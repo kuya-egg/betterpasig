@@ -39,7 +39,9 @@ Pages live in `src/pages/`, read content straight from `data/*.json` (via `src/l
 
 ### Deploy (Cloudflare Pages)
 
-Connect the repo in Cloudflare Pages with framework preset **Astro**, build command `bun run build`, output directory `dist`. Pages detects `bun.lock` and installs with Bun. Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
+Connect the repo in Cloudflare Pages with framework preset **Astro**, build command `bun run build`, output directory `dist`. Pages detects `bun.lock` and installs with Bun.
+
+Set the environment variable **`BUN_VERSION=1.4.2`** in the Pages project (Settings → Variables and Secrets, for Production and Preview). The build image's default Bun is too old to read `bun.lock`, and Bun can't be pinned from a file. Node is pinned by `.node-version` (Astro needs 22.22+). Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
 
 Until launch, `/` is a "ginagawa pa" placeholder with the emergency hotlines.
 
