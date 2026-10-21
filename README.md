@@ -35,7 +35,7 @@ bun run build     # static site in dist/
 bun run check     # type-check .astro and .ts files
 ```
 
-Pages live in `src/pages/`, read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
+Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
 
 ### Deploy (Cloudflare Pages)
 

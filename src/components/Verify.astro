@@ -1,10 +1,10 @@
 ---
 // Amber "being checked" label for any value with verify: true (see docs/design-system.md).
+import { langFromUrl, ui } from "../i18n";
+
+const t = ui[langFromUrl(Astro.url)];
 ---
 
-<span
-  class="ml-1.5 align-middle text-[13px] font-semibold whitespace-nowrap text-amber"
-  title="Mula sa hindi opisyal o lumang source. Kinukumpirma pa namin."
->
-  Sinusuri pa
+<span class="ml-1.5 align-middle text-[13px] font-semibold whitespace-nowrap text-amber" title={t.verifyTitle}>
+  {t.verify}
 </span>

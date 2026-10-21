@@ -35,13 +35,6 @@ export const telHref = (number: string) => `tel:${number.replace(/[^\d+]/g, "")}
 export const mapsHref = (place: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
 
-// "2026-10-19" -> "Okt 19, 2026" for "Sinuri" lines.
-const MONTHS_FIL = ["Ene", "Peb", "Mar", "Abr", "May", "Hun", "Hul", "Ago", "Set", "Okt", "Nob", "Dis"];
-export function dateFil(iso: string): string {
-  const [y, m, d] = iso.split("-").map(Number);
-  return `${MONTHS_FIL[m - 1]} ${d}, ${y}`;
-}
-
 export function officeName(id: string): string {
   const office = offices.find((o) => o.id === id);
   return office?.acronym ?? office?.name ?? id;

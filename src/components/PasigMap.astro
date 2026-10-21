@@ -3,19 +3,26 @@
 // until the visitor touches the map, and every barangay they open is remembered (per browser) as "visited".
 import map from "../../design/map/pasig-map.json";
 import { barangays } from "../lib/data";
+import { langFromUrl, ui } from "../i18n";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+const t = ui[langFromUrl(Astro.url)];
 const district = new Map(barangays.map((b) => [b.name, b.district]));
 // South first, so the intro and the wave travel up the city like the loader.
 const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
 ---
 
-<figure class:list={["pasig-map m-0", className]} data-total={pieces.length}>
-  <svg viewBox="100 0 360 560" aria-label="Mapa ng Pasig at ang 30 barangay nito" role="group">
+<figure
+  class:list={["pasig-map m-0", className]}
+  data-district={t.district}
+  data-visited={t.visited}
+  data-complete={t.complete}
+>
+  <svg viewBox="100 0 360 560" aria-label={t.mapLabel} role="group">
     {
       pieces.map((b, i) => (
         <path
@@ -34,8 +41,8 @@ const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
     <path class="lift" pointer-events="none" aria-hidden="true" />
   </svg>
   <figcaption class="mt-4 min-h-[88px] text-center" aria-live="polite">
-    <p class="name text-[19px] font-semibold tracking-[-0.01em]">Pindutin ang isang barangay</p>
-    <p class="meta text-[14px] text-muted">Kilalanin ang 30 barangay ng Pasig habang hinihintay.</p>
+    <p class="name text-[19px] font-semibold tracking-[-0.01em]">{t.mapPrompt}</p>
+    <p class="meta text-[14px] text-muted">{t.mapHint}</p>
     <div class="mx-auto mt-3 h-1 w-40 overflow-hidden rounded-full bg-subtle" aria-hidden="true">
       <div class="bar h-full w-0 bg-blue"></div>
     </div>
@@ -65,7 +72,7 @@ const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
     const render = () => {
       for (const p of paths) p.classList.toggle("visited", visited.has(p.dataset.name!));
       bar.style.width = `${(visited.size / total) * 100}%`;
-      countEl.textContent = visited.size ? `Nabisita: ${visited.size} / ${total}` : "";
+      countEl.textContent = visited.size ? `${fig.dataset.visited}: ${visited.size} / ${total}` : "";
     };
 
     let waveTimer: number | undefined;
@@ -99,9 +106,9 @@ const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
       nameEl.textContent = name;
       metaEl.textContent =
         visited.size === total
-          ? "Kumpleto! Nabisita mo ang lahat ng 30 barangay ng Pasig."
+          ? fig.dataset.complete!
           : p.dataset.district
-            ? `Distrito ${p.dataset.district}`
+            ? `${fig.dataset.district} ${p.dataset.district}`
             : "";
     };
 
