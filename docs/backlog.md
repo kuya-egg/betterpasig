@@ -5,7 +5,7 @@ Everything we need to build, in launch order. Each item maps to a goal in [roadm
 ## Phase 0 · Setup (by Nov 1, 2026)
 
 - [ ] Contact the BetterLGU Pasig maintainer (@ericvelasco-dev) and agree on one project · S · G7
-- [ ] Scaffold Astro + Tailwind, wire `design/tokens/tokens.css`, Geist via `@fontsource` · S
+- [x] Scaffold Astro + Tailwind, wire `design/tokens/tokens.css`, Geist via `@fontsource` · S
 - [ ] Content collections reading `data/*.json` with Zod schemas (fail the build on missing `sources`) · M · G1
 - [ ] Cloudflare Pages deploy from `main`, preview deploys from `dev` and PRs · S
 - [ ] Cloudflare Web Analytics (cookieless) · S · G6

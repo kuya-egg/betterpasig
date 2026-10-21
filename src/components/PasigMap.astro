@@ -1,0 +1,33 @@
+---
+// Pasig outline drawn from the 30 PSA barangay boundaries.
+import map from "../../design/map/pasig-map.json";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg viewBox="100 0 360 560" class:list={["pasig-map", className]} role="img" aria-label="Mapa ng Pasig at ang 30 barangay nito">
+  {
+    map.barangays.map((b) => (
+      <path d={b.d}>
+        <title>{b.name}</title>
+      </path>
+    ))
+  }
+</svg>
+
+<style>
+  path {
+    fill: var(--pale);
+    stroke: var(--bg);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    transition: fill var(--fast) var(--ease);
+  }
+  path:hover {
+    fill: var(--hover);
+  }
+</style>

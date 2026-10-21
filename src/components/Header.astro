@@ -1,0 +1,18 @@
+---
+import Mark from "../../design/logo/mark-blue.svg";
+---
+
+<header class="sticky top-0 z-10 border-b border-line bg-bg">
+  <div class="wrap flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 text-ink no-underline" aria-label="BetterPasig, home">
+      <Mark class="logo h-8 w-auto" aria-hidden="true" />
+      <span class="text-[21px] font-bold tracking-[-0.03em]">BetterPasig</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .logo :global(path) {
+    fill: var(--blue);
+  }
+</style>

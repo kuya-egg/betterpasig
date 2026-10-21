@@ -1,0 +1,4 @@
+# Cloudflare Pages project. Build: `bun run build`, output: dist/.
+name = "betterpasig"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"

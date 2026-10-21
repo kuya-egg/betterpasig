@@ -1,0 +1,82 @@
+---
+// Loader from the prototype: the 30 barangays fill south to north, once per visit.
+import map from "../../design/map/pasig-map.json";
+
+const STEP = 32;
+const order = [...map.barangays].sort((a, b) => b.y - a.y);
+---
+
+<div class="loader" id="loader" aria-hidden="true">
+  <figure>
+    <svg viewBox="100 0 360 560">
+      {order.map((b, i) => <path d={b.d} style={`animation-delay:${i * STEP}ms`} />)}
+    </svg>
+    <figcaption>BetterPasig</figcaption>
+  </figure>
+</div>
+<noscript><style>.loader { display: none; }</style></noscript>
+
+<script is:inline define:vars={{ total: order.length * STEP + 380 + 180 }}>
+  (() => {
+    const L = document.getElementById("loader");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let seen = false;
+    try { seen = sessionStorage.getItem("bp-loaded") === "1"; } catch (e) {}
+    if (reduce || seen) { L.remove(); return; }
+    const finish = () => {
+      L.classList.add("done");
+      setTimeout(() => L.remove(), 400);
+      try { sessionStorage.setItem("bp-loaded", "1"); } catch (e) {}
+    };
+    setTimeout(finish, total);
+    L.addEventListener("click", finish);
+  })();
+</script>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+    transition: opacity 320ms var(--ease), visibility 320ms;
+  }
+  .loader.done {
+    opacity: 0;
+    visibility: hidden;
+  }
+  figure {
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+  }
+  svg {
+    width: 150px;
+    height: auto;
+  }
+  path {
+    fill: var(--pale);
+    stroke: var(--bg);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    animation: piece 380ms var(--ease) forwards;
+  }
+  @keyframes piece {
+    to {
+      fill: var(--blue);
+    }
+  }
+  figcaption {
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .loader {
+      display: none;
+    }
+  }
+</style>
