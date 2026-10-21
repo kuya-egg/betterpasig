@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import { emergencyHotlines, featuredServices, officeName, services, categories } from "../lib/data";
+---
+
+<Base>
+  <section id="hotline" class="border-b border-red/20 bg-red-bg" aria-label="Emergency hotlines">
+    <div class="wrap flex flex-wrap items-baseline gap-x-6 gap-y-1 py-3 text-[15px]">
+      <span class="font-semibold text-red">Emergency</span>
+      {
+        emergencyHotlines.map((h) => (
+          <span>
+            <span class="text-muted">{h.name.split(" (")[0]}:</span>{" "}
+            <a class="num font-semibold text-ink" href={`tel:${h.numbers[0].replace(/[^\d+]/g, "")}`}>
+              {h.numbers[0]}
+            </a>
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="wrap pt-14 pb-10">
+    <h1 class="max-w-[18ch] text-[34px] font-bold leading-[1.1] tracking-[-0.04em] md:text-[52px]">
+      Bawat serbisyo ng Pasig, malinaw at nasa isang lugar.
+    </h1>
+    <p class="mt-4 max-w-[60ch] text-muted">
+      {services.length} serbisyo sa {categories.length} kategorya, mula sa Citizen's Charters ng Lungsod ng Pasig.
+    </p>
+  </section>
+
+  <section id="serbisyo" class="wrap" aria-labelledby="featured-h">
+    <h2 id="featured-h" class="text-[30px] font-bold tracking-[-0.03em]">Madalas hanapin</h2>
+    <table class="mt-4 w-full border-collapse text-left">
+      <thead class="text-[14px] font-medium text-muted">
+        <tr class="border-b-2 border-ink">
+          <th class="py-2 pr-4 font-medium">Serbisyo</th>
+          <th class="hidden py-2 pr-4 font-medium md:table-cell">Opisina</th>
+          <th class="py-2 pr-4 font-medium">Bayad</th>
+          <th class="hidden py-2 font-medium md:table-cell">Tagal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          featuredServices.map((s) => (
+            <tr class="border-b border-line align-top">
+              <td class="py-3 pr-4 font-semibold tracking-[-0.01em]">{s.title_fil}</td>
+              <td class="hidden py-3 pr-4 text-muted md:table-cell">{officeName(s.office)}</td>
+              <td class="num py-3 pr-4">{s.fee ?? "—"}</td>
+              <td class="num hidden py-3 text-muted md:table-cell">{s.processing_time ?? "—"}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </section>
+</Base>

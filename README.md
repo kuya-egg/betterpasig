@@ -11,7 +11,7 @@ BetterPasig is a volunteer-run, non-partisan civic information site for Pasig Ci
 
 > Hindi ito opisyal na website ng Lungsod ng Pasig. For official transactions go to [pasigcity.gov.ph](https://pasigcity.gov.ph).
 
-**Status:** prototype and data ready · Astro build starting · public launch **December 15, 2026**.
+**Status:** prototype and data ready · Astro site scaffolded · public launch **December 15, 2026**.
 
 ## What's in this repo
 
@@ -25,6 +25,19 @@ BetterPasig is a volunteer-run, non-partisan civic information site for Pasig Ci
 | [`scripts/`](scripts/) | Geometry, design-asset and data-check scripts |
 
 ## Quick start
+
+The site is [Astro](https://astro.build) with [Bun](https://bun.sh) as the package manager and runner.
+
+```bash
+bun install
+bun run dev       # http://localhost:4321
+bun run build     # static site in dist/
+bun run check     # type-check .astro and .ts files
+```
+
+Pages live in `src/pages/`, read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
+
+### Prototype
 
 Open `prototype/index.html` or `prototype/officials.html` in a browser. No server, no install.
 
