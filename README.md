@@ -37,6 +37,12 @@ bun run check     # type-check .astro and .ts files
 
 Pages live in `src/pages/`, read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
 
+### Deploy (Cloudflare Pages)
+
+Connect the repo in Cloudflare Pages with framework preset **Astro**, build command `bun run build`, output directory `dist`. Pages detects `bun.lock` and installs with Bun. Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
+
+Until launch, `/` is a "ginagawa pa" placeholder with the emergency hotlines.
+
 ### Prototype
 
 Open `prototype/index.html` or `prototype/officials.html` in a browser. No server, no install.
