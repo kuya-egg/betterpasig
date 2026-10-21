@@ -1,0 +1,72 @@
+---
+import Verify from "./Verify.astro";
+import { site, city, mapsHref, telHref, dateFil } from "../lib/data";
+
+const hall = site.city_hall;
+const { contact } = city;
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+const sources = [...new Set([...hall.sources, ...contact.sources].map(host))];
+---
+
+<section aria-labelledby="cityhall-h">
+  <h2 id="cityhall-h" class="text-[30px] font-bold tracking-[-0.03em]">Pasig City Hall</h2>
+  <p class="mt-1 text-[15px] text-muted">
+    Pansamantalang City Hall habang itinatayo ang bagong City Hall sa Caruncho Ave.
+  </p>
+
+  <dl class="mt-5 border-t-2 border-ink">
+    <div class="border-b border-line py-3">
+      <dt class="text-[14px] font-medium text-muted">Address</dt>
+      <dd class="mt-0.5">
+        {hall.address}
+        {hall.verify && <Verify />}
+        <a class="mt-1 block font-medium" href={mapsHref(`${hall.name}, ${hall.address}`)} target="_blank" rel="noopener">
+          Buksan sa Google Maps ↗
+        </a>
+      </dd>
+    </div>
+    {
+      hall.hours && (
+        <div class="border-b border-line py-3">
+          <dt class="text-[14px] font-medium text-muted">Oras</dt>
+          <dd class="mt-0.5">{hall.hours}</dd>
+        </div>
+      )
+    }
+    <div class="border-b border-line py-3">
+      <dt class="text-[14px] font-medium text-muted">Telepono (trunkline)</dt>
+      <dd class="mt-0.5">
+        <a class="num font-semibold text-ink" href={telHref(contact.trunkline)}>{contact.trunkline}</a>
+        {contact.trunkline_verify && <Verify />}
+      </dd>
+    </div>
+    <div class="border-b border-line py-3">
+      <dt class="text-[14px] font-medium text-muted">Mga annex</dt>
+      <dd class="mt-0.5">
+        <ul>
+          {
+            contact.other_sites.map((s) => (
+              <li class="py-0.5">
+                <span class="font-medium">{s.name}:</span>{" "}
+                <a href={mapsHref(`${s.address}, Pasig City`)} target="_blank" rel="noopener">
+                  {s.address}
+                </a>
+                {s.verify && <Verify />}
+              </li>
+            ))
+          }
+        </ul>
+      </dd>
+    </div>
+    <div class="border-b border-line py-3">
+      <dt class="text-[14px] font-medium text-muted">Online</dt>
+      <dd class="mt-0.5 flex flex-wrap gap-x-5">
+        <a href={contact.website}>{host(contact.website)}</a>
+        <a href={contact.facebook}>Facebook: Pasig PIO</a>
+      </dd>
+    </div>
+  </dl>
+  <p class="mt-3 text-[14px] text-muted">
+    Pinagmulan: {sources.join(", ")} · Sinuri: {dateFil(city.retrieved)}
+  </p>
+</section>

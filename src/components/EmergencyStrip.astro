@@ -1,0 +1,28 @@
+---
+import { emergencyHotlines, telHref } from "../lib/data";
+
+const [main, ...rest] = emergencyHotlines;
+---
+
+<section class="border-b border-red/20 bg-red-bg" aria-label="Emergency hotlines">
+  <div class="wrap flex flex-wrap items-baseline gap-x-6 gap-y-1.5 py-2.5 text-[15px]">
+    <span class="font-semibold text-red">Emergency</span>
+    <span>
+      <span class="text-muted">{main.label_fil}</span>{" "}
+      <a class="num text-[19px] font-bold whitespace-nowrap text-ink" href={telHref(main.numbers[0])}>
+        {main.numbers[0]}
+      </a>
+    </span>
+    {
+      rest.map((h) => (
+        <span>
+          <span class="text-muted">{h.label_fil}</span>{" "}
+          <a class="num font-semibold whitespace-nowrap text-ink" href={telHref(h.numbers[0])}>
+            {h.numbers[0]}
+          </a>
+        </span>
+      ))
+    }
+    <a class="text-[14px] font-medium" href="/#hotlines">Iba pang numero</a>
+  </div>
+</section>
