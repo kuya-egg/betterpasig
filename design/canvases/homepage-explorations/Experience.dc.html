@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig Experience</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1A47A8}a:hover{color:#0B1736}
+button,input,select{font-family:'Instrument Sans',system-ui,sans-serif}
+:focus-visible{outline:3px solid #FFB43F;outline-offset:2px}
+</style>
+</helmet>
+<div style="zoom: {{zoom}}; font-family: 'Instrument Sans', system-ui, sans-serif; color: {{c.ink}}; background: {{c.bg}}; min-height: 100%;">
+
+<!-- Utility bar -->
+<div style="background: #0B1736; color: #DCE4F5; font-size: 13px;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 6px 24px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between;">
+<span>Independent at volunteer-built. Hindi opisyal na website ng Lungsod. Opisyal: <a href="https://pasigcity.gov.ph" style="color: #FFFFFF; font-weight: 600;">pasigcity.gov.ph</a></span>
+<div style="display: flex; gap: 6px; align-items: center;">
+<span style="color: #9FB0D6;">Laki ng teksto</span>
+<button onClick="{{smaller}}" aria-label="Paliitin ang teksto" style="background: #1B2A55; color: #FFFFFF; border: 0; border-radius: 8px; min-width: 36px; min-height: 32px; font-weight: 700;">A−</button>
+<button onClick="{{bigger}}" aria-label="Palakihin ang teksto" style="background: #1B2A55; color: #FFFFFF; border: 0; border-radius: 8px; min-width: 36px; min-height: 32px; font-weight: 700; font-size: 15px;">A+</button>
+<button onClick="{{toggleContrast}}" aria-pressed="{{contrast}}" style="background: {{contrastBtn}}; color: {{contrastBtnInk}}; border: 0; border-radius: 8px; padding: 0 12px; min-height: 32px; font-weight: 700;">Mataas na contrast</button>
+<button onClick="{{toggleLang}}" style="background: #FFB43F; color: #0B1736; border: 0; border-radius: 8px; padding: 0 12px; min-height: 32px; font-weight: 700;">{{langBtn}}</button>
+</div>
+</div>
+</div>
+
+<!-- Alert ribbon -->
+<sc-if value="{{showAlert}}" hint-placeholder-val="{{ true }}">
+<div role="status" style="background: #FFF1D6; border-bottom: 2px solid #E8A21F; color: #4A2E00;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;">
+<span style="background: #4A2E00; color: #FFF1D6; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; letter-spacing: 0.04em;">HALIMBAWA · ABISO</span>
+<span style="font-size: 15px;">[Halimbawang abiso: tumataas ang tubig sa Ilog Pasig. Source: Command Center · ORAS]</span>
+<a href="#" style="color: #4A2E00; font-weight: 700;">Evacuation centers malapit sa iyo →</a>
+<button onClick="{{dismissAlert}}" aria-label="Isara ang abiso" style="margin-left: auto; background: transparent; border: 0; color: #4A2E00; min-width: 40px; min-height: 40px; font-size: 20px;">×</button>
+</div>
+</div>
+</sc-if>
+
+<!-- Header -->
+<header style="background: {{c.card}}; border-bottom: 1px solid {{c.border}};">
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center;">
+<a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: {{c.ink}};">
+<svg width="42" height="42" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="12" fill="{{blue}}"></rect><path d="M8 15c4.5-4 9-4 13 0s8.5 4 13 0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M8 22c4.5-4 9-4 13 0s8.5 4 13 0" stroke="#2BB3C9" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M8 29c4.5-4 9-4 13 0s8.5 4 13 0" stroke="#FFB43F" stroke-width="3" fill="none" stroke-linecap="round"></path></svg>
+<span style="display: flex; flex-direction: column; line-height: 1;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.02em;">Better<span style="color: {{blue}};">Pasig</span></span>
+<span style="font-size: 11px; color: {{c.muted}}; letter-spacing: 0.06em; margin-top: 4px;">PARA SA BAWAT PASIGUEÑO</span>
+</span>
+</a>
+<nav aria-label="Pangunahing menu" style="display: flex; flex-wrap: wrap; gap: 2px; flex: 1 1 auto;">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="6">
+<a href="#" style="padding: 10px 12px; text-decoration: none; color: {{c.ink}}; font-weight: 600; font-size: 15px; border-radius: 8px;">{{n}}</a>
+</sc-for>
+</nav>
+<a href="#hotlines" style="display: inline-flex; align-items: center; gap: 8px; background: #C62828; color: #FFFFFF; text-decoration: none; font-weight: 700; padding: 11px 16px; border-radius: 12px;">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+Emergency
+</a>
+</div>
+</header>
+
+<!-- Hero -->
+<section style="background: {{blue}}; color: #FFFFFF; position: relative; overflow: hidden;">
+<svg viewBox="0 0 1440 520" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+<path d="M-20 380 C200 300 380 460 640 380 S1080 280 1460 360" stroke="#2BB3C9" stroke-width="2" fill="none" opacity="0.55"></path>
+<path d="M-20 410 C220 330 400 490 660 410 S1100 310 1460 390" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.25"></path>
+<path d="M-20 440 C240 360 420 520 680 440 S1120 340 1460 420" stroke="#FFB43F" stroke-width="2.5" fill="none" opacity="0.8"></path>
+</svg>
+<div style="max-width: 1240px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-wrap: wrap; gap: 36px; position: relative;">
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 18px;">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #FFB43F;">{{t.kicker}}</span>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 58px; line-height: 1.02; letter-spacing: -0.03em; max-width: 720px;">{{t.headline}}</h1>
+
+<!-- Live search -->
+<div style="background: #FFFFFF; color: #0B1736; border-radius: 18px; padding: 8px; box-shadow: 0 18px 40px rgba(5,16,48,0.35); max-width: 680px;">
+<form role="search" style="display: flex; gap: 8px; align-items: center;">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1A47A8" stroke-width="2.2" stroke-linecap="round" style="margin-left: 12px; flex: 0 0 22px;"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<label for="xp-search" style="position: absolute; left: -9999px;">Maghanap</label>
+<input id="xp-search" type="search" value="{{query}}" onChange="{{onQuery}}" placeholder="{{t.searchPh}}" autocomplete="off" style="flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font-size: 18px; font-weight: 500; padding: 14px 6px; color: #0B1736; background: transparent;">
+<span style="font-size: 12px; color: #5A6788; border: 1px solid #D5DCEB; border-radius: 6px; padding: 3px 7px;">Ctrl K</span>
+<button type="button" style="border: 0; background: #0B1736; color: #FFFFFF; border-radius: 12px; padding: 0 22px; font-weight: 700; font-size: 16px; min-height: 52px;">{{t.searchBtn}}</button>
+</form>
+<sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+<div style="border-top: 1px solid #E3E8F2; margin-top: 8px; padding: 8px 4px 4px; display: flex; flex-direction: column;">
+<sc-for list="{{results}}" as="r" hint-placeholder-count="3">
+<a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; text-decoration: none; color: #0B1736;">
+<span style="display: flex; flex-direction: column;"><strong style="font-size: 16px;">{{r.title}}</strong><span style="font-size: 13px; color: #5A6788;">{{r.desc}}</span></span>
+<span style="font-size: 12px; font-weight: 700; color: #1A47A8; background: #E8EEFB; padding: 4px 8px; border-radius: 6px; white-space: nowrap;">{{r.kind}}</span>
+</a>
+</sc-for>
+<sc-if value="{{noResults}}" hint-placeholder-val="{{ false }}">
+<span style="padding: 12px; font-size: 15px; color: #5A6788;">Walang tugma. Subukan ang "Saan Ako Lalapit?" sa ibaba, o tawagan ang City Hall.</span>
+</sc-if>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+<span style="font-size: 14px; color: #C9D6F2;">{{t.iwant}}</span>
+<sc-for list="{{intents}}" as="it" hint-placeholder-count="4">
+<button type="button" onClick="{{it.pick}}" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.4); border-radius: 999px; padding: 10px 16px; font-size: 15px; font-weight: 600; min-height: 44px;">{{it.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<!-- This week -->
+<aside style="flex: 1 1 340px; background: #0B1736; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; align-self: flex-start; box-shadow: 0 18px 40px rgba(5,16,48,0.35);">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<strong style="font-size: 17px;">{{t.thisWeek}}</strong>
+<span style="font-size: 12px; color: #9FB0D6;">[Petsa ngayon]</span>
+</div>
+<sc-for list="{{dates}}" as="d" hint-placeholder-count="3">
+<a href="#" style="display: flex; gap: 14px; align-items: center; text-decoration: none; color: #FFFFFF; background: #15244A; border-radius: 14px; padding: 12px;">
+<span style="width: 52px; flex: 0 0 52px; text-align: center; background: {{d.tone}}; color: #0B1736; border-radius: 10px; padding: 6px 0; display: flex; flex-direction: column; line-height: 1.1;"><strong style="font-size: 12px;">{{d.mon}}</strong><strong style="font-size: 20px; font-family: 'Bricolage Grotesque', sans-serif;">{{d.day}}</strong></span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 15px;">{{d.title}}</strong><span style="font-size: 13px; color: #9FB0D6;">{{d.sub}}</span></span>
+</a>
+</sc-for>
+<a href="#" style="color: #FFB43F; font-weight: 700; font-size: 14px;">Buong kalendaryo ng Lungsod →</a>
+</aside>
+</div>
+</section>
+
+<!-- Life events -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 16px; display: flex; flex-direction: column; gap: 22px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: {{blue}};">GABAY AYON SA YUGTO NG BUHAY</span>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; letter-spacing: -0.02em;">Ano'ng nangyayari sa buhay mo ngayon?</h2>
+<p style="margin: 0; color: {{c.muted}}; font-size: 17px; max-width: 680px;">Hindi mo kailangang alamin kung aling opisina. Piliin ang sitwasyon mo, at ipapakita namin ang mga hakbang, sunod-sunod.</p>
+</div>
+<div role="tablist" aria-label="Mga yugto ng buhay" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{lifeTabs}}" as="lt" hint-placeholder-count="5">
+<button role="tab" aria-selected="{{lt.active}}" onClick="{{lt.pick}}" style="background: {{lt.bg}}; color: {{lt.ink}}; border: 1px solid {{lt.border}}; border-radius: 999px; padding: 12px 18px; font-size: 15px; font-weight: 700; min-height: 46px;">{{lt.label}}</button>
+</sc-for>
+</div>
+<div role="tabpanel" style="background: {{c.card}}; border: 1px solid {{c.border}}; border-radius: 22px; padding: 28px; display: flex; flex-wrap: wrap; gap: 28px;">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 10px;">
+<h3 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; line-height: 1.1;">{{life.title}}</h3>
+<p style="margin: 0; color: {{c.muted}}; font-size: 16px; line-height: 1.5;">{{life.intro}}</p>
+<span style="font-size: 13px; color: {{c.muted}};">Huling na-verify: [DATE] · Source: Pasig Citizen's Charter</span>
+</div>
+<ol style="flex: 999 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+<sc-for list="{{life.steps}}" as="st" hint-placeholder-count="4">
+<li style="background: {{c.bg}}; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px;">
+<span style="width: 34px; height: 34px; border-radius: 999px; background: {{blue}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'Bricolage Grotesque', sans-serif;">{{st.n}}</span>
+<strong style="font-size: 16px; line-height: 1.3;">{{st.title}}</strong>
+<span style="font-size: 14px; color: {{c.muted}}; line-height: 1.45;">{{st.where}}</span>
+<a href="#" style="font-size: 14px; font-weight: 700; margin-top: auto;">Paano →</a>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<!-- My barangay -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 16px;">
+<div style="background: #0B1736; color: #FFFFFF; border-radius: 26px; padding: 32px; display: flex; flex-wrap: wrap; gap: 28px;">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px;">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #2BB3C9;">SA BARANGAY KO</span>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; line-height: 1.05; letter-spacing: -0.02em;">Gawing personal ang Pasig.</h2>
+<p style="margin: 0; color: #B9C6E4; font-size: 16px; line-height: 1.5;">Piliin ang barangay mo minsan. Tatandaan ito ng browser mo lang, hindi namin iniimbak.</p>
+<label for="xp-brgy" style="font-size: 14px; font-weight: 600;">Barangay</label>
+<select id="xp-brgy" value="{{brgy}}" onChange="{{onBrgy}}" style="font-size: 17px; font-weight: 600; padding: 14px; border-radius: 12px; border: 0; min-height: 52px; color: #0B1736; background: #FFFFFF;">
+<sc-for list="{{barangays}}" as="b" hint-placeholder-count="30">
+<option value="{{b}}">{{b}}</option>
+</sc-for>
+</select>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+<sc-for list="{{brgyCards}}" as="bc" hint-placeholder-count="4">
+<div style="background: #15244A; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 6px;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: {{bc.tone}};">{{bc.label}}</span>
+<strong style="font-size: 18px; line-height: 1.25;">{{bc.value}}</strong>
+<span style="font-size: 13px; color: #9FB0D6;">{{bc.sub}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- Follow the money -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 16px; display: flex; flex-direction: column; gap: 22px;">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; justify-content: space-between;">
+<div style="display: flex; flex-direction: column; gap: 6px; max-width: 680px;">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: {{blue}};">SUNDAN ANG PONDO</span>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; letter-spacing: -0.02em;">Bawat piso, may pinanggalingan.</h2>
+<p style="margin: 0; color: {{c.muted}}; font-size: 17px;">Kinukuha namin ang bidding livestreams, Full Disclosure reports at COA audits ng Lungsod, at ginagawang madaling basahin.</p>
+</div>
+<div style="background: {{c.card}}; border: 1px solid {{c.border}}; border-radius: 18px; padding: 18px 22px; max-width: 360px;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; color: {{blue}}; letter-spacing: -0.02em;">₱414.7M</span>
+<p style="margin: 4px 0 0; font-size: 14px; color: {{c.muted}}; line-height: 1.45;">Iniulat na natipid sa unang taon ng mas mahigpit na bidding. Source: Lungsod ng Pasig, via Rappler (2020)</p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px;">
+<sc-for list="{{money}}" as="mo" hint-placeholder-count="4">
+<a href="#" style="background: {{c.card}}; border: 1px solid {{c.border}}; border-radius: 20px; padding: 22px; text-decoration: none; color: {{c.ink}}; display: flex; flex-direction: column; gap: 10px; min-height: 190px;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: {{mo.tagInk}}; background: {{mo.tagBg}}; padding: 5px 10px; border-radius: 999px; align-self: flex-start;">{{mo.tag}}</span>
+<strong style="font-size: 20px; font-family: 'Bricolage Grotesque', sans-serif;">{{mo.title}}</strong>
+<span style="font-size: 15px; color: {{c.muted}}; line-height: 1.45;">{{mo.desc}}</span>
+<span style="font-size: 14px; font-weight: 700; color: {{blue}}; margin-top: auto;">{{mo.cta}} →</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- Trust -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 16px;">
+<div style="border: 2px solid {{blue}}; border-radius: 26px; padding: 32px; display: flex; flex-direction: column; gap: 22px; background: {{c.card}};">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: {{blue}};">BAKIT KAMI MAPAGKAKATIWALAAN</span>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; letter-spacing: -0.02em;">Bukas ang lahat. Pati mga pagkakamali namin.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+<sc-for list="{{trust}}" as="tr" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<strong style="font-size: 17px;">{{tr.title}}</strong>
+<span style="font-size: 15px; color: {{c.muted}}; line-height: 1.45;">{{tr.desc}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- Volunteer -->
+<section style="max-width: 1240px; margin: 0 auto; padding: 64px 24px 80px;">
+<div style="background: #FFB43F; color: #0B1736; border-radius: 26px; padding: 36px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between;">
+<div style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 8px;">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; letter-spacing: -0.02em;">Gawa ng taga-Pasig, para sa taga-Pasig.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.5;">Kailangan namin ng 30 barangay stewards, isa kada barangay, para mag-verify ng impormasyon kada quarter. Pati developers, designers at translators.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<a href="#" style="background: #0B1736; color: #FFFFFF; text-decoration: none; font-weight: 700; padding: 15px 22px; border-radius: 12px;">Maging barangay steward</a>
+<a href="#" style="color: #0B1736; text-decoration: none; font-weight: 700; padding: 13px 20px; border-radius: 12px; border: 2px solid #0B1736;">GitHub</a>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer style="background: #0B1736; color: #B9C6E4; font-size: 15px;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px;">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; color: #FFFFFF;">BetterPasig</span>
+<p style="margin: 0; line-height: 1.5;">Non-partisan. Volunteer-built. Bahagi ng BetterGov.ph network.</p>
+<strong style="color: #FFB43F;">Gastos sa mamamayan ng Pasig: ₱0</strong>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<strong style="color: #FFFFFF;">Opisyal na channel</strong>
+<a href="#" style="color: #B9C6E4;">pasigcity.gov.ph</a>
+<a href="#" style="color: #B9C6E4;">Full Disclosure Portal</a>
+<a href="#" style="color: #B9C6E4;">Ugnayan sa Pasig (FOI)</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<strong style="color: #FFFFFF;">Open data</strong>
+<a href="#" style="color: #B9C6E4;">I-download ang datasets (CSV/JSON)</a>
+<a href="#" style="color: #B9C6E4;">COA Annual Audit Reports</a>
+<a href="#" style="color: #B9C6E4;">BetterLGU Directory</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<strong style="color: #FFFFFF;">Tungkol</strong>
+<a href="#" style="color: #B9C6E4;">Non-partisan pledge</a>
+<a href="#" style="color: #B9C6E4;">Corrections log</a>
+<a href="#" style="color: #B9C6E4;">Accessibility statement</a>
+</div>
+</div>
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px 24px; font-size: 13px; border-top: 1px solid #1B2A55;">© 2026 BetterPasig.org · MIT | CC BY 4.0 · v0.1 · Changelog</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"blue":{"editor":"color","default":"#1A47A8","options":["#1A47A8","#0F3B8C","#2456C7","#123A7A"]},"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { query: '', life: 0, brgy: 'Kapitolyo', zoom: 1, contrast: false, lang: 'fil', showAlert: true };
+}
+renderVals() {
+const s = this.state;
+const blue = this.props.blue ?? '#1A47A8';
+const c = s.contrast
+? { bg: '#FFFFFF', card: '#FFFFFF', ink: '#000000', muted: '#1F1F1F', border: '#000000' }
+: { bg: '#F5F7FB', card: '#FFFFFF', ink: '#0B1736', muted: '#4A5778', border: '#DFE5F1' };
+const en = s.lang === 'en';
+const t = en
+? { kicker: 'HOPE FLOWS · FOR EVERY PASIGUEÑO', headline: 'What do you need today, Pasigueño?', searchPh: 'Try "business permit", "flood", "senior ID"…', searchBtn: 'Search', iwant: 'I want to:', thisWeek: 'This week in Pasig' }
+: { kicker: 'UMAAGOS ANG PAG-ASA · PARA SA BAWAT PASIGUEÑO', headline: "Ano'ng kailangan mo ngayon, Pasigueño?", searchPh: 'Subukan: "business permit", "baha", "senior ID"…', searchBtn: 'Hanapin', iwant: 'Gusto kong:', thisWeek: 'Ngayong linggo sa Pasig' };
+const all = [
+{ title: 'Business Permit (bago at renewal)', desc: 'BPLO · may online option', kind: 'Serbisyo', k: 'business permit negosyo bplo magbayad' },
+{ title: 'Real Property Tax (amilyar)', desc: 'City Treasurer · online payment', kind: 'Serbisyo', k: 'amilyar real property tax rpt magbayad' },
+{ title: 'Birth certificate', desc: 'Civil Registry', kind: 'Serbisyo', k: 'birth certificate kapanganakan kumuha' },
+{ title: 'Senior Citizen ID', desc: 'OSCA', kind: 'Serbisyo', k: 'senior id osca kumuha' },
+{ title: 'Evacuation centers at flood map', desc: 'Para sa barangay mo', kind: 'Handa sa baha', k: 'baha flood evacuation' },
+{ title: 'Ord. 37 s.2018 · FOI Ordinance', desc: 'Pasig Transparency Mechanism Ordinance', kind: 'Ordinansa', k: 'foi ordinansa transparency dokumento malaman' },
+{ title: 'Mag-report sa Ugnayan sa Pasig', desc: 'Itinuturo ka namin sa opisyal na channel', kind: 'Saan lalapit', k: 'reklamo report mag-report complaint' },
+{ title: 'Bids & Awards Log', desc: 'Lahat ng bidding, may livestream link', kind: 'Transparency', k: 'bidding bids pondo malaman kontrata' }
+];
+const q = s.query.trim().toLowerCase();
+const results = q ? all.filter((r) => (r.title + ' ' + r.k).toLowerCase().indexOf(q) !== -1).slice(0, 5) : [];
+const intentWords = en ? [['Pay', 'magbayad'], ['Get a document', 'kumuha'], ['Report', 'mag-report'], ['Find out', 'malaman']] : [['Magbayad', 'magbayad'], ['Kumuha ng dokumento', 'kumuha'], ['Mag-report', 'mag-report'], ['Malaman', 'malaman']];
+const intents = intentWords.map((w) => ({ label: w[0], pick: () => this.setState({ query: w[1] }) }));
+const lifeData = [
+{ label: 'Bagong panganak', title: 'May bagong baby sa pamilya', intro: 'Mula pagrehistro hanggang bakuna, ito ang mga dapat gawin sa unang mga buwan.', steps: [
+{ title: 'I-register ang kapanganakan', where: 'Civil Registry, City Hall' },
+{ title: 'Kumuha ng birth certificate', where: 'Civil Registry o PSA' },
+{ title: 'Ipalista sa health center para sa bakuna', where: 'Health center ng barangay mo' },
+{ title: 'Alamin ang tulong para sa pamilya', where: 'CSWDO' } ] },
+{ label: 'Magsisimula ng negosyo', title: 'Magtatayo ka ng negosyo sa Pasig', intro: 'Ang tamang pagkakasunod-sunod para hindi pabalik-balik sa City Hall.', steps: [
+{ title: 'Locational clearance / zoning', where: 'CLIMA online portal' },
+{ title: 'Barangay business clearance', where: 'Barangay hall mo' },
+{ title: 'Business permit', where: 'BPLO · may online option' },
+{ title: 'BIR registration', where: 'BIR, hindi Lungsod' } ] },
+{ label: 'Bagong lipat sa Pasig', title: 'Bagong residente ka', intro: 'Mga unang hakbang para makilala at magamit ang serbisyo ng Lungsod.', steps: [
+{ title: 'Kilalanin ang barangay hall mo', where: 'Barangay directory' },
+{ title: 'Mag-register sa PasigPass', where: 'Online' },
+{ title: 'Ilipat ang voter registration', where: 'COMELEC Pasig' },
+{ title: 'I-save ang emergency hotlines', where: 'Gumagana kahit offline' } ] },
+{ label: 'Senior citizen', title: 'Senior ka na o may senior sa bahay', intro: 'ID, benepisyo at serbisyong pangkalusugan para sa 60 pataas.', steps: [
+{ title: 'Kumuha ng Senior Citizen ID', where: 'OSCA' },
+{ title: 'Alamin ang mga benepisyo', where: 'OSCA at CSWDO' },
+{ title: 'Libreng check-up at gamot', where: 'Health center at PCGH' } ] },
+{ label: 'Estudyante', title: 'Nag-aaral o mag-aaral pa lang', intro: 'Iskolarship at edukasyon na suportado ng Lungsod.', steps: [
+{ title: 'Scholarship ng Lungsod', where: 'Scholarship Office' },
+{ title: 'Admission sa PLP', where: 'Pamantasan ng Lungsod ng Pasig' },
+{ title: 'Mga requirements at deadline', where: '[DATE]' } ] }
+];
+const lifeTabs = lifeData.map((l, i) => ({
+label: l.label,
+active: i === s.life,
+bg: i === s.life ? blue : c.card,
+ink: i === s.life ? '#FFFFFF' : c.ink,
+border: i === s.life ? blue : c.border,
+pick: () => this.setState({ life: i })
+}));
+const lifeSel = lifeData[s.life];
+const life = { title: lifeSel.title, intro: lifeSel.intro, steps: lifeSel.steps.map((st, i) => ({ n: i + 1, title: st.title, where: st.where })) };
+const barangays = ['Bagong Ilog','Bagong Katipunan','Bambang','Buting','Caniogan','Dela Paz','Kalawaan','Kapasigan','Kapitolyo','Malinao','Manggahan','Maybunga','Oranbo','Palatiw','Pinagbuhatan','Pineda','Rosario','Sagad','San Antonio','San Joaquin','San Jose','San Miguel','San Nicolas','Santa Cruz','Santa Lucia','Santa Rosa','Santo Tomas','Santolan','Sumilang','Ugong'];
+const brgyCards = [
+{ label: 'BARANGAY HALL', value: 'Brgy. ' + s.brgy, sub: '[Address] · Huling na-verify [DATE]', tone: '#2BB3C9' },
+{ label: 'HOTLINE NG BARANGAY', value: '[Numero]', sub: 'Tap para tumawag', tone: '#FFB43F' },
+{ label: 'PANGANIB SA BAHA', value: '[Antas mula Project NOAH]', sub: 'Tingnan ang hazard map', tone: '#FF8A80' },
+{ label: 'PINAKAMALAPIT NA EVACUATION CENTER', value: '[Pangalan]', sub: '[Distansya] · Kapasidad [N]', tone: '#9FE3B4' }
+];
+const money = [
+{ tag: 'BIDDING', title: 'Bids & Awards Log', desc: 'Budget, nanalong bid, natipid, at link sa livestream ng bawat bidding.', cta: 'Tingnan ang log', tagBg: '#E8EEFB', tagInk: '#1A47A8' },
+{ tag: 'PROYEKTO', title: 'Bagong Pasig City Hall', desc: 'Groundbreaking Okt 2025. Milestones, kontrata at dokumento sa isang timeline.', cta: 'Sundan ang proyekto', tagBg: '#FFF1D6', tagInk: '#7A4A00' },
+{ tag: 'BUDGET', title: 'Saan napupunta ang pondo?', desc: 'Taunang budget ng Lungsod, kada departamento, kumpara sa nakaraang taon.', cta: 'Buksan ang explorer', tagBg: '#E0F5F8', tagInk: '#0B5F6C' },
+{ tag: 'AUDIT', title: 'COA, ipinaliwanag', desc: 'Audit opinion at obserbasyon ng COA, sa simpleng Filipino, may link sa orihinal.', cta: 'Basahin', tagBg: '#EFE8FB', tagInk: '#4B2C8C' }
+];
+const trust = [
+{ title: 'May source ang bawat numero', desc: 'Link sa orihinal na dokumento at petsa kung kailan kinuha.' },
+{ title: 'May petsa ng pag-verify', desc: 'Bawat pahina ay may "huling na-verify" at pangalan ng volunteer.' },
+{ title: 'Pampublikong corrections log', desc: 'Nagkamali kami? Makikita mo kung ano, kailan at paano inayos.' },
+{ title: 'Walang pinapanigan', desc: 'Walang endorsement, walang kulay ng partido, open source ang code.' }
+];
+const dates = [
+{ mon: '[MON]', day: '[DD]', title: 'Bid opening, livestream', sub: 'BAC · [Proyekto]', tone: '#FFB43F' },
+{ mon: '[MON]', day: '[DD]', title: 'Deadline ng amilyar, [quarter]', sub: 'City Treasurer', tone: '#2BB3C9' },
+{ mon: '[MON]', day: '[DD]', title: 'Session ng Sangguniang Panlungsod', sub: 'Agenda: [link]', tone: '#DCE4F5' }
+];
+return {
+blue: blue, c: c, t: t,
+zoom: s.zoom,
+contrast: s.contrast,
+contrastBtn: s.contrast ? '#FFFFFF' : '#1B2A55',
+contrastBtnInk: s.contrast ? '#000000' : '#FFFFFF',
+langBtn: en ? 'FIL' : 'EN',
+showAlert: s.showAlert,
+nav: en ? ['Services', 'Barangays', 'Government', 'Laws', 'Transparency', 'Data'] : ['Serbisyo', 'Barangay', 'Pamahalaan', 'Batas', 'Transparency', 'Data'],
+query: s.query,
+hasQuery: q.length > 0,
+noResults: q.length > 0 && results.length === 0,
+results: results,
+intents: intents,
+lifeTabs: lifeTabs, life: life,
+barangays: barangays, brgy: s.brgy, brgyCards: brgyCards,
+money: money, trust: trust, dates: dates,
+onQuery: (e) => this.setState({ query: e.target.value }),
+onBrgy: (e) => this.setState({ brgy: e.target.value }),
+bigger: () => this.setState({ zoom: Math.min(1.3, Math.round((s.zoom + 0.1) * 10) / 10) }),
+smaller: () => this.setState({ zoom: Math.max(0.9, Math.round((s.zoom - 0.1) * 10) / 10) }),
+toggleContrast: () => this.setState({ contrast: !s.contrast }),
+toggleLang: () => this.setState({ lang: en ? 'fil' : 'en' }),
+dismissAlert: () => this.setState({ showAlert: false })
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#FFFFFF;font-family:"Geist",system-ui,sans-serif;color:#16181D;-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1080px;height:1080px;overflow:hidden;background:#FFFFFF}
+.abs{position:absolute}
+#map{left:0;top:0;width:1080px;height:1080px}
+#word{left:0;top:0;font-size:84px;font-weight:700;letter-spacing:-0.04em;white-space:nowrap}
+#lines{left:96px;top:300px;width:888px;font-size:96px;font-weight:700;letter-spacing:-0.045em;line-height:1.02}
+#lines span{display:inline-block}
+#ui{left:96px;top:300px;width:888px}
+.bar{display:flex;border:4px solid #16181D;border-radius:20px;overflow:hidden;height:112px;align-items:center;background:#fff}
+.bar .txt{flex:1;padding:0 36px;font-size:46px;font-weight:500}
+.bar .btn{background:#16181D;color:#fff;height:100%;display:flex;align-items:center;padding:0 40px;font-size:38px;font-weight:600}
+.caret{display:inline-block;width:4px;height:52px;background:#1A47A8;vertical-align:-8px;margin-left:4px}
+.row{margin-top:28px;border:2px solid #E2E5EB;border-radius:20px;padding:30px 36px;display:grid;grid-template-columns:1fr auto;gap:10px 24px;background:#fff}
+.row .t{font-size:42px;font-weight:600;letter-spacing:-0.02em}
+.row .t mark{background:#DCE5F8;color:inherit;border-radius:6px;padding:0 4px}
+.row .m{font-size:30px;color:#586070}
+.row .f{font-size:34px;font-weight:600;text-align:right;align-self:center}
+#sos{left:96px;top:330px;width:888px}
+#end{left:0;top:0;width:1080px;height:1080px;background:#1A47A8;color:#fff}
+</style></head>
+<body><div id="stage">
+<svg id="map" class="abs" viewBox="0 0 1080 1080"><g id="mapg"></g></svg>
+<div id="word" class="abs">BetterPasig</div>
+<div id="lines" class="abs"></div>
+<div id="ui" class="abs">
+  <div class="bar"><div class="txt"><span id="typed"></span><span class="caret" id="caret"></span></div><div class="btn">Hanapin</div></div>
+  <div class="row" id="r1"><div class="t">Magbayad ng <mark>amilyar</mark></div><div class="f">Mga 7 minuto</div><div class="m">City Treasurer</div><div class="m" style="text-align:right">May online</div></div>
+  <div class="row" id="r2"><div class="t">Kopya ng birth certificate</div><div class="f">₱120</div><div class="m">City Civil Registry</div><div class="m" style="text-align:right">Mga 50 minuto</div></div>
+</div>
+<div id="sos" class="abs">
+  <div style="font-size:40px;font-weight:600;color:#B42318">Kapag may emergency</div>
+  <div style="font-size:170px;font-weight:700;letter-spacing:-0.05em;color:#B42318;line-height:1.05;white-space:nowrap" id="num">8643-0000</div>
+  <div style="font-size:40px;color:#586070;margin-top:8px">Pasig Emergency Hotline, nasa itaas ng bawat pahina.</div>
+</div>
+<div id="end" class="abs">
+  <svg id="endmark" class="abs" viewBox="8 2 32 44" style="left:440px;top:210px;width:200px;height:275px"><path id="endpath" fill="#FFFFFF"></path></svg>
+  <div class="abs" style="left:0;width:1080px;top:540px;text-align:center;font-size:110px;font-weight:700;letter-spacing:-0.045em" id="url">betterpasig.org</div>
+  <div class="abs" style="left:0;width:1080px;top:690px;text-align:center;font-size:38px;color:#D3DDF5" id="tag">Bawat serbisyo ng Lungsod, malinaw at nasa isang lugar.</div>
+  <div class="abs" style="left:0;width:1080px;top:960px;text-align:center;font-size:26px;color:#AFC1EC" id="disc">Gawa ng mga volunteer. Hindi opisyal na website ng Lungsod ng Pasig.</div>
+</div>
+</div>
+<script>
+const MAP = /*MAP*/; const MARK = /*MARK*/;
+const NS='http://www.w3.org/2000/svg';
+const g=document.getElementById('mapg');
+const order=MAP.slice().sort((a,b)=>b.y-a.y);
+const paths=order.map(b=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',b.d);p.setAttribute('stroke','#FFFFFF');p.setAttribute('stroke-width','3');p.setAttribute('stroke-linejoin','round');g.appendChild(p);p._n=b.name;return p;});
+document.getElementById('endpath').setAttribute('d',MARK);
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=x=>{x=clamp(x);return 1-Math.pow(1-x,3)};
+const inout=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const mix=(a,b,k)=>a+(b-a)*k;
+const pale=[230,236,248], blue=[26,71,168];
+const col=k=>`rgb(${pale.map((v,i)=>Math.round(mix(v,blue[i],k))).join(',')})`;
+// map geometry: source box x 100..460, y 0..560
+function placeMap(cx,cy,h){ const s=h/560; g.setAttribute('transform',`translate(${cx-280*s} ${cy-280*s}) scale(${s})`); }
+const L1=['173','serbisyo','ng','Lungsod','ng','Pasig.'];
+const L2=['Isang','lugar.'];
+window.render=function(t){
+  // ---- scene 1+2: map fill then shrink into lockup (0-4.4s)
+  const mapOn = t<4.6 || (t>=10.6 && t<12.4);
+  $('map').style.opacity = mapOn?1:0;
+  if(t<4.6){
+    paths.forEach((p,i)=>{ const k=ease(seg(t,0.3+i*0.055,0.3+i*0.055+0.28)); p.setAttribute('fill',col(k)); });
+    const k=inout(seg(t,2.6,3.6));
+    // big centered -> logo position left of wordmark (lockup centered)
+    const h=mix(760,150,k), cx=mix(540,268,k), cy=mix(540,540,k);
+    placeMap(cx,cy,h);
+    const w=$('word'); const wk=ease(seg(t,3.2,3.9));
+    w.style.opacity=wk; w.style.transform=`translate(${352+mix(40,0,wk)}px, ${490}px)`;
+    const out=ease(seg(t,4.1,4.5));
+    $('map').style.opacity=1-out; w.style.opacity=wk*(1-out);
+  } else { $('word').style.opacity=0; }
+  // ---- scene 3: kinetic lines (4.4-6.9)
+  const ln=$('lines');
+  if(t>=4.4 && t<7.0){
+    ln.style.opacity=1-ease(seg(t,6.6,6.95));
+    const words=L1.map((w,i)=>{const k=ease(seg(t,4.5+i*0.12,4.5+i*0.12+0.35));return `<span style="opacity:${k};transform:translateY(${mix(30,0,k)}px)">${w}</span>`}).join(' ');
+    const words2=L2.map((w,i)=>{const k=ease(seg(t,5.6+i*0.16,5.6+i*0.16+0.35));return `<span style="opacity:${k};transform:translateY(${mix(30,0,k)}px);color:#1A47A8">${w}</span>`}).join(' ');
+    ln.innerHTML=words+'<br><br>'+words2;
+  } else { ln.style.opacity=0; }
+  // ---- scene 4: search demo (7.0-10.4)
+  const ui=$('ui');
+  if(t>=7.0 && t<10.5){
+    const kin=ease(seg(t,7.0,7.4)), kout=ease(seg(t,10.1,10.45));
+    ui.style.opacity=kin*(1-kout); ui.style.transform=`translateY(${mix(24,0,kin)}px)`;
+    const word='amilyar'; const n=Math.floor(clamp((t-7.6)/0.09,0,word.length));
+    $('typed').textContent=word.slice(0,n);
+    $('caret').style.opacity=(Math.floor(t*2.2)%2===0||n<word.length)?1:0;
+    const r1=ease(seg(t,8.4,8.75)), r2=ease(seg(t,8.6,8.95));
+    $('r1').style.opacity=r1; $('r1').style.transform=`translateY(${mix(-14,0,r1)}px)`;
+    $('r2').style.opacity=r2; $('r2').style.transform=`translateY(${mix(-14,0,r2)}px)`;
+  } else ui.style.opacity=0;
+  // ---- scene 5: emergency (10.5-12.4) with small map highlighting
+  const sos=$('sos');
+  if(t>=10.5 && t<12.4){
+    const k=ease(seg(t,10.55,10.95)), o=ease(seg(t,12.0,12.35));
+    sos.style.opacity=k*(1-o); sos.style.transform=`translateY(${mix(24,0,k)}px)`;
+    $('map').style.opacity=0;
+  } else sos.style.opacity=0;
+  // ---- scene 6: end card (12.3-15)
+  const end=$('end');
+  if(t>=12.3){
+    const k=inout(seg(t,12.3,12.8));
+    end.style.opacity=1; end.style.clipPath=`inset(${mix(100,0,k)}% 0 0 0)`;
+    const m=ease(seg(t,12.7,13.2)), u=ease(seg(t,12.9,13.4)), tg=ease(seg(t,13.2,13.7)), d=ease(seg(t,13.5,14));
+    $('endmark').style.opacity=m; $('endmark').style.transform=`translateY(${mix(20,0,m)}px)`;
+    $('url').style.opacity=u; $('url').style.transform=`translateY(${mix(20,0,u)}px)`;
+    $('tag').style.opacity=tg; $('disc').style.opacity=d;
+  } else end.style.opacity=0;
+};
+render(0);
+</script></body></html>

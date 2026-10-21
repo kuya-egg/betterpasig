@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1A47A8;text-underline-offset:3px}
+button,input{font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif}
+input::placeholder{color:#B4BCCB}
+:focus-visible{outline:3px solid #1A47A8;outline-offset:3px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; overflow-y: auto; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; color: #1E2228; background: #FFFFFF; font-size: 17px; line-height: 1.5;">
+
+<div style="padding: 8px 20px; font-size: 13px; color: #4A5260; border-bottom: 1px solid #E2E7F0;">Hindi opisyal na website ng Lungsod. <a href="#">pasigcity.gov.ph</a></div>
+
+<header style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+<a href="#" aria-label="BetterPasig, home" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1E2228;">
+<svg width="28" height="28" viewBox="0 0 36 36" aria-hidden="true"><path d="M2 14c5.3-5 10.7-5 16 0s10.7 5 16 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path><path d="M2 24c5.3-5 10.7-5 16 0s10.7 5 16 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path></svg>
+<span style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em;">BetterPasig</span>
+</a>
+<button aria-label="Buksan ang menu" style="background: transparent; border: 2px solid #1E2228; border-radius: 6px; min-width: 44px; min-height: 44px; font-size: 15px; font-weight: 700; color: #1E2228;">Menu</button>
+</header>
+
+<section style="padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 16px;">
+<form role="search" style="display: flex; flex-direction: column; gap: 2px;">
+<label for="m-need" style="font-size: 38px; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em;">Kailangan kong</label>
+<input id="m-need" type="search" autocomplete="off" value="{{query}}" onChange="{{onQuery}}" placeholder="magbayad ng amilyar" style="width: 100%; box-sizing: border-box; border: 0; border-bottom: 4px solid {{blue}}; font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; color: {{blue}}; padding: 0 0 6px; background: transparent;">
+</form>
+<sc-if value="{{showSuggest}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{suggest}}" as="sg" hint-placeholder-count="4">
+<button type="button" onClick="{{sg.pick}}" style="background: #EEF2F8; color: #1E2228; border: 0; border-radius: 6px; padding: 10px 12px; font-size: 16px; min-height: 44px;">{{sg.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column;">
+<sc-for list="{{results}}" as="r" hint-placeholder-count="2">
+<a href="#" style="padding: 14px 0; border-top: 1px solid #E2E7F0; font-size: 19px; font-weight: 700;">{{r}}</a>
+</sc-for>
+</div>
+</sc-if>
+</section>
+
+<section aria-labelledby="m-em" style="margin: 0 20px; padding: 18px 0 8px; border-top: 3px solid #B3261E;">
+<h2 id="m-em" style="margin: 0 0 6px; font-size: 19px;">Kapag may emergency</h2>
+<sc-for list="{{hotlines}}" as="h" hint-placeholder-count="3">
+<a href="tel:{{h.tel}}" style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #E2E7F0; text-decoration: none; color: #1E2228; min-height: 44px; box-sizing: border-box;">
+<span>{{h.label}}</span><strong style="color: #B3261E;">{{h.num}}</strong>
+</a>
+</sc-for>
+</section>
+
+<section style="background: #EEF2F8; margin-top: 28px; padding: 28px 20px; display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;">Gabay ayon sa nangyayari sa buhay mo</h2>
+<sc-for list="{{sits}}" as="si" hint-placeholder-count="5">
+<a href="#" style="background: #FFFFFF; border-radius: 6px; padding: 14px 16px; font-size: 17px; font-weight: 700; color: #1E2228; text-decoration: none; min-height: 52px; box-sizing: border-box;">{{si}}</a>
+</sc-for>
+</section>
+
+<section style="background: #0E2A66; color: #FFFFFF; padding: 28px 20px; display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;">Saan napupunta ang pondo ng bayan</h2>
+<p style="margin: 0; color: #C9D4EC; font-size: 16px;">Bidding, budget, audit at ang Bagong City Hall, may link sa bawat orihinal na dokumento.</p>
+<a href="#" style="color: #FFFFFF; font-weight: 700;">Tingnan ang talaan ng bidding</a>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"blue":{"editor":"color","default":"#1A47A8","options":["#1A47A8","#1440A0","#0F3B8C","#2456C7"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { query: '' }; }
+renderVals() {
+const blue = this.props.blue ?? '#1A47A8';
+const all = ['Magbayad ng amilyar', 'Kumuha ng business permit', 'Kumuha ng birth certificate', 'Mag-report ng problema sa Lungsod', 'Humingi ng dokumento (FOI)', 'Hanapin ang evacuation center'];
+const q = this.state.query.trim().toLowerCase();
+const results = q ? all.filter((x) => x.toLowerCase().indexOf(q) !== -1) : [];
+return {
+blue: blue,
+query: this.state.query,
+showSuggest: q.length === 0,
+hasQuery: q.length > 0,
+results: results.length ? results : ['Wala pang tugma. Tumawag sa City Hall, 8643-1111.'],
+suggest: ['magbayad ng amilyar', 'kumuha ng business permit', 'mag-report ng problema', 'hanapin ang evacuation center'].map((x) => ({ label: x, pick: () => this.setState({ query: x }) })),
+hotlines: [
+{ label: 'Command Center', num: '8643-0000', tel: '86430000' },
+{ label: 'Bumbero', num: '8641-2815', tel: '86412815' },
+{ label: 'City Hall', num: '8643-1111', tel: '86431111' }
+],
+sits: ['May bagong silang na sanggol', 'Magsisimula ng negosyo', 'Bagong lipat sa Pasig', 'Senior citizen', 'Estudyante'],
+onQuery: (e) => this.setState({ query: e.target.value })
+};
+}
+}
+</script>
+</body>
+</html>

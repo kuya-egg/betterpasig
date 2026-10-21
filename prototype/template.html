@@ -1,0 +1,447 @@
+<title>BetterPasig</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: left-aligned page, hairlines and type structure it; the real barangay map is the one visual. Motion answers actions only. */
+:root {
+  --bg: #FFFFFF; --ink: #16181D; --muted: #586070; --line: #E2E5EB; --subtle: #F4F6F9;
+  --blue: #1A47A8; --pale: #E6ECF8; --hover: #C7D5F4; --mark-bg: #DCE5F8;
+  --red: #B42318; --red-bg: #FEF3F2; --amber: #8A5A00; --shadow: rgba(16,24,40,.12);
+  --font: "Geist", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.2,.7,.2,1); --fast: 140ms; --mid: 240ms;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0F1216; --ink: #ECEEF2; --muted: #A2A9B6; --line: #272C35; --subtle: #161A20;
+  --blue: #86A6F4; --pale: #1E2633; --hover: #2C3A55; --mark-bg: #24314C;
+  --red: #F97066; --red-bg: #2B1513; --amber: #E3B35C; --shadow: rgba(0,0,0,.45); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0F1216; --ink: #ECEEF2; --muted: #A2A9B6; --line: #272C35; --subtle: #161A20;
+  --blue: #86A6F4; --pale: #1E2633; --hover: #2C3A55; --mark-bg: #24314C;
+  --red: #F97066; --red-bg: #2B1513; --amber: #E3B35C; --shadow: rgba(0,0,0,.45); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--fast) var(--ease); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; transition: outline-offset var(--fast) var(--ease); }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* link with a drawn underline, used where links sit in lists */
+.ul { color: var(--ink); text-decoration: none; background: none; position: relative; }
+.ul::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--mid) var(--ease); }
+.ul:hover { color: var(--blue); }
+.ul:hover::after, .ul:focus-visible::after { transform: scaleX(1); }
+
+button { font: inherit; cursor: pointer; }
+.press { transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease); }
+.press:active { transform: scale(.97); }
+
+/* loader */
+.loader { position: fixed; inset: 0; z-index: 50; background: var(--bg); display: grid; place-items: center; transition: opacity 320ms var(--ease), visibility 320ms; }
+.loader.done { opacity: 0; visibility: hidden; }
+.loader figure { margin: 0; display: grid; justify-items: center; gap: 18px; }
+.loader svg { width: 150px; height: auto; }
+.loader path { fill: var(--pale); stroke: var(--bg); stroke-width: 3; stroke-linejoin: round; animation: piece 380ms var(--ease) forwards; }
+@keyframes piece { to { fill: var(--blue); } }
+.loader figcaption { font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); transition: box-shadow var(--mid) var(--ease); }
+.top.scrolled { box-shadow: 0 6px 20px var(--shadow); }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 36px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-size: 21px; font-weight: 700; letter-spacing: -0.025em; }
+.brand svg { width: 26px; height: 36px; transition: transform var(--mid) var(--ease); }
+.brand:hover svg { transform: rotate(-6deg) scale(1.06); }
+.brand path { fill: var(--blue); }
+.nav { display: flex; flex-wrap: wrap; gap: 6px 24px; flex: 1 1 auto; font-size: 16px; font-weight: 500; }
+.lang { font-size: 15px; color: var(--muted); display: flex; gap: 10px; }
+.lang b { color: var(--ink); font-weight: 600; }
+
+/* emergency */
+.sos { background: var(--red-bg); border-bottom: 1px solid var(--line); }
+.sos .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; padding-block: 10px; }
+.sos strong { color: var(--red); font-weight: 700; font-size: 15px; }
+.sos .item { display: inline-flex; gap: 6px; align-items: center; font-size: 15px; }
+.sos .item a { color: var(--ink); font-weight: 700; font-size: 17px; text-decoration: none; }
+.sos .item a.main { color: var(--red); font-size: 20px; }
+.copy { border: 0; background: transparent; color: var(--muted); width: 32px; height: 32px; border-radius: 8px; display: inline-grid; place-items: center; transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.copy:hover { background: var(--bg); color: var(--ink); }
+.copy:active { transform: scale(.9); }
+.copy svg { width: 16px; height: 16px; }
+.sos .more { margin-left: auto; font-size: 15px; }
+
+/* hero */
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 56px; padding-block: 56px 48px; align-items: start; }
+.hero h1 { font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 700; max-width: 12ch; }
+.hero .lede { margin: 16px 0 24px; color: var(--muted); max-width: 46ch; }
+.search { position: relative; max-width: 580px; }
+.search form { display: flex; border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; background: var(--bg); transition: box-shadow var(--mid) var(--ease); }
+.search form:focus-within { box-shadow: 0 0 0 4px var(--mark-bg); }
+.search input { flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font: 500 18px var(--font); padding: 15px 16px; background: transparent; color: var(--ink); }
+.search input::placeholder { color: var(--muted); }
+.search button { border: 0; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 16px; padding: 0 22px; }
+.results { position: absolute; z-index: 15; left: 0; right: 0; top: calc(100% + 8px); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 18px 44px var(--shadow); max-height: 400px; overflow: auto; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease); }
+.results.open { opacity: 1; transform: none; pointer-events: auto; }
+.results a { display: flex; justify-content: space-between; gap: 16px; padding: 12px 16px; text-decoration: none; color: var(--ink); border-top: 1px solid var(--line); transition: background-color var(--fast) var(--ease); }
+.results a:first-child { border-top: 0; }
+.results a:hover, .results a.active { background: var(--subtle); }
+.results small { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.results mark { background: var(--mark-bg); color: inherit; border-radius: 3px; padding: 0 1px; }
+.results p { margin: 0; padding: 14px 16px; color: var(--muted); font-size: 15px; }
+.results .hint { display: flex; justify-content: space-between; padding: 8px 16px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: var(--subtle); }
+.popular { margin-top: 16px; font-size: 15px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.popular button { background: var(--subtle); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; color: var(--ink); font-size: 15px; transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.popular button:hover { border-color: var(--blue); color: var(--blue); }
+.popular button:active { transform: scale(.96); }
+
+.map { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: start; }
+.map svg { width: 100%; height: auto; overflow: visible; }
+.map a path { fill: var(--pale); stroke: var(--bg); stroke-width: 2.5; stroke-linejoin: round; transition: fill var(--mid) var(--ease); }
+.map a:hover path, .map a:focus-visible path { fill: var(--hover); }
+.map a.on path { fill: var(--blue); }
+.map a:focus-visible { outline: none; }
+.map .tip { pointer-events: none; font: 600 13px var(--font); fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; opacity: 0; transition: opacity var(--fast) var(--ease); }
+.map .tip.show { opacity: 1; }
+.info { display: grid; gap: 10px; padding-top: 4px; }
+.info label { font-size: 14px; color: var(--muted); }
+.info select { font: 600 18px var(--font); padding: 10px 12px; border: 1px solid var(--muted); border-radius: 8px; background: var(--bg); color: var(--ink); min-height: 48px; }
+.info dl { margin: 4px 0 0; transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease); }
+.info dl.swap { opacity: 0; transform: translateY(4px); }
+.info dl div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.info dl div:last-child { border-bottom: 1px solid var(--line); }
+.info dt { color: var(--muted); }
+.info dd { margin: 0; font-weight: 500; text-align: right; }
+.info .chk { color: var(--amber); }
+.info small { font-size: 12px; color: var(--muted); }
+
+/* notes */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; padding-block: 0 56px; }
+.notes div { border-top: 2px solid var(--ink); padding-top: 14px; display: grid; gap: 4px; align-content: start; }
+.notes .k { font-size: 14px; color: var(--muted); }
+.notes .t { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
+.notes .b { font-size: 15px; color: var(--muted); }
+
+/* sections */
+section.block { padding-block: 56px; border-top: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 24px; }
+.head h2 { font-size: 30px; letter-spacing: -0.03em; font-weight: 700; }
+.head p { margin: 6px 0 0; color: var(--muted); font-size: 16px; }
+
+.tablebox { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 720px; }
+th { text-align: left; font-weight: 500; font-size: 14px; color: var(--muted); padding: 0 16px 10px 0; border-bottom: 1px solid var(--ink); }
+td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; transition: background-color var(--fast) var(--ease); }
+tbody tr { cursor: pointer; }
+tbody tr:hover td { background: var(--subtle); }
+tbody tr td:first-child { padding-left: 8px; }
+th:first-child { padding-left: 8px; }
+td:first-child a { font-weight: 600; }
+.tag { display: inline-block; font-size: 13px; font-weight: 600; color: var(--blue); border: 1px solid currentColor; border-radius: 4px; padding: 0 6px; margin-left: 8px; vertical-align: 2px; }
+
+.cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.cat { border-top: 1px solid var(--line); padding: 18px 0 22px; position: relative; }
+.cat::before { content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 320ms var(--ease); }
+.cat:hover::before, .cat:focus-within::before { transform: scaleX(1); }
+.cat h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.cat h3 span { font-size: 14px; font-weight: 500; color: var(--muted); transition: color var(--fast) var(--ease); }
+.cat:hover h3 span { color: var(--blue); }
+.cat ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; font-size: 16px; }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); }
+.list li:last-child { border-bottom: 1px solid var(--line); }
+.list .who { display: block; font-size: 14px; color: var(--muted); }
+.list .amt { font-weight: 600; text-align: right; white-space: nowrap; }
+.list .chk { display: block; font-size: 13px; font-weight: 500; color: var(--amber); }
+.off div { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.council { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 32px; border-top: 1px solid var(--line); padding-top: 14px; }
+.council span { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+.council ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 16px; }
+
+.figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.figs > div { padding: 18px 24px 18px 0; }
+.figs > div + div { border-left: 1px solid var(--line); padding-left: 24px; }
+.figs .v { font-size: 34px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; }
+.figs .l { font-size: 16px; margin-top: 6px; }
+.figs .s { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; font-size: 16px; }
+
+footer { border-top: 1px solid var(--line); background: var(--subtle); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 24px 64px; padding-block: 40px; font-size: 15px; color: var(--muted); }
+footer .about { flex: 1 1 380px; max-width: 60ch; display: grid; gap: 8px; }
+footer .col { display: grid; gap: 6px; align-content: start; }
+footer strong { color: var(--ink); }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 60; transform: translate(-50%, 16px); opacity: 0; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 15px; font-weight: 500; transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease); pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 900px) {
+  .hero .wrap, .two { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .cats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .notes { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .figs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .figs > div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .figs > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero .wrap { padding-block: 28px; }
+  .hero h1 { font-size: 36px; }
+  .map { grid-template-columns: 120px minmax(0, 1fr); gap: 16px; }
+  .sos .more { margin-left: 0; }
+  .cats, .council, .figs { grid-template-columns: minmax(0, 1fr); }
+  .figs > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+  .head h2 { font-size: 26px; }
+  .nav { order: 3; flex-basis: 100%; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .nav a { white-space: nowrap; }
+  .lang { margin-left: auto; }
+  .cat ul { display: none; }
+  .cat { padding: 14px 0; }
+  table { min-width: 0; }
+  thead { display: none; }
+  tr { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  td, tbody tr td:first-child { border: 0; padding: 0; font-size: 15px; color: var(--muted); }
+  td:first-child { grid-column: 1 / -1; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+  td:nth-child(2) { grid-column: 1 / -1; }
+  tbody tr:hover td { background: none; }
+  .list li { flex-direction: column; gap: 4px; }
+  .list .amt { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  .loader { display: none; }
+}
+</style>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <figure><svg viewBox="100 0 360 560" id="loadmap"></svg><figcaption>BetterPasig</figcaption></figure>
+</div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#"><svg viewBox="8 2 32 44" aria-hidden="true"><path id="markp"></path></svg>BetterPasig</a>
+    <nav class="nav" aria-label="Pangunahing menu">
+      <a class="ul" href="#serbisyo">Serbisyo</a><a class="ul" href="#benepisyo">Benepisyo</a><a class="ul" href="#mapa">Barangay</a><a class="ul" href="#opisyal">Opisyal</a><a class="ul" href="#pondo">Pondo ng bayan</a>
+    </nav>
+    <div class="lang"><b>Filipino</b><a href="#">English</a></div>
+  </div>
+</header>
+
+<div class="sos" role="region" aria-label="Emergency hotlines">
+  <div class="wrap" id="sos"></div>
+</div>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Paano ka namin matutulungan?</h1>
+      <p class="lede">Serbisyo, benepisyo at impormasyon ng Lungsod ng Pasig, mula sa Citizen's Charter ng bawat opisina.</p>
+      <div class="search">
+        <form role="search" id="sf">
+          <label for="q" class="sr">Maghanap ng serbisyo</label>
+          <input id="q" type="search" autocomplete="off" placeholder="Hal. amilyar, birth certificate" aria-controls="res" aria-autocomplete="list">
+          <button type="submit" class="press">Hanapin</button>
+        </form>
+        <div class="results" id="res" role="listbox"></div>
+      </div>
+      <div class="popular" id="pop"><span>Madalas hanapin:</span></div>
+    </div>
+    <div class="map" id="mapa">
+      <svg viewBox="100 0 360 560" id="bmap" role="group" aria-label="Mapa ng 30 barangay ng Pasig"></svg>
+      <div class="info">
+        <label for="bsel">Ang barangay mo</label>
+        <select id="bsel"></select>
+        <dl id="bfacts"></dl>
+        <small>Hangganan: PSA PSGC. Pindutin ang mapa para pumili.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap notes" id="notes"></div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="head"><div><h2>Pinakamadalas na serbisyo</h2><p>Opisina, tagal at bayad, mula sa Citizen's Charter.</p></div></div>
+    <div class="tablebox"><table>
+      <thead><tr><th>Serbisyo</th><th>Opisina</th><th>Tagal</th><th>Bayad</th></tr></thead>
+      <tbody id="feat"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="block" id="serbisyo">
+  <div class="wrap">
+    <div class="head"><div><h2>Lahat ng serbisyo</h2><p id="svcCount"></p></div><a class="ul" href="#" style="font-weight:500">Buong listahan</a></div>
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap two">
+    <div id="benepisyo">
+      <div class="head"><h2>Benepisyo at tulong</h2></div>
+      <ul class="list" id="progs"></ul>
+    </div>
+    <div id="opisyal">
+      <div class="head"><h2>Mga opisyal, 2025 hanggang 2028</h2><a class="ul" href="officials.html" style="font-weight:500">Buong direktoryo</a></div>
+      <div class="off" id="offtop"></div>
+      <div class="council" id="council"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="pondo">
+  <div class="wrap">
+    <div class="head"><div><h2>Pondo ng bayan</h2><p>Mga numero mula sa COA at sa mga dokumento ng Lungsod.</p></div></div>
+    <div class="figs" id="figs"></div>
+    <div class="links" id="links"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="about">
+      <strong>BetterPasig</strong>
+      <span>Gawa ng mga volunteer at hindi opisyal na website ng Lungsod ng Pasig. Para sa opisyal na transaksyon, pumunta sa <a href="https://pasigcity.gov.ph">pasigcity.gov.ph</a>.</span>
+      <span id="updated"></span>
+    </div>
+    <div class="col"><strong>Temporary City Hall</strong><span>E. Rodriguez Ave., Bridgetowne</span><span>Brgy. Rosario, Pasig City</span><span class="num">8643-1111</span></div>
+    <div class="col"><a class="ul" href="#">May nakitang mali?</a><a class="ul" href="#">Data (JSON)</a><a class="ul" href="#">GitHub</a></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const DATA = /*DATA*/;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const NS = 'http://www.w3.org/2000/svg';
+const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// logo
+$('markp').setAttribute('d', DATA.mark);
+
+// loader: 30 barangays fill south to north, once per visit
+(function () {
+  const L = $('loader');
+  let seen = false; try { seen = sessionStorage.getItem('bp-loaded') === '1'; } catch (e) {}
+  if (reduce || seen) { L.remove(); return; }
+  const svg = $('loadmap');
+  const order = DATA.map.slice().sort((a, b) => b.y - a.y);
+  order.forEach((b, i) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', b.d); p.style.animationDelay = (i * 32) + 'ms'; svg.appendChild(p); });
+  const total = order.length * 32 + 380 + 180;
+  const finish = () => { L.classList.add('done'); setTimeout(() => L.remove(), 400); try { sessionStorage.setItem('bp-loaded', '1'); } catch (e) {} };
+  setTimeout(finish, total);
+  L.addEventListener('click', finish);
+})();
+
+// sticky header shadow
+const topEl = $('top');
+addEventListener('scroll', () => topEl.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+// toast + copy
+const toast = $('toast'); let tt;
+function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 1800); }
+const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+$('sos').innerHTML = '<strong>Emergency</strong>' + DATA.hotlines.map((h, i) =>
+  `<span class="item"><span class="muted">${esc(h.label)}</span><a class="num${i === 0 ? ' main' : ''}" href="tel:${esc(h.tel)}">${esc(h.num)}</a><button class="copy" type="button" data-n="${esc(h.num)}" aria-label="Kopyahin ang ${esc(h.num)}">${copyIcon}</button></span>`).join('') +
+  '<a class="more ul" href="#" style="color:var(--blue)">Pulis, bumbero at ospital</a>';
+$('sos').addEventListener('click', async (e) => {
+  const b = e.target.closest('.copy'); if (!b) return;
+  try { await navigator.clipboard.writeText(b.dataset.n); say('Nakopya: ' + b.dataset.n); }
+  catch (err) { say('Hindi makopya. Ang numero: ' + b.dataset.n); }
+});
+
+// notes
+$('notes').innerHTML = DATA.notes.map((n) => `<div><span class="k">${esc(n.k)}</span><span class="t">${esc(n.t)}</span><span class="b">${esc(n.b)}</span></div>`).join('');
+
+// table: whole row is clickable through its link
+$('feat').innerHTML = DATA.featured.map((f) => `<tr><td><a href="#">${esc(f.title)}</a>${f.online ? '<span class="tag">May online</span>' : ''}</td><td>${esc(f.office)}</td><td class="num">${esc(f.time)}</td><td class="num">${esc(f.fee)}</td></tr>`).join('');
+$('feat').addEventListener('click', (e) => { if (e.target.closest('a')) return; const a = e.target.closest('tr')?.querySelector('a'); if (a) a.click(); });
+
+// categories
+$('svcCount').textContent = `${DATA.total} serbisyo sa ${DATA.cats.length} kategorya, mula sa ${DATA.offices} opisina.`;
+$('cats').innerHTML = DATA.cats.map((c) => `<div class="cat"><h3><a class="ul" href="#">${esc(c.name)}</a><span class="num">${c.n}</span></h3><ul>${c.top.map((t) => `<li><a class="ul" href="#">${esc(t)}</a></li>`).join('')}</ul></div>`).join('');
+
+// programs, officials, funds
+$('progs').innerHTML = DATA.programs.map((p) => `<li><span><a class="ul" href="#" style="font-weight:500">${esc(p.title)}</a><span class="who">${esc(p.who)}</span></span><span class="amt num">${esc(p.amount)}${p.verify ? '<span class="chk">Sinusuri pa</span>' : ''}</span></li>`).join('');
+$('offtop').innerHTML = DATA.top.map((o) => `<div><span class="muted">${esc(o.pos)}</span><strong style="font-weight:600">${esc(o.name)}</strong></div>`).join('');
+$('council').innerHTML = DATA.council.map((d) => `<div><span>${esc(d.label)}</span><ul>${d.names.map((n) => `<li>${esc(n)}</li>`).join('')}</ul></div>`).join('');
+$('figs').innerHTML = DATA.figures.map((f) => `<div><div class="v num">${esc(f.value)}</div><div class="l">${esc(f.label)}</div><div class="s">${esc(f.src)}</div></div>`).join('');
+$('links').innerHTML = DATA.links.map((l) => `<a class="ul" style="color:var(--blue)" href="${esc(l.url)}">${esc(l.title)}</a>`).join('');
+$('updated').textContent = `Huling kinuha ang datos: ${DATA.updated}. May link sa pinagmulan ang bawat numero.`;
+
+// barangay map
+const bmap = $('bmap'), sel = $('bsel'), facts = $('bfacts');
+const byName = Object.fromEntries(DATA.barangays.map((b) => [b.name, b]));
+const names = DATA.map.map((b) => b.name).sort();
+sel.innerHTML = names.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
+const links = {};
+DATA.map.forEach((b) => {
+  const a = document.createElementNS(NS, 'a'); a.setAttribute('href', '#mapa'); a.setAttribute('aria-label', b.name);
+  const p = document.createElementNS(NS, 'path'); p.setAttribute('d', b.d); a.appendChild(p);
+  a.addEventListener('click', (e) => { e.preventDefault(); pick(b.name); });
+  a.addEventListener('mouseenter', () => showTip(b)); a.addEventListener('mouseleave', hideTip);
+  a.addEventListener('focus', () => showTip(b)); a.addEventListener('blur', hideTip);
+  bmap.appendChild(a); links[b.name] = a;
+});
+const tip = document.createElementNS(NS, 'text'); tip.setAttribute('class', 'tip'); tip.setAttribute('text-anchor', 'middle'); bmap.appendChild(tip);
+function showTip(b) { tip.textContent = b.name; tip.setAttribute('x', b.x); tip.setAttribute('y', b.y + 4); tip.style.fontSize = '18px'; tip.classList.add('show'); }
+function hideTip() { tip.classList.remove('show'); }
+function renderFacts(n) {
+  const b = byName[n] || {};
+  const d = b.district === 2 ? 'Ikalawang distrito' : b.district === 1 ? 'Unang distrito' : 'Hindi pa alam';
+  facts.innerHTML = `<div><dt>Distrito</dt><dd>${d}</dd></div><div><dt>Barangay hall</dt><dd class="chk">Sinusuri pa</dd></div><div><dt>Hotline</dt><dd class="chk">Sinusuri pa</dd></div>`;
+}
+let current = null;
+function pick(n, quiet) {
+  if (current) links[current]?.classList.remove('on');
+  current = n; links[n]?.classList.add('on'); sel.value = n;
+  if (quiet || reduce) { renderFacts(n); }
+  else { facts.classList.add('swap'); setTimeout(() => { renderFacts(n); facts.classList.remove('swap'); }, 160); }
+  try { localStorage.setItem('bp-brgy', n); } catch (e) {}
+}
+sel.addEventListener('change', () => pick(sel.value));
+let saved = null; try { saved = localStorage.getItem('bp-brgy'); } catch (e) {}
+pick(saved && links[saved] ? saved : 'Kapitolyo', true);
+
+// search with highlight and keyboard
+const q = $('q'), res = $('res'); let items = [], active = -1;
+const hl = (t, words) => { let out = esc(t); words.forEach((w) => { if (w.length > 1) out = out.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return out; };
+function run() {
+  const v = q.value.trim().toLowerCase();
+  if (!v) { res.classList.remove('open'); active = -1; return; }
+  const words = v.split(/\s+/);
+  const hits = DATA.services.filter((s) => words.every((w) => s.k.includes(w))).slice(0, 7);
+  res.innerHTML = hits.length
+    ? hits.map((s, i) => `<a href="#" role="option" data-i="${i}"><span>${hl(s.t, words)}</span><small>${esc(s.c)}</small></a>`).join('') + `<div class="hint"><span>${hits.length} sa ${DATA.total} serbisyo</span><span>Taas at baba para pumili</span></div>`
+    : '<p>Walang tugma. Subukan ang ibang salita o tingnan ang Lahat ng serbisyo sa ibaba.</p>';
+  items = [...res.querySelectorAll('a')]; active = -1;
+  res.classList.add('open');
+}
+function move(d) { if (!items.length) return; items[active]?.classList.remove('active'); active = (active + d + items.length) % items.length; items[active].classList.add('active'); items[active].scrollIntoView({ block: 'nearest' }); }
+q.addEventListener('input', run);
+q.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+  else if (e.key === 'Escape') { res.classList.remove('open'); }
+  else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); items[active].click(); }
+});
+q.addEventListener('focus', () => { if (q.value.trim()) run(); });
+$('sf').addEventListener('submit', (e) => { e.preventDefault(); run(); });
+res.addEventListener('click', (e) => { const a = e.target.closest('a'); if (!a) return; e.preventDefault(); say('Bubuksan: ' + a.querySelector('span').textContent); res.classList.remove('open'); });
+document.addEventListener('click', (e) => { if (!e.target.closest('.search')) res.classList.remove('open'); });
+$('pop').insertAdjacentHTML('beforeend', DATA.popular.map((p) => `<button type="button" data-q="${esc(p)}">${esc(p)}</button>`).join(''));
+$('pop').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { q.value = b.dataset.q; run(); q.focus(); } });
+</script>

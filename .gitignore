@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+*.log
+.env*
+# render scratch
+video/frames/
+video/frames2/
+video/scene_built.html
+video/src/mix.wav
+__pycache__/

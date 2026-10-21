@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig logo concepts</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1480px; height: 1040px; box-sizing: border-box; padding: 56px; background: #FFFFFF; font-family: 'Mona Sans', system-ui, sans-serif; color: #15171C; display: flex; flex-direction: column; gap: 32px;">
+<div>
+<h1 style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -0.03em;">Logo concepts</h1>
+<p style="margin: 8px 0 0; font-size: 18px; color: #4F5664;">Bawat isa ay ipinapakita nang malaki, bilang favicon (32px) at sa asul.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+<sc-for list="{{marks}}" as="m" hint-placeholder-count="6">
+<div style="border: 1px solid #E6E9F0; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; justify-content: space-between; align-items: baseline;">
+<strong style="font-size: 20px;">{{m.letter}}. {{m.name}}</strong>
+<span style="font-size: 14px; color: #4F5664;">{{m.idea}}</span>
+</div>
+<div style="display: flex; gap: 14px; align-items: stretch;">
+<div style="flex: 1 1 auto; background: #F3F5F9; border-radius: 18px; height: 150px; display: flex; align-items: center; justify-content: center; gap: 12px;">
+<svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1A47A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="{{m.d}}"></path><path d="{{m.d2}}" fill="{{m.fill}}" stroke="{{m.stroke2}}"></path><path d="{{m.d3}}" stroke="{{m.s3}}"></path></svg>
+<span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em;">BetterPasig</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; flex: 0 0 96px;">
+<div style="background: #FFFFFF; border: 1px solid #E6E9F0; border-radius: 14px; height: 70px; display: flex; align-items: center; justify-content: center;">
+<svg width="32" height="32" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1A47A8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="{{m.d}}"></path><path d="{{m.d2}}" fill="{{m.fill}}" stroke="{{m.stroke2}}"></path><path d="{{m.d3}}" stroke="{{m.s3}}"></path></svg>
+</div>
+<div style="background: #1A47A8; border-radius: 14px; height: 70px; display: flex; align-items: center; justify-content: center;">
+<svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="{{m.d}}"></path><path d="{{m.d2}}" fill="{{m.fillInv}}" stroke="{{m.stroke2Inv}}"></path><path d="{{m.d3}}" stroke="{{m.s3Inv}}"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="border: 1px solid #E6E9F0; border-radius: 24px; padding: 24px; display: flex; align-items: center; gap: 48px;">
+<strong style="font-size: 20px; flex: 0 0 auto;">G. Wordmark lang</strong>
+<span style="display: inline-flex; align-items: flex-end; font-size: 54px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">better<span style="color: #1A47A8; display: inline-flex; align-items: flex-end;">pas<span style="position: relative; display: inline-block;">ı<svg width="22" height="10" viewBox="0 0 22 10" aria-hidden="true" style="position: absolute; left: 50%; top: -6px; transform: translateX(-50%);"><path d="M2 6c3-3 6-3 9 0s6 3 9 0" stroke="#1A47A8" stroke-width="3.2" fill="none" stroke-linecap="round"></path></svg></span>g</span></span>
+<span style="font-size: 16px; color: #4F5664; max-width: 520px;">Walang hiwalay na simbolo. Ang tuldok ng "i" ay maliit na alon ng Ilog Pasig. Pinakasimple at hindi mukhang pang-gobyerno.</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1480,"height":1040}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+marks: [
+{ letter: 'A', name: 'Agos', idea: 'Dalawang alon ng ilog', d: 'M5 19c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0M5 31c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0', d2: '', fill: 'none', fillInv: 'none', stroke2: 'none', stroke2Inv: 'none', d3: '', s3: 'none', s3Inv: 'none' },
+{ letter: 'B', name: 'P na ilog', idea: 'Letrang P, may alon sa ilalim', d: 'M15 33V8h10a8 8 0 0 1 0 16H15', d2: 'M6 41c4.5-4 9-4 13.5 0s9 4 13.5 0 6-2 9-1', fill: 'none', fillInv: 'none', stroke2: '#1A47A8', stroke2Inv: '#FFFFFF', d3: '', s3: 'none', s3Inv: 'none' },
+{ letter: 'C', name: 'Pin', idea: 'Lugar mo sa Pasig', d: 'M24 44s14-12 14-24a14 14 0 0 0-28 0c0 12 14 24 14 24z', d2: 'M16 21c2.7-2.4 5.3-2.4 8 0s5.3 2.4 8 0', fill: 'none', fillInv: 'none', stroke2: '#1A47A8', stroke2Inv: '#FFFFFF', d3: '', s3: 'none', s3Inv: 'none' },
+{ letter: 'D', name: 'Bangka', idea: 'Bangka sa Ilog Pasig', d: 'M6 24h36l-6 9H12z', d2: 'M5 40c4.7-4 9.3-4 14 0s9.3 4 14 0 7-3 10-2M24 24V8l10 12', fill: 'none', fillInv: 'none', stroke2: '#1A47A8', stroke2Inv: '#FFFFFF', d3: '', s3: 'none', s3Inv: 'none' },
+{ letter: 'E', name: 'Boses', idea: 'Usapan ng mamamayan', d: 'M8 10h32a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H20l-9 7v-7H8a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3z', d2: 'M14 22c3.3-3 6.7-3 10 0s6.7 3 10 0', fill: 'none', fillInv: 'none', stroke2: '#1A47A8', stroke2Inv: '#FFFFFF', d3: '', s3: 'none', s3Inv: 'none' },
+{ letter: 'F', name: 'Tile', idea: 'Puno ng kulay, parang app icon', d: '', d2: 'M4 12a8 8 0 0 1 8-8h24a8 8 0 0 1 8 8v24a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8z', fill: '#1A47A8', fillInv: '#FFFFFF', stroke2: 'none', stroke2Inv: 'none', d3: 'M12 20c4-3.5 8-3.5 12 0s8 3.5 12 0M12 29c4-3.5 8-3.5 12 0s8 3.5 12 0', s3: '#FFFFFF', s3Inv: '#1A47A8' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

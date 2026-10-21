@@ -1,0 +1,165 @@
+{
+  "retrieved": "2026-10-19",
+  "hotlines": [
+    {
+      "id": "pasig-emergency-hotline",
+      "name": "Pasig City Emergency Hotline (Command Center / C3, operated by Pasig City DRRMO)",
+      "kind": "emergency",
+      "numbers": ["(02) 8643-0000"],
+      "notes": "The main city emergency line for fire, rescue, medical and flood calls. The DRRMO Citizen's Charter calls it the 'Command Center Hotline'. DRRMO office: C3, Pasig City Hall, Caruncho Ave. DRRMO Research and Planning Division is 8643-0000 local 306. The city cited this number in its August 2026 habagat evacuation advisories.",
+      "sources": [
+        "https://x.com/PasigInfo/status/1779530379407536451",
+        "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/633f8800db42116651079686335211cbe1911664426268CCh_DRRMO.docx.pdf",
+        "https://idrrm.ncr.dilg.gov.ph/lgu-profile/22",
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://philstarlife.com/amp/article/297302-emergency-numbers-lgu-hospitals"
+      ],
+      "verify": false
+    },
+    {
+      "id": "pasig-katxt",
+      "name": "Pasig KaTXT (text line of the emergency hotline / DRRMO)",
+      "kind": "emergency",
+      "numbers": ["0908-899-3333"],
+      "notes": "Text-only line. The DRRMO Citizen's Charter and the DILG-NCR iDRRM profile both list it as the DRRMO mobile number.",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/633f8800db42116651079686335211cbe1911664426268CCh_DRRMO.docx.pdf",
+        "https://idrrm.ncr.dilg.gov.ph/lgu-profile/22",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+      ],
+      "verify": false
+    },
+    {
+      "id": "pasig-emergency-backup-mobile",
+      "name": "Pasig City emergency backup mobile line",
+      "kind": "emergency",
+      "numbers": ["0962-252-1094"],
+      "notes": "Only a commercial (non-official) site lists this number.",
+      "sources": ["https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"],
+      "verify": true
+    },
+    {
+      "id": "pasig-rescue-legacy",
+      "name": "Pasig City rescue line (older listing)",
+      "kind": "rescue",
+      "numbers": ["(02) 8632-0099"],
+      "notes": "Listed as Pasig City's rescue hotline in news hotline roundups from 2020 (Typhoon Ulysses) and July 2024 (Typhoon Carina). Current official city posts use 8643-0000 instead, so this line may be outdated.",
+      "sources": [
+        "https://gmanetwork.com/news/lifestyle/content/914593/super-typhoon-carina-a-list-of-hotlines-for-emergency-rescue/story",
+        "https://newsinfo.inquirer.net/1359615/typhoon-ulysses-emergency-rescue-hotlines"
+      ],
+      "verify": true
+    },
+    {
+      "id": "pasig-city-hall-trunkline",
+      "name": "Pasig City Hall Trunkline",
+      "kind": "city-hall",
+      "numbers": ["(02) 8643-1111"],
+      "notes": "Pasig Info (the city PIO) announced on 2024-04-14 that the trunkline was working again after a device migration. City Hall is on Caruncho Ave., Brgy. San Nicolas. Email: info@pasigcity.gov.ph, publicinformation@pasigcity.gov.ph (per an MMDA reply).",
+      "sources": [
+        "https://x.com/PasigInfo/status/1779530379407536451",
+        "https://x.com/MMDA/status/1988915133175750877",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+      ],
+      "verify": false
+    },
+    {
+      "id": "pasig-traffic",
+      "name": "Pasig City Traffic Department (Traffic and Parking Management Office)",
+      "kind": "traffic",
+      "numbers": ["(02) 8641-1907", "(02) 7744-6940", "(02) 8643-1111"],
+      "notes": "Taken from an MMDA reply on X (late 2025). That reply also gives pacdpasig2011@gmail.com as a contact email. The official Pasig source could not be fetched.",
+      "sources": ["https://x.com/MMDA/status/1988915133175750877"],
+      "verify": true
+    },
+    {
+      "id": "pasig-police-station",
+      "name": "Pasig City Police Station (PNP, Eastern Police District)",
+      "kind": "police",
+      "numbers": ["(02) 8477-7953", "(02) 8949-9566"],
+      "notes": "Address: Pariancillo Park, Pasig City (Kapasigan area). contactnumbersph.com gives the old 7-digit forms 477-7953 and 949-9566, with 8 added as the prefix under the 2019 numbering change. phshirt.com lists 8477-7953 as 'Philippine National Police'. Both are secondary sources, and a 2024 reader comment on contactnumbersph asked whether the numbers were still current. National emergency line: 911.",
+      "sources": [
+        "https://police.contactnumbersph.com/pasig-police-station/",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+      ],
+      "verify": true
+    },
+    {
+      "id": "bfp-pasig",
+      "name": "Bureau of Fire Protection - Pasig City Central Fire Station",
+      "kind": "fire",
+      "numbers": ["0932-779-8621"],
+      "notes": "Only a commercial site lists the mobile number. A Yellow Pages listing title puts the station on F. Manalo St., Sto. Tomas, Pasig City 1600. The landline 8641-2815 from earlier research could not be confirmed in any source this run. For fire emergencies, the city's 8643-0000 line also dispatches.",
+      "sources": [
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/",
+        "https://www.yellow-pages.ph/business/pasig-fire-station",
+        "https://www.facebook.com/bfpncr.pasigcitypis/"
+      ],
+      "verify": true
+    },
+    {
+      "id": "pasig-city-general-hospital",
+      "name": "Pasig City General Hospital (PCGH)",
+      "kind": "medical",
+      "numbers": ["(02) 8643-3333", "(02) 8642-7379", "(02) 8642-7381"],
+      "notes": "LGU hospital on M. Eusebio Ave., Maybunga. healthspace.ph lists 8643-3333 and 8642-7379; phshirt.com lists 8642-7379 and 8642-7381. Neither source says which line reaches the ER.",
+      "sources": [
+        "https://healthspace.ph/facility/pasig-city-general-hospital-FCD00603",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+      ],
+      "verify": true
+    },
+    {
+      "id": "pasig-city-childrens-hospital",
+      "name": "Pasig City Children's Hospital (PCCH) - Child's Hope",
+      "kind": "medical",
+      "numbers": ["(02) 8643-2222"],
+      "notes": "Industria St. cor. Alcalde Jose St., Kapasigan. ClinicFinderPH lists local 601. Inquirer reported limited ER services from June 28, 2024, with the ER moved temporarily to the outpatient department.",
+      "sources": [
+        "https://www.clinicfinderph.com/clinic/pasig-city-childrens-hospital-childs-hope",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/",
+        "https://newsinfo.inquirer.net/1954641/pcch-emergency-room-temporary-closure"
+      ],
+      "verify": true
+    },
+    {
+      "id": "rizal-medical-center",
+      "name": "Rizal Medical Center (DOH-retained)",
+      "kind": "medical",
+      "numbers": ["(02) 8865-8400"],
+      "notes": "Pasig Blvd., Bagong Ilog. The number comes from a directory site (general line, open 24 hours). It could not be confirmed on rmc.doh.gov.ph.",
+      "sources": [
+        "https://www.clinicfinderph.com/clinic/rizal-medical-center",
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+      ],
+      "verify": true
+    },
+    {
+      "id": "the-medical-city-ortigas-er",
+      "name": "The Medical City (Ortigas) Emergency Department",
+      "kind": "medical",
+      "numbers": ["(02) 8988-1000", "(02) 8988-7000"],
+      "notes": "ER locals 2222 or 2338; triage local 2341; trauma local 2340. From the official TMC site. The page does not say which branch it covers, but the main hospital is on Ortigas Ave., Brgy. Ugong.",
+      "sources": ["https://www.themedicalcity.com/clinical-departments/services/emergency-department"],
+      "verify": true
+    },
+    {
+      "id": "national-emergency-911",
+      "name": "National Emergency Hotline",
+      "kind": "emergency",
+      "numbers": ["911"],
+      "notes": "Nationwide emergency number.",
+      "sources": ["https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"],
+      "verify": false
+    }
+  ],
+  "conflicts": [
+    "No source found ties 8642-1111 to any Pasig agency; it is not confirmed as a Command Center line. The official Pasig Info post names 8643-0000 as the emergency hotline and 8643-1111 as the City Hall trunkline.",
+    "The BFP Pasig landline 8641-2815 could not be confirmed. The only number found was the mobile 0932-779-8621, from a commercial site. Official BFP-NCR pages (ncr.bfp.gov.ph/fire-district-4) failed to load.",
+    "News roundups from 2020 and 2024 list 8632-0099 as Pasig City's rescue line, but current official posts use 8643-0000. It is unclear whether 8632-0099 still works.",
+    "8477-7953 appears to be the Pasig City Police Station (two secondary sources agree), but no official PNP or NCRPO source confirmed it.",
+    "The DRRMO Citizen's Charter (about 2022) gives the Sangguniang Secretariat as '641-1111 local 246'. This suggests the trunkline was once 8641-1111; the current trunkline per Pasig Info (April 2024) is 8643-1111.",
+    "Pasig City General Hospital numbers differ by source: healthspace.ph gives 8643-3333 and 8642-7379, while phshirt.com gives 8642-7379 and 8642-7381. No source names the ER line.",
+    "The official 'Emergency Contact Numbers ng Lungsod ng Pasig' page (pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393) blocks automated fetching, so the full official list could not be checked directly."
+  ]
+}

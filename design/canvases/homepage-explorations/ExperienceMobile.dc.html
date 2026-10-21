@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig Mobile Experience</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1A47A8}
+button,input,select{font-family:'Instrument Sans',system-ui,sans-serif}
+:focus-visible{outline:3px solid #FFB43F;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; font-family: 'Instrument Sans', system-ui, sans-serif; color: #0B1736; background: #F5F7FB;">
+
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 76px; overflow-y: auto;">
+
+<!-- Top -->
+<section style="background: {{blue}}; color: #FFFFFF; padding: 18px 16px 26px; position: relative; overflow: hidden;">
+<svg viewBox="0 0 390 260" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+<path d="M-10 200 C80 160 160 240 250 196 S360 150 400 180" stroke="#2BB3C9" stroke-width="2" fill="none" opacity="0.55"></path>
+<path d="M-10 222 C90 182 170 262 260 218 S370 172 400 202" stroke="#FFB43F" stroke-width="2.5" fill="none" opacity="0.85"></path>
+</svg>
+<div style="position: relative; display: flex; flex-direction: column; gap: 14px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 21px;">BetterPasig</span>
+<button onClick="{{openBrgy}}" style="background: rgba(255,255,255,0.15); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.4); border-radius: 999px; padding: 0 12px; min-height: 40px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"></path></svg>Brgy. {{brgy}}</button>
+</div>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;">Ano'ng kailangan mo ngayon?</h1>
+<form role="search" style="display: flex; gap: 6px; background: #FFFFFF; border-radius: 14px; padding: 5px; align-items: center;">
+<label for="xm-search" style="position: absolute; left: -9999px;">Maghanap</label>
+<input id="xm-search" type="search" value="{{query}}" onChange="{{onQuery}}" placeholder="business permit, baha…" style="flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font-size: 16px; padding: 10px; color: #0B1736;">
+<button type="button" style="border: 0; background: #0B1736; color: #FFFFFF; border-radius: 10px; padding: 0 14px; font-weight: 700; min-height: 44px;">Hanapin</button>
+</form>
+<sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; color: #0B1736; border-radius: 14px; padding: 6px;">
+<sc-for list="{{results}}" as="r" hint-placeholder-count="3">
+<a href="#" style="display: block; padding: 10px; text-decoration: none; color: #0B1736; border-radius: 10px;"><strong style="font-size: 15px;">{{r.title}}</strong><br><span style="font-size: 12px; color: #4A5778;">{{r.kind}}</span></a>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</section>
+
+<!-- Alert -->
+<div role="status" style="margin: 14px 16px 0; background: #FFF1D6; border: 1px solid #E8A21F; border-radius: 14px; padding: 12px 14px; color: #4A2E00; font-size: 13px; line-height: 1.4;">
+<strong>HALIMBAWA · ABISO:</strong> [Antas ng tubig sa Ilog Pasig · Source · ORAS] <a href="#" style="color: #4A2E00; font-weight: 700;">Evacuation centers →</a>
+</div>
+
+<!-- Quick actions -->
+<section style="padding: 18px 16px 6px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<sc-for list="{{quick}}" as="qa" hint-placeholder-count="4">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: #0B1736; font-size: 12px; font-weight: 600; text-align: center;">
+<span style="width: 56px; height: 56px; border-radius: 18px; background: {{qa.bg}}; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="{{qa.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{qa.icon}}"></path></svg>
+</span>
+{{qa.label}}
+</a>
+</sc-for>
+</section>
+
+<!-- My barangay card -->
+<section style="padding: 14px 16px 6px;">
+<div style="background: #0B1736; color: #FFFFFF; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #2BB3C9;">SA BARANGAY KO</span>
+<span style="font-size: 11px; color: #9FB0D6;">Na-verify [DATE]</span>
+</div>
+<strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px;">Brgy. {{brgy}}</strong>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
+<a href="tel:" style="background: #15244A; border-radius: 12px; padding: 12px; text-decoration: none; color: #FFFFFF; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; color: #FFB43F; font-weight: 700;">HOTLINE</span><strong style="font-size: 14px;">[Numero]</strong></a>
+<a href="#" style="background: #15244A; border-radius: 12px; padding: 12px; text-decoration: none; color: #FFFFFF; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; color: #FF8A80; font-weight: 700;">BAHA</span><strong style="font-size: 14px;">[Antas]</strong></a>
+<a href="#" style="background: #15244A; border-radius: 12px; padding: 12px; text-decoration: none; color: #FFFFFF; display: flex; flex-direction: column; gap: 2px; grid-column: span 2;"><span style="font-size: 11px; color: #9FE3B4; font-weight: 700;">EVACUATION CENTER</span><strong style="font-size: 14px;">[Pangalan] · [Distansya]</strong></a>
+</div>
+</div>
+</section>
+
+<!-- Life events -->
+<section style="padding: 18px 0 6px; display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px;">Ayon sa yugto ng buhay</h2>
+<div style="display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 6px;">
+<sc-for list="{{life}}" as="l" hint-placeholder-count="5">
+<a href="#" style="flex: 0 0 150px; background: #FFFFFF; border: 1px solid #DFE5F1; border-radius: 16px; padding: 14px; text-decoration: none; color: #0B1736; display: flex; flex-direction: column; gap: 6px; min-height: 104px; box-sizing: border-box;">
+<span style="width: 10px; height: 10px; border-radius: 999px; background: {{l.dot}};"></span>
+<strong style="font-size: 15px; line-height: 1.25;">{{l.label}}</strong>
+<span style="font-size: 12px; color: #4A5778;">{{l.steps}} hakbang</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- Money teaser -->
+<section style="padding: 14px 16px 24px;">
+<a href="#" style="background: #FFFFFF; border: 2px solid {{blue}}; border-radius: 18px; padding: 16px; text-decoration: none; color: #0B1736; display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: {{blue}};">SUNDAN ANG PONDO</span>
+<strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px;">Bids, budget at Bagong City Hall</strong>
+<span style="font-size: 13px; color: #4A5778;">May source at petsa ang bawat numero →</span>
+</a>
+</section>
+</div>
+
+<!-- Bottom tab bar -->
+<nav aria-label="Pangunahing tab" style="position: absolute; left: 0; right: 0; bottom: 0; height: 76px; background: #FFFFFF; border-top: 1px solid #DFE5F1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center;">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="5">
+<button onClick="{{tb.pick}}" aria-current="{{tb.current}}" style="background: transparent; border: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; color: {{tb.ink}}; font-size: 11px; font-weight: 700; min-height: 60px;">
+<span style="width: 44px; height: 30px; border-radius: 999px; background: {{tb.pill}}; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="{{tb.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{tb.icon}}"></path></svg>
+</span>
+{{tb.label}}
+</button>
+</sc-for>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"blue":{"editor":"color","default":"#1A47A8","options":["#1A47A8","#0F3B8C","#2456C7","#123A7A"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { query: '', tab: 0, brgyIdx: 0 };
+}
+renderVals() {
+const s = this.state;
+const blue = this.props.blue ?? '#1A47A8';
+const brgys = ['Kapitolyo', 'Manggahan', 'Rosario', 'Pinagbuhatan', 'Santolan'];
+const all = [
+{ title: 'Business Permit', kind: 'Serbisyo', k: 'business permit negosyo' },
+{ title: 'Amilyar (Real Property Tax)', kind: 'Serbisyo', k: 'amilyar rpt tax' },
+{ title: 'Evacuation centers', kind: 'Handa sa baha', k: 'baha flood evacuation' },
+{ title: 'Senior Citizen ID', kind: 'Serbisyo', k: 'senior id osca' },
+{ title: 'FOI: humingi ng dokumento', kind: 'Karapatan', k: 'foi dokumento' }
+];
+const q = s.query.trim().toLowerCase();
+const results = q ? all.filter((r) => (r.title + ' ' + r.k).toLowerCase().indexOf(q) !== -1) : [];
+const tabDefs = [
+{ label: 'Home', icon: 'M3 11l9-7 9 7v10h-6v-6H9v6H3z' },
+{ label: 'Serbisyo', icon: 'M4 6h16M4 12h16M4 18h10' },
+{ label: 'Hotlines', icon: 'M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.7 2.8-1.8 3.4a16 16 0 0 0 6 6l3.4-1.8 2.8.7a2 2 0 0 1 1.7 2z' },
+{ label: 'Pondo', icon: 'M4 20V10M10 20V4M16 20v-8M22 20H2' },
+{ label: 'Higit pa', icon: 'M5 12h.01M12 12h.01M19 12h.01' }
+];
+const tabs = tabDefs.map((t, i) => ({
+label: t.label, icon: t.icon,
+current: i === s.tab ? 'page' : 'false',
+ink: i === s.tab ? blue : (i === 2 ? '#C62828' : '#4A5778'),
+pill: i === s.tab ? '#E8EEFB' : 'transparent',
+pick: () => this.setState({ tab: i })
+}));
+return {
+blue: blue,
+brgy: brgys[s.brgyIdx],
+openBrgy: () => this.setState({ brgyIdx: (s.brgyIdx + 1) % brgys.length }),
+query: s.query,
+hasQuery: q.length > 0 && results.length > 0,
+results: results,
+onQuery: (e) => this.setState({ query: e.target.value }),
+quick: [
+{ label: 'Magbayad', bg: '#E8EEFB', ink: '#1A47A8', icon: 'M2 7h20v10H2zM2 11h20' },
+{ label: 'Dokumento', bg: '#E0F5F8', ink: '#0B5F6C', icon: 'M7 3h7l5 5v13H7zM14 3v5h5' },
+{ label: 'Mag-report', bg: '#FFF1D6', ink: '#7A4A00', icon: 'M4 21V4h12l-2 4 2 4H4' },
+{ label: 'Emergency', bg: '#FDE7E7', ink: '#C62828', icon: 'M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z' }
+],
+life: [
+{ label: 'Bagong panganak', steps: 4, dot: '#FFB43F' },
+{ label: 'Magsisimula ng negosyo', steps: 4, dot: '#2BB3C9' },
+{ label: 'Bagong lipat sa Pasig', steps: 4, dot: blue },
+{ label: 'Senior citizen', steps: 3, dot: '#9FE3B4' },
+{ label: 'Estudyante', steps: 3, dot: '#FF8A80' }
+],
+tabs: tabs
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+{
+  "retrieved": "2026-10-19",
+  "hospitals": [
+    {
+      "name": "Pasig City General Hospital",
+      "type": "public",
+      "address": "M. Eusebio Avenue, Maybunga, Pasig City",
+      "contact": "(02) 8643-3333; (02) 8642-7379; (02) 8642-7381",
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
+        "https://healthspace.ph/facility/pasig-city-general-hospital-FCD00603",
+        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Pasig City Children's Hospital - Child's Hope",
+      "type": "public",
+      "address": "Industria St. cor. Alcalde Jose St., Kapasigan, Pasig City",
+      "contact": "(02) 8643-2222 loc. 601",
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
+        "https://www.clinicfinderph.com/clinic/pasig-city-childrens-hospital-childs-hope"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Rizal Medical Center (DOH-retained)",
+      "type": "public",
+      "address": "Pasig Boulevard, Bagong Ilog, Pasig City",
+      "contact": "(02) 8865-8400",
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
+        "https://www.clinicfinderph.com/clinic/rizal-medical-center"
+      ],
+      "verify": true
+    },
+    {
+      "name": "The Medical City Ortigas",
+      "type": "private",
+      "address": "Don Eugenio Lopez Sr. Medical Complex, Ortigas Avenue, Brgy. Ugong, Pasig City",
+      "contact": "(02) 8988-1000 / 8988-7000 (ER locals 2222, 2338)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
+        "https://www.themedicalcity.com/clinical-departments/services/emergency-department"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Tricity Medical Center, Inc.",
+      "type": "private",
+      "address": "269 C. Raymundo Avenue, Maybunga, Pasig City",
+      "contact": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Pasig Doctors Medical Center Inc.",
+      "type": "private",
+      "address": "254 Amang Rodriguez Avenue, Manggahan, Pasig City",
+      "contact": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+      ],
+      "verify": true
+    },
+    {
+      "name": "St. Camillus Medical Center",
+      "type": "private",
+      "address": "116 E. Amang Rodriguez Avenue, Santolan, Pasig City",
+      "contact": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+      ],
+      "verify": true
+    }
+  ],
+  "evacuation_centers": [
+    {
+      "name": "Bagong Ilog Elementary School",
+      "barangay": "Bagong Ilog",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "B. Tatco Covered Court",
+      "barangay": "Bagong Ilog",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Caniogan Barangay Hall (4th floor)",
+      "barangay": "Caniogan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Karangalan Multipurpose Hall (Dela Paz Multipurpose Hall - Karangalan)",
+      "barangay": "Dela Paz",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Kapasigan Sports Center Function Hall",
+      "barangay": "Kapasigan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Child Development Center 1-2",
+      "barangay": "Kapasigan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Malinao Covered Court",
+      "barangay": "Malinao",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Manggahan Multipurpose Hall",
+      "barangay": "Manggahan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Maybunga Elementary School Annex",
+      "barangay": "Maybunga",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Stella Maris Covered Court",
+      "barangay": "Maybunga",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Westbank Community Center (Annex)",
+      "barangay": "Maybunga",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Balsancat Covered Court",
+      "barangay": "Pinagbuhatan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Damayan Covered Court",
+      "barangay": "Pinagbuhatan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Nagpayong Covered Court / Multipurpose Hall",
+      "barangay": "Pinagbuhatan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Bluegrass Multipurpose Hall",
+      "barangay": "Rosario",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Rosario Elementary School",
+      "barangay": "Rosario",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "San Joaquin Elementary School",
+      "barangay": "San Joaquin",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "San Miguel Covered Court / Multipurpose Hall",
+      "barangay": "San Miguel",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Ilaya Covered Court",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Santolan Elementary School",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Santolan High School",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Our Lady of Perpetual Help School",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Sto. Tomas De Villanueva School",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Tierra Verde Covered Court",
+      "barangay": "Santolan",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Sta. Lucia BLISS Multipurpose Hall",
+      "barangay": "Santa Lucia",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Countryside Multipurpose Hall",
+      "barangay": "Santa Lucia",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "De Castro Elementary School",
+      "barangay": "Santa Lucia",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Sta. Rosa Multipurpose Hall (3rd floor)",
+      "barangay": "Santa Rosa",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": true
+    },
+    {
+      "name": "Ugong Barangay Hall Parking Area",
+      "barangay": "Ugong",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains",
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ],
+      "verify": false
+    },
+    {
+      "name": "Sumilang Barangay Hall (standby)",
+      "barangay": "Sumilang",
+      "address": null,
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
+      ],
+      "verify": true
+    }
+  ],
+  "flood_prone_notes": [
+    {
+      "text": "During the 17 August 2026 habagat rains, Pasig opened 18 evacuation centers in 10 barangays: Bagong Ilog, Dela Paz, Kapasigan, Pinagbuhatan, Maybunga, Rosario, Santolan, San Miguel, Sta. Lucia and Ugong. Manggahan and Sumilang had centers on standby.",
+      "sources": [
+        "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
+      ]
+    },
+    {
+      "text": "On 22 July 2025, rains displaced residents in 15 barangays: Bagong Ilog, Caniogan, Dela Paz, Kapasigan, Pinagbuhatan, Malinao, Manggahan, Maybunga, San Joaquin, San Miguel, Santolan, Rosario, Sta. Lucia, Sta. Rosa and Ugong. These barangays repeatedly need evacuation; most lie along the Pasig and Marikina rivers or the Manggahan Floodway (location inferred, not stated in the source).",
+      "sources": [
+        "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
+      ]
+    },
+    {
+      "text": "The DILG-NCR iDRRM profile lists Pasig's hazards as earthquake, liquefaction, fire and flood.",
+      "sources": [
+        "https://idrrm.ncr.dilg.gov.ph/lgu-profile/22"
+      ]
+    },
+    {
+      "text": "Pasig DRRMO rescue bases (from the DRRMO Citizen's Charter, about 2022): Fire and Rescue Base at Red TC, Caniogan; San Joaquin Base on Elisco Rd.; Fire and Rescue Boat at Bambang-Kalawaan Bridge; Panthom (sic) Base at Mega Market, Palatiw; Falcon Base at Bartville Subd., Dela Paz.",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/633f8800db42116651079686335211cbe1911664426268CCh_DRRMO.docx.pdf"
+      ]
+    }
+  ],
+  "notes": "Evacuation centers are the ones the city opened during specific rain events in July 2025 and August 2026, as reported by Inquirer; this is not an official master list. verify=true marks a center that appears in only one of the two events. Health centers (barangay health centers) were not found."
+}

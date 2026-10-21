@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,300..900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1A47A8;text-decoration:none}
+button,input,select{font-family:'Mona Sans',system-ui,sans-serif}
+input::placeholder{color:#8A909C}
+:focus-visible{outline:3px solid #1A47A8;outline-offset:3px;border-radius:8px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; overflow-y: auto; font-family: 'Mona Sans', system-ui, sans-serif; color: #15171C; background: #FFFFFF; font-size: 17px; line-height: 1.5;">
+
+<header style="position: sticky; top: 0; z-index: 2; background: rgba(255,255,255,0.9); backdrop-filter: blur(14px); border-bottom: 1px solid #ECEEF3; height: 58px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
+<a href="#" aria-label="BetterPasig, home" style="display: flex; align-items: center; gap: 8px; color: #15171C;">
+<svg width="22" height="22" viewBox="0 0 36 36" aria-hidden="true"><path d="M3 14c5-4.6 10-4.6 15 0s10 4.6 15 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path><path d="M3 23c5-4.6 10-4.6 15 0s10 4.6 15 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path></svg>
+<span style="font-size: 17px; font-weight: 700;">BetterPasig</span>
+</a>
+<div style="display: flex; gap: 8px; align-items: center;">
+<a href="tel:86430000" style="background: #C4291C; color: #FFFFFF; font-size: 14px; font-weight: 600; padding: 9px 14px; border-radius: 999px;">Emergency</a>
+<button aria-label="Buksan ang menu" style="background: #F3F5F9; border: 0; border-radius: 999px; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#15171C" stroke-width="2.2" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg>
+</button>
+</div>
+</header>
+
+<section style="padding: 44px 20px 0; text-align: center; display: flex; flex-direction: column; gap: 16px; align-items: center;">
+<h1 style="margin: 0; font-size: 48px; font-weight: 700; font-stretch: 112%; line-height: 0.98; letter-spacing: -0.045em;">Pasig, pinadali.</h1>
+<p style="margin: 0; font-size: 18px; color: #5E6573; max-width: 320px;">Bawat serbisyo ng Lungsod, ipinaliwanag nang malinaw.</p>
+<form role="search" style="width: 100%; display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #DADFE8; border-radius: 999px; padding: 6px 6px 6px 18px; box-sizing: border-box; box-shadow: 0 10px 28px rgba(26,71,168,0.08);">
+<label for="mq" style="position: absolute; left: -9999px;">Ano ang kailangan mo?</label>
+<input id="mq" type="search" value="{{query}}" onChange="{{onQuery}}" placeholder="Ano ang kailangan mo?" style="flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font-size: 17px; padding: 10px 0; background: transparent; color: #15171C;">
+<button type="button" aria-label="Hanapin" style="background: {{blue}}; border: 0; border-radius: 999px; width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+</button>
+</form>
+<sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+<div style="width: 100%; text-align: left; border: 1px solid #DADFE8; border-radius: 20px; padding: 6px;">
+<sc-for list="{{results}}" as="r" hint-placeholder-count="2">
+<a href="#" style="display: block; padding: 12px 14px; border-radius: 14px; color: #15171C; font-size: 17px; font-weight: 600;">{{r}}</a>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+<button type="button" onClick="{{c.pick}}" style="background: #F3F5F9; border: 0; border-radius: 999px; padding: 10px 16px; font-size: 15px; font-weight: 500; min-height: 44px; color: #15171C;">{{c.label}}</button>
+</sc-for>
+</div>
+</section>
+
+<section style="padding: 32px 20px 0;">
+<div style="background: #F3F5F9; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+<span style="font-size: 14px; color: #5E6573;">Ang barangay mo</span>
+<span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;">Brgy. Kapitolyo</span>
+<div style="background: #FFFFFF; border-radius: 18px; padding: 4px 16px;">
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: {{f.line}}; font-size: 15px;">
+<span style="color: #5E6573;">{{f.k}}</span><strong style="font-weight: 600;">{{f.v}}</strong>
+</div>
+</sc-for>
+</div>
+<a href="#" style="font-size: 15px; font-weight: 600;">Palitan ang barangay</a>
+</div>
+</section>
+
+<section style="padding: 32px 20px 0; display: flex; flex-direction: column; gap: 12px;">
+<h2 style="margin: 0; font-size: 28px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.03em; line-height: 1.05;">Gabay ayon sa buhay mo</h2>
+<sc-for list="{{sits}}" as="si" hint-placeholder-count="5">
+<a href="#" style="display: flex; justify-content: space-between; align-items: center; background: #F3F5F9; border-radius: 18px; padding: 16px 18px; color: #15171C; font-size: 17px; font-weight: 600; min-height: 56px; box-sizing: border-box;">
+{{si}}
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#5E6573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+</a>
+</sc-for>
+</section>
+
+<section style="padding: 32px 20px 40px;">
+<div style="background: #0B1A3A; color: #FFFFFF; border-radius: 28px; padding: 26px; display: flex; flex-direction: column; gap: 10px;">
+<span style="font-size: 26px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.03em; line-height: 1.05;">Alam mo kung saan napupunta ang pera.</span>
+<span style="font-size: 44px; font-weight: 700; font-stretch: 110%; letter-spacing: -0.04em; line-height: 1; margin-top: 6px;">₱414.7M</span>
+<span style="font-size: 14px; color: #B8C3DA;">Iniulat na natipid sa unang taon ng mas mahigpit na bidding. Rappler, 2020.</span>
+<a href="#" style="color: #FFFFFF; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; margin-top: 4px;">Tingnan ang lahat ng bidding</a>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"blue":{"editor":"color","default":"#1A47A8","options":["#1A47A8","#1440A0","#0F3B8C","#2456C7"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { query: '' }; }
+renderVals() {
+const all = ['Magbayad ng amilyar', 'Kumuha ng business permit', 'Kumuha ng birth certificate', 'Kumuha ng Senior Citizen ID', 'Mag-report ng problema', 'Hanapin ang evacuation center'];
+const q = this.state.query.trim().toLowerCase();
+const hits = q ? all.filter((x) => x.toLowerCase().indexOf(q) !== -1) : [];
+const factRows = [['Hotline', '[Numero]'], ['Evacuation center', '[Pangalan]'], ['Panganib sa baha', '[Antas]']];
+return {
+blue: this.props.blue ?? '#1A47A8',
+query: this.state.query,
+hasQuery: q.length > 0,
+results: hits.length ? hits : ['Wala pang tugma. Tumawag sa 8643-1111.'],
+chips: [['Amilyar', 'amilyar'], ['Business permit', 'business'], ['Senior ID', 'senior'], ['Baha', 'evacuation']].map((w) => ({ label: w[0], pick: () => this.setState({ query: w[1] }) })),
+facts: factRows.map((r, i) => ({ k: r[0], v: r[1], line: i === 0 ? '0' : '1px solid #ECEEF3' })),
+sits: ['May bagong silang na sanggol', 'Magsisimula ng negosyo', 'Bagong lipat sa Pasig', 'Senior citizen', 'Estudyante'],
+onQuery: (e) => this.setState({ query: e.target.value })
+};
+}
+}
+</script>
+</body>
+</html>

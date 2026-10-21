@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig theme directions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..800&amp;family=Schibsted+Grotesk:wght@400;500;700;800&amp;family=Onest:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1480px; height: 1400px; box-sizing: border-box; padding: 48px; background: #E9ECF2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; font-family: 'Mona Sans', system-ui, sans-serif;">
+
+<!-- A Calm Blue -->
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span style="font-size: 17px; font-weight: 700; color: #15171C;">A. Kalmadong asul</span>
+<div style="flex: 1 1 auto; background: #F3F5F9; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; color: #15171C;">
+<div style="background: #FFFFFF; padding: 14px 22px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E6E9F0;">
+<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1A47A8" stroke-width="5" stroke-linecap="round"><path d="M5 19c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0M5 31c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0"></path></svg>
+<strong style="font-size: 17px;">BetterPasig</strong>
+<span style="margin-left: auto; font-size: 13px; color: #4F5664; display: flex; gap: 16px;"><span>Serbisyo</span><span>Barangay</span><span>Pondo</span></span>
+</div>
+<div style="padding: 20px; display: flex; gap: 14px; flex: 1 1 auto;">
+<div style="flex: 1.5 1 0; background: #FFFFFF; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+<span style="font-size: 28px; font-weight: 700; font-stretch: 108%; letter-spacing: -0.03em; line-height: 1.05;">Lahat ng serbisyo ng Lungsod ng Pasig</span>
+<span style="border: 1.5px solid #CBD2DE; border-radius: 999px; padding: 10px 16px; font-size: 14px; color: #7C8391;">Hal. amilyar, scholarship</span>
+<div style="display: flex; gap: 8px;"><span style="background: #F3F5F9; border-radius: 12px; padding: 12px; font-size: 13px; flex: 1;"><b>Amilyar</b><br>15% discount bago Dis. 31</span><span style="background: #F3F5F9; border-radius: 12px; padding: 12px; font-size: 13px; flex: 1;"><b>City Hall</b><br>Nasa Bridgetowne</span></div>
+</div>
+<div style="flex: 1 1 0; background: #FFFFFF; border-radius: 20px; padding: 18px; border-top: 5px solid #C4291C; display: flex; flex-direction: column; gap: 8px;">
+<b style="font-size: 15px;">Emergency</b>
+<span style="background: #FCEDEB; border-radius: 14px; padding: 12px;"><span style="display: block; font-size: 12px; color: #8A1F14;">Pasig Hotline</span><span style="font-size: 24px; font-weight: 700; color: #C4291C;">8643-0000</span></span>
+<span style="font-size: 13px; display: flex; justify-content: space-between;">Text <b>0908-899-3333</b></span>
+<span style="font-size: 13px; display: flex; justify-content: space-between;">City Hall <b>8643-1111</b></span>
+</div>
+</div>
+<div style="padding: 0 20px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><span style="background: #FFFFFF; border-radius: 14px; padding: 12px; font-size: 13px; font-weight: 600;">{{c}}</span></sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #4F5664;">Puti at mapusyaw na abo, asul para sa mga link. Tahimik at malinis. Font: Mona Sans.</span>
+</div>
+
+<!-- B Bold band -->
+<div style="display: flex; flex-direction: column; gap: 10px; font-family: 'Schibsted Grotesk', sans-serif;">
+<span style="font-size: 17px; font-weight: 700; color: #15171C; font-family: 'Mona Sans', sans-serif;">B. Matapang na asul</span>
+<div style="flex: 1 1 auto; background: #FFFFFF; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; color: #101828;">
+<div style="background: #1A47A8; color: #FFFFFF; padding: 16px 22px 26px; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5C542" stroke-width="5" stroke-linecap="round"><path d="M5 19c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0M5 31c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0"></path></svg>
+<strong style="font-size: 17px;">BetterPasig</strong>
+<span style="margin-left: auto; font-size: 13px; color: #D4DEF5; display: flex; gap: 16px;"><span>Serbisyo</span><span>Barangay</span><span>Pondo</span></span>
+</div>
+<span style="font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.02;">Lahat ng serbisyo ng Lungsod ng Pasig</span>
+<div style="display: flex; background: #FFFFFF; border-radius: 12px; padding: 5px;"><span style="flex: 1; padding: 9px 12px; font-size: 14px; color: #7C8391;">Hal. amilyar, scholarship</span><span style="background: #F5C542; color: #101828; border-radius: 9px; padding: 9px 16px; font-size: 14px; font-weight: 700;">Hanapin</span></div>
+</div>
+<div style="padding: 18px 20px; display: flex; gap: 12px;">
+<div style="flex: 1 1 0; background: #C4291C; color: #FFFFFF; border-radius: 14px; padding: 16px;"><span style="display: block; font-size: 12px;">Emergency hotline</span><span style="font-size: 26px; font-weight: 800;">8643-0000</span></div>
+<div style="flex: 1 1 0; border: 2px solid #101828; border-radius: 14px; padding: 16px;"><span style="display: block; font-size: 12px;">Text (KaTXT)</span><span style="font-size: 20px; font-weight: 800;">0908-899-3333</span></div>
+</div>
+<div style="padding: 0 20px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><span style="border: 1.5px solid #D0D5DD; border-radius: 12px; padding: 12px; font-size: 13px; font-weight: 700;">{{c}}</span></sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #4F5664; font-family: 'Mona Sans', sans-serif;">Buong asul na banda sa itaas, dilaw na button. Kumpiyansa at madaling makita. Font: Schibsted Grotesk.</span>
+</div>
+
+<!-- C Soft river -->
+<div style="display: flex; flex-direction: column; gap: 10px; font-family: 'Onest', sans-serif;">
+<span style="font-size: 17px; font-weight: 700; color: #15171C; font-family: 'Mona Sans', sans-serif;">C. Malambot na ilog</span>
+<div style="flex: 1 1 auto; background: #EAF4F3; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; color: #12302F;">
+<div style="padding: 16px 22px; display: flex; align-items: center; gap: 10px;">
+<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#0E6E74" stroke-width="5" stroke-linecap="round"><path d="M5 19c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0M5 31c6.3-5.5 12.7-5.5 19 0s12.7 5.5 19 0"></path></svg>
+<strong style="font-size: 17px;">BetterPasig</strong>
+<span style="margin-left: auto; font-size: 13px; color: #3E5E5C; display: flex; gap: 16px;"><span>Serbisyo</span><span>Barangay</span><span>Pondo</span></span>
+</div>
+<div style="padding: 4px 22px 18px; display: flex; flex-direction: column; gap: 14px;">
+<span style="font-size: 30px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.1;">Kumusta, Pasigueño. Ano ang kailangan mo ngayon?</span>
+<span style="background: #FFFFFF; border-radius: 999px; padding: 12px 18px; font-size: 14px; color: #6C8482;">Hal. amilyar, scholarship</span>
+</div>
+<div style="padding: 0 20px; display: flex; gap: 12px;">
+<div style="flex: 1 1 0; background: #FFFFFF; border-radius: 22px; padding: 16px; display: flex; gap: 12px; align-items: center;"><span style="width: 40px; height: 40px; border-radius: 999px; background: #FCE3DF; display: inline-flex; align-items: center; justify-content: center; color: #B42318; font-weight: 700;">!</span><span><span style="display: block; font-size: 12px; color: #3E5E5C;">Emergency</span><span style="font-size: 22px; font-weight: 700; color: #B42318;">8643-0000</span></span></div>
+<div style="flex: 1 1 0; background: #0E6E74; color: #FFFFFF; border-radius: 22px; padding: 16px;"><span style="display: block; font-size: 12px; color: #CDEBE9;">Amilyar</span><span style="font-size: 15px; font-weight: 600;">15% discount kung bayad bago Dis. 31</span></div>
+</div>
+<div style="padding: 14px 20px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><span style="background: #FFFFFF; border-radius: 18px; padding: 12px; font-size: 13px; font-weight: 600;">{{c}}</span></sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #4F5664; font-family: 'Mona Sans', sans-serif;">Teal at mint, bilugang hugis, palakaibigang tono. Hindi asul. Font: Onest.</span>
+</div>
+
+<!-- D Editorial -->
+<div style="display: flex; flex-direction: column; gap: 10px; font-family: 'Public Sans', sans-serif;">
+<span style="font-size: 17px; font-weight: 700; color: #15171C; font-family: 'Mona Sans', sans-serif;">D. Parang balita</span>
+<div style="flex: 1 1 auto; background: #FFFFFF; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; color: #1B1F27;">
+<div style="padding: 16px 22px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E4E7EC;">
+<strong style="font-size: 20px; font-family: 'Newsreader', serif; font-weight: 600;">Better Pasig</strong>
+<span style="margin-left: auto; font-size: 13px; color: #475467; display: flex; gap: 16px;"><span>Serbisyo</span><span>Barangay</span><span>Pondo</span></span>
+</div>
+<div style="padding: 20px 22px; display: flex; gap: 20px;">
+<div style="flex: 1.5 1 0; display: flex; flex-direction: column; gap: 12px;">
+<span style="font-size: 34px; font-family: 'Newsreader', serif; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05;">Ang kailangan mong malaman tungkol sa Lungsod ng Pasig</span>
+<span style="border-bottom: 2px solid #1B1F27; padding: 8px 0; font-size: 14px; color: #667085;">Maghanap ng serbisyo</span>
+</div>
+<div style="flex: 1 1 0; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid #B42318; padding-top: 10px;">
+<b style="font-size: 13px;">Emergency</b>
+<span style="font-size: 26px; font-weight: 700; color: #B42318; font-family: 'Newsreader', serif;">8643-0000</span>
+<span style="font-size: 13px; display: flex; justify-content: space-between; border-top: 1px solid #E4E7EC; padding-top: 6px;">Text <b>0908-899-3333</b></span>
+<span style="font-size: 13px; display: flex; justify-content: space-between; border-top: 1px solid #E4E7EC; padding-top: 6px;">City Hall <b>8643-1111</b></span>
+</div>
+</div>
+<div style="padding: 0 22px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 20px;">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6"><span style="border-top: 1px solid #E4E7EC; padding: 12px 0; font-size: 14px; font-weight: 600; color: #1A3E8C;">{{c}}</span></sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #4F5664; font-family: 'Mona Sans', sans-serif;">Serif na headline, manipis na guhit, parang mapagkakatiwalaang balita. Font: Newsreader at Public Sans.</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1480,"height":1400}}'>
+class Component extends DCLogic {
+renderVals() {
+return { cats: ['Dokumento', 'Negosyo', 'Buwis at bayarin', 'Kalusugan', 'Tulong', 'Scholarship'] };
+}
+}
+</script>
+</body>
+</html>

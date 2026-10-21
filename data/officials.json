@@ -1,0 +1,249 @@
+{
+  "retrieved": "2026-10-19",
+  "term": "2025-2028",
+  "officials": [
+    {
+      "id": "mayor-vico-sotto",
+      "name": "Victor Ma. Regis N. \"Vico\" Sotto",
+      "position": "Mayor",
+      "district": null,
+      "party": "Independent (Giting ng Pasig)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "vice-mayor-dodot-jaworski",
+      "name": "Robert Vincent Jude B. \"Dodot\" Jaworski Jr.",
+      "position": "Vice Mayor",
+      "district": null,
+      "party": "Independent (Giting ng Pasig)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "rep-roman-romulo",
+      "name": "Roman T. Romulo",
+      "position": "Representative",
+      "district": null,
+      "party": "NPC (allied with Giting ng Pasig)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-simon-tantoco",
+      "name": "Simon Gerard R. Tantoco (Simon Romulo Tantoco)",
+      "position": "Councilor",
+      "district": 1,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-kiko-rustia",
+      "name": "Raymund Francis S. \"Kiko\" Rustia",
+      "position": "Councilor",
+      "district": 1,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-pao-santiago",
+      "name": "Paul Roman C. \"Pao\" Santiago",
+      "position": "Councilor",
+      "district": 1,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-volta-delos-santos",
+      "name": "Mark Gil M. \"Volta\" Delos Santos",
+      "position": "Councilor",
+      "district": 1,
+      "party": "AKAY",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-eric-gonzales",
+      "name": "Roderick Mario U. \"Eric\" Gonzales",
+      "position": "Councilor",
+      "district": 1,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-paul-senogat",
+      "name": "Paul Angelo A. Senogat",
+      "position": "Councilor",
+      "district": 1,
+      "party": "Akbayan",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-angelu-de-leon",
+      "name": "Maria Luisa M. \"Angelu\" De Leon",
+      "position": "Councilor",
+      "district": 2,
+      "party": "Independent",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-maro-martires",
+      "name": "Marion Rosalio M. \"Maro\" Martires",
+      "position": "Councilor",
+      "district": 2,
+      "party": "Independent",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-buboy-agustin",
+      "name": "Noel L. \"Buboy\" Agustin",
+      "position": "Councilor",
+      "district": 2,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-warren-inocencio",
+      "name": "Warren B. Inocencio",
+      "position": "Councilor",
+      "district": 2,
+      "party": "Independent",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-boyie-raymundo",
+      "name": "Ronald Alan M. \"Boyie\" Raymundo",
+      "position": "Councilor",
+      "district": 2,
+      "party": "NPC",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "coun-ryan-enriquez",
+      "name": "Ryan R. Enriquez",
+      "position": "Councilor",
+      "district": 2,
+      "party": "PDP (PDP-Laban)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+      ],
+      "verify": false
+    },
+    {
+      "id": "exo-liga-marl-de-guzman",
+      "name": "Marl Oscar de Guzman",
+      "position": "Ex-officio",
+      "role": "President, Liga ng mga Barangay (Pasig chapter)",
+      "district": null,
+      "party": null,
+      "sources": [
+        "https://peoplaid.com/2023/05/27/pasig-officials/",
+        "https://en.wikipedia.org/wiki/2026_Philippine_barangay_and_Sangguniang_Kabataan_elections"
+      ],
+      "verify": true,
+      "note": "Conflicts with officials-directory.json ex_officio (Wikipedia, Oct 2026). Confirm with the Sangguniang Panlungsod."
+    },
+    {
+      "id": "exo-sk-georgia-clemente",
+      "name": "Georgia Lynne P. Clemente",
+      "position": "Ex-officio",
+      "role": "President, Sangguniang Kabataan Federation (Pasig)",
+      "district": null,
+      "party": null,
+      "sources": [
+        "https://peoplaid.com/2023/05/27/pasig-officials/",
+        "https://en.wikipedia.org/wiki/2026_Philippine_barangay_and_Sangguniang_Kabataan_elections"
+      ],
+      "verify": true,
+      "note": "Conflicts with officials-directory.json ex_officio (Wikipedia, Oct 2026). Confirm with the Sangguniang Panlungsod."
+    }
+  ],
+  "department_heads": [
+    {
+      "office": "City Administrator",
+      "name": "Jeronimo Manzanero",
+      "sources": [
+        "https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1"
+      ],
+      "verify": true,
+      "note": "Named as City Administrator in January 2025."
+    },
+    {
+      "office": "Ugnayan sa Pasig (FOI and Feedback Office)",
+      "name": "Ma. Rowena Dimanlig",
+      "sources": [
+        "https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"
+      ],
+      "verify": true,
+      "note": "Named as office head in mid-2024."
+    }
+  ]
+}

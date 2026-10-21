@@ -1,0 +1,3609 @@
+{
+  "retrieved": "2026-10-21",
+  "term": "Barangay/SK: 2023 to Nov 2028 (RA 12326). City: 2025-2028.",
+  "term_note": "Barangay and SK officials elected in the October 30, 2023 BSKE are still serving in October 2026. RA 12232 (signed August 2025) first moved the BSKE from December 2025 to November 2, 2026; then RA 12326, signed September 24, 2026, cancelled the November 2026 polls, set the next BSKE for the second Monday of November 2028 (November 13, 2028), and fixed barangay/SK terms at five years, so 2023-elected officials keep their posts until then. Comelec cancelled 2026 BSKE activities on September 25, 2026; petitions against the law are pending before the Supreme Court (not junked as of Oct 13, 2026).",
+  "term_sources": [
+    "https://www.philstar.com/headlines/2025/08/14/2465309/marcos-jr-signs-law-extending-bsk-execs-term-polls-reset",
+    "https://www.gmanetwork.com/news/topstories/nation/1003757/explainer-what-to-know-about-the-new-law-moving-the-bske-to-2028/story/",
+    "https://verafiles.org/articles/fact-check-sc-did-not-junk-law-resetting-bske-to-2028",
+    "https://tribune.net.ph/2026/09/25/comelec-cancels-2026-bske-activities",
+    "https://philstarlife.com/news-and-views/688871-marcos-signs-law-postponing-barangay-sk-elections-nov-2028",
+    "https://www.philstar.com/metro/2026/09/29/2559728/bske-postponement-challenged-sc"
+  ],
+  "general_notes": [
+    "pasigcity.gov.ph pages (incl. the Nov 17, 2023 oath-taking release) could not be fetched (robots disallowed); not worked around.",
+    "All barangay officials come from barangaydirectory.com (aggregator, '2023 - 2026 term'); no official per-barangay list was reachable, so every barangay value is verify:true.",
+    "Pasig City Hall operates from a Temporary City Hall at Bridgetowne, E. Amang Rodriguez Ave., Rosario; new city hall expected 2027 (Philstar 2026-08-03).",
+    "City trunkline (02) 8643-1111 confirmed in multiple 2025 charters; city hotline (02) 8643-0000.",
+    "Ex-officio councilors conflict: officials.json (Oct 19) listed Marl Oscar de Guzman and Georgia Lynne P. Clemente; Wikipedia (Oct 21) lists Rigor J. Enriquez (Liga) and Keil P. Custillas (SK Federation). Directory shows the latter; both unconfirmed."
+  ],
+  "ex_officio": [
+    {
+      "position": "Liga ng mga Barangay President",
+      "name": "Rigor J. Enriquez",
+      "barangay": "San Nicolas",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+      ],
+      "verify": true,
+      "note": "Wikipedia lists him as ABC President ex-officio councilor; no news/official confirmation found."
+    },
+    {
+      "position": "SK Federation President",
+      "name": "Keil P. Custillas",
+      "barangay": "Pinagbuhatan",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pasig",
+        "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+      ],
+      "verify": true,
+      "note": "Wikipedia lists as SK Federation President ex-officio councilor; no news/official confirmation found."
+    }
+  ],
+  "departments": [
+    {
+      "office": "Office of the City Administrator",
+      "head": "Jeronimo Manzanero",
+      "position": "City Administrator",
+      "phones": [],
+      "email": null,
+      "location": null,
+      "sources": [
+        "https://www.philstar.com/nation/2026/08/03/2546524/new-pasig-city-hall-open-2027",
+        "https://assets.pasigcity.gov.ph/storage/attachments/city_administrator's_office/633f8e88dc3791665109640632bd17f4df561663816063CCh_OCA.pdf"
+      ],
+      "verify": true,
+      "note": "Name from Philstar (2026-08-03) news mention. OCA citizen's charter (2022 edition) names no head and lists no local; mentions 8888 Citizen Complaint Hotline."
+    },
+    {
+      "office": "Office of the City Treasurer",
+      "head": "Marita A. Calaje",
+      "position": "City Treasurer",
+      "phones": [],
+      "email": null,
+      "location": "Temporary Pasig City Hall (Bridgetowne); collection annexes at Revolving Tower, Ayala Malls The 30th, Robinsons Metro East annex, Pasig Mega Market",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/city_treasurer's_office/686b08431a5401751844931Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "note": "2025-edition charter (uploaded July 2025). No local listed in that document."
+    },
+    {
+      "office": "City Assessor's Office",
+      "head": "Robert D. Mina",
+      "position": "City Assessor",
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1321",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/city_assessor's_office/648149e820c361686194664English.pdf"
+          ],
+          "verify": true
+        }
+      ],
+      "email": null,
+      "location": null,
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/city_assessor's_office/648149e820c361686194664English.pdf"
+      ],
+      "verify": true,
+      "note": "From Feb 14, 2023 charter edition; no 2025 edition found. Confirm current head."
+    },
+    {
+      "office": "Business Permit and Licensing Department (BPLD)",
+      "head": null,
+      "position": null,
+      "phones": [
+        {
+          "number": "8641-1111 local 1223",
+          "label": "trunkline local (BPLD Admin)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true,
+          "note": "Charter lists trunkline as 8641-1111 here; its complaints section says 8-643-1111 loc 330. Conflicting; both kept."
+        },
+        {
+          "number": "8-643-1111 local 330",
+          "label": "trunkline local (complaints)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        },
+        {
+          "number": "local 1158 / 1222",
+          "label": "BPLD Annex 1 (Ayala Malls The 30th)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        },
+        {
+          "number": "local 2241",
+          "label": "BPLD Annex 2 (Robinsons Metro East)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        },
+        {
+          "number": "local 1225",
+          "label": "BPLD Bridgetowne",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        },
+        {
+          "number": "local 1221",
+          "label": "BPLD Mutya ng Pasig Mega Market",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        }
+      ],
+      "email": "bpldadmin@pasigcity.gov.ph",
+      "location": "Eulogio Amang Rodriguez Ave., Bridgetowne, Rosario, Pasig City (plus annexes at Ayala Malls The 30th, Robinsons Metro East, Mutya ng Pasig Mega Market)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "note": "2025 Citizen's Charter, updated 4 March 2025. Annex emails: bpld.annex1@, bpld.annex2@, bpld.bridgetowne@, bpld.mutya@pasigcity.gov.ph. Head not named."
+    },
+    {
+      "office": "City Civil Registry",
+      "head": null,
+      "position": "City Civil Registrar",
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 381",
+          "label": "trunkline local (feedback/complaints)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/population/686b654cb1f2f1751868748Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": null,
+      "location": "3rd Floor, City Civil Registry, Pasig City Hall",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/population/686b654cb1f2f1751868748Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "note": "2025-edition charter; registrar not named."
+    },
+    {
+      "office": "City Health Department",
+      "head": "Joseph R. Panaligan, MD, MHA",
+      "position": "City Health Officer (Department Head)",
+      "phones": [
+        {
+          "number": "8642-7754 loc. 390, 391",
+          "label": "landline",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "cityhealth@pasigcity.gov.ph",
+      "location": "Admin Office, 3rd Floor, Temporary City Hall, Bridgetowne, Amang Rodriguez Ave., Rosario, Pasig City",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "City Social Welfare and Development Office (CSWDO)",
+      "head": "Ma. Teresa O. Briones",
+      "position": "Head of Office",
+      "phones": [],
+      "email": "pcsw@pasigcity.gov.ph",
+      "location": "Bahay Aruga Building (ground floor information desk)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_social_welfare_and_development_office/686b67911b50c1751869329Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "note": "Citizen's Charter 2025. No phone listed."
+    },
+    {
+      "office": "Office for Senior Citizens Affairs (OSCA)",
+      "head": null,
+      "position": null,
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1152",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_senior_citizen_affairs/686b673acd45c1751869242Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "osca@pasigcity.gov.ph",
+      "location": "Temporary City Hall, Bridgetowne, Rosario; also Tanghalang Pasigueño",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_senior_citizen_affairs/686b673acd45c1751869242Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "Persons with Disability Affairs Office (PDAO)",
+      "head": "Helen G. Carmona",
+      "position": "Disability Affairs Officer IV (Head)",
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1162",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/person_with_disability_affairs_office/686b67e4b86c11751869412Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        },
+        {
+          "number": "+63 928 343 5576",
+          "label": "mobile",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/person_with_disability_affairs_office/686b67e4b86c11751869412Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "pdao@pasigcity.gov.ph",
+      "location": "Tanghalang Pasigueño, Caruncho Ave., San Nicolas (main); Temporary City Hall, Amang Rodriguez Ave., Rosario (alternate)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/person_with_disability_affairs_office/686b67e4b86c11751869412Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "Public Employment Service Office (PESO)",
+      "head": "Jelene L. Sison, JD, MSHR, RPm",
+      "position": "PESO Manager",
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1451",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/public_employment_services_office/6867700015eca1751609344Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        },
+        {
+          "number": "8640-0318",
+          "label": "landline",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/public_employment_services_office/6867700015eca1751609344Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "peso@pasigcity.gov.ph",
+      "location": null,
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/public_employment_services_office/6867700015eca1751609344Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "Disaster Risk Reduction and Management Office (DRRMO)",
+      "head": "Bryant Q. Wong, RN, EMT, MPM",
+      "position": "Chief, Pasig City DRRMO",
+      "phones": [
+        {
+          "number": "(02) 8643-0000",
+          "label": "hotline",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/686775e995e781751610857Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        },
+        {
+          "number": "+63 908 899 3333",
+          "label": "mobile (Pasig Katext)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/686775e995e781751610857Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "drrmo@pasigcity.gov.ph",
+      "location": "3rd Floor, Temporary Pasig City Hall, Eulogio Amang Rodriguez Ave., Rosario, Pasig City",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/686775e995e781751610857Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "City Engineering Office",
+      "head": "Engr. Artaxerxes V. Geronimo",
+      "position": "OIC, City Engineering Office",
+      "phones": [
+        {
+          "number": "(02) 8643-0000 local 1645",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/engineering_office/68677c9f1749a1751612575Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true,
+          "note": "Charter prints 8643-0000 (the city hotline) rather than 8643-1111 with this local."
+        }
+      ],
+      "email": "engineering@pasig.gov.ph",
+      "location": "2nd Floor, Temporary City Hall, Eulogio Amang Rodriguez Ave., Brgy. Rosario, Pasig City",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/engineering_office/68677c9f1749a1751612575Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": true,
+      "note": "Email printed as engineering@pasig.gov.ph (not pasigcity.gov.ph) in the charter; may be a typo."
+    },
+    {
+      "office": "Office of the Building Official (OBO)",
+      "head": "Engr. Francis Jerome P. Ronquillo",
+      "position": "OIC, Office of the Building Official",
+      "phones": [],
+      "email": null,
+      "location": "Ground Floor, Temporary Pasig City Hall (forms)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_building_official/686788cae06521751615690Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "note": "Charter revised as of 02/03/2025."
+    },
+    {
+      "office": "City Environment and Natural Resources Office (CENRO) / Solid Waste Management Office",
+      "head": "Allendri B. Angeles",
+      "position": "SWMO / Acting CENRO (Department Head II)",
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1471",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/city_environment_and_natural_resources_office/647ff14b4bd6a1686106443English.pdf"
+          ],
+          "verify": true
+        },
+        {
+          "number": "(02) 8643-1111 local 480 / 530",
+          "label": "trunkline local (feedback)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/city_environment_and_natural_resources_office/647ff14b4bd6a1686106443English.pdf"
+          ],
+          "verify": true
+        }
+      ],
+      "email": "cenro@pasigcity.gov.ph",
+      "location": "4th Floor, Pasig City Hall, Caruncho Ave., San Nicolas (pre-relocation address)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/city_environment_and_natural_resources_office/647ff14b4bd6a1686106443English.pdf"
+      ],
+      "verify": true,
+      "note": "From 2023 charter edition; no 2025 edition found. Location predates move to Temporary City Hall at Bridgetowne."
+    },
+    {
+      "office": "Traffic and Parking Management Office (TPMO)",
+      "head": null,
+      "position": "TPMO OIC / Chief TPMO",
+      "phones": [
+        {
+          "number": "8641-1907",
+          "label": "landline",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/traffic_and_parking_management_office/662af8dd91e921714092253English%20and%20Filipino.pdf"
+          ],
+          "verify": true,
+          "note": "Printed as '86411907'."
+        }
+      ],
+      "email": null,
+      "location": "TBAR Building, BFP compound, F. Manalo St., Santo Tomas, Pasig City",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/traffic_and_parking_management_office/662af8dd91e921714092253English%20and%20Filipino.pdf"
+      ],
+      "verify": true,
+      "note": "2024 charter edition."
+    },
+    {
+      "office": "Ugnayan sa Pasig",
+      "head": "Ma. Rowena Dimanlig",
+      "position": null,
+      "phones": [
+        {
+          "number": "(02) 8643-1111 local 1211, 1213",
+          "label": "trunkline local",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": null,
+      "location": "2nd Floor, Pasig City Hall Bldg. (per Pasig Urban Settlements Office charter)",
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf",
+        "https://assets.pasigcity.gov.ph/storage/attachments/housing/686b5a4e00ea81751865934Citizen_s%20Charter%20English.pdf",
+        "https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"
+      ],
+      "verify": true,
+      "note": " Head name from 2024 GMA report (verify)."
+    },
+    {
+      "office": "Pasig City Command Center / City Hotline",
+      "head": null,
+      "position": null,
+      "phones": [
+        {
+          "number": "(02) 8643-0000",
+          "label": "hotline",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf",
+            "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/686775e995e781751610857Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": null,
+      "location": null,
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "Pasig Urban Settlements Office (PUSO)",
+      "head": null,
+      "position": null,
+      "phones": [
+        {
+          "number": "0909 117 9503",
+          "label": "mobile",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/housing/686b5a4e00ea81751865934Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        }
+      ],
+      "email": "puso@pasigcity.gov.ph",
+      "location": null,
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/housing/686b5a4e00ea81751865934Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false
+    },
+    {
+      "office": "Pasig City General Hospital (PCGH)",
+      "head": "Paulo Roman A. Castro, Jr., MD, PhD",
+      "position": "Medical Director",
+      "phones": [
+        {
+          "number": "8643-3333 local 4601",
+          "label": "landline (Medical Director)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_general_hospital(_p_c_g_h)/686b59b17ac2f1751865777Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        },
+        {
+          "number": "8643-3333 local 4602",
+          "label": "landline (Hospital Administrator)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_general_hospital(_p_c_g_h)/686b59b17ac2f1751865777Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": false
+        },
+        {
+          "number": "8642-7381 local 601",
+          "label": "landline (OPD section, conflicting)",
+          "sources": [
+            "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_general_hospital(_p_c_g_h)/686b59b17ac2f1751865777Citizen_s%20Charter%20English.pdf"
+          ],
+          "verify": true
+        }
+      ],
+      "email": "pcgh@pasigcity.gov.ph",
+      "location": null,
+      "sources": [
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_general_hospital(_p_c_g_h)/686b59b17ac2f1751865777Citizen_s%20Charter%20English.pdf",
+        "https://malaya.com.ph/news/national-news/pasig-city-general-hospital-marks-30th-year"
+      ],
+      "verify": true,
+      "note": "Malaya (Sept 2025) names Dr. Alice Santos as hospital administrator (separate post from Medical Director); charter names no administrator."
+    },
+    {
+      "office": "Public Information Office (PIO)",
+      "head": null,
+      "position": null,
+      "phones": [],
+      "email": null,
+      "location": null,
+      "sources": [],
+      "verify": true,
+      "note": "No source found."
+    }
+  ],
+  "barangays": [
+    {
+      "name": "Bagong Ilog",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Ferdinand Alicante Avis",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Jose Nilo C. Abreño."
+      },
+      "sk_chair": {
+        "name": "Jessie Bansal Padit Jr",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Virgilio Peralta Inocencio",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Cesar Alicante Avis",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Yam Cire Cuizon Gallano",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Michael Marcelo Estioco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Arvin Monserrat Banaag",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rino Polican Intalan Sr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Edgar Reyes Angelo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "671-0681",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Bagong Katipunan",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Jeronimo Reyes Alba",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Alba Geronimo Ambo."
+      },
+      "sk_chair": {
+        "name": "John Kelly Velina Paragas",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Judith Mique Oliveros",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Danilo Falco Layante",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Paul John Javilinar Luzada",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Khristoffer Pamisa Martinez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rosalio Perez Canonigo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rommel Santana Reyes",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "John Mark Jabson Benavidez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "8477-4262",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "642-7416",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Bambang",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Rodel Abelgas Samaniego",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Reynaldo A. Samson, Jr.."
+      },
+      "sk_chair": {
+        "name": "Alec Joshua Medina Santos",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Julius Cortez Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Michael Dennis Balderama Dela Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Darwin Embuscado Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Angelita Alignay Angeles",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Roberto Ongmawchi Dela Vega",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Raymond Santos Balbuena",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Bianca Mari Kierulf Bernardo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "70039869",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "643-6832",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "945-4092",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Buting",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Marlon Santos Servillon",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Danilo M. Tuaño."
+      },
+      "sk_chair": {
+        "name": "Mark Jervin Buebo Ventura",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Jeffrey Mercado Catura",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Avelino Acebedo Santos Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Erlinda Francisco Eden",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Erminda Sumo España",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Arnedo Atienza Mendez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Sherill Perpenia Del Rosario",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/buting"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "0286411440",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/buting",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "642-7268",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Caniogan",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Petri Santos Cortez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Bernard C. Perez."
+      },
+      "sk_chair": {
+        "name": "Ysabella Suarez Carnay",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Jovito Delima Añonuevo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Annabelle Concepcion Castañeda",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Sharon Suarez Carnay",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Michael Santos Altamero",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Alfredo Buenaobra Alvarez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Oliver Peralta Espiritu",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Marlon Manalo Alberto",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "84424091",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "641-5110",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "643-4805",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Dela Paz",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Dietmar Lee Romualdez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz",
+          "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Same person listed as captain on older undated pasigcityguide.com list (pre-2023 term)."
+      },
+      "sk_chair": {
+        "name": "Cedric Miguel Rotoni Paculan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Ronald Cruz Matulis",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jay Martin Santiago",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Cresencio Valenzona Oro",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Mika Ella Brizuela Sato",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Angeli Lette Martin Enriquez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Elizabeth Alfiler Veluz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rhoderick Singh Victoriano",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86452331",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "654-2331",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "682-8351",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Kalawaan",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Jessie Bolivar Gaviola",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Onofre R. Capco."
+      },
+      "sk_chair": {
+        "name": "Hannah Detera Pabalan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Oberon Criz Capco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Louie Salinas Alvarez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Pablito Cruz Jimenez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jimmy Junsay Borja",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Johnny J. Bornay",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Arnold Juanoza Tajan",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Kristian Howell Dollentas Jimenez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "02-742-6653",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "642-5648",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Kapasigan",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Jenifer Reyes Marcelo",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Bien Paul D. Legaspi."
+      },
+      "sk_chair": {
+        "name": "Jasper Allen Carmen Intalan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Vilma Aban Gutierrez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rodrigo Herrera Buensuceso",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Sherwin Cristobal Lobrigo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rebecca Ramos Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "John Cris Comsti Caruncho",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jay Ahr Gutierrez Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Edritz Bataan San Agustin",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "7005-71-70",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "565-6902",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "565-6901",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "565-6637",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Kapitolyo",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Alexis Rafael Marcilla Torres",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Noel R. Pajara."
+      },
+      "sk_chair": {
+        "name": "Kiah Pacetes Reyes",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Marygin Girao Cardinas",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jaisen Wilfred Cabrera Pajara II",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Joanna Marie Balce Pajara",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Andrew Rasco Austria",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rodolfo Pelayo Sanguyo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Kobe Monastria Felicia",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Milagros Alfonso Laigo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86314397",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Malinao",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Joel Sioco Dela Cruz",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao",
+          "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Same person listed as captain on older undated pasigcityguide.com list (pre-2023 term)."
+      },
+      "sk_chair": {
+        "name": "Mariela Bien Morales",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Moises Domingo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Erwin Castillo Francisco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Carmelito Bala Atillo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Romeo Gayutin Bersoto",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Christine Castro Romero",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Christopher Barroga Victoria",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Loriel Co Morales",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "6327605",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "641-6672",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Manggahan",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Quin Antonio Cruz",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Bobby L. Bobis."
+      },
+      "sk_chair": {
+        "name": "Charles Francel Torralba",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Gloria Sedeño Lualhati",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Esteban Giray De Asis",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Alberto Arriba Serat",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Prince Cedric Cronologia Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jocelyn Plaza Climaco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Reynaldo Del Rosario Malilay",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Danmar Caballero Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86820424",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "710-6032",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "710-5763",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Maybunga",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Arnold Reyes Alvarez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga",
+          "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Same person listed as captain on older undated pasigcityguide.com list (pre-2023 term)."
+      },
+      "sk_chair": {
+        "name": "Hendrix Reyes Villacorte",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Erwin Cabangbang Alvarez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Angelo Nacional Iporac",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Renato Victoria Pozon",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Enrico Juanillo Sandoval",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Reynante Apin Concepcion",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Sotero Cruz Catoc",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Neil Kevin Santos Albero",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86428645",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "628-4466",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Oranbo",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Richard Masiglat Pua",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Vicente V. Javier, Jr.."
+      },
+      "sk_chair": {
+        "name": "Mark Daniel Celestial Osting",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Helen Barrera Benedicto",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Maria Doreen Dalina Masiglat",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Paulo Delgado Tumlos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Junar Javier De Leon",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Mary Grace Bernardo Pua",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Vicente Vengano Javier Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Nenita Rosales Buenaventura",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86310254",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "635-9498",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "635-9027",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Palatiw",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Eriberto Mabini Guevarra",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Dinah R. Guevarra."
+      },
+      "sk_chair": {
+        "name": "Rica Macalintal Ardales",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Teodora Catacutan Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jean Guevarra Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Maricel Leviste Tatco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Robby Matri Hizon",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ronald Ryan Velasco Silva",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Luzette Hufancia Necio",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Alexander Areglo Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "885327813",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "641-044",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix). Number appears incomplete (6 digits)."
+        },
+        {
+          "number": "747-1540",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Pinagbuhatan",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Robin Rin Salandanan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Maricar A. Vivero."
+      },
+      "sk_chair": {
+        "name": "Keil Paz Custillas",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan",
+          "https://en.wikipedia.org/wiki/Pasig"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator. Wikipedia 'Pasig' lists Keil P. Custillas as SK Federation president."
+      },
+      "kagawad": [
+        {
+          "name": "Zandro Cataylo Asilo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rodolfo J. Bugnot",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Antonio Alegado Bello",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rosalie Jose Umali",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Arcie Vargas Lucas",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ramil Carlos Lontoc",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jess Bravo Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "88809394",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "570-4130",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Pineda",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Michael Dedase Publico",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Hermani S. A. Lacuna."
+      },
+      "sk_chair": {
+        "name": "Chlodi Andre Mendoza Quintana",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Rafael Hidalgo Dumpit",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Daryl Pisino Delos Reyes",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Alexander Pascual Arreola",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jovito Magbitang San Andres",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Kathlyn San Andres Carlos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Hussam Irilis Kulong",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "85848355",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Rosario",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Aquilino Santos Dela Cruz Sr.",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario",
+          "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Same person listed as captain on older undated pasigcityguide.com list (pre-2023 term)."
+      },
+      "sk_chair": {
+        "name": "Tyrone Jethro Jaurigue Monakil",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Baltazar Labrador Iglesias II",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Anna Lynn Galicia Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ryan Sarmiento Zeta",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Grace San Jose Sta. Ana",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Karen Bidayan Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Angelita Ramos Roldan",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Benjamin Manong Antonio",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86407705",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "642-9004",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Sagad",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Marvin Domingo Benito",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Alberto A. Bautista."
+      },
+      "sk_chair": {
+        "name": "Angelo Salvador Mirabel",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Gerardo Cubos Lapuz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Armando Jalique Amparo Sr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Deo Portuguez Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ricahrd Benito Damian (spelling as listed)",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Vanessa Salvador Martir",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Dexter D. Nazareth",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86405088",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "628-0227",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "San Antonio",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Thomas Raymond Umale Lising",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Joselito P. Dela Merced."
+      },
+      "sk_chair": {
+        "name": "Justin Zolina Garde",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Cynthia Lemoncito Milo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Melvin Hernandez Villaruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rachel Marie Santos Rustia-Olarte",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Justin Lanz Rupisan Galang",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ma. Pauline Lacson Blando",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Enidel Venus Tabana La Putt",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Fe Labandero Aguilar",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86310099",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "635-9424",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "635-5476",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "San Joaquin",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Franz Julius Balanday Sanchez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Nelia L. Munzod."
+      },
+      "sk_chair": {
+        "name": "Coleen Dismaya Hinayon",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Lorraine Reyes Adlawan",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Florentino Santos Hilario",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Aldwin Santos Molina",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Domingo Mastrili Sanchez Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jaime Romipal Tismo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Gabriel Tapnio Oliveros II",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Benjamin Sanchez Castelo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86439657",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "640-4862",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "San Jose",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Noel Antonio Dela Cruz",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Ronwaldo C. Angeles."
+      },
+      "sk_chair": {
+        "name": "Kurt Andrei Ravago",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Redd Adrian Cruz Angeles",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ramon Mendoza Bernardo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Christian Cruz Mañosca",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "John Victor Mesina Tuico",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Karla Czarina Salazar Reyes",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Orlando Michael Madrid Miguel",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Reymar Velez Perez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86400994",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "San Miguel",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Manuel Estrella Alba",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Roberto E. Benito."
+      },
+      "sk_chair": {
+        "name": "John David Arcangel Bravo",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Apple America Benito",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ringo Malimban Clerigo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jason Bedaña Aquino",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Dan Dan Arcangel Bravo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Diego Miguel Cruz Comsti",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Almario Dela Peña Enriquez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rudolph Cassius Tolentino Reyes",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "6400138",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "642-9510",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "San Nicolas",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Rigor Javiniar Enriquez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas",
+          "https://www.pasigcityguide.com/p/pasig-city-barangay.html",
+          "https://en.wikipedia.org/wiki/Pasig"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Same person listed as captain on older undated pasigcityguide.com list (pre-2023 term). Wikipedia 'Pasig' lists Rigor J. Enriquez as ABC (Liga) president, consistent with being a sitting punong barangay."
+      },
+      "sk_chair": {
+        "name": "Angello Custodio Perez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Richard Uy Valencia",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Roselle Enriquez Blanco",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Redwardo Geronimo Vasquez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Herman Nicolas Sta. Ana",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Yolanda Latoja Macaranas",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Gabriel Pilot Maigue",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Maurice Buenaobra Bedaña",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "79002062",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "799-0995",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Santa Cruz",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Ralph Renz Sulit Andaya",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Roderick Mario U. Gonzales."
+      },
+      "sk_chair": {
+        "name": "Mikaella Leano Soriano",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Jake Hukom Abueng",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Amado Cariño Gruta Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ted Bacani Babol",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jose Miguel Valencia Gonzales",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Joven Arthur Maglaya Caruncho",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Florante Equinia Bautista",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Oriza Nuestro Corpuz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "3398911",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "916-9015",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Santa Lucia",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Aldwin Malabanan Ilagan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Elpidio E. Bunag."
+      },
+      "sk_chair": {
+        "name": "Bernadette Amaranto Marticio",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Jose Roy Tumale Balingit",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Roy Abrigo Ombrog",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Girlie Dimanarig Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Shirley Eviota Morante",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Eugene Reyes Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "791-8283",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Santa Rosa",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Arcel Trinidad Umipig",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Reynaldo G. Morelos."
+      },
+      "sk_chair": {
+        "name": "Dhon Andrei Principe Julian",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Rotaniel Trinidad Morelos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Robert Paul Mina Algoso",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Marcon Guansing Raña",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Gian Carlo Llasos Delos Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Gomer Alagon Elardo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Joey Morelos Dela Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Christopher Ray Orense Casas",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "72560509",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "746-2128",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Santo Tomas",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Amelia Lati Raymundo",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Josefino M. Mojica."
+      },
+      "sk_chair": {
+        "name": "Edchelle Fernando Esguerra",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Albert Pedrera Padoga",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Danilo Dela Peña Ordoveza",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "John Dowee Armas Mojica",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Raphael Manood Benito",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Loida Aguilar Morfe",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Anthony Villanueva Rodriguez",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Bailanie Daroma Amerol",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86583063",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "470-6362",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Santolan",
+      "district": 2,
+      "punong_barangay": {
+        "name": "Jose Gabriel Garra Bayan",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Briccio V. Ramos."
+      },
+      "sk_chair": {
+        "name": "Elijah Quiñones Boncay",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Zandro Santos Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Dale Lucky Benablo Abugadie",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Charlie Danan Young Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Arlene Bea Salvacion Camba",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Jeffrey Catbagan Lubao",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Dominga Sta. Ana Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Lucio Reyes Borja",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "86811614",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan",
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed. Same 7-digit number on older pasigcityguide.com list."
+        },
+        {
+          "number": "682-1020",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "646-4627",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Sumilang",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Irma Ramos Gomez",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Celestino U. Chua."
+      },
+      "sk_chair": {
+        "name": "John Jasdel Furoc Cabrera",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "James Romar Santos Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Aries Christopher Pablo Conde",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Alberto Guan Lipana",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rico Santos Natividad",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Prudencio Ison Lipana",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Gerardo Navarro Cruz Jr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ronilo Esteban Mendoza Sr.",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "89423557",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "643-6276",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "641-5995",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    },
+    {
+      "name": "Ugong",
+      "district": 1,
+      "punong_barangay": {
+        "name": "Gloria Pascual Cruz",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator; not confirmed by COMELEC/official source. Older undated pasigcityguide.com list (likely pre-2023) shows a different captain: Engracio E. Santiago."
+      },
+      "sk_chair": {
+        "name": "Janus Ramos Legaspi",
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+        ],
+        "verify": true,
+        "note": "Listed under '2023 - 2026 term' on aggregator."
+      },
+      "kagawad": [
+        {
+          "name": "Joseph Cruz Arnau",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Rolando Natividad Ramos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Florencio Dela Cruz Cruz",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Ma. Cecilia Livio Llarenas",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Marvin Cruz Aguirre",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Archie Abuel Abrencillo",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        },
+        {
+          "name": "Emelita Legaspi Santos",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true
+        }
+      ],
+      "hall_address": {
+        "value": null,
+        "sources": [
+          "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+        ],
+        "verify": true,
+        "note": "Aggregator says street address is still being verified; no official source found (pasigcity.gov.ph blocked by robots)."
+      },
+      "phones": [
+        {
+          "number": "84510028",
+          "label": "landline",
+          "sources": [
+            "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong"
+          ],
+          "verify": true,
+          "note": "From barangaydirectory.com (aggregator); format as listed."
+        },
+        {
+          "number": "671-4071",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        },
+        {
+          "number": "671-5956",
+          "label": "landline",
+          "sources": [
+            "https://www.pasigcityguide.com/p/pasig-city-barangay.html"
+          ],
+          "verify": true,
+          "note": "From older undated pasigcityguide.com list (likely pre-2023, 7-digit pre-2019 format; Metro Manila landlines now take an '8' prefix)."
+        }
+      ],
+      "email": null,
+      "facebook": null
+    }
+  ]
+}

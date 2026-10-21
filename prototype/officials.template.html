@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mga Opisyal ng Pasig</title>
+<meta name="description" content="Direktoryo ng mga opisyal ng Lungsod ng Pasig at ng 30 barangay, kasama ang mga numero ng telepono.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #FFFFFF; --ink: #16181D; --muted: #586070; --line: #E2E5EB; --subtle: #F4F6F9;
+  --blue: #1A47A8; --pale: #E6ECF8; --hover: #C7D5F4; --mark-bg: #DCE5F8;
+  --red: #B42318; --red-bg: #FEF3F2; --amber: #8A5A00; --shadow: rgba(16,24,40,.12);
+  --font: "Geist", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.2,.7,.2,1); --fast: 140ms; --mid: 240ms;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0F1216; --ink: #ECEEF2; --muted: #A2A9B6; --line: #272C35; --subtle: #161A20;
+  --blue: #86A6F4; --pale: #1E2633; --hover: #2C3A55; --mark-bg: #24314C;
+  --red: #F97066; --red-bg: #2B1513; --amber: #E3B35C; --shadow: rgba(0,0,0,.45); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0F1216; --ink: #ECEEF2; --muted: #A2A9B6; --line: #272C35; --subtle: #161A20;
+  --blue: #86A6F4; --pale: #1E2633; --hover: #2C3A55; --mark-bg: #24314C;
+  --red: #F97066; --red-bg: #2B1513; --amber: #E3B35C; --shadow: rgba(0,0,0,.45); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 90px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ul { color: var(--ink); text-decoration: none; position: relative; }
+.ul::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--mid) var(--ease); }
+.ul:hover { color: var(--blue); }
+.ul:hover::after, .ul:focus-visible::after, .ul[aria-current]::after { transform: scaleX(1); }
+
+/* header + emergency (same as homepage) */
+.top { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); transition: box-shadow var(--mid) var(--ease); }
+.top.scrolled { box-shadow: 0 6px 20px var(--shadow); }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 36px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-size: 21px; font-weight: 700; letter-spacing: -0.025em; }
+.brand svg { width: 26px; height: 36px; transition: transform var(--mid) var(--ease); }
+.brand:hover svg { transform: rotate(-6deg) scale(1.06); }
+.brand path { fill: var(--blue); }
+.nav { display: flex; flex-wrap: wrap; gap: 6px 24px; flex: 1 1 auto; font-size: 16px; font-weight: 500; }
+.sos { background: var(--red-bg); border-bottom: 1px solid var(--line); }
+.sos .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; padding-block: 10px; font-size: 15px; }
+.sos strong { color: var(--red); }
+.sos a { color: var(--ink); font-weight: 700; text-decoration: none; font-size: 17px; }
+.sos a.main { color: var(--red); font-size: 20px; }
+
+/* page head */
+.phead { padding-block: 44px 28px; border-bottom: 1px solid var(--line); }
+.phead h1 { font-size: 46px; line-height: 1.05; letter-spacing: -0.04em; }
+.phead p { margin: 12px 0 0; max-width: 64ch; color: var(--muted); }
+.asof { display: inline-flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 16px; font-size: 14px; color: var(--muted); }
+.asof b { color: var(--ink); font-weight: 600; }
+.jump { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 22px; font-size: 16px; font-weight: 500; }
+
+/* filter */
+.filter { position: sticky; top: 65px; z-index: 15; background: var(--bg); border-bottom: 1px solid var(--line); }
+.filter .wrap { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; padding-block: 12px; }
+.filter input { flex: 1 1 280px; min-height: 48px; border: 2px solid var(--ink); border-radius: 10px; padding: 0 14px; background: var(--bg); font-size: 17px; transition: box-shadow var(--mid) var(--ease); }
+.filter input:focus { outline: none; box-shadow: 0 0 0 4px var(--mark-bg); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; padding: 3px; gap: 2px; }
+.seg button { border: 0; background: none; border-radius: 6px; padding: 8px 12px; font-size: 15px; font-weight: 500; color: var(--muted); transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.count { font-size: 14px; color: var(--muted); }
+
+/* sections */
+.block { padding-block: 44px; border-bottom: 1px solid var(--line); }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px; }
+.head h2 { font-size: 30px; letter-spacing: -0.03em; font-weight: 700; }
+.head p { margin: 6px 0 0; color: var(--muted); font-size: 16px; }
+
+/* people rows */
+.people { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.people li { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; transition: background-color var(--fast) var(--ease); }
+.people li:hover { background: var(--subtle); }
+.people .n { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+.people .r { font-size: 15px; color: var(--muted); }
+.people .c { font-size: 15px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; }
+.cols h3 { font-size: 15px; font-weight: 500; color: var(--muted); padding-bottom: 8px; }
+.cols ol { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.cols li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
+
+/* table */
+.tablebox { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 760px; }
+th { text-align: left; font-weight: 500; font-size: 14px; color: var(--muted); padding: 0 16px 10px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 13px 16px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr { transition: background-color var(--fast) var(--ease); }
+tbody tr:hover { background: var(--subtle); }
+
+/* barangays */
+.bwrap { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; align-items: start; }
+.bmap { position: sticky; top: 150px; }
+.bmap svg { width: 100%; height: auto; display: block; }
+.bmap path { fill: var(--pale); stroke: var(--bg); stroke-width: 1.5; stroke-linejoin: round; cursor: pointer; transition: fill var(--mid) var(--ease); }
+.bmap path:hover { fill: var(--hover); }
+.bmap path.on { fill: var(--blue); }
+.bmap path.dim { fill: var(--subtle); }
+.bmap small { display: block; font-size: 13px; color: var(--muted); margin-top: 8px; }
+.brgy { border-top: 2px solid var(--ink); }
+.b { border-bottom: 1px solid var(--line); scroll-margin-top: 150px; }
+.b summary { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr) 24px; gap: 4px 20px; padding: 16px 0; cursor: pointer; align-items: baseline; transition: background-color var(--fast) var(--ease); }
+.b summary::-webkit-details-marker { display: none; }
+.b summary:hover { background: var(--subtle); }
+.b .bn { font-weight: 700; font-size: 19px; letter-spacing: -0.015em; }
+.b .bd { display: block; font-size: 13px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.b .cap { font-size: 16px; }
+.b .cap span { display: block; font-size: 13px; color: var(--muted); }
+.b .ph { font-size: 16px; display: flex; flex-wrap: wrap; gap: 2px 12px; }
+.chev { width: 18px; height: 18px; color: var(--muted); transition: transform var(--mid) var(--ease); align-self: center; }
+.b[open] .chev { transform: rotate(180deg); }
+.more { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px 40px; padding: 4px 0 22px; font-size: 15px; }
+.more h4 { margin: 0 0 6px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.more ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.more dl { margin: 0; display: grid; gap: 12px; align-content: start; }
+.more dt { font-size: 14px; color: var(--muted); }
+.more dd { margin: 0; }
+.b[open] .more { animation: rise var(--mid) var(--ease); }
+@keyframes rise { from { opacity: 0; transform: translateY(-4px); } }
+.empty { padding: 24px 0; color: var(--muted); }
+
+/* small things */
+.chk { display: inline-block; font-size: 13px; font-weight: 600; color: var(--amber); margin-left: 6px; white-space: nowrap; }
+.src { font-size: 13px; color: var(--muted); }
+.src a { color: var(--muted); }
+.tel { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; }
+.tel a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.tel a:hover { color: var(--blue); text-decoration: underline; }
+.copy { border: 0; background: transparent; color: var(--muted); width: 30px; height: 30px; border-radius: 8px; display: inline-grid; place-items: center; transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.copy:hover { background: var(--subtle); color: var(--ink); }
+.copy:active { transform: scale(.9); }
+.copy svg { width: 15px; height: 15px; }
+mark { background: var(--mark-bg); color: inherit; border-radius: 3px; padding: 0 1px; }
+.note { margin-top: 18px; padding: 14px 16px; border-left: 3px solid var(--amber); background: var(--subtle); font-size: 15px; max-width: 80ch; }
+
+footer { background: var(--subtle); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 24px 64px; padding-block: 40px; font-size: 15px; color: var(--muted); }
+footer .about { flex: 1 1 380px; max-width: 60ch; display: grid; gap: 8px; }
+footer strong { color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 60; transform: translate(-50%, 16px); opacity: 0; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 15px; font-weight: 500; transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease); pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 900px) {
+  .cols { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .bwrap { grid-template-columns: minmax(0, 1fr); }
+  .bmap { position: static; max-width: 220px; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .phead h1 { font-size: 34px; }
+  .head h2 { font-size: 26px; }
+  .nav { order: 3; flex-basis: 100%; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .nav a { white-space: nowrap; }
+  .filter { top: 0; position: relative; }
+  .people li { grid-template-columns: minmax(0, 1fr); }
+  .b summary { grid-template-columns: minmax(0, 1fr) 24px; }
+  .b summary .cap, .b summary .ph { grid-column: 1; }
+  .b summary .chev { grid-row: 1; grid-column: 2; }
+  .more { grid-template-columns: minmax(0, 1fr); }
+  table { min-width: 0; }
+  thead { display: none; }
+  tr { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  td { border: 0; padding: 0; }
+  td:first-child { font-weight: 600; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="8 2 32 44" aria-hidden="true"><path id="markp"></path></svg>BetterPasig</a>
+    <nav class="nav" aria-label="Pangunahing menu">
+      <a class="ul" href="index.html#serbisyo">Serbisyo</a><a class="ul" href="index.html#benepisyo">Benepisyo</a><a class="ul" href="index.html#mapa">Barangay</a><a class="ul" href="officials.html" aria-current="page">Opisyal</a><a class="ul" href="index.html#pondo">Pondo ng bayan</a>
+    </nav>
+  </div>
+</header>
+
+<div class="sos" role="region" aria-label="Emergency hotlines">
+  <div class="wrap"><strong>Emergency</strong><span class="muted">Pasig Hotline</span><a class="main num" href="tel:86430000">8643-0000</a><span class="muted">Text</span><a class="num" href="tel:09088993333">0908-899-3333</a><span class="muted">National</span><a class="num" href="tel:911">911</a></div>
+</div>
+
+<main>
+<div class="phead">
+  <div class="wrap">
+    <h1>Mga opisyal ng Pasig</h1>
+    <p>Sino ang namumuno sa Lungsod at sa bawat barangay, at paano sila maaabot. Pare-pareho ang pagkakalista sa lahat, ayon sa posisyon at distrito.</p>
+    <div class="asof" id="asof"></div>
+    <nav class="jump" aria-label="Sa pahinang ito">
+      <a class="ul" href="#lungsod">Lungsod</a><a class="ul" href="#konseho">Sangguniang Panlungsod</a><a class="ul" href="#departamento">Mga departamento</a><a class="ul" href="#barangay">30 barangay</a>
+    </nav>
+  </div>
+</div>
+
+<div class="filter">
+  <div class="wrap">
+    <label for="q" class="sr">Hanapin ang opisyal o barangay</label>
+    <input id="q" type="search" autocomplete="off" placeholder="Hanapin: pangalan, barangay o opisina">
+    <div class="seg" role="group" aria-label="Distrito">
+      <button type="button" data-d="all" aria-pressed="true">Lahat</button><button type="button" data-d="1" aria-pressed="false">Distrito 1</button><button type="button" data-d="2" aria-pressed="false">Distrito 2</button>
+    </div>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+</div>
+
+<section class="block" id="lungsod">
+  <div class="wrap">
+    <div class="head"><div><h2>Lungsod</h2><p>Halal na opisyal, termino 2025 hanggang 2028.</p></div></div>
+    <ul class="people" id="exec"></ul>
+  </div>
+</section>
+
+<section class="block" id="konseho">
+  <div class="wrap">
+    <div class="head"><div><h2>Sangguniang Panlungsod</h2><p>Pinamumunuan ng Vice Mayor. Anim na konsehal bawat distrito, kasama ang Liga ng mga Barangay at SK Federation.</p></div></div>
+    <div class="cols" id="council"></div>
+    <div id="councilContact"></div>
+  </div>
+</section>
+
+<section class="block" id="departamento">
+  <div class="wrap">
+    <div class="head"><div><h2>Mga departamento</h2><p>Mga pinuno ng opisina at paano sila kontakin.</p></div></div>
+    <div class="tablebox"><table>
+      <thead><tr><th>Opisina</th><th>Pinuno</th><th>Telepono</th><th>Email / lokasyon</th></tr></thead>
+      <tbody id="depts"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="block" id="barangay">
+  <div class="wrap">
+    <div class="head"><div><h2>30 barangay</h2><p>Punong barangay, SK chair, address at numero ng barangay hall. Pindutin ang barangay para sa buong konseho.</p></div></div>
+    <div class="bwrap">
+      <div class="bmap"><svg viewBox="100 0 360 560" id="bmap" role="group" aria-label="Mapa ng 30 barangay"></svg><small>Pindutin ang mapa para pumunta sa barangay.</small></div>
+      <div>
+        <div class="brgy" id="brgy"></div>
+        <div class="note" id="termnote"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="about">
+      <strong>BetterPasig</strong>
+      <span>Gawa ng mga volunteer at hindi opisyal na website ng Lungsod ng Pasig. Ang "Sinusuri pa" ay impormasyong hindi pa nakukumpirma sa opisyal na pinagmulan o sa tawag.</span>
+      <span>May nakitang mali o luma na? <a href="https://github.com/">Ipaalam sa GitHub</a>.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const D = /*DATA*/;
+const MAP = /*MAP*/;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const NS = 'http://www.w3.org/2000/svg';
+const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const norm = (s) => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+$('markp').setAttribute('d', D.mark);
+
+const topEl = $('top');
+addEventListener('scroll', () => topEl.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+const toast = $('toast'); let tt;
+function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 1800); }
+const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+const chev = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('.copy'); if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  try { await navigator.clipboard.writeText(b.dataset.n); say('Nakopya: ' + b.dataset.n); }
+  catch (err) { say('Ang numero: ' + b.dataset.n); }
+});
+
+const chk = (v) => v ? '<span class="chk">Sinusuri pa</span>' : '';
+const telHref = (n) => { const base = String(n).split(/\s*(?:loc\.?|local)\s*/i)[0]; const d = base.replace(/\D/g, ''); if (d.startsWith('63')) return '+' + d; if (d.startsWith('0')) return d; return '+632' + d; };
+const tel = (n) => { if (!n) return ''; const t = telHref(n); return `<span class="tel"><a class="num" href="tel:${esc(t)}">${esc(n)}</a><button class="copy" type="button" data-n="${esc(n)}" aria-label="Kopyahin ang ${esc(n)}">${copyIcon}</button></span>`; };
+const phones = (arr) => (arr && arr.length) ? arr.map(tel).join('') : '<span class="muted">Wala pang numero</span>';
+const srcs = (arr) => (arr && arr.length) ? '<span class="src">Pinagmulan: ' + arr.slice(0, 3).map((u, i) => { let h = u; try { h = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {} return `<a href="${esc(u)}" rel="noopener">${esc(h)}</a>`; }).join(', ') + '</span>' : '';
+const mail = (m) => m ? `<a href="mailto:${esc(m)}">${esc(m)}</a>` : '';
+
+$('asof').innerHTML = `<span>Datos hanggang <b>${esc(D.as_of_label)}</b></span><span>${esc(D.counts)}</span>`;
+
+// executive
+$('exec').innerHTML = D.city.executive.map((p) => `<li data-k="${esc(norm(p.name + ' ' + p.role))}"><div><span class="n">${esc(p.name)}</span>${chk(p.verify)}<div class="r">${esc(p.role)}</div></div><div class="c">${phones(p.phones)}</div><div class="c">${mail(p.email)}${p.office ? `<span class="muted">${esc(p.office)}</span>` : ''}${srcs(p.sources)}</div></li>`).join('');
+
+// council
+const col = (title, list, d) => `<div data-dist="${d}"><h3>${esc(title)}</h3><ol>${list.map((p) => `<li data-k="${esc(norm(p.name + ' ' + (p.role || '')))}"><span>${esc(p.name)}${chk(p.verify)}</span><span class="muted" style="font-size:14px">${esc(p.role || 'Konsehal')}</span></li>`).join('')}</ol></div>`;
+$('council').innerHTML = col('Unang Distrito', D.city.council.district1, '1') + col('Ikalawang Distrito', D.city.council.district2, '2') + col('Ex officio', D.city.council.ex_officio, 'x');
+if (D.city.council.contact) $('councilContact').innerHTML = `<p class="muted" style="margin:18px 0 0;font-size:15px">Opisina ng Sangguniang Panlungsod: ${phones(D.city.council.contact.phones)} ${mail(D.city.council.contact.email)} ${srcs(D.city.council.contact.sources)}</p>`;
+
+// departments
+$('depts').innerHTML = D.departments.map((x) => `<tr data-k="${esc(norm(x.name + ' ' + (x.head || '') + ' ' + (x.short || '')))}"><td>${esc(x.name)}${x.short ? ` <span class="muted">(${esc(x.short)})</span>` : ''}</td><td>${x.head ? esc(x.head) : '<span class="muted">Hindi pa tukoy</span>'}${chk(x.verify)}</td><td>${phones(x.phones)}</td><td>${mail(x.email)}${x.location ? `<div class="muted" style="font-size:14px">${esc(x.location)}</div>` : ''}${srcs(x.sources)}</td></tr>`).join('');
+
+// barangays
+const ordered = D.barangays.slice().sort((a, b) => a.district - b.district || a.name.localeCompare(b.name));
+$('brgy').innerHTML = ordered.map((b) => {
+  const id = 'b-' + slug(b.name);
+  const kag = (b.kagawad || []).length ? `<ul>${b.kagawad.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>` : '<span class="muted">Hindi pa nailista</span>';
+  const kw = norm([b.name, b.punong_barangay, b.sk_chair, ...(b.kagawad || []), b.address].join(' '));
+  return `<details class="b" id="${id}" data-name="${esc(b.name)}" data-dist="${b.district}" data-k="${esc(kw)}">
+    <summary><span class="bn">${esc(b.name)}<span class="bd">Distrito ${b.district}${b.verify ? ' · <span style="color:var(--amber)">Sinusuri pa</span>' : ''}</span></span>
+      <span class="cap">${b.punong_barangay ? esc(b.punong_barangay) : '<span class="muted">Hindi pa tukoy</span>'}<span>Punong barangay</span></span>
+      <span class="ph">${phones(b.phones)}</span>${chev}</summary>
+    <div class="more">
+      <dl>
+        <div><dt>SK chairperson</dt><dd>${b.sk_chair ? esc(b.sk_chair) : '<span class="muted">Hindi pa tukoy</span>'}</dd></div>
+        <div><dt>Barangay hall</dt><dd>${b.address ? esc(b.address) : '<span class="muted">Wala pang address</span>'}</dd></div>
+        ${b.email || b.facebook ? `<div><dt>Online</dt><dd>${mail(b.email)} ${b.facebook ? `<a href="${esc(b.facebook)}" rel="noopener">Facebook page</a>` : ''}</dd></div>` : ''}
+        ${b.old7 ? `<div><dt>Tala</dt><dd>May numerong nasa lumang 7-digit na format (bago ang 2019). Maaaring iba na ito ngayon; tawagan muna ang mas bagong numero.</dd></div>` : ''}
+      </dl>
+      <div><h4>Mga kagawad</h4>${kag}<div style="margin-top:12px">${srcs(b.sources)}</div></div>
+    </div></details>`;
+}).join('') + '<p class="empty" id="bempty" hidden>Walang tumugmang barangay.</p>';
+$('termnote').textContent = D.term_note;
+
+// map
+const svg = $('bmap');
+const pathByName = {};
+MAP.forEach((m) => {
+  const p = document.createElementNS(NS, 'path'); p.setAttribute('d', m.d);
+  const t = document.createElementNS(NS, 'title'); t.textContent = m.name; p.appendChild(t);
+  p.addEventListener('click', () => { const el = $('b-' + slug(m.name)); if (el) { el.open = true; el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); mark(m.name); } });
+  svg.appendChild(p); pathByName[slug(m.name)] = p;
+});
+function mark(name) { Object.values(pathByName).forEach((p) => p.classList.remove('on')); const p = pathByName[slug(name)]; if (p) p.classList.add('on'); }
+$('brgy').addEventListener('toggle', (e) => { if (e.target.open) mark(e.target.dataset.name); }, true);
+
+// filter
+let dist = 'all';
+function apply() {
+  const q = norm($('q').value.trim());
+  let n = 0;
+  document.querySelectorAll('[data-k]').forEach((el) => {
+    const inDist = dist === 'all' || !el.closest('[data-dist]') || el.closest('[data-dist]').dataset.dist === dist || el.closest('[data-dist]').dataset.dist === 'x';
+    const hit = !q || el.dataset.k.includes(q);
+    el.hidden = !(hit && inDist);
+    if (!el.hidden) n++;
+  });
+  document.querySelectorAll('.b').forEach((el) => { const dp = pathByName[slug(el.dataset.name)]; if (dp) { dp.classList.toggle('dim', el.hidden); dp.classList.toggle('on', !el.hidden && (!!q || dist !== 'all')); } });
+  $('bempty').hidden = !!document.querySelector('.b:not([hidden])');
+  $('count').textContent = q || dist !== 'all' ? `${n} tugma` : '';
+}
+$('q').addEventListener('input', apply);
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+  dist = b.dataset.d; document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply();
+}));
+if (location.hash.startsWith('#b-')) { const el = document.querySelector(location.hash); if (el) { el.open = true; } }
+</script>
+</body>
+</html>

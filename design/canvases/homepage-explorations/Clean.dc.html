@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#1A47A8;text-underline-offset:3px}a:hover{color:#0E2A66}
+button,input,select{font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif}
+input::placeholder{color:#B4BCCB}
+:focus-visible{outline:3px solid #1A47A8;outline-offset:3px}
+</style>
+</helmet>
+<div style="zoom: {{zoom}}; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; color: #1E2228; background: #FFFFFF; font-size: 18px; line-height: 1.55;">
+
+<!-- Notice line -->
+<div style="border-bottom: 1px solid #E2E7F0;">
+<div style="max-width: 1180px; margin: 0 auto; padding: 8px 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; font-size: 15px; color: #4A5260;">
+<span>{{t.notice}} <a href="https://pasigcity.gov.ph">pasigcity.gov.ph</a></span>
+<span style="display: flex; gap: 4px; align-items: center;">
+<button onClick="{{toggleLang}}" style="background: transparent; border: 0; color: #1A47A8; font-size: 15px; font-weight: 700; min-height: 40px; padding: 0 10px; cursor: pointer;">{{t.langBtn}}</button>
+<button onClick="{{toggleSize}}" aria-label="{{t.sizeLabel}}" style="background: transparent; border: 0; color: #1A47A8; font-size: 15px; font-weight: 700; min-height: 40px; padding: 0 10px; cursor: pointer;">{{t.sizeBtn}}</button>
+</span>
+</div>
+</div>
+
+<!-- Header -->
+<header style="max-width: 1180px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: center;">
+<a href="#" aria-label="BetterPasig, home" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1E2228;">
+<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M2 14c5.3-5 10.7-5 16 0s10.7 5 16 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path><path d="M2 24c5.3-5 10.7-5 16 0s10.7 5 16 0" stroke="{{blue}}" stroke-width="4.5" fill="none" stroke-linecap="round"></path></svg>
+<span style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em;">BetterPasig</span>
+</a>
+<nav aria-label="{{t.navLabel}}" style="display: flex; flex-wrap: wrap; gap: 4px 26px; flex: 1 1 auto; font-size: 17px; font-weight: 500;">
+<sc-for list="{{t.nav}}" as="n" hint-placeholder-count="4">
+<a href="#" style="color: #1E2228; text-decoration: none; padding: 8px 0;">{{n}}</a>
+</sc-for>
+</nav>
+<a href="tel:86430000" style="color: #B3261E; font-weight: 700; text-decoration: none; font-size: 17px;">{{t.emergency}} 8643-0000</a>
+</header>
+
+<!-- Hero: the sentence is the search -->
+<section style="max-width: 1180px; margin: 0 auto; padding: 56px 32px 72px; display: flex; flex-wrap: wrap; gap: 48px 64px;">
+<div style="flex: 999 1 620px; min-width: 0; display: flex; flex-direction: column; gap: 28px;">
+<form role="search" style="display: flex; flex-direction: column; gap: 4px;">
+<label for="need" style="font-size: 68px; font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; color: #1E2228;">{{t.lead}}</label>
+<input id="need" type="search" autocomplete="off" value="{{query}}" onChange="{{onQuery}}" placeholder="{{t.ph}}" style="width: 100%; box-sizing: border-box; border: 0; border-bottom: 5px solid {{blue}}; outline-offset: 6px; font-size: 68px; font-weight: 800; line-height: 1.15; letter-spacing: -0.035em; color: {{blue}}; padding: 0 0 8px; background: transparent;">
+</form>
+
+<sc-if value="{{showSuggest}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<span style="font-size: 16px; color: #4A5260;">{{t.tryThese}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 10px;">
+<sc-for list="{{suggest}}" as="sg" hint-placeholder-count="5">
+<button type="button" onClick="{{sg.pick}}" style="background: #EEF2F8; color: #1E2228; border: 0; border-radius: 6px; padding: 10px 14px; font-size: 17px; font-weight: 500; min-height: 44px; cursor: pointer;">{{sg.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column;">
+<span style="font-size: 16px; color: #4A5260; padding-bottom: 8px;">{{resultCount}}</span>
+<sc-for list="{{results}}" as="r" hint-placeholder-count="3">
+<a href="#" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; padding: 18px 0; border-top: 1px solid #E2E7F0; text-decoration: none; color: #1E2228;">
+<span style="display: flex; flex-direction: column; gap: 2px; max-width: 560px;">
+<strong style="font-size: 21px; color: {{blue}}; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;">{{r.title}}</strong>
+<span style="font-size: 17px; color: #4A5260;">{{r.desc}}</span>
+</span>
+<span style="font-size: 15px; color: #4A5260;">{{r.where}}</span>
+</a>
+</sc-for>
+<sc-if value="{{noResults}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 18px 0; border-top: 1px solid #E2E7F0; max-width: 560px;">{{t.none}}</p>
+</sc-if>
+</div>
+</sc-if>
+</div>
+
+<!-- Emergency column -->
+<aside aria-labelledby="em-h" style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 4px; padding-top: 12px;">
+<h2 id="em-h" style="margin: 0 0 8px; font-size: 21px; font-weight: 700;">{{t.emTitle}}</h2>
+<sc-for list="{{hotlines}}" as="h" hint-placeholder-count="4">
+<a href="tel:{{h.tel}}" style="display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid #E2E7F0; text-decoration: none; color: #1E2228;">
+<span>{{h.label}}</span>
+<strong style="color: #B3261E; font-variant-numeric: tabular-nums;">{{h.num}}</strong>
+</a>
+</sc-for>
+<p style="margin: 8px 0 0; font-size: 15px; color: #4A5260;">{{t.emNote}}</p>
+</aside>
+</section>
+
+<!-- Situations -->
+<section style="background: #EEF2F8;">
+<div style="max-width: 1180px; margin: 0 auto; padding: 72px 32px; display: flex; flex-direction: column; gap: 36px;">
+<div style="max-width: 640px; display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-size: 44px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em;">{{t.sitTitle}}</h2>
+<p style="margin: 0; color: #4A5260;">{{t.sitBody}}</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 32px 64px;">
+<div role="tablist" aria-orientation="vertical" aria-label="{{t.sitTitle}}" style="flex: 1 1 260px; display: flex; flex-direction: column;">
+<sc-for list="{{sitTabs}}" as="st" hint-placeholder-count="5">
+<button role="tab" aria-selected="{{st.active}}" onClick="{{st.pick}}" style="text-align: left; background: {{st.bg}}; color: {{st.ink}}; border: 0; border-radius: 6px; padding: 14px 16px; font-size: 19px; font-weight: {{st.weight}}; min-height: 52px; cursor: pointer;">{{st.label}}</button>
+</sc-for>
+</div>
+<div role="tabpanel" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<h3 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.015em;">{{sit.title}}</h3>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column;">
+<sc-for list="{{sit.steps}}" as="sp" hint-placeholder-count="4">
+<li style="display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-top: 1px solid #C8D0DE;">
+<span style="font-size: 28px; font-weight: 800; color: {{blue}}; line-height: 1;">{{sp.n}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px;">
+<a href="#" style="font-size: 19px; font-weight: 700;">{{sp.title}}</a>
+<span style="color: #4A5260; font-size: 17px;">{{sp.where}}</span>
+</span>
+</li>
+</sc-for>
+</ol>
+<p style="margin: 0; font-size: 15px; color: #4A5260;">{{t.sitSource}}</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Barangay -->
+<section style="max-width: 1180px; margin: 0 auto; padding: 80px 32px; display: flex; flex-wrap: wrap; gap: 32px 64px;">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px;">
+<h2 style="margin: 0; font-size: 44px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em;">{{t.brgyTitle}}</h2>
+<p style="margin: 0; color: #4A5260;">{{t.brgyBody}}</p>
+<label for="brgy" style="font-weight: 700; margin-top: 8px;">Barangay</label>
+<select id="brgy" value="{{brgy}}" onChange="{{onBrgy}}" style="font-size: 19px; font-weight: 500; padding: 12px 14px; border: 2px solid #1E2228; border-radius: 6px; min-height: 54px; background: #FFFFFF; color: #1E2228;">
+<sc-for list="{{barangays}}" as="b" hint-placeholder-count="30">
+<option value="{{b}}">{{b}}</option>
+</sc-for>
+</select>
+</div>
+<dl style="flex: 999 1 560px; min-width: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; align-self: flex-start;">
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="6">
+<div style="padding: 18px 0; border-top: 1px solid #E2E7F0; display: flex; flex-direction: column; gap: 4px;">
+<dt style="font-size: 15px; color: #4A5260;">{{f.k}}</dt>
+<dd style="margin: 0; font-size: 19px; font-weight: 700;">{{f.v}}</dd>
+</div>
+</sc-for>
+</dl>
+</section>
+
+<!-- Money -->
+<section style="background: #0E2A66; color: #FFFFFF;">
+<div style="max-width: 1180px; margin: 0 auto; padding: 80px 32px; display: flex; flex-wrap: wrap; gap: 40px 64px;">
+<div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 18px;">
+<h2 style="margin: 0; font-size: 44px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em;">{{t.moneyTitle}}</h2>
+<p style="margin: 0; color: #C9D4EC; max-width: 520px;">{{t.moneyBody}}</p>
+<p style="margin: 0; font-size: 15px; color: #C9D4EC;">{{t.moneySource}}</p>
+</div>
+<ul style="flex: 1 1 460px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column;">
+<sc-for list="{{money}}" as="m" hint-placeholder-count="4">
+<li style="padding: 20px 0; border-top: 1px solid #2E4A86;">
+<a href="#" style="color: #FFFFFF; font-size: 21px; font-weight: 700;">{{m.title}}</a>
+<p style="margin: 4px 0 0; color: #C9D4EC; font-size: 17px;">{{m.desc}}</p>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<!-- How we stay accurate -->
+<section style="max-width: 1180px; margin: 0 auto; padding: 80px 32px 64px; display: flex; flex-direction: column; gap: 28px;">
+<h2 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.02em; max-width: 640px;">{{t.trustTitle}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 40px;">
+<sc-for list="{{trust}}" as="tr" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<strong style="font-size: 19px;">{{tr.title}}</strong>
+<span style="color: #4A5260; font-size: 17px;">{{tr.desc}}</span>
+</div>
+</sc-for>
+</div>
+<p style="margin: 8px 0 0; font-size: 17px;">{{t.helpLine}} <a href="#">{{t.helpLink}}</a></p>
+</section>
+
+<!-- Footer -->
+<footer style="border-top: 1px solid #E2E7F0;">
+<div style="max-width: 1180px; margin: 0 auto; padding: 40px 32px 48px; display: flex; flex-wrap: wrap; gap: 24px 64px; font-size: 16px; color: #4A5260;">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px;">
+<span style="font-weight: 800; color: #1E2228; font-size: 19px;">BetterPasig</span>
+<span>{{t.footAbout}}</span>
+<span>{{t.footCost}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<a href="#">pasigcity.gov.ph</a>
+<a href="#">Full Disclosure Portal</a>
+<a href="#">Ugnayan sa Pasig</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<a href="#">{{t.footData}}</a>
+<a href="#">{{t.footFix}}</a>
+<a href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"blue":{"editor":"color","default":"#1A47A8","options":["#1A47A8","#1440A0","#0F3B8C","#2456C7"]},"$preview":{"width":1440,"height":3600}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { query: '', sit: 0, brgy: 'Kapitolyo', big: false, lang: 'fil' };
+}
+renderVals() {
+const s = this.state;
+const blue = this.props.blue ?? '#1A47A8';
+const en = s.lang === 'en';
+const t = en ? {
+notice: 'BetterPasig is run by volunteers and is not the official city website. For official transactions, go to',
+langBtn: 'Filipino', sizeBtn: s.big ? 'Smaller text' : 'Larger text', sizeLabel: 'Change text size',
+navLabel: 'Main menu', nav: ['Services', 'Barangays', 'Government', 'Public funds'],
+emergency: 'Emergency',
+lead: 'I need to', ph: 'pay property tax', tryThese: 'Or choose one:',
+none: 'Nothing matches yet. Call City Hall at 8643-1111 and we will add it here.',
+emTitle: 'In an emergency', emNote: 'Numbers checked on [DATE]. Saved on your phone so they work offline.',
+sitTitle: 'Guides for what is happening in your life', sitBody: 'Pick your situation and see every step in order, including which office handles each one.',
+sitSource: 'Based on the Pasig Citizen’s Charter. Checked on [DATE].',
+brgyTitle: 'Your barangay', brgyBody: 'Choose once. Your choice stays in this browser only; we do not keep it.',
+moneyTitle: 'Where public money goes', moneyBody: 'Pasig livestreams its biddings and publishes its reports. We collect them in one place and explain them in plain words, with a link to every original document.',
+moneySource: 'The city reported ₱414.7M in savings in the first year of stricter bidding (via Rappler, 2020).',
+trustTitle: 'How we keep this accurate',
+helpLine: 'Found a mistake?', helpLink: 'Tell us and we will fix it within 48 hours.',
+footAbout: 'Independent and non-partisan. Part of the BetterGov.ph volunteer network.', footCost: 'Cost to the people of Pasig: ₱0', footData: 'Download the data', footFix: 'Corrections log'
+} : {
+notice: 'Gawa ng mga volunteer ang BetterPasig at hindi ito opisyal na website ng Lungsod. Para sa opisyal na transaksyon, pumunta sa',
+langBtn: 'English', sizeBtn: s.big ? 'Paliitin ang teksto' : 'Palakihin ang teksto', sizeLabel: 'Baguhin ang laki ng teksto',
+navLabel: 'Pangunahing menu', nav: ['Serbisyo', 'Barangay', 'Pamahalaan', 'Pondo ng bayan'],
+emergency: 'Emergency',
+lead: 'Kailangan kong', ph: 'magbayad ng amilyar', tryThese: 'O pumili sa mga ito:',
+none: 'Wala pang tugma. Tumawag sa City Hall, 8643-1111, at idadagdag namin ito rito.',
+emTitle: 'Kapag may emergency', emNote: 'Sinuri ang mga numero noong [DATE]. Naka-save sa phone mo para gumana kahit offline.',
+sitTitle: 'Gabay ayon sa nangyayari sa buhay mo', sitBody: 'Piliin ang sitwasyon mo para makita ang bawat hakbang nang sunod-sunod, pati kung aling opisina ang hahawak dito.',
+sitSource: 'Batay sa Pasig Citizen’s Charter. Sinuri noong [DATE].',
+brgyTitle: 'Ang barangay mo', brgyBody: 'Pumili nang isang beses. Nasa browser mo lang ito; hindi namin ito iniimbak.',
+moneyTitle: 'Saan napupunta ang pondo ng bayan', moneyBody: 'Nila-livestream ng Pasig ang bidding at inilalathala ang mga report nito. Inipon namin ang lahat sa isang lugar at ipinaliwanag sa simpleng salita, may link sa bawat orihinal na dokumento.',
+moneySource: 'Iniulat ng Lungsod na nakatipid ito ng ₱414.7M sa unang taon ng mas mahigpit na bidding (via Rappler, 2020).',
+trustTitle: 'Paano namin pinapanatiling tama ang impormasyon',
+helpLine: 'May nakitang mali?', helpLink: 'Sabihin sa amin at aayusin namin sa loob ng 48 oras.',
+footAbout: 'Independent at walang pinapanigan. Bahagi ng volunteer network ng BetterGov.ph.', footCost: 'Gastos sa mamamayan ng Pasig: ₱0', footData: 'I-download ang data', footFix: 'Talaan ng mga pagwawasto'
+};
+const all = [
+{ title: 'Magbayad ng amilyar (real property tax)', desc: 'Magkano, kailan ang deadline, at paano magbayad online.', where: 'City Treasurer’s Office', k: 'magbayad amilyar real property tax pay' },
+{ title: 'Kumuha ng business permit', desc: 'Para sa bago at renewal. May bahaging puwedeng gawin online.', where: 'BPLO', k: 'kumuha business permit negosyo magbayad get start' },
+{ title: 'Kumuha ng birth certificate', desc: 'Kopya mula sa Civil Registry o sa PSA.', where: 'Civil Registry', k: 'kumuha birth certificate kapanganakan get' },
+{ title: 'Kumuha ng Senior Citizen ID', desc: 'Para sa edad 60 pataas na nakatira sa Pasig.', where: 'OSCA', k: 'kumuha senior id get' },
+{ title: 'Mag-report ng problema sa Lungsod', desc: 'Ituturo ka namin sa tamang opisyal na channel. Hindi kami nag-iimbak ng reklamo.', where: 'Ugnayan sa Pasig', k: 'mag-report reklamo problema report complaint' },
+{ title: 'Humingi ng dokumento sa Lungsod (FOI)', desc: 'Sa ilalim ng Ord. 37 s. 2018, may 10 araw ang Lungsod para tumugon.', where: 'Ugnayan sa Pasig', k: 'humingi dokumento foi malaman request document' },
+{ title: 'Hanapin ang evacuation center', desc: 'Ang pinakamalapit sa barangay mo, at ang flood hazard map.', where: 'CDRRMO', k: 'baha evacuation hanapin flood find' }
+];
+const q = s.query.trim().toLowerCase();
+const results = q ? all.filter((r) => (r.title + ' ' + r.k).toLowerCase().indexOf(q) !== -1) : [];
+const sugg = ['magbayad ng amilyar', 'kumuha ng business permit', 'mag-report ng problema', 'humingi ng dokumento', 'hanapin ang evacuation center'];
+const sitData = [
+{ label: 'May bagong silang na sanggol', title: 'Pagkatapos manganak', steps: [['I-register ang kapanganakan', 'Civil Registry, City Hall'], ['Kumuha ng kopya ng birth certificate', 'Civil Registry o PSA'], ['Ipalista ang sanggol para sa bakuna', 'Health center ng barangay mo'], ['Alamin ang tulong para sa pamilya', 'CSWDO']] },
+{ label: 'Magsisimula ng negosyo', title: 'Pagtatayo ng negosyo sa Pasig', steps: [['Kumuha ng locational clearance', 'CLIMA, online'], ['Kumuha ng barangay business clearance', 'Barangay hall mo'], ['Mag-apply ng business permit', 'BPLO'], ['Magparehistro sa BIR', 'BIR, hindi sa Lungsod']] },
+{ label: 'Bagong lipat sa Pasig', title: 'Bilang bagong residente', steps: [['Alamin ang barangay hall mo', 'Barangay directory'], ['Magparehistro sa PasigPass', 'Online'], ['Ilipat ang voter registration', 'COMELEC Pasig']] },
+{ label: 'Senior citizen', title: 'Para sa edad 60 pataas', steps: [['Kumuha ng Senior Citizen ID', 'OSCA'], ['Alamin ang mga benepisyo', 'OSCA at CSWDO'], ['Magpatingin nang libre', 'Health center at PCGH']] },
+{ label: 'Estudyante', title: 'Para sa mga nag-aaral', steps: [['Mag-apply sa scholarship ng Lungsod', 'Scholarship Office'], ['Mag-apply sa PLP', 'Pamantasan ng Lungsod ng Pasig']] }
+];
+const sitTabs = sitData.map((d, i) => ({
+label: d.label, active: i === s.sit,
+bg: i === s.sit ? '#FFFFFF' : 'transparent',
+ink: i === s.sit ? blue : '#1E2228',
+weight: i === s.sit ? 700 : 500,
+pick: () => this.setState({ sit: i })
+}));
+const cur = sitData[s.sit];
+const barangays = ['Bagong Ilog','Bagong Katipunan','Bambang','Buting','Caniogan','Dela Paz','Kalawaan','Kapasigan','Kapitolyo','Malinao','Manggahan','Maybunga','Oranbo','Palatiw','Pinagbuhatan','Pineda','Rosario','Sagad','San Antonio','San Joaquin','San Jose','San Miguel','San Nicolas','Santa Cruz','Santa Lucia','Santa Rosa','Santo Tomas','Santolan','Sumilang','Ugong'];
+return {
+blue: blue, t: t,
+zoom: s.big ? 1.15 : 1,
+query: s.query,
+hasQuery: q.length > 0,
+showSuggest: q.length === 0,
+noResults: q.length > 0 && results.length === 0,
+resultCount: results.length === 1 ? '1 gabay' : results.length + ' gabay',
+results: results,
+suggest: sugg.map((x) => ({ label: x, pick: () => this.setState({ query: x }) })),
+hotlines: [
+{ label: 'Command Center', num: '8643-0000', tel: '86430000' },
+{ label: 'Bumbero (BFP Pasig)', num: '8641-2815', tel: '86412815' },
+{ label: 'Pulis (Pasig PNP)', num: '[Sinusuri]', tel: '' },
+{ label: 'City Hall', num: '8643-1111', tel: '86431111' }
+],
+sitTabs: sitTabs,
+sit: { title: cur.title, steps: cur.steps.map((p, i) => ({ n: i + 1, title: p[0], where: p[1] })) },
+barangays: barangays, brgy: s.brgy,
+facts: [
+{ k: 'Barangay hall', v: '[Address ng ' + s.brgy + ']' },
+{ k: 'Hotline ng barangay', v: '[Numero]' },
+{ k: 'Health center', v: '[Pangalan at address]' },
+{ k: 'Pinakamalapit na evacuation center', v: '[Pangalan]' },
+{ k: 'Panganib sa baha', v: '[Antas mula sa Project NOAH]' },
+{ k: 'Huling sinuri', v: '[DATE], ni [volunteer]' }
+],
+money: [
+{ title: 'Talaan ng bidding', desc: 'Budget, nanalong bid, natipid, at ang livestream ng bawat bidding.' },
+{ title: 'Ang Bagong Pasig City Hall', desc: 'Mga milestone, kontrata at dokumento mula noong groundbreaking noong Oktubre 2025.' },
+{ title: 'Taunang budget ng Lungsod', desc: 'Kung magkano ang napupunta sa bawat departamento, kumpara sa nakaraang taon.' },
+{ title: 'Mga audit ng COA', desc: 'Ang opinyon at obserbasyon ng COA sa simpleng Filipino, may link sa orihinal.' }
+],
+trust: [
+{ title: 'May pinagmulan ang bawat numero', desc: 'Naka-link ang orihinal na dokumento at ang petsa kung kailan ito kinuha.' },
+{ title: 'May petsa ng pagsusuri', desc: 'Bawat pahina ay may petsa kung kailan huling sinuri at kung sinong volunteer ang sumuri.' },
+{ title: 'Bukas na talaan ng pagwawasto', desc: 'Kapag nagkamali kami, makikita mo kung ano ang mali at paano ito inayos.' },
+{ title: 'Walang pinapanigan', desc: 'Walang endorsement at walang kulay ng partido. Bukas sa lahat ang code.' }
+],
+onQuery: (e) => this.setState({ query: e.target.value }),
+onBrgy: (e) => this.setState({ brgy: e.target.value }),
+toggleLang: () => this.setState({ lang: en ? 'fil' : 'en' }),
+toggleSize: () => this.setState({ big: !s.big })
+};
+}
+}
+</script>
+</body>
+</html>

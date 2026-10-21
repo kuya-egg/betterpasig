@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig Mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0B5563}a:hover{color:#073B45}
+</style>
+</helmet>
+<div style="width: 390px; height: 1760px; overflow: hidden; box-sizing: border-box; font-family: 'Figtree', system-ui, sans-serif; color: #10282C; background: #F6F8F7; display: flex; flex-direction: column;">
+
+<div style="background: #FFF4DE; color: #5A3A00; font-size: 12px; padding: 8px 16px; text-align: center; border-bottom: 1px solid #F1DDB2;">Hindi opisyal na website ng Lungsod ng Pasig.</div>
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #DDE6E5; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;">
+<a href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #10282C;">
+<svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="{{accent}}"></rect><path d="M7 16c4-4 8-4 13 0s9 4 13 0M7 24c4-4 8-4 13 0s9 4 13 0" stroke="#F2B54A" stroke-width="3" fill="none" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.02em;">Better<span style="color: {{accent}};">Pasig</span></span>
+</a>
+<div style="display: flex; gap: 4px;">
+<button style="border: 1px solid #C9D6D4; background: #FFFFFF; color: #10282C; border-radius: 10px; font: 700 13px 'Figtree', sans-serif; min-width: 44px; min-height: 44px;">EN</button>
+<button aria-label="Buksan ang menu" style="border: 0; background: #10282C; border-radius: 10px; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+</button>
+</div>
+</header>
+
+<section style="background: {{accent}}; color: #FFFFFF; padding: 28px 16px 36px; display: flex; flex-direction: column; gap: 14px;">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #F2B54A;">Umaagos ang pag-asa</span>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 34px; line-height: 1.05; letter-spacing: -0.02em;">Mas madaling serbisyo. Mas malinaw na pamahalaan.</h1>
+<form role="search" style="display: flex; gap: 6px; background: #FFFFFF; border-radius: 12px; padding: 5px;">
+<label for="m-search" style="position: absolute; left: -9999px;">Maghanap ng serbisyo</label>
+<input id="m-search" type="search" placeholder="Hal. business permit…" style="flex: 1 1 auto; min-width: 0; border: 0; outline: 0; font: 500 16px 'Figtree', sans-serif; padding: 10px;">
+<button type="submit" style="border: 0; background: #10282C; color: #FFFFFF; border-radius: 9px; padding: 0 14px; font: 700 15px 'Figtree', sans-serif; min-height: 44px;">Hanapin</button>
+</form>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px;">
+<a href="#" style="color: #FFFFFF; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 8px 12px;">Business permit</a>
+<a href="#" style="color: #FFFFFF; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 8px 12px;">Amilyar</a>
+<a href="#" style="color: #FFFFFF; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 8px 12px;">PasigPass</a>
+</div>
+</section>
+
+<!-- Emergency card -->
+<section style="padding: 16px; margin-top: -18px;">
+<div style="background: #0A1F23; color: #FFFFFF; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<strong style="font-size: 16px;">Emergency hotlines</strong>
+<span style="font-size: 11px; color: #9FC3C8;">Gumagana offline</span>
+</div>
+<sc-for list="{{hotlines}}" as="h" hint-placeholder-count="3">
+<a href="tel:{{h.tel}}" style="display: flex; justify-content: space-between; align-items: center; background: #13343A; border-radius: 10px; padding: 12px 14px; color: #FFFFFF; text-decoration: none; min-height: 44px; box-sizing: border-box;">
+<span style="font-size: 14px; color: #B9D2D5;">{{h.label}}</span>
+<strong style="font-size: 16px;">{{h.num}}</strong>
+</a>
+</sc-for>
+<a href="#" style="color: #F2B54A; font-weight: 700; font-size: 14px;">Lahat ng hotline at 30 barangay →</a>
+</div>
+</section>
+
+<!-- Router -->
+<section style="padding: 0 16px 16px;">
+<a href="#" style="background: #FFFFFF; border: 1px solid #DDE6E5; border-radius: 16px; padding: 18px; display: flex; gap: 14px; align-items: center; text-decoration: none; color: #10282C;">
+<span style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 12px; background: #FFF4DE; display: inline-flex; align-items: center; justify-content: center;">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#8A5300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12zM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>
+</span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 17px;">Saan Ako Lalapit?</strong><span style="font-size: 14px; color: #4D6366;">Piliin ang problema, ituturo ang tamang opisina.</span></span>
+</a>
+</section>
+
+<!-- Services -->
+<section style="padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px;">Serbisyo</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+<sc-for list="{{services}}" as="sv" hint-placeholder-count="6">
+<a href="#" style="background: #FFFFFF; border: 1px solid #DDE6E5; border-radius: 14px; padding: 14px; text-decoration: none; color: #10282C; display: flex; flex-direction: column; gap: 8px; min-height: 96px; box-sizing: border-box;">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{sv.icon}}"></path></svg>
+<strong style="font-size: 15px; line-height: 1.25;">{{sv.title}}</strong>
+</a>
+</sc-for>
+</div>
+<a href="#" style="font-weight: 700; font-size: 15px;">Lahat ng serbisyo →</a>
+</section>
+
+<!-- Transparency -->
+<section style="padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px;">Sundan ang pondo</h2>
+<div style="background: #10282C; color: #FFFFFF; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px;">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #F2B54A;">Project Tracker</span>
+<strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px;">Bagong Pasig City Hall</strong>
+<span style="font-size: 14px; color: #B9D2D5;">Groundbreaking Okt 2025 · [% tapos as of DATE]</span>
+<div style="height: 8px; background: #1E3A3F; border-radius: 999px; overflow: hidden;"><div style="width: 30%; height: 8px; background: #F2B54A;"></div></div>
+</div>
+<sc-for list="{{money}}" as="mo" hint-placeholder-count="3">
+<a href="#" style="background: #FFFFFF; border: 1px solid #DDE6E5; border-radius: 14px; padding: 14px 16px; text-decoration: none; color: #10282C; display: flex; justify-content: space-between; align-items: center; min-height: 52px; box-sizing: border-box;">
+<strong style="font-size: 15px;">{{mo}}</strong>
+<span aria-hidden="true" style="color: {{accent}}; font-weight: 700;">→</span>
+</a>
+</sc-for>
+</section>
+
+<!-- FOI -->
+<section style="padding: 8px 16px 24px;">
+<div style="background: #FFF4DE; border: 1px solid #F1DDB2; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px;">
+<strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; color: #2B1B00;">Humingi ng dokumento (FOI)</strong>
+<span style="font-size: 14px; color: #5A3A00; line-height: 1.45;">Ord. 37 s.2018: may 10 araw ang Lungsod para tumugon. Mag-file sa Ugnayan sa Pasig.</span>
+<a href="#" style="color: #2B1B00; font-weight: 700; font-size: 14px;">Basahin ang gabay →</a>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B5563","options":["#0B5563","#0E4C7A","#1F5F3F","#3D2E6B"]},"$preview":{"width":390,"height":1760}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+accent: this.props.accent ?? '#0B5563',
+hotlines: [
+{ label: 'Command Center', num: '8643-0000', tel: '86430000' },
+{ label: 'BFP Pasig', num: '8641-2815', tel: '86412815' },
+{ label: 'City Hall', num: '8643-1111', tel: '86431111' }
+],
+services: [
+{ title: 'Business Permit', icon: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6' },
+{ title: 'Real Property Tax', icon: 'M3 11l9-7 9 7v10H3zM9 21v-6h6v6' },
+{ title: 'Civil Registry', icon: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6' },
+{ title: 'Kalusugan', icon: 'M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z' },
+{ title: 'Senior, PWD, Solo Parent', icon: 'M12 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM5 22v-5a7 7 0 0 1 14 0v5' },
+{ title: 'Scholarship at PLP', icon: 'M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5' }
+],
+money: ['Bids & Awards Log', 'Budget Explorer', 'COA Audit, ipinaliwanag']
+};
+}
+}
+</script>
+</body>
+</html>
