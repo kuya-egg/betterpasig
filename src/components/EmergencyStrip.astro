@@ -1,0 +1,32 @@
+---
+import { emergencyHotlines, telHref } from "../lib/data";
+import { href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const label = (h: (typeof emergencyHotlines)[number]) => (lang === "en" ? h.label_en : h.label_fil);
+const [main, ...rest] = emergencyHotlines;
+---
+
+<section class="border-b border-red/20 bg-red-bg" aria-label={t.emergency}>
+  <div class="wrap flex flex-wrap items-baseline gap-x-6 gap-y-1.5 py-2.5 text-[15px]">
+    <span class="font-semibold text-red">{t.emergency}</span>
+    <span>
+      <span class="text-muted">{label(main)}</span>{" "}
+      <a class="num text-[19px] font-bold whitespace-nowrap text-ink" href={telHref(main.numbers[0])}>
+        {main.numbers[0]}
+      </a>
+    </span>
+    {
+      rest.map((h) => (
+        <span>
+          <span class="text-muted">{label(h)}</span>{" "}
+          <a class="num font-semibold whitespace-nowrap text-ink" href={telHref(h.numbers[0])}>
+            {h.numbers[0]}
+          </a>
+        </span>
+      ))
+    }
+    <a class="text-[14px] font-medium" href={href(lang, "/#hotlines")}>{t.moreNumbers}</a>
+  </div>
+</section>

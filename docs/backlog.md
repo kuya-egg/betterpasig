@@ -50,7 +50,7 @@ Tracking (G5)
 Quality
 - [ ] Every page under 300 KB first load (CI budget check) · S
 - [ ] Accessibility pass: contrast, focus, 48px targets, screen reader labels · M · G3
-- [ ] English toggle (`_en` fields) · M
+- [x] English toggle (`_en` fields) · M
 - [ ] OG images per page (logo + title, no gradients) · S
 
 ## Phase 2 · Launch (Dec 1 – Dec 31)

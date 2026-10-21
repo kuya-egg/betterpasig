@@ -9,7 +9,7 @@ Data retrieved: 2026-10-19.
 | File | What it holds | Shows up on |
 |---|---|---|
 | `site.json` | Notice text, alerts, which hotlines and services to feature, City Hall location | Homepage |
-| `hotlines.json` | Emergency and city phone numbers, plus `conflicts` still to resolve | Emergency strip, Hotlines page |
+| `hotlines.json` | Emergency and city phone numbers (`label_fil` / `label_en` are the short names shown on the site), plus `conflicts` still to resolve | Emergency strip, Hotlines page |
 | `services.json` | 12 `categories`, 31 `offices`, 173 `services` from the Pasig Citizen's Charters | Services pages, search |
 | `programs.json` | Benefits and programs (senior pension, solo parent, scholarships, etc.) | Programs / Tulong page |
 | `barangays.json` | All 30 barangays with district, captain, contact | Barangay pages |

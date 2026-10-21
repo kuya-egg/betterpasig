@@ -35,7 +35,7 @@ bun run build     # static site in dist/
 bun run check     # type-check .astro and .ts files
 ```
 
-Pages live in `src/pages/`, read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
+Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
 
 ### Deploy (Cloudflare Pages)
 
@@ -43,7 +43,7 @@ Connect the repo in Cloudflare Pages with framework preset **Astro**, build comm
 
 Set the environment variable **`BUN_VERSION=1.4.2`** in the Pages project (Settings → Variables and Secrets, for Production and Preview). The build image's default Bun is too old to read `bun.lock`, and Bun can't be pinned from a file. Node is pinned by `.node-version` (Astro needs 22.22+). Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
 
-Until launch, `/` is a "ginagawa pa" placeholder with the emergency hotlines.
+Until launch, `/` is a "ginagawa pa" placeholder with an interactive barangay map and the emergency hotlines.
 
 ### Prototype
 

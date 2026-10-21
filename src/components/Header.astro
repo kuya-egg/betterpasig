@@ -1,15 +1,41 @@
 ---
 import Mark from "../../design/logo/mark-blue.svg";
+import { href, langFromUrl, pathIn, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const other = lang === "en" ? "fil" : "en";
 ---
 
 <header class="sticky top-0 z-10 border-b border-line bg-bg">
   <div class="wrap flex h-16 items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-2 text-ink no-underline" aria-label="BetterPasig, home">
+    <a href={href(lang, "/")} class="flex items-center gap-2 text-ink no-underline" aria-label={t.home}>
       <Mark class="logo h-8 w-auto" aria-hidden="true" />
       <span class="text-[21px] font-bold tracking-[-0.03em]">BetterPasig</span>
     </a>
+    <a
+      href={pathIn(other, Astro.url)}
+      hreflang={ui[other].htmlLang}
+      lang={ui[other].htmlLang}
+      aria-label={t.switchLabel}
+      data-lang-switch={other}
+      class="flex min-h-12 items-center rounded-md px-3 text-[15px] font-medium text-ink hover:bg-subtle"
+    >
+      {t.otherLangName}
+    </a>
   </div>
 </header>
+
+<script>
+  // Remember the visitor's choice (this browser only) so "/" can send them back to English.
+  for (const a of document.querySelectorAll<HTMLAnchorElement>("[data-lang-switch]")) {
+    a.addEventListener("click", () => {
+      try {
+        localStorage.setItem("bp-lang", a.dataset.langSwitch!);
+      } catch {}
+    });
+  }
+</script>
 
 <style>
   .logo :global(path) {

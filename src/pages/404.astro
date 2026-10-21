@@ -1,10 +1,18 @@
 ---
+// One 404 for both languages: Cloudflare Pages serves it for any missing path.
 import Base from "../layouts/Base.astro";
+import { ui } from "../i18n";
+
+const { fil, en } = ui;
 ---
 
-<Base title="Hindi nahanap">
+<Base title={`${fil.notFoundTitle} / ${en.notFoundTitle}`}>
   <section class="wrap py-20">
-    <h1 class="text-[34px] font-bold tracking-[-0.04em]">Hindi nahanap ang pahinang ito.</h1>
-    <p class="mt-4 text-muted"><a href="/">Bumalik sa simula</a></p>
+    <h1 class="text-[34px] font-bold tracking-[-0.04em]">{fil.notFound}</h1>
+    <p class="mt-1 text-[19px] text-muted" lang="en">{en.notFound}</p>
+    <p class="mt-6 flex gap-6">
+      <a href="/">{fil.backHome}</a>
+      <a href="/en/" lang="en">{en.backHome}</a>
+    </p>
   </section>
 </Base>

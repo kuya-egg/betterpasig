@@ -4,6 +4,8 @@
     {
       "id": "pasig-emergency-hotline",
       "name": "Pasig City Emergency Hotline (Command Center / C3, operated by Pasig City DRRMO)",
+      "label_fil": "Pasig Emergency (DRRMO)",
+      "label_en": "Pasig Emergency (DRRMO)",
       "kind": "emergency",
       "numbers": ["(02) 8643-0000"],
       "notes": "The main city emergency line for fire, rescue, medical and flood calls. The DRRMO Citizen's Charter calls it the 'Command Center Hotline'. DRRMO office: C3, Pasig City Hall, Caruncho Ave. DRRMO Research and Planning Division is 8643-0000 local 306. The city cited this number in its August 2026 habagat evacuation advisories.",
@@ -19,6 +21,8 @@
     {
       "id": "pasig-katxt",
       "name": "Pasig KaTXT (text line of the emergency hotline / DRRMO)",
+      "label_fil": "Pasig KaTXT (text)",
+      "label_en": "Pasig KaTXT (text)",
       "kind": "emergency",
       "numbers": ["0908-899-3333"],
       "notes": "Text-only line. The DRRMO Citizen's Charter and the DILG-NCR iDRRM profile both list it as the DRRMO mobile number.",
@@ -32,6 +36,8 @@
     {
       "id": "pasig-emergency-backup-mobile",
       "name": "Pasig City emergency backup mobile line",
+      "label_fil": "Emergency backup (mobile)",
+      "label_en": "Emergency backup (mobile)",
       "kind": "emergency",
       "numbers": ["0962-252-1094"],
       "notes": "Only a commercial (non-official) site lists this number.",
@@ -41,6 +47,8 @@
     {
       "id": "pasig-rescue-legacy",
       "name": "Pasig City rescue line (older listing)",
+      "label_fil": "Rescue (lumang listahan)",
+      "label_en": "Rescue (older listing)",
       "kind": "rescue",
       "numbers": ["(02) 8632-0099"],
       "notes": "Listed as Pasig City's rescue hotline in news hotline roundups from 2020 (Typhoon Ulysses) and July 2024 (Typhoon Carina). Current official city posts use 8643-0000 instead, so this line may be outdated.",
@@ -53,6 +61,8 @@
     {
       "id": "pasig-city-hall-trunkline",
       "name": "Pasig City Hall Trunkline",
+      "label_fil": "City Hall trunkline",
+      "label_en": "City Hall trunkline",
       "kind": "city-hall",
       "numbers": ["(02) 8643-1111"],
       "notes": "Pasig Info (the city PIO) announced on 2024-04-14 that the trunkline was working again after a device migration. City Hall is on Caruncho Ave., Brgy. San Nicolas. Email: info@pasigcity.gov.ph, publicinformation@pasigcity.gov.ph (per an MMDA reply).",
@@ -66,6 +76,8 @@
     {
       "id": "pasig-traffic",
       "name": "Pasig City Traffic Department (Traffic and Parking Management Office)",
+      "label_fil": "Trapiko (TPMO)",
+      "label_en": "Traffic (TPMO)",
       "kind": "traffic",
       "numbers": ["(02) 8641-1907", "(02) 7744-6940", "(02) 8643-1111"],
       "notes": "Taken from an MMDA reply on X (late 2025). That reply also gives pacdpasig2011@gmail.com as a contact email. The official Pasig source could not be fetched.",
@@ -75,6 +87,8 @@
     {
       "id": "pasig-police-station",
       "name": "Pasig City Police Station (PNP, Eastern Police District)",
+      "label_fil": "Pulis (Pasig Police Station)",
+      "label_en": "Police (Pasig Police Station)",
       "kind": "police",
       "numbers": ["(02) 8477-7953", "(02) 8949-9566"],
       "notes": "Address: Pariancillo Park, Pasig City (Kapasigan area). contactnumbersph.com gives the old 7-digit forms 477-7953 and 949-9566, with 8 added as the prefix under the 2019 numbering change. phshirt.com lists 8477-7953 as 'Philippine National Police'. Both are secondary sources, and a 2024 reader comment on contactnumbersph asked whether the numbers were still current. National emergency line: 911.",
@@ -87,6 +101,8 @@
     {
       "id": "bfp-pasig",
       "name": "Bureau of Fire Protection - Pasig City Central Fire Station",
+      "label_fil": "Bumbero (BFP Pasig)",
+      "label_en": "Fire (BFP Pasig)",
       "kind": "fire",
       "numbers": ["0932-779-8621"],
       "notes": "Only a commercial site lists the mobile number. A Yellow Pages listing title puts the station on F. Manalo St., Sto. Tomas, Pasig City 1600. The landline 8641-2815 from earlier research could not be confirmed in any source this run. For fire emergencies, the city's 8643-0000 line also dispatches.",
@@ -100,6 +116,8 @@
     {
       "id": "pasig-city-general-hospital",
       "name": "Pasig City General Hospital (PCGH)",
+      "label_fil": "Pasig City General Hospital",
+      "label_en": "Pasig City General Hospital",
       "kind": "medical",
       "numbers": ["(02) 8643-3333", "(02) 8642-7379", "(02) 8642-7381"],
       "notes": "LGU hospital on M. Eusebio Ave., Maybunga. healthspace.ph lists 8643-3333 and 8642-7379; phshirt.com lists 8642-7379 and 8642-7381. Neither source says which line reaches the ER.",
@@ -112,6 +130,8 @@
     {
       "id": "pasig-city-childrens-hospital",
       "name": "Pasig City Children's Hospital (PCCH) - Child's Hope",
+      "label_fil": "Pasig City Children's Hospital",
+      "label_en": "Pasig City Children's Hospital",
       "kind": "medical",
       "numbers": ["(02) 8643-2222"],
       "notes": "Industria St. cor. Alcalde Jose St., Kapasigan. ClinicFinderPH lists local 601. Inquirer reported limited ER services from June 28, 2024, with the ER moved temporarily to the outpatient department.",
@@ -125,6 +145,8 @@
     {
       "id": "rizal-medical-center",
       "name": "Rizal Medical Center (DOH-retained)",
+      "label_fil": "Rizal Medical Center",
+      "label_en": "Rizal Medical Center",
       "kind": "medical",
       "numbers": ["(02) 8865-8400"],
       "notes": "Pasig Blvd., Bagong Ilog. The number comes from a directory site (general line, open 24 hours). It could not be confirmed on rmc.doh.gov.ph.",
@@ -137,6 +159,8 @@
     {
       "id": "the-medical-city-ortigas-er",
       "name": "The Medical City (Ortigas) Emergency Department",
+      "label_fil": "The Medical City Ortigas (ER)",
+      "label_en": "The Medical City Ortigas (ER)",
       "kind": "medical",
       "numbers": ["(02) 8988-1000", "(02) 8988-7000"],
       "notes": "ER locals 2222 or 2338; triage local 2341; trauma local 2340. From the official TMC site. The page does not say which branch it covers, but the main hospital is on Ortigas Ave., Brgy. Ugong.",
@@ -146,6 +170,8 @@
     {
       "id": "national-emergency-911",
       "name": "National Emergency Hotline",
+      "label_fil": "National Emergency",
+      "label_en": "National Emergency",
       "kind": "emergency",
       "numbers": ["911"],
       "notes": "Nationwide emergency number.",

@@ -1,13 +1,17 @@
 ---
 import { site } from "../lib/data";
+import { formatDate, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
 ---
 
 <footer class="mt-24 border-t border-line">
   <div class="wrap py-10 text-[15px] text-muted">
-    <p class="max-w-[60ch]">{site.notice_fil}</p>
+    <p class="max-w-[60ch]">{lang === "en" ? site.notice_en : site.notice_fil}</p>
     <p class="mt-4">
-      Bahagi ng <a href="https://bettergov.ph">BetterGov.ph</a>. Na-update ang datos:{" "}
-      <span class="num">{site.updated}</span>.
+      {t.partOf} <a href="https://bettergov.ph">BetterGov.ph</a>. {t.dataUpdated}:{" "}
+      <span class="num">{formatDate(lang, site.updated)}</span>.
     </p>
   </div>
 </footer>
