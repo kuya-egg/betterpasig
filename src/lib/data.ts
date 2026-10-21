@@ -2,6 +2,7 @@
 import site from "../../data/site.json";
 import hotlinesFile from "../../data/hotlines.json";
 import servicesFile from "../../data/services.json";
+import barangaysFile from "../../data/barangays.json";
 
 export { site };
 
@@ -9,6 +10,7 @@ export const hotlines = hotlinesFile.hotlines;
 export const categories = servicesFile.categories;
 export const offices = servicesFile.offices;
 export const services = servicesFile.services;
+export const barangays = barangaysFile.barangays;
 
 export type Hotline = (typeof hotlines)[number];
 export type Service = (typeof services)[number];

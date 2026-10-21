@@ -1,23 +1,142 @@
 ---
-// Pasig outline drawn from the 30 PSA barangay boundaries.
+// Interactive Pasig map: the 30 PSA barangay boundaries. Pieces rise in south to north, a soft wave runs
+// until the visitor touches the map, and every barangay they open is remembered (per browser) as "visited".
 import map from "../../design/map/pasig-map.json";
+import { barangays } from "../lib/data";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+const district = new Map(barangays.map((b) => [b.name, b.district]));
+// South first, so the intro and the wave travel up the city like the loader.
+const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
 ---
 
-<svg viewBox="100 0 360 560" class:list={["pasig-map", className]} role="img" aria-label="Mapa ng Pasig at ang 30 barangay nito">
-  {
-    map.barangays.map((b) => (
-      <path d={b.d}>
-        <title>{b.name}</title>
-      </path>
-    ))
+<figure class:list={["pasig-map m-0", className]} data-total={pieces.length}>
+  <svg viewBox="100 0 360 560" aria-label="Mapa ng Pasig at ang 30 barangay nito" role="group">
+    {
+      pieces.map((b, i) => (
+        <path
+          d={b.d}
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          aria-label={`Barangay ${b.name}`}
+          id={`brgy-${i}`}
+          data-name={b.name}
+          data-district={district.get(b.name)}
+          style={`--i:${i}`}
+        />
+      ))
+    }
+    <path class="lift" pointer-events="none" aria-hidden="true" />
+  </svg>
+  <figcaption class="mt-4 min-h-[88px] text-center" aria-live="polite">
+    <p class="name text-[19px] font-semibold tracking-[-0.01em]">Pindutin ang isang barangay</p>
+    <p class="meta text-[14px] text-muted">Kilalanin ang 30 barangay ng Pasig habang hinihintay.</p>
+    <div class="mx-auto mt-3 h-1 w-40 overflow-hidden rounded-full bg-subtle" aria-hidden="true">
+      <div class="bar h-full w-0 bg-blue"></div>
+    </div>
+    <p class="count num mt-1 text-[13px] font-semibold text-muted"></p>
+  </figcaption>
+</figure>
+
+<script>
+  const KEY = "bp-visited";
+
+  for (const fig of document.querySelectorAll<HTMLElement>(".pasig-map")) {
+    const svg = fig.querySelector("svg")!;
+    const paths = [...svg.querySelectorAll<SVGPathElement>("path[data-name]")];
+    const lift = svg.querySelector<SVGPathElement>(".lift")!;
+    const total = paths.length;
+    const nameEl = fig.querySelector(".name")!;
+    const metaEl = fig.querySelector(".meta")!;
+    const countEl = fig.querySelector(".count")!;
+    const bar = fig.querySelector<HTMLElement>(".bar")!;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let visited = new Set<string>();
+    try {
+      visited = new Set(JSON.parse(localStorage.getItem(KEY) ?? "[]"));
+    } catch {}
+
+    const render = () => {
+      for (const p of paths) p.classList.toggle("visited", visited.has(p.dataset.name!));
+      bar.style.width = `${(visited.size / total) * 100}%`;
+      countEl.textContent = visited.size ? `Nabisita: ${visited.size} / ${total}` : "";
+    };
+
+    let waveTimer: number | undefined;
+    const stopWave = () => {
+      clearInterval(waveTimer);
+      fig.classList.remove("waving");
+    };
+
+    const select = (p: SVGPathElement) => {
+      stopWave();
+      for (const q of paths) {
+        q.classList.remove("selected");
+        q.setAttribute("aria-pressed", "false");
+      }
+      p.classList.add("selected");
+      p.setAttribute("aria-pressed", "true");
+      // Draw a raised copy on top so neighbours don't clip it; the paths keep their order for Tab.
+      lift.setAttribute("d", p.getAttribute("d")!);
+      lift.classList.remove("pop");
+      void lift.getBoundingClientRect(); // restart the pop animation
+      lift.classList.add("pop");
+      p.focus({ preventScroll: true });
+
+      const name = p.dataset.name!;
+      visited.add(name);
+      try {
+        localStorage.setItem(KEY, JSON.stringify([...visited]));
+      } catch {}
+      render();
+
+      nameEl.textContent = name;
+      metaEl.textContent =
+        visited.size === total
+          ? "Kumpleto! Nabisita mo ang lahat ng 30 barangay ng Pasig."
+          : p.dataset.district
+            ? `Distrito ${p.dataset.district}`
+            : "";
+    };
+
+    svg.addEventListener("click", (e) => {
+      const p = (e.target as Element).closest("path");
+      if (p) select(p);
+    });
+    svg.addEventListener("keydown", (e) => {
+      const p = (e.target as Element).closest("path");
+      if (p && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        select(p);
+      }
+    });
+    svg.addEventListener("pointerenter", stopWave, { once: true });
+
+    render();
+
+    const start = () => {
+      fig.classList.add("in");
+      setTimeout(() => fig.classList.add("ready"), reduce ? 0 : total * 30 + 420);
+      if (reduce) return;
+      // One wave right after the intro, then every 6s until the visitor touches the map.
+      const wave = () => {
+        fig.classList.remove("waving");
+        void fig.offsetWidth; // restart the CSS animation
+        fig.classList.add("waving");
+      };
+      setTimeout(wave, total * 30 + 400);
+      waveTimer = window.setInterval(wave, 6000);
+    };
+    if ("loaded" in document.documentElement.dataset) start();
+    else document.addEventListener("bp:loaded", start, { once: true });
   }
-</svg>
+</script>
 
 <style>
   path {
@@ -25,9 +144,86 @@ const { class: className } = Astro.props;
     stroke: var(--bg);
     stroke-width: 1.5;
     stroke-linejoin: round;
-    transition: fill var(--fast) var(--ease);
+    cursor: pointer;
+    outline: none;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      fill var(--fast) var(--ease),
+      transform var(--mid) var(--ease);
   }
-  path:hover {
+  .in path {
+    opacity: 1;
+    transform: none;
+    animation: rise 420ms var(--ease) both;
+    animation-delay: calc(var(--i) * 30ms);
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  /* After the intro, drop its fill so hover and selection can change the pieces. */
+  .ready path {
+    animation: none;
+  }
+  .ready.waving path:not(.selected, .lift) {
+    animation: wave 900ms var(--ease);
+    animation-delay: calc(var(--i) * 40ms);
+  }
+  @keyframes wave {
+    40% {
+      fill: var(--hover);
+    }
+  }
+  path.visited {
+    fill: color-mix(in srgb, var(--blue) 35%, var(--pale));
+  }
+  path:hover,
+  path:focus-visible {
     fill: var(--hover);
+  }
+  path.visited:hover,
+  path.visited:focus-visible {
+    fill: color-mix(in srgb, var(--blue) 55%, var(--pale));
+  }
+  path.selected,
+  path.selected:hover,
+  path.selected:focus-visible {
+    fill: var(--blue);
+  }
+  .pasig-map path.lift {
+    fill: var(--blue);
+    stroke: var(--bg);
+    stroke-width: 2;
+    opacity: 1;
+    transform: scale(1.08);
+    animation: none;
+  }
+  .pasig-map path.lift.pop {
+    animation: pop var(--mid) var(--ease);
+  }
+  @keyframes pop {
+    from {
+      transform: none;
+    }
+  }
+  path:focus-visible {
+    stroke: var(--ink);
+    stroke-width: 2.5;
+  }
+  .bar {
+    transition: width var(--mid) var(--ease);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    path,
+    .in path {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 </style>

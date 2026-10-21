@@ -22,8 +22,17 @@ const order = [...map.barangays].sort((a, b) => b.y - a.y);
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let seen = false;
     try { seen = sessionStorage.getItem("bp-loaded") === "1"; } catch (e) {}
-    if (reduce || seen) { L.remove(); return; }
+    // Tell the page the loader is out of the way (PasigMap waits for this to start its intro).
+    const ready = () => {
+      document.documentElement.dataset.loaded = "";
+      document.dispatchEvent(new Event("bp:loaded"));
+    };
+    if (reduce || seen) { L.remove(); ready(); return; }
+    let done = false;
     const finish = () => {
+      if (done) return;
+      done = true;
+      ready();
       L.classList.add("done");
       setTimeout(() => L.remove(), 400);
       try { sessionStorage.setItem("bp-loaded", "1"); } catch (e) {}
