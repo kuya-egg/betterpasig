@@ -1,0 +1,314 @@
+---
+import { categories, services } from "../lib/data";
+import { href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const index = services.map((service) => {
+  const category = categories.find((item) => item.id === service.category);
+  const summary = service.summary_fil ?? "";
+  return {
+    id: service.id,
+    title: lang === "en" ? service.title_en : service.title_fil,
+    category: lang === "en" ? (category?.name_en ?? "") : (category?.name_fil ?? ""),
+    text: `${service.title_fil} ${service.title_en} ${summary} ${category?.name_fil ?? ""} ${category?.name_en ?? ""}`.toLowerCase(),
+  };
+});
+const json = JSON.stringify(index).replace(/</g, "\\u003c");
+---
+
+<div
+  class="bp-search mt-6 max-w-[580px]"
+  data-empty={t.noMatch}
+  data-one={t.matchOne}
+  data-many={t.matchMany}
+  data-keys={t.searchKeys}
+  data-root={href(lang, "/serbisyo/")}
+>
+  <div class="field">
+  <form role="search">
+    <label class="sr-only" for="q">{t.searchLabel}</label>
+    <input
+      id="q"
+      type="search"
+      name="q"
+      autocomplete="off"
+      placeholder={t.searchPlaceholder}
+      aria-controls="search-results"
+      aria-autocomplete="list"
+      aria-expanded="false"
+    />
+    <button type="submit">{t.searchButton}</button>
+  </form>
+  <div id="search-results" class="results" role="listbox"></div>
+  </div>
+  <div class="popular">
+    <span>{t.popularLabel}</span>
+    {t.popular.map((term) => (
+      <button type="button" data-q={term}>{term}</button>
+    ))}
+  </div>
+</div>
+<script type="application/json" id="bp-search" is:inline set:html={json} />
+
+<script>
+  const box = document.querySelector<HTMLElement>(".bp-search");
+  const dataEl = document.getElementById("bp-search");
+  if (box && dataEl?.textContent) {
+    type Row = { id: string; title: string; category: string; text: string };
+    const rows = JSON.parse(dataEl.textContent) as Row[];
+    const form = box.querySelector("form");
+    const input = box.querySelector("input");
+    const results = box.querySelector<HTMLElement>(".results");
+    if (form && input && results) {
+      const empty = box.dataset.empty ?? "";
+      const one = box.dataset.one ?? "";
+      const many = box.dataset.many ?? "{n}";
+      const keys = box.dataset.keys ?? "";
+      const prefix = box.dataset.root ?? "/serbisyo/";
+      let links: HTMLAnchorElement[] = [];
+      let active = -1;
+
+      const countLabel = (n: number) => (n === 1 ? one : many.replace("{n}", String(n)));
+
+      const highlight = (text: string, words: string[]) => {
+        const frag = document.createDocumentFragment();
+        const lower = text.toLowerCase();
+        const usable = words.filter((word) => word.length > 1);
+        let i = 0;
+        while (i < text.length) {
+          let at = -1;
+          let len = 0;
+          for (const word of usable) {
+            const found = lower.indexOf(word, i);
+            if (found !== -1 && (at === -1 || found < at)) {
+              at = found;
+              len = word.length;
+            }
+          }
+          if (at === -1) {
+            frag.append(text.slice(i));
+            break;
+          }
+          if (at > i) frag.append(text.slice(i, at));
+          const mark = document.createElement("mark");
+          mark.textContent = text.slice(at, at + len);
+          frag.append(mark);
+          i = at + len;
+        }
+        return frag;
+      };
+
+      const paint = () => {
+        links.forEach((link, index) => {
+          link.classList.toggle("active", index === active);
+          link.setAttribute("aria-selected", index === active ? "true" : "false");
+        });
+        if (active >= 0) links[active]?.scrollIntoView({ block: "nearest" });
+      };
+
+      const close = () => {
+        results.classList.remove("open");
+        input.setAttribute("aria-expanded", "false");
+      };
+
+      const run = () => {
+        const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        results.replaceChildren();
+        links = [];
+        active = -1;
+        if (words.length === 0) {
+          close();
+          return;
+        }
+        const hits = rows.filter((row) => words.every((word) => row.text.includes(word)));
+        if (hits.length === 0) {
+          const note = document.createElement("p");
+          note.textContent = empty;
+          results.append(note);
+        } else {
+          for (const hit of hits.slice(0, 7)) {
+            const link = document.createElement("a");
+            link.href = prefix + hit.id;
+            link.setAttribute("role", "option");
+            const title = document.createElement("span");
+            title.append(highlight(hit.title, words));
+            const category = document.createElement("small");
+            category.textContent = hit.category;
+            link.append(title, category);
+            results.append(link);
+            links.push(link);
+          }
+          const hint = document.createElement("div");
+          hint.className = "hint";
+          const shown = document.createElement("span");
+          shown.textContent = countLabel(hits.length);
+          const help = document.createElement("span");
+          help.textContent = keys;
+          hint.append(shown, help);
+          results.append(hint);
+        }
+        results.classList.add("open");
+        input.setAttribute("aria-expanded", "true");
+      };
+
+      input.addEventListener("input", run);
+      input.addEventListener("focus", () => {
+        if (input.value.trim()) run();
+      });
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          if (!links.length) return;
+          active = (active + 1) % links.length;
+          paint();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          if (!links.length) return;
+          active = (active - 1 + links.length) % links.length;
+          paint();
+        } else if (event.key === "Escape") {
+          close();
+        } else if (event.key === "Enter" && active >= 0) {
+          event.preventDefault();
+          links[active]?.click();
+        }
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (active >= 0) links[active]?.click();
+        else run();
+      });
+      box.addEventListener("click", (event) => {
+        const button = (event.target as Element).closest<HTMLButtonElement>("[data-q]");
+        if (!button) return;
+        input.value = button.dataset.q ?? "";
+        run();
+        input.focus();
+      });
+      document.addEventListener("click", (event) => {
+        if (!(event.target as Element).closest(".bp-search")) close();
+      });
+    }
+  }
+</script>
+
+<style>
+  form {
+    display: flex;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+    transition: box-shadow var(--mid) var(--ease);
+  }
+  form:focus-within {
+    box-shadow: 0 0 0 4px var(--mark-bg);
+  }
+  input {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 48px;
+    border: 0;
+    outline: 0;
+    font: 500 18px var(--font);
+    padding: 12px 16px;
+    background: transparent;
+    color: var(--ink);
+  }
+  input::placeholder {
+    color: var(--muted);
+  }
+  form button {
+    border: 0;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 22px;
+    min-height: 48px;
+  }
+  .field {
+    position: relative;
+  }
+  .results {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 18px 44px var(--shadow);
+    max-height: 400px;
+    overflow: auto;
+  }
+  .results.open {
+    display: block;
+  }
+  .results :global(a) {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--ink);
+    border-top: 1px solid var(--line);
+  }
+  .results :global(a:first-child) {
+    border-top: 0;
+  }
+  .results :global(a:hover),
+  .results :global(a.active) {
+    background: var(--subtle);
+  }
+  .results :global(small) {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .results :global(mark) {
+    background: var(--mark-bg);
+    color: inherit;
+    border-radius: 3px;
+  }
+  .results :global(p) {
+    margin: 0;
+    padding: 14px 16px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .results :global(.hint) {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    background: var(--subtle);
+  }
+  .popular {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .popular button {
+    background: var(--subtle);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    min-height: 48px;
+    padding: 8px 12px;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .popular button:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+</style>

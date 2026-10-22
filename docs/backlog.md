@@ -13,21 +13,21 @@ Everything we need to build, in launch order. Each item maps to a goal in [roadm
 - [ ] Request a meeting with Ugnayan sa Pasig and the PIO · S
 - [ ] CONTRIBUTING.md, non-partisan pledge, corrections log page · S · G7
 
-## Phase 1 · Build (Nov 2 – Nov 29)
+## Phase 1 · Build (Nov 2 to Nov 29)
 
 Homepage
-- [ ] Port `prototype/index.html` into Astro components: Header, EmergencyStrip, Search, BarangayMap, Notes, FeaturedTable, Categories, Programs, Officials, Funds, Footer · L
+- [x] Port the prototype homepage into Astro components: Header, EmergencyStrip, Search, BarangayMap, FeaturedTable, Categories, Programs, Officials, Funds, Footer. The prototype Notes strip was not copied, because those sentences are not fields in the JSON · L
 - [ ] Loader (fills the 30 barangays once per session, skipped on reduced motion) · S
-- [ ] Copy-to-clipboard for hotlines with toast · S
+- [x] Copy-to-clipboard for hotlines with toast · S
 
 Services (G1)
-- [ ] `/serbisyo/[slug]` page per service: office, fee, processing time, requirements, steps, where, source + checked date · L
-- [ ] `/serbisyo` index grouped by the 12 categories · M
+- [x] `/serbisyo/[id]` page per service: office, fee, processing time, requirements, steps, where, source + checked date · L
+- [x] `/serbisyo` index grouped by the 12 categories · M
 - [ ] Finish the last fields for all 173 services; zero `null` fees without a note · L
 
 Barangays (G2)
 - [ ] `/barangay/[slug]` for all 30: hall address, phones, punong barangay, SK chair, health center, map outline · M
-- [ ] Barangay picker remembers choice (localStorage, per viewer only) · S
+- [x] Barangay picker remembers choice (localStorage, per viewer only) · S
 
 Officials directory
 - [ ] `/opisyal` page from `data/officials-directory.json` (city officials, council, department heads, 30 barangays) · M
@@ -53,7 +53,7 @@ Quality
 - [x] English toggle (`_en` fields) · M
 - [ ] OG images per page (logo + title, no gradients) · S
 
-## Phase 2 · Launch (Dec 1 – Dec 31)
+## Phase 2 · Launch (Dec 1 to Dec 31)
 
 - [ ] Soft launch Dec 1 to volunteers · S
 - [ ] First weekly list Dec 1 · S · G4

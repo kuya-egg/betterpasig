@@ -1,0 +1,47 @@
+---
+import { site } from "../lib/data";
+import { langFromUrl } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const now = new Date();
+const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+type Alert = {
+  text_fil?: string;
+  text_en?: string;
+  expires?: string;
+  source?: string | null;
+};
+
+const alerts = (site.alerts as readonly Alert[]).filter((alert) => {
+  const text = (lang === "en" ? alert.text_en || alert.text_fil : alert.text_fil)?.trim();
+  if (!text || text === "...") return false;
+  if (!alert.source || !/^https?:\/\//.test(alert.source)) return false;
+  if (alert.expires && alert.expires < today) return false;
+  return true;
+});
+---
+
+{
+  alerts.length > 0 && (
+    <div class="border-b border-line bg-subtle">
+      <ul class="wrap grid gap-2 py-3 text-[15px]">
+        {alerts.map((alert) => {
+          const text = lang === "en" ? alert.text_en || alert.text_fil : alert.text_fil;
+          let host = alert.source ?? "";
+          try {
+            host = new URL(alert.source ?? "").hostname.replace(/^www\./, "");
+          } catch {
+            /* source already passed the http check */
+          }
+          return (
+            <li>
+              {text}{" "}
+              <a href={alert.source}>{host}</a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )
+}

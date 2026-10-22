@@ -5,21 +5,40 @@ import { href, langFromUrl, pathIn, ui } from "../i18n";
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const other = lang === "en" ? "fil" : "en";
+const links = [
+  ["/#serbisyo", t.navServices],
+  ["/#benepisyo", t.navBenefits],
+  ["/#mapa", t.navBarangay],
+  ["/#opisyal", t.navOfficials],
+  ["/#pondo", t.navFunds],
+] as const;
 ---
 
-<header class="sticky top-0 z-10 border-b border-line bg-bg">
-  <div class="wrap flex h-16 items-center justify-between gap-4">
+<header id="top" class="sticky top-0 z-30 border-b border-line bg-bg">
+  <div class="wrap flex flex-wrap items-center gap-x-6 gap-y-1 py-2">
     <a href={href(lang, "/")} class="flex items-center gap-2 text-ink no-underline" aria-label={t.home}>
       <Mark class="logo h-8 w-auto" aria-hidden="true" />
       <span class="text-[21px] font-bold tracking-[-0.03em]">BetterPasig</span>
     </a>
+    <nav
+      class="order-last flex w-full gap-x-5 overflow-x-auto md:order-none md:w-auto md:flex-1"
+      aria-label={t.navLabel}
+    >
+      {
+        links.map(([path, label]) => (
+          <a class="link-draw inline-flex min-h-12 items-center text-[16px] font-medium whitespace-nowrap" href={href(lang, path)}>
+            {label}
+          </a>
+        ))
+      }
+    </nav>
     <a
       href={pathIn(other, Astro.url)}
       hreflang={ui[other].htmlLang}
       lang={ui[other].htmlLang}
       aria-label={t.switchLabel}
       data-lang-switch={other}
-      class="flex min-h-12 items-center rounded-md px-3 text-[15px] font-medium text-ink hover:bg-subtle"
+      class="ml-auto flex min-h-12 items-center rounded-md px-3 text-[15px] font-medium text-ink hover:bg-subtle"
     >
       {t.otherLangName}
     </a>
@@ -27,12 +46,21 @@ const other = lang === "en" ? "fil" : "en";
 </header>
 
 <script>
+  const topEl = document.getElementById("top");
+  if (topEl) {
+    const onScroll = () => topEl.classList.toggle("scrolled", scrollY > 8);
+    onScroll();
+    addEventListener("scroll", onScroll, { passive: true });
+  }
+
   // Remember the visitor's choice (this browser only) so "/" can send them back to English.
   for (const a of document.querySelectorAll<HTMLAnchorElement>("[data-lang-switch]")) {
     a.addEventListener("click", () => {
       try {
         localStorage.setItem("bp-lang", a.dataset.langSwitch!);
-      } catch {}
+      } catch {
+        /* this browser is blocking storage */
+      }
     });
   }
 </script>
@@ -40,5 +68,11 @@ const other = lang === "en" ? "fil" : "en";
 <style>
   .logo :global(path) {
     fill: var(--blue);
+  }
+  header.scrolled {
+    box-shadow: 0 6px 20px var(--shadow);
+  }
+  nav {
+    scrollbar-width: none;
   }
 </style>

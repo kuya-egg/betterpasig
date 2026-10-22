@@ -1,236 +1,250 @@
 ---
-// Interactive Pasig map: the 30 PSA barangay boundaries. Pieces rise in south to north, a soft wave runs
-// until the visitor touches the map, and every barangay they open is remembered (per browser) as "visited".
+// Barangay picker. The choice is remembered in localStorage on this browser only.
 import map from "../../design/map/pasig-map.json";
 import { barangays } from "../lib/data";
 import { langFromUrl, ui } from "../i18n";
+import Verify from "./Verify.astro";
 
-interface Props {
-  class?: string;
-}
-
-const { class: className } = Astro.props;
 const t = ui[langFromUrl(Astro.url)];
-const district = new Map(barangays.map((b) => [b.name, b.district]));
-// South first, so the intro and the wave travel up the city like the loader.
-const pieces = [...map.barangays].sort((a, b) => b.y - a.y);
+const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
+const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
+
+function districtLabel(district: number | null): string | null {
+  if (district === 1) return t.district1;
+  if (district === 2) return t.district2;
+  return null;
+}
 ---
 
-<figure
-  class:list={["pasig-map m-0", className]}
-  data-district={t.district}
-  data-visited={t.visited}
-  data-complete={t.complete}
->
-  <svg viewBox="100 0 360 560" aria-label={t.mapLabel} role="group">
+<div id="mapa" class="bp-map scroll-mt-28 grid grid-cols-[120px_minmax(0,1fr)] items-start gap-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-6">
+  <svg viewBox="100 0 360 560" role="group" aria-label={t.mapLabel}>
     {
-      pieces.map((b, i) => (
-        <path
-          d={b.d}
-          tabindex="0"
-          role="button"
-          aria-pressed="false"
-          aria-label={`Barangay ${b.name}`}
-          id={`brgy-${i}`}
-          data-name={b.name}
-          data-district={district.get(b.name)}
-          style={`--i:${i}`}
-        />
+      map.barangays.map((shape) => (
+        <a
+          href="#mapa"
+          data-id={idByName.get(shape.name)}
+          data-name={shape.name}
+          data-x={shape.x}
+          data-y={shape.y}
+          aria-label={shape.name}
+        >
+          <path d={shape.d} />
+        </a>
       ))
     }
-    <path class="lift" pointer-events="none" aria-hidden="true" />
+    <text class="tip" text-anchor="middle"></text>
   </svg>
-  <figcaption class="mt-4 min-h-[88px] text-center" aria-live="polite">
-    <p class="name text-[19px] font-semibold tracking-[-0.01em]">{t.mapPrompt}</p>
-    <p class="meta text-[14px] text-muted">{t.mapHint}</p>
-    <div class="mx-auto mt-3 h-1 w-40 overflow-hidden rounded-full bg-subtle" aria-hidden="true">
-      <div class="bar h-full w-0 bg-blue"></div>
-    </div>
-    <p class="count num mt-1 text-[13px] font-semibold text-muted"></p>
-  </figcaption>
-</figure>
+  <div class="info">
+    <label for="bsel">{t.yourBarangay}</label>
+    <select id="bsel">
+      <option value="" selected disabled>{t.mapPrompt}</option>
+      {choices.map((barangay) => <option value={barangay.id}>{barangay.name}</option>)}
+    </select>
+    {
+      choices.map((barangay) => {
+        const district = districtLabel(barangay.district);
+        return (
+          <dl class="panel" data-panel={barangay.id}>
+            {district && (
+              <div>
+                <dt>{t.district}</dt>
+                <dd>
+                  {district}
+                  {barangay.verify && <Verify />}
+                </dd>
+              </div>
+            )}
+            {barangay.punong_barangay && (
+              <div>
+                <dt>{t.captain}</dt>
+                <dd>
+                  {barangay.punong_barangay}
+                  {barangay.verify && <Verify />}
+                </dd>
+              </div>
+            )}
+            {barangay.contact && (
+              <div>
+                <dt>{t.phone}</dt>
+                <dd>
+                  {barangay.contact}
+                  {barangay.verify && <Verify />}
+                </dd>
+              </div>
+            )}
+            {barangay.hall_address && (
+              <div>
+                <dt>{t.address}</dt>
+                <dd>
+                  {barangay.hall_address}
+                  {barangay.verify && <Verify />}
+                </dd>
+              </div>
+            )}
+          </dl>
+        );
+      })
+    }
+    <p>{t.mapCaption}</p>
+  </div>
+</div>
 
 <script>
-  const KEY = "bp-visited";
+  const root = document.querySelector<HTMLElement>("#mapa");
+  const select = root?.querySelector<HTMLSelectElement>("select");
+  const anchors = root ? [...root.querySelectorAll<SVGAElement>("a[data-id]")] : [];
+  const panels = root ? [...root.querySelectorAll<HTMLElement>("[data-panel]")] : [];
+  const tip = root?.querySelector("text");
+  if (root && select) {
+    const show = (id: string | null) => {
+      for (const anchor of anchors) {
+        const on = Boolean(id) && anchor.dataset.id === id;
+        anchor.classList.toggle("on", on);
+        if (on) anchor.setAttribute("aria-current", "true");
+        else anchor.removeAttribute("aria-current");
+      }
+      for (const panel of panels) panel.classList.toggle("on", panel.dataset.panel === id);
+      if (id) {
+        select.value = id;
+        try {
+          localStorage.setItem("bp-brgy", id);
+        } catch {
+          /* this browser is blocking storage */
+        }
+      }
+    };
 
-  for (const fig of document.querySelectorAll<HTMLElement>(".pasig-map")) {
-    const svg = fig.querySelector("svg")!;
-    const paths = [...svg.querySelectorAll<SVGPathElement>("path[data-name]")];
-    const lift = svg.querySelector<SVGPathElement>(".lift")!;
-    const total = paths.length;
-    const nameEl = fig.querySelector(".name")!;
-    const metaEl = fig.querySelector(".meta")!;
-    const countEl = fig.querySelector(".count")!;
-    const bar = fig.querySelector<HTMLElement>(".bar")!;
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const resolve = (saved: string | null) => {
+      if (!saved) return null;
+      if (panels.some((panel) => panel.dataset.panel === saved)) return saved;
+      return anchors.find((anchor) => anchor.dataset.name === saved)?.dataset.id ?? null;
+    };
 
-    let visited = new Set<string>();
+    let saved: string | null = null;
     try {
-      visited = new Set(JSON.parse(localStorage.getItem(KEY) ?? "[]"));
-    } catch {}
+      saved = localStorage.getItem("bp-brgy");
+    } catch {
+      /* this browser is blocking storage */
+    }
+    const restored = resolve(saved);
+    if (restored) show(restored);
 
-    const render = () => {
-      for (const p of paths) p.classList.toggle("visited", visited.has(p.dataset.name!));
-      bar.style.width = `${(visited.size / total) * 100}%`;
-      countEl.textContent = visited.size ? `${fig.dataset.visited}: ${visited.size} / ${total}` : "";
+    select.addEventListener("change", () => show(select.value || null));
+
+    const placeTip = (anchor: SVGAElement) => {
+      if (!tip) return;
+      tip.textContent = anchor.dataset.name ?? "";
+      tip.setAttribute("x", anchor.dataset.x ?? "0");
+      tip.setAttribute("y", String(Number(anchor.dataset.y ?? "0") + 4));
+      tip.classList.add("show");
     };
 
-    let waveTimer: number | undefined;
-    const stopWave = () => {
-      clearInterval(waveTimer);
-      fig.classList.remove("waving");
-    };
-
-    const select = (p: SVGPathElement) => {
-      stopWave();
-      for (const q of paths) {
-        q.classList.remove("selected");
-        q.setAttribute("aria-pressed", "false");
-      }
-      p.classList.add("selected");
-      p.setAttribute("aria-pressed", "true");
-      // Draw a raised copy on top so neighbours don't clip it; the paths keep their order for Tab.
-      lift.setAttribute("d", p.getAttribute("d")!);
-      lift.classList.remove("pop");
-      void lift.getBoundingClientRect(); // restart the pop animation
-      lift.classList.add("pop");
-      p.focus({ preventScroll: true });
-
-      const name = p.dataset.name!;
-      visited.add(name);
-      try {
-        localStorage.setItem(KEY, JSON.stringify([...visited]));
-      } catch {}
-      render();
-
-      nameEl.textContent = name;
-      metaEl.textContent =
-        visited.size === total
-          ? fig.dataset.complete!
-          : p.dataset.district
-            ? `${fig.dataset.district} ${p.dataset.district}`
-            : "";
-    };
-
-    svg.addEventListener("click", (e) => {
-      const p = (e.target as Element).closest("path");
-      if (p) select(p);
-    });
-    svg.addEventListener("keydown", (e) => {
-      const p = (e.target as Element).closest("path");
-      if (p && (e.key === "Enter" || e.key === " ")) {
-        e.preventDefault();
-        select(p);
-      }
-    });
-    svg.addEventListener("pointerenter", stopWave, { once: true });
-
-    render();
-
-    const start = () => {
-      fig.classList.add("in");
-      setTimeout(() => fig.classList.add("ready"), reduce ? 0 : total * 30 + 420);
-      if (reduce) return;
-      // One wave right after the intro, then every 6s until the visitor touches the map.
-      const wave = () => {
-        fig.classList.remove("waving");
-        void fig.offsetWidth; // restart the CSS animation
-        fig.classList.add("waving");
-      };
-      setTimeout(wave, total * 30 + 400);
-      waveTimer = window.setInterval(wave, 6000);
-    };
-    if ("loaded" in document.documentElement.dataset) start();
-    else document.addEventListener("bp:loaded", start, { once: true });
+    for (const anchor of anchors) {
+      anchor.addEventListener("click", (event) => {
+        event.preventDefault();
+        show(anchor.dataset.id ?? null);
+      });
+      anchor.addEventListener("mouseenter", () => placeTip(anchor));
+      anchor.addEventListener("mouseleave", () => tip?.classList.remove("show"));
+      anchor.addEventListener("focus", () => placeTip(anchor));
+      anchor.addEventListener("blur", () => tip?.classList.remove("show"));
+    }
   }
 </script>
 
 <style>
-  path {
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  a path {
     fill: var(--pale);
     stroke: var(--bg);
     stroke-width: 1.5;
     stroke-linejoin: round;
     cursor: pointer;
-    outline: none;
-    transform-box: fill-box;
-    transform-origin: center;
-    opacity: 0;
-    transform: translateY(14px);
-    transition:
-      fill var(--fast) var(--ease),
-      transform var(--mid) var(--ease);
+    transition: fill var(--mid) var(--ease);
   }
-  .in path {
-    opacity: 1;
-    transform: none;
-    animation: rise 420ms var(--ease) both;
-    animation-delay: calc(var(--i) * 30ms);
-  }
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-  }
-  /* After the intro, drop its fill so hover and selection can change the pieces. */
-  .ready path {
-    animation: none;
-  }
-  .ready.waving path:not(.selected, .lift) {
-    animation: wave 900ms var(--ease);
-    animation-delay: calc(var(--i) * 40ms);
-  }
-  @keyframes wave {
-    40% {
-      fill: var(--hover);
-    }
-  }
-  path.visited {
-    fill: color-mix(in srgb, var(--blue) 35%, var(--pale));
-  }
-  path:hover,
-  path:focus-visible {
+  a:hover path,
+  a:focus-visible path {
     fill: var(--hover);
   }
-  path.visited:hover,
-  path.visited:focus-visible {
-    fill: color-mix(in srgb, var(--blue) 55%, var(--pale));
-  }
-  path.selected,
-  path.selected:hover,
-  path.selected:focus-visible {
+  a.on path {
     fill: var(--blue);
   }
-  .pasig-map path.lift {
-    fill: var(--blue);
-    stroke: var(--bg);
-    stroke-width: 2;
-    opacity: 1;
-    transform: scale(1.08);
-    animation: none;
+  a:focus-visible {
+    outline: none;
   }
-  .pasig-map path.lift.pop {
-    animation: pop var(--mid) var(--ease);
-  }
-  @keyframes pop {
-    from {
-      transform: none;
-    }
-  }
-  path:focus-visible {
+  a:focus-visible path {
     stroke: var(--ink);
     stroke-width: 2.5;
   }
-  .bar {
-    transition: width var(--mid) var(--ease);
+  .tip {
+    pointer-events: none;
+    font: 600 13px var(--font);
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    opacity: 0;
+  }
+  .tip.show {
+    opacity: 1;
+  }
+  .info {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+  }
+  label {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  select {
+    font: 600 18px var(--font);
+    padding: 10px 12px;
+    border: 1px solid var(--muted);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 48px;
+    width: 100%;
+  }
+  .panel {
+    display: none;
+    margin: 4px 0 0;
+  }
+  .panel.on {
+    display: grid;
+  }
+  .panel div {
+    display: grid;
+    gap: 2px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .panel div:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  dt {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  dd {
+    margin: 0;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
   }
   @media (prefers-reduced-motion: reduce) {
-    path,
-    .in path {
-      opacity: 1;
-      transform: none;
-      animation: none;
+    a path {
+      transition: none;
     }
   }
 </style>

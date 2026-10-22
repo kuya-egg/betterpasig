@@ -1,0 +1,145 @@
+---
+import Verify from "./Verify.astro";
+import { featuredServices, officeName } from "../lib/data";
+import { href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+
+function titleOf(service: (typeof featuredServices)[number]): string {
+  return lang === "en" ? service.title_en : service.title_fil;
+}
+---
+
+<section class="border-t border-line py-14">
+  <div class="wrap">
+    <div class="mb-6">
+      <h2 class="text-[30px] font-bold tracking-[-0.03em]">{t.featuredTitle}</h2>
+      <p class="mt-1.5 text-muted">{t.featuredLede}</p>
+    </div>
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr>
+            <th>{t.colService}</th>
+            <th>{t.colOffice}</th>
+            <th>{t.colTime}</th>
+            <th>{t.colFee}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            featuredServices.map((service) => (
+              <tr>
+                <td>
+                  <a class="link-draw font-semibold" href={href(lang, `/serbisyo/${service.id}`)}>
+                    {titleOf(service)}
+                  </a>
+                  {service.verify && <Verify />}
+                  {service.online?.url && <span class="tag">{t.onlineTag}</span>}
+                </td>
+                <td data-label={t.colOffice}>{officeName(service.office)}</td>
+                <td class="num" data-label={service.processing_time ? t.colTime : undefined}>
+                  {service.processing_time}
+                </td>
+                <td class="num" data-label={service.fee != null ? t.colFee : undefined}>
+                  {service.fee}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  const table = document.querySelector(".tablebox tbody");
+  table?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || target.closest("a")) return;
+    const link = target.closest("tr")?.querySelector("a");
+    if (link instanceof HTMLAnchorElement) location.assign(link.href);
+  });
+</script>
+
+<style>
+  .tablebox {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--muted);
+    padding: 0 16px 10px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+  td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th:first-child,
+  td:first-child {
+    padding-left: 8px;
+  }
+  tbody tr {
+    cursor: pointer;
+  }
+  tbody tr:hover td {
+    background: var(--subtle);
+  }
+  .tag {
+    display: inline-block;
+    margin-left: 8px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+    padding: 0 6px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 600;
+    vertical-align: 2px;
+  }
+  @media (max-width: 640px) {
+    thead {
+      display: none;
+    }
+    table {
+      min-width: 0;
+    }
+    tr {
+      display: grid;
+      gap: 2px 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    td {
+      border: 0;
+      padding: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    td:first-child {
+      color: var(--ink);
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+    td[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    tbody tr:hover td {
+      background: none;
+    }
+  }
+</style>

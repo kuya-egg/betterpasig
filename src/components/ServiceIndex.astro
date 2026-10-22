@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import Verify from "./Verify.astro";
+import { categories, officeName, offices, services } from "../lib/data";
+import { href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+---
+
+<Base title={t.allServices} description={t.pageDescription}>
+  <div class="wrap py-12">
+    <h1 class="text-[34px] font-bold tracking-[-0.04em] md:text-[52px]">{t.allServices}</h1>
+    <p class="mt-3 text-muted">{t.serviceCount(services.length, categories.length, offices.length)}</p>
+    {
+      categories.map((category) => {
+        const items = services.filter((service) => service.category === category.id);
+        const name = lang === "en" ? category.name_en : category.name_fil;
+        return (
+          <section class="mt-12">
+            <h2 id={category.id} class="flex scroll-mt-28 items-baseline justify-between gap-4 text-[30px] font-bold tracking-[-0.03em]">
+              <span>{name}</span>
+              <span class="num text-[16px] font-medium text-muted">{items.length}</span>
+            </h2>
+            {category.description_fil && (
+              <p class="mt-2 max-w-[60ch] text-muted" lang={lang === "en" ? "fil" : undefined}>
+                {category.description_fil}
+              </p>
+            )}
+            {items.length === 0 ? (
+              <p class="mt-3 text-muted">{t.emptyCategory}</p>
+            ) : (
+              <ul class="mt-4 border-t border-ink">
+                {items.map((service) => (
+                  <li class="border-b border-line py-3">
+                    <a class="link-draw font-medium" href={href(lang, `/serbisyo/${service.id}`)}>
+                      {lang === "en" ? service.title_en : service.title_fil}
+                    </a>
+                    {service.verify && <Verify />}
+                    <span class="mt-0.5 block text-[14px] text-muted">{officeName(service.office)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        );
+      })
+    }
+  </div>
+</Base>

@@ -1,0 +1,26 @@
+---
+import Verify from "./Verify.astro";
+import { programs } from "../lib/data";
+import { langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+---
+
+<div id="benepisyo" class="scroll-mt-28 min-w-0">
+  <h2 class="text-[30px] font-bold tracking-[-0.03em]">{t.benefitsTitle}</h2>
+  <ul class="mt-4 border-b border-line">
+    {
+      programs.map((program) => (
+        <li class="grid gap-1 border-t border-line py-3.5 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-5">
+          <span class="min-w-0">
+            <span class="font-medium">{lang === "en" ? program.title_en : program.title_fil}</span>
+            {program.verify && <Verify />}
+            {program.for && <span class="mt-0.5 block text-[14px] text-muted">{program.for}</span>}
+          </span>
+          {program.benefit && <span class="num font-semibold sm:max-w-[24ch] sm:text-right">{program.benefit}</span>}
+        </li>
+      ))
+    }
+  </ul>
+</div>

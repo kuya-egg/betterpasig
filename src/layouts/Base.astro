@@ -66,5 +66,32 @@ const enPath = pathIn("en", Astro.url);
       <slot />
     </main>
     <Footer />
+    <div id="toast" class="toast" role="status" aria-live="polite" data-ok={t.copied} data-fail={t.copyFailed}></div>
+    <script>
+      const toast = document.getElementById("toast");
+      let hideTimer = 0;
+      const say = (message: string) => {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add("show");
+        window.clearTimeout(hideTimer);
+        hideTimer = window.setTimeout(() => toast.classList.remove("show"), 2000);
+      };
+      document.addEventListener("click", async (event) => {
+        const target = event.target;
+        if (!(target instanceof Element) || !toast) return;
+        const button = target.closest<HTMLButtonElement>("[data-copy]");
+        if (!button) return;
+        const number = button.dataset.copy ?? "";
+        try {
+          await navigator.clipboard.writeText(number);
+          say(`${toast.dataset.ok} ${number}`);
+          button.classList.add("is-copied");
+          window.setTimeout(() => button.classList.remove("is-copied"), 2000);
+        } catch {
+          say(`${toast.dataset.fail} ${number}`);
+        }
+      });
+    </script>
   </body>
 </html>

@@ -22,7 +22,7 @@ const order = [...map.barangays].sort((a, b) => b.y - a.y);
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let seen = false;
     try { seen = sessionStorage.getItem("bp-loaded") === "1"; } catch (e) {}
-    // Tell the page the loader is out of the way (PasigMap waits for this to start its intro).
+    // The loader is out of the way. Pages can listen for bp:loaded if they need to wait.
     const ready = () => {
       document.documentElement.dataset.loaded = "";
       document.dispatchEvent(new Event("bp:loaded"));
