@@ -1,0 +1,164 @@
+# Project Build Guide
+
+**Project:** BetterPasig
+**Date:** 2026-10-22
+**Version:** 0.1
+**Owner:** BetterPasig maintainers
+**Status:** Draft
+**Last reconciled:** N/A
+**PRD:** [prd-betterpasig.md](prd-betterpasig.md)
+**SDD:** [sdd-betterpasig.md](sdd-betterpasig.md)
+**SAD:** N/A
+
+---
+
+## 1. How to Build From These Docs
+
+Read [state.md](state.md) and [index.md](index.md) first. Then only what the task needs, in this order: [prd-betterpasig.md](prd-betterpasig.md), [sdd-betterpasig.md](sdd-betterpasig.md), [qad-betterpasig.md](qad-betterpasig.md), [clr-betterpasig.md](clr-betterpasig.md), [ops-betterpasig.md](ops-betterpasig.md), this guide. Narrative, still authoritative: [roadmap.md](roadmap.md), [backlog.md](backlog.md), [design-system.md](design-system.md), [research.md](research.md).
+
+These operating docs are Draft. Flag that and do not invent a requirement to fill a gap. When a Locked doc and the code disagree, open a change record. Do not quietly code around it.
+
+| To implement | Read | Verify against |
+|--------------|------|----------------|
+| PRD-F1 to PRD-F4 | PRD §3 and §4, then the SDD trace table | QAD rows tagged with that id |
+| A JSON edit | SDD §3 and `data/README.md` | A source URL is present. Unknowns stay `null` |
+| A page | `docs/design-system.md`, PRD §5 | Disclaimer, Filipino default, no party colors |
+| Public copy | CLR and §5.2 below | No engine vocabulary on the README or the UI |
+
+---
+
+## 2. Subagents
+
+No roster. One implementer works in the main session.
+
+---
+
+## 3. Stack Currency & Deprecations
+
+Verify a convention against the pinned docs before using it. If you cannot verify, say so and ask.
+
+### Pinned stack
+
+Versions below are the ones declared in `package.json` and `.node-version` on 2026-10-22.
+
+| Layer | Technology | Pinned version | Verified (YYYY-MM-DD) | Source |
+|-------|------------|----------------|-----------------------|--------|
+| Runtime | Node.js | 22.22.0 | 2026-10-22 | `.node-version` |
+| Runtime | Bun | 1.4.2 | 2026-10-22 | `package.json` `packageManager` |
+| Language | TypeScript | 6 | 2026-10-22 | `package.json` |
+| Framework | Astro | 7.4.1 | 2026-10-22 | `package.json` |
+| CSS | Tailwind CSS | 4.3.3 | 2026-10-22 | `package.json` |
+| Font | Geist via `@fontsource/geist` | 5.3.0 | 2026-10-22 | `package.json` |
+| Host | Cloudflare Pages | `wrangler.toml` compatibility_date 2026-10-01 | 2026-10-22 | `wrangler.toml` |
+
+### Deprecations register
+
+| Stale / deprecated | Current convention | Since | Source |
+|--------------------|--------------------|-------|--------|
+| A React or Next.js data fetch for this content | Import JSON through `src/lib/data.ts`, then content collections | 2026-10-22 | `docs/research.md` |
+| A database for page content | Edit `data/*.json` in a pull request | 2026-10-22 | SDD §3 |
+| Cookie analytics | Cookieless Cloudflare Web Analytics, or nothing | 2026-10-22 | CLR §1 |
+
+**Verify live every time:** Astro, Tailwind CSS, Cloudflare Pages. The currency check warns when a date in this file is over 90 days old.
+
+---
+
+## 4. Golden-Path Patterns
+
+### Render a sourced service · *verified 2026-10-22 against Astro 7.4.1*
+
+```astro
+---
+import { services } from "../../lib/data.ts";
+
+const service = services.find((item) => item.id === Astro.params.id);
+if (!service || service.sources.length === 0) {
+  throw new Error("A service page needs at least one source");
+}
+---
+```
+
+*Why this shape:* the JSON is the fact. A missing source fails the build instead of shipping a blank citation. Fees that are `null` stay off the page.
+
+---
+
+## 5. Conventions & Guardrails
+
+**Repo layout:** `src/pages` routes, `src/components` UI, `src/lib/data.ts` reads `data/*.json`, `design/tokens` for color and type, `docs/` for the narrative and these operating docs.
+
+**Naming:** Filipino URLs. English under `/en/`. Stable `id` values. Do not rename an id because a title changed.
+
+**Always:** a source on every fact. `null` when a fee or number is unknown. Filipino copy first. Any other free maintainer reviews a pull request that changes a fact. The author does not wait on a named person.
+
+**Never:** commit a secret. Invent a fee, a phone number, or a date. Use party colors or an endorsement. Add an account or a tracking cookie. Make one person the gate for a lane someone else can finish.
+
+**Who does the work.** BetterPasig maintainers own these docs as a group. A person or an agent may take a backlog item and do it from these docs. A steward confirms only their own barangay. The core team talks on Messenger. That chat is not a gate. A decision that changes the site is written in GitHub, so someone outside the chat can still contribute.
+
+**People only, on GitHub too.** The person who commits uses their own git identity. Do not change git config. Do not set an agent, model, or editor as the author or the committer. Commit messages do not carry a Co-authored-by trailer for an agent, model, or editor. If one is injected, remove it before the commit exists. Do not invite an agent as a repository collaborator, and do not add one to a contributors file.
+
+**Restraint ladder:** before adding code, a library, or an abstraction, stop at the first rung that holds: (1) does it need to exist? (2) is it already in the repo? (3) can the language do it? (4) can Astro or the browser do it? (5) is the dependency already installed? (6) is it one line? (7) only then, the minimum that works. Do not cut a source check, an error, accessibility, or a CLR bar to make the diff smaller.
+
+**Definition of Done (one task, before merge):**
+
+- [ ] Meets its PRD id and QAD rows. Local commands: `bun run check` and `python scripts/count_verify.py data`
+- [ ] The approach matches SDD §1. No new database, no new account
+- [ ] No secret in the diff. JSON unknowns are `null`
+- [ ] No product AI path
+- [ ] Public pages keep the disclaimer
+
+**Definition of Done (release):** PRD §9 M5, QAD §6, and CLR §3. OPS rollback points at PRD §9.
+
+## 5.1 Brownfield Change Workflow
+
+The code and these docs now exist. The next feature uses the change loop, not a new document set. Scaffold is `docs/specs/` and `docs/changes/`. Explore the area, then propose, validate, review, apply, verify, and archive. A Locked PRD or SDD change gets a change record in the archive pass.
+
+Run the engine scripts from the clone named on the pointer line. Do not copy engine files into this repo.
+
+## 5.2 Public Surface & Crawler Policy
+
+**Public URL:** https://betterpasig.org (launch). The repo README is already public.
+
+- [x] Pages are Astro HTML, not an empty client-rendered shell
+- [ ] `sitemap.xml`, canonical URLs, and a check for accidental `noindex` are still to be added before launch
+
+**robots.txt** (`public/robots.txt`, not in the repo yet, decision reviewed 2026-10-22):
+
+Until that file exists, crawlers are not blocked. Publish it before launch.
+
+| Bot | Kind | Rule (Allow / Disallow) |
+|-----|------|-------------------------|
+| Googlebot | Search | Allow |
+| OAI-SearchBot | Search | Allow |
+| Claude-SearchBot | Search | Allow |
+| PerplexityBot | Search | Allow |
+| GPTBot | Training (CLR-P4) | Defer until 2026-12-15 |
+| Google-Extended | Training (CLR-P4) | Defer until 2026-12-15 |
+| ClaudeBot | Training (CLR-P4) | Defer until 2026-12-15 |
+| ChatGPT-User, Claude-User | User-initiated fetch | Allow |
+
+**llms.txt:** N/A. This is a resident guide, not an API. **Schema.org and semantic HTML:** one h1, landmarks, link text that says where it goes, and the disclaimer as visible text. No markup for a rating or a review the page does not show.
+
+## 5.3 Engineering Maturity Level
+
+**Current level:** L0 Local validation, since 2026-10-22, because no workflow runs on push. A small team already maintains the repo.
+**Next level and its trigger:** L1 when GitHub Actions runs `bun run check` on every push and a red check can block a merge.
+**Exists today:** local verification yes, `bun run check`. Tests in CI no. Preview per pull request no. Deploy on merge no. Staged rollout or flags no. Rollback documented in PRD §9, not rehearsed. Secrets none in the repo. Backup is git. Restore not drilled.
+
+**Honesty rule:** do not describe a pipeline that is only a plan.
+
+---
+
+## 6. Materialization
+
+This file is the canonical guide. The root `AGENTS.md` is a copy, with the pointer line kept first. `CLAUDE.md` only says to read `AGENTS.md`. Re-copy after this file changes. Do not hand-edit the copy.
+
+---
+
+## Self-Check
+
+- [x] §1 read order matches the docs that exist
+- [x] §3 pins versions with a date and a source in the repo
+- [x] Deprecations name the traps for this stack
+- [x] §4 sample is version-tagged and dated
+- [x] §5.2 filled. Training bots point at CLR-P4. The sitemap box is open on purpose
+- [x] §5.3 level is L0

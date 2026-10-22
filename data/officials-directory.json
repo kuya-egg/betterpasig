@@ -15,7 +15,8 @@
     "All barangay officials come from barangaydirectory.com (aggregator, '2023 - 2026 term'); no official per-barangay list was reachable, so every barangay value is verify:true.",
     "Pasig City Hall operates from a Temporary City Hall at Bridgetowne, E. Amang Rodriguez Ave., Rosario; new city hall expected 2027 (Philstar 2026-08-03).",
     "City trunkline (02) 8643-1111 confirmed in multiple 2025 charters; city hotline (02) 8643-0000.",
-    "Ex-officio councilors conflict: officials.json (Oct 19) listed Marl Oscar de Guzman and Georgia Lynne P. Clemente; Wikipedia (Oct 21) lists Rigor J. Enriquez (Liga) and Keil P. Custillas (SK Federation). Directory shows the latter; both unconfirmed."
+    "Ex-officio councilors conflict: officials.json (Oct 19) listed Marl Oscar de Guzman and Georgia Lynne P. Clemente; Wikipedia (Oct 21) lists Rigor J. Enriquez (Liga) and Keil P. Custillas (SK Federation). Directory shows the latter; both unconfirmed.",
+    "The Public Information Office head is not listed because no source was found."
   ],
   "ex_officio": [
     {
@@ -512,17 +513,6 @@
       ],
       "verify": true,
       "note": "Malaya (Sept 2025) names Dr. Alice Santos as hospital administrator (separate post from Medical Director); charter names no administrator."
-    },
-    {
-      "office": "Public Information Office (PIO)",
-      "head": null,
-      "position": null,
-      "phones": [],
-      "email": null,
-      "location": null,
-      "sources": [],
-      "verify": true,
-      "note": "No source found."
     }
   ],
   "barangays": [
