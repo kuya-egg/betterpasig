@@ -1,0 +1,287 @@
+{
+    "as_of_date":  "2026-10-28",
+    "timezone":  "Asia/Manila",
+    "window_start":  "2026-09-29",
+    "window_end":  "2026-10-28",
+    "note":  "Expected dates require manual confirmation in article text. Retrieval timestamps do not refresh publication dates. Saved HTML is evidence, never executable product content.",
+    "sources":  [
+                    {
+                        "id":  "S01",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/maligayang-ika-52-anibersaryo-mutya-ng-pasig-mega-market-327",
+                        "expected_published":  "2026-10-05",
+                        "observed_published":  "2026-10-05",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:33.6728942+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S01.html",
+                        "text_file":  "snapshots/S01.txt",
+                        "article_file":  "snapshots/S01.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad036112199d1792030225mutya.jpeg"
+                                           ],
+                        "sha256":  "b335aa63c0b894469dbdf2162b1fbb34198e598c1ea87b55450ab8b73e2fdb2d",
+                        "bytes":  27586,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S02",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/bfp-pasig-hinikayat-ang-mga-business-owner-na-gamitin-ang-online-fsis-para-sa-mas-mabilis-na-fire-safety-inspection-transactions-835",
+                        "expected_published":  "2026-10-01",
+                        "observed_published":  "2026-10-01",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:34.2856010+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S02.html",
+                        "text_file":  "snapshots/S02.txt",
+                        "article_file":  "snapshots/S02.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf1b16e580d1791957782reso.jpeg"
+                                           ],
+                        "sha256":  "4a76b7520e5746ebf6a552110df84434c7c1a5166bbf1d668b3fda0e68c21957",
+                        "bytes":  27728,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S03",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/updated-as-of-october-4-2026-4th-quarter-assessment-and-payment-of-business-taxes-and-fees-303",
+                        "expected_published":  "2026-10-04",
+                        "observed_published":  "2026-10-04",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:34.5472964+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S03.html",
+                        "text_file":  "snapshots/S03.txt",
+                        "article_file":  "snapshots/S03.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad027b47561617920265484th.jpeg"
+                                           ],
+                        "sha256":  "44f6c8bb9093dfbfbd476b89116aaf93746d2fac50259c2ed98c739d7b78a456",
+                        "bytes":  30230,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S04",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/heads-up-property-owners-in-pasig-city-591",
+                        "expected_published":  "2026-10-03",
+                        "observed_published":  "2026-10-03",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:34.8535305+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S04.html",
+                        "text_file":  "snapshots/S04.txt",
+                        "article_file":  "snapshots/S04.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02715723c11792026389pay.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad02730e4316_pay-1.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad027311938b_pay-2.jpeg"
+                                           ],
+                        "sha256":  "1318d37abc71af3946b7627c56bd1a2a9a4028f138d4a337ca2d5e9053d572a3",
+                        "bytes":  27171,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S05",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/libreng-sakay-x-pasigpass-367",
+                        "expected_published":  "2026-10-01",
+                        "observed_published":  "2026-10-01",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:35.1626290+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S05.html",
+                        "text_file":  "snapshots/S05.txt",
+                        "article_file":  "snapshots/S05.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf1a58b73a61791957592libreng-sakay.jpg"
+                                           ],
+                        "sha256":  "0d1f586b6c9dafb479d765f787b9533b0de9db80c01f93c8fd3dc91216ecc79e",
+                        "bytes":  27847,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S06",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/pcsdo-pasig-city-blood-collecting-team-magsasagawa-ng-blood-donation-drive-sa-manggahan-208",
+                        "expected_published":  "2026-10-06",
+                        "observed_published":  "2026-10-06",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:35.4462889+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S06.html",
+                        "text_file":  "snapshots/S06.txt",
+                        "article_file":  "snapshots/S06.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03833df67a1792030771b1.jpg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad0382f57a55_b2.jpg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad0382f7ea1a_b3.jpg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad0382fa12a5_b4.jpg"
+                                           ],
+                        "sha256":  "c883577b3a783185d16d333aff0eafa5a8027f47a36dff2ebf2e9eb310d6a815",
+                        "bytes":  27788,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S07",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/in-photos-inagurasyon-ng-bagong-gawang-kanal-at-bangketa-sa-sta-lucia-210",
+                        "expected_published":  "2026-10-01",
+                        "observed_published":  "2026-10-01",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:35.7696205+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S07.html",
+                        "text_file":  "snapshots/S07.txt",
+                        "article_file":  "snapshots/S07.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf16c7cefb61791956679inagurasyon.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b4c70cc_inagurasyon1.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b504332_inagurasyon2.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b539ef9_inagurasyon3.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b57520c_inagurasyon4.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b59c61d_inagurasyon5.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b5cc5e1_inagurasyon6.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b60753e_inagurasyon7.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b6331f7_inagurasyon8.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b65eced_inagurasyon9.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/14//6acf16b689b62_inagurasyon10.jpeg"
+                                           ],
+                        "sha256":  "bd024b515f8e7ac6dda81258d729b0ac9aed84bd304149618781969548aa7adf",
+                        "bytes":  28787,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S08",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/caspay-fridays-845",
+                        "expected_published":  "2026-10-03",
+                        "observed_published":  "2026-10-03",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:36.0741068+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S08.html",
+                        "text_file":  "snapshots/S08.txt",
+                        "article_file":  "snapshots/S08.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad026468df271792026182aspin.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad02642a4159_aspin-2.jpeg"
+                                           ],
+                        "sha256":  "a5d4ce72173b7ce25d0c4c991abaf851a430374d56b5c9148a86e4f93eed2792",
+                        "bytes":  26539,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S09",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/abiso-pasig-city-mega-parking-i-near-mutya-ng-pasig-mega-market-caruncho-ave-brgy-san-nicolas-584",
+                        "expected_published":  "2026-10-06",
+                        "observed_published":  "2026-10-06",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:36.3859821+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S09.html",
+                        "text_file":  "snapshots/S09.txt",
+                        "article_file":  "snapshots/S09.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03fca279f61792032714pc.jpeg"
+                                           ],
+                        "sha256":  "fbfeea516de3bbfcadf7c9438355305af504ce682a3be4cf6ad36d6243076cea",
+                        "bytes":  26445,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S10",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/higit-1000-jobseekers-lumahok-sa-tara-trabaho-g-mega-job-fair-879",
+                        "expected_published":  "2026-10-06",
+                        "observed_published":  "2026-10-06",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:36.6895927+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S10.html",
+                        "text_file":  "snapshots/S10.txt",
+                        "article_file":  "snapshots/S10.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03bbd6d8191792031677j.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bafc91fd_j1.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bafec59d_j2.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb019b15_j3.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb03c27a_j4.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb060586_j5.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb084aff_j6.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb0a63f4_j7.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb0c9dea_j8.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb0efdda_j9.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb120e44_j10.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb142f42_j11.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb165707_j12.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb185eac_j13.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad03bb1a63eb_j14.jpeg"
+                                           ],
+                        "sha256":  "e0c2a70b65b5737140d0e60cbc3a4930953b76a8fdb6606c0ed5289d40eed491",
+                        "bytes":  32369,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S11",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/trabaho-ba-ang-hanap-mo-may-mga-oportunidad-para-sa-iyo-sa-tara-trabaho-g-mega-job-fair-980",
+                        "expected_published":  "2026-09-29",
+                        "observed_published":  "2026-09-29",
+                        "publication_matches":  true,
+                        "retrieved_at":  "2026-10-28T23:41:36.9961961+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S11.html",
+                        "text_file":  "snapshots/S11.txt",
+                        "article_file":  "snapshots/S11.article.txt",
+                        "article_images":  [
+                                               "https://assets.pasigcity.gov.ph/storage/news/2026/10/08/6ac74ce1f3c6617914462410002.jpeg",
+                                               "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/08//6ac74ccbb0c47_0003.jpeg"
+                                           ],
+                        "sha256":  "a66474fd8f4c814d8f55b0d24b9162778084df60e681124d18a09abcf63cce50",
+                        "bytes":  31810,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S12",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases",
+                        "expected_published":  null,
+                        "observed_published":  null,
+                        "publication_matches":  false,
+                        "retrieved_at":  "2026-10-28T23:41:37.2826063+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S12.html",
+                        "text_file":  "snapshots/S12.txt",
+                        "article_file":  null,
+                        "article_images":  [
+
+                                           ],
+                        "sha256":  "89cd6aff5d636954b46dbfb8fc1cf7201b8e8dc9987092dd939e86c27bfd3808",
+                        "bytes":  46869,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    },
+                    {
+                        "id":  "S13",
+                        "url":  "https://pagasa.dost.gov.ph/regional-forecast/ncrprsd",
+                        "expected_published":  null,
+                        "observed_published":  null,
+                        "publication_matches":  false,
+                        "retrieved_at":  "2026-10-28T23:41:37.4941201+08:00",
+                        "http_status":  200,
+                        "html_file":  "snapshots/S13.html",
+                        "text_file":  "snapshots/S13.txt",
+                        "article_file":  null,
+                        "article_images":  [
+
+                                           ],
+                        "sha256":  "a429a236fa914b681c48037fd27189fbf43b93930fd8147ef81eb90b386914bd",
+                        "bytes":  234698,
+                        "error":  null,
+                        "claim_review":  "pending"
+                    }
+                ]
+}
