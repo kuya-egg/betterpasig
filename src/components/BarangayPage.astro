@@ -1,0 +1,108 @@
+---
+import Base from "../layouts/Base.astro";
+import SourceNote from "./SourceNote.astro";
+import { barangays, pasigSources, places, serviceUpdates } from "../lib/data";
+import { formatDate, langFromUrl } from "../i18n";
+import { isSourceFresh } from "../lib/freshness";
+
+interface Props {
+  barangayId: string;
+}
+
+const lang = langFromUrl(Astro.url);
+const barangay = barangays.find((item) => item.id === Astro.props.barangayId);
+if (!barangay) throw new Error(`Unknown barangay ${Astro.props.barangayId}`);
+
+const sourceFreshForPlace = (place: (typeof places)[number]) =>
+  Object.values(place.evidence)
+    .flat()
+    .some((ref) => {
+      const source = pasigSources.find((item) => item.id === ref.split(":")[0]);
+      return isSourceFresh(source?.published_date, new Date());
+    });
+
+const recentPlaces = places.filter(
+  (place) => place.barangay_id === barangay.id && sourceFreshForPlace(place),
+);
+const recentUpdates = serviceUpdates.filter(
+  (item) =>
+    item.place_ids?.some((id) =>
+      places.some((place) => place.id === id && place.barangay_id === barangay.id),
+    ) && isSourceFresh(item.published_date, new Date()),
+);
+---
+
+<Base title={barangay.name}>
+  <article class="wrap max-w-[820px] py-10" data-current-feed>
+    <h1 class="text-[34px] font-bold leading-tight tracking-[-0.04em]">{barangay.name}</h1>
+    {barangay.district && (
+      <p class="mt-2 text-muted">{lang === "en" ? "District" : "Distrito"} {barangay.district} · {lang === "en" ? "Older directory information; being checked." : "Mas lumang datos ng direktoryo; sinusuri pa."} <a href={barangay.sources[1]}>{lang === 'en' ? 'Directory source' : 'Sanggunian ng direktoryo'}</a></p>
+    )}
+
+    <h2 class="mt-8 text-[23px] font-bold">
+      {lang === "en"
+        ? "Recent places with official sources"
+        : "Mga lugar na may opisyal na sanggunian sa nakaraang 30 araw"}
+    </h2>
+
+    {recentPlaces.length ? (
+      <ul class="mt-3 divide-y divide-line border-y border-line">
+        {recentPlaces.map((place) => (
+          <li class="py-4" data-published-date={Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1)}>
+            <a
+              class="font-semibold"
+              href={lang === "en" ? `/en/lugar/${place.id}/` : `/lugar/${place.id}/`}
+            >
+              {place.name}
+            </a>
+            <p class="text-[15px] text-muted">
+              {place.address ??
+                (lang === "en"
+                  ? "Address not stated in the announcement checked."
+                  : "Hindi nakasaad ang address sa nasuring anunsyo.")}
+            </p>
+            <SourceNote refs={Object.values(place.evidence).flat()} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-3">
+        {lang === "en"
+          ? "No information supported by an official announcement from the past 30 days has been added for this barangay yet."
+          : "Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito."}
+      </p>
+    )}
+
+    {recentUpdates.length > 0 && (
+      <section class="mt-8">
+        <h2 class="text-[23px] font-bold">
+          {lang === "en" ? "Recent service notices" : "Mga bagong abiso sa serbisyo"}
+        </h2>
+        <ul class="mt-3 divide-y divide-line border-y border-line">
+          {recentUpdates.map((item) => {
+            const source = pasigSources.find(
+              (row) => row.id === item.evidence[0]?.split(":")[0],
+            );
+            const destination = item.service_id
+              ? lang === "en"
+                ? `/en/serbisyo/${item.service_id}`
+                : `/serbisyo/${item.service_id}`
+              : source?.url;
+            return (
+              <li class="py-4" data-published-date={item.published_date}>
+                <a href={destination}>{lang === "en" ? item.title_en : item.title_fil}</a>
+                <p>{formatDate(lang, item.published_date)}</p>
+                <SourceNote refs={item.evidence} />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+    {recentPlaces.length > 0 && <p data-feed-empty hidden class="mt-3">{lang === 'en' ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
+  </article>
+</Base>
+
+<style>
+  a { display: inline-flex; min-height: 48px; align-items: center; }
+</style>

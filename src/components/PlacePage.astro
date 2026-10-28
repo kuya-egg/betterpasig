@@ -1,0 +1,272 @@
+---
+import Base from "../layouts/Base.astro";
+import SourceNote from "./SourceNote.astro";
+import {
+  historicalUpdates,
+  opportunities,
+  pasigSources,
+  places,
+  serviceUpdates,
+} from "../lib/data";
+import { formatDate, langFromUrl } from "../i18n";
+import { eventState } from "../lib/freshness";
+
+interface Props {
+  placeId: string;
+}
+
+interface ScheduleRow {
+  days: string[];
+  opens: string;
+  closes: string;
+}
+
+const lang = langFromUrl(Astro.url);
+const place = places.find((item) => item.id === Astro.props.placeId);
+if (!place) throw new Error(`Unknown place ${Astro.props.placeId}`);
+
+const sourceIds = [...new Set(Object.values(place.evidence).flat().map((ref) => ref.split(":")[0]))];
+const updates = serviceUpdates.filter(
+  (item) =>
+    item.place_ids?.some(id => id === place.id) ||
+    item.rpt_schedules?.some((row) => row.place_id === place.id),
+);
+const events = opportunities.filter((item) => item.place_id === place.id);
+const currentEvents = events.filter((item) => eventState(item.event_date, new Date()) !== "past");
+const childDesks = places.filter(item => item.parent_id === place.id);
+const rptDesks = serviceUpdates.flatMap(item => item.rpt_schedules ?? []).filter(row => row.place_id === place.id || childDesks.some(child => child.id === row.place_id));
+const history = historicalUpdates.filter(
+  (item) => item.place_id === place.id || item.place_ids?.includes(place.id),
+);
+
+const dayNames: Record<string, string> =
+  lang === "en"
+    ? { MO: "Mon", TU: "Tue", WE: "Wed", TH: "Thu", FR: "Fri", SA: "Sat", SU: "Sun" }
+    : { MO: "Lun", TU: "Mar", WE: "Miy", TH: "Huw", FR: "Biy", SA: "Sab", SU: "Lin" };
+
+const formatSchedule = (rows: ScheduleRow[]) =>
+  rows
+    .map((row) => `${row.days.map((day) => dayNames[day]).join(", ")} ${row.opens}–${row.closes}`)
+    .join("; ");
+
+function historySummary(id: string, english: string): string {
+  if (lang === "en") return english;
+  if (id === "mega-parking-1-2026-10-07") {
+    return "May abiso noon ng pagsasara para sa maintenance sa ikatlong palapag noong Oktubre 7 at muling pagbubukas nang 12:01 PM. Hindi nito ipinapakita ang kasalukuyang bukas o okupadong kapasidad.";
+  }
+  if (id === "pcist-blood-drive-2026-10-08") {
+    return "Nakatakda noon ang blood donation sa kampus noong Oktubre 8. Hindi pinatutunayan ng anunsyo kung natuloy ang aktibidad.";
+  }
+  return "Iniulat ng lungsod ang 1,067 jobseeker at 1,753 kwalipikadong application para sa job fair noong Oktubre 1–2. Magkaibang bilang ang tao at application.";
+}
+---
+
+<Base title={place.name}>
+  <article class="wrap max-w-[820px] py-10">
+    {place.barangay_id && <p>
+      <a
+        class="link-draw"
+        href={lang === "en" ? `/en/barangay/${place.barangay_id}/` : `/barangay/${place.barangay_id}/`}
+      >{lang === "en" ? "Barangay details" : "Impormasyon ng barangay"}</a>
+    </p>}
+
+    <h1 class="mt-3 text-[34px] font-bold leading-tight tracking-[-0.04em]">
+      {place.name}<span class="ml-2 text-[14px] text-amber">{lang === "en" ? "Being checked" : "Sinusuri pa"}</span>
+    </h1>
+
+    <dl class="mt-6 border-t-2 border-ink">
+      {place.barangay_id && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">Barangay</dt>
+          <dd>{place.barangay_id.replaceAll("-", " ")}</dd>
+        </div>
+      )}
+      <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+        <dt class="text-muted">{lang === "en" ? "Address" : "Address"}</dt>
+        <dd>
+          {place.address ??
+            (lang === "en"
+              ? "Not stated in the announcement checked."
+              : "Hindi nakasaad sa nasuring anunsyo.")}
+        </dd>
+      </div>
+      {place.regular_hours && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">{lang === "en" ? "Market hours" : "Oras ng palengke"}</dt>
+          <dd>{formatSchedule([place.regular_hours])}</dd>
+        </div>
+      )}
+      {place.business_tax_schedule && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">
+            {lang === "en" ? "Q4 2026 business tax schedule" : "Oras para sa buwis sa negosyo, ikaapat na quarter ng 2026"}
+          </dt>
+          <dd>
+            {formatSchedule(place.business_tax_schedule)}
+            <span class="text-muted">
+              {lang === "en" ? " Holiday exclusions apply." : " Hindi kasama ang mga holiday."}
+            </span>
+          </dd>
+        </div>
+      )}
+      {place.rpt_schedule && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">
+            {lang === "en" ? "RPT transaction schedule" : "Oras ng transaksyon para sa amilyar"}
+          </dt>
+          <dd>
+            {formatSchedule(place.rpt_schedule)}
+            <span class="text-muted">
+              {lang === "en"
+                ? " For RPT transactions only; holidays excluded."
+                : " Para lamang sa amilyar; hindi kasama ang mga holiday."}
+            </span>
+          </dd>
+        </div>
+      )}
+      {place.project && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">{lang === "en" ? "Reported street project" : "Iniulat na proyekto sa kalsada"}</dt>
+          <dd>
+            {place.project.scope}; {place.project.reported_length_m} m; approximately PHP{" "}
+            {place.project.reported_cost_php.toLocaleString()}.{" "}
+            {lang === "en" ? "According to the city report of" : "Ayon sa ulat ng lungsod noong"}{" "}
+            {formatDate(lang, place.project.reported_inauguration)}. {lang === "en"
+              ? "This is not a flood safety assessment."
+              : "Hindi ito pagtatasa sa kaligtasan laban sa baha."}
+          </dd>
+        </div>
+      )}
+      {place.phone && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt class="text-muted">{lang === "en" ? "Published phone" : "Nakalathalang telepono"}</dt>
+          <dd>
+            <a href={`tel:${place.phone.number}`}>
+              (02) 8643-1111, {lang === "en" ? "local" : "lokal"} {place.phone.extension}
+            </a>
+            <small class="block text-muted">
+              {lang === "en"
+                ? "Published number; not checked by phone."
+                : "Nakalathalang numero; hindi pa nasusubukang tawagan."}
+            </small>
+          </dd>
+        </div>
+      )}
+      {place.email && (
+        <div class="grid gap-1 border-b border-line py-3 sm:grid-cols-[12rem_1fr]">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${place.email}`}>{place.email}</a></dd>
+        </div>
+      )}
+    </dl>
+
+    <SourceNote refs={sourceIds} />
+
+    {(childDesks.length > 0 || rptDesks.length > 0) && <section class="mt-8">
+      <h2 class="text-[24px] font-bold">{lang === 'en' ? 'Service desks and separate schedules' : 'Mga desk at hiwalay na oras ng serbisyo'}</h2>
+      <ul class="mt-3 divide-y divide-line border-y border-line">
+        {childDesks.map(child => <li class="py-3"><a href={lang === 'en' ? `/en/lugar/${child.id}/` : `/lugar/${child.id}/`}>{child.name}</a>{child.business_tax_schedule && <p>{lang === 'en' ? 'Q4 2026 business tax only' : 'Para lamang sa business tax, ikaapat na quarter ng 2026'}: {formatSchedule(child.business_tax_schedule)}</p>}<SourceNote refs={child.evidence.business_tax_schedule ?? Object.values(child.evidence).flat()} /></li>)}
+        {rptDesks.map(row => <li class="py-3"><p>{lang === 'en' ? 'Real property tax desk' : 'Desk para sa amilyar'} · {row.floor} · {formatSchedule([row])}; {lang === 'en' ? 'holidays excluded' : 'hindi kasama ang mga holiday'}.</p><SourceNote refs={['S04:image:3']} /></li>)}
+      </ul>
+    </section>}
+
+    {updates.length > 0 && (
+      <section class="mt-9">
+        <h2 class="text-[24px] font-bold">
+          {lang === "en" ? "Related service notices" : "Mga kaugnay na abiso sa serbisyo"}
+        </h2>
+        <ul class="mt-3 divide-y divide-line border-y border-line">
+          {updates.map((item) => {
+            const source = pasigSources.find((row) => row.id === item.evidence[0]?.split(":")[0]);
+            return (
+              <li class="py-4">
+                <a
+                  class="font-semibold"
+                  href={item.service_id
+                    ? lang === "en"
+                      ? `/en/serbisyo/${item.service_id}`
+                      : `/serbisyo/${item.service_id}`
+                    : source?.url}
+                >
+                  {lang === "en" ? item.title_en : item.title_fil}
+                </a>
+                <p class="text-[14px] text-muted">{formatDate(lang, item.published_date)}</p>
+                {"phone" in item && (
+                  <p class="mt-2">
+                    {lang === "en" ? "Business transaction assistance phone" : "Telepono para sa tulong sa transaksyon ng negosyo"}: {" "}
+                    <a href={`tel:${item.phone}`}>{item.phone}</a> ·{" "}
+                    {lang === "en" ? "Not an emergency hotline." : "Hindi ito emergency hotline."}
+                  </p>
+                )}
+                {"phone_hours" in item && item.phone_hours && (
+                  <p>
+                    {item.phone_hours.days.join(", ")} {item.phone_hours.opens}–{item.phone_hours.closes};{" "}
+                    {lang === "en" ? "holidays excluded" : "hindi kasama ang mga holiday"}.
+                  </p>
+                )}
+                {"online_url" in item && item.online_url && (
+                  <p>
+                    <a href={item.online_url}>
+                      {lang === "en" ? "Official service portal" : "Opisyal na portal ng serbisyo"}
+                    </a>
+                  </p>
+                )}
+                {"reported_route_count" in item && (
+                  <p class="mt-2">
+                    {lang === "en"
+                      ? `The notice reports ${item.reported_route_count} routes. QR is optional; manual registration is available. Stops and route geometry were not stated in the notice checked.`
+                      : `Anim na ruta ang iniulat. Opsyonal ang QR at may manual na rehistrasyon. Hindi nakasaad sa nasuring anunsyo ang mga hintuan o guhit ng ruta.`}
+                  </p>
+                )}
+                <SourceNote refs={item.evidence} />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+
+    {currentEvents.length > 0 && (
+      <section class="mt-9">
+        <h2 class="text-[24px] font-bold">
+          {lang === "en" ? "Dated opportunity" : "May takdang oportunidad"}
+        </h2>
+        {currentEvents.map((event) => (
+          <div data-event-date={event.event_date}>
+            <p class="mt-3 font-semibold">{lang === "en" ? event.title_en : event.title_fil}</p>
+            <p>
+              {lang === "en" ? "Scheduled" : "Nakatakda"}: {formatDate(lang, event.event_date)}
+            </p>
+            <p class="text-muted">
+              {lang === "en"
+                ? "Confirm with the organizer whether registration is still being accepted."
+                : "Kumpirmahin sa tagapag-ayos kung tumatanggap pa ng pagpaparehistro."}
+            </p>
+            <a data-registration href={event.registration_url}>
+              {lang === "en" ? "Open registration page" : "Buksan ang pahina ng pagpaparehistro"}
+            </a>
+            <SourceNote refs={event.evidence} />
+          </div>
+        ))}
+      </section>
+    )}
+
+    {history.length > 0 && (
+      <section class="mt-9">
+        <h2 class="text-[24px] font-bold">{lang === "en" ? "Past notices" : "Mga nagdaang abiso"}</h2>
+        {history.map((item) => (
+          <div class="border-t border-line py-3">
+            <p>{historySummary(item.id, item.summary)}</p>
+            <SourceNote refs={item.evidence} />
+          </div>
+        ))}
+      </section>
+    )}
+  </article>
+</Base>
+
+
+
+<style>
+  a { display: inline-flex; min-height: 48px; align-items: center; }
+</style>
