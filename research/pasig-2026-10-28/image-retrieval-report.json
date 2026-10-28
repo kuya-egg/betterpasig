@@ -1,0 +1,50 @@
+﻿[
+    {
+        "source_id":  "S03",
+        "url":  "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad027b47561617920265484th.jpeg",
+        "file":  "images/S03-1.jpeg",
+        "sha256":  "03e79bb966d286fc788315e36f3b8336a117561cc4f668442dcadaac449af3aa",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    },
+    {
+        "source_id":  "S04",
+        "url":  "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02715723c11792026389pay.jpeg",
+        "file":  "images/S04-1.jpeg",
+        "sha256":  "207a4ec9b4926d192aa797ca00276a0fa3e709ccc6a203e139f1d5ef1fcfa32b",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    },
+    {
+        "source_id":  "S04",
+        "url":  "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad02730e4316_pay-1.jpeg",
+        "file":  "images/S04-2.jpeg",
+        "sha256":  "17de0d5011fd34fb3a499abdc5343e32573f584e828143e25dcfe27d3e75a461",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    },
+    {
+        "source_id":  "S04",
+        "url":  "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad027311938b_pay-2.jpeg",
+        "file":  "images/S04-3.jpeg",
+        "sha256":  "98261f65cbf95f38f2085907bd364bcb2b060b0f8c5b80e5d75ef633be940110",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    },
+    {
+        "source_id":  "S08",
+        "url":  "https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad026468df271792026182aspin.jpeg",
+        "file":  "images/S08-1.jpeg",
+        "sha256":  "6a422cddfd17ee811b3c8034db8a99dbfc413f9d592e85faad0bc54dd7fc67a3",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    },
+    {
+        "source_id":  "S08",
+        "url":  "https://admin2022.pasigcity.gov.ph/storage/news/2026/10/15//6ad02642a4159_aspin-2.jpeg",
+        "file":  "images/S08-2.jpeg",
+        "sha256":  "8ca183b2360951e59800cd375021a28021ce8996020f41d625327d10ea5d631c",
+        "status":  "downloaded",
+        "visual_review":  "pending"
+    }
+]
