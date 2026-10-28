@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { recentSchemas } from "./validate-recent";
 
 // A fact needs a real http(s) URL. null and verify: true stay valid.
 // Grouping labels (service categories, directory barangay wrappers) are not facts.
@@ -107,6 +108,7 @@ export const dataSchemas = {
     links: z.array(fact),
     figures: z.array(fact),
   }),
+  ...recentSchemas,
 } satisfies Record<string, z.ZodType>;
 
 export function assertDataFile(file: string, data: unknown): void {
