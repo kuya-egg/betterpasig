@@ -1,0 +1,38 @@
+{
+  "as_of_date":"2026-10-28",
+  "review_method":"Direct official HTML retrieval, isolated article inspection, manual comparison of factual values, and visual inspection of selected official attachment images",
+  "independent_maintainer_review":"pending",
+  "phone_verification":"not_performed",
+  "onsite_verification":"not_performed",
+  "transaction_testing":"not_performed",
+  "live_form_or_capacity_testing":"not_performed",
+  "articles":[
+    {"source_id":"S01","document_checked":true,"supported_scope":"market identity and regular hours; separate ended anniversary promotion"},
+    {"source_id":"S02","document_checked":true,"supported_scope":"four BFP assistance locations, source-linked portal, published assistance number and phone schedule"},
+    {"source_id":"S03","document_checked":true,"supported_scope":"publication date, online cutoff, conditional onsite deadline; image supplies desk details"},
+    {"source_id":"S04","document_checked":true,"supported_scope":"source-linked RPT payment URL, dated offer and delinquency condition; images supply payment precision and desk schedules"},
+    {"source_id":"S05","document_checked":true,"supported_scope":"optional QR, manual registration alternative, reported route count; no route geometry"},
+    {"source_id":"S06","document_checked":true,"supported_scope":"campus location and past scheduled blood donation; not proof of occurrence"},
+    {"source_id":"S07","document_checked":true,"supported_scope":"city-attributed street project location, reported date, approximate cost and length; not a safety assessment"},
+    {"source_id":"S08","document_checked":true,"supported_scope":"announced dates, registration referral and restrictions; unknown current capacity"},
+    {"source_id":"S09","document_checked":true,"supported_scope":"parking location and past announced maintenance interval; no current open status"},
+    {"source_id":"S10","document_checked":true,"supported_scope":"city-reported past job fair, 1067 jobseekers distinct from 1753 applications"},
+    {"source_id":"S11","document_checked":true,"supported_scope":"past event venues, addresses and schedules"}
+  ],
+  "images":[
+    {"file":"images/S03-1.jpeg","visually_checked":true,"supported_scope":"four BPLD locations, barangays, schedules, trunk extensions, office emails and cutoff"},
+    {"file":"images/S04-1.jpeg","visually_checked":false,"supported_scope":null},
+    {"file":"images/S04-2.jpeg","visually_checked":true,"supported_scope":"exclusive-before ordinary/bulk advance dates, bulk means more than 20 accounts; other table rows not promoted in this slice"},
+    {"file":"images/S04-3.jpeg","visually_checked":true,"supported_scope":"distinct RPT transaction desks and hours; excludes holidays"},
+    {"file":"images/S08-1.jpeg","visually_checked":true,"supported_scope":"male aspin/puspin October dates and organizer-linked form, not live availability"},
+    {"file":"images/S08-2.jpeg","visually_checked":true,"supported_scope":"age, health, vaccination, residency/ID, cage, bathing, companion limit and SMS qualification"}
+  ],
+  "limitations":[
+    "Source dates are those printed in the article; image-directory dates do not establish a substantive update.",
+    "No exhaustive current feed or 30-barangay place coverage is established.",
+    "The October 28 online business-tax cutoff has passed at capture.",
+    "The conditional November 3 onsite deadline needs the applicable holiday declaration.",
+    "The research batch ages out of the rolling window and needs fresh sources before a December release.",
+    "Every prepared verify flag remains true pending independent maintainer review."
+  ]
+}
