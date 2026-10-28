@@ -1,0 +1,810 @@
+{
+  "edition_date": "2026-10-28",
+  "opportunities": [
+    {
+      "id": "caspay-2026-10-30",
+      "service_id": "spay-neuter",
+      "title_fil": "CaSpay: libreng kapon sa Oktubre 30",
+      "title_en": "CaSpay: free neutering on October 30",
+      "published_date": "2026-10-03",
+      "event_date": "2026-10-30",
+      "starts_at": null,
+      "ends_at": null,
+      "place_id": null,
+      "registration_url": "https://forms.gle/k4mANN873wciV3zx5",
+      "registration_open_now": null,
+      "slots_available_now": null,
+      "fee_php": 0,
+      "eligibility": {
+        "owner_resident_of_pasig": true,
+        "pet_sex": "male",
+        "pet_types": [
+          "aspin",
+          "puspin"
+        ],
+        "min_age_months": 8,
+        "max_age_years": 5,
+        "healthy": true,
+        "vaccination_current": true
+      },
+      "requirements_fil": [
+        "Dalhin ang valid ID.",
+        "Ihanda ang cage ng alaga.",
+        "Paliguan ang alaga bago ang nakatakdang araw.",
+        "Isang kasama lamang bawat alaga.",
+        "Isang alaga bawat sambahayan bawat araw.",
+        "Hintayin ang text mula sa VSD para sa mga kwalipikadong nagparehistro."
+      ],
+      "requirements_en": [
+        "Bring a valid ID.",
+        "Provide a cage for the pet.",
+        "Bathe the pet before the scheduled day.",
+        "Only one companion per pet.",
+        "One pet per household per day.",
+        "Wait for the VSD text for qualified registrants."
+      ],
+      "action_status": "check_with_organizer",
+      "evidence": [
+        "S08:article",
+        "S08:image:1",
+        "S08:image:2"
+      ],
+      "verify": true,
+      "kind": "opportunity",
+      "place_ids": [],
+      "application_deadline_at": null,
+      "sources": [
+        "S08"
+      ],
+      "summary_en": "CaSpay: free neutering on October 30",
+      "summary_fil": "CaSpay: libreng kapon sa Oktubre 30",
+      "facts": [
+        {
+          "id": "service_id",
+          "value": "spay-neuter",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field service_id",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field service_id",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field service_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "title_fil",
+          "value": "CaSpay: libreng kapon sa Oktubre 30",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field title_fil",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field title_fil",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field title_fil",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "title_en",
+          "value": "CaSpay: free neutering on October 30",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field title_en",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field title_en",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field title_en",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "published_date",
+          "value": "2026-10-03",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field published_date",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field published_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "event_date",
+          "value": "2026-10-30",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field event_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field event_date",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field event_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "registration_url",
+          "value": "https://forms.gle/k4mANN873wciV3zx5",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field registration_url",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field registration_url",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field registration_url",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "fee_php",
+          "value": 0,
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field fee_php",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field fee_php",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field fee_php",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "eligibility",
+          "value": {
+            "owner_resident_of_pasig": true,
+            "pet_sex": "male",
+            "pet_types": [
+              "aspin",
+              "puspin"
+            ],
+            "min_age_months": 8,
+            "max_age_years": 5,
+            "healthy": true,
+            "vaccination_current": true
+          },
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field eligibility",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field eligibility",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field eligibility",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "requirements_fil",
+          "value": [
+            "Dalhin ang valid ID.",
+            "Ihanda ang cage ng alaga.",
+            "Paliguan ang alaga bago ang nakatakdang araw.",
+            "Isang kasama lamang bawat alaga.",
+            "Isang alaga bawat sambahayan bawat araw.",
+            "Hintayin ang text mula sa VSD para sa mga kwalipikadong nagparehistro."
+          ],
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field requirements_fil",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field requirements_fil",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field requirements_fil",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "requirements_en",
+          "value": [
+            "Bring a valid ID.",
+            "Provide a cage for the pet.",
+            "Bathe the pet before the scheduled day.",
+            "Only one companion per pet.",
+            "One pet per household per day.",
+            "Wait for the VSD text for qualified registrants."
+          ],
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field requirements_en",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field requirements_en",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field requirements_en",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "action_status",
+          "value": "check_with_organizer",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field action_status",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field action_status",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field action_status",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "place_ids",
+          "value": [],
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field place_ids",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field place_ids",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field place_ids",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary_en",
+          "value": "CaSpay: free neutering on October 30",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field summary_en",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field summary_en",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field summary_en",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary_fil",
+          "value": "CaSpay: libreng kapon sa Oktubre 30",
+          "evidence": [
+            {
+              "source_id": "S08",
+              "locator": "article text; field summary_fil",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 1; field summary_fil",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S08",
+              "locator": "image 2; field summary_fil",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ],
+      "eligibility_fil": [
+        "May-ari na residente ng Pasig",
+        "Lalaking aspin o puspin, 8 buwan hanggang 5 taon",
+        "Malusog at may kasalukuyang bakuna"
+      ],
+      "eligibility_en": [
+        "Owner is a Pasig resident",
+        "Male aspin or puspin, 8 months through 5 years",
+        "Healthy with current vaccination"
+      ]
+    }
+  ],
+  "historical_updates": [
+    {
+      "id": "mega-parking-1-2026-10-07",
+      "place_id": "mega-parking-1",
+      "published_date": "2026-10-06",
+      "starts_at": "2026-10-07T08:00:00+08:00",
+      "ends_at": "2026-10-07T12:01:00+08:00",
+      "status": "past_announced_reopening",
+      "summary": "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+      "evidence": [
+        "S09:article"
+      ],
+      "verify": true,
+      "kind": "closure",
+      "place_ids": [
+        "mega-parking-1"
+      ],
+      "application_deadline_at": null,
+      "sources": [
+        "S09"
+      ],
+      "summary_en": "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+      "summary_fil": "Inanunsyo ang pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Hindi ito kasalukuyang ulat ng kapasidad.",
+      "facts": [
+        {
+          "id": "place_id",
+          "value": "mega-parking-1",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field place_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "published_date",
+          "value": "2026-10-06",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "starts_at",
+          "value": "2026-10-07T08:00:00+08:00",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field starts_at",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "ends_at",
+          "value": "2026-10-07T12:01:00+08:00",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field ends_at",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "status",
+          "value": "past_announced_reopening",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field status",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary",
+          "value": "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field summary",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "place_ids",
+          "value": [
+            "mega-parking-1"
+          ],
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field place_ids",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary_en",
+          "value": "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field summary_en",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ],
+      "title_fil": "Maintenance sa Mega Parking I",
+      "title_en": "Mega Parking I maintenance"
+    },
+    {
+      "id": "pcist-blood-drive-2026-10-08",
+      "place_id": "pcist-manggahan",
+      "published_date": "2026-10-06",
+      "starts_at": "2026-10-08T08:00:00+08:00",
+      "ends_at": "2026-10-08T13:00:00+08:00",
+      "status": "past_scheduled_event",
+      "summary": "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+      "evidence": [
+        "S06:article"
+      ],
+      "verify": true,
+      "kind": "event_notice",
+      "place_ids": [
+        "pcist-manggahan"
+      ],
+      "application_deadline_at": null,
+      "sources": [
+        "S06"
+      ],
+      "summary_en": "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+      "summary_fil": "Inanunsyo ang aktibidad noong Oktubre 8, 08:00–13:00. Hindi patunay ang anunsyo na natuloy ito.",
+      "facts": [
+        {
+          "id": "place_id",
+          "value": "pcist-manggahan",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field place_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "published_date",
+          "value": "2026-10-06",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "starts_at",
+          "value": "2026-10-08T08:00:00+08:00",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field starts_at",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "ends_at",
+          "value": "2026-10-08T13:00:00+08:00",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field ends_at",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "status",
+          "value": "past_scheduled_event",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field status",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary",
+          "value": "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field summary",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "place_ids",
+          "value": [
+            "pcist-manggahan"
+          ],
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field place_ids",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary_en",
+          "value": "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field summary_en",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ],
+      "title_fil": "Anunsyo ng blood donation sa PCIST",
+      "title_en": "PCIST blood donation announcement"
+    },
+    {
+      "id": "job-fair-2026-10-01-02",
+      "place_ids": [
+        "sm-city-east-ortigas",
+        "robinsons-metro-east"
+      ],
+      "published_date": "2026-10-06",
+      "status": "past_city_reported_event",
+      "summary": "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+      "evidence": [
+        "S10:article",
+        "S11:article"
+      ],
+      "verify": true,
+      "kind": "outcome",
+      "application_deadline_at": null,
+      "sources": [
+        "S10",
+        "S11"
+      ],
+      "summary_en": "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+      "summary_fil": "Iniulat ang 1,067 jobseeker at 1,753 kwalipikadong application. Magkaibang sukatan ang tao at application.",
+      "facts": [
+        {
+          "id": "place_ids",
+          "value": [
+            "sm-city-east-ortigas",
+            "robinsons-metro-east"
+          ],
+          "evidence": [
+            {
+              "source_id": "S10",
+              "locator": "article text; field place_ids",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S11",
+              "locator": "article text; field place_ids",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "published_date",
+          "value": "2026-10-06",
+          "evidence": [
+            {
+              "source_id": "S10",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S11",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "status",
+          "value": "past_city_reported_event",
+          "evidence": [
+            {
+              "source_id": "S10",
+              "locator": "article text; field status",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S11",
+              "locator": "article text; field status",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary",
+          "value": "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+          "evidence": [
+            {
+              "source_id": "S10",
+              "locator": "article text; field summary",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S11",
+              "locator": "article text; field summary",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "summary_en",
+          "value": "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+          "evidence": [
+            {
+              "source_id": "S10",
+              "locator": "article text; field summary_en",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S11",
+              "locator": "article text; field summary_en",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ],
+      "title_fil": "Ulat sa job fair noong Oktubre 1–2",
+      "title_en": "October 1–2 job fair report"
+    }
+  ]
+}
