@@ -1,13 +1,15 @@
 ---
 // Barangay picker. The choice is remembered in localStorage on this browser only.
 import map from "../../design/map/pasig-map.json";
-import { barangays } from "../lib/data";
+import { barangays, places, pasigSources } from "../lib/data";
 import { langFromUrl, ui } from "../i18n";
 import Verify from "./Verify.astro";
+import { isSourceFresh } from "../lib/freshness";
 
 const t = ui[langFromUrl(Astro.url)];
 const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
 const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
+const recentPlaceDates = (barangayId: string) => places.filter(place => place.barangay_id === barangayId).map(place => Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1) ?? '');
 
 function districtLabel(district: number | null): string | null {
   if (district === 1) return t.district1;
@@ -16,7 +18,7 @@ function districtLabel(district: number | null): string | null {
 }
 ---
 
-<div id="mapa" class="bp-map scroll-mt-28 grid grid-cols-[120px_minmax(0,1fr)] items-start gap-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-6">
+<div id="mapa" class="bp-map grid grid-cols-[120px_minmax(0,1fr)] items-start gap-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-6">
   <svg viewBox="100 0 360 560" role="group" aria-label={t.mapLabel}>
     {
       map.barangays.map((shape) => (
@@ -81,6 +83,11 @@ function districtLabel(district: number | null): string | null {
                 </dd>
               </div>
             )}
+            <div>
+              <dt>{langFromUrl(Astro.url) === "en" ? "Recent places" : "Mga bagong lugar"}</dt>
+              <dd data-place-source-dates={JSON.stringify(recentPlaceDates(barangay.id))}>{recentPlaceDates(barangay.id).filter(date => isSourceFresh(date,new Date())).length}</dd>
+            </div>
+            <div><dt></dt><dd><a class="mt-2 inline-flex min-h-12 items-center" href={langFromUrl(Astro.url) === "en" ? `/en/barangay/${barangay.id}/` : `/barangay/${barangay.id}/`}>{langFromUrl(Astro.url) === "en" ? "Open barangay details" : "Tingnan ang detalye ng barangay"}</a></dd></div>
           </dl>
         );
       })
@@ -126,7 +133,7 @@ function districtLabel(district: number | null): string | null {
     } catch {
       /* this browser is blocking storage */
     }
-    const restored = resolve(saved);
+    const restored = resolve(new URLSearchParams(location.search).get("barangay")) ?? resolve(saved);
     if (restored) show(restored);
 
     select.addEventListener("change", () => show(select.value || null));
