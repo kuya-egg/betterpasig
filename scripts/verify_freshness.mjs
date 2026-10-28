@@ -1,0 +1,23 @@
+import assert from "node:assert/strict";
+import { currentServiceState, eventState, factState, opportunityState, isSourceFresh, manilaDate, nextManilaMidnight, windowStart } from "../src/lib/freshness.ts";
+
+assert.equal(windowStart("2026-10-28"), "2026-09-29");
+assert.equal(isSourceFresh("2026-09-29", new Date("2026-10-28T15:59:00Z")), true);
+assert.equal(isSourceFresh("2026-09-28", new Date("2026-10-28T15:59:00Z")), false);
+assert.equal(isSourceFresh("2026-10-29", new Date("2026-10-28T15:59:00Z")), false);
+assert.equal(manilaDate(new Date("2026-10-30T15:59:59Z")), "2026-10-30");
+assert.equal(nextManilaMidnight(new Date("2026-10-30T15:59:59Z")), Date.parse("2026-10-31T00:00:00+08:00"));
+assert.equal(isSourceFresh("2026-10-01", new Date("2026-10-30T15:59:59Z")), true);
+assert.equal(isSourceFresh("2026-10-01", new Date("2026-10-30T16:00:00Z")), false);
+assert.equal(isSourceFresh(null, new Date("2026-10-30T12:00:00Z")), false);
+assert.equal(isSourceFresh("2026-09-01", new Date("2026-10-30T12:00:00Z")), false);
+assert.equal(currentServiceState("2026-10-28T17:00:00+08:00", new Date("2026-10-28T08:59:59Z")), "active");
+assert.equal(currentServiceState("2026-10-28T17:00:00+08:00", new Date("2026-10-28T09:00:00Z")), "past");
+assert.equal(eventState("2026-10-30", new Date("2026-10-29T16:00:00Z")), "today");
+assert.equal(eventState("2026-10-30", new Date("2026-10-30T16:00:00Z")), "past");
+assert.equal(isSourceFresh('2026-02-30',new Date('2026-03-01T00:00:00+08:00')),false);
+assert.equal(eventState('2026-02-30',new Date('2026-03-01T00:00:00+08:00')),'unknown');
+assert.equal(factState({}, {published_at:'2026-10-01',review_status:'pending'},new Date('2026-10-29T12:00:00+08:00')).review,'pending');
+assert.equal(opportunityState({published_date:'2026-10-03',event_date:'2026-10-30'},new Date('2026-10-30T12:00:00+08:00')).event,'today');
+assert.equal(opportunityState({published_date:'2026-10-03',event_date:'2026-10-30'},new Date('2026-10-31T12:00:00+08:00')).event,'past');
+console.log("Freshness boundary checks passed (19 assertions).");
