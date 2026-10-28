@@ -1,0 +1,21 @@
+---
+import { pasigSources } from "../lib/data";
+import { formatDate, langFromUrl } from "../i18n";
+import { isSourceFresh } from "../lib/freshness";
+const lang = langFromUrl(Astro.url);
+interface Props { refs: string[] }
+const { refs } = Astro.props;
+const rows = [...new Set(refs.map((ref) => ref.split(":")[0]))]
+  .map((id) => pasigSources.find((source) => source.id === id))
+  .filter((source) => source !== undefined);
+---
+<div class="mt-3 text-[14px] text-muted">
+  {lang === "en" ? "Checked against an official announcement." : "Sinuri sa opisyal na anunsyo."}
+  <span class="block"><span class="font-semibold text-amber" title={lang === "en" ? "The announcement was checked; a separate maintainer review is still pending." : "Sinuri ang anunsyo; hinihintay pa ang hiwalay na pagsusuri ng maintainer."}>{lang === "en" ? "Being checked" : "Sinusuri pa"}</span> · {lang === "en" ? "Independent review is still pending." : "Hindi pa tapos ang hiwalay na pagsusuri."}</span>
+  {rows.map((source) => <span class="block" data-source-date={source.published_date}>{source.publisher} · {formatDate(lang, source.published_date)} · {lang === "en" ? "checked" : "sinuri"} {formatDate(lang, source.checked_at.slice(0, 10))} · <a href={source.url}>{lang === "en" ? "Open source" : "Buksan ang sanggunian"}</a>{!isSourceFresh(source.published_date, new Date()) && <span data-stale> · {lang === "en" ? "This announcement is over 30 days old. Check the official page for a newer notice." : "Lampas 30 araw na ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso."}</span>}</span>)}
+</div>
+
+
+<style>
+  a { display: inline-flex; min-height: 48px; align-items: center; }
+</style>

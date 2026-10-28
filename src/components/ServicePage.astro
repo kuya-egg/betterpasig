@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Verify from "./Verify.astro";
+import ServiceNotices from "./ServiceNotices.astro";
 import { categories, officeById, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 
@@ -18,10 +19,9 @@ const category = categories.find((item) => item.id === service.category);
 const categoryName = category ? (lang === "en" ? category.name_en : category.name_fil) : "";
 const requirements = lines(service.requirements);
 const steps = lines(service.steps);
-const online = service.online?.url && /^https?:\/\//.test(service.online.url) ? service.online.url : "";
+const online = service.id !== "pay-business-tax-online" && service.online?.url && /^https?:\/\//.test(service.online.url) ? service.online.url : "";
 const fee = typeof service.fee === "string" && service.fee.trim() ? service.fee : "";
 const time = typeof service.processing_time === "string" && service.processing_time.trim() ? service.processing_time : "";
-
 function lines(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
@@ -83,6 +83,8 @@ function lines(value: unknown): string[] {
         )
       }
     </dl>
+
+    <ServiceNotices serviceId={service.id} />
 
     {
       requirements.length > 0 && (
