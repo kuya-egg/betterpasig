@@ -26,6 +26,7 @@
 @layer base {
   html {
     font-size: 17px;
+    scroll-padding-top: 140px;
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -44,6 +45,10 @@
   }
 }
 
+@media (min-width: 1024px) {
+  html { scroll-padding-top: 96px; }
+}
+
 @utility num {
   font-variant-numeric: tabular-nums;
 }
@@ -56,19 +61,19 @@
 
 .link-draw {
   color: var(--ink);
-  text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0 1.5px;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  text-decoration-skip-ink: auto;
   transition:
     color var(--fast) var(--ease),
-    background-size var(--mid) var(--ease);
+    text-decoration-color var(--fast) var(--ease);
 }
 .link-draw:hover,
 .link-draw:focus-visible {
   color: var(--blue);
-  background-size: 100% 1.5px;
+  text-decoration-color: currentColor;
 }
 
 .copy-btn {

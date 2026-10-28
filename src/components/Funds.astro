@@ -14,7 +14,7 @@ const figures = ids.map((id) => {
 const links = transparencyLinks.filter((link) => /^https?:\/\//.test(link.url));
 ---
 
-<section id="pondo" class="scroll-mt-28 border-t border-line py-14">
+<section id="pondo" class="border-t border-line py-14">
   <div class="wrap">
     <div class="mb-6">
       <h2 class="text-[30px] font-bold tracking-[-0.03em]">{t.fundsTitle}</h2>
@@ -25,7 +25,7 @@ const links = transparencyLinks.filter((link) => /^https?:\/\//.test(link.url));
         figures.map((figure) => {
           const note = "note" in figure && typeof figure.note === "string" ? figure.note : "";
           return (
-            <div class="min-w-0 border-line py-4 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0">
+            <div class="min-w-0 border-t border-line py-4 first:border-t-0 sm:border-t-0 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0">
               <p class:list={["num font-semibold leading-snug", figure.value.length > 24 ? "text-[19px]" : "text-[28px] tracking-[-0.03em]"]}>
                 {figure.value}
                 {figure.verify && <Verify />}

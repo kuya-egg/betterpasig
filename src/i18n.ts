@@ -31,6 +31,13 @@ export const ui = {
     navBarangay: "Barangay",
     navOfficials: "Opisyal",
     navFunds: "Pondo ng bayan",
+    viewSection: "Tingnan ang seksyon",
+    previousPage: "Nakaraan",
+    nextPage: "Susunod",
+    menuPageLabel: "Pahina {current} sa {total}",
+    darkMode: "Madilim na mode",
+    useLightMode: "Gumamit ng maliwanag na mode",
+    useDarkMode: "Gumamit ng madilim na mode",
 
     searchLabel: "Maghanap ng serbisyo",
     searchPlaceholder: "Hal. amilyar, birth certificate",
@@ -140,6 +147,13 @@ export const ui = {
     navBarangay: "Barangay",
     navOfficials: "Officials",
     navFunds: "Public funds",
+    viewSection: "View section",
+    previousPage: "Previous",
+    nextPage: "Next",
+    menuPageLabel: "Page {current} of {total}",
+    darkMode: "Dark mode",
+    useLightMode: "Use light mode",
+    useDarkMode: "Use dark mode",
 
     searchLabel: "Search for a service",
     searchPlaceholder: "e.g. amilyar, birth certificate",
@@ -236,6 +250,7 @@ export function langFromUrl(url: URL): Lang {
 
 /** The same page in the other language: /foo <-> /en/foo. */
 export function pathIn(lang: Lang, url: URL): string {
+  if (/\/(?:en\/)?404(?:\.html)?\/?$/.test(url.pathname)) return lang === 'en' ? '/en/' : '/';
   const base = url.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
   return lang === "en" ? `/en${base === "/" ? "/" : base}` : base;
 }

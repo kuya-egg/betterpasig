@@ -1,78 +1,617 @@
 ---
 import Mark from "../../design/logo/mark-blue.svg";
 import { href, langFromUrl, pathIn, ui } from "../i18n";
+import { barangays, categories, programs, transparencyLinks } from "../lib/data";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const other = lang === "en" ? "fil" : "en";
-const links = [
-  ["/#serbisyo", t.navServices],
-  ["/#benepisyo", t.navBenefits],
-  ["/#mapa", t.navBarangay],
-  ["/#opisyal", t.navOfficials],
-  ["/#pondo", t.navFunds],
-] as const;
+const menus = [
+  {
+    id: "serbisyo", label: t.navServices, title: t.allServices,
+    links: categories.map((item) => ({
+      label: lang === "en" ? item.name_en : item.name_fil,
+      url: href(lang, `/serbisyo#${item.id}`),
+    })),
+  },
+  {
+    id: "benepisyo", label: t.navBenefits, title: t.benefitsTitle,
+    links: programs.map((item) => ({
+      label: lang === "en" ? item.title_en : item.title_fil,
+      url: href(lang, `/#benepisyo-${item.id}`),
+    })),
+  },
+  {
+    id: "mapa", label: t.navBarangay, title: t.mapPrompt,
+    links: [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil")).map((item) => ({
+      label: item.name, url: href(lang, `/?barangay=${item.id}#mapa`),
+    })),
+  },
+  {
+    id: "opisyal", label: t.navOfficials, title: t.navOfficials,
+    links: [
+      { label: t.mayor, url: href(lang, "/#opisyal-mayor") },
+      { label: t.viceMayor, url: href(lang, "/#opisyal-vice-mayor") },
+      { label: t.representative, url: href(lang, "/#opisyal-representative") },
+      { label: t.council1, url: href(lang, "/#opisyal-council-1") },
+      { label: t.council2, url: href(lang, "/#opisyal-council-2") },
+    ],
+  },
+  {
+    id: "pondo", label: t.navFunds, title: t.fundsTitle,
+    links: transparencyLinks.filter((item) => /^https?:\/\//.test(item.url)).map((item) => ({
+      label: lang === "en" && item.title_en ? item.title_en : item.title_fil,
+      url: item.url,
+    })),
+  },
+];
 ---
 
-<header id="top" class="sticky top-0 z-30 border-b border-line bg-bg">
-  <div class="wrap flex flex-wrap items-center gap-x-6 gap-y-1 py-2">
-    <a href={href(lang, "/")} class="flex items-center gap-2 text-ink no-underline" aria-label={t.home}>
-      <Mark class="logo h-8 w-auto" aria-hidden="true" />
-      <span class="text-[21px] font-bold tracking-[-0.03em]">BetterPasig</span>
+<header id="top" class="site-header">
+  <div class="wrap header-inner">
+    <a href={href(lang, "/")} class="brand" aria-label={t.home}>
+      <Mark class="logo" aria-hidden="true" />
+      <span>BetterPasig</span>
     </a>
-    <nav
-      class="order-last flex w-full gap-x-5 overflow-x-auto md:order-none md:w-auto md:flex-1"
-      aria-label={t.navLabel}
-    >
-      {
-        links.map(([path, label]) => (
-          <a class="link-draw inline-flex min-h-12 items-center text-[16px] font-medium whitespace-nowrap" href={href(lang, path)}>
-            {label}
-          </a>
-        ))
-      }
+    <nav class="primary-nav" aria-label={t.navLabel}>
+      <ul class="nav-items">
+        {menus.map((menu) => (
+          <li>
+            <a class="nav-trigger nav-fallback" href={href(lang, `/#${menu.id}`)}>{menu.label}</a>
+            <button type="button" class="nav-trigger" data-section={menu.id} aria-expanded="false" aria-controls={`nav-${menu.id}`} hidden>
+              <span class="nav-label">{menu.label}</span>
+              <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div class="dropdown-viewport" hidden inert>
+        <div class="dropdown">
+          {menus.map((menu) => (
+            <section class="dropdown-content" id={`nav-${menu.id}`} aria-label={menu.label} hidden>
+              <div class="wrap dropdown-inner">
+                <div class="dropdown-heading">
+                  <h2>{menu.title}</h2>
+                  <a class="link-draw" href={href(lang, `/#${menu.id}`)}>{t.viewSection}<span aria-hidden="true"> &rarr;</span></a>
+                </div>
+                <ul class="dropdown-links">
+                  {menu.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
+                </ul>
+                {menu.id === "mapa" && (
+                  <div class="barangay-pagination" data-label={t.menuPageLabel} hidden>
+                    <button type="button" data-page-step="-1" aria-label={t.previousPage}>
+                      {t.previousPage}
+                    </button>
+                    <span class="num" data-page-status role="status"></span>
+                    <button type="button" data-page-step="1" aria-label={t.nextPage}>
+                      {t.nextPage}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
     </nav>
-    <a
-      href={pathIn(other, Astro.url)}
-      hreflang={ui[other].htmlLang}
-      lang={ui[other].htmlLang}
-      aria-label={t.switchLabel}
-      data-lang-switch={other}
-      class="ml-auto flex min-h-12 items-center rounded-md px-3 text-[15px] font-medium text-ink hover:bg-subtle"
-    >
-      {t.otherLangName}
-    </a>
+    <div class="header-tools">
+      <a
+        href={pathIn(other, Astro.url)}
+        hreflang={ui[other].htmlLang}
+        lang={ui[other].htmlLang}
+        aria-label={t.switchLabel}
+        data-lang-switch={other}
+        class="language-switch"
+      >{t.otherLangName}</a>
+      <button
+        type="button"
+        class="theme-switch"
+        aria-label={t.darkMode}
+        aria-pressed="false"
+        data-light-label={t.useLightMode}
+        data-dark-label={t.useDarkMode}
+      >
+        <span class="theme-thumb" aria-hidden="true"></span>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 13.2A8.8 8.8 0 0 1 10.8 3.5a8.8 8.8 0 1 0 9.7 9.7Z" />
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <script>
-  const topEl = document.getElementById("top");
-  if (topEl) {
-    const onScroll = () => topEl.classList.toggle("scrolled", scrollY > 8);
-    onScroll();
-    addEventListener("scroll", onScroll, { passive: true });
-  }
+  // Load plugin declarations without importing the default CSS animation engine.
+  import type {} from "gsap";
+  import { gsap } from "gsap/gsap-core";
+  import { CustomEase } from "gsap/CustomEase";
 
-  // Remember the visitor's choice (this browser only) so "/" can send them back to English.
-  for (const a of document.querySelectorAll<HTMLAnchorElement>("[data-lang-switch]")) {
-    a.addEventListener("click", () => {
-      try {
-        localStorage.setItem("bp-lang", a.dataset.langSwitch!);
-      } catch {
-        /* this browser is blocking storage */
+  gsap.registerPlugin(CustomEase);
+  const slideEase = CustomEase.create("header-slide", ".45, 0, .2, 1");
+  const header = document.getElementById("top")!;
+  const nav = header.querySelector<HTMLElement>(".primary-nav")!;
+  const triggers = [...nav.querySelectorAll<HTMLButtonElement>("button[data-section]")];
+  const contents = [...nav.querySelectorAll<HTMLElement>(".dropdown-content")];
+  const viewport = nav.querySelector<HTMLElement>(".dropdown-viewport")!;
+  const panel = nav.querySelector<HTMLElement>(".dropdown")!;
+  // Animate one numeric value with GSAP core; no CSS animation plugin is needed.
+  const position = { y: 0 };
+  const renderPosition = () => { panel.style.transform = `translate3d(0, ${position.y}px, 0)`; };
+  const clearMotion = () => {
+    gsap.killTweensOf(position);
+    position.y = 0;
+    panel.style.removeProperty("transform");
+    panel.style.removeProperty("will-change");
+  };
+  const themeButton = header.querySelector<HTMLButtonElement>(".theme-switch")!;
+  const root = document.documentElement;
+  const systemTheme = matchMedia("(prefers-color-scheme: dark)");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let activeTrigger: HTMLButtonElement | null = null;
+  let hoverTimer = 0;
+  const cancelHover = () => window.clearTimeout(hoverTimer);
+  const barangayContent = nav.querySelector<HTMLElement>("#nav-mapa")!;
+  const barangayList = barangayContent.querySelector<HTMLElement>(".dropdown-links")!;
+  const barangayItems = [...barangayList.querySelectorAll<HTMLLIElement>(":scope > li")];
+  const paging = barangayContent.querySelector<HTMLElement>(".barangay-pagination")!;
+  const pageStatus = paging.querySelector<HTMLElement>("[data-page-status]")!;
+  const pageButtons = [...paging.querySelectorAll<HTMLButtonElement>("[data-page-step]")];
+  let barangayPage = 0;
+  let barangayPages = [{ start: 0, end: barangayItems.length }];
+  const showBarangayPage = () => {
+    const pages = barangayPages.length;
+    barangayPage = Math.min(barangayPage, pages - 1);
+    const { start, end } = barangayPages[barangayPage];
+    barangayItems.forEach((item, index) => { item.hidden = index < start || index >= end; });
+    if (barangayPage > 0) pageButtons[0].disabled = false;
+    if (barangayPage < pages - 1) pageButtons[1].disabled = false;
+    if (pages === 1 && paging.contains(document.activeElement)) activeTrigger?.focus({ preventScroll: true });
+    if (pages > 1 && barangayPage === 0 && document.activeElement === pageButtons[0]) pageButtons[1].focus();
+    if (pages > 1 && barangayPage === pages - 1 && document.activeElement === pageButtons[1]) pageButtons[0].focus();
+    paging.hidden = pages === 1;
+    pageStatus.textContent = paging.dataset.label!
+      .replace("{current}", String(barangayPage + 1)).replace("{total}", String(pages));
+    pageButtons[0].disabled = barangayPage === 0;
+    pageButtons[1].disabled = barangayPage === pages - 1;
+  };
+  const fitBarangays = () => {
+    if (barangayContent.hidden || viewport.hidden) return;
+    const focusedItem = barangayItems.findIndex((item) => item.contains(document.activeElement));
+    const firstItem = focusedItem >= 0 ? focusedItem : barangayPages[barangayPage].start;
+    barangayItems.forEach((item) => { item.hidden = false; });
+    paging.hidden = false;
+    const grid = getComputedStyle(barangayList);
+    const columns = grid.gridTemplateColumns.split(" ").length;
+    const gap = parseFloat(grid.rowGap) || 0;
+    const heights = barangayItems.map((item) => item.offsetHeight);
+    const rows = [];
+    for (let index = 0; index < heights.length; index += columns) {
+      rows.push({ start: index, height: Math.max(...heights.slice(index, index + columns)) });
+    }
+    const inner = barangayContent.querySelector<HTMLElement>(".dropdown-inner")!;
+    const top = barangayList.getBoundingClientRect().top - panel.getBoundingClientRect().top;
+    const space = panel.clientHeight - top - parseFloat(getComputedStyle(inner).paddingBottom);
+    const pagingSpace = paging.offsetHeight + parseFloat(getComputedStyle(paging).marginTop);
+    const fullHeight = rows.reduce((total, row) => total + row.height, 0) + gap * (rows.length - 1);
+    barangayPages = [];
+    let start = 0;
+    let used = 0;
+    const available = fullHeight <= space ? space : space - pagingSpace;
+    for (const row of rows) {
+      const next = used + (used ? gap : 0) + row.height;
+      if (used && next > available) {
+        barangayPages.push({ start, end: row.start });
+        start = row.start;
+        used = row.height;
+      } else used = next;
+    }
+    barangayPages.push({ start, end: barangayItems.length });
+    barangayPage = barangayPages.findIndex((page) => page.end > firstItem);
+    showBarangayPage();
+  };
+  for (const button of pageButtons) {
+    button.addEventListener("click", () => {
+      barangayPage += Number(button.dataset.pageStep);
+      showBarangayPage();
+    });
+  }
+  new ResizeObserver(fitBarangays).observe(panel);
+  void document.fonts.ready.then(fitBarangays);
+  const finishClose = () => {
+    if (!activeTrigger) viewport.hidden = true;
+    panel.style.removeProperty("will-change");
+  };
+  const closeMenu = () => {
+    cancelHover();
+    if (!activeTrigger) return;
+    activeTrigger.setAttribute("aria-expanded", "false");
+    activeTrigger = null;
+    viewport.inert = true;
+    if (reducedMotion.matches) {
+      clearMotion();
+      finishClose();
+      return;
+    }
+    panel.style.willChange = "transform";
+    gsap.to(position, {
+      y: -panel.offsetHeight, duration: 0.46, ease: slideEase,
+      overwrite: true, onUpdate: renderPosition, onComplete: finishClose,
+    });
+  };
+  const openMenu = (trigger: HTMLButtonElement) => {
+    cancelHover();
+    if (activeTrigger === trigger) return;
+    const switching = activeTrigger !== null;
+    const wasHidden = viewport.hidden;
+    activeTrigger?.setAttribute("aria-expanded", "false");
+    if (switching && viewport.contains(document.activeElement)) trigger.focus({ preventScroll: true });
+    for (const content of contents) content.hidden = content.id !== trigger.getAttribute("aria-controls");
+    activeTrigger = trigger;
+    trigger.setAttribute("aria-expanded", "true");
+    viewport.hidden = false;
+    viewport.inert = false;
+    panel.dataset.menu = trigger.dataset.section;
+    panel.scrollTop = 0;
+    if (trigger.dataset.section === "mapa") fitBarangays();
+    // One persistent surface: changing section only swaps its content.
+    if (switching) return;
+    if (reducedMotion.matches) {
+      clearMotion();
+      return;
+    }
+    if (wasHidden) {
+      position.y = -panel.offsetHeight;
+      renderPosition();
+    }
+    panel.style.willChange = "transform";
+    gsap.to(position, {
+      y: 0, duration: 0.58, ease: slideEase, overwrite: true,
+      onUpdate: renderPosition,
+      onComplete: () => {
+        panel.style.removeProperty("will-change");
+        panel.style.removeProperty("transform");
+      },
+    });
+  };
+  const scheduleClose = (event: PointerEvent) => {
+    if (event.pointerType !== "mouse") return;
+    cancelHover();
+    hoverTimer = window.setTimeout(() => {
+      if (!viewport.contains(document.activeElement)) closeMenu();
+    }, 180);
+  };
+  for (const trigger of triggers) {
+    trigger.hidden = false;
+    trigger.addEventListener("click", () => {
+      if (activeTrigger === trigger) closeMenu();
+      else openMenu(trigger);
+    });
+    trigger.addEventListener("pointerenter", (event) => {
+      if (event.pointerType !== "mouse") return;
+      cancelHover();
+      hoverTimer = window.setTimeout(() => openMenu(trigger), activeTrigger ? 60 : 120);
+    });
+    trigger.addEventListener("pointerleave", scheduleClose);
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey && activeTrigger === trigger)) {
+        event.preventDefault();
+        openMenu(trigger);
+        panel.querySelector<HTMLAnchorElement>(".dropdown-content:not([hidden]) a")?.focus({ preventScroll: true });
       }
     });
   }
+  viewport.addEventListener("pointerenter", cancelHover);
+  viewport.addEventListener("pointerleave", scheduleClose);
+  viewport.addEventListener("keydown", (event) => {
+    const first = panel.querySelector(".dropdown-content:not([hidden]) a");
+    if (event.key === "Tab" && event.shiftKey && event.target === first) {
+      event.preventDefault();
+      activeTrigger?.focus();
+    }
+  });
+  nav.addEventListener("focusout", (event) => {
+    if (!(event.relatedTarget instanceof Node) || !nav.contains(event.relatedTarget)) closeMenu();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    cancelHover();
+    if (event.target instanceof Node && !nav.contains(event.target)) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !activeTrigger) return;
+    event.preventDefault();
+    const trigger = activeTrigger;
+    const returnFocus = nav.contains(document.activeElement);
+    closeMenu();
+    if (returnFocus) trigger.focus();
+  });
+  nav.addEventListener("click", (event) => {
+    if (event.target instanceof Element && event.target.closest("a")) closeMenu();
+  });
+  reducedMotion.addEventListener("change", () => {
+    if (!reducedMotion.matches) return;
+    clearMotion();
+    if (!activeTrigger) finishClose();
+  });
+  const syncLocation = () => {
+    const servicePage = /^\/(en\/)?serbisyo(?:\/|$)/.test(location.pathname);
+    for (const trigger of triggers) {
+      const active = (servicePage && trigger.dataset.section === "serbisyo") ||
+        (!servicePage && location.hash.replace(/^#/, "").split("-")[0] === trigger.dataset.section);
+      if (active) trigger.setAttribute("aria-current", "location");
+      else trigger.removeAttribute("aria-current");
+    }
+  };
+  addEventListener("hashchange", syncLocation);
+  syncLocation();
+
+  const syncTheme = () => {
+    const dark = root.dataset.theme === "dark" || (!root.dataset.theme && systemTheme.matches);
+    themeButton.setAttribute("aria-pressed", String(dark));
+    themeButton.title = (dark ? themeButton.dataset.lightLabel : themeButton.dataset.darkLabel)!;
+  };
+  themeButton.addEventListener("click", () => {
+    const theme = themeButton.getAttribute("aria-pressed") === "true" ? "light" : "dark";
+    root.dataset.theme = theme;
+    try { localStorage.setItem("bp-theme", theme); } catch { /* storage may be blocked */ }
+    syncTheme();
+  });
+  systemTheme.addEventListener("change", syncTheme);
+  syncTheme();
+  header.dataset.enhanced = "";
+
+  const onScroll = () => header.classList.toggle("scrolled", scrollY > 8);
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+
+  // Remember the visitor's language in this browser.
+  const languageSwitch = header.querySelector<HTMLAnchorElement>("[data-lang-switch]")!;
+  languageSwitch.addEventListener("click", () => {
+    try { localStorage.setItem("bp-lang", languageSwitch.dataset.langSwitch!); } catch { /* storage may be blocked */ }
+  });
 </script>
 
 <style>
-  .logo :global(path) {
-    fill: var(--blue);
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
   }
-  header.scrolled {
+  .site-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     box-shadow: 0 6px 20px var(--shadow);
+    opacity: 0;
+    transition: opacity var(--mid) var(--ease);
   }
-  nav {
+  .site-header.scrolled::after { opacity: 1; }
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 16px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 72px;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .logo { height: 36px; width: auto; }
+  .logo :global(path) { fill: var(--blue); }
+  .primary-nav {
+    order: 1;
+    width: 100%;
+    gap: 4px;
+    overflow-x: auto;
     scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .nav-items { display: flex; gap: 2px; width: max-content; }
+  .nav-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 52px;
+    padding-inline: 8px;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    list-style: none;
+    transition: color var(--fast) var(--ease);
+  }
+  .nav-trigger[hidden], .dropdown-viewport[hidden], .dropdown-content[hidden],
+  .barangay-pagination[hidden], .dropdown-links > li[hidden],
+  [data-enhanced] .nav-fallback { display: none; }
+  .nav-trigger:is(:hover, :focus-visible, [aria-current], [aria-expanded="true"]) { color: var(--blue); }
+  .nav-trigger:focus-visible { outline-offset: -4px; }
+  .nav-label { position: relative; }
+  .nav-label::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--blue);
+    transform-origin: left;
+    transform: scaleX(0);
+    pointer-events: none;
+    transition: transform var(--mid) var(--ease);
+  }
+  .nav-trigger:is(:hover, :focus-visible, [aria-current], [aria-expanded="true"]) .nav-label::after { transform: scaleX(1); }
+  .chevron { width: 12px; height: 12px; transition: transform var(--mid) var(--ease); }
+  .nav-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+  .dropdown-viewport {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+  .dropdown {
+    width: 100%;
+    height: min(440px, calc(100dvh - 96px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) var(--subtle);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    pointer-events: auto;
+  }
+  .dropdown-inner { padding-block: 24px; }
+  .dropdown-viewport[inert] { pointer-events: none; }
+  .dropdown-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 16px; }
+  .dropdown-heading h2 { font-size: 23px; font-weight: 600; letter-spacing: -0.02em; }
+  .dropdown-heading > a { display: inline-flex; gap: 8px; align-items: center; min-height: 48px; font-size: 15px; }
+  .dropdown-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 24px; }
+  .dropdown-links a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.4;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+  }
+  .dropdown-links a:is(:hover, :focus-visible) { color: var(--blue); background: var(--subtle); }
+  .dropdown[data-menu="mapa"] { overflow: clip; }
+  #nav-mapa, #nav-mapa .dropdown-inner { height: 100%; }
+  #nav-mapa .dropdown-inner { position: relative; }
+  #nav-mapa .dropdown-links { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px 12px; }
+  #nav-mapa .dropdown-links a {
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    overflow-wrap: normal;
+  }
+  .barangay-pagination { position: absolute; bottom: 24px; left: 16px; right: 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 16px; border-top: 1px solid var(--line); padding-top: 8px; }
+  .barangay-pagination button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px; border-radius: 6px; color: var(--blue); font-size: 15px; font-weight: 500; cursor: pointer; }
+  .barangay-pagination button:is(:hover, :focus-visible):not(:disabled) { background: var(--subtle); }
+  .barangay-pagination button:disabled { color: var(--muted); cursor: default; }
+  [data-page-status] { color: var(--muted); font-size: 14px; text-align: center; }
+  .header-tools { display: flex; align-items: center; gap: 12px; }
+  .language-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding-inline: 12px;
+    border-radius: 6px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+  }
+  .language-switch:hover { color: var(--blue); background: var(--subtle); }
+  .theme-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 0 0 auto;
+    width: 80px;
+    height: 48px;
+    padding: 4px;
+    border: 0;
+    border-radius: 24px;
+    background: var(--subtle);
+    color: var(--muted);
+    cursor: pointer;
+    visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  [data-enhanced] .theme-switch { visibility: visible; }
+  .theme-thumb {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 36px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--bg);
+    transition: transform var(--mid) var(--ease);
+  }
+  .theme-switch[aria-pressed="true"] .theme-thumb { transform: translateX(36px); }
+  .theme-switch svg { position: relative; width: 20px; height: 20px; }
+  .theme-switch[aria-pressed="false"] .sun,
+  .theme-switch[aria-pressed="true"] .moon { color: var(--blue); }
+  .theme-switch:hover { color: var(--ink); }
+  @media (min-width: 1024px) {
+    .brand { min-height: 80px; }
+    .primary-nav { order: 0; width: auto; }
+    .nav-trigger { min-height: 80px; }
+    .header-tools { border-left: 1px solid var(--line); padding-left: 12px; }
+  }
+  @media (max-width: 1023px) {
+    .primary-nav { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+    .dropdown { height: min(560px, calc(100dvh - 144px)); }
+  }
+  @media (min-width: 1200px) {
+    #nav-mapa .dropdown-links { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  }
+  @media (min-width: 601px) and (max-width: 900px) {
+    .dropdown-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 601px) and (max-width: 767px) {
+    #nav-mapa .dropdown-links { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .header-inner { column-gap: 8px; }
+    .header-tools { gap: 4px; }
+    .language-switch { padding-inline: 6px; }
+    .theme-switch { width: 72px; }
+    .theme-thumb { width: 32px; }
+    .theme-switch[aria-pressed="true"] .theme-thumb { transform: translateX(32px); }
+    .dropdown { height: min(680px, calc(100dvh - 152px)); }
+    .dropdown-inner { padding-block: 16px; }
+    .dropdown-links { grid-template-columns: 1fr; gap: 2px; }
+    .dropdown-heading { margin-bottom: 8px; }
+    .dropdown-heading h2 { font-size: 21px; }
+    #nav-mapa .dropdown-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 8px; }
+    .barangay-pagination { bottom: 16px; }
+  }
+  @media (max-width: 374px) {
+    .brand { gap: 6px; font-size: 20px; }
+    .logo { height: 30px; }
+  }
+  @media (max-width: 600px) and (max-height: 400px) {
+    #nav-mapa .dropdown-heading { display: none; }
+    #nav-mapa .dropdown-inner { padding-block: 8px; }
+    .barangay-pagination { bottom: 8px; margin-top: 4px; padding-top: 0; }
+  }
+  @media (min-width: 480px) and (max-width: 600px) and (max-height: 400px) {
+    #nav-mapa .dropdown-links { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 </style>
