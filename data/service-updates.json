@@ -1,0 +1,727 @@
+{
+  "edition_date": "2026-10-28",
+  "updates": [
+    {
+      "id": "business-tax-q4-2026",
+      "service_id": "pay-business-tax-online",
+      "title_fil": "Business tax, ikaapat na quarter ng 2026",
+      "title_en": "Business tax, fourth quarter of 2026",
+      "published_date": "2026-10-04",
+      "online_url": "https://onlinepayments.pasigcity.gov.ph",
+      "online_cutoff_at": "2026-10-28T17:00:00+08:00",
+      "online_status_at_capture": "past_published_cutoff",
+      "onsite_deadline_date": "2026-10-31",
+      "conditional_deadline_date": "2026-11-03",
+      "conditional_deadline_condition": "Only if October 31 is declared a special non-working holiday; that declaration is not verified in this packet.",
+      "place_ids": [
+        "bpld-temporary-city-hall",
+        "bpld-mega-market",
+        "city-hall-annex-1",
+        "city-hall-annex-2"
+      ],
+      "evidence": [
+        "S03:article",
+        "S03:image:1"
+      ],
+      "verify": true,
+      "kind": "service_notice",
+      "summary_fil": "Business tax, ikaapat na quarter ng 2026",
+      "summary_en": "Business tax, fourth quarter of 2026",
+      "sources": [
+        "S03"
+      ],
+      "facts": [
+        {
+          "id": "published_date",
+          "value": "2026-10-04",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field published_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "online_url",
+          "value": "https://onlinepayments.pasigcity.gov.ph",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field online_url",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field online_url",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "online_cutoff_at",
+          "value": "2026-10-28T17:00:00+08:00",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field online_cutoff_at",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field online_cutoff_at",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "online_status_at_capture",
+          "value": "past_published_cutoff",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field online_status_at_capture",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field online_status_at_capture",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "onsite_deadline_date",
+          "value": "2026-10-31",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field onsite_deadline_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field onsite_deadline_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "conditional_deadline_date",
+          "value": "2026-11-03",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field conditional_deadline_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field conditional_deadline_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "conditional_deadline_condition",
+          "value": "Only if October 31 is declared a special non-working holiday; that declaration is not verified in this packet.",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "article text; field conditional_deadline_condition",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S03",
+              "locator": "image 1; field conditional_deadline_condition",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "rpt-2027-advance-payment",
+      "service_id": "pay-real-property-tax",
+      "title_fil": "Maagang bayad ng amilyar para sa 2027",
+      "title_en": "Advance payment of 2027 real property tax",
+      "published_date": "2026-10-03",
+      "online_url": "https://onlinepayments.pasigcity.gov.ph/",
+      "contact_email": "payments@pasigcity.gov.ph",
+      "discount_percent": 15,
+      "eligibility": "Accounts without delinquencies; full advance payment.",
+      "ordinary_payment_before_date": "2026-12-28",
+      "bulk_payment_before_date": "2026-12-10",
+      "bulk_definition": "More than 20 accounts",
+      "exact_deadline_at": null,
+      "rpt_schedules": [
+        {
+          "place_id": "temporary-city-hall",
+          "floor": "1/F",
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH"
+          ],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "place_id": "city-hall-annex-1",
+          "floor": "3/F",
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "place_id": "city-hall-annex-2",
+          "floor": "3/F",
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "place_id": "revolving-tower-rpt",
+          "floor": "2/F",
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "schedule_scope": "RPT desks, excluding holidays. A building can contain separate desks with different schedules.",
+      "evidence": [
+        "S04:article",
+        "S04:image:2",
+        "S04:image:3"
+      ],
+      "verify": true,
+      "kind": "service_notice",
+      "place_ids": [
+        "temporary-city-hall",
+        "city-hall-annex-1",
+        "city-hall-annex-2",
+        "revolving-tower-rpt"
+      ],
+      "summary_fil": "Maagang bayad ng amilyar para sa 2027",
+      "summary_en": "Advance payment of 2027 real property tax",
+      "sources": [
+        "S04"
+      ],
+      "facts": [
+        {
+          "id": "published_date",
+          "value": "2026-10-03",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field published_date",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field published_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "online_url",
+          "value": "https://onlinepayments.pasigcity.gov.ph/",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field online_url",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field online_url",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field online_url",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "contact_email",
+          "value": "payments@pasigcity.gov.ph",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field contact_email",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field contact_email",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field contact_email",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "discount_percent",
+          "value": 15,
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field discount_percent",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field discount_percent",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field discount_percent",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "eligibility",
+          "value": "Accounts without delinquencies; full advance payment.",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field eligibility",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field eligibility",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field eligibility",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "ordinary_payment_before_date",
+          "value": "2026-12-28",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field ordinary_payment_before_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field ordinary_payment_before_date",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field ordinary_payment_before_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bulk_payment_before_date",
+          "value": "2026-12-10",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field bulk_payment_before_date",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field bulk_payment_before_date",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field bulk_payment_before_date",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bulk_definition",
+          "value": "More than 20 accounts",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field bulk_definition",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field bulk_definition",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field bulk_definition",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "rpt_schedules",
+          "value": [
+            {
+              "place_id": "temporary-city-hall",
+              "floor": "1/F",
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH"
+              ],
+              "opens": "07:00",
+              "closes": "18:00"
+            },
+            {
+              "place_id": "city-hall-annex-1",
+              "floor": "3/F",
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "place_id": "city-hall-annex-2",
+              "floor": "3/F",
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "place_id": "revolving-tower-rpt",
+              "floor": "2/F",
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field rpt_schedules",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field rpt_schedules",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field rpt_schedules",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "RPT desks, excluding holidays. A building can contain separate desks with different schedules.",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "article text; field schedule_scope",
+              "method": "article_text"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 2; field schedule_scope",
+              "method": "visual_attachment"
+            },
+            {
+              "source_id": "S04",
+              "locator": "image 3; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "bfp-fsis-assistance-2026-10",
+      "service_id": null,
+      "title_fil": "Tulong para sa Fire Safety Inspection System",
+      "title_en": "Fire Safety Inspection System assistance",
+      "published_date": "2026-10-01",
+      "online_url": "https://fsis.e-bfp.com",
+      "phone": "09603402260",
+      "phone_scope": "BFP business transaction assistance; not an emergency-response hotline",
+      "phone_hours": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
+        "opens": "08:00",
+        "closes": "17:00",
+        "excludes_holidays": true
+      },
+      "place_ids": [
+        "bpld-temporary-city-hall",
+        "bpld-mega-market",
+        "city-hall-annex-1",
+        "city-hall-annex-2"
+      ],
+      "evidence": [
+        "S02:article"
+      ],
+      "verify": true,
+      "kind": "service_notice",
+      "summary_fil": "Tulong para sa Fire Safety Inspection System",
+      "summary_en": "Fire Safety Inspection System assistance",
+      "sources": [
+        "S02"
+      ],
+      "facts": [
+        {
+          "id": "published_date",
+          "value": "2026-10-01",
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "online_url",
+          "value": "https://fsis.e-bfp.com",
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field online_url",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone",
+          "value": "09603402260",
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field phone",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone_scope",
+          "value": "BFP business transaction assistance; not an emergency-response hotline",
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field phone_scope",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone_hours",
+          "value": {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR"
+            ],
+            "opens": "08:00",
+            "closes": "17:00",
+            "excludes_holidays": true
+          },
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field phone_hours",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "libreng-sakay-pasigpass-2026-10",
+      "service_id": null,
+      "title_fil": "PasigPass sa Libreng Sakay",
+      "title_en": "PasigPass for Libreng Sakay",
+      "published_date": "2026-10-01",
+      "qr_required": false,
+      "manual_registration_available": true,
+      "reported_route_count": 6,
+      "route_geometry": null,
+      "pickup_points": null,
+      "evidence": [
+        "S05:article"
+      ],
+      "verify": true,
+      "kind": "service_notice",
+      "place_ids": [],
+      "summary_fil": "PasigPass sa Libreng Sakay",
+      "summary_en": "PasigPass for Libreng Sakay",
+      "sources": [
+        "S05"
+      ],
+      "facts": [
+        {
+          "id": "published_date",
+          "value": "2026-10-01",
+          "evidence": [
+            {
+              "source_id": "S05",
+              "locator": "article text; field published_date",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "qr_required",
+          "value": false,
+          "evidence": [
+            {
+              "source_id": "S05",
+              "locator": "article text; field qr_required",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "manual_registration_available",
+          "value": true,
+          "evidence": [
+            {
+              "source_id": "S05",
+              "locator": "article text; field manual_registration_available",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "reported_route_count",
+          "value": 6,
+          "evidence": [
+            {
+              "source_id": "S05",
+              "locator": "article text; field reported_route_count",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    }
+  ]
+}
