@@ -1,10 +1,10 @@
 ---
+import { manilaDate } from "../lib/freshness";
 import { site } from "../lib/data";
 import { langFromUrl } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
-const now = new Date();
-const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+const today = manilaDate(new Date());
 
 type Alert = {
   text_fil?: string;
@@ -35,7 +35,7 @@ const alerts = (site.alerts as readonly Alert[]).filter((alert) => {
             /* source already passed the http check */
           }
           return (
-            <li>
+            <li data-alert-expires={alert.expires}>
               {text}{" "}
               <a href={alert.source}>{host}</a>
             </li>

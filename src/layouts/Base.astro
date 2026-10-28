@@ -24,6 +24,13 @@ const enPath = pathIn("en", Astro.url);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script is:inline>
+      // Restore before first paint; without a saved choice, CSS follows the device.
+      try {
+        const theme = localStorage.getItem("bp-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch (e) { /* storage may be blocked */ }
+    </script>
     {
       lang === "fil" && (
         <script is:inline define:vars={{ enPath }}>
@@ -93,5 +100,6 @@ const enPath = pathIn("en", Astro.url);
         }
       });
     </script>
+  <script>import "../lib/client-freshness";</script>
   </body>
 </html>
