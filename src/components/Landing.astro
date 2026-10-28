@@ -9,6 +9,7 @@ import Programs from "./Programs.astro";
 import OfficialsPreview from "./OfficialsPreview.astro";
 import Funds from "./Funds.astro";
 import Hotlines from "./Hotlines.astro";
+import RecentUpdates from "./RecentUpdates.astro";
 import { langFromUrl, ui } from "../i18n";
 
 const t = ui[langFromUrl(Astro.url)];
@@ -28,6 +29,7 @@ const t = ui[langFromUrl(Astro.url)];
   </section>
   <Featured />
   <Categories />
+  <RecentUpdates />
   <section class="border-t border-line py-14">
     <div class="wrap grid gap-14 md:grid-cols-2">
       <Programs />
