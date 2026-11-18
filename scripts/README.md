@@ -37,3 +37,10 @@ bun scripts/count_verify.mjs data
 ```
 
 The browser check uses `C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe` unless `BROWSER_PATH` points at another Chromium browser (macOS Chrome: `BROWSER_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`), and writes its report and screenshots under `research/implementation-audit/`. Run `bun run build` first: search needs the Pagefind index. See [the data guide](../data/README.md) for source retrieval, field evidence and review rules, and [the research index](../research/README.md) for archived implementation records.
+
+
+To check the public guide, use `bun run build` and `bun run preview`, then run
+`BROWSER_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" bun scripts/verify_guide_browser.mjs`
+with the path to your Chromium browser. Set `BETTERPASIG_PREVIEW_URL` if the preview uses a different URL
+and `BETTERPASIG_AUDIT_DIR` to save screenshots. The existing browser regression script also accepts
+`BETTERPASIG_AUDIT_DIR` to write its report to another location.

@@ -10,6 +10,7 @@
       "numbers": ["(02) 8643-0000"],
       "notes": "The main city emergency line for fire, rescue, medical and flood calls. The DRRMO Citizen's Charter calls it the 'Command Center Hotline'. DRRMO office: C3, Pasig City Hall, Caruncho Ave. DRRMO Research and Planning Division is 8643-0000 local 306. The city cited this number in its August 2026 habagat evacuation advisories.",
       "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393",
         "https://x.com/PasigInfo/status/1779530379407536451",
         "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/633f8800db42116651079686335211cbe1911664426268CCh_DRRMO.docx.pdf",
         "https://idrrm.ncr.dilg.gov.ph/lgu-profile/22",
@@ -175,7 +176,7 @@
       "kind": "emergency",
       "numbers": ["911"],
       "notes": "Nationwide emergency number.",
-      "sources": ["https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"],
+      "sources": ["https://ehotlines.e.gov.ph/"],
       "verify": false
     }
   ],

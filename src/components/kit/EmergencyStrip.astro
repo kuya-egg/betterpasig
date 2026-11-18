@@ -1,0 +1,92 @@
+---
+import Verify from "../Verify.astro";
+import { href, langFromUrl, ui } from "../../i18n";
+import { emergencyHotlines, telHref } from "../../lib/data";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotline" || id === "national-emergency-911");
+---
+
+<div class="bp-urgent">
+  <div class="wrap bp-urgent__inner">
+    <ul class="bp-urgent__links" aria-label={t.emergencyPageTitle}>
+      {lines.map((line) => (
+        <li>
+          <a href={telHref(line.numbers[0])}>
+            <span>{line.id === "pasig-emergency-hotline" ? "Pasig DRRMO" : t.guideNational}</span>
+            <strong>{line.numbers[0]}</strong>
+          </a>
+          {line.verify && <Verify />}
+        </li>
+      ))}
+    </ul>
+    <a class="bp-urgent__all" href={href(lang, "/emergency/#hotlines")}>{t.allHotlines} <span aria-hidden="true">→</span></a>
+    <p class="bp-urgent__clock">
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="10" cy="10" r="7.5" /><path d="M10 5.8v4.4l2.5 1.5" />
+      </svg>
+      <span>{t.guideTime}</span>
+      <time data-ph-clock hidden></time>
+    </p>
+  </div>
+</div>
+
+<script>
+  import { manilaTimeZone } from "../../lib/freshness";
+
+  const clock = document.querySelector<HTMLTimeElement>("[data-ph-clock]");
+  if (clock) {
+    const formatter = new Intl.DateTimeFormat("en-PH", {
+      timeZone: manilaTimeZone,
+      hour: "numeric",
+      minute: "2-digit",
+      hourCycle: "h12",
+    });
+    const minute = 60_000;
+    let timer = 0;
+
+    function update() {
+      window.clearTimeout(timer);
+      if (document.hidden || !clock) return;
+      const now = new Date();
+      clock.textContent = formatter.format(now);
+      clock.dateTime = now.toISOString();
+      clock.hidden = false;
+      timer = window.setTimeout(update, minute - (now.getTime() % minute));
+    }
+
+    document.addEventListener("visibilitychange", update);
+    window.addEventListener("pageshow", update);
+    update();
+  }
+</script>
+
+<style>
+  .bp-urgent { background: #951f18; color: white; }
+  .bp-urgent__inner { display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--s-5); }
+  .bp-urgent__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-5); }
+  .bp-urgent__links li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+  .bp-urgent__links a, .bp-urgent__all {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: 3rem;
+    font-size: .875rem;
+    text-underline-offset: 4px;
+  }
+  .bp-urgent__links strong { font-size: 1rem; font-weight: 750; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bp-urgent__all { text-decoration: underline; }
+  .bp-urgent :is(a, button):focus-visible { outline-color: white; }
+  .bp-urgent__clock { margin-inline-start: auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); font-size: .8125rem; }
+  .bp-urgent__clock time { min-width: 8ch; font-variant-numeric: tabular-nums; font-weight: 700; }
+  @media (hover: hover) { .bp-urgent a:hover { text-decoration: underline; } }
+  @media (max-width: 56rem) {
+    .bp-urgent__inner { gap: 0 var(--s-3); }
+    .bp-urgent__links { flex-basis: 100%; gap: 0 var(--s-3); }
+    .bp-urgent__clock { margin-inline-start: 0; padding-block: var(--s-2); }
+    .bp-urgent__clock svg { display: none; }
+    .bp-urgent__all { margin-inline-end: auto; }
+  }
+</style>

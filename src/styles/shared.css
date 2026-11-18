@@ -1,22 +1,4 @@
-/* Rules both layouts need: page-to-page transitions, copy buttons and the copy status toast. */
-
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-  ::view-transition-old(root) {
-    animation: 180ms cubic-bezier(.2, .8, .2, 1) both bp-page-out;
-  }
-  ::view-transition-new(root) {
-    animation: 320ms cubic-bezier(.22, 1, .36, 1) both bp-page-in;
-  }
-}
-@keyframes bp-page-out {
-  to { opacity: 0; }
-}
-@keyframes bp-page-in {
-  from { opacity: 0; transform: translateY(8px); }
-}
+/* Copy buttons and the copy status toast. */
 
 .copy-btn {
   border: 0;

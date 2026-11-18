@@ -3,6 +3,8 @@
 // and merges the results. This is the only list; add a pair here, nowhere else.
 export const synonyms: [string, string[]][] = [
   ["amilyar", ["real property tax"]],
+  ["tulong pinansyal", ["financial assistance", "ayuda"]],
+  ["parke", ["park"]],
   ["sedula", ["community tax", "cedula"]],
   ["kapanganakan", ["birth"]],
   ["kasal", ["marriage"]],

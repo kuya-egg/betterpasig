@@ -17,6 +17,13 @@ export const ui = {
 
     emergency: "Emergency",
     moreNumbers: "Iba pang numero",
+    guideHelp: "Tulong",
+    guideExplore: "Pasyalan",
+    guideMore: "Iba pa",
+    guideNational: "Pambansa",
+    guideTime: "Oras sa Pilipinas",
+    searchLoading: "Naghahanap…",
+    searchUnavailable: "Hindi mabuksan ang paghahanap. Puwede pa ring tingnan ang listahan ng serbisyo.",
 
     heroTitle: "Paano ka namin matutulungan?",
     heroLede: "Serbisyo, benepisyo at impormasyon ng Lungsod ng Pasig, mula sa Citizen's Charter ng bawat opisina.",
@@ -37,6 +44,7 @@ export const ui = {
     searchKinds: {
       serbisyo: "Serbisyo",
       lugar: "Lugar",
+      pasyalan: "Pasyalan",
       barangay: "Barangay",
       tulong: "Benepisyo",
       opisyal: "Opisyal",
@@ -54,8 +62,8 @@ export const ui = {
     useLightMode: "Gumamit ng maliwanag na mode",
     useDarkMode: "Gumamit ng madilim na mode",
 
-    searchLabel: "Maghanap ng serbisyo",
-    searchPlaceholder: "Hal. amilyar, birth certificate",
+    searchLabel: "Maghanap sa BetterPasig",
+    searchPlaceholder: "Hal. amilyar, parke",
     searchButton: "Hanapin",
     noMatch: "Walang tugma. Subukan ang ibang salita o tingnan ang lahat ng serbisyo.",
     matchOne: "1 tugma",
@@ -230,8 +238,8 @@ export const ui = {
     aboutPhotos: "Tingnan ang kumuha, lisensya at pahina ng bawat larawan",
 
     // Home page ({services}, {programs}, {date} are filled from data)
-    homeTitle: "Lahat ng serbisyo ng Pasig, sa isang hanap",
-    homeLead: "{services} serbisyo at {programs} benepisyo ng lungsod, bawat isa may opisina, bayad, tagal at pinagmulan.",
+    homeTitle: "Gabay sa mga serbisyo at lugar sa Pasig",
+    homeLead: "Alamin kung saan pupunta, ano ang dadalhin, at paano makakakuha ng tulong sa Pasig.",
     mainAction: "Hanapin ang serbisyo",
     navFundsShort: "Pondo",
     emergencyCardLabel: "Emergency, sunog o rescue",
@@ -288,6 +296,13 @@ export const ui = {
 
     emergency: "Emergency",
     moreNumbers: "More numbers",
+    guideHelp: "Assistance",
+    guideExplore: "Explore Pasig",
+    guideMore: "More",
+    guideNational: "National",
+    guideTime: "Philippine time",
+    searchLoading: "Searching…",
+    searchUnavailable: "Search is unavailable. You can still browse the service directory.",
 
     heroTitle: "How can we help?",
     heroLede: "Pasig City services, benefits, and information, from each office's Citizen's Charter.",
@@ -307,6 +322,7 @@ export const ui = {
     searchKinds: {
       serbisyo: "Service",
       lugar: "Place",
+      pasyalan: "Place to visit",
       barangay: "Barangay",
       tulong: "Benefit",
       opisyal: "Official",
@@ -324,8 +340,8 @@ export const ui = {
     useLightMode: "Use light mode",
     useDarkMode: "Use dark mode",
 
-    searchLabel: "Search for a service",
-    searchPlaceholder: "e.g. amilyar, birth certificate",
+    searchLabel: "Search BetterPasig",
+    searchPlaceholder: "e.g. permits, parks",
     searchButton: "Search",
     noMatch: "No match. Try another word, or look through all services.",
     matchOne: "1 match",
@@ -499,8 +515,8 @@ export const ui = {
     aboutReport: "Report a correction",
     aboutPhotos: "See the author, licence and page of every photograph",
 
-    homeTitle: "Every Pasig city service, in one search",
-    homeLead: "{services} city services and {programs} benefits, each with its office, fee, processing time and source.",
+    homeTitle: "Your guide to services and places in Pasig",
+    homeLead: "Find out where to go, what to bring, and how to get help in Pasig.",
     mainAction: "Find a service",
     navFundsShort: "Funds",
     emergencyCardLabel: "Emergency, fire or rescue",

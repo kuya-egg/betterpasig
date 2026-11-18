@@ -404,7 +404,23 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/population/686b654cb1f2f1751868748Citizen_s%20Charter%20English.pdf"
       ],
-      "verify": false
+      "verify": false,
+      "english": {
+        "summary": "Request a certified true copy of a record filed with the Pasig City Civil Registry.",
+        "requirements": [
+          "Valid government-issued ID",
+          "Request form and Tax Order (Window 6)",
+          "Official receipt from the City Treasurer’s Office"
+        ],
+        "steps": [
+          "Fill out the request form and show your ID",
+          "The office will look up the record",
+          "Pay at the Treasurer’s Office",
+          "The registrar signs and releases the copy"
+        ],
+        "fee": "Birth certificate: PHP 120 (front only), PHP 140 (front and back), PHP 200 (with annotation). Marriage certificate: PHP 150 or PHP 200 (with annotation).",
+        "processing_time": "About 50 minutes"
+      }
     },
     {
       "id": "marriage-license",
@@ -934,7 +950,25 @@
         "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf",
         "https://assets.pasigcity.gov.ph/storage/attachments/city_treasurer's_office/686b08431a5401751844931Citizen_s%20Charter%20English.pdf"
       ],
-      "verify": true
+      "verify": true,
+      "english": {
+        "summary": "Renew the annual business permit for a registered business.",
+        "requirements": [
+          "UBAF",
+          "Proof of gross sales for the previous year (VAT or percentage tax returns, or a sworn sales statement)",
+          "Previous year’s Tax Order of Payment",
+          "Authorization letter if applying through a representative"
+        ],
+        "steps": [
+          "Fill out the UBAF",
+          "File it with the BPLD",
+          "Get the Tax Order of Payment",
+          "Pay at the City Treasurer’s Office",
+          "Collect the permit, plate, and stickers"
+        ],
+        "fee": "The BPLD charges no fee. Business tax and fees depend on the assessment. Pay in cash or by manager’s check payable to “City Treasurer of Pasig.”",
+        "processing_time": "About 90 minutes"
+      }
     },
     {
       "id": "business-permit-amendment",
@@ -1617,7 +1651,21 @@
       "verify": true,
       "recent_update_ids": [
         "rpt-2027-advance-payment"
-      ]
+      ],
+      "english": {
+        "summary": "Get a property tax bill and pay at City Hall, an annex, or online.",
+        "requirements": [
+          "A copy of the tax declaration or the latest official receipt"
+        ],
+        "steps": [
+          "Show the tax declaration or receipt",
+          "The office verifies the record",
+          "Get the billing statement",
+          "Pay at the cashier or online",
+          "Get the official receipt"
+        ],
+        "processing_time": "About 5 minutes for billing and 2 minutes at the cashier. For online payment, the official receipt is released in 3–5 working days."
+      }
     },
     {
       "id": "pay-business-tax-online",
@@ -3001,7 +3049,23 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_city_mayor/662a1322e760d1714033442ENGLISH.pdf"
       ],
-      "verify": false
+      "verify": false,
+      "english": {
+        "summary": "Financial assistance for Pasig residents in crisis.",
+        "requirements": [
+          "Medical: clinical abstract, hospital bill or prescription, barangay certificate of indigency, and social case study",
+          "Funeral: death certificate, funeral contract, IDs of the deceased and claimant, and barangay certificate of indigency",
+          "Education: certificate of enrollment, school ID, and barangay certificate of indigency"
+        ],
+        "steps": [
+          "Show the requirements for assessment",
+          "Fill out the General Intake Sheet",
+          "Wait for a text or call",
+          "Collect the assistance with a valid ID"
+        ],
+        "fee": "No fee",
+        "processing_time": "About 40–45 minutes. Assistance is released within 2 weeks."
+      }
     },
     {
       "id": "damayan-funeral",
@@ -3122,7 +3186,25 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_senior_citizen_affairs/686b673acd45c1751869242Citizen_s%20Charter%20English.pdf"
       ],
-      "verify": false
+      "verify": false,
+      "english": {
+        "summary": "Discount ID and booklet for senior citizens who live in Pasig.",
+        "requirements": [
+          "Application form",
+          "Photocopy of the PSA birth certificate",
+          "Two 1×1 photos",
+          "Barangay residency certificate",
+          "Photocopy of a government ID with a Pasig address"
+        ],
+        "steps": [
+          "Submit the application at the barangay help desk or OSCA",
+          "The office verifies the record",
+          "The office approves and records the application",
+          "Collect the ID and booklet"
+        ],
+        "fee": "No fee",
+        "processing_time": "11–14 minutes"
+      }
     },
     {
       "id": "senior-benefit-card",
@@ -3655,7 +3737,27 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/education_unit/686b2985905ca1751853445Citizen_s%20Charter%20English.pdf"
       ],
-      "verify": false
+      "verify": false,
+      "english": {
+        "summary": "Scholarships for Pasig residents in academics, arts, sports, out-of-school learning, and other categories.",
+        "requirements": [
+          "Printed online application form",
+          "One 1×1 photo",
+          "School ID",
+          "Report of grades and proof of enrollment",
+          "Barangay Certificate of Residency",
+          "Proof of parent income",
+          "Handwritten essay"
+        ],
+        "steps": [
+          "Apply online and print the form",
+          "Submit the documents in a brown envelope",
+          "Parent interview",
+          "Check Facebook for the list of scholars"
+        ],
+        "fee": "No fee",
+        "processing_time": "About 15–20 working days"
+      }
     },
     {
       "id": "scholarship-renewal",

@@ -1,5 +1,6 @@
 ---
 import Kit from "../layouts/Kit.astro";
+import Search from "./Search.astro";
 import Verify from "./Verify.astro";
 import { categories, officeName, offices, services } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
@@ -15,6 +16,14 @@ const t = ui[lang];
         <h1 id="services-h">{t.allServices}</h1>
         <p>{t.serviceCount(services.length, categories.length, offices.length)}</p>
       </div>
+      <Search />
+      <nav class="bp-cat__jump" id="service-categories" aria-label={lang === "en" ? "Service categories" : "Mga kategorya ng serbisyo"}>
+        <ul>
+          {categories.map((category) => (
+            <li><a href={`#${category.id}`}>{lang === "en" ? category.name_en : category.name_fil}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </section>
   {
@@ -59,6 +68,20 @@ const t = ui[lang];
 </Kit>
 
 <style>
+  .bp-cat__jump { margin-top: var(--s-5); }
+  .bp-cat__jump ul { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bp-cat__jump a {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    color: var(--blue);
+    padding-inline: var(--s-3);
+    font-size: .9375rem;
+    font-weight: 650;
+  }
+  @media (hover: hover) { .bp-cat__jump a:hover { background: var(--pale); text-decoration: underline; } }
   .bp-cat__head {
     display: flex;
     align-items: baseline;
@@ -95,7 +118,7 @@ const t = ui[lang];
   }
   .bp-cat__link {
     display: inline-flex;
-    min-height: 44px;
+    min-height: 48px;
     align-items: center;
     font-size: var(--t-body);
     font-weight: 500;

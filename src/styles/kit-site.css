@@ -19,10 +19,9 @@
   --p-inv-accent: #ffffff; --p-inv-accent-ink: #16181d; --p-inv-action: #ffffff; --p-inv-action-ink: #16181d;
   --font-display: "Manrope", system-ui, sans-serif;
   --font-text: "Manrope", system-ui, sans-serif;
-  --display-weight: 400;
+  --display-weight: 650;
   --display-tracking: -0.035em;
   --display-tracking-xl: -0.045em;
-  --ly-scale: 0.97;
 
   /* the site's own tokens, read by components shared with the older layout */
   --subtle: #f4f6f9; --blue: #1a47a8; --pale: #e6ecf8; --hover: #c7d5f4; --mark-bg: #dce5f8;
@@ -52,26 +51,11 @@
   color-scheme: dark;
 }
 
-html, body { overflow-x: clip; }
 body { background: var(--bg); color: var(--ink); }
 
 /* the Pasig outline beside the name (the client's logo replaces the dealt mark) */
 .nav__logo .bp-mark { height: 26px; width: auto; color: var(--accent); flex: none; }
 .footer .nav__logo .bp-mark { height: 0.9em; }
-
-/* emergency stays red wherever it appears */
-.nav__actions .bp-emergency { color: var(--red); }
-.actionbar .bp-call { color: var(--red); border-color: color-mix(in oklab, var(--red) 40%, transparent); }
-
-/* menu panels: the links set in columns */
-.bp-menu-links { list-style: none; margin: 0; padding: 0; columns: var(--cols, 3); column-gap: var(--gutter); }
-.bp-menu-links li { break-inside: avoid; }
-.bp-menu-links a { display: flex; align-items: center; min-height: 40px; font-size: var(--t-small); color: var(--ink); }
-.bp-menu-links a:hover { color: var(--action); }
-@media (max-width: 1023px) {
-  .bp-menu-links { columns: 1; }
-  .bp-menu-links a { min-height: 44px; font-size: var(--t-body); }
-}
 
 /* footer */
 .bp-foot-links { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
@@ -80,6 +64,47 @@ body { background: var(--bg); color: var(--ink); }
 .bp-theme { font: inherit; color: inherit; background: none; border: 1px solid var(--line-strong); border-radius: var(--r-btn); min-height: 44px; padding: 0 var(--s-4); cursor: pointer; }
 .bp-theme[aria-pressed="true"] { background: var(--surface); }
 
-/* reference pages (a service, a barangay, a directory) read top to bottom: the section grows with its content */
-main > .section.section--flow { height: auto; min-height: calc(100svh - var(--nav)); }
-main > .section.section--flow + .section--flow { min-height: 0; }
+/* Site sections follow their content and share the same horizontal grid. */
+:root[data-type="service"] {
+  --container: 76rem;
+  --gut: clamp(1rem, 5vw, 4rem);
+  --t-body: 1.0625rem;
+  --t-h1: clamp(2rem, 1.55rem + 2.1vw, 3.65rem);
+  --t-h2: clamp(1.65rem, 1.42rem + 1.2vw, 2.65rem);
+  --t-h3: clamp(1.23rem, 1.12rem + .5vw, 1.65rem);
+  --btn-h: 3rem;
+  --head-gap: clamp(1.5rem, 4vw, 2.25rem);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+.bp-site main > :is(section, .section) {
+  height: auto;
+  min-height: 0;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+.bp-site main > :is(section, .section) > .wrap { height: auto; }
+.bp-site main .rows__value { white-space: normal; overflow-wrap: anywhere; }
+.bp-site main > :is(section, .section) > .section-head p,
+.bp-site .section-head > p { color: var(--muted); }
+.bp-site main > .section--flow:first-of-type {
+  padding-block-start: clamp(2rem, 4vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 4px var(--pale);
+}
+.bp-site main :is(a, button, input, select, summary):focus-visible,
+.bp-site :is(header, footer) :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+.bp-site :is(main, footer) a { overflow-wrap: anywhere; }
+.bp-site .bp-urgent a:focus-visible { outline-color: white; }
+.bp-site :is(.btn, .bp-theme, .bp-foot-links a) { min-height: 3rem; }
+.bp-site .bp-footer { background: var(--surface); padding-block: clamp(2rem, 5vw, 4rem) var(--s-5); }
+.bp-footer .footer__legal { align-items: center; }
+.bp-footer .bp-foot-about > .nav__logo { width: fit-content; min-height: 3rem; font-weight: 750; }
+.bp-footer .closing__links .grid { row-gap: var(--s-5); }
+@media (prefers-reduced-motion: reduce) {
+  .bp-site *, .bp-site *::before, .bp-site *::after { animation: none !important; transition: none !important; }
+}
+
+.bp-footer .bp-footer__column { font-size: .9375rem; letter-spacing: 0; }

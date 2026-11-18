@@ -67,7 +67,15 @@ export const dataSchemas = {
   services: z.object({
     categories: z.array(z.object({ id: z.string().min(1) })),
     offices: z.array(fact),
-    services: z.array(fact),
+    services: z.array(sourced({
+      english: z.object({
+        summary: z.string().min(1),
+        requirements: z.array(z.string().min(1)),
+        steps: z.array(z.string().min(1)),
+        fee: z.string().min(1).optional(),
+        processing_time: z.string().min(1),
+      }).optional(),
+    })),
   }),
   barangays: z.object({
     barangays: z.array(fact),
