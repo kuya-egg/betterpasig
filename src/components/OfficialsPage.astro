@@ -23,6 +23,9 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const byName = (a: { name: string }, b: { name: string }) =>
   a.name.localeCompare(b.name, "fil", { sensitivity: "base" });
+// Prose fields are stored as <field>_fil / <field>_en; null when the record has no such field.
+const text = (record: object, field: string): string | null =>
+  ((record as Record<string, string | null | undefined>)[`${field}_${lang === "en" ? "en" : "fil"}`]) ?? null;
 const uniq = (lists: (readonly string[] | undefined)[]) => [...new Set(lists.flatMap((l) => l ?? []))];
 
 const top = ["Mayor", "Vice Mayor", "Representative"].flatMap((position) =>
@@ -58,13 +61,13 @@ const offices: Office[] = officialsDirectory.departments.map((d) => {
   return {
     office: d.office,
     head: d.head || null,
-    position: d.position ?? null,
+    position: text(d, "position"),
     phones: d.phones,
     email: d.email,
-    location: d.location,
+    location: text(d, "location"),
     sources: uniq([d.sources, extra?.sources]),
     verify: d.verify || Boolean(extra?.verify),
-    note: d.note ?? null,
+    note: text(d, "note"),
   };
 });
 for (const h of departmentHeads) {
@@ -78,7 +81,7 @@ for (const h of departmentHeads) {
     location: null,
     sources: [...h.sources],
     verify: h.verify,
-    note: h.note ?? null,
+    note: text(h, "note"),
   });
 }
 offices.sort((a, b) => a.office.localeCompare(b.office, "fil", { sensitivity: "base" }));
@@ -108,13 +111,13 @@ const districts = [1, 2].map((d) => ({
       <h2 id="opisyal-lungsod-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.cityOfficialsHeading}</h2>
       <ul class="mt-4 border-t-2 border-ink">
         {top.map((p) => (
-          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} class="border-b border-line py-3">
+          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name} class="border-b border-line py-3">
             <div class="flex flex-wrap items-baseline justify-between gap-x-4">
               <span class="text-muted">{role(p.position)}</span>
               <strong class="font-semibold">{p.name}{p.verify && <Verify />}</strong>
             </div>
             <p class="mt-1 text-[14px] text-muted">
-              {p.note && <>{p.note} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+              {text(p, "note") && <>{text(p, "note")} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
             </p>
           </li>
         ))}
@@ -125,9 +128,9 @@ const districts = [1, 2].map((d) => ({
             <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{d === 1 ? t.council1 : t.council2}</h3>
             <ul class="mt-2 border-t-2 border-ink">
               {councilFor(d).map((p) => (
-                <li class="border-b border-line py-2.5">
+                <li id={`opisyal-${p.id}`} data-pagefind-title={p.name} class="border-b border-line py-2.5">
                   <span>{p.name}{p.verify && <Verify />}</span>
-                  {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                  {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
                   <p class="mt-0.5 text-[14px] text-muted">
                     {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
                   </p>
@@ -150,8 +153,8 @@ const districts = [1, 2].map((d) => ({
             {exOfficioCity.map((p) => (
               <li class="border-b border-line py-2.5">
                 <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
-                {"role" in p && p.role && <p class="text-[15px]">{p.role}</p>}
-                {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                {text(p, "role") && <p class="text-[15px]">{text(p, "role")}</p>}
+                {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
                 <p class="mt-0.5 text-[14px] text-muted">
                   {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
                   · {t.checked}: {formatDate(lang, officialsRetrieved)}
@@ -166,8 +169,8 @@ const districts = [1, 2].map((d) => ({
             {exOfficioDirectory.map((p) => (
               <li class="border-b border-line py-2.5">
                 <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
-                <p class="text-[15px]">{p.position}{p.barangay && <> · {p.barangay}</>}</p>
-                {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                <p class="text-[15px]">{text(p, "position")}{p.barangay && <> · {p.barangay}</>}</p>
+                {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
                 <p class="mt-0.5 text-[14px] text-muted">
                   {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
                   · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
@@ -231,7 +234,7 @@ const districts = [1, 2].map((d) => ({
                 b.hall_address.value ? b.hall_address.sources : [],
               ]);
               return (
-                <li id={`opisyal-${b.slug}`} class="border-b border-line py-4">
+                <li id={`opisyal-${b.slug}`} data-pagefind-title={b.name} class="border-b border-line py-4">
                   <h4 class="text-[19px] font-semibold tracking-[-0.01em]">
                     {b.id ? <a href={href(lang, `/barangay/${b.id}/`)}>{b.name}</a> : b.name}
                   </h4>

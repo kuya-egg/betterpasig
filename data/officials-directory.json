@@ -22,7 +22,8 @@
   ],
   "ex_officio": [
     {
-      "position": "Liga ng mga Barangay President",
+      "position_fil": "Pangulo ng Liga ng mga Barangay",
+      "position_en": "Liga ng mga Barangay President",
       "name": "Rigor J. Enriquez",
       "barangay": "San Nicolas",
       "sources": [
@@ -30,10 +31,12 @@
         "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas"
       ],
       "verify": true,
-      "note": "Wikipedia lists him as ABC President ex-officio councilor; no news/official confirmation found."
+      "note_fil": "Inililista siya ng Wikipedia bilang ABC President at ex-officio na konsehal; walang nakitang kumpirmasyon mula sa balita o opisyal na source.",
+      "note_en": "Wikipedia lists him as ABC President ex-officio councilor; no news/official confirmation found."
     },
     {
-      "position": "SK Federation President",
+      "position_fil": "Pangulo ng SK Federation",
+      "position_en": "SK Federation President",
       "name": "Keil P. Custillas",
       "barangay": "Pinagbuhatan",
       "sources": [
@@ -41,14 +44,16 @@
         "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan"
       ],
       "verify": true,
-      "note": "Wikipedia lists as SK Federation President ex-officio councilor; no news/official confirmation found."
+      "note_fil": "Inililista siya ng Wikipedia bilang SK Federation President at ex-officio na konsehal; walang nakitang kumpirmasyon mula sa balita o opisyal na source.",
+      "note_en": "Wikipedia lists as SK Federation President ex-officio councilor; no news/official confirmation found."
     }
   ],
   "departments": [
     {
       "office": "Office of the City Administrator",
       "head": "Jeronimo Manzanero",
-      "position": "City Administrator",
+      "position_fil": "City Administrator",
+      "position_en": "City Administrator",
       "phones": [],
       "email": null,
       "location": null,
@@ -57,25 +62,30 @@
         "https://assets.pasigcity.gov.ph/storage/attachments/city_administrator's_office/633f8e88dc3791665109640632bd17f4df561663816063CCh_OCA.pdf"
       ],
       "verify": true,
-      "note": "Name from Philstar (2026-08-03) news mention. OCA citizen's charter (2022 edition) names no head and lists no local; mentions 8888 Citizen Complaint Hotline."
+      "note_fil": "Pangalan mula sa balita ng Philstar (2026-08-03). Walang pinangalanang pinuno ang citizen's charter ng OCA (edisyong 2022) at walang nakalistang local; binabanggit nito ang 8888 Citizen Complaint Hotline.",
+      "note_en": "Name from Philstar (2026-08-03) news mention. OCA citizen's charter (2022 edition) names no head and lists no local; mentions 8888 Citizen Complaint Hotline."
     },
     {
       "office": "Office of the City Treasurer",
       "head": "Marita A. Calaje",
-      "position": "City Treasurer",
+      "position_fil": "Ingat-yaman ng Lungsod",
+      "position_en": "City Treasurer",
       "phones": [],
       "email": null,
-      "location": "Temporary Pasig City Hall (Bridgetowne); collection annexes at Revolving Tower, Ayala Malls The 30th, Robinsons Metro East annex, Pasig Mega Market",
+      "location_fil": "Pansamantalang Pasig City Hall (Bridgetowne); mga annex para sa koleksyon sa Revolving Tower, Ayala Malls The 30th, Robinsons Metro East annex, Pasig Mega Market",
+      "location_en": "Temporary Pasig City Hall (Bridgetowne); collection annexes at Revolving Tower, Ayala Malls The 30th, Robinsons Metro East annex, Pasig Mega Market",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/city_treasurer's_office/686b08431a5401751844931Citizen_s%20Charter%20English.pdf"
       ],
       "verify": false,
-      "note": "2025-edition charter (uploaded July 2025). No local listed in that document."
+      "note_fil": "Charter na edisyong 2025 (na-upload noong Hulyo 2025). Walang nakalistang local sa dokumentong iyon.",
+      "note_en": "2025-edition charter (uploaded July 2025). No local listed in that document."
     },
     {
       "office": "City Assessor's Office",
       "head": "Robert D. Mina",
-      "position": "City Assessor",
+      "position_fil": "Tagatasa ng Lungsod",
+      "position_en": "City Assessor",
       "phones": [
         {
           "number": "(02) 8643-1111 local 1321",
@@ -92,7 +102,8 @@
         "https://assets.pasigcity.gov.ph/storage/attachments/city_assessor's_office/648149e820c361686194664English.pdf"
       ],
       "verify": true,
-      "note": "From Feb 14, 2023 charter edition; no 2025 edition found. Confirm current head."
+      "note_fil": "Mula sa edisyon ng charter noong Pebrero 14, 2023; walang nahanap na edisyong 2025. Kumpirmahin kung sino ang kasalukuyang pinuno.",
+      "note_en": "From Feb 14, 2023 charter edition; no 2025 edition found. Confirm current head."
     },
     {
       "office": "Business Permit and Licensing Department (BPLD)",
@@ -150,17 +161,20 @@
         }
       ],
       "email": "bpldadmin@pasigcity.gov.ph",
-      "location": "Eulogio Amang Rodriguez Ave., Bridgetowne, Rosario, Pasig City (plus annexes at Ayala Malls The 30th, Robinsons Metro East, Mutya ng Pasig Mega Market)",
+      "location_fil": "Eulogio Amang Rodriguez Ave., Bridgetowne, Rosario, Pasig City (kasama ang mga annex sa Ayala Malls The 30th, Robinsons Metro East, Mutya ng Pasig Mega Market)",
+      "location_en": "Eulogio Amang Rodriguez Ave., Bridgetowne, Rosario, Pasig City (plus annexes at Ayala Malls The 30th, Robinsons Metro East, Mutya ng Pasig Mega Market)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/business_permit_and_licensing_department/686768e6a0f0a1751607526Citizen_s%20Charter%20English.pdf"
       ],
       "verify": false,
-      "note": "2025 Citizen's Charter, updated 4 March 2025. Annex emails: bpld.annex1@, bpld.annex2@, bpld.bridgetowne@, bpld.mutya@pasigcity.gov.ph. Head not named."
+      "note_fil": "2025 Citizen's Charter, na-update noong 4 Marso 2025. Mga email ng annex: bpld.annex1@, bpld.annex2@, bpld.bridgetowne@, bpld.mutya@pasigcity.gov.ph. Hindi pinangalanan ang pinuno.",
+      "note_en": "2025 Citizen's Charter, updated 4 March 2025. Annex emails: bpld.annex1@, bpld.annex2@, bpld.bridgetowne@, bpld.mutya@pasigcity.gov.ph. Head not named."
     },
     {
       "office": "City Civil Registry",
       "head": null,
-      "position": "City Civil Registrar",
+      "position_fil": "City Civil Registrar",
+      "position_en": "City Civil Registrar",
       "phones": [
         {
           "number": "(02) 8643-1111 local 381",
@@ -172,17 +186,20 @@
         }
       ],
       "email": null,
-      "location": "3rd Floor, City Civil Registry, Pasig City Hall",
+      "location_fil": "Ika-3 Palapag, City Civil Registry, Pasig City Hall",
+      "location_en": "3rd Floor, City Civil Registry, Pasig City Hall",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/population/686b654cb1f2f1751868748Citizen_s%20Charter%20English.pdf"
       ],
       "verify": false,
-      "note": "2025-edition charter; registrar not named."
+      "note_fil": "Charter na edisyong 2025; hindi pinangalanan ang registrar.",
+      "note_en": "2025-edition charter; registrar not named."
     },
     {
       "office": "City Health Department",
       "head": "Joseph R. Panaligan, MD, MHA",
-      "position": "City Health Officer (Department Head)",
+      "position_fil": "City Health Officer (Pinuno ng Kagawaran)",
+      "position_en": "City Health Officer (Department Head)",
       "phones": [
         {
           "number": "8642-7754 loc. 390, 391",
@@ -194,7 +211,8 @@
         }
       ],
       "email": "cityhealth@pasigcity.gov.ph",
-      "location": "Admin Office, 3rd Floor, Temporary City Hall, Bridgetowne, Amang Rodriguez Ave., Rosario, Pasig City",
+      "location_fil": "Admin Office, Ika-3 Palapag, Temporary City Hall, Bridgetowne, Amang Rodriguez Ave., Rosario, Pasig City",
+      "location_en": "Admin Office, 3rd Floor, Temporary City Hall, Bridgetowne, Amang Rodriguez Ave., Rosario, Pasig City",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf"
       ],
@@ -203,15 +221,18 @@
     {
       "office": "City Social Welfare and Development Office (CSWDO)",
       "head": "Ma. Teresa O. Briones",
-      "position": "Head of Office",
+      "position_fil": "Pinuno ng Tanggapan",
+      "position_en": "Head of Office",
       "phones": [],
       "email": "pcsw@pasigcity.gov.ph",
-      "location": "Bahay Aruga Building (ground floor information desk)",
+      "location_fil": "Bahay Aruga Building (information desk sa ground floor)",
+      "location_en": "Bahay Aruga Building (ground floor information desk)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/pasig_social_welfare_and_development_office/686b67911b50c1751869329Citizen_s%20Charter%20English.pdf"
       ],
       "verify": false,
-      "note": "Citizen's Charter 2025. No phone listed."
+      "note_fil": "Citizen's Charter 2025. Walang nakalistang telepono.",
+      "note_en": "Citizen's Charter 2025. No phone listed."
     },
     {
       "office": "Office for Senior Citizens Affairs (OSCA)",
@@ -228,7 +249,8 @@
         }
       ],
       "email": "osca@pasigcity.gov.ph",
-      "location": "Temporary City Hall, Bridgetowne, Rosario; also Tanghalang Pasigueño",
+      "location_fil": "Temporary City Hall, Bridgetowne, Rosario; gayundin sa Tanghalang Pasigueño",
+      "location_en": "Temporary City Hall, Bridgetowne, Rosario; also Tanghalang Pasigueño",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_senior_citizen_affairs/686b673acd45c1751869242Citizen_s%20Charter%20English.pdf"
       ],
@@ -237,7 +259,8 @@
     {
       "office": "Persons with Disability Affairs Office (PDAO)",
       "head": "Helen G. Carmona",
-      "position": "Disability Affairs Officer IV (Head)",
+      "position_fil": "Disability Affairs Officer IV (Pinuno)",
+      "position_en": "Disability Affairs Officer IV (Head)",
       "phones": [
         {
           "number": "(02) 8643-1111 local 1162",
@@ -257,7 +280,8 @@
         }
       ],
       "email": "pdao@pasigcity.gov.ph",
-      "location": "Tanghalang Pasigueño, Caruncho Ave., San Nicolas (main); Temporary City Hall, Amang Rodriguez Ave., Rosario (alternate)",
+      "location_fil": "Tanghalang Pasigueño, Caruncho Ave., San Nicolas (pangunahin); Temporary City Hall, Amang Rodriguez Ave., Rosario (alternatibo)",
+      "location_en": "Tanghalang Pasigueño, Caruncho Ave., San Nicolas (main); Temporary City Hall, Amang Rodriguez Ave., Rosario (alternate)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/person_with_disability_affairs_office/686b67e4b86c11751869412Citizen_s%20Charter%20English.pdf"
       ],
@@ -266,7 +290,8 @@
     {
       "office": "Public Employment Service Office (PESO)",
       "head": "Jelene L. Sison, JD, MSHR, RPm",
-      "position": "PESO Manager",
+      "position_fil": "PESO Manager",
+      "position_en": "PESO Manager",
       "phones": [
         {
           "number": "(02) 8643-1111 local 1451",
@@ -295,7 +320,8 @@
     {
       "office": "Disaster Risk Reduction and Management Office (DRRMO)",
       "head": "Bryant Q. Wong, RN, EMT, MPM",
-      "position": "Chief, Pasig City DRRMO",
+      "position_fil": "Hepe, Pasig City DRRMO",
+      "position_en": "Chief, Pasig City DRRMO",
       "phones": [
         {
           "number": "(02) 8643-0000",
@@ -315,7 +341,8 @@
         }
       ],
       "email": "drrmo@pasigcity.gov.ph",
-      "location": "3rd Floor, Temporary Pasig City Hall, Eulogio Amang Rodriguez Ave., Rosario, Pasig City",
+      "location_fil": "Ika-3 Palapag, Temporary Pasig City Hall, Eulogio Amang Rodriguez Ave., Rosario, Pasig City",
+      "location_en": "3rd Floor, Temporary Pasig City Hall, Eulogio Amang Rodriguez Ave., Rosario, Pasig City",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/686775e995e781751610857Citizen_s%20Charter%20English.pdf"
       ],
@@ -324,7 +351,8 @@
     {
       "office": "City Engineering Office",
       "head": "Engr. Artaxerxes V. Geronimo",
-      "position": "OIC, City Engineering Office",
+      "position_fil": "OIC, City Engineering Office",
+      "position_en": "OIC, City Engineering Office",
       "phones": [
         {
           "number": "(02) 8643-0000 local 1645",
@@ -337,30 +365,36 @@
         }
       ],
       "email": "engineering@pasig.gov.ph",
-      "location": "2nd Floor, Temporary City Hall, Eulogio Amang Rodriguez Ave., Brgy. Rosario, Pasig City",
+      "location_fil": "Ika-2 Palapag, Temporary City Hall, Eulogio Amang Rodriguez Ave., Brgy. Rosario, Pasig City",
+      "location_en": "2nd Floor, Temporary City Hall, Eulogio Amang Rodriguez Ave., Brgy. Rosario, Pasig City",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/engineering_office/68677c9f1749a1751612575Citizen_s%20Charter%20English.pdf"
       ],
       "verify": true,
-      "note": "Email printed as engineering@pasig.gov.ph (not pasigcity.gov.ph) in the charter; may be a typo."
+      "note_fil": "Nakalimbag sa charter ang email bilang engineering@pasig.gov.ph (hindi pasigcity.gov.ph); maaaring typo.",
+      "note_en": "Email printed as engineering@pasig.gov.ph (not pasigcity.gov.ph) in the charter; may be a typo."
     },
     {
       "office": "Office of the Building Official (OBO)",
       "head": "Engr. Francis Jerome P. Ronquillo",
-      "position": "OIC, Office of the Building Official",
+      "position_fil": "OIC, Office of the Building Official",
+      "position_en": "OIC, Office of the Building Official",
       "phones": [],
       "email": null,
-      "location": "Ground Floor, Temporary Pasig City Hall (forms)",
+      "location_fil": "Ground Floor, Temporary Pasig City Hall (para sa mga form)",
+      "location_en": "Ground Floor, Temporary Pasig City Hall (forms)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/office_of_the_building_official/686788cae06521751615690Citizen_s%20Charter%20English.pdf"
       ],
       "verify": false,
-      "note": "Charter revised as of 02/03/2025."
+      "note_fil": "Binago ang charter hanggang 02/03/2025.",
+      "note_en": "Charter revised as of 02/03/2025."
     },
     {
       "office": "City Environment and Natural Resources Office (CENRO) / Solid Waste Management Office",
       "head": "Allendri B. Angeles",
-      "position": "SWMO / Acting CENRO (Department Head II)",
+      "position_fil": "SWMO / Acting CENRO (Department Head II)",
+      "position_en": "SWMO / Acting CENRO (Department Head II)",
       "phones": [
         {
           "number": "(02) 8643-1111 local 1471",
@@ -380,17 +414,20 @@
         }
       ],
       "email": "cenro@pasigcity.gov.ph",
-      "location": "4th Floor, Pasig City Hall, Caruncho Ave., San Nicolas (pre-relocation address)",
+      "location_fil": "Ika-4 Palapag, Pasig City Hall, Caruncho Ave., San Nicolas (address bago lumipat)",
+      "location_en": "4th Floor, Pasig City Hall, Caruncho Ave., San Nicolas (pre-relocation address)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/city_environment_and_natural_resources_office/647ff14b4bd6a1686106443English.pdf"
       ],
       "verify": true,
-      "note": "From 2023 charter edition; no 2025 edition found. Location predates move to Temporary City Hall at Bridgetowne."
+      "note_fil": "Mula sa edisyon ng charter noong 2023; walang nahanap na edisyong 2025. Mas luma ang lokasyon kaysa sa paglipat sa Temporary City Hall sa Bridgetowne.",
+      "note_en": "From 2023 charter edition; no 2025 edition found. Location predates move to Temporary City Hall at Bridgetowne."
     },
     {
       "office": "Traffic and Parking Management Office (TPMO)",
       "head": null,
-      "position": "TPMO OIC / Chief TPMO",
+      "position_fil": "TPMO OIC / Chief TPMO",
+      "position_en": "TPMO OIC / Chief TPMO",
       "phones": [
         {
           "number": "8641-1907",
@@ -403,12 +440,14 @@
         }
       ],
       "email": null,
-      "location": "TBAR Building, BFP compound, F. Manalo St., Santo Tomas, Pasig City",
+      "location_fil": "TBAR Building, BFP compound, F. Manalo St., Santo Tomas, Pasig City",
+      "location_en": "TBAR Building, BFP compound, F. Manalo St., Santo Tomas, Pasig City",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/traffic_and_parking_management_office/662af8dd91e921714092253English%20and%20Filipino.pdf"
       ],
       "verify": true,
-      "note": "2024 charter edition."
+      "note_fil": "Edisyon ng charter noong 2024.",
+      "note_en": "2024 charter edition."
     },
     {
       "office": "Ugnayan sa Pasig",
@@ -425,14 +464,16 @@
         }
       ],
       "email": null,
-      "location": "2nd Floor, Pasig City Hall Bldg. (per Pasig Urban Settlements Office charter)",
+      "location_fil": "Ika-2 Palapag, Pasig City Hall Bldg. (ayon sa charter ng Pasig Urban Settlements Office)",
+      "location_en": "2nd Floor, Pasig City Hall Bldg. (per Pasig Urban Settlements Office charter)",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_health_department/686b58c0de12f1751865536Citizen_s%20Charter%20English.pdf",
         "https://assets.pasigcity.gov.ph/storage/attachments/housing/686b5a4e00ea81751865934Citizen_s%20Charter%20English.pdf",
         "https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"
       ],
       "verify": true,
-      "note": " Head name from 2024 GMA report (verify)."
+      "note_fil": "Pangalan ng pinuno mula sa ulat ng GMA noong 2024 (kumpirmahin).",
+      "note_en": "Head name from 2024 GMA report (verify)."
     },
     {
       "office": "Pasig City Command Center / City Hotline",
@@ -480,7 +521,8 @@
     {
       "office": "Pasig City General Hospital (PCGH)",
       "head": "Paulo Roman A. Castro, Jr., MD, PhD",
-      "position": "Medical Director",
+      "position_fil": "Direktor Medikal",
+      "position_en": "Medical Director",
       "phones": [
         {
           "number": "8643-3333 local 4601",
@@ -514,7 +556,8 @@
         "https://malaya.com.ph/news/national-news/pasig-city-general-hospital-marks-30th-year"
       ],
       "verify": true,
-      "note": "Malaya (Sept 2025) names Dr. Alice Santos as hospital administrator (separate post from Medical Director); charter names no administrator."
+      "note_fil": "Pinangalanan ng Malaya (Sept 2025) si Dr. Alice Santos bilang hospital administrator (hiwalay na posisyon sa Medical Director); walang pinangalanang administrator ang charter.",
+      "note_en": "Malaya (Sept 2025) names Dr. Alice Santos as hospital administrator (separate post from Medical Director); charter names no administrator."
     }
   ],
   "barangays": [
