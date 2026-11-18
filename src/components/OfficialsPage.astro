@@ -100,7 +100,7 @@ const districts = [1, 2].map((d) => ({
     <p class="mt-4 text-[17px]">{lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}</p>
     <p class="mt-2 max-w-[760px] text-[14px] text-muted">
       {lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}
-      {" "}{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+      {" "}{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a class="underline underline-offset-2" href={u}>{sourceLabel(u)}</a></>))}
       {" "}· {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
     </p>
 

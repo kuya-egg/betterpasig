@@ -32,7 +32,7 @@ const checked = formatDate(lang, transparencyRetrieved);
                 const label = lang === "en" ? figure.label_en : figure.label_fil;
                 const value = lang === "en" ? figure.value_en : figure.value_fil;
                 return (
-                  <tr id={figure.id} class="scroll-mt-24 border-b border-line align-top max-sm:block max-sm:py-3.5">
+                  <tr id={figure.id} data-pagefind-title={label} class="scroll-mt-24 border-b border-line align-top max-sm:block max-sm:py-3.5">
                     <th scope="row" class="py-3.5 pr-4 font-normal max-sm:block max-sm:py-0 sm:min-w-[14rem]">
                       {label}
                     </th>
@@ -70,7 +70,7 @@ const checked = formatDate(lang, transparencyRetrieved);
             const title = lang === "en" && link.title_en ? link.title_en : link.title_fil;
             const desc = lang === "en" && "description_en" in link && link.description_en ? link.description_en : "description_fil" in link ? link.description_fil : "";
             return (
-              <li id={link.id} class="scroll-mt-24 border-b border-line py-3.5">
+              <li id={link.id} data-pagefind-title={title} class="scroll-mt-24 border-b border-line py-3.5">
                 <a class="font-medium" href={link.url}>{title}</a>
                 {desc && <p class="mt-1">{desc}</p>}
                 <p class="mt-1 text-[14px] text-muted">

@@ -13,15 +13,15 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 | File | What it holds | Shows up on |
 |---|---|---|
 | `site.json` | Notice text, alerts, which hotlines and services to feature, City Hall location | Homepage |
-| `hotlines.json` | Emergency and city phone numbers (`label_fil` / `label_en` are the short names shown on the site), plus `conflicts` still to resolve | Emergency strip, Hotlines page |
+| `hotlines.json` | Emergency and city phone numbers (`label_fil` / `label_en` are the short names shown on the site), plus `conflicts` still to resolve (`text_fil` / `text_en`) | Emergency strip, `/emergency` |
 | `services.json` | 12 `categories`, 31 `offices`, 173 `services` from the Pasig Citizen's Charters | Services pages, search |
-| `programs.json` | Benefits and programs (senior pension, solo parent, scholarships, etc.) | Programs / Tulong page |
+| `programs.json` | Benefits and programs (senior pension, solo parent, scholarships, etc.): `for_*`, `benefit_*`, `how_*`, `note_*` | `/tulong`, homepage benefits |
 | `barangays.json` | All 30 barangays with district, captain, contact | Barangay pages |
-| `facilities.json` | Hospitals, evacuation centers, flood notes | Barangay pages, Emergency page |
-| `officials.json` | Elected officials 2025–2028, some department heads | Government page |
-| `officials-directory.json` | Full directory: city officials, council, department heads, and every barangay's officials and contact numbers | Officials directory page |
-| `city.json` | City facts and City Hall contact | Homepage "Pasig at a glance" |
-| `transparency.json` | Links to official disclosure portals and key figures | Public funds page |
+| `facilities.json` | Hospitals, evacuation centers, flood notes (`text_*`), list caveat (`notes_*`) | Barangay pages, `/emergency` |
+| `officials.json` | Elected officials 2025–2028, some department heads | `/opisyal`, homepage officials |
+| `officials-directory.json` | Full directory: terms (`term_*`, `term_note_*`), ex-officio, department heads, and every barangay's officials and contact numbers | `/opisyal` |
+| `city.json` | City facts (`value_*`, `note_*`) and City Hall contact | `/tungkol` "Pasig at a glance" |
+| `transparency.json` | Links to official disclosure portals (`description_*`) and key figures (`label_*`, `value_*`, `note_*`) | `/pondo`, homepage funds |
 
 ## Rules for editing
 
@@ -29,7 +29,7 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 2. **Use `verify`.** Set `"verify": true` when a value comes only from a secondary site, conflicts with another source, or might be outdated. The site shows these with a "being checked" label. Set it to `false` only after someone confirms it against an official source or by calling.
 3. **Never guess.** If a fee, requirement or number is unknown, use `null`. The site hides empty fields.
 4. **Keep IDs stable.** `id` values are used in URLs and in `site.json`. Rename the title, not the ID.
-5. **Filipino first.** Fields ending in `_fil` are the default; `_en` is the English toggle.
+5. **Filipino first.** Fields ending in `_fil` are the default; `_en` is the English toggle. Prose and values that people read get both (`*_fil` and `*_en`); keep every number, peso amount, date, name and phone number identical between the two. A name, URL or plain number stays a single field.
 
 ## Services schema
 
