@@ -143,7 +143,7 @@ Until that file exists, crawlers are not blocked. Publish it before launch.
 
 **Current level:** L1 CI gate, since 2026-11-18. GitHub Actions runs the `check` workflow on every push and pull request, and repository rulesets require it to pass before a merge into `dev` or `main`.
 **Next level and its trigger:** L2 when the browser verifiers (`scripts/verify_pasig_browser.mjs`, `scripts/verify_guide_browser.mjs`) run in CI and a rollback has been rehearsed.
-**Exists today:** local verification yes, `bun run check`. Tests in CI: data contracts, freshness, type check, build (including the trusted-source check), page weight. Browser tests local only. Preview per pull request yes (Cloudflare Pages). Deploy on merge yes, from the Pages production branch. Branches: `dev` takes pull requests reviewed by any maintainer; `main` is production and needs the owner's approval (`.github/CODEOWNERS`). Staged rollout or flags no. Rollback documented in PRD §9, not rehearsed. Secrets none in the repo. Backup is git. Restore not drilled.
+**Exists today:** local verification yes, `bun run check`. Tests in CI: data contracts, freshness, type check, build (including the trusted-source check), page weight. Browser tests local only. Preview per pull request yes (Cloudflare Pages). Deploy on merge yes, from the Pages production branch. Branches: `dev` is the default and takes pull requests reviewed by any maintainer; `main` is production, takes pull requests only from `dev` (`release-source` check), and needs the owner's approval (`.github/CODEOWNERS`). Staged rollout or flags no. Rollback documented in PRD §9, not rehearsed. Secrets none in the repo. Backup is git. Restore not drilled.
 
 **Honesty rule:** do not describe a pipeline that is only a plan.
 
@@ -162,4 +162,4 @@ This file is the canonical guide. The root `AGENTS.md` is a copy, with the point
 - [x] Deprecations name the traps for this stack
 - [x] §4 sample is version-tagged and dated
 - [x] §5.2 filled. Training bots point at CLR-P4. The sitemap box is open on purpose
-- [x] §5.3 level is L0
+- [x] §5.3 level is L1
