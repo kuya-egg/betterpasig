@@ -1,5 +1,5 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import Verify from "./Verify.astro";
 import { programs, programsRetrieved, sourceLabel } from "../lib/data";
 import { formatDate, langFromUrl, ui } from "../i18n";
@@ -8,54 +8,114 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Base title={t.benefitsTitle} description={t.benefitsIntro}>
-  <div class="wrap py-12">
-    <h1 class="text-[34px] font-bold leading-[1.05] tracking-[-0.04em] md:text-[52px]">{t.benefitsTitle}</h1>
-    <p class="mt-4 max-w-[62ch] text-muted">{t.benefitsIntro}</p>
-
-    {
-      programs.map((program) => {
-        const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? en : (fil ?? en)) ?? null;
-        const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null) ?? "";
-        const rows = [
-          { label: t.benefitFor, value: pick(program.for_fil, program.for_en), num: false },
-          { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true },
-          { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false },
-          { label: t.benefitOffice, value: program.office, num: false },
-        ].filter((row) => typeof row.value === "string" && row.value.trim());
-        return (
-          <section id={program.id} aria-labelledby={`${program.id}-h`} class="mt-12 scroll-mt-24">
-            <h2 id={`${program.id}-h`} class="text-[30px] font-bold tracking-[-0.03em]">
-              {lang === "en" ? program.title_en : program.title_fil}
-              {program.verify && <Verify />}
-            </h2>
-            <dl class="mt-4 border-t-2 border-ink">
-              {rows.map((row) => (
-                <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-                  <dt class="text-[14px] font-medium text-muted">{row.label}</dt>
-                  <dd class:list={[row.num && "num font-semibold"]}>{row.value}</dd>
-                </div>
-              ))}
-            </dl>
-            {note && <p class="mt-2 text-[14px] text-muted">{note}</p>}
-            <p class="mt-2 text-[14px] text-muted">
-              {t.sources}:{" "}
-              {program.sources.map((url, index) => (
-                <>
-                  {index > 0 && ", "}
-                  <a href={url}>{sourceLabel(url)}</a>
-                </>
-              ))}
-              {" · "}
-              {t.checked}: <span class="num">{formatDate(lang, programsRetrieved)}</span>
-            </p>
-          </section>
-        );
-      })
-    }
-  </div>
-</Base>
+<Kit title={t.benefitsTitle} description={t.benefitsIntro}>
+  <section class="section section--flow bp-benefits" aria-labelledby="benefits-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h1 id="benefits-h">{t.benefitsTitle}</h1>
+        <p>{t.benefitsIntro}</p>
+      </div>
+    </div>
+  </section>
+  {
+    programs.map((program, index) => {
+      const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? en : (fil ?? en)) ?? null;
+      const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null) ?? "";
+      const rows = [
+        { label: t.benefitFor, value: pick(program.for_fil, program.for_en), num: false },
+        { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true },
+        { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false },
+        { label: t.benefitOffice, value: program.office, num: false },
+      ].filter((row) => typeof row.value === "string" && row.value.trim());
+      return (
+        <section
+          id={program.id}
+          aria-labelledby={`${program.id}-h`}
+          class:list={["section section--flow bp-benefits", index % 2 === 0 && "ground-surface"]}
+        >
+          <div class="wrap grid">
+            <div class="span-4">
+              <h2 id={`${program.id}-h`} class="bp-benefits__title">
+                {lang === "en" ? program.title_en : program.title_fil}
+                {program.verify && <Verify />}
+              </h2>
+            </div>
+            <div class="span-8">
+              <dl class="bp-benefits__rows">
+                {rows.map((row) => (
+                  <div>
+                    <dt class="t-label muted">{row.label}</dt>
+                    <dd class:list={[row.num && "bp-benefits__num"]}>{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {note && <p class="t-small muted bp-benefits__note">{note}</p>}
+              <p class="t-small muted bp-benefits__src">
+                {t.sources}:{" "}
+                {program.sources.map((url, i) => (
+                  <>
+                    {i > 0 && ", "}
+                    <a href={url}>{sourceLabel(url)}</a>
+                  </>
+                ))}
+              </p>
+              <p class="t-small muted">{t.checked}: <span>{formatDate(lang, programsRetrieved)}</span></p>
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
+  section.bp-benefits {
+    scroll-margin-top: var(--s-8);
+  }
+  .bp-benefits__title {
+    margin: 0;
+  }
+  .bp-benefits__rows {
+    margin: 0;
+  }
+  .bp-benefits__rows > div {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    gap: var(--s-4);
+    padding-block: var(--s-3);
+    border-top: 1px solid var(--line);
+  }
+  .bp-benefits__rows dd {
+    margin: 0;
+  }
+  .bp-benefits__num {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-benefits__note,
+  .bp-benefits__src {
+    margin: var(--s-3) 0 0;
+  }
+  .bp-benefits__src + p {
+    margin: var(--s-1) 0 0;
+  }
+  .bp-benefits__src a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 1023px) {
+    .bp-benefits .wrap > div {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 639px) {
+    .bp-benefits__rows > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-1);
+    }
+  }
 </style>

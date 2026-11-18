@@ -6,7 +6,7 @@ Source of truth for values: [`design/tokens/tokens.json`](../design/tokens/token
 
 ## 2026 redesign (Kit layout)
 
-Pages are moving from `src/layouts/Base.astro` (Tailwind) to `src/layouts/Kit.astro`. The home page, `/buhay/<id>/` and `/larawan/` are on Kit now; the rest follow page by page. Colors do not change: `src/styles/kit-site.css` maps the table below onto the kit's tokens, light and dark.
+Every page renders through `src/layouts/Kit.astro`; `Base.astro`, Tailwind and Geist on the web were removed in November 2026. Colors do not change: `src/styles/kit-site.css` maps the table below onto the kit's tokens, light and dark. Reference pages (services, barangays, directories) use `section section--flow` so they grow with their content.
 
 - **Kit**: plain CSS and ES modules in `public/kit/` (design-taste-frontend): `system.css/js` (sections, buttons, nav, action bar), `layout/` (split hero, float card), `motion/` (hero entrance, hover), `moments/` (photo chapters, word highlight) and `ui/` (the checklist fragment). Copy kit files in; do not edit them. Site-specific styles go in `kit-site.css` or the component's `<style>`.
 - **Type**: Manrope (variable, self-hosted from `@fontsource-variable/manrope`, no Google Fonts).
@@ -43,7 +43,7 @@ Pages are moving from `src/layouts/Base.astro` (Tailwind) to `src/layouts/Kit.as
 
 ## Type
 
-Geist (400, 500, 600, 700), fallback Segoe UI / system-ui. Base 17px for older readers. Pages on the Kit layout use Manrope (see above).
+Manrope (variable, self-hosted), fallback system-ui. Base 17px for older readers. The table below is the original Geist scale, kept for the logo and print files; on the site the kit's type scale applies (`--t-label`, `--t-small`, `--t-body`, `--t-card`, display sizes from `public/kit/system.css`).
 
 | Role | Size | Weight | Tracking |
 | --- | --- | --- | --- |

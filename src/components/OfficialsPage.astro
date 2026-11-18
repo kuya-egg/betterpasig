@@ -5,7 +5,7 @@
 // 3. then alphabetical by name exactly as listed in the source.
 // Every person gets the same row treatment: name, role, sources, "Sinusuri pa" when unconfirmed.
 // No photos, no party, no praise or criticism.
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import CopyButton from "./CopyButton.astro";
 import Verify from "./Verify.astro";
 import {
@@ -97,41 +97,45 @@ const districts = [1, 2].map((d) => ({
 }));
 ---
 
-<Base title={t.officialsPageTitle}>
-  <article class="wrap py-10">
-    <h1 class="text-[34px] md:text-[52px] font-bold leading-[1.05] tracking-[-0.04em]">{t.officialsPageTitle}</h1>
-    <p class="mt-4 text-[17px]">{lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}</p>
-    <p class="mt-2 max-w-[760px] text-[14px] text-muted">
-      {lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}
-      {" "}{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a class="underline underline-offset-2" href={u}>{sourceLabel(u)}</a></>))}
-      {" "}· {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
-    </p>
+<Kit title={t.officialsPageTitle} description={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
+  <section class="section section--flow" aria-labelledby="opisyal-lungsod-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h1>{t.officialsPageTitle}</h1>
+        <p>{lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}</p>
+      </div>
 
-    <section class="mt-12" aria-labelledby="opisyal-lungsod-h">
-      <h2 id="opisyal-lungsod-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.cityOfficialsHeading}</h2>
-      <ul class="mt-4 border-t-2 border-ink">
+      <div class="bp-off__term stack-2">
+        <p class="t-small">{lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}</p>
+        <p class="t-small muted bp-off__meta">
+          <span>{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+          <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>
+        </p>
+      </div>
+
+      <h2 id="opisyal-lungsod-h" class="bp-off__h2">{t.cityOfficialsHeading}</h2>
+      <ul class="rows bp-off__rows">
         {top.map((p) => (
-          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name} class="border-b border-line py-3">
-            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
-              <span class="text-muted">{role(p.position)}</span>
-              <strong class="font-semibold">{p.name}{p.verify && <Verify />}</strong>
-            </div>
-            <p class="mt-1 text-[14px] text-muted">
+          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name}>
+            <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+            <span class="rows__value">{role(p.position)}</span>
+            <p class="t-small muted">
               {text(p, "note") && <>{text(p, "note")} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
             </p>
           </li>
         ))}
       </ul>
-      <div class="mt-8 grid gap-8 md:grid-cols-2">
+
+      <div class="grid bp-off__split">
         {[1, 2].map((d) => (
-          <div id={`opisyal-council-${d}`}>
-            <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{d === 1 ? t.council1 : t.council2}</h3>
-            <ul class="mt-2 border-t-2 border-ink">
+          <div class="span-6" id={`opisyal-council-${d}`}>
+            <h3 class="bp-off__h3">{d === 1 ? t.council1 : t.council2}</h3>
+            <ul class="rows bp-off__rows">
               {councilFor(d).map((p) => (
-                <li id={`opisyal-${p.id}`} data-pagefind-title={p.name} class="border-b border-line py-2.5">
-                  <span>{p.name}{p.verify && <Verify />}</span>
-                  {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
-                  <p class="mt-0.5 text-[14px] text-muted">
+                <li id={`opisyal-${p.id}`} data-pagefind-title={p.name}>
+                  <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                  {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
+                  <p class="t-small muted">
                     {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
                   </p>
                 </li>
@@ -140,91 +144,101 @@ const districts = [1, 2].map((d) => ({
           </div>
         ))}
       </div>
-      <p class="mt-4 text-[14px] text-muted">{t.checked}: {formatDate(lang, officialsRetrieved)}</p>
-    </section>
+      <p class="t-small muted bp-off__checked">{t.checked}: {formatDate(lang, officialsRetrieved)}</p>
+    </div>
+  </section>
 
-    <section id="opisyal-ex-officio" class="mt-12" aria-labelledby="opisyal-ex-officio-h">
-      <h2 id="opisyal-ex-officio-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.exOfficioHeading}</h2>
-      <p class="mt-2 max-w-[760px]">{t.exOfficioConflict}</p>
-      <div class="mt-6 grid gap-8 md:grid-cols-2">
-        <div>
-          <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{t.exOfficioSetA}</h3>
-          <ul class="mt-2 border-t-2 border-ink">
+  <section id="opisyal-ex-officio" class="section section--flow ground-surface" aria-labelledby="opisyal-ex-officio-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="opisyal-ex-officio-h">{t.exOfficioHeading}</h2>
+        <p>{t.exOfficioConflict}</p>
+      </div>
+      <div class="grid bp-off__split">
+        <div class="span-6">
+          <h3 class="bp-off__h3">{t.exOfficioSetA}</h3>
+          <ul class="rows bp-off__rows">
             {exOfficioCity.map((p) => (
-              <li class="border-b border-line py-2.5">
-                <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
-                {text(p, "role") && <p class="text-[15px]">{text(p, "role")}</p>}
-                {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
-                <p class="mt-0.5 text-[14px] text-muted">
-                  {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
-                  · {t.checked}: {formatDate(lang, officialsRetrieved)}
+              <li>
+                <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                {text(p, "role") && <p>{text(p, "role")}</p>}
+                {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
+                <p class="t-small muted bp-off__meta">
+                  <span>{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+                  <span>{t.checked}: {formatDate(lang, officialsRetrieved)}</span>
                 </p>
               </li>
             ))}
           </ul>
         </div>
-        <div>
-          <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{t.exOfficioSetB}</h3>
-          <ul class="mt-2 border-t-2 border-ink">
+        <div class="span-6">
+          <h3 class="bp-off__h3">{t.exOfficioSetB}</h3>
+          <ul class="rows bp-off__rows">
             {exOfficioDirectory.map((p) => (
-              <li class="border-b border-line py-2.5">
-                <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
-                <p class="text-[15px]">{text(p, "position")}{p.barangay && <> · {p.barangay}</>}</p>
-                {text(p, "note") && <p class="mt-0.5 text-[14px] text-muted">{text(p, "note")}</p>}
-                <p class="mt-0.5 text-[14px] text-muted">
-                  {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
-                  · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+              <li>
+                <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                <p>{text(p, "position")}{p.barangay && <>, {p.barangay}</>}</p>
+                {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
+                <p class="t-small muted bp-off__meta">
+                  <span>{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+                  <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>
                 </p>
               </li>
             ))}
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="opisyal-departamento" class="mt-12" aria-labelledby="opisyal-departamento-h">
-      <h2 id="opisyal-departamento-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.departmentsHeading}</h2>
-      <ul class="mt-4 border-t-2 border-ink">
+  <section id="opisyal-departamento" class="section section--flow" aria-labelledby="opisyal-departamento-h">
+    <div class="wrap">
+      <h2 id="opisyal-departamento-h" class="bp-off__h2">{t.departmentsHeading}</h2>
+      <ul class="rows bp-off__rows">
         {offices.map((o) => (
-          <li class="border-b border-line py-4">
-            <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{o.office}</h3>
+          <li>
+            <h3 class="rows__name bp-off__h3">{o.office}</h3>
             {o.head && (
-              <p class="mt-1">
-                {o.position ? <span class="text-muted">{o.position}: </span> : null}
-                <strong class="font-semibold">{o.head}</strong>{o.verify && <Verify />}
+              <p>
+                {o.position ? <span class="muted">{o.position}: </span> : null}
+                <strong>{o.head}</strong>{o.verify && <Verify />}
               </p>
             )}
-            {!o.head && o.verify && <p class="mt-1"><Verify /></p>}
-            {o.location && <p class="mt-1 text-[15px]">{o.location}</p>}
+            {!o.head && o.verify && <p><Verify /></p>}
+            {o.location && <p>{o.location}</p>}
             {o.phones.length > 0 && (
-              <ul class="mt-1">
+              <ul class="bp-off__phones">
                 {o.phones.map((ph) => (
-                  <li class="flex flex-wrap items-center gap-x-2">
-                    <a class="num" href={telHref(ph.number)}>{ph.number}</a>
+                  <li>
+                    <a class="bp-off__tel" href={telHref(ph.number)}>{ph.number}</a>
                     <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
-                    {ph.label && <span class="text-[14px] text-muted">{ph.label}</span>}
+                    {ph.label && <span class="t-small muted">{ph.label}</span>}
                   </li>
                 ))}
               </ul>
             )}
-            {o.email && <p class="mt-1"><a href={`mailto:${o.email}`}>{o.email}</a></p>}
-            {o.note && <p class="mt-1 text-[14px] text-muted">{o.note}</p>}
-            <p class="mt-1 text-[14px] text-muted">
-              {t.sources}: {o.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
-              · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+            {o.email && <p><a class="bp-off__tel" href={`mailto:${o.email}`}>{o.email}</a></p>}
+            {o.note && <p class="t-small muted">{o.note}</p>}
+            <p class="t-small muted bp-off__meta">
+              <span>{t.sources}: {o.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+              <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>
             </p>
           </li>
         ))}
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section id="opisyal-barangay" class="mt-12" aria-labelledby="opisyal-barangay-h">
-      <h2 id="opisyal-barangay-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.barangayOfficialsHeading}</h2>
-      <p class="mt-2 text-[14px] text-muted">{t.barangayOfficialsNote}</p>
+  <section id="opisyal-barangay" class="section section--flow ground-surface" aria-labelledby="opisyal-barangay-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="opisyal-barangay-h">{t.barangayOfficialsHeading}</h2>
+        <p>{t.barangayOfficialsNote}</p>
+      </div>
       {districts.map((g) => (
-        <div class="mt-8">
-          <h3 class="text-[24px] font-bold tracking-[-0.02em]">{g.district === 1 ? t.district1 : t.district2}</h3>
-          <ul class="mt-2 border-t-2 border-ink">
+        <div class="bp-off__district">
+          <h3 class="bp-off__h2">{g.district === 1 ? t.district1 : t.district2}</h3>
+          <ul class="grid bp-off__cards">
             {g.rows.map((b) => {
               const srcs = uniq([
                 b.punong_barangay.sources,
@@ -234,69 +248,170 @@ const districts = [1, 2].map((d) => ({
                 b.hall_address.value ? b.hall_address.sources : [],
               ]);
               return (
-                <li id={`opisyal-${b.slug}`} data-pagefind-title={b.name} class="border-b border-line py-4">
-                  <h4 class="text-[19px] font-semibold tracking-[-0.01em]">
-                    {b.id ? <a href={href(lang, `/barangay/${b.id}/`)}>{b.name}</a> : b.name}
-                  </h4>
-                  <dl class="mt-2 grid gap-1 text-[15px]">
-                    <div>
-                      <dt class="text-[14px] font-medium text-muted">{t.punongBarangay}</dt>
-                      <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-[14px] font-medium text-muted">{t.skChair}</dt>
-                      <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>
-                    </div>
-                    {b.kagawad.length > 0 && (
+                <li id={`opisyal-${b.slug}`} data-pagefind-title={b.name} class="span-6">
+                  <article class="card bp-off__card">
+                    <h4 class="bp-off__h3">
+                      {b.id ? <a class="bp-off__tel" href={href(lang, `/barangay/${b.id}/`)}>{b.name}</a> : b.name}
+                    </h4>
+                    <dl class="bp-off__dl">
                       <div>
-                        <dt class="text-[14px] font-medium text-muted">{t.kagawad}</dt>
-                        <dd>
-                          <ul>
-                            {[...b.kagawad].sort(byName).map((k) => (
-                              <li>{k.name}{k.verify && <Verify />}</li>
-                            ))}
-                          </ul>
-                        </dd>
+                        <dt class="t-small muted">{t.punongBarangay}</dt>
+                        <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
                       </div>
-                    )}
-                    {b.hall_address.value && (
                       <div>
-                        <dt class="text-[14px] font-medium text-muted">{t.hallAddress}</dt>
-                        <dd>{b.hall_address.value}{b.hall_address.verify && <Verify />}</dd>
+                        <dt class="t-small muted">{t.skChair}</dt>
+                        <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>
                       </div>
-                    )}
-                    {b.phones.length > 0 && (
-                      <div>
-                        <dt class="text-[14px] font-medium text-muted">{t.phones}</dt>
-                        <dd>
-                          <ul>
-                            {b.phones.map((ph) => (
-                              <li class="flex flex-wrap items-center gap-x-2">
-                                <a class="num" href={telHref(ph.number)}>{ph.number}</a>
-                                <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
-                                {ph.verify && <Verify />}
-                              </li>
-                            ))}
-                          </ul>
-                        </dd>
-                      </div>
-                    )}
-                  </dl>
-                  <p class="mt-2 text-[14px] text-muted">
-                    {t.sources}: {srcs.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
-                    · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
-                  </p>
+                      {b.kagawad.length > 0 && (
+                        <div>
+                          <dt class="t-small muted">{t.kagawad}</dt>
+                          <dd>
+                            <ul>
+                              {[...b.kagawad].sort(byName).map((k) => (
+                                <li>{k.name}{k.verify && <Verify />}</li>
+                              ))}
+                            </ul>
+                          </dd>
+                        </div>
+                      )}
+                      {b.hall_address.value && (
+                        <div>
+                          <dt class="t-small muted">{t.hallAddress}</dt>
+                          <dd>{b.hall_address.value}{b.hall_address.verify && <Verify />}</dd>
+                        </div>
+                      )}
+                      {b.phones.length > 0 && (
+                        <div>
+                          <dt class="t-small muted">{t.phones}</dt>
+                          <dd>
+                            <ul class="bp-off__phones">
+                              {b.phones.map((ph) => (
+                                <li>
+                                  <a class="bp-off__tel" href={telHref(ph.number)}>{ph.number}</a>
+                                  <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
+                                  {ph.verify && <Verify />}
+                                </li>
+                              ))}
+                            </ul>
+                          </dd>
+                        </div>
+                      )}
+                    </dl>
+                    <p class="t-small muted bp-off__meta">
+                      <span>{t.sources}: {srcs.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+                      <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>
+                    </p>
+                  </article>
                 </li>
               );
             })}
           </ul>
         </div>
       ))}
-    </section>
-  </article>
-</Base>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
-  p a { display: inline; min-height: 0; }
+  .bp-off__term {
+    max-width: 70ch;
+    margin-bottom: var(--s-8);
+  }
+  .bp-off__h2 {
+    font-size: var(--t-card);
+    font-weight: 600;
+  }
+  .bp-off__h3 {
+    font-size: var(--t-body);
+    font-weight: 600;
+  }
+  .bp-off__split {
+    margin-top: var(--s-8);
+    row-gap: var(--s-8);
+  }
+  .bp-off__rows {
+    list-style: none;
+    margin: var(--s-3) 0 0;
+    padding: 0;
+  }
+  .bp-off__rows > li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .bp-off__rows > li > * {
+    grid-column: 1 / -1;
+  }
+  .bp-off__rows > li > .rows__name {
+    grid-column: 1;
+  }
+  .bp-off__rows > li > .rows__value {
+    grid-column: 2;
+    white-space: normal;
+  }
+  .bp-off__rows > li > p {
+    max-width: 64ch;
+  }
+  .bp-off__rows :global(.verify),
+  .bp-off__card :global(.verify) {
+    margin-left: var(--s-2);
+  }
+  .bp-off__checked {
+    margin-top: var(--s-6);
+  }
+  .bp-off__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-5);
+  }
+  .bp-off__phones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .bp-off__phones > li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-1) var(--s-3);
+  }
+  .bp-off__tel {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    font-variant-numeric: tabular-nums;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .bp-off__district + .bp-off__district {
+    margin-top: var(--s-8);
+  }
+  .bp-off__cards {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .bp-off__card {
+    display: grid;
+    gap: var(--s-3);
+    height: 100%;
+    align-content: start;
+  }
+  .bp-off__dl {
+    display: grid;
+    gap: var(--s-3);
+    margin: 0;
+  }
+  .bp-off__dl dd {
+    margin: 0;
+  }
+  .bp-off__dl ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @media (max-width: 1023px) {
+    .bp-off__rows > li > .rows__value {
+      grid-column: 1;
+      text-align: left;
+    }
+  }
 </style>

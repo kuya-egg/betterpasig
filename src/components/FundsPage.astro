@@ -1,5 +1,5 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import Verify from "./Verify.astro";
 import { sourceLabel, transparencyFigures, transparencyLinks, transparencyRetrieved } from "../lib/data";
 import { formatDate, langFromUrl, ui } from "../i18n";
@@ -9,76 +9,42 @@ const t = ui[lang];
 const checked = formatDate(lang, transparencyRetrieved);
 ---
 
-<Base title={t.fundsTitle} description={t.fundsPageIntro}>
-  <div class="wrap py-12">
-    <h1 class="text-[34px] font-bold leading-[1.05] tracking-[-0.04em] md:text-[52px]">{t.fundsTitle}</h1>
-    <p class="mt-4 max-w-[62ch] text-muted">{t.fundsPageIntro}</p>
-
-    <section id="mga-numero" aria-labelledby="mga-numero-h" class="mt-12">
-      <h2 id="mga-numero-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.figuresTitle}</h2>
-      <div class="mt-4">
-        <table class="w-full border-collapse text-left max-sm:block">
-          <thead class="max-sm:sr-only">
-            <tr class="border-t-2 border-ink border-b border-line text-[14px] font-medium text-muted">
-              <th scope="col" class="py-3 pr-4 font-medium">{t.figureLabel}</th>
-              <th scope="col" class="py-3 pr-4 font-medium">{t.figureValue}</th>
-              <th scope="col" class="py-3 pr-4 font-medium">{t.figureAsOf}</th>
-            </tr>
-          </thead>
-          <tbody class="max-sm:block max-sm:border-t-2 max-sm:border-ink">
-            {
-              transparencyFigures.map((figure) => {
-                const note = (lang === "en" ? figure.note_en : figure.note_fil) ?? "";
-                const label = lang === "en" ? figure.label_en : figure.label_fil;
-                const value = lang === "en" ? figure.value_en : figure.value_fil;
-                return (
-                  <tr id={figure.id} data-pagefind-title={label} class="scroll-mt-24 border-b border-line align-top max-sm:block max-sm:py-3.5">
-                    <th scope="row" class="py-3.5 pr-4 font-normal max-sm:block max-sm:py-0 sm:min-w-[14rem]">
-                      {label}
-                    </th>
-                    <td class="py-3.5 pr-4 max-sm:block max-sm:py-0 max-sm:mt-1 sm:min-w-[12rem]">
-                      <span class="num font-semibold">{value}</span>
-                      {figure.verify && <Verify />}
-                      {figure.as_of && <span class="num mt-1 block text-[14px] text-muted sm:hidden">{figure.as_of}</span>}
-                      {note && <span class="mt-1 block text-[14px] text-muted">{note}</span>}
-                      <span class="mt-1 block text-[14px] text-muted">
-                        {t.sources}:{" "}
-                        {figure.sources.map((url, index) => (
-                          <>
-                            {index > 0 && ", "}
-                            <a href={url}>{sourceLabel(url)}</a>
-                          </>
-                        ))}
-                      </span>
-                    </td>
-                    <td class="num py-3.5 pr-4 text-muted max-sm:hidden">{figure.as_of}</td>
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
+<Kit title={t.fundsTitle} description={t.fundsPageIntro}>
+  <section class="section section--flow bp-funds" aria-labelledby="funds-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h1 id="funds-h">{t.fundsTitle}</h1>
+        <p>{t.fundsPageIntro}</p>
       </div>
-      <p class="mt-2 text-[14px] text-muted">{t.checked}: <span class="num">{checked}</span></p>
-    </section>
+    </div>
+  </section>
 
-    <section id="mga-link" aria-labelledby="mga-link-h" class="mt-12 scroll-mt-24">
-      <h2 id="mga-link-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.linksTitle}</h2>
-      <ul class="mt-4 border-t-2 border-ink">
+  <section id="mga-numero" class="section section--flow ground-surface bp-funds" aria-labelledby="mga-numero-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="mga-numero-h">{t.figuresTitle}</h2>
+      </div>
+      <ul class="bp-funds__list">
         {
-          transparencyLinks.map((link) => {
-            const title = lang === "en" && link.title_en ? link.title_en : link.title_fil;
-            const desc = lang === "en" && "description_en" in link && link.description_en ? link.description_en : "description_fil" in link ? link.description_fil : "";
+          transparencyFigures.map((figure) => {
+            const note = (lang === "en" ? figure.note_en : figure.note_fil) ?? "";
+            const label = lang === "en" ? figure.label_en : figure.label_fil;
+            const value = lang === "en" ? figure.value_en : figure.value_fil;
             return (
-              <li id={link.id} data-pagefind-title={title} class="scroll-mt-24 border-b border-line py-3.5">
-                <a class="font-medium" href={link.url}>{title}</a>
-                {desc && <p class="mt-1">{desc}</p>}
-                <p class="mt-1 text-[14px] text-muted">
+              <li id={figure.id} data-pagefind-title={label} class="bp-funds__fig">
+                <p class="bp-funds__label">{label}</p>
+                <p class="bp-funds__value">
+                  {value}
+                  {figure.verify && <Verify />}
+                </p>
+                {figure.as_of && <p class="t-small muted">{figure.as_of}</p>}
+                {note && <p class="t-small muted">{note}</p>}
+                <p class="t-small muted">
                   {t.sources}:{" "}
-                  {link.sources.map((url, index) => (
+                  {figure.sources.map((url, index) => (
                     <>
                       {index > 0 && ", "}
-                      <a href={url}>{sourceLabel(url)}</a>
+                      <a class="bp-funds__src" href={url}>{sourceLabel(url)}</a>
                     </>
                   ))}
                 </p>
@@ -87,11 +53,92 @@ const checked = formatDate(lang, transparencyRetrieved);
           })
         }
       </ul>
-      <p class="mt-2 text-[14px] text-muted">{t.checked}: <span class="num">{checked}</span></p>
-    </section>
-  </div>
-</Base>
+      <p class="t-small muted bp-funds__checked">{t.checked}: {checked}</p>
+    </div>
+  </section>
+
+  <section id="mga-link" class="section section--flow bp-funds" aria-labelledby="mga-link-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="mga-link-h">{t.linksTitle}</h2>
+      </div>
+      <ul class="bp-funds__list">
+        {
+          transparencyLinks.map((link) => {
+            const title = lang === "en" && link.title_en ? link.title_en : link.title_fil;
+            const desc = lang === "en" && "description_en" in link && link.description_en ? link.description_en : "description_fil" in link ? link.description_fil : "";
+            return (
+              <li id={link.id} data-pagefind-title={title} class="bp-funds__fig">
+                <a class="bp-funds__link" href={link.url}>{title}</a>
+                {desc && <p>{desc}</p>}
+                <p class="t-small muted">
+                  {t.sources}:{" "}
+                  {link.sources.map((url, index) => (
+                    <>
+                      {index > 0 && ", "}
+                      <a class="bp-funds__src" href={url}>{sourceLabel(url)}</a>
+                    </>
+                  ))}
+                </p>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p class="t-small muted bp-funds__checked">{t.checked}: {checked}</p>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
+  section.bp-funds,
+  .bp-funds__fig {
+    scroll-margin-top: var(--s-8);
+  }
+  .bp-funds__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 70ch;
+  }
+  .bp-funds__fig {
+    display: grid;
+    gap: var(--s-1);
+    padding-block: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-funds__fig p {
+    margin: 0;
+  }
+  .bp-funds__label {
+    color: var(--muted);
+    font-size: var(--t-small);
+  }
+  .bp-funds__value {
+    font-size: var(--t-card);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-funds__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    justify-self: start;
+    font-size: var(--t-card);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 4px;
+  }
+  .bp-funds__src {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  .bp-funds__checked {
+    margin-top: var(--s-5);
+  }
 </style>

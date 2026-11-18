@@ -11,7 +11,7 @@ const t = ui[lang];
 ---
 
 <Kit title={t.creditsTitle} description={t.creditsLead}>
-  <section class="section bp-credits" aria-labelledby="credits-h">
+  <section class="section section--flow bp-credits" aria-labelledby="credits-h">
     <div class="wrap">
       <div class="section-head">
         <h1 id="credits-h">{t.creditsTitle}</h1>
@@ -39,10 +39,6 @@ const t = ui[lang];
 </Kit>
 
 <style>
-  .bp-credits {
-    height: auto;
-    min-height: 100svh;
-  }
   .bp-credits__item {
     display: grid;
     grid-template-columns: 80px minmax(0, 1fr);

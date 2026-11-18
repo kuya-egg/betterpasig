@@ -34,7 +34,7 @@ Deferred to 2027 because they need slow, careful extraction: budget explorer, CO
 
 **Astro** over Nuxt/Next: the site is content, not an app. Astro ships zero JS by default, has typed content collections for the JSON data, and adds interactivity only where needed (search, map). Add Tailwind (or plain CSS with our tokens), **Pagefind** for static search, and **Cloudflare Pages** for free hosting with preview deploys. Yearly cost is about the domain fee.
 
-**Search uses Pagefind** (decided 2026-11-18 for issue #6), replacing the hand-built inline JSON index. `bun run build` runs `astro build && pagefind --site dist`; Pagefind indexes only `<main>` of detail pages (`data-pagefind-body` in `Base.astro`), one index per `<html lang>`, and loads in the browser only when the search box is first used. Freshness stays in our code: `src/pages/notice-dates.json.ts` supplies dates so an expired notice is sent to the archive, and `src/lib/search-synonyms.ts` holds the everyday-Filipino synonym pairs (Pagefind has no synonym feature).
+**Search uses Pagefind** (decided 2026-11-18 for issue #6), replacing the hand-built inline JSON index. `bun run build` runs `astro build && pagefind --site dist`; Pagefind indexes only `<main>` of detail pages (`data-pagefind-body` in `src/layouts/Kit.astro`), one index per `<html lang>`, and loads in the browser only when the search box is first used. Freshness stays in our code: `src/pages/notice-dates.json.ts` supplies dates so an expired notice is sent to the archive, and `src/lib/search-synonyms.ts` holds the everyday-Filipino synonym pairs (Pagefind has no synonym feature).
 
 ## Data sources
 

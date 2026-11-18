@@ -79,3 +79,7 @@ body { background: var(--bg); color: var(--ink); }
 .bp-foot-about p a, .closing__links .t-small a { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .bp-theme { font: inherit; color: inherit; background: none; border: 1px solid var(--line-strong); border-radius: var(--r-btn); min-height: 44px; padding: 0 var(--s-4); cursor: pointer; }
 .bp-theme[aria-pressed="true"] { background: var(--surface); }
+
+/* reference pages (a service, a barangay, a directory) read top to bottom: the section grows with its content */
+main > .section.section--flow { height: auto; min-height: calc(100svh - var(--nav)); }
+main > .section.section--flow + .section--flow { min-height: 0; }

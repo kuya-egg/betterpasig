@@ -39,7 +39,7 @@ const t = ui[lang];
   import { eventState, isSourceFresh } from "../lib/freshness";
   import { searchVariants } from "../lib/search-synonyms";
 
-  type SubResult = { title: string; url: string; anchor?: { id: string } };
+  type SubResult = { title: string; url: string; anchor?: { id: string; element?: string } };
   type PageData = { url: string; meta: { title?: string; kind?: string }; sub_results: SubResult[] };
   type Pagefind = { options: (options: object) => Promise<void>; search: (query: string) => Promise<{ results: { id: string; score: number; data: () => Promise<PageData> }[] }> };
   type Dates = { notices: Record<string, { published: string; event: string | null; historical: boolean }>; places: Record<string, string> };
@@ -160,7 +160,10 @@ const t = ui[lang];
           if (!isSourceFresh(published, new Date())) note = olderLabel;
         }
         // Without the date table a notice links to the notices page itself, which hides expired rows on its own.
-        rows.push({ href: kind === "ngayong-linggo" ? page.url : (page.sub_results[0]?.url ?? page.url), title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
+        // A match in the page's own h1 section opens the page at its top, not at the heading's anchor.
+        const first = page.sub_results[0];
+        const pageHref = !first || first.anchor?.element === "h1" ? page.url : first.url;
+        rows.push({ href: kind === "ngayong-linggo" ? page.url : pageHref, title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
       }
       // Expired and older-source results sort after current ones (stable).
       return rows.sort((a, b) => Number(a.note !== "") - Number(b.note !== ""));

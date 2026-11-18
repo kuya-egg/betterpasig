@@ -227,6 +227,7 @@ export const ui = {
       "Bukas sa publiko ang code at datos. Kung may mali, iulat ito: itatama sa loob ng 48 oras at ilalathala ang pagwawasto.",
     aboutGithub: "Code at datos sa GitHub",
     aboutReport: "Mag-ulat ng mali",
+    aboutPhotos: "Tingnan ang kumuha, lisensya at pahina ng bawat larawan",
 
     // Home page ({services}, {programs}, {date} are filled from data)
     homeTitle: "Lahat ng serbisyo ng Pasig, sa isang hanap",
@@ -496,6 +497,7 @@ export const ui = {
       "Code and data are public. If something is wrong, report it: corrections are fixed within 48 hours and logged publicly.",
     aboutGithub: "Code and data on GitHub",
     aboutReport: "Report a correction",
+    aboutPhotos: "See the author, licence and page of every photograph",
 
     homeTitle: "Every Pasig city service, in one search",
     homeLead: "{services} city services and {programs} benefits, each with its office, fee, processing time and source.",

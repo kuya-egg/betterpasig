@@ -20,7 +20,7 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
 ---
 
 <Kit title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
-  <section class="section bp-life" aria-labelledby="life-h">
+  <section class="section section--flow bp-life" aria-labelledby="life-h">
     <div class="wrap">
       <div class="section-head bp-life__head">
         <LifeIcon id={event.id} />
@@ -87,11 +87,16 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
 </Kit>
 
 <style>
-  .bp-life {
-    height: auto;
-  }
   .bp-life__head {
     margin-bottom: var(--s-8);
+  }
+  .bp-life__head :global(.bp-life-icon) {
+    align-self: flex-start;
+    justify-self: start;
+  }
+  .bp-life__rows :global(.verify) {
+    justify-self: start;
+    margin-left: 0;
   }
   .bp-life__h {
     margin-top: var(--s-8);
