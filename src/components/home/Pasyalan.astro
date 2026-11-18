@@ -3,7 +3,6 @@
 // A card opens the place page at /lugar/<id>/ when one exists, else the place's card on /pasyalan/.
 import { Picture } from "astro:assets";
 import SectionHead from "./SectionHead.astro";
-import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { barangays, pasyalan, pasyalanRetrieved, places } from "../../lib/data";
 import { photo, photoAlt } from "../../lib/photos";
@@ -19,13 +18,14 @@ const kindLabel: Record<string, { fil: string; en: string }> = {
   kainan: { fil: "Kainan", en: "Food" },
   bago: { fil: "Bago", en: "New" },
 };
-const cards = Astro.props.ids.map((id) => {
+const cards = Astro.props.ids.flatMap((id) => {
   const place = pasyalan.find((item) => item.id === id);
-  if (!place?.photo_id) throw new Error(`Pasyalan needs a photo for ${id}`);
+  if (!place) return [];
+  if (!place.photo_id) throw new Error(`Pasyalan needs a photo for ${id}`);
   const target = places.some((item) => item.id === place.id) ? href(lang, `/lugar/${place.id}/`) : href(lang, `/pasyalan/#pasyalan-${place.id}`);
   const barangay = barangays.find((item) => item.id === place.barangay_id);
   const hasTimes = Boolean(place.hours_fil || place.fee_fil);
-  return { place, target, barangay, hasTimes, picture: photo(place.photo_id) };
+  return [{ place, target, barangay, hasTimes, picture: photo(place.photo_id) }];
 });
 const [lead, ...rest] = cards;
 ---
@@ -44,7 +44,7 @@ const [lead, ...rest] = cards;
           </span>
           <span class="bp-places__body">
             <span class="kicker">{kindLabel[lead.place.kind]?.[lang] ?? ""}{lead.barangay && <span class="bp-places__brgy">{lead.barangay.name}</span>}</span>
-            <h3 id={`pasyalan-${lead.place.id}`}>{lead.place.name}{lead.place.verify && <Verify />}</h3>
+            <h3 id={`pasyalan-${lead.place.id}`}>{lead.place.name}</h3>
             <span class="bp-places__line">{en ? lead.place.line_en : lead.place.line_fil}</span>
             {lead.hasTimes && <span class="bp-places__line muted">{en ? "Hours and fee" : "Oras at bayad"}: {en ? "checked" : "sinuri noong"} {formatDate(lang, pasyalanRetrieved)}</span>}
           </span>
@@ -59,7 +59,7 @@ const [lead, ...rest] = cards;
               </span>
               <span class="bp-places__small-body">
                 <span class="kicker">{kindLabel[place.kind]?.[lang] ?? ""}</span>
-                <h3 id={`pasyalan-${place.id}`}>{place.name}{place.verify && <Verify />}</h3>
+                <h3 id={`pasyalan-${place.id}`}>{place.name}</h3>
                 {barangay && <span class="muted bp-places__where">{barangay.name}</span>}
               </span>
             </a>

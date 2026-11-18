@@ -1,6 +1,5 @@
 ---
 // The navy footer (handoff 2026-11), the same on every page.
-import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
 import { photos } from "../../lib/photos";
@@ -59,16 +58,12 @@ const columns = [
           <p class="t-small muted">
             {t.partOf} <a href="https://bettergov.ph">BetterGov.ph</a>. {t.dataUpdated}: {formatDate(lang, site.updated)}.
           </p>
-          <p class="t-small muted">
-            {hall.name}: <a href={mapsHref(`${hall.name}, ${hall.address}`)}>{hall.address}</a>
-            {hall.verify && <Verify />}
-            {trunk && (
-              <>
-                {" "}<a class="num" href={telHref(trunk)}>{trunk}</a>
-                {cityHallHotline?.verify && <Verify />}
-              </>
-            )}
-          </p>
+          {(!hall.verify || trunk) && (
+            <p class="t-small muted">
+              {hall.name}: {!hall.verify && <a href={mapsHref(`${hall.name}, ${hall.address}`)}>{hall.address}</a>}
+              {trunk && <>{" "}<a class="num" href={telHref(trunk)}>{trunk}</a></>}
+            </p>
+          )}
         </div>
         {
           columns.map((column, index) => (

@@ -6,7 +6,6 @@ import CopyButton from "./CopyButton.astro";
 import SourceNote from "./SourceNote.astro";
 import { barangays, pasigSources, places, serviceUpdates, sourceLabel, telHref } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
-import Verify from "./Verify.astro";
 import { centersForBarangay } from "../lib/evacuation";
 import { isSourceFresh } from "../lib/freshness";
 
@@ -69,25 +68,25 @@ const contactGroups = (barangay.contact ?? "")
 <Site
   title={barangay.name}
   description={en
-    ? `${barangay.name}, Pasig: barangay numbers, evacuation centers and places with new official announcements.`
-    : `${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
+    ? `Find ${barangay.name} on the Pasig map and see listed evacuation centers and official notices.`
+    : `Hanapin ang ${barangay.name} sa mapa ng Pasig at tingnan ang mga nakalistang evacuation center at opisyal na abiso.`}
 >
   <section class="section section--flow" aria-labelledby="page-h">
     <div class="wrap">
       <PageHead
         crumbs={[[en ? "Barangays" : "Barangay", "/barangay/"], [barangay.name]]}
         kicker={barangay.district ? (barangay.district === 1 ? t.district1 : t.district2) : undefined}
-        lead={barangay.district ? (en ? "From an older directory. The information is still being confirmed." : "Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon.") : undefined}
       >{barangay.name}</PageHead>
-      {barangay.district && (
-        <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "See the source directory" : "Tingnan ang direktoryong pinagmulan"}</a></p>
-      )}
+      <p class="bp-brgy__src"><a class="link" href={barangay.sources[0]}>{en ? "Barangay source" : "Sanggunian ng barangay"}</a></p>
       <div class="bp-brgy__top">
         <div>
+          {!barangay.punong_barangay && !barangay.hall_address && contactGroups.length === 0 && (
+            <p class="muted">{en ? "No confirmed barangay hall or official contact details are listed yet." : "Wala pang nakalistang kumpirmadong address o contact ng barangay."}</p>
+          )}
           <ul class="rows bp-brgy__facts">
             {barangay.punong_barangay && (
               <li>
-                <span class="rows__name">{t.punongBarangay}{barangay.verify && <Verify />}</span>
+                <span class="rows__name">{t.punongBarangay}</span>
                 <span class="bp-brgy__val">
                   {barangay.punong_barangay}
                   {barangay.punong_barangay_term && <small>{barangay.punong_barangay_term}</small>}
@@ -102,7 +101,7 @@ const contactGroups = (barangay.contact ?? "")
             )}
             {contactGroups.length > 0 && (
               <li>
-                <span class="rows__name">{en ? "Phone numbers" : "Mga numero ng telepono"}{barangay.verify && <Verify />}</span>
+                <span class="rows__name">{en ? "Phone numbers" : "Mga numero ng telepono"}</span>
                 <div class="bp-brgy__val bp-brgy__phones">
                   {contactGroups.map((group) => (
                     <div class="bp-brgy__group">
@@ -122,7 +121,6 @@ const contactGroups = (barangay.contact ?? "")
                       {group.source && <small>{group.source}</small>}
                     </div>
                   ))}
-                  <small>{en ? "These numbers are listed in the source. We have not confirmed them by calling yet." : "Nakalista ang mga numerong ito sa sanggunian. Hindi pa namin nakukumpirma sa pagtawag."}</small>
                 </div>
               </li>
             )}
@@ -195,7 +193,7 @@ const contactGroups = (barangay.contact ?? "")
         <ul class="bp-brgy__list">
           {evacCenters.map((c) => (
             <li>
-              <p class="bp-brgy__title">{c.name}{c.verify && <Verify />}</p>
+              <p class="bp-brgy__title">{c.name}</p>
               {c.address && <p class="muted">{c.address}</p>}
               <p class="t-small muted bp-brgy__srcs">
                 <span>{t.sources}:</span>
@@ -237,10 +235,6 @@ const contactGroups = (barangay.contact ?? "")
   }
   .bp-brgy__facts > li:first-child {
     padding-top: var(--s-4);
-  }
-  .bp-brgy__facts :global(.verify) {
-    display: block;
-    margin-left: 0;
   }
   .bp-brgy__val {
     grid-column: 2;

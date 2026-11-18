@@ -1,12 +1,10 @@
 ---
 import Site from "../layouts/Site.astro";
 import CopyButton from "./CopyButton.astro";
-import Verify from "./Verify.astro";
 import PageHead from "./site/PageHead.astro";
 import {
   hotlines,
   hotlinesRetrieved,
-  hotlineConflicts,
   facilities,
   telHref,
   mapsHref,
@@ -56,8 +54,7 @@ const hospitalType = (type: string) =>
 
 const jump = [
   ["hotlines", t.allHotlines],
-  ["conflicts", t.conflictsTitle],
-  ["ospital", t.hospitalsTitle],
+  ...(facilities.hospitals.length ? [["ospital", t.hospitalsTitle]] : []),
   ["evacuation", t.evacTitle],
   ["baha", t.floodTitle],
 ];
@@ -120,7 +117,6 @@ const retrieved = formatDate(lang, facilities.retrieved);
                     <div class="bp-hotline">
                       <p class="bp-hotline__label">
                         {lang === "en" ? h.label_en : h.label_fil}
-                        {h.verify && <Verify />}
                       </p>
                       <ul class="bp-hotline__nums">
                         {h.numbers.map((n) => (
@@ -154,25 +150,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
     </div>
   </section>
 
-  <section id="conflicts" class="section section--flow bp-em" aria-labelledby="conflicts-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="conflicts-h">{t.conflictsTitle}</h2>
-        <p>{t.conflictsIntro}</p>
-      </div>
-      <ul class="bp-em__list">
-        {
-          hotlineConflicts.map((c) => (
-            <li>
-              <p>{lang === "en" ? c.text_en : c.text_fil}<Verify /></p>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="t-small muted bp-em__checked">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
-    </div>
-  </section>
-
+  {facilities.hospitals.length > 0 && (
   <section id="ospital" class="section section--flow ground-surface bp-em" aria-labelledby="ospital-h">
     <div class="wrap">
       <div class="section-head">
@@ -184,7 +162,6 @@ const retrieved = formatDate(lang, facilities.retrieved);
             <li class="bp-em__item">
               <h3 class="bp-em__name">
                 {h.name}
-                {h.verify && <Verify />}
               </h3>
               <p class="t-small muted">{hospitalType(h.type)}</p>
               {h.address && (
@@ -225,6 +202,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
       <p class="t-small muted bp-em__checked">{t.checked}: {retrieved}</p>
     </div>
   </section>
+  )}
 
   <section id="evacuation" class="section section--flow bp-em" aria-labelledby="evacuation-h">
     <div class="wrap">
@@ -243,7 +221,6 @@ const retrieved = formatDate(lang, facilities.retrieved);
                 <li class="bp-em__item">
                   <p>
                     {c.name}
-                    {c.verify && <Verify />}
                   </p>
                   <p class="t-small muted">{c.address ?? t.evacNoAddress}</p>
                   <p class="t-small muted">

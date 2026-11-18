@@ -1,7 +1,6 @@
 ---
 import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
-import Verify from "./Verify.astro";
 import SourceNote from "./SourceNote.astro";
 import {
   historicalUpdates,
@@ -9,6 +8,7 @@ import {
   pasigSources,
   places,
   serviceUpdates,
+  services,
 } from "../lib/data";
 import { barangays } from "../lib/data";
 import PageHead from "./site/PageHead.astro";
@@ -79,7 +79,7 @@ function historySummary(id: string, english: string): string {
   <section class="section" aria-labelledby="page-h">
     <div class="wrap">
       <PageHead crumbs={[[t.guideExplore, "/pasyalan/"], [place.name]]}>
-        {nameHead}{" "}<em>{nameTail}</em><Verify />
+        {nameHead}{" "}<em>{nameTail}</em>
         <Fragment slot="actions">
           {barangay && (
             <a class="chip" href={href(lang, `/barangay/${barangay.id}/`)}>
@@ -216,7 +216,7 @@ function historySummary(id: string, english: string): string {
               <li>
                 <a
                   class="bp-place__title"
-                  href={item.service_id ? href(lang, `/serbisyo/${item.service_id}/`) : source?.url}
+                  href={services.some((service) => service.id === item.service_id) ? href(lang, `/serbisyo/${item.service_id}/`) : source?.url}
                 >
                   {lang === "en" ? item.title_en : item.title_fil}
                 </a>

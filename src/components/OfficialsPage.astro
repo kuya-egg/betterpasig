@@ -3,13 +3,12 @@
 // 1. by office rank (Mayor, Vice Mayor, Representative, Councilors, ex-officio, department heads),
 // 2. then by district (1 before 2; barangays grouped District 1 then District 2),
 // 3. then alphabetical by name exactly as listed in the source.
-// Every person gets the same row treatment: name, role, sources, "Sinusuri pa" when unconfirmed.
+// Every published official gets the same row treatment: name, role and sources.
 // No photos, no party, no praise or criticism.
 import Site from "../layouts/Site.astro";
 import CopyButton from "./CopyButton.astro";
 import PageHead from "./site/PageHead.astro";
 import IbaPaTabs from "./IbaPaTabs.astro";
-import Verify from "./Verify.astro";
 import {
   barangays,
   departmentHeads,
@@ -55,7 +54,6 @@ type Office = {
   email: string | null;
   location: string | null;
   sources: string[];
-  verify: boolean;
   note: string | null;
 };
 const offices: Office[] = officialsDirectory.departments.map((d) => {
@@ -68,7 +66,6 @@ const offices: Office[] = officialsDirectory.departments.map((d) => {
     email: d.email,
     location: text(d, "location"),
     sources: uniq([d.sources, extra?.sources]),
-    verify: d.verify || Boolean(extra?.verify),
     note: text(d, "note"),
   };
 });
@@ -82,7 +79,6 @@ for (const h of departmentHeads) {
     email: null,
     location: null,
     sources: [...h.sources],
-    verify: h.verify,
     note: text(h, "note"),
   });
 }
@@ -92,11 +88,11 @@ offices.sort((a, b) => a.office.localeCompare(b.office, "fil", { sensitivity: "b
 const barangayRows = officialsDirectory.barangays.map((b) => {
   const match = barangays.find((x) => x.name === b.name);
   return { ...b, id: match?.id ?? null, slug: match?.id ?? b.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") };
-});
+}).filter((b) => b.punong_barangay || b.sk_chair || b.kagawad.length || b.hall_address?.value || b.phones.length);
 const districts = [1, 2].map((d) => ({
   district: d,
   rows: barangayRows.filter((b) => b.district === d).sort(byName),
-}));
+})).filter((g) => g.rows.length > 0);
 ---
 
 <Site title={t.officialsPageTitle} description={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
@@ -124,7 +120,7 @@ const districts = [1, 2].map((d) => ({
         {top.map((p) => (
           <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name} class="bp-off__person">
             <p class="kicker">{role(p.position)}</p>
-            <p class="bp-off__name">{p.name}{p.verify && <Verify />}</p>
+            <p class="bp-off__name">{p.name}</p>
             <p class="t-small muted">
               {text(p, "note") && <>{text(p, "note")} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
             </p>
@@ -139,7 +135,7 @@ const districts = [1, 2].map((d) => ({
             <ul class="rows bp-off__rows">
               {councilFor(d).map((p) => (
                 <li id={`opisyal-${p.id}`} data-pagefind-title={p.name}>
-                  <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                  <span class="rows__name">{p.name}</span>
                   {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
                   <p class="t-small muted">
                     {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
@@ -158,15 +154,15 @@ const districts = [1, 2].map((d) => ({
     <div class="wrap">
       <div class="section-head">
         <h2 id="opisyal-ex-officio-h">{t.exOfficioHeading}</h2>
-        <p>{t.exOfficioConflict}</p>
       </div>
       <div class="grid bp-off__split">
+        {exOfficioCity.length > 0 && (
         <div class="span-6">
           <h3 class="bp-off__h3">{t.exOfficioSetA}</h3>
           <ul class="rows bp-off__rows">
             {exOfficioCity.map((p) => (
               <li>
-                <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                <span class="rows__name">{p.name}</span>
                 {text(p, "role") && <p>{text(p, "role")}</p>}
                 {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
                 <p class="t-small muted bp-off__meta">
@@ -177,12 +173,14 @@ const districts = [1, 2].map((d) => ({
             ))}
           </ul>
         </div>
+        )}
+        {exOfficioDirectory.length > 0 && (
         <div class="span-6">
           <h3 class="bp-off__h3">{t.exOfficioSetB}</h3>
           <ul class="rows bp-off__rows">
             {exOfficioDirectory.map((p) => (
               <li>
-                <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
+                <span class="rows__name">{p.name}</span>
                 <p>{text(p, "position")}{p.barangay && <>, {p.barangay}</>}</p>
                 {text(p, "note") && <p class="t-small muted">{text(p, "note")}</p>}
                 <p class="t-small muted bp-off__meta">
@@ -193,6 +191,7 @@ const districts = [1, 2].map((d) => ({
             ))}
           </ul>
         </div>
+        )}
       </div>
     </div>
   </section>
@@ -207,10 +206,9 @@ const districts = [1, 2].map((d) => ({
             {o.head && (
               <p>
                 {o.position ? <span class="muted">{o.position}: </span> : null}
-                <strong>{o.head}</strong>{o.verify && <Verify />}
+                <strong>{o.head}</strong>
               </p>
             )}
-            {!o.head && o.verify && <p><Verify /></p>}
             {o.location && <p>{o.location}</p>}
             {o.phones.length > 0 && (
               <ul class="bp-off__phones">
@@ -239,7 +237,7 @@ const districts = [1, 2].map((d) => ({
     <div class="wrap">
       <div class="section-head">
         <h2 id="opisyal-barangay-h">{t.barangayOfficialsHeading}</h2>
-        <p>{t.barangayOfficialsNote}</p>
+        {districts.length === 0 && <p>{t.barangayOfficialsNote}</p>}
       </div>
       {districts.map((g) => (
         <div class="bp-off__district">
@@ -248,10 +246,10 @@ const districts = [1, 2].map((d) => ({
             {g.rows.map((b) => {
               const srcs = uniq([
                 b.punong_barangay?.sources ?? [],
-                b.sk_chair.sources,
+                b.sk_chair?.sources ?? [],
                 ...b.kagawad.map((k) => k.sources),
                 ...b.phones.map((ph) => ph.sources),
-                b.hall_address.value ? b.hall_address.sources : [],
+                b.hall_address?.value ? b.hall_address.sources : [],
               ]);
               return (
                 <li id={`opisyal-${b.slug}`} data-pagefind-title={b.name} class="span-6">
@@ -263,29 +261,31 @@ const districts = [1, 2].map((d) => ({
                       {b.punong_barangay && (
                         <div>
                           <dt class="t-small muted">{t.punongBarangay}</dt>
-                          <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
+                          <dd>{b.punong_barangay.name}</dd>
                         </div>
                       )}
-                      <div>
-                        <dt class="t-small muted">{t.skChair}</dt>
-                        <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>
-                      </div>
+                      {b.sk_chair && (
+                        <div>
+                          <dt class="t-small muted">{t.skChair}</dt>
+                          <dd>{b.sk_chair.name}</dd>
+                        </div>
+                      )}
                       {b.kagawad.length > 0 && (
                         <div>
                           <dt class="t-small muted">{t.kagawad}</dt>
                           <dd>
                             <ul>
                               {[...b.kagawad].sort(byName).map((k) => (
-                                <li>{k.name}{k.verify && <Verify />}</li>
+                                <li>{k.name}</li>
                               ))}
                             </ul>
                           </dd>
                         </div>
                       )}
-                      {b.hall_address.value && (
+                      {b.hall_address?.value && (
                         <div>
                           <dt class="t-small muted">{t.hallAddress}</dt>
-                          <dd>{b.hall_address.value}{b.hall_address.verify && <Verify />}</dd>
+                          <dd>{b.hall_address.value}</dd>
                         </div>
                       )}
                       {b.phones.length > 0 && (
@@ -297,7 +297,6 @@ const districts = [1, 2].map((d) => ({
                                 <li>
                                   <a class="bp-off__tel" href={telHref(ph.number)}>{ph.number}</a>
                                   <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
-                                  {ph.verify && <Verify />}
                                 </li>
                               ))}
                             </ul>
@@ -379,10 +378,6 @@ const districts = [1, 2].map((d) => ({
   }
   .bp-off__rows > li > p {
     max-width: 64ch;
-  }
-  .bp-off__rows :global(.verify),
-  .bp-off__card :global(.verify) {
-    margin-left: var(--s-2);
   }
   .bp-off__checked {
     margin-top: var(--s-6);

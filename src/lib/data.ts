@@ -57,15 +57,22 @@ for (const [file, data] of Object.entries({
   pasyalan: pasyalanFile,
 })) assertTrustedSources(file, data);
 
+// Keep pending records in the source files and validate them, but don't publish them.
+const published = <T extends object>(items: T[]) =>
+  items.filter((item) => !("verify" in item && item.verify === true));
+
 export { site };
 
-export const hotlines = hotlinesFile.hotlines;
+export const hotlines = published(hotlinesFile.hotlines);
 export const hotlinesRetrieved = hotlinesFile.retrieved;
 export const categories = servicesFile.categories;
 export const offices = servicesFile.offices;
-export const services = servicesFile.services;
-export const barangays = barangaysFile.barangays;
-export const city = cityFile;
+export const services = published(servicesFile.services);
+// Names and districts come from the PSA. The flag covers hall and official details.
+export const barangays = barangaysFile.barangays.map((item) => item.verify
+  ? { ...item, contact: null, hall_address: null, punong_barangay: null, punong_barangay_term: null }
+  : item);
+export const city = { ...cityFile, facts: published(cityFile.facts) };
 /** every barangay name as a page may print it ("Santa Lucia", "Sta. Lucia"); see lib/no-translate.ts */
 export const barangayNames = nameVariants(barangays.map((item) => item.name));
 export const barangayNamePattern = namePattern(barangayNames);
@@ -81,54 +88,76 @@ function byId<T extends { id: string }>(items: T[], ids: string[]): T[] {
   });
 }
 
-export const emergencyHotlines = byId(hotlines, site.emergency_featured);
-export const featuredServices = byId(services, site.featured_services);
-export const programs = programsFile.programs;
-export const officials = officialsFile.officials;
+export const emergencyHotlines = published(byId(hotlinesFile.hotlines, site.emergency_featured));
+export const featuredServices = published(byId(servicesFile.services, site.featured_services));
+export const programs = published(programsFile.programs);
+export const officials = published(officialsFile.officials);
 export const officialsTerm = officialsFile.term;
-export const transparencyLinks = transparencyFile.links;
-export const transparencyFigures = transparencyFile.figures;
+export const transparencyLinks = published(transparencyFile.links);
+export const transparencyFigures = published(transparencyFile.figures);
 export const servicesRetrieved = servicesFile.retrieved;
 export const cityHallHotline = hotlines.find((item) => item.id === "pasig-city-hall-trunkline");
-export const hotlineConflicts = hotlinesFile.conflicts;
 export const officialsRetrieved = officialsFile.retrieved;
-export const departmentHeads = officialsFile.department_heads;
-export const officialsDirectory = officialsDirectoryFile;
-export const facilities = facilitiesFile;
+export const departmentHeads = published(officialsFile.department_heads);
+export const officialsDirectory = {
+  ...officialsDirectoryFile,
+  ex_officio: published(officialsDirectoryFile.ex_officio),
+  departments: published(officialsDirectoryFile.departments).map((item) => ({
+    ...item,
+    phones: published(item.phones),
+  })),
+  barangays: officialsDirectoryFile.barangays.map((item) => ({
+    ...item,
+    punong_barangay: item.punong_barangay?.verify ? null : item.punong_barangay,
+    sk_chair: item.sk_chair.verify ? null : item.sk_chair,
+    kagawad: published(item.kagawad),
+    phones: published(item.phones),
+    hall_address: item.hall_address.verify ? null : item.hall_address,
+  })),
+};
+export const facilities = {
+  ...facilitiesFile,
+  hospitals: published(facilitiesFile.hospitals),
+  evacuation_centers: published(facilitiesFile.evacuation_centers),
+  flood_prone_notes: published(facilitiesFile.flood_prone_notes),
+};
 export const programsRetrieved = programsFile.retrieved;
 export const transparencyRetrieved = transparencyFile.retrieved;
 
 export const pasigDataEdition = pasigSourcesFile.edition_date;
 export const pasigSources = pasigSourcesFile.sources;
-export const places = placesFile.places;
-export const serviceUpdates = serviceUpdatesFile.updates;
-export const opportunities = opportunitiesFile.opportunities;
-export const historicalUpdates = opportunitiesFile.historical_updates;
+const { places: allPlaces } = placesFile;
+const { updates: allUpdates } = serviceUpdatesFile;
+const { opportunities: allOpportunities, historical_updates: allHistory } = opportunitiesFile;
+export const places = published(allPlaces);
+export const serviceUpdates = published(allUpdates);
+export const opportunities = published(allOpportunities);
+export const historicalUpdates = published(allHistory);
 
-assertRecentData(pasigSourcesFile, places, serviceUpdates, opportunities, historicalUpdates, barangays.map(x => x.id), services.map(x => x.id));
+assertRecentData(pasigSourcesFile, allPlaces, allUpdates, allOpportunities, allHistory, barangays.map(x => x.id), servicesFile.services.map(x => x.id));
 const sourceIds = new Set(pasigSources.map((source) => source.id));
-const placeIds = new Set(places.map((place) => place.id));
-const serviceIds = new Set(services.map((service) => service.id));
+const placeIds = new Set(allPlaces.map((place) => place.id));
+const serviceIds = new Set(servicesFile.services.map((service) => service.id));
 function requireUnique(ids: string[], label: string) {
   if (new Set(ids).size !== ids.length) throw new Error(`Duplicate ${label} id`);
 }
 requireUnique(pasigSources.map((item) => item.id), "source");
-requireUnique(places.map((item) => item.id), "place");
-requireUnique(serviceUpdates.map((item) => item.id), "service update");
-requireUnique([...opportunities, ...historicalUpdates].map((item) => item.id), "opportunity/history");
-for (const place of places) {
+requireUnique(allPlaces.map((item) => item.id), "place");
+requireUnique(allUpdates.map((item) => item.id), "service update");
+requireUnique([...allOpportunities, ...allHistory].map((item) => item.id), "opportunity/history");
+for (const place of allPlaces) {
   if (Object.values(place.evidence).some((refs) => refs.length === 0)) throw new Error(`A place evidence field is empty (${place.id})`);
   if (place.parent_id && !placeIds.has(place.parent_id)) throw new Error(`Unknown parent place ${place.parent_id} (${place.id})`);
   if (place.barangay_id && !barangays.some((barangay) => barangay.id === place.barangay_id)) throw new Error(`Unknown barangay ${place.barangay_id} (${place.id})`);
   for (const refs of Object.values(place.evidence)) for (const ref of refs) if (!sourceIds.has(ref.split(":")[0])) throw new Error(`Unknown evidence source ${ref} (${place.id})`);
 }
-for (const update of serviceUpdates) {
+for (const update of allUpdates) {
   if (update.service_id && !serviceIds.has(update.service_id)) throw new Error(`Unknown service ${update.service_id} (${update.id})`);
   for (const id of update.place_ids ?? []) if (!placeIds.has(id)) throw new Error(`Unknown place ${id} (${update.id})`);
   for (const row of update.rpt_schedules ?? []) if (!placeIds.has(row.place_id)) throw new Error(`Unknown RPT place ${row.place_id} (${update.id})`);
   for (const ref of update.evidence) if (!sourceIds.has(ref.split(":")[0])) throw new Error(`Unknown evidence source ${ref} (${update.id})`);
 }
-for (const item of [...opportunities, ...historicalUpdates]) {
+for (const item of [...allOpportunities, ...allHistory]) {
   if ("service_id" in item && item.service_id && !serviceIds.has(item.service_id)) throw new Error(`Unknown service ${item.service_id} (${item.id})`);
   const refs = [...("place_ids" in item && item.place_ids ? item.place_ids : []), ...("place_id" in item && item.place_id ? [item.place_id] : [])];
   for (const id of refs) if (!placeIds.has(id)) throw new Error(`Unknown place ${id} (${item.id})`);
@@ -143,16 +172,8 @@ export const lifeEvents = lifeEventsFile.events.map((event) => {
   for (const id of event.related) if (!eventIds.has(id)) throw new Error(`Unknown related life event ${id} (${event.id})`);
   return {
     ...event,
-    serviceList: event.services.map((id) => {
-      const service = services.find((item) => item.id === id);
-      if (!service) throw new Error(`Unknown service ${id} (life event ${event.id})`);
-      return service;
-    }),
-    programList: event.programs.map((id) => {
-      const program = programs.find((item) => item.id === id);
-      if (!program) throw new Error(`Unknown program ${id} (life event ${event.id})`);
-      return program;
-    }),
+    serviceList: published(byId(servicesFile.services, event.services)),
+    programList: published(byId(programsFile.programs, event.programs)),
   };
 });
 
@@ -162,7 +183,7 @@ for (const place of pasyalanFile.places) {
   if (place.barangay_id && !barangays.some((barangay) => barangay.id === place.barangay_id)) throw new Error(`Unknown barangay ${place.barangay_id} (pasyalan ${place.id})`);
 }
 // Places to visit; `kind: "bago"` with `opened` marks a place that opened recently.
-export const pasyalan = pasyalanFile.places;
+export const pasyalan = published(pasyalanFile.places);
 export const pasyalanRetrieved = pasyalanFile.retrieved;
 export type LifeEvent = (typeof lifeEvents)[number];
 

@@ -2,7 +2,6 @@
 import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import Search from "./Search.astro";
-import Verify from "./Verify.astro";
 import { categories, cityHallHotline, officeName, offices, services, telHref } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
 
@@ -67,7 +66,6 @@ const cityHallNumber = cityHallHotline?.numbers[0];
                         <span class="bp-sidx__meta">
                           <span>{officeName(service.office)}</span>
                           {service.processing_time && <span class="num" lang={en ? "fil" : undefined}>{service.processing_time}</span>}
-                          {service.verify && <Verify />}
                         </span>
                       </span>
                       <svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
@@ -137,7 +135,6 @@ const cityHallNumber = cityHallHotline?.numbers[0];
   .bp-sidx__body { flex: 1; min-width: 0; display: grid; gap: var(--s-1); }
   .bp-sidx__title { font: 600 var(--t-card)/1.3 var(--font-text); }
   .bp-sidx__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-5); font-size: var(--t-small); color: var(--muted); }
-  .bp-sidx__meta :global(.verify) { margin-inline-start: 0; }
   .bp-sidx__help { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4); padding: var(--s-5); border-radius: var(--r-panel); background: var(--pale); }
   .bp-sidx__helpq { font: var(--display-weight) var(--t-h3)/1.15 var(--font-display); }
   .bp-sidx__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }

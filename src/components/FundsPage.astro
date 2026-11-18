@@ -1,6 +1,5 @@
 ---
 import Site from "../layouts/Site.astro";
-import Verify from "./Verify.astro";
 import PageHead from "./site/PageHead.astro";
 import IbaPaTabs from "./IbaPaTabs.astro";
 import { sourceLabel, transparencyFigures, transparencyLinks, transparencyRetrieved } from "../lib/data";
@@ -36,7 +35,6 @@ const checked = formatDate(lang, transparencyRetrieved);
               <li id={figure.id} data-pagefind-title={label} class="bp-funds__fig">
                 <h3 class="bp-funds__label">{label}</h3>
                 <p class="bp-funds__value">{value}</p>
-                {figure.verify && <p><Verify /></p>}
                 {figure.as_of && <p class="t-small muted">{t.aboutAsOf}: {figure.as_of}</p>}
                 <p class="t-small muted">
                   {t.sources}:{" "}
