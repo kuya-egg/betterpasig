@@ -1,0 +1,37 @@
+---
+import "../styles/site.css";
+import SiteHead from "../components/SiteHead.astro";
+import SiteHeader from "../components/site/SiteHeader.astro";
+import SiteFooter from "../components/site/SiteFooter.astro";
+import Toast from "../components/Toast.astro";
+import { langFromUrl, ui } from "../i18n";
+import { pagefindSection } from "../lib/pagefind";
+
+interface Props {
+  title?: string;
+  description?: string;
+  photos?: string[];
+  contentLang?: "fil" | "en";
+}
+
+const t = ui[langFromUrl(Astro.url)];
+const { title, description, photos = [], contentLang } = Astro.props;
+const { indexed, section } = pagefindSection(Astro.url);
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <SiteHead title={title} description={description} />
+  </head>
+  <body class="bp-site">
+    <SiteHeader />
+    <main lang={contentLang} id="top" tabindex="-1" data-pagefind-body={indexed || undefined} data-pagefind-meta={indexed ? `kind:${section}` : undefined}>
+      {indexed && title && <span hidden data-pagefind-meta="title[data-title]" data-title={title} />}
+      <slot />
+    </main>
+    <SiteFooter photoIds={photos} />
+    <Toast />
+    <script>import "../lib/client-freshness";</script>
+  </body>
+</html>

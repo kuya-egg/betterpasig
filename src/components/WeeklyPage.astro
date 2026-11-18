@@ -1,5 +1,6 @@
 ---
-import Kit from '../layouts/Kit.astro';
+import { ButtonLink } from "@/components/ui/button-link";
+import Site from '../layouts/Site.astro';
 import SourceNote from './SourceNote.astro';
 import {historicalUpdates,opportunities,pasigSources,serviceUpdates} from '../lib/data';
 import {formatDate,href,langFromUrl} from '../i18n';
@@ -8,14 +9,14 @@ interface Props { archive?: boolean }
 const {archive=false}=Astro.props;
 const lang=langFromUrl(Astro.url),en=lang==='en';
 const title=archive?(en?'Notice archive':'Arkibo ng mga abiso'):(en?'Recent notices and opportunities':'Mga bagong abiso at oportunidad');
-const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:null,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...opportunities.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:item.event_date,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...historicalUpdates.map(item=>({id:item.id,title:en?(item.id.includes('parking')?'Mega Parking I maintenance':item.id.includes('blood')?'PCIST blood donation announcement':'October 1–2 job fair report'):(item.id.includes('parking')?'Maintenance sa Mega Parking I':item.id.includes('blood')?'Anunsyo ng blood donation sa PCIST':'Ulat sa job fair noong Oktubre 1–2'),date:item.published_date,eventDate:null,refs:item.evidence,service:null,summary:en?item.summary:item.id.includes('parking')?'May anunsyo ng pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Hindi nito itinatakda ang kasalukuyang bukas na kapasidad.':item.id.includes('blood')?'Nakatakda noon ang aktibidad noong Oktubre 8, 08:00–13:00. Hindi patunay ang anunsyo na natuloy ito.':'Iniulat ng lungsod ang 1,067 jobseeker at 1,753 kwalipikadong application noong Oktubre 1–2. Magkaibang sukatan ang tao at application.',historical:true}))];
+const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:null,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...opportunities.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:item.event_date,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...historicalUpdates.map(item=>({id:item.id,title:en?(item.id.includes('parking')?'Mega Parking I maintenance':item.id.includes('blood')?'PCIST blood donation announcement':'October 1–2 job fair report'):(item.id.includes('parking')?'Maintenance sa Mega Parking I':item.id.includes('blood')?'Anunsyo ng blood donation sa PCIST':'Ulat sa job fair noong Oktubre 1–2'),date:item.published_date,eventDate:null,refs:item.evidence,service:null,summary:en?item.summary:item.id.includes('parking')?'May anunsyo ng pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.':item.id.includes('blood')?'Nasa anunsyo ang iskedyul na Oktubre 8, 08:00–13:00. Hindi pa kumpirmadong natuloy ang aktibidad.':'Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.',historical:true}))];
 ---
-<Kit title={title} description={en?'Recent official notices and opportunities from Pasig City, each with its source and date.':'Mga bagong opisyal na abiso at oportunidad sa Lungsod ng Pasig, may pinagmulan at petsa.'}>
+<Site title={title} description={en?'Recent official notices and opportunities from Pasig City, each with its source and date.':'Mga bagong opisyal na abiso at oportunidad sa Pasig. May petsa at sanggunian ang bawat abiso.'}>
  <section class="section section--flow" aria-labelledby="weekly-h">
   <div class="wrap" data-current-feed={!archive||undefined} data-pagefind-ignore={archive||undefined}>
    <div class="section-head">
     <h1 id="weekly-h">{title}</h1>
-    <p>{archive?(en?'Older notices and ones whose date has passed.':'Mga lumang abiso at mga lumipas na ang petsa.'):(en?'Official notices still current, each with its source.':'Mga opisyal na abisong kasalukuyan pa, may pinagmulan bawat isa.')}</p>
+    <p>{archive?(en?'Older notices and ones whose date has passed.':'Mga naunang abiso at mga aktibidad na lumipas na ang petsa.'):(en?'Official notices still current, each with its source.':'Mga bagong abiso na may link sa opisyal na anunsyo.')}</p>
    </div>
    <ul class="weekly">
     {rows.map(row=>{const current=!row.historical&&isSourceFresh(row.date,new Date())&&eventState(row.eventDate,new Date())!=='past';const source=pasigSources.find(s=>s.id===row.refs[0].split(':')[0]);return <li id={row.id} data-pagefind-title={row.title} data-published-date={row.date} data-event-date={row.eventDate} data-archive-record={archive||undefined} data-historical={String(row.historical)} hidden={archive?current:!current} class="weekly__item">
@@ -24,18 +25,18 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
       <span>{en?'Published':'Inanunsyo'}: {formatDate(lang,row.date)}</span>
       {row.eventDate&&<span>{en?'Scheduled':'Nakatakda'}: {formatDate(lang,row.eventDate)}</span>}
      </div>
-     {row.eventDate&&<p class="t-small muted" data-event-status>{en?'Scheduled event; confirm with the organizer.':'Nakatakdang aktibidad; kumpirmahin sa tagapag-ayos.'}</p>}
+     {row.eventDate&&<p class="t-small muted" data-event-status>{en?'Scheduled event; confirm with the organizer.':'Kumpirmahin sa tagapag-ayos ang iskedyul.'}</p>}
      {row.summary&&<p>{row.summary}</p>}
-     {row.id==='bfp-fsis-assistance-2026-10'&&<p class="t-small">{en?'BFP transaction assistance; not an emergency hotline.':'Tulong sa transaksyon sa BFP; hindi emergency hotline.'} 09603402260, {en?'Mon–Fri':'Lun–Biy'} 08:00–17:00; {en?'holidays excluded. Published number; not checked by phone.':'hindi kasama ang mga holiday. Hindi pa nasusubukang tawagan.'}</p>}
-     {row.id==='libreng-sakay-pasigpass-2026-10'&&<p class="t-small">{en?'The notice reports six routes. QR is optional; manual registration is available. Stops and route geometry are unverified.':'Anim na ruta ang iniulat. Opsyonal ang QR; may manual na rehistrasyon. Hindi pa napatutunayan ang mga hintuan at guhit ng ruta.'}</p>}
+     {row.id==='bfp-fsis-assistance-2026-10'&&<p class="t-small">{en?'BFP transaction assistance; not an emergency hotline.':'Linya para sa mga transaksiyon sa BFP. Para sa emergency, gamitin ang mga hotline sa pahina ng Emergency.'} 09603402260, {en?'Mon–Fri':'Lun–Biy'} 08:00–17:00; {en?'holidays excluded. Published number; not checked by phone.':'hindi kasama ang mga holiday. Hindi pa nasusubukang tawagan.'}</p>}
+     {row.id==='libreng-sakay-pasigpass-2026-10'&&<p class="t-small">{en?'The notice reports six routes. QR is optional; manual registration is available. Stops and route geometry are unverified.':'Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Kinukumpirma pa ang mga hintuan at eksaktong ruta.'}</p>}
      <SourceNote refs={row.refs}/>
     </li>;})}
    </ul>
-   {!archive&&<p class="muted" data-feed-empty hidden>{en?'No recent official notices are listed.':'Walang nakalistang bagong opisyal na anunsyo.'}</p>}
-   <p class="weekly__more"><a class="btn btn--secondary" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</a></p>
+   {!archive&&<p class="muted" data-feed-empty hidden>{en?'No recent official notices are listed.':'Wala pang nakalistang bagong opisyal na abiso. Tingnan ang arkibo para sa mga naunang abiso.'}</p>}
+   <p class="weekly__more"><ButtonLink variant="outline" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</ButtonLink></p>
   </div>
  </section>
-</Kit>
+</Site>
 
 <style>
   .weekly { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }

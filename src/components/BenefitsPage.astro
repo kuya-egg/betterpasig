@@ -1,31 +1,37 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import { programs, programsRetrieved, sourceLabel } from "../lib/data";
-import { formatDate, langFromUrl, ui } from "../i18n";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Kit title={t.benefitsTitle} description={t.benefitsIntro}>
+<Site title={t.benefitsTitle} description={t.benefitsIntro}>
   <section class="section section--flow bp-benefits" aria-labelledby="benefits-h">
     <div class="wrap">
       <div class="section-head">
         <h1 id="benefits-h">{t.benefitsTitle}</h1>
         <p>{t.benefitsIntro}</p>
       </div>
+      <ul class="bp-benefits__jump" aria-label={t.benefitsAll} data-pagefind-ignore>
+        {programs.map((program) => (
+          <li><a href={`#${program.id}`}>{lang === "en" ? program.title_en : program.title_fil}</a></li>
+        ))}
+      </ul>
+      <a class="link bp-benefits__services" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
     </div>
   </section>
   {
     programs.map((program, index) => {
-      const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? en : (fil ?? en)) ?? null;
+      const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? (en ?? fil) : (fil ?? en)) ?? null;
       const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null) ?? "";
       const rows = [
         { label: t.benefitFor, value: pick(program.for_fil, program.for_en), num: false },
-        { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true },
-        { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false },
         { label: t.benefitOffice, value: program.office, num: false },
+        { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false, language: lang === "fil" && !program.how_fil ? "en" : undefined },
+        { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true, language: lang === "fil" && !program.benefit_fil ? "en" : undefined },
       ].filter((row) => typeof row.value === "string" && row.value.trim());
       return (
         <section
@@ -45,7 +51,7 @@ const t = ui[lang];
                 {rows.map((row) => (
                   <div>
                     <dt class="t-label muted">{row.label}</dt>
-                    <dd class:list={[row.num && "bp-benefits__num"]}>{row.value}</dd>
+                    <dd lang={row.language} class:list={[row.num && "bp-benefits__num"]}>{row.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -66,9 +72,28 @@ const t = ui[lang];
       );
     })
   }
-</Kit>
+</Site>
 
 <style>
+  .bp-benefits__jump {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+    column-gap: var(--s-5);
+    padding: var(--s-5);
+    border-radius: var(--r-lg);
+    background: var(--paper);
+  }
+  .bp-benefits__jump a, .bp-benefits__services {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    color: var(--blue);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .bp-benefits__services { margin-top: var(--s-3); align-self: start; border: 0; }
   section.bp-benefits {
     scroll-margin-top: var(--s-8);
   }

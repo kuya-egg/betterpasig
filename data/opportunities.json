@@ -441,7 +441,7 @@
         "S09"
       ],
       "summary_en": "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
-      "summary_fil": "Inanunsyo ang pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Hindi ito kasalukuyang ulat ng kapasidad.",
+      "summary_fil": "Inanunsyo ang pansamantalang pagsasara ng ikatlong palapag noong Oktubre 7, 08:00–12:01. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.",
       "facts": [
         {
           "id": "place_id",
@@ -574,7 +574,7 @@
         "S06"
       ],
       "summary_en": "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
-      "summary_fil": "Inanunsyo ang aktibidad noong Oktubre 8, 08:00–13:00. Hindi patunay ang anunsyo na natuloy ito.",
+      "summary_fil": "Nakatakda ang aktibidad para sa Oktubre 8, 08:00–13:00. Hindi pa kumpirmadong natuloy ito.",
       "facts": [
         {
           "id": "place_id",
@@ -707,7 +707,7 @@
         "S11"
       ],
       "summary_en": "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
-      "summary_fil": "Iniulat ang 1,067 jobseeker at 1,753 kwalipikadong application. Magkaibang sukatan ang tao at application.",
+      "summary_fil": "Iniulat na 1,067 ang naghahanap ng trabaho at 1,753 ang kwalipikadong aplikasyon. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.",
       "facts": [
         {
           "id": "place_ids",

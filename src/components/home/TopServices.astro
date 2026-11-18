@@ -1,145 +1,85 @@
 ---
-// The most used services as rows (office and time from the Citizen's Charter), beside a checklist fragment
-// holding one of them's real requirements: what a service page gives you before you go.
-import Verify from "../Verify.astro";
+import { Card } from "../ui/card";
 import { href, langFromUrl, ui } from "../../i18n";
-import { featuredServices, officeName } from "../../lib/data";
+import { featuredServices } from "../../lib/data";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
-// The checklist shows this featured service: five short requirements fit the fragment's five steps.
-const sample = featuredServices.find((service) => service.id === "senior-citizen-id");
-if (!sample?.requirements?.length) throw new Error('TopServices needs "senior-citizen-id" with requirements in site.featured_services');
-const steps = sample.requirements.slice(0, 5);
-const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg>';
+const labels: Record<string, { fil: string; en: string }> = {
+  "pay-real-property-tax": { fil: "Magbayad ng amilyar", en: "Pay property tax" },
+  "senior-citizen-id": { fil: "Kumuha ng Senior Citizen ID", en: "Get a senior ID" },
+  aics: { fil: "Humingi ng tulong pinansiyal", en: "Get financial assistance" },
+  "certified-copy-civil-document": { fil: "Kumuha ng rekord ng civil registry", en: "Get civil registry records" },
+  "business-permit-renewal": { fil: "Mag-renew ng business permit", en: "Renew a business permit" },
+  "scholarship-new": { fil: "Mag-apply ng scholarship", en: "Apply for a scholarship" },
+};
 ---
 
-<section class="section ground-surface" id="serbisyo" aria-labelledby="serbisyo-h">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 id="serbisyo-h">{t.topTitle}</h2>
-      <p>{t.topLead}</p>
-    </div>
-    <div class="grid grid--top">
-      <ul class="rows span-6 bp-top">
-        {
-          featuredServices.map((service) => (
-            <li>
-              <span class="rows__name">
-                <a class="bp-top__link" href={href(lang, `/serbisyo/${service.id}/`)}>{en ? service.title_en : service.title_fil}</a>
-                <small>
-                  {officeName(service.office)}
-                  {service.verify && <Verify />}
-                </small>
-              </span>
-              {service.processing_time && <span class="rows__value bp-top__time">{service.processing_time}</span>}
-            </li>
-          ))
-        }
-      </ul>
-      <div class="span-6 start-7 panel bp-req">
-        <div class="ui ui-panel ui-checks" data-ui="checklist" lang="fil">
-          <div class="ui-checks__head">
-            <div class="ui-title">{t.reqTitle}</div>
-            <span class="ui-spacer"></span>
-            <div class="ui-meta" data-checks-count>{t.reqCount(0, steps.length)}</div>
-          </div>
-          <div class="ui-checks__bar"><i data-checks-bar style="--k:0"></i></div>
-          <ul class="ui-checks__list">
-            {
-              steps.map((step) => (
-                <li class="ui-check">
-                  <span class="ui-check__box" set:html={tick} />
-                  <span class="ui-check__label">{step}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="bp-quick" id="serbisyo" aria-labelledby="serbisyo-h">
+  <Card className="bp-quick__card">
+    <h2 id="serbisyo-h">{t.topTitle}</h2>
+    <ul>
+      {featuredServices.map((service) => (
+        <li>
+          <a href={href(lang, `/serbisyo/${service.id}/`)}>
+            {labels[service.id]?.[lang] ?? (lang === "en" ? service.title_en : service.title_fil)}
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a class="bp-quick__all link" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
+  </Card>
 </section>
 
 <style>
-  .bp-top {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .bp-quick__card {
+    display: block;
+    box-shadow: none;
+    padding: clamp(.875rem, 2.5vw, 1.75rem);
+    border-color: var(--line);
+    border-radius: var(--r-lg);
   }
-  .bp-top > li {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 11rem);
-    padding-block: var(--s-3);
+  .bp-quick h2 {
+    margin-block-end: var(--s-2);
+    font: 800 clamp(1.125rem, 1.04rem + .35vw, 1.375rem)/1.3 var(--font-text);
+    letter-spacing: 0;
   }
-  .bp-top .rows__name {
+  .bp-quick ul {
     display: grid;
-    gap: var(--s-1);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2.6vw, 2rem);
   }
-  .bp-top small {
-    color: var(--muted);
-    font-size: var(--t-small);
-    font-weight: 400;
+  .bp-quick li { border-block-start: 1px solid var(--line); }
+  .bp-quick li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    min-block-size: 3rem;
+    padding-block: var(--s-2);
+    color: var(--blue);
+    font-size: .9375rem;
+    font-weight: 750;
+    line-height: 1.4;
   }
-  .bp-top__link {
-    font-size: var(--t-card);
-    font-weight: 500;
-    line-height: 1.3;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 4px;
-    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
+  .bp-quick li a svg { flex: none; }
+  .bp-quick__all {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 3rem;
+    margin-block-start: var(--s-1);
+    font-weight: 750;
+    font-size: .9375rem;
   }
-  .bp-top__link:hover {
-    text-decoration-color: currentColor;
+  @media (hover: hover) {
+    .bp-quick li a:hover { text-decoration: underline; text-underline-offset: .22em; }
   }
-  .bp-top__time {
-    white-space: normal;
-    text-align: right;
-    color: var(--muted);
-    font-size: var(--t-small);
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .bp-quick li a svg { transition: translate var(--fast) var(--ease); }
+    .bp-quick li a:hover svg { translate: .16rem; }
   }
-  .bp-req {
-    display: grid;
-    place-items: center;
-    align-self: stretch;
-    min-height: 360px;
-    border-radius: var(--r-lg, 16px);
-  }
-  /* the kit's lit grounds (sand, sky, sage) are off the city palette: the panel stands on Pasig pale,
-     the light value on dark pages too, so the fragment always sits on a lit ground */
-  .bp-req.panel {
-    background: #e6ecf8;
-  }
-  .bp-req .ui-checks {
-    width: min(400px, calc(100% - 48px));
-  }
-  @media (max-width: 1023px) {
-    .bp-top,
-    .bp-req {
-      grid-column: 1 / -1;
-    }
-    .bp-top > li {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .bp-top__time {
-      grid-column: 1;
-      grid-row: auto;
-      max-width: none;
-      text-align: left;
-    }
-  }
-  @media (min-width: 1024px) and (max-width: 1279px) {
-    #serbisyo {
-      --h: 2;
-    }
-  }
-  @media (max-width: 639px) {
-    .bp-req {
-      min-height: 520px;
-    }
-    #serbisyo {
-      --hm: 2;
-    }
+  @media (max-width: 22.5rem) {
+    .bp-quick ul { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

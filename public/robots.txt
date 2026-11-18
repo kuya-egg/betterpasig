@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: ClaudeBot
+Disallow: /
+
+Sitemap: https://betterpasig.org/sitemap-index.xml

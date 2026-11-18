@@ -1,14 +1,25 @@
 ---
+import { SearchField } from "./SearchField";
+import { Button } from "./ui/button";
 import { href, langFromUrl, ui } from "../i18n";
+
+interface Props { includePlaces?: boolean }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const label = Astro.props.includePlaces
+  ? (lang === "en" ? "Search for a service or place" : "Maghanap ng serbisyo o lugar")
+  : t.searchLabel;
+const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ? "#service-categories" : href(lang, "/serbisyo/");
 ---
 
 <div
   class="bp-search"
+  hidden
   data-pagefind-ignore
   data-empty={t.noMatch}
+  data-loading={t.searchLoading}
+  data-unavailable={t.searchUnavailable}
   data-one={t.matchOne}
   data-many={t.matchMany}
   data-keys={t.searchKeys}
@@ -17,23 +28,24 @@ const t = ui[lang];
   data-older={t.searchOlderSource}
   data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
 >
-  <div class="field">
-  <label class="bp-search__label" for="q">{t.searchLabel}</label>
+  <label class="bp-search__label" for="q">{label}</label>
   <form role="search">
-    <input
-      id="q"
-      type="search"
-      name="q"
-      autocomplete="off"
+    <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <circle cx="10.8" cy="10.8" r="6.3" /><path d="m15.5 15.5 4 4" />
+    </svg>
+    <SearchField
+      client:load
       placeholder={t.searchPlaceholder}
-      aria-controls="search-results"
-      aria-autocomplete="list"
-      aria-expanded="false"
+      clearLabel={lang === "en" ? "Clear search" : "Burahin ang hinahanap"}
     />
-    <button type="submit">{t.searchButton}</button>
+    <Button type="submit" size="lg" className="bp-search__submit">{t.searchButton}</Button>
   </form>
-  <div id="search-results" class="results" role="listbox"></div>
+  <div class="bp-search__popup" hidden>
+    <div id="search-results" class="results" role="listbox" aria-label={label} hidden></div>
+    <p class="bp-search__status" aria-hidden="true"></p>
+    <a class="bp-search__browse" href={browseHref}>{t.allServices}</a>
   </div>
+  <p class="bp-search__announcement" role="status" aria-atomic="true"></p>
 </div>
 <script>
   import { eventState, isSourceFresh } from "../lib/freshness";
@@ -49,7 +61,12 @@ const t = ui[lang];
   const form = box?.querySelector("form");
   const input = box?.querySelector("input");
   const results = box?.querySelector<HTMLElement>(".results");
-  if (box && form && input && results) {
+  const popup = box?.querySelector<HTMLElement>(".bp-search__popup");
+  const status = box?.querySelector<HTMLElement>(".bp-search__status");
+  const browse = box?.querySelector<HTMLElement>(".bp-search__browse");
+  const announcement = box?.querySelector<HTMLElement>(".bp-search__announcement");
+  if (box && form && input && results && popup && status && browse && announcement) {
+    box.hidden = false;
     const empty = box.dataset.empty ?? "";
     const one = box.dataset.one ?? "";
     const many = box.dataset.many ?? "{n}";
@@ -62,21 +79,31 @@ const t = ui[lang];
     let active = -1;
     let latest = 0;
     let timer = 0;
+    let shownQuery = "";
 
     // Pagefind and the date table load on first use, not with the page. Pagefind picks the index of <html lang>.
-    let pagefind: Promise<Pagefind | null> | undefined;
+    let pagefind: Promise<Pagefind> | undefined;
     const loadPagefind = () => {
       const url = "/pagefind/pagefind.js";
       // pageLength 0.1: hub pages (officials, emergency, funds) are long; the default would rank short pages that merely mention a name above them.
       pagefind ??= import(/* @vite-ignore */ url).then(async (module: Pagefind) => {
         await module.options({ ranking: { pageLength: 0.1 } });
         return module;
-      }, () => null);
+      }).catch((error) => {
+        pagefind = undefined;
+        throw error;
+      });
       return pagefind;
     };
     let dates: Promise<Dates> | undefined;
     const loadDates = () => {
-      dates ??= fetch("/notice-dates.json").then((response) => response.json() as Promise<Dates>);
+      dates ??= fetch("/notice-dates.json").then((response) => {
+        if (!response.ok) throw new Error("Could not load notice dates");
+        return response.json() as Promise<Dates>;
+      }).catch((error) => {
+        dates = undefined;
+        throw error;
+      });
       return dates;
     };
 
@@ -115,12 +142,42 @@ const t = ui[lang];
         link.classList.toggle("active", index === active);
         link.setAttribute("aria-selected", index === active ? "true" : "false");
       });
-      if (active >= 0) links[active]?.scrollIntoView({ block: "nearest" });
+      const selected = links[active];
+      if (selected) {
+        input.setAttribute("aria-activedescendant", selected.id);
+        const row = selected.getBoundingClientRect();
+        const list = results.getBoundingClientRect();
+        if (row.bottom > list.bottom) results.scrollTop += row.bottom - list.bottom;
+        if (row.top < list.top) results.scrollTop -= list.top - row.top;
+      } else {
+        input.removeAttribute("aria-activedescendant");
+      }
+    };
+
+    const reset = () => {
+      results.replaceChildren();
+      results.hidden = true;
+      links = [];
+      active = -1;
+      shownQuery = "";
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
     };
 
     const close = () => {
-      results.classList.remove("open");
-      input.setAttribute("aria-expanded", "false");
+      latest++;
+      window.clearTimeout(timer);
+      reset();
+      popup.hidden = true;
+      status.textContent = "";
+      announcement.textContent = "";
+    };
+
+    const showStatus = (message: string, showBrowse: boolean, announce = true) => {
+      popup.hidden = false;
+      status.textContent = message;
+      if (announce) announcement.textContent = message;
+      browse.hidden = !showBrowse;
     };
 
     // Every notice is indexed once, on the current-notices page. An expired one (old source, past event,
@@ -154,6 +211,12 @@ const t = ui[lang];
             continue;
           }
         }
+        if (kind === "pasyalan") {
+          for (const sub of anchored.filter(({ anchor }) => anchor?.element === "h3" && anchor.id.startsWith("pasyalan-"))) {
+            rows.push({ href: sub.url, title: sub.title, kind: kinds[kind] ?? "", note: "" });
+          }
+          continue;
+        }
         let note = "";
         if (kind === "lugar" && dateTable) {
           const published = dateTable.places[page.url.split("/").filter(Boolean).pop() ?? ""];
@@ -163,47 +226,51 @@ const t = ui[lang];
         // A match in the page's own h1 section opens the page at its top, not at the heading's anchor.
         const first = page.sub_results[0];
         const pageHref = !first || first.anchor?.element === "h1" ? page.url : first.url;
-        rows.push({ href: kind === "ngayong-linggo" ? page.url : pageHref, title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
+        const title = first?.anchor && first.anchor.element !== "h1" && kind === "tulong"
+          ? first.title
+          : page.meta.title ?? "";
+        rows.push({ href: kind === "ngayong-linggo" ? page.url : pageHref, title, kind: kinds[kind] ?? "", note });
       }
-      // Expired and older-source results sort after current ones (stable).
-      return rows.sort((a, b) => Number(a.note !== "") - Number(b.note !== ""));
+      return rows;
     };
 
-    const run = async () => {
-      const query = input.value.trim();
-      const ticket = ++latest;
-      if (!query) {
-        results.replaceChildren();
-        links = [];
-        active = -1;
-        close();
-        return;
-      }
-      const variants = searchVariants(query);
-      const words = [...new Set(variants.flatMap((variant) => variant.split(/\s+/)))];
-      const pf = await loadPagefind();
-      const found = pf ? await Promise.all(variants.map((variant) => pf.search(variant))).catch(() => []) : [];
-      // One result per page, best score first, across the query and its synonym variants.
-      const best = new Map<string, (typeof found)[number]["results"][number]>();
-      for (const result of found.flatMap((set) => set.results)) {
-        if ((best.get(result.id)?.score ?? -1) < result.score) best.set(result.id, result);
-      }
-      const unique = [...best.values()].sort((a, b) => b.score - a.score);
-      const pages = await Promise.all(unique.slice(0, 12).map((result) => result.data())).catch(() => []);
-      const rows = await toRows(pages);
-      if (ticket !== latest) return;
-      results.replaceChildren();
-      links = [];
-      active = -1;
-      if (rows.length === 0) {
-        const note = document.createElement("p");
-        note.textContent = empty;
-        results.append(note);
-      } else {
-        for (const row of rows.slice(0, 7)) {
+    const run = async (query: string, ticket: number) => {
+      try {
+        const variants = searchVariants(query);
+        const words = [...new Set(variants.flatMap((variant) => variant.split(/\s+/)))];
+        const pf = await loadPagefind();
+        const found = await Promise.all(variants.map((variant) => pf.search(variant)));
+        if (ticket !== latest) return;
+        // One result per page, best score first, across the query and its synonym variants.
+        const best = new Map<string, (typeof found)[number]["results"][number]>();
+        for (const result of found.flatMap((set) => set.results)) {
+          if ((best.get(result.id)?.score ?? -1) < result.score) best.set(result.id, result);
+        }
+        const unique = [...best.values()].sort((a, b) => b.score - a.score);
+        const pages = await Promise.all(unique.slice(0, 12).map((result) => result.data()));
+        const displayTitle = (title: string) => title.toLowerCase().replace(/[-–—]/g, " ").replace(/\s+/g, " ").trim();
+        const queryTitle = displayTitle(query);
+        const titleMatch = (row: Row) => {
+          const title = displayTitle(row.title);
+          if (title === queryTitle) return 2;
+          return title.startsWith(queryTitle + " ") ? 1 : 0;
+        };
+        const rows = (await toRows(pages))
+          .sort((a, b) => Number(Boolean(a.note)) - Number(Boolean(b.note)) || titleMatch(b) - titleMatch(a))
+          .slice(0, 7);
+        if (ticket !== latest) return;
+        if (!rows.length) {
+          showStatus(empty, true);
+          return;
+        }
+
+        for (const [index, row] of rows.entries()) {
           const link = document.createElement("a");
           link.href = row.href;
+          link.id = `search-result-${index + 1}`;
+          link.tabIndex = -1;
           link.setAttribute("role", "option");
+          link.setAttribute("aria-selected", "false");
           const title = document.createElement("span");
           title.append(highlight(row.title, words));
           const category = document.createElement("small");
@@ -212,174 +279,153 @@ const t = ui[lang];
           results.append(link);
           links.push(link);
         }
-        const hint = document.createElement("div");
-        hint.className = "hint";
-        const shown = document.createElement("span");
-        shown.textContent = countLabel(rows.length);
-        const help = document.createElement("span");
-        help.textContent = keys;
-        hint.append(shown, help);
-        results.append(hint);
+        results.hidden = false;
+        input.setAttribute("aria-expanded", "true");
+        shownQuery = query;
+        showStatus(`${countLabel(rows.length)} · ${keys}`, false);
+      } catch {
+        if (ticket === latest) showStatus(box.dataset.unavailable ?? "", true);
       }
-      results.classList.add("open");
-      input.setAttribute("aria-expanded", "true");
-    };
-    const runSoon = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(run, 80);
     };
 
-    input.addEventListener("input", runSoon);
+    const queue = (delay: number) => {
+      close();
+      const query = input.value.trim();
+      if (!query) return;
+      showStatus(box.dataset.loading ?? "", false, false);
+      const ticket = latest;
+      timer = window.setTimeout(() => void run(query, ticket), delay);
+    };
+
+    input.addEventListener("input", (event) => {
+      if (!(event instanceof InputEvent && event.isComposing)) queue(120);
+    });
+    input.addEventListener("compositionend", () => queue(120));
     input.addEventListener("focus", () => {
-      void loadPagefind();
-      if (input.value.trim()) void run();
+      if (input.value.trim() && popup.hidden) queue(0);
     });
     input.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        if (!links.length) return;
-        active = (active + 1) % links.length;
-        paint();
-      } else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        if (!links.length) return;
-        active = (active - 1 + links.length) % links.length;
-        paint();
-      } else if (event.key === "Escape") {
-        close();
-      } else if (event.key === "Enter" && active >= 0) {
-        event.preventDefault();
-        links[active]?.click();
+      if (event.isComposing || (event.key !== "ArrowDown" && event.key !== "ArrowUp")) return;
+      if (!links.length) {
+        if (popup.hidden && input.value.trim()) {
+          event.preventDefault();
+          queue(0);
+        }
+        return;
       }
+      event.preventDefault();
+      if (event.key === "ArrowDown") active = (active + 1) % links.length;
+      else active = active <= 0 ? links.length - 1 : active - 1;
+      paint();
+    });
+    box.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || event.isComposing || popup.hidden) return;
+      event.preventDefault();
+      input.focus();
+      close();
+    });
+    popup.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) requestAnimationFrame(close);
     });
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (active >= 0) links[active]?.click();
-      else void run();
+      if (shownQuery && shownQuery === input.value.trim()) links[Math.max(active, 0)]?.click();
+      else queue(0);
+    });
+    box.addEventListener("focusout", (event) => {
+      if (event.relatedTarget instanceof Node && box.contains(event.relatedTarget)) return;
+      // A pointer click on a result must be allowed to complete before it is removed.
+      if (event.relatedTarget) close();
     });
     document.addEventListener("click", (event) => {
-      if (!(event.target as Element).closest(".bp-search")) close();
+      if (event.target instanceof Node && !box.contains(event.target)) close();
     });
   }
 </script>
 
 <style>
-  .bp-search {
-    max-width: 600px;
-  }
+  .bp-search { position: relative; max-width: 38rem; }
   form {
     display: flex;
     align-items: center;
     gap: var(--s-2);
-    padding: 6px;
-    border: 1px solid var(--line-strong);
-    border-radius: calc(var(--r-btn) + 6px);
+    padding: var(--s-1);
+    border: 1px solid var(--muted);
+    border-radius: var(--r-sm);
     background: var(--bg);
-    transition: border-color var(--m-in, 150ms) var(--ease), box-shadow var(--m-in, 150ms) var(--ease);
   }
-  form:focus-within {
-    border-color: var(--action);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--action) 18%, transparent);
-  }
-  input {
+  form > svg { color: var(--blue); flex: none; margin-inline-start: var(--s-2); }
+  form:focus-within { border-color: var(--blue); }
+  form :global(.bp-search__field) { display: flex; flex: 1; align-items: center; min-inline-size: 0; }
+  form :global(input) {
     flex: 1 1 auto;
-    min-width: 0;
-    min-height: 48px;
+    min-inline-size: 0;
+    min-block-size: 3rem;
     border: 0;
-    outline: 0;
-    font: 400 18px var(--font-text);
-    padding: 0 var(--s-3);
     background: transparent;
-    color: var(--ink);
+    box-shadow: none;
+    padding-inline: var(--s-2);
   }
-  input::placeholder {
-    color: var(--muted);
+  form :global(input::placeholder) { color: var(--muted); font-size: .9375rem; }
+  form :global(input::-webkit-search-cancel-button) { appearance: none; }
+  form :global(input:focus-visible) { outline-offset: -3px; }
+  form :global([data-slot="input-clear"]) { color: var(--blue); min-inline-size: 3rem; min-block-size: 3rem; }
+  form :global(.bp-search__submit) {
+    min-block-size: 3rem;
+    border-radius: calc(var(--r-sm) - var(--s-1));
+    padding-inline: clamp(.6rem, 2vw, 1.25rem);
   }
-  input::-webkit-search-cancel-button {
-    cursor: pointer;
-  }
-  form button {
-    border: 0;
-    border-radius: var(--r-btn);
-    background: var(--action);
-    color: var(--action-ink);
-    font: 500 16px var(--font-text);
-    padding: 0 var(--s-5);
-    min-height: 48px;
-    cursor: pointer;
-    transition: background-color var(--m-in, 150ms) var(--ease), transform var(--m-press, 90ms) var(--ease);
-  }
-  form button:hover {
-    background: color-mix(in oklab, var(--action) 86%, var(--ink));
-  }
-  form button:active {
-    transform: translateY(1px) scale(.985);
-  }
-  .field {
-    position: relative;
-  }
-  .results {
-    display: none;
+  .bp-search__popup {
     position: absolute;
-    z-index: 20;
-    left: 0;
-    right: 0;
+    z-index: 4;
+    inset-inline: 0;
     top: calc(100% + 8px);
     background: var(--bg);
     border: 1px solid var(--line-strong);
     border-radius: var(--r-md);
-    max-height: 400px;
-    overflow: auto;
+    box-shadow: 0 6px 24px var(--shadow);
   }
-  .results.open {
-    display: block;
-  }
+  .results { max-height: min(55vh, 24rem); overflow: auto; overscroll-behavior: contain; }
   .results :global(a) {
     display: flex;
+    min-height: 3rem;
     justify-content: space-between;
-    gap: 16px;
-    padding: 12px 16px;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-3) var(--s-4);
     text-decoration: none;
     color: var(--ink);
-    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin: 4px;
   }
-  .results :global(a:first-child) {
-    border-top: 0;
-  }
-  .results :global(a:hover),
-  .results :global(a.active) {
-    background: var(--surface);
-  }
+  .results :global(a.active) { background: var(--pale); }
+  @media (hover: hover) { .results :global(a:hover) { background: var(--pale); } }
   .results :global(small) {
+    flex: 0 0 auto;
+    max-inline-size: 40%;
     color: var(--muted);
-    font-size: 14px;
+    font-size: .8125rem;
+    text-align: end;
+    overflow-wrap: normal;
   }
-  .results :global(mark) {
-    background: var(--mark-bg);
-    color: inherit;
-    border-radius: 3px;
+  .results :global(mark) { background: var(--mark-bg); color: inherit; border-radius: 3px; }
+  .bp-search__announcement {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
-  .results :global(p) {
-    margin: 0;
-    padding: 14px 16px;
-    color: var(--muted);
-    font-size: 15px;
+  .bp-search__status { margin: 0; padding: var(--s-3) var(--s-4); color: var(--muted); font-size: .875rem; }
+  .bp-search__browse {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding-inline: var(--s-4);
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
-  .results :global(.hint) {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 8px 16px;
-    font-size: 13px;
-    color: var(--muted);
-    border-top: 1px solid var(--line);
-    background: var(--surface);
-  }
-  .bp-search__label {
-    display: block;
-    margin-bottom: var(--s-2);
-    font-size: var(--t-small);
-    font-weight: 500;
-    color: var(--muted);
-  }
+  .bp-search__label { display: block; margin-bottom: var(--s-2); font-size: .875rem; font-weight: 750; }
 </style>

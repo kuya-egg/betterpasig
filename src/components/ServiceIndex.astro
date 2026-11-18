@@ -1,5 +1,6 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
+import Search from "./Search.astro";
 import Verify from "./Verify.astro";
 import { categories, officeName, offices, services } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
@@ -8,13 +9,21 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Kit title={t.allServices} description={t.pageDescription}>
-  <section class="section section--flow" aria-labelledby="services-h">
+<Site title={t.allServices} description={t.pageDescription}>
+  <section class="section section--flow bp-service-index" aria-labelledby="services-h">
     <div class="wrap">
       <div class="section-head">
         <h1 id="services-h">{t.allServices}</h1>
         <p>{t.serviceCount(services.length, categories.length, offices.length)}</p>
       </div>
+      <Search />
+      <nav class="bp-cat__jump" id="service-categories" aria-label={lang === "en" ? "Service categories" : "Mga kategorya ng serbisyo"}>
+        <ul>
+          {categories.map((category) => (
+            <li><a href={`#${category.id}`}>{lang === "en" ? category.name_en : category.name_fil}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </section>
   {
@@ -56,9 +65,35 @@ const t = ui[lang];
       );
     })
   }
-</Kit>
+</Site>
 
 <style>
+  .bp-service-index .section-head h1 {
+    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.08 var(--font-text);
+    letter-spacing: -.035em;
+    text-wrap: wrap;
+  }
+  .bp-cat__jump {
+    margin-block-start: var(--s-6);
+    border-block-start: 1px solid var(--line);
+  }
+  .bp-cat__jump ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: 0 var(--s-5);
+  }
+  .bp-cat__jump a {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    width: 100%;
+    border-block-end: 1px solid var(--line);
+    color: var(--blue);
+    padding-block: var(--s-2);
+    font-size: .9375rem;
+    font-weight: 650;
+  }
+  @media (hover: hover) { .bp-cat__jump a:hover { background: var(--pale); text-decoration: underline; } }
   .bp-cat__head {
     display: flex;
     align-items: baseline;
@@ -67,7 +102,7 @@ const t = ui[lang];
     max-width: 760px;
   }
   .bp-cat__head h2 {
-    font-size: var(--t-card);
+    font-size: var(--t-h3);
     font-weight: 600;
   }
   .bp-cat__lead {
@@ -95,17 +130,17 @@ const t = ui[lang];
   }
   .bp-cat__link {
     display: inline-flex;
-    min-height: 44px;
+    min-height: 48px;
     align-items: center;
     font-size: var(--t-body);
     font-weight: 500;
+    color: var(--blue);
     text-decoration: underline;
-    text-decoration-color: transparent;
     text-underline-offset: 4px;
-    transition: text-decoration-color 150ms var(--ease);
+    transition: text-underline-offset 150ms var(--ease);
   }
   .bp-cat__link:hover {
-    text-decoration-color: currentColor;
+    text-underline-offset: .34em;
   }
   .bp-cat__time {
     color: var(--muted);

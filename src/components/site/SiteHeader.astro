@@ -1,0 +1,173 @@
+---
+import Mark from "../../../design/logo/mark-blue.svg";
+import { href, langFromUrl, pathIn, ui } from "../../i18n";
+import EmergencyStrip from "./EmergencyStrip.astro";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const other = lang === "en" ? "fil" : "en";
+const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/$/, "") || "/";
+const links = [
+  { label: t.navServices, path: "/serbisyo/" },
+  { label: t.guideHelp, path: "/tulong/" },
+  { label: t.navBarangay, path: "/#mapa" },
+  { label: t.guideExplore, path: "/#pasyalan" },
+];
+const more = [
+  { label: t.weeklyTitle, path: "/ngayong-linggo/" },
+  { label: t.navOfficials, path: "/opisyal/" },
+  { label: t.navFunds, path: "/pondo/" },
+  { label: t.aboutTitle, path: "/tungkol/" },
+];
+
+const navState = (target: string) => {
+  if (target === "/#mapa" && path.startsWith("/barangay/")) return "true";
+  const root = target.replace(/\/$/, "");
+  return path === root ? "page" : path.startsWith(root + "/") ? "true" : undefined;
+};
+---
+
+<header class="bp-header">
+  <a class="skip-link" href="#top">{t.skip}</a>
+  <EmergencyStrip />
+  <div class="wrap bp-header__inner">
+    <a class="nav__logo bp-brand" href={href(lang, "/")} aria-label={t.home}>
+      <Mark class="bp-mark" aria-hidden="true" />
+      <span>BetterPasig</span>
+    </a>
+    <nav class="bp-header__nav" aria-label={t.navLabel}>
+      <ul>
+        {links.map((link) => (
+          <li><a href={href(lang, link.path)} aria-current={navState(link.path)}>{link.label}</a></li>
+        ))}
+        <li>
+          <details class="bp-header__more">
+            <summary>
+              {t.guideMore}
+              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </summary>
+            <ul>
+              {more.map((link) => (
+                <li><a href={href(lang, link.path)} aria-current={navState(link.path)}>{link.label}</a></li>
+              ))}
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </nav>
+    <a
+      class="bp-header__language"
+      href={pathIn(other, Astro.url)}
+      hreflang={ui[other].htmlLang}
+      lang={ui[other].htmlLang}
+      aria-label={t.switchLabel}
+      data-lang-switch={other}
+    >
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18" />
+      </svg>
+      {t.otherLangName}
+    </a>
+  </div>
+</header>
+
+<script>
+  const language = document.querySelector<HTMLAnchorElement>("[data-lang-switch]");
+  language?.addEventListener("click", () => {
+    const target = new URL(language.href);
+    target.hash = location.hash;
+    language.href = target.href;
+    try { localStorage.setItem("bp-lang", language.dataset.langSwitch ?? "fil"); } catch { /* storage may be blocked */ }
+  });
+
+  const more = document.querySelector<HTMLDetailsElement>(".bp-header__more");
+  if (more) {
+    document.addEventListener("click", (event) => {
+      if (event.target instanceof Node && !more.contains(event.target)) more.open = false;
+    });
+    more.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !more.open) return;
+      more.open = false;
+      more.querySelector("summary")?.focus();
+    });
+  }
+</script>
+
+<style>
+  .bp-header {
+    position: relative;
+    z-index: 5;
+    background: var(--bg);
+    border-block-end: 1px solid var(--line);
+  }
+
+  .bp-header .skip-link { z-index: 1; }
+
+  .bp-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 4.5rem;
+    column-gap: var(--s-4);
+  }
+
+  .bp-brand {
+    min-height: 3rem;
+    font-weight: 750;
+    letter-spacing: -.04em;
+  }
+
+  .bp-header__nav > ul { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-1); }
+  .bp-header__nav a, .bp-header__nav summary, .bp-header__language {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: 3rem;
+    padding-inline: var(--s-3);
+    border-radius: var(--r-sm);
+    font-size: .9375rem;
+    font-weight: 650;
+  }
+  .bp-header__nav [aria-current] { color: var(--blue); text-decoration: underline; text-underline-offset: .35em; }
+  .bp-header__language { color: var(--blue); }
+  .bp-header__more { position: relative; }
+  .bp-header__more summary { cursor: pointer; list-style: none; }
+  .bp-header__more summary::-webkit-details-marker { display: none; }
+  .bp-header__more[open] summary svg { rotate: 180deg; }
+  .bp-header__more > ul {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: calc(100% + 4px);
+    z-index: 2;
+    width: min(14rem, 90vw);
+    padding: var(--s-2);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    box-shadow: 0 6px 24px var(--shadow);
+  }
+
+  @media (hover: hover) {
+    .bp-header__nav :is(a, summary):hover, .bp-header__language:hover { background: var(--pale); color: var(--blue); }
+  }
+
+  @media (max-width: 56rem) {
+    .bp-header__inner { padding-block-start: var(--s-1); }
+    .bp-header__nav { order: 1; flex-basis: 100%; border-top: 1px solid var(--line); }
+    .bp-header__nav > ul { justify-content: space-between; gap: 0; }
+    .bp-header__nav a, .bp-header__nav summary { padding-inline: var(--s-1); font-size: .875rem; }
+    .bp-header__more > ul { position: static; box-shadow: none; width: auto; }
+    .bp-header__nav > ul:has(details[open]) { align-items: start; }
+    .bp-header__nav li:has(details[open]) { flex: 1 0 100%; }
+    .bp-header__language { padding-inline: var(--s-1); }
+  }
+
+  @media (max-width: 31rem) {
+    .bp-header__nav > ul { column-gap: var(--s-1); }
+    .bp-header__nav > ul > li > a, .bp-header__more summary {
+      min-inline-size: 3rem;
+      padding-inline: 0;
+    }
+  }
+</style>

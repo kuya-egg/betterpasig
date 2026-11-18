@@ -1,31 +1,24 @@
 ---
-// Shared <head> tags for every layout: title, language links, icons, share tags and the two
-// pre-paint scripts (saved theme, saved language).
+// Shared metadata, icons, and the saved language redirect.
 import { langFromUrl, langs, pathIn, ui } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
-  themeColor?: string;
 }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const { title, description = t.tagline, themeColor = "#1A47A8" } = Astro.props;
-const fullTitle = title ? `${title} · BetterPasig` : "BetterPasig";
+const { title, description = t.tagline } = Astro.props;
+const fullTitle = title ? `${title} · BetterPasig` : `${t.homeTitle} · BetterPasig`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const enPath = pathIn("en", Astro.url);
+const notFound = /^\/404\/?$/.test(Astro.url.pathname);
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<script is:inline>
-  // Restore before first paint; without a saved choice, CSS follows the device.
-  try {
-    const theme = localStorage.getItem("bp-theme");
-    if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
-  } catch (e) { /* storage may be blocked */ }
-</script>
+<meta name="color-scheme" content="only light" />
 {
   lang === "fil" && (
     <script is:inline define:vars={{ enPath }}>
@@ -36,14 +29,19 @@ const enPath = pathIn("en", Astro.url);
 }
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
-{langs.map((l) => <link rel="alternate" hreflang={ui[l].htmlLang} href={new URL(pathIn(l, Astro.url), Astro.site)} />)}
-<link rel="alternate" hreflang="x-default" href={new URL(pathIn("fil", Astro.url), Astro.site)} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+{notFound ? <meta name="robots" content="noindex" /> : (
+  <>
+    <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={ui[l].htmlLang} href={new URL(pathIn(l, Astro.url), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(pathIn("fil", Astro.url), Astro.site)} />
+  </>
+)}
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="theme-color" content={themeColor} />
+<meta name="theme-color" content="#F8FAFC" />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

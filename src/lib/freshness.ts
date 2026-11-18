@@ -1,11 +1,11 @@
-const timezone = "Asia/Manila";
+export const manilaTimeZone = "Asia/Manila";
 export function validDate(value: string): boolean {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 }
 
 export function manilaDate(now: Date): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: timezone,
+    timeZone: manilaTimeZone,
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

@@ -4,6 +4,8 @@ All content on BetterPasig.org comes from the JSON files in `data/`. The site is
 
 Core directory data retrieved: 2026-10-19. Recent official notice edition: 2026-10-28.
 
+A service may include an `english` block translating its summary, requirements, steps, fee (when published), and processing time. Keep translations aligned with the original fields and their existing sources.
+
 The recent edition uses `sources.json` for publisher, publication/retrieval timestamps, review status and saved evidence paths. `places.json`, `service-updates.json` (`updates`) and `opportunities.json` preserve display fields alongside `facts`: each fact has a typed JSON value, field ID, source/locator/method evidence and nullable effective dates. Build-time validation rejects uncited or inconsistent fields, invalid dates/hours, duplicate IDs and broken relationships. `recent_update_ids` links the three affected legacy services. The legacy RPT fee is null pending review; the dated 2027 offer appears separately.
 
 Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs`, `bun run check`, `bun run build`, then `bun scripts/verify_pasig_browser.mjs`. The browser check uses the installed Windows Edge executable and saves results/screenshots under `research/implementation-audit/`. `bun scripts/count_verify.mjs data` is the Bun equivalent of the Python review-flag counter; neither counter establishes factual accuracy.

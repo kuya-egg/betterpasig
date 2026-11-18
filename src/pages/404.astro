@@ -1,12 +1,13 @@
 ---
+import { ButtonLink } from "@/components/ui/button-link";
 // One 404 for both languages: Cloudflare Pages serves it for any missing path.
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import { ui } from "../i18n";
 
 const { fil, en } = ui;
 ---
 
-<Kit title={`${fil.notFoundTitle} / ${en.notFoundTitle}`} description={`${fil.notFound} ${en.notFound}`}>
+<Site title={`${fil.notFoundTitle} / ${en.notFoundTitle}`} description={`${fil.notFound} ${en.notFound}`}>
   <section class="section section--flow" aria-labelledby="nf-h">
     <div class="wrap">
       <div class="section-head">
@@ -14,14 +15,14 @@ const { fil, en } = ui;
         <p lang="en">{en.notFound}</p>
       </div>
       <div class="nf-actions">
-        <a class="btn btn--primary" href="/">Bumalik sa home page</a>
-        <a class="btn btn--secondary" href="/serbisyo/">Tingnan ang mga serbisyo</a>
-        <a class="btn btn--secondary" href="/en/" lang="en">Go to the English home page</a>
-        <a class="btn btn--secondary" href="/en/serbisyo/" lang="en">Browse services</a>
+        <ButtonLink href="/">Bumalik sa home page</ButtonLink>
+        <ButtonLink variant="outline" href="/serbisyo/">Tingnan ang mga serbisyo</ButtonLink>
+        <ButtonLink variant="outline" href="/en/" lang="en">Go to the English home page</ButtonLink>
+        <ButtonLink variant="outline" href="/en/serbisyo/" lang="en">Browse services</ButtonLink>
       </div>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .nf-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }

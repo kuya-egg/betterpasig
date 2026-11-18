@@ -1,6 +1,5 @@
 ---
-// footer.closing: row 1 the dealt close (close-type), row 2 the link columns and the legal row.
-import Mark from "../../../design/logo/mark-blue.svg";
+import Mark from "../../../design/logo/mark-white.svg";
 import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
@@ -18,6 +17,8 @@ const showsPhotos = photos.some((item) => photoIds.includes(item.id));
 const hall = site.city_hall;
 const trunk = cityHallHotline?.numbers[0];
 const year = new Date().getFullYear();
+const notice = lang === "en" ? site.notice_en : site.notice_fil;
+const [noticeStart, noticeEnd] = notice.split("pasigcity.gov.ph");
 const columns = [
   {
     title: t.navServices,
@@ -30,7 +31,8 @@ const columns = [
   {
     title: t.footCity,
     links: [
-      { label: t.mapTitle, url: href(lang, "/#mapa") },
+      { label: t.navBarangay, url: href(lang, "/#mapa") },
+      { label: t.guideExplore, url: href(lang, "/#pasyalan") },
       { label: t.officialsPageTitle, url: href(lang, "/opisyal/") },
       { label: t.fundsTitle, url: href(lang, "/pondo/") },
     ],
@@ -46,22 +48,13 @@ const columns = [
 ];
 ---
 
-<footer class="footer closing" id="contact" aria-labelledby="close-h">
+<footer class="footer bp-footer" id="contact">
   <div class="wrap">
-    <div class="closing__cta close--type">
-      <div class="section-head">
-        <h2 id="close-h">{t.closeTitle}</h2>
-        <p class="t-lead">{t.closeLead}</p>
-      </div>
-      <a class="btn btn--primary btn--xl" href={href(lang, "/serbisyo/")}>
-        {t.mainAction}<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8" /><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" /></svg>
-      </a>
-    </div>
-    <div class="closing__links">
+    <div class="closing__links" id="close-h">
       <div class="grid">
         <div class="span-5 stack-4 bp-foot-about">
           <a class="nav__logo" href={href(lang, "/")}><Mark class="bp-mark" aria-hidden="true" /><span>BetterPasig</span></a>
-          <p class="t-small muted">{lang === "en" ? site.notice_en : site.notice_fil}</p>
+          <p class="t-small muted">{noticeStart}<a href="https://pasigcity.gov.ph">pasigcity.gov.ph</a>{noticeEnd}</p>
           <p class="t-small muted">
             {t.partOf} <a href="https://bettergov.ph">BetterGov.ph</a>. {t.dataUpdated}: {formatDate(lang, site.updated)}.
           </p>
@@ -79,7 +72,7 @@ const columns = [
         {
           columns.map((column, index) => (
             <div class={`span-2 ${index === 0 ? "start-7" : ""} stack-4`}>
-              <h3 class="t-label">{column.title}</h3>
+              <h2 class="bp-footer__column">{column.title}</h2>
               <ul class="bp-foot-links">
                 {column.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
               </ul>
@@ -90,13 +83,6 @@ const columns = [
       <div class="footer__legal">
         <span>&copy; {year} BetterPasig</span>
         <a href="https://github.com/kuya-egg/betterpasig">{t.aboutGithub}</a>
-        <button
-          type="button"
-          class="bp-theme"
-          aria-pressed="false"
-          data-light-label={t.useLightMode}
-          data-dark-label={t.useDarkMode}
-        >{t.darkMode}</button>
         {
           showsPhotos && <a href={href(lang, "/larawan/")}>{t.photoCredits}</a>
         }
@@ -104,24 +90,3 @@ const columns = [
     </div>
   </div>
 </footer>
-
-<script>
-  const root = document.documentElement;
-  const button = document.querySelector<HTMLButtonElement>(".bp-theme");
-  const system = matchMedia("(prefers-color-scheme: dark)");
-  if (button) {
-    const sync = () => {
-      const dark = root.dataset.theme === "dark" || (!root.dataset.theme && system.matches);
-      button.setAttribute("aria-pressed", String(dark));
-      button.title = (dark ? button.dataset.lightLabel : button.dataset.darkLabel) ?? "";
-    };
-    button.addEventListener("click", () => {
-      const theme = button.getAttribute("aria-pressed") === "true" ? "light" : "dark";
-      root.dataset.theme = theme;
-      try { localStorage.setItem("bp-theme", theme); } catch { /* storage may be blocked */ }
-      sync();
-    });
-    system.addEventListener("change", sync);
-    sync();
-  }
-</script>

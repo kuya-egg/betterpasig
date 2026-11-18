@@ -1,6 +1,6 @@
 ---
 // /buhay/<id>/: every service and benefit for one life event, then the events people often need next.
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import LifeIcon from "./home/LifeIcon.astro";
 import { href, langFromUrl, ui } from "../i18n";
@@ -19,7 +19,7 @@ const related = event.related.map((id) => lifeEvents.find((item) => item.id === 
 const pick = (fil: string | null | undefined, eng: string | null | undefined) => (en ? eng || fil : fil || eng) ?? null;
 ---
 
-<Kit title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
+<Site title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
   <section class="section section--flow bp-life" aria-labelledby="life-h">
     <div class="wrap">
       <div class="section-head bp-life__head">
@@ -84,7 +84,7 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
       </ul>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .bp-life__head {

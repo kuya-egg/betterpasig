@@ -4,7 +4,10 @@
   "exclude": ["dist", "prototype", "video", "scripts"],
   "compilerOptions": {
     "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "paths": {
+      "@/*": ["./src/*"],
       "@data/*": ["./data/*"],
       "@design/*": ["./design/*"]
     }

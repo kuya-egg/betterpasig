@@ -4,7 +4,7 @@
     {
       "id": "business-tax-q4-2026",
       "service_id": "pay-business-tax-online",
-      "title_fil": "Business tax, ikaapat na quarter ng 2026",
+      "title_fil": "Pagbabayad ng business tax para sa ikaapat na quarter ng 2026",
       "title_en": "Business tax, fourth quarter of 2026",
       "published_date": "2026-10-04",
       "online_url": "https://onlinepayments.pasigcity.gov.ph",
@@ -25,7 +25,7 @@
       ],
       "verify": true,
       "kind": "service_notice",
-      "summary_fil": "Business tax, ikaapat na quarter ng 2026",
+      "summary_fil": "Pagbabayad ng business tax para sa ikaapat na quarter ng 2026",
       "summary_en": "Business tax, fourth quarter of 2026",
       "sources": [
         "S03"
@@ -162,7 +162,7 @@
     {
       "id": "rpt-2027-advance-payment",
       "service_id": "pay-real-property-tax",
-      "title_fil": "Maagang bayad ng amilyar para sa 2027",
+      "title_fil": "Maagang pagbabayad ng amilyar para sa 2027",
       "title_en": "Advance payment of 2027 real property tax",
       "published_date": "2026-10-03",
       "online_url": "https://onlinepayments.pasigcity.gov.ph/",
@@ -240,7 +240,7 @@
         "city-hall-annex-2",
         "revolving-tower-rpt"
       ],
-      "summary_fil": "Maagang bayad ng amilyar para sa 2027",
+      "summary_fil": "Maagang pagbabayad ng amilyar para sa 2027",
       "summary_en": "Advance payment of 2027 real property tax",
       "sources": [
         "S04"
@@ -533,7 +533,7 @@
     {
       "id": "bfp-fsis-assistance-2026-10",
       "service_id": null,
-      "title_fil": "Tulong para sa Fire Safety Inspection System",
+      "title_fil": "Tulong sa paggamit ng Fire Safety Inspection System",
       "title_en": "Fire Safety Inspection System assistance",
       "published_date": "2026-10-01",
       "online_url": "https://fsis.e-bfp.com",
@@ -562,7 +562,7 @@
       ],
       "verify": true,
       "kind": "service_notice",
-      "summary_fil": "Tulong para sa Fire Safety Inspection System",
+      "summary_fil": "Tulong sa paggamit ng Fire Safety Inspection System",
       "summary_en": "Fire Safety Inspection System assistance",
       "sources": [
         "S02"
@@ -649,7 +649,7 @@
     {
       "id": "libreng-sakay-pasigpass-2026-10",
       "service_id": null,
-      "title_fil": "PasigPass sa Libreng Sakay",
+      "title_fil": "Paggamit ng PasigPass sa Libreng Sakay",
       "title_en": "PasigPass for Libreng Sakay",
       "published_date": "2026-10-01",
       "qr_required": false,
@@ -663,7 +663,7 @@
       "verify": true,
       "kind": "service_notice",
       "place_ids": [],
-      "summary_fil": "PasigPass sa Libreng Sakay",
+      "summary_fil": "Paggamit ng PasigPass sa Libreng Sakay",
       "summary_en": "PasigPass for Libreng Sakay",
       "sources": [
         "S05"

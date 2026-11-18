@@ -5,7 +5,7 @@
 <p align="center">Bawat serbisyo, benepisyo at opisyal ng Lungsod ng Pasig, malinaw at nasa isang lugar.<br>
 Every service, benefit and official of Pasig City, clear and in one place.</p>
 
-<p align="center"><img src="design/screenshots/homepage-desktop.png" width="820" alt="BetterPasig homepage prototype"></p>
+<p align="center"><img src="research/city-guide/home-desktop.jpg" width="820" alt="BetterPasig homepage"></p>
 
 BetterPasig is a volunteer-run, non-partisan civic information site for Pasig City, part of the [BetterGov.ph](https://bettergov.ph) / [BetterLGU](https://lgu.bettergov.ph/) movement. Pasig already publishes more than most cities; BetterPasig organizes it so any Pasigueño can find a service, benefit, opportunity or official in under a minute, then sends them to the city's own channels to transact.
 
@@ -35,7 +35,13 @@ bun run build     # static site in dist/
 bun run check     # type-check .astro and .ts files
 ```
 
-Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Kit.astro`: plain CSS from the design kit in `public/kit/` plus the city colors in `src/styles/kit-site.css` (see `docs/design-system.md`).
+Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Site.astro` with the shared editorial styles in `src/styles/site.css`. Barangay content stays in Filipino on both routes.
+
+### UI components
+
+Shared buttons, badges, inputs, and cards live in `src/components/ui/` and come from the [shadcn/ui registry](https://ui.shadcn.com/docs/installation/astro). Use `bunx shadcn@4.23.0 add <component>` to add another. The registry styles use Tailwind utilities mapped to BetterPasig's color tokens in `src/styles/shadcn.css`.
+
+Astro renders the pages and shared controls to HTML. The search field uses UI SDK for its clear and focus behavior. The installed SDK's React documentation is at `node_modules/@ui-sdk/react/docs/llms.txt`.
 
 ### Deploy (Cloudflare Pages)
 
@@ -63,9 +69,9 @@ python3 scripts/count_verify.py data     # what is still "Sinusuri pa"
 
 Data is current to **October 21, 2026**. The barangay officials elected in October 2023 are still in office: RA 12326 (Sept 24, 2026) cancelled the November 2026 barangay election and moved it to November 13, 2028. Barangay names and numbers come from directories, not an official city list, so all of them show **"Sinusuri pa"** until a steward confirms them by phone. That is the first job for barangay stewards (see [backlog](docs/backlog.md)).
 
-## Planned stack
+## Stack
 
-Static first, no backend: **Astro** with content collections reading `data/*.json`, plain CSS (design kit plus the city tokens), **Pagefind** for search, **Cloudflare Pages** for hosting and preview deploys, Cloudflare Web Analytics (no cookies). Running cost is about the domain fee.
+The public site uses **Astro**, JSON content, **Pagefind**, shadcn/ui, and **Cloudflare Pages**. Astro generates the sitemap during the build. Running cost is about the domain fee.
 
 ## How to help
 
@@ -84,6 +90,6 @@ Rules: every fact needs a source; never guess (use `null`); Filipino first; no p
 
 - Barangay boundaries: PSA PSGC via [faeldon/philippines-json-maps](https://github.com/faeldon/philippines-json-maps) (MIT). The logo is our own drawing of that outline; we do not use the official city seal.
 - Service data: Pasig City Citizen's Charters 2025 (`assets.pasigcity.gov.ph`).
-- Typeface: [Manrope](https://github.com/sharanda/manrope) (SIL Open Font License), self-hosted. The logo lockup files use Geist (SIL Open Font License).
+- Typeface: [Newsreader](https://github.com/productiontype/Newsreader) and [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans) (SIL Open Font License), self-hosted. The logo lockup files use Geist (SIL Open Font License).
 - Photographs: Wikimedia Commons, each credited with author and licence at `/larawan/` (`data/photos.json`).
 - Launch video music and sound effects are synthesized in code; the voice is Microsoft Edge neural TTS (fil-PH-AngeloNeural).

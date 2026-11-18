@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Any Pasigueño, often a senior or someone on a budget phone and slow data, looking for a city office, fee, requirements, hotline, benefit or official. They arrive with one errand ("magbabayad ng amilyar", "anong number ng ambulansya") and want to leave knowing where to go. Secondary: barangay stewards, volunteers who confirm their own barangay's officials and numbers and record the date they checked.
+Anyone who lives, works, studies, runs a business, or visits in Pasig. They may be looking for an office, fee, requirements, hotline, benefit, or place to visit on a budget phone or slow connection. They arrive with one errand ("magbabayad ng amilyar", "anong number ng ambulansya") and want to leave knowing where to go. Secondary: barangay stewards, volunteers who confirm their own barangay's officials and numbers and record the date they checked.
 
 ## Product Purpose
 
@@ -20,7 +20,7 @@ A guide and tracker, not a watchdog. Pasig's records are already open (local FOI
 
 ## Operating Context
 
-Residents use it on phones, often outdoors or in line at an office, sometimes in an emergency. Content comes from `data/*.json` edited by pull request; Filipino is the default at `/`, English at `/en/`. Routes: home, `/serbisyo` (173 services), `/barangay/[id]` (30), `/lugar/[id]`, `/ngayong-linggo` (+ archive), `/opisyal`, `/emergency`, `/tulong`, `/pondo`, `/tungkol`.
+People use it on phones, often outdoors or in line at an office, sometimes in an emergency. Content comes from `data/*.json` edited by pull request; Filipino is the default at `/`, English at `/en/`. Routes: home, `/serbisyo` (173 services), `/barangay/[id]` (30), `/lugar/[id]`, `/ngayong-linggo` (+ archive), `/opisyal`, `/emergency`, `/tulong`, `/pondo`, `/tungkol`.
 
 ## Capabilities and Constraints
 
@@ -32,7 +32,7 @@ Residents use it on phones, often outdoors or in line at an office, sometimes in
 ## Brand Commitments
 
 - Name: BetterPasig, part of BetterGov.ph.
-- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency, amber only for "Sinusuri pa" (`design/tokens/tokens.css`), with dark mode.
+- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency, amber only for "Sinusuri pa" (`src/styles/site.css`). The public site uses a single light theme.
 - The logo mark is the real outline of Pasig from PSA boundaries (`design/logo/`); never the official city seal.
 - The 30-barangay map is a signature element.
 - City motto "Umaagos ang Pag-asa" (Hope Flows), from `data/city.json`; the city is known for transparency.
@@ -40,7 +40,7 @@ Residents use it on phones, often outdoors or in line at an office, sometimes in
 
 ## Evidence on Hand
 
-Real sourced data in `data/` (services, hotlines, barangays, officials, programs, transparency figures, city facts, dated notices). No photographs, testimonials, partner logos or usage numbers exist; none may be invented.
+Real sourced data in `data/` (services, hotlines, barangays, officials, programs, transparency figures, city facts, dated notices). The photographs in src/assets/photos have credits and licenses recorded in data/photos.json. Testimonials, partner logos, and usage numbers require evidence.
 
 ## Product Principles
 

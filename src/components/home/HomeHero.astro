@@ -1,92 +1,64 @@
 ---
-// hero--split (dealt): the claim and the search left; the Manggahan Floodway right,
-// with one float card holding the city emergency line.
-import { Picture } from "astro:assets";
 import Search from "../Search.astro";
-import Verify from "../Verify.astro";
+import TopServices from "./TopServices.astro";
 import { langFromUrl, ui } from "../../i18n";
-import { emergencyHotlines, programs, services, telHref } from "../../lib/data";
 import { liveAlerts } from "../../lib/alerts";
-import { photo, photoAlt } from "../../lib/photos";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const lead = t.homeLead.replace("{services}", String(services.length)).replace("{programs}", String(programs.length));
 const alert = liveAlerts(lang)[0];
-const hero = photo("manggahan-floodway");
-const emergency = emergencyHotlines[0];
 ---
 
-<section class="hero hero--split" data-enter aria-labelledby="hero-h">
-  <div class="wrap">
-    <div class="hero-text grid hero__grid">
-      <div class="hero__text span-5">
-        {
-          alert && (
-            <p class="hero__kicker" data-alert-expires={alert.expires}>
-              <span class="dot" aria-hidden="true" />
-              {alert.text} <a href={alert.source}>{alert.host}</a>
-            </p>
-          )
-        }
-        <h1 id="hero-h">{t.homeTitle}</h1>
-        <p class="hero__lead">{lead}</p>
-        <Search />
-      </div>
-      <div class="hero__media span-6 start-7">
-        <Picture
-          src={hero.image}
-          alt={photoAlt(hero, lang)}
-          formats={["avif", "webp"]}
-          fallbackFormat="webp"
-          widths={[640, 960, 1280, 1600]}
-          sizes="(max-width: 1023px) 100vw, 75vw"
-          width={1280}
-          loading="eager"
-          fetchpriority="high"
-          style="--ly-pos: 50% 62%"
-        />
-        {
-          emergency && (
-            <div class="ly-float bp-float">
-              <div class="ly-float__row"><span>{t.emergencyCardLabel}</span></div>
-              <a class="ly-float__title bp-float__number" href={telHref(emergency.numbers[0])}>{emergency.numbers[0]}</a>
-              <div class="ly-float__row">
-                <span>{lang === "en" ? emergency.label_en : emergency.label_fil}</span>
-                {emergency.verify && <Verify />}
-              </div>
-            </div>
-          )
-        }
-      </div>
+<section class="civic-hero" aria-labelledby="hero-h">
+  <div class="wrap civic-hero__layout">
+    <div class="civic-hero__intro">
+      {alert && (
+        <p class="civic-hero__alert" data-alert-expires={alert.expires}>
+          {alert.text} <a href={alert.source}>{alert.host}</a>
+        </p>
+      )}
+      <h1 id="hero-h">{t.homeTitle}</h1>
+      <p class="civic-hero__lead">{t.homeLead}</p>
+      <Search includePlaces />
     </div>
+    <TopServices />
   </div>
 </section>
 
 <style>
-  .bp-float {
-    width: min(320px, calc(100% - 48px));
+  .civic-hero {
+    background: var(--pale);
+    border-block-end: 1px solid var(--line);
+    padding-block: clamp(1.5rem, 4.5vw, 4.25rem);
+  }
+  .civic-hero__layout {
     display: grid;
-    gap: var(--s-1);
-  }
-  .bp-float .ly-float__row:first-child {
-    color: var(--red);
-    font-weight: 500;
-  }
-  .bp-float__number {
-    font: var(--display-weight) 32px/1.1 var(--font-display);
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    min-height: 44px;
-    display: inline-flex;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     align-items: center;
+    gap: clamp(1.5rem, 5vw, 4.5rem);
   }
-  .bp-float__number:hover {
-    color: var(--red);
+  .civic-hero__intro h1 {
+    max-inline-size: 18ch;
+    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.05 var(--font-text);
+    letter-spacing: -.04em;
+    text-wrap: balance;
   }
-  .hero__kicker a {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .civic-hero__lead {
+    max-inline-size: 48ch;
+    color: var(--muted);
+    margin-block: var(--s-3) var(--s-5);
+  }
+  .civic-hero__alert {
+    margin-block-end: var(--s-4);
+    padding: var(--s-2) var(--s-3);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--bg);
+  }
+  .civic-hero__alert a { color: var(--blue); text-decoration: underline; }
+
+  @media (max-width: 54rem) {
+    .civic-hero__layout { grid-template-columns: minmax(0, 1fr); }
+    .civic-hero__intro h1 { max-inline-size: 22ch; text-wrap: wrap; }
   }
 </style>

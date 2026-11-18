@@ -8,7 +8,7 @@ import Verify from "./Verify.astro";
 import { isSourceFresh } from "../lib/freshness";
 
 const lang = langFromUrl(Astro.url);
-const t = ui[lang];
+const t = ui.fil;
 const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
 const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
 const recentPlaceDates = (barangayId: string) =>
@@ -30,15 +30,15 @@ function districtLabel(district: number | null): string | null {
 }
 ---
 
-<section class="section" id="mapa" aria-labelledby="mapa-h">
+<section class="section bp-barangay" lang="fil" id="mapa" aria-labelledby="mapa-h">
   <div class="wrap grid grid--top bp-map">
     <div class="span-5 info">
       <div class="section-head">
         <h2 id="mapa-h">{t.mapTitle}</h2>
         <p>{t.mapLead}</p>
       </div>
-      <label for="bsel">{t.yourBarangay}</label>
-      <select id="bsel">
+      <label for="bsel" hidden>{t.yourBarangay}</label>
+      <select id="bsel" hidden>
         <option value="" selected disabled>{t.mapPrompt}</option>
         {choices.map((barangay) => <option value={barangay.id}>{barangay.name}</option>)}
       </select>
@@ -53,7 +53,7 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.district}</dt>
                   <dd>
                     {district}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
@@ -62,7 +62,7 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.captain}</dt>
                   <dd>
                     {barangay.punong_barangay}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
@@ -71,17 +71,17 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.address}</dt>
                   <dd>
                     {barangay.hall_address}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
               <div>
-                <dt>{lang === "en" ? "Recent places" : "Mga bagong lugar"}</dt>
+                <dt>Mga bagong lugar</dt>
                 <dd data-place-source-dates={JSON.stringify(dates)}>{dates.filter((date) => isSourceFresh(date, new Date())).length}</dd>
               </div>
               <div class="more">
                 <a class="link" href={href(lang, `/barangay/${barangay.id}/`)}>
-                  {lang === "en" ? "Open barangay details" : "Tingnan ang detalye ng barangay"}
+                  Tingnan ang detalye ng barangay
                 </a>
               </div>
             </dl>
@@ -104,6 +104,14 @@ function districtLabel(district: number | null): string | null {
         <text class="tip" text-anchor="middle" />
       </svg>
     </div>
+    <div class="bp-map__directory">
+      <h3>Mga barangay ayon sa pangalan</h3>
+      <ul>
+        {choices.map((barangay) => (
+          <li><a href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a></li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -114,6 +122,8 @@ function districtLabel(district: number | null): string | null {
   const panels = root ? [...root.querySelectorAll<HTMLElement>("[data-panel]")] : [];
   const tip = root?.querySelector("text");
   if (root && select) {
+    select.hidden = false;
+    for (const label of select.labels ?? []) label.hidden = false;
     const show = (id: string | null) => {
       for (const anchor of anchors) {
         const on = Boolean(id) && anchor.dataset.id === id;
@@ -172,7 +182,11 @@ function districtLabel(district: number | null): string | null {
 
 <style>
   /* Hallmark · dropped #mapa, {langFromUrl(Astro.url) === "en" ? `/en/barangay/${barangay.id}/` : `/barangay/${barangay.id}/`} · the same barangay pages are linked through href(lang, `/barangay/<id>/`) and the map anchor through href(lang, "/#mapa") in the nav and footer */
+  .bp-barangay { background: var(--bg); }
   .bp-map__art {
+    background: var(--surface);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -180,7 +194,7 @@ function districtLabel(district: number | null): string | null {
   }
   svg {
     width: auto;
-    height: min(620px, calc(100svh - var(--padt) - var(--padb) - 40px));
+    height: clamp(22rem, 42vw, 34rem);
     max-width: 100%;
     overflow: visible;
   }
@@ -270,8 +284,24 @@ function districtLabel(district: number | null): string | null {
     font-weight: 500;
     overflow-wrap: anywhere;
   }
-  .caption {
-    margin: 0;
+  .bp-map__directory { grid-column: 1 / -1; }
+  .bp-map__directory h3 { margin-bottom: var(--s-3); }
+  .bp-map__directory ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+    column-gap: var(--s-4);
+  }
+  .bp-map__directory a {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-block: var(--s-2);
+    min-height: 3rem;
+    color: var(--blue);
+    font-size: .9375rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   @media (max-width: 1023px) {
     .info,

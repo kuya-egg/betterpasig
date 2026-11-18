@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import map from "../../design/map/pasig-map.json";
 import CopyButton from "./CopyButton.astro";
 import SourceNote from "./SourceNote.astro";
@@ -34,9 +34,9 @@ const recentUpdates = serviceUpdates.filter(
       places.some((place) => place.id === id && place.barangay_id === barangay.id),
     ) && isSourceFresh(item.published_date, new Date()),
 );
-const t = ui[lang];
+const t = ui.fil;
 const evacCenters = centersForBarangay(barangay.id);
-const en = lang === "en";
+
 
 // The directory stores contacts as one string: "numbers (source); label numbers (source)".
 // Split it into labelled numbers, each group with the directory that published it.
@@ -61,32 +61,34 @@ const contactGroups = (barangay.contact ?? "")
 const shape = map.barangays.find((item) => item.name === barangay.name);
 ---
 
-<Kit
+<Site
   title={barangay.name}
-  description={en ? `${barangay.name}, Pasig: barangay contacts, evacuation centers and recent places with official sources.` : `${barangay.name}, Pasig: mga kontak ng barangay, evacuation center at mga kamakailang lugar na may opisyal na sanggunian.`}
+  contentLang="fil"
+  description={`${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
 >
   <section class="section section--flow" aria-labelledby="brgy-h">
     <div class="wrap">
+      <a class="link bp-brgy__back" href={href(lang, "/#mapa")}>← Lahat ng barangay</a>
       <div class="grid grid--top">
         <div class="span-7">
           <div class="section-head bp-brgy__head">
             <h1 id="brgy-h">{barangay.name}</h1>
             {barangay.district && (
               <p>
-                {en ? "District" : "Distrito"} {barangay.district}
+                Distrito {barangay.district}
                 <br />
-                {en ? "Older directory information; being checked." : "Mas lumang datos ng direktoryo; sinusuri pa."}
+                Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon.
               </p>
             )}
           </div>
           {barangay.district && (
-            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "Directory source" : "Sanggunian ng direktoryo"}</a></p>
+            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>Tingnan ang direktoryong pinagmulan</a></p>
           )}
 
           <ul class="rows bp-brgy__facts">
             {barangay.punong_barangay && (
               <li>
-                <span class="rows__name">{en ? "Punong barangay" : "Punong barangay"}{barangay.verify && <Verify />}</span>
+                <span class="rows__name">Punong barangay{barangay.verify && <Verify lang="fil" />}</span>
                 <span class="bp-brgy__val">
                   {barangay.punong_barangay}
                   {barangay.punong_barangay_term && <small>{barangay.punong_barangay_term}</small>}
@@ -95,13 +97,13 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
             )}
             {barangay.hall_address && (
               <li>
-                <span class="rows__name">{en ? "Barangay hall" : "Barangay hall"}</span>
+                <span class="rows__name">Tanggapan ng barangay</span>
                 <span class="bp-brgy__val">{barangay.hall_address}</span>
               </li>
             )}
             {contactGroups.length > 0 && (
               <li>
-                <span class="rows__name">{en ? "Contact numbers" : "Mga numero ng kontak"}{barangay.verify && <Verify />}</span>
+                <span class="rows__name">Mga numero ng telepono{barangay.verify && <Verify lang="fil" />}</span>
                 <div class="bp-brgy__val bp-brgy__phones">
                   {contactGroups.map((group) => (
                     <div class="bp-brgy__group">
@@ -121,7 +123,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
                       {group.source && <small>{group.source}</small>}
                     </div>
                   ))}
-                  <small>{en ? "Published numbers; not checked by phone." : "Nakalathalang numero; hindi pa nasusubukang tawagan."}</small>
+                  <small>Nakalista ang mga numerong ito sa sanggunian. Hindi pa namin nakukumpirma sa pagtawag.</small>
                 </div>
               </li>
             )}
@@ -129,7 +131,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
         </div>
         {shape && (
           <div class="span-4 start-9 bp-brgy__map">
-            <svg viewBox="100 0 360 560" role="img" aria-label={en ? `Location of ${barangay.name} in Pasig` : `Lokasyon ng ${barangay.name} sa Pasig`}>
+            <svg viewBox="100 0 360 560" role="img" aria-label={`Lokasyon ng ${barangay.name} sa Pasig`}>
               {map.barangays.map((item) => <path d={item.d} class={item.name === barangay.name ? "on" : undefined} />)}
             </svg>
           </div>
@@ -141,57 +143,51 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
   <section class="section section--flow ground-surface" aria-labelledby="brgy-recent-h">
     <div class="wrap" data-current-feed>
       <div class="section-head">
-        <h2 id="brgy-recent-h">{en ? "Recent places with official sources" : "Mga lugar na may opisyal na sanggunian sa nakaraang 30 araw"}</h2>
+        <h2 id="brgy-recent-h">Mga lugar na nabanggit sa opisyal na abiso sa nakaraang 30 araw</h2>
       </div>
 
       {recentPlaces.length ? (
         <ul class="bp-brgy__list">
           {recentPlaces.map((place) => (
             <li data-published-date={Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1)}>
-              <a class="bp-brgy__title" href={en ? `/en/lugar/${place.id}/` : `/lugar/${place.id}/`}>{place.name}</a>
+              <a class="bp-brgy__title" href={href(lang, `/lugar/${place.id}/`)}>{place.name}</a>
               <p class="muted">
                 {place.address ??
-                  (en
-                    ? "Address not stated in the announcement checked."
-                    : "Hindi nakasaad ang address sa nasuring anunsyo.")}
+                  "Hindi nakasaad ang address sa nasuring anunsyo."}
               </p>
-              <SourceNote refs={Object.values(place.evidence).flat()} />
+              <SourceNote lang="fil" refs={Object.values(place.evidence).flat()} />
             </li>
           ))}
         </ul>
       ) : (
         <p>
-          {en
-            ? "No information supported by an official announcement from the past 30 days has been added for this barangay yet."
-            : "Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito."}
+          Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.
         </p>
       )}
 
       {recentUpdates.length > 0 && (
         <div class="bp-brgy__updates">
-          <h3 class="t-label muted">{en ? "Recent service notices" : "Mga bagong abiso sa serbisyo"}</h3>
+          <h3 class="t-label muted">Mga bagong abiso sa serbisyo</h3>
           <ul class="bp-brgy__list">
             {recentUpdates.map((item) => {
               const source = pasigSources.find(
                 (row) => row.id === item.evidence[0]?.split(":")[0],
               );
               const destination = item.service_id
-                ? en
-                  ? `/en/serbisyo/${item.service_id}`
-                  : `/serbisyo/${item.service_id}`
+                ? href(lang, `/serbisyo/${item.service_id}/`)
                 : source?.url;
               return (
                 <li data-published-date={item.published_date}>
-                  <a class="bp-brgy__title" href={destination}>{en ? item.title_en : item.title_fil}</a>
-                  <p class="muted">{formatDate(lang, item.published_date)}</p>
-                  <SourceNote refs={item.evidence} />
+                  <a class="bp-brgy__title" href={destination}>{item.title_fil}</a>
+                  <p class="muted">{formatDate("fil", item.published_date)}</p>
+                  <SourceNote lang="fil" refs={item.evidence} />
                 </li>
               );
             })}
           </ul>
         </div>
       )}
-      {recentPlaces.length > 0 && <p data-feed-empty hidden>{en ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
+      {recentPlaces.length > 0 && <p data-feed-empty hidden>Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.</p>}
     </div>
   </section>
 
@@ -205,7 +201,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
         <ul class="bp-brgy__list">
           {evacCenters.map((c) => (
             <li>
-              <p class="bp-brgy__title">{c.name}{c.verify && <Verify />}</p>
+              <p class="bp-brgy__title">{c.name}{c.verify && <Verify lang="fil" />}</p>
               {c.address && <p class="muted">{c.address}</p>}
               <p class="t-small muted bp-brgy__srcs">
                 <span>{t.sources}:</span>
@@ -222,9 +218,11 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
       <p class="bp-brgy__all"><a class="link" href={href(lang, "/emergency/#evacuation")}>{t.evacBarangayAll}</a></p>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
+  .bp-brgy__back { display: inline-flex; align-items: center; min-height: 3rem; margin-bottom: var(--s-2); }
+  .bp-brgy__map { background: var(--surface); border-radius: var(--r-lg); padding: var(--s-5); }
   .bp-brgy__head {
     margin-bottom: var(--s-4);
   }

@@ -1,5 +1,6 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import { ButtonLink } from "@/components/ui/button-link";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import SourceNote from "./SourceNote.astro";
 import {
@@ -53,20 +54,20 @@ const formatSchedule = (rows: ScheduleRow[]) =>
 function historySummary(id: string, english: string): string {
   if (lang === "en") return english;
   if (id === "mega-parking-1-2026-10-07") {
-    return "May abiso noon ng pagsasara para sa maintenance sa ikatlong palapag noong Oktubre 7 at muling pagbubukas nang 12:01 PM. Hindi nito ipinapakita ang kasalukuyang bukas o okupadong kapasidad.";
+    return "Ayon sa abiso, nakatakdang isara para sa maintenance ang ikatlong palapag noong Oktubre 7 at buksan muli nang 12:01 PM. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.";
   }
   if (id === "pcist-blood-drive-2026-10-08") {
-    return "Nakatakda noon ang blood donation sa kampus noong Oktubre 8. Hindi pinatutunayan ng anunsyo kung natuloy ang aktibidad.";
+    return "Nasa anunsyo ang iskedyul ng blood donation sa kampus noong Oktubre 8. Hindi pa kumpirmadong natuloy ito.";
   }
-  return "Iniulat ng lungsod ang 1,067 jobseeker at 1,753 kwalipikadong application para sa job fair noong Oktubre 1–2. Magkaibang bilang ang tao at application.";
+  return "Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon para sa job fair noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.";
 }
 ---
 
-<Kit
+<Site
   title={place.name}
   description={lang === "en"
     ? `${place.name}: address, hours and published contact details, with the official sources checked.`
-    : `${place.name}: address, oras at nakalathalang kontak, kasama ang mga opisyal na sanggunian.`}
+    : `${place.name}: address, oras at mga numerong nakalista sa mga opisyal na sanggunian.`}
 >
   <section class="section section--flow" aria-labelledby="place-h">
     <div class="wrap bp-place">
@@ -77,7 +78,7 @@ function historySummary(id: string, english: string): string {
             <a
               class="link bp-place__back"
               href={lang === "en" ? `/en/barangay/${place.barangay_id}/` : `/barangay/${place.barangay_id}/`}
-            >{lang === "en" ? "Barangay details" : "Impormasyon ng barangay"}</a>
+            lang="fil">Impormasyon ng barangay</a>
           </p>
         )}
       </div>
@@ -118,14 +119,14 @@ function historySummary(id: string, english: string): string {
         {place.rpt_schedule && (
           <li>
             <span class="rows__name">
-              {lang === "en" ? "RPT transaction schedule" : "Oras ng transaksyon para sa amilyar"}
+              {lang === "en" ? "RPT transaction schedule" : "Oras ng serbisyo para sa amilyar"}
             </span>
             <span class="bp-place__val">
               {formatSchedule(place.rpt_schedule)}
               <small>
                 {lang === "en"
                   ? "For RPT transactions only; holidays excluded."
-                  : "Para lamang sa amilyar; hindi kasama ang mga holiday."}
+                  : "Para lang sa amilyar. Hindi kasama ang mga holiday."}
               </small>
             </span>
           </li>
@@ -139,7 +140,7 @@ function historySummary(id: string, english: string): string {
               {lang === "en" ? "According to the city report of" : "Ayon sa ulat ng lungsod noong"}{" "}
               {formatDate(lang, place.project.reported_inauguration)}. {lang === "en"
                 ? "This is not a flood safety assessment."
-                : "Hindi ito pagtatasa sa kaligtasan laban sa baha."}
+                : "Walang pagtatasa sa panganib ng baha sa ulat na ito."}
             </span>
           </li>
         )}
@@ -174,7 +175,7 @@ function historySummary(id: string, english: string): string {
     <section class="section section--flow ground-surface" aria-labelledby="place-desks-h">
       <div class="wrap bp-place">
         <div class="section-head">
-          <h2 id="place-desks-h">{lang === 'en' ? 'Service desks and separate schedules' : 'Mga desk at hiwalay na oras ng serbisyo'}</h2>
+          <h2 id="place-desks-h">{lang === 'en' ? 'Service desks and separate schedules' : 'Mga desk at kani-kanilang oras ng serbisyo'}</h2>
         </div>
         <ul class="bp-place__list">
           {childDesks.map(child => (
@@ -220,7 +221,7 @@ function historySummary(id: string, english: string): string {
                 <p class="t-small muted">{formatDate(lang, item.published_date)}</p>
                 {"phone" in item && (
                   <p>
-                    {lang === "en" ? "Business transaction assistance phone" : "Telepono para sa tulong sa transaksyon ng negosyo"}: {" "}
+                    {lang === "en" ? "Business transaction assistance phone" : "Tawagan para sa tulong sa transaksiyon ng negosyo"}: {" "}
                     <a class="bp-place__tel" href={`tel:${item.phone}`}>{item.phone}</a>
                     <br />
                     {lang === "en" ? "Not an emergency hotline." : "Hindi ito emergency hotline."}
@@ -243,7 +244,7 @@ function historySummary(id: string, english: string): string {
                   <p>
                     {lang === "en"
                       ? `The notice reports ${item.reported_route_count} routes. QR is optional; manual registration is available. Stops and route geometry were not stated in the notice checked.`
-                      : `Anim na ruta ang iniulat. Opsyonal ang QR at may manual na rehistrasyon. Hindi nakasaad sa nasuring anunsyo ang mga hintuan o guhit ng ruta.`}
+                      : `Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Walang nakasaad na mga hintuan o eksaktong ruta sa nasuring anunsyo.`}
                   </p>
                 )}
                 <SourceNote refs={item.evidence} />
@@ -271,12 +272,12 @@ function historySummary(id: string, english: string): string {
               <p class="muted">
                 {lang === "en"
                   ? "Confirm with the organizer whether registration is still being accepted."
-                  : "Kumpirmahin sa tagapag-ayos kung tumatanggap pa ng pagpaparehistro."}
+                  : "Magtanong sa tagapag-ayos kung puwede pang magparehistro."}
               </p>
               <p>
-                <a class="btn btn--primary" data-registration href={event.registration_url}>
+                <ButtonLink data-registration href={event.registration_url}>
                   {lang === "en" ? "Open registration page" : "Buksan ang pahina ng pagpaparehistro"}
-                </a>
+                </ButtonLink>
               </p>
               <SourceNote refs={event.evidence} />
             </div>
@@ -303,7 +304,7 @@ function historySummary(id: string, english: string): string {
       </div>
     </section>
   )}
-</Kit>
+</Site>
 
 <style>
   .bp-place {

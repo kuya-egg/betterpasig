@@ -1,88 +1,138 @@
 ---
-// photo-chapters (dealt moment): places to visit, one photograph each, the chapter on a panel at its foot.
 import { Picture } from "astro:assets";
 import Verify from "../Verify.astro";
-import { langFromUrl, ui } from "../../i18n";
-import { pasyalan } from "../../lib/data";
+import { formatDate, href, langFromUrl, ui } from "../../i18n";
+import { barangays, pasyalan, pasyalanRetrieved } from "../../lib/data";
 import { photo, photoAlt } from "../../lib/photos";
 
-interface Props {
-  /** pasyalan ids, in order, each with a photo */
-  ids: string[];
-}
+interface Props { ids: string[] }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const en = lang === "en";
 const chapters = Astro.props.ids.map((id) => {
   const place = pasyalan.find((item) => item.id === id);
-  if (!place?.photo_id) throw new Error(`Pasyalan chapter "${id}" needs a place with a photo`);
-  return { place, picture: photo(place.photo_id) };
+  if (!place?.photo_id) throw new Error(`Pasyalan needs a photo for ${id}`);
+  return { place, picture: photo(place.photo_id), barangay: barangays.find((item) => item.id === place.barangay_id) };
 });
 ---
 
-<section class="section" id="pasyalan" data-moment="photo-chapters" aria-labelledby="pasyalan-h">
-  <div class="wrap mo-ph">
-    <div class="mo-ph__head">
+<section class="section bp-discover" id="pasyalan" data-pagefind-body data-pagefind-meta="kind:pasyalan" aria-labelledby="pasyalan-h">
+  <div class="wrap">
+    <div class="section-head">
       <h2 id="pasyalan-h">{t.pasyalanTitle}</h2>
       <p>{t.pasyalanLead}</p>
     </div>
-    <ol class="mo-ph__list">
+    <ul class="bp-discover__places">
       {
-        chapters.map(({ place, picture }) => {
+        chapters.map(({ place, picture, barangay }, index) => {
           const hours = en ? place.hours_en : place.hours_fil;
           const fee = en ? place.fee_en : place.fee_fil;
           return (
-            <li class="mo-ph__ch">
-              <figure class="mo-ph__pic">
-                <Picture
-                  src={picture.image}
-                  alt={photoAlt(picture, lang)}
-                  formats={["avif", "webp"]}
-                  fallbackFormat="webp"
-                  widths={[640, 960, 1280]}
-                  sizes="100vw"
-                  width={1280}
-                  quality={55}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
-              <h3>{place.name}</h3>
-              <p>
-                {place.kind === "bago" && <span class="bp-new">{t.pasyalanNew}</span>}
-                {place.verify && <Verify />}
-                {en ? place.line_en : place.line_fil}
-                {(hours || fee) && <span class="bp-ch-fact">{[hours, fee].filter(Boolean).join(". ")}.</span>}
-              </p>
+            <li>
+              <article class="bp-discover__place">
+                <div class="bp-discover__photo">
+                  <Picture
+                    src={picture.image}
+                    alt={photoAlt(picture, lang)}
+                    formats={["avif", "webp"]}
+                    fallbackFormat="webp"
+                    widths={[400, 640, 800]}
+                    sizes={`(max-width: 767px) 92vw, ${index === 0 ? "min(51vw, 720px)" : "min(29vw, 426px)"}`}
+                    width={640}
+                    quality={49}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="bp-discover__body">
+                  <h3 id={`pasyalan-${place.id}`}>{place.name}</h3>
+                  {place.verify && <Verify />}
+                  <p>{en ? place.line_en : place.line_fil}</p>
+                  {(place.address || hours || fee) && (
+                    <dl>
+                      {place.address && <div><dt>{en ? "Address" : "Lokasyon"}</dt><dd>{place.address}</dd></div>}
+                      {hours && <div><dt>{en ? "Opening hours" : "Oras"}</dt><dd>{hours}</dd></div>}
+                      {fee && <div><dt>{t.colFee}</dt><dd>{fee}</dd></div>}
+                    </dl>
+                  )}
+                  {barangay && <a class="bp-discover__barangay" href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a>}
+                  <p class="bp-discover__sources">
+                    {place.sources.map((url, index) => (
+                      <a href={url}>{place.sources.length === 1 ? t.sourceWord : `${t.sourceWord} ${index + 1}`}</a>
+                    ))}
+                    <span>{t.checked} {formatDate(lang, pasyalanRetrieved)}</span>
+                  </p>
+                </div>
+              </article>
             </li>
           );
         })
       }
-    </ol>
+    </ul>
   </div>
 </section>
 
 <style>
-  .bp-new {
+  .bp-discover { background: var(--bg); }
+  .bp-discover .section-head { margin-block-end: var(--s-6); }
+  .bp-discover__places {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+  .bp-discover__places > li:first-child { grid-column: 1 / -1; }
+  .bp-discover__places > li:first-child .bp-discover__place {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+  }
+  .bp-discover__photo { position: relative; aspect-ratio: 16 / 10; background: var(--surface); }
+  .bp-discover__photo :global(img) {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: var(--r-md);
+  }
+  .bp-discover__places > li:first-child .bp-discover__photo {
+    aspect-ratio: auto;
+    min-block-size: 20rem;
+  }
+  .bp-discover__places > li:first-child .bp-discover__photo :global(img) {
+    border-radius: var(--r-lg) 0 0 var(--r-lg);
+  }
+  .bp-discover__body { display: grid; justify-items: start; gap: var(--s-2); padding-block: var(--s-4); }
+  .bp-discover__places > li:first-child .bp-discover__body { padding: clamp(1.25rem, 3vw, 2.5rem); }
+  .bp-discover__places > li:first-child h3 { font-size: var(--t-h2); text-wrap: balance; }
+  .bp-discover__body h3 { font-size: clamp(1.65rem, 1.35rem + .9vw, 2.3rem); }
+  .bp-discover__body > p { color: var(--muted); }
+  .bp-discover__body dl { inline-size: 100%; margin: var(--s-2) 0 0; font-size: .9375rem; }
+  .bp-discover__body dl > div {
+    display: grid;
+    grid-template-columns: minmax(5.25rem, 1fr) minmax(0, 3fr);
+    gap: var(--s-2);
+    padding-block: var(--s-2);
+    border-block-start: 1px solid var(--line);
+  }
+  .bp-discover__body dt { font-weight: 800; overflow-wrap: anywhere; }
+  .bp-discover__body dd { margin: 0; }
+  .bp-discover__sources, .bp-discover__barangay { font-size: .875rem; }
+  .bp-discover__sources { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); align-items: center; }
+  .bp-discover__body a {
     display: inline-flex;
     align-items: center;
-    height: 24px;
-    padding: 0 var(--s-2);
-    margin-right: var(--s-2);
-    border-radius: 999px;
-    background: var(--pale);
-    color: var(--accent);
-    font: 500 var(--t-label) var(--font-text);
-    vertical-align: middle;
+    min-block-size: 3rem;
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: .25em;
   }
-  .mo-ph__ch p :global(.verify) {
-    margin: 0 var(--s-2) 0 0;
-  }
-  .bp-ch-fact {
-    display: block;
-    margin-top: var(--s-2);
-    color: var(--muted);
-    font-size: var(--t-small);
+  @media (max-width: 47.9375rem) {
+    .bp-discover__places, .bp-discover__places > li:first-child .bp-discover__place { grid-template-columns: minmax(0, 1fr); }
+    .bp-discover__places > li:first-child .bp-discover__photo { aspect-ratio: 16 / 10; min-block-size: 0; }
+    .bp-discover__places > li:first-child .bp-discover__photo :global(img) { border-radius: var(--r-lg) var(--r-lg) 0 0; }
   }
 </style>
