@@ -1,4 +1,5 @@
 ---
+import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import { city, site, sourceLabel } from "../lib/data";
@@ -120,8 +121,8 @@ const asOf = (fact: (typeof city.facts)[number]) =>
           <h2 id="ambag" class="bp-about__h">{t.aboutContribTitle}</h2>
           <p class="bp-about__p">{t.aboutContribText}</p>
           <div class="bp-about__actions">
-            <a class="btn btn--primary" href={`${repo}/issues/new`}>{t.aboutReport}</a>
-            <a class="btn btn--secondary" href={repo}>{t.aboutGithub}</a>
+            <ButtonLink href={`${repo}/issues/new`}>{t.aboutReport}</ButtonLink>
+            <ButtonLink variant="outline" href={repo}>{t.aboutGithub}</ButtonLink>
           </div>
         </div>
       </div>

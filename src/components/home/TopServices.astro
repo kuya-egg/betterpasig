@@ -1,4 +1,5 @@
 ---
+import { Card } from "../ui/card";
 import { href, langFromUrl, ui } from "../../i18n";
 import { featuredServices } from "../../lib/data";
 
@@ -15,25 +16,28 @@ const labels: Record<string, { fil: string; en: string }> = {
 ---
 
 <section class="bp-quick" id="serbisyo" aria-labelledby="serbisyo-h">
-  <h2 id="serbisyo-h">{t.topTitle}</h2>
-  <ul>
-    {featuredServices.map((service) => (
-      <li>
-        <a href={href(lang, `/serbisyo/${service.id}/`)}>
-          {labels[service.id]?.[lang] ?? (lang === "en" ? service.title_en : service.title_fil)}
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
-        </a>
-      </li>
-    ))}
-  </ul>
-  <a class="bp-quick__all link" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
+  <Card className="bp-quick__card">
+    <h2 id="serbisyo-h">{t.topTitle}</h2>
+    <ul>
+      {featuredServices.map((service) => (
+        <li>
+          <a href={href(lang, `/serbisyo/${service.id}/`)}>
+            {labels[service.id]?.[lang] ?? (lang === "en" ? service.title_en : service.title_fil)}
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a class="bp-quick__all link" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
+  </Card>
 </section>
 
 <style>
-  .bp-quick {
+  .bp-quick__card {
+    display: block;
+    box-shadow: none;
     padding: clamp(.875rem, 2.5vw, 1.75rem);
-    background: var(--bg);
-    border: 1px solid var(--line);
+    border-color: var(--line);
     border-radius: var(--r-lg);
   }
   .bp-quick h2 {

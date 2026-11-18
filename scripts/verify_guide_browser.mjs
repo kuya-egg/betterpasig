@@ -150,6 +150,15 @@ try {
     await search.fill("Maybunga Rainforest Park");
     const first = searchPage.getByRole("option").first();
     await first.waitFor();
+    const clearSearch = searchPage.getByRole("button", { name: hasEnglish ? "Clear search" : "Burahin ang hinahanap" });
+    await clearSearch.focus();
+    await clearSearch.press("Enter");
+    assert.equal(await search.inputValue(), "");
+    assert.equal(await search.getAttribute("aria-expanded"), "false");
+    assert.equal(await search.evaluate((field) => field === document.activeElement), true);
+    await clearSearch.waitFor({ state: "hidden" });
+    await search.fill("Maybunga Rainforest Park");
+    await first.waitFor();
     assert.equal(await first.getAttribute("href"), `${locale}/#pasyalan-maybunga-rainforest-park`);
     await search.press("ArrowDown");
     assert.equal(await search.getAttribute("aria-activedescendant"), await first.getAttribute("id"));

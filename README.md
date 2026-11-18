@@ -5,7 +5,7 @@
 <p align="center">Bawat serbisyo, benepisyo at opisyal ng Lungsod ng Pasig, malinaw at nasa isang lugar.<br>
 Every service, benefit and official of Pasig City, clear and in one place.</p>
 
-<p align="center"><img src="research/editorial-redesign/home-desktop.jpg" width="820" alt="BetterPasig homepage"></p>
+<p align="center"><img src="research/city-guide/home-desktop.jpg" width="820" alt="BetterPasig homepage"></p>
 
 BetterPasig is a volunteer-run, non-partisan civic information site for Pasig City, part of the [BetterGov.ph](https://bettergov.ph) / [BetterLGU](https://lgu.bettergov.ph/) movement. Pasig already publishes more than most cities; BetterPasig organizes it so any Pasigueño can find a service, benefit, opportunity or official in under a minute, then sends them to the city's own channels to transact.
 
@@ -37,6 +37,12 @@ bun run check     # type-check .astro and .ts files
 
 Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Site.astro` with the shared editorial styles in `src/styles/site.css`. Barangay content stays in Filipino on both routes.
 
+### UI components
+
+Shared buttons, badges, inputs, and cards live in `src/components/ui/` and come from the [shadcn/ui registry](https://ui.shadcn.com/docs/installation/astro). Use `bunx shadcn@4.23.0 add <component>` to add another. The registry styles use Tailwind utilities mapped to BetterPasig's color tokens in `src/styles/shadcn.css`.
+
+Astro renders the pages and shared controls to HTML. The search field uses UI SDK for its clear and focus behavior. The installed SDK's React documentation is at `node_modules/@ui-sdk/react/docs/llms.txt`.
+
 ### Deploy (Cloudflare Pages)
 
 Connect the repo in Cloudflare Pages with framework preset **Astro**, build command `bun run build`, output directory `dist`. Pages detects `bun.lock` and installs with Bun.
@@ -63,9 +69,9 @@ python3 scripts/count_verify.py data     # what is still "Sinusuri pa"
 
 Data is current to **October 21, 2026**. The barangay officials elected in October 2023 are still in office: RA 12326 (Sept 24, 2026) cancelled the November 2026 barangay election and moved it to November 13, 2028. Barangay names and numbers come from directories, not an official city list, so all of them show **"Sinusuri pa"** until a steward confirms them by phone. That is the first job for barangay stewards (see [backlog](docs/backlog.md)).
 
-## Planned stack
+## Stack
 
-Static first, no backend: **Astro** with content collections reading `data/*.json`, plain CSS, **Pagefind** for search, **Cloudflare Pages** for hosting and preview deploys, Cloudflare Web Analytics (no cookies). Running cost is about the domain fee.
+The public site uses **Astro**, JSON content, **Pagefind**, shadcn/ui, and **Cloudflare Pages**. Astro generates the sitemap during the build. Running cost is about the domain fee.
 
 ## How to help
 

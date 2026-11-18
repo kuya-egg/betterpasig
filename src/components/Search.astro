@@ -1,4 +1,6 @@
 ---
+import { SearchField } from "./SearchField";
+import { Button } from "./ui/button";
 import { href, langFromUrl, ui } from "../i18n";
 
 interface Props { includePlaces?: boolean }
@@ -31,18 +33,12 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
       <circle cx="10.8" cy="10.8" r="6.3" /><path d="m15.5 15.5 4 4" />
     </svg>
-    <input
-      id="q"
-      type="search"
-      name="q"
-      role="combobox"
-      autocomplete="off"
+    <SearchField
+      client:load
       placeholder={t.searchPlaceholder}
-      aria-controls="search-results"
-      aria-autocomplete="list"
-      aria-expanded="false"
+      clearLabel={lang === "en" ? "Clear search" : "Burahin ang hinahanap"}
     />
-    <button type="submit">{t.searchButton}</button>
+    <Button type="submit" size="lg" className="bp-search__submit">{t.searchButton}</Button>
   </form>
   <div class="bp-search__popup" hidden>
     <div id="search-results" class="results" role="listbox" aria-label={label} hidden></div>
@@ -360,35 +356,24 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
   }
   form > svg { color: var(--blue); flex: none; margin-inline-start: var(--s-2); }
   form:focus-within { border-color: var(--blue); }
-  input {
+  form :global(.bp-search__field) { display: flex; flex: 1; align-items: center; min-inline-size: 0; }
+  form :global(input) {
     flex: 1 1 auto;
-    min-width: 0;
-    min-height: 3rem;
+    min-inline-size: 0;
+    min-block-size: 3rem;
     border: 0;
-    border-radius: var(--r-sm);
-    font: inherit;
-    padding-inline: var(--s-2);
     background: transparent;
-    color: var(--ink);
+    box-shadow: none;
+    padding-inline: var(--s-2);
   }
-  input::placeholder { color: var(--muted); font-size: .9375rem; }
-  input:focus-visible { outline-offset: -3px; }
-  form button {
-    border: 0;
+  form :global(input::placeholder) { color: var(--muted); font-size: .9375rem; }
+  form :global(input::-webkit-search-cancel-button) { appearance: none; }
+  form :global(input:focus-visible) { outline-offset: -3px; }
+  form :global([data-slot="input-clear"]) { color: var(--blue); min-inline-size: 3rem; min-block-size: 3rem; }
+  form :global(.bp-search__submit) {
+    min-block-size: 3rem;
     border-radius: calc(var(--r-sm) - var(--s-1));
-    background: var(--action);
-    color: var(--action-ink);
-    font: 700 .9375rem var(--font-text);
     padding-inline: clamp(.6rem, 2vw, 1.25rem);
-    min-height: 3rem;
-    cursor: pointer;
-  }
-  @media (hover: hover) {
-    form button:hover { background: color-mix(in oklab, var(--action) 86%, var(--ink)); }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    form button { transition: scale 150ms var(--ease); }
-    form button:active { scale: .96; }
   }
   .bp-search__popup {
     position: absolute;
@@ -415,7 +400,14 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
   }
   .results :global(a.active) { background: var(--pale); }
   @media (hover: hover) { .results :global(a:hover) { background: var(--pale); } }
-  .results :global(small) { color: var(--muted); font-size: .8125rem; text-align: end; }
+  .results :global(small) {
+    flex: 0 0 auto;
+    max-inline-size: 40%;
+    color: var(--muted);
+    font-size: .8125rem;
+    text-align: end;
+    overflow-wrap: normal;
+  }
   .results :global(mark) { background: var(--mark-bg); color: inherit; border-radius: 3px; }
   .bp-search__announcement {
     position: absolute;

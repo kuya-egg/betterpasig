@@ -1,4 +1,5 @@
 ---
+import { ButtonLink } from "@/components/ui/button-link";
 import Site from '../layouts/Site.astro';
 import SourceNote from './SourceNote.astro';
 import {historicalUpdates,opportunities,pasigSources,serviceUpdates} from '../lib/data';
@@ -32,7 +33,7 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
     </li>;})}
    </ul>
    {!archive&&<p class="muted" data-feed-empty hidden>{en?'No recent official notices are listed.':'Wala pang nakalistang bagong opisyal na abiso. Tingnan ang arkibo para sa mga naunang abiso.'}</p>}
-   <p class="weekly__more"><a class="btn btn--secondary" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</a></p>
+   <p class="weekly__more"><ButtonLink variant="outline" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</ButtonLink></p>
   </div>
  </section>
 </Site>

@@ -1,4 +1,5 @@
 ---
+import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import SourceNote from "./SourceNote.astro";
@@ -274,9 +275,9 @@ function historySummary(id: string, english: string): string {
                   : "Magtanong sa tagapag-ayos kung puwede pang magparehistro."}
               </p>
               <p>
-                <a class="btn btn--primary" data-registration href={event.registration_url}>
+                <ButtonLink data-registration href={event.registration_url}>
                   {lang === "en" ? "Open registration page" : "Buksan ang pahina ng pagpaparehistro"}
-                </a>
+                </ButtonLink>
               </p>
               <SourceNote refs={event.evidence} />
             </div>

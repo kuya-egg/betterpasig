@@ -1,4 +1,5 @@
 ---
+import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
@@ -89,10 +90,10 @@ function lines(value: unknown): string[] {
             {office?.contact && <div><dt>{t.officeContact}</dt><dd>{office.contact}</dd></div>}
           </dl>
           {online && (
-            <a class="btn btn--primary bp-svc__online" href={online}>
+            <ButtonLink className="bp-svc__online" href={online}>
               {onlineHost === "facebook.com" ? (lang === "en" ? "Official office page" : "Opisyal na pahina ng tanggapan") : t.doOnline}
               <span aria-hidden="true">↗</span>
-            </a>
+            </ButtonLink>
           )}
           <p class="t-small muted bp-svc__source">
             {t.sources}
