@@ -288,9 +288,10 @@ const retrieved = formatDate(lang, facilities.retrieved);
 </Site>
 
 <style>
+  /* the sections carry their own top padding, so their edge can meet the pinned strip */
   section.bp-em,
   .bp-em section {
-    scroll-margin-top: var(--s-8);
+    scroll-margin-top: var(--bp-sticky-h, 7.5rem);
   }
   /* red hero: emergency only */
   .bp-em__hero {

@@ -98,15 +98,34 @@ const navState = (target: string) => {
       more.querySelector("summary")?.focus();
     });
   }
+
+  // The strip (and the nav on wide screens) stay pinned; sticky panels and anchor jumps read their height.
+  const strip = document.querySelector<HTMLElement>(".bp-urgent");
+  const bar = document.querySelector<HTMLElement>(".bp-header");
+  if (strip && bar) {
+    const root = document.documentElement.style;
+    const measure = () => {
+      const pinned = strip.offsetHeight + (getComputedStyle(bar).position === "sticky" ? bar.offsetHeight : 0);
+      root.setProperty("--bp-strip-h", `${strip.offsetHeight}px`);
+      root.setProperty("--bp-sticky-h", `${pinned}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(strip);
+    observer.observe(bar);
+  }
 </script>
 
 <style>
+  /* wide screens: the nav stays pinned under the red strip; phones: only the strip stays, to keep the screen free */
   .bp-header {
     position: sticky;
-    top: 0;
+    top: var(--bp-strip-h, 3rem);
     z-index: 20;
     background: var(--bg);
     border-block-end: 1px solid var(--line);
+  }
+  @media (max-width: 56rem) {
+    .bp-header { position: static; }
   }
 
   .bp-header__inner {

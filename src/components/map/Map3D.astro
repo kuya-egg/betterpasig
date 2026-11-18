@@ -65,7 +65,7 @@ const initial = selected ? shapes.find((shape) => shape.id === selected) : undef
       <svg viewBox="100 0 360 560" role="group" aria-label={label ?? t.mapLabel}>
         <g class="bp-map3d__ext">
           {shapes.map((shape) => (
-            <a href={href(lang, `/barangay/${shape.id}/`)} aria-label={shape.name} data-id={shape.id} data-name={shape.name} data-district={shape.district ?? ""} aria-current={shape.id === initial?.id ? "true" : undefined}>
+            <a href={href(lang, `/barangay/${shape.id}/`)} aria-label={shape.name} translate="no" data-id={shape.id} data-name={shape.name} data-district={shape.district ?? ""} aria-current={shape.id === initial?.id ? "true" : undefined}>
               <path d={shape.d} class={`bp-map3d__${shape.fill}${shape.id === initial?.id ? " is-on" : ""}`} />
             </a>
           ))}
@@ -76,7 +76,7 @@ const initial = selected ? shapes.find((shape) => shape.id === selected) : undef
   {card && (
     <div class="bp-map3d__card" aria-live="polite">
       <p class="kicker bp-map3d__card-district" data-card-district>{initial ? districtName(initial.district) : ""}</p>
-      <p class:list={["bp-map3d__card-name", { "is-empty": !initial }]} data-card-name>{initial?.name ?? t.mapNoSelection}</p>
+      <p class:list={["bp-map3d__card-name", { "is-empty": !initial }]} translate={initial ? "no" : undefined} data-card-name>{initial?.name ?? t.mapNoSelection}</p>
       <a class="link bp-map3d__card-link" data-card-link href={initial ? href(lang, `/barangay/${initial.id}/`) : href(lang, "/barangay/")} hidden={!initial}>{t.mapOpenBarangay} <span aria-hidden="true">→</span></a>
     </div>
   )}
@@ -106,6 +106,7 @@ const initial = selected ? shapes.find((shape) => shape.id === selected) : undef
       if (card.name) {
         card.name.textContent = link.dataset.name ?? "";
         card.name.classList.remove("is-empty");
+        card.name.translate = false; // a barangay name now, not the prompt
       }
       if (card.district) card.district.textContent = labels[link.dataset.district ?? ""] ?? "";
       if (card.link) {

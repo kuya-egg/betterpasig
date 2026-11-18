@@ -17,6 +17,7 @@ import lifeEventsFile from "../../data/life-events.json";
 import pasyalanFile from "../../data/pasyalan.json";
 import { assertDataFile } from "./schemas";
 import { assertRecentData } from "./validate-recent";
+import { namePattern, nameVariants } from "./no-translate";
 
 assertDataFile("site", site);
 assertDataFile("hotlines", hotlinesFile);
@@ -43,6 +44,9 @@ export const offices = servicesFile.offices;
 export const services = servicesFile.services;
 export const barangays = barangaysFile.barangays;
 export const city = cityFile;
+/** every barangay name as a page may print it ("Santa Lucia", "Sta. Lucia"); see lib/no-translate.ts */
+export const barangayNames = nameVariants(barangays.map((item) => item.name));
+export const barangayNamePattern = namePattern(barangayNames);
 
 export type Hotline = (typeof hotlines)[number];
 export type Service = (typeof services)[number];

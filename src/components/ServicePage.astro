@@ -255,15 +255,15 @@ function lines(value: unknown): string[] {
   .bp-svc { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); align-items: start; }
   @media (min-width: 1024px) {
     .bp-svc { grid-template-columns: minmax(0, 1fr) 21.25rem; gap: var(--s-8); }
-    .bp-svc__aside { position: sticky; top: var(--s-9); }
+    .bp-svc__aside { position: sticky; top: var(--sticky-offset); }
   }
   .bp-svc__main { min-width: 0; display: grid; gap: var(--s-8); }
   .bp-svc__jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
   .bp-svc__jump a { text-decoration: none; }
   @media (hover: hover) { .bp-svc__jump a:hover { background: var(--pale); border-color: var(--blue); } }
   .bp-svc__instructions { display: grid; gap: var(--s-8); }
-  .bp-svc__instructions > section, .bp-svc__related { scroll-margin-top: var(--s-9); }
-  .bp-svc h2[id] { scroll-margin-top: var(--s-9); }
+  .bp-svc__instructions > section, .bp-svc__related { scroll-margin-top: var(--sticky-offset); }
+  .bp-svc h2[id] { scroll-margin-top: var(--sticky-offset); }
   .bp-svc__main h2 { font-size: var(--t-h3); margin-block-end: var(--s-5); }
   .bp-svc__shead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-3); }
   .bp-svc__shead h2 { margin-block-end: var(--s-3); }
@@ -300,7 +300,7 @@ function lines(value: unknown): string[] {
   .bp-svc__program { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-block-size: 3.5rem; padding: var(--s-4) var(--s-5); font-weight: 600; line-height: 1.35; }
 
   .bp-svc__aside { display: grid; gap: var(--s-4); min-width: 0; }
-  .bp-svc__box { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); scroll-margin-top: var(--s-9); }
+  .bp-svc__box { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); scroll-margin-top: var(--sticky-offset); }
   .bp-svc__box h2 { font-size: var(--t-h3); margin-block-end: var(--s-4); }
   .bp-svc__box--ask { background: var(--pale); border-color: transparent; }
   .bp-svc__where, .bp-svc__contact, .bp-svc__sources ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }

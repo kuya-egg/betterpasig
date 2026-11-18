@@ -90,6 +90,9 @@
   --map-d2: #a9bfef;
   --map-side: #6e86bc;
   --map-hover: #7f9de3;
+  /* height of what stays pinned at the top (red strip, plus the nav on wide screens), measured by SiteHeader;
+     sticky panels and anchor jumps sit this far down so the strip never covers them */
+  --sticky-offset: calc(var(--bp-sticky-h, 7.5rem) + var(--s-4));
 }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -117,12 +120,12 @@ img, video { height: auto; }
 ul, ol { list-style: none; padding: 0; }
 :where(main, footer) a { overflow-wrap: anywhere; }
 :where(a, button, summary, input, select):focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
-:where(section, article, h2, h3)[id] { scroll-margin-block-start: var(--s-6); }
+:where(section, article, h2, h3, details, li)[id] { scroll-margin-block-start: var(--sticky-offset); }
 ::selection { background: var(--mark-bg); color: var(--ink); }
 .skip-link {
   position: absolute;
   inset: var(--s-2) auto auto var(--gut);
-  z-index: 10;
+  z-index: 30;
   padding: var(--s-3) var(--s-5);
   background: var(--bg);
   color: var(--ink);

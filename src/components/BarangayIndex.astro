@@ -64,10 +64,10 @@ const labels = {
           <p class="bp-bi__none" data-none>{labels.none}</p>
           <div data-detail hidden>
             <p class="kicker" data-f="district"></p>
-            <h2 data-f="name"></h2>
+            <h2 data-f="name" translate="no"></h2>
             <dl class="bp-bi__facts">
               <div data-row="punong"><dt>{labels.punong}</dt><dd><span data-f="punong"></span><span data-verify hidden><Verify /></span></dd></div>
-              <div data-row="hall"><dt>{labels.hall}</dt><dd data-f="hall"></dd></div>
+              <div data-row="hall"><dt>{labels.hall}</dt><dd data-f="hall" translate="no"></dd></div>
               <div data-row="phone"><dt>{labels.phone}</dt><dd><ul data-f="phones"></ul></dd></div>
             </dl>
             <a class="bp-bi__full" data-f="url" href={href(lang, "/barangay/")}>{labels.full} <span aria-hidden="true">→</span></a>
@@ -173,7 +173,7 @@ const labels = {
 <style>
   .bp-bi__grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-5); margin-block-start: var(--s-7); align-items: start; }
   .bp-bi__map { background: var(--pale); border-radius: var(--r-panel); padding: var(--s-5); min-block-size: 36rem; }
-  .bp-bi__panel { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-panel); padding: var(--s-5); display: grid; gap: var(--s-4); position: sticky; top: var(--s-9); }
+  .bp-bi__panel { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-panel); padding: var(--s-5); display: grid; gap: var(--s-4); position: sticky; top: var(--sticky-offset); }
   .bp-bi__panel h2 { font-size: 2.25rem; margin-block: var(--s-1) var(--s-4); }
   .bp-bi__none { color: var(--muted); }
   .bp-bi__facts { margin: 0; display: grid; }

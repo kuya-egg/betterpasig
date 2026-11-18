@@ -75,7 +75,8 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
 </script>
 
 <style>
-  .bp-urgent { background: var(--red); color: white; }
+  /* pinned on every page and every width: the emergency numbers never scroll away */
+  .bp-urgent { position: sticky; top: 0; z-index: 21; background: var(--red); color: white; }
   .bp-urgent__inner { display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--s-5); }
   .bp-urgent__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-5); }
   .bp-urgent__links li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
@@ -98,7 +99,8 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
   @media (max-width: 56rem) {
     .bp-urgent__inner { gap: 0 var(--s-3); }
     .bp-urgent__links { flex-basis: 100%; gap: 0 var(--s-3); }
-    .bp-urgent__clock { margin-inline-start: 0; padding-block: var(--s-2); }
+    .bp-urgent__clock { margin-inline-start: 0; padding-block: 0; }
     .bp-urgent__all { margin-inline-end: auto; }
+    .bp-urgent__links a, .bp-urgent__all { min-height: 2.75rem; }
   }
 </style>
