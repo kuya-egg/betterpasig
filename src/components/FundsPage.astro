@@ -30,7 +30,6 @@ const checked = formatDate(lang, transparencyRetrieved);
       <ul class="bp-funds__grid">
         {
           transparencyFigures.map((figure) => {
-            const note = (en ? figure.note_en : figure.note_fil) ?? "";
             const label = en ? figure.label_en : figure.label_fil;
             const value = en ? figure.value_en : figure.value_fil;
             return (
@@ -39,7 +38,6 @@ const checked = formatDate(lang, transparencyRetrieved);
                 <p class="bp-funds__value">{value}</p>
                 {figure.verify && <p><Verify /></p>}
                 {figure.as_of && <p class="t-small muted">{t.aboutAsOf}: {figure.as_of}</p>}
-                {note && <p class="t-small muted">{note}</p>}
                 <p class="t-small muted">
                   {t.sources}:{" "}
                   {figure.sources.map((url, index) => (

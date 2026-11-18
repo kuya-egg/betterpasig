@@ -247,7 +247,7 @@ const districts = [1, 2].map((d) => ({
           <ul class="grid bp-off__cards">
             {g.rows.map((b) => {
               const srcs = uniq([
-                b.punong_barangay.sources,
+                b.punong_barangay?.sources ?? [],
                 b.sk_chair.sources,
                 ...b.kagawad.map((k) => k.sources),
                 ...b.phones.map((ph) => ph.sources),
@@ -260,10 +260,12 @@ const districts = [1, 2].map((d) => ({
                       {b.id ? <a class="bp-off__tel" href={href(lang, `/barangay/${b.id}/`)}>{b.name}</a> : b.name}
                     </h4>
                     <dl class="bp-off__dl">
-                      <div>
-                        <dt class="t-small muted">{t.punongBarangay}</dt>
-                        <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
-                      </div>
+                      {b.punong_barangay && (
+                        <div>
+                          <dt class="t-small muted">{t.punongBarangay}</dt>
+                          <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
+                        </div>
+                      )}
                       <div>
                         <dt class="t-small muted">{t.skChair}</dt>
                         <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>

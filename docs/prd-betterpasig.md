@@ -33,7 +33,7 @@ IDs are permanent. Priority is MoSCoW.
 | PRD-F1 | Sourced services | All 173 Citizen's Charter services, each with office, fee, processing time, requirements, and a source URL | Must-Have |
 | PRD-F2 | Verified contacts | Emergency hotlines and all 30 barangay pages confirmed, dated, and re-checked every 90 days. Unconfirmed facts show "Sinusuri pa" | Must-Have |
 | PRD-F3 | Find it in a minute | In a test of 30 residents, 10 of them seniors, 8 in 10 find the office, fee, and requirements in under 60 seconds | Must-Have |
-| PRD-F4 | Trust rules | Filipino first. Not-official disclaimer on every page. Officials listed equally. No accounts, no stored complaints, no tracking cookies. No party colors or endorsements | Must-Have |
+| PRD-F4 | Trust rules | English is the default, with a full Filipino twin under `/fil/`. Every fact cites a trusted source: official (`*.gov.ph`/`*.gov`, an official government account, an agency's own system, an institution's own site for its own facts) or a major news outlet. Never Wikipedia, directories, aggregators or blogs (D7). A fact without one is removed or `null`. Not-official disclaimer on every page. Officials listed equally. No accounts, no stored complaints, no tracking cookies. No party colors or endorsements | Must-Have |
 | PRD-F5 | This week in Pasig | Weekly list of payouts, scholarships, job fairs, and deadlines, with an archive | Should-Have |
 | PRD-F6 | Follow the city | Bids log and a New City Hall page updated monthly | Should-Have |
 | PRD-F7 | Search | Pagefind across services, barangays, officials, and programs, plus Filipino synonyms | Should-Have |
@@ -73,9 +73,9 @@ IDs are permanent. Priority is MoSCoW.
 
 **US-05: English when I need it** (PRD-F4)
 
-> As a resident who reads English, I want the same facts without losing the Filipino default.
+> As a resident who reads Filipino, I want the same facts under `/fil/` while English stays the default.
 
-- Given a page with `_en` fields, when I open the English path, then the facts match the Filipino page and the Filipino URL stays the default.
+- Given a page with `_fil` fields, when I open the Filipino path, then the facts match the English page and the English URL stays the default.
 
 ---
 
@@ -89,7 +89,7 @@ The site is static. "Loading" is the barangay-map loader, skipped when the visit
 
 | Screen | Purpose | Entry points | States to design |
 |--------|---------|--------------|------------------|
-| Home | Search, emergency numbers, map, featured services | `/`, `/en/` | empty search, map loader, data error, success |
+| Home | Search, emergency numbers, map, featured services | `/`, `/fil/` | empty search, map loader, data error, success |
 | Service | One charter service | `/serbisyo/[id]` | null fee hidden, build fails without a source, success with source and date |
 | Service index | 12 categories | `/serbisyo` | empty category, success |
 | Barangay | Hall, phones, officials | `/barangay/[id]` | "Sinusuri pa", success with checked date |
@@ -101,11 +101,11 @@ The site is static. "Loading" is the barangay-map loader, skipped when the visit
 
 ### 5.2 Navigation Model & Information Architecture
 
-**Primary navigation pattern:** a header on every page. Filipino is the default. English lives under `/en/`. There is no account menu and no login.
+**Primary navigation pattern:** a header on every page. English is the default. Filipino lives under `/fil/`. There is no account menu and no login.
 
 | Destination | Maps to screen (§5.1) | Route / path | Auth required | Feature(s) |
 |-------------|-----------------------|--------------|---------------|------------|
-| Home | Home | `/` and `/en/` | No | PRD-F2, PRD-F3, PRD-F4 |
+| Home | Home | `/` and `/fil/` | No | PRD-F2, PRD-F3, PRD-F4 |
 | Services | Service index, Service | `/serbisyo`, `/serbisyo/[id]` | No | PRD-F1 |
 | Barangay | Barangay | `/barangay/[id]` | No | PRD-F2 |
 | Officials | Officials | `/opisyal` | No | PRD-F4 |
@@ -114,8 +114,8 @@ The site is static. "Loading" is the barangay-map loader, skipped when the visit
 | New City Hall | New City Hall | `/bagong-city-hall` | No | PRD-F6 |
 
 ```
-/                         Filipino home
-/en/                      English home
+/                         English home
+/fil/                     Filipino home
 /serbisyo                 category index
 /serbisyo/[id]            one service
 /barangay/[id]            one barangay
@@ -149,7 +149,7 @@ Aha moment: the office, fee, and requirements on one sourced page. Time-to-first
 
 ### 5.5 UX Constraints
 
-- Filipino first, 17px body, one accent color, tables for fees and times.
+- English and Filipino, 17px body, one accent color, tables for fees and times.
 - Works on a budget phone. First load under 300 KB. Tap targets at least 48px.
 - Emergency numbers are visible without scrolling. Red is emergency only. Amber is "Sinusuri pa" only.
 - Motion is short and off when the visitor prefers reduced motion.

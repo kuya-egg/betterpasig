@@ -1,30 +1,30 @@
 {
-  "retrieved": "2026-10-19",
+  "retrieved": "2026-11-18",
   "term": "2025-2028",
   "officials": [
     {
       "id": "mayor-vico-sotto",
-      "name": "Victor Ma. Regis N. \"Vico\" Sotto",
+      "name": "Victor Ma. Regis N. Sotto",
       "position": "Mayor",
       "district": null,
       "party": "Independent (Giting ng Pasig)",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "vice-mayor-dodot-jaworski",
-      "name": "Robert Vincent Jude B. \"Dodot\" Jaworski Jr.",
+      "name": "Robert Vincent Jude B. Jaworski Jr.",
       "position": "Vice Mayor",
       "district": null,
       "party": "Independent (Giting ng Pasig)",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
@@ -33,76 +33,76 @@
       "name": "Roman T. Romulo",
       "position": "Representative",
       "district": null,
-      "party": "NPC (allied with Giting ng Pasig)",
+      "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-simon-tantoco",
-      "name": "Simon Gerard R. Tantoco (Simon Romulo Tantoco)",
+      "name": "Simon Gerard R. Tantoco",
       "position": "Councilor",
       "district": 1,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-kiko-rustia",
-      "name": "Raymund Francis S. \"Kiko\" Rustia",
+      "name": "Raymund Francis S. Rustia",
       "position": "Councilor",
       "district": 1,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-pao-santiago",
-      "name": "Paul Roman C. \"Pao\" Santiago",
+      "name": "Paul Roman C. Santiago",
       "position": "Councilor",
       "district": 1,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-volta-delos-santos",
-      "name": "Mark Gil M. \"Volta\" Delos Santos",
+      "name": "Mark Gil M. Delos Santos",
       "position": "Councilor",
       "district": 1,
       "party": "AKAY",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-eric-gonzales",
-      "name": "Roderick Mario U. \"Eric\" Gonzales",
+      "name": "Roderick Mario U. Gonzales",
       "position": "Councilor",
       "district": 1,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
@@ -113,48 +113,48 @@
       "district": 1,
       "party": "Akbayan",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-angelu-de-leon",
-      "name": "Maria Luisa M. \"Angelu\" De Leon",
+      "name": "Maria Luisa \"Angelu\" de Leon",
       "position": "Councilor",
       "district": 2,
       "party": "Independent",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-maro-martires",
-      "name": "Marion Rosalio M. \"Maro\" Martires",
+      "name": "Marion Rosalio M. Martires",
       "position": "Councilor",
       "district": 2,
       "party": "Independent",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-buboy-agustin",
-      "name": "Noel L. \"Buboy\" Agustin",
+      "name": "Noel L. Agustin",
       "position": "Councilor",
       "district": 2,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
@@ -165,69 +165,63 @@
       "district": 2,
       "party": "Independent",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-boyie-raymundo",
-      "name": "Ronald Alan M. \"Boyie\" Raymundo",
+      "name": "Ronald Alan M. Raymundo",
       "position": "Councilor",
       "district": 2,
       "party": "NPC",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "coun-ryan-enriquez",
-      "name": "Ryan R. Enriquez",
+      "name": "Ryan Enriquez",
       "position": "Councilor",
       "district": 2,
-      "party": "PDP (PDP-Laban)",
+      "party": "PDP-Laban",
       "sources": [
-        "https://en.wikipedia.org/wiki/2025_Pasig_local_elections",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government",
+        "https://ph.rappler.com/elections/2025/local-race/ncr-pasig-city",
+        "https://www.inquirer.net/442738/pasig-city-mayor-vico-sotto-partymates-proclaimed-winners"
       ],
       "verify": false
     },
     {
       "id": "exo-liga-marl-de-guzman",
-      "name": "Marl Oscar de Guzman",
+      "name": "Jeronimo “Ambo” Alba",
       "position": "Ex-officio",
       "role_fil": "Pangulo, Liga ng mga Barangay (kabanata ng Pasig)",
       "role_en": "President, Liga ng mga Barangay (Pasig chapter)",
       "district": null,
       "party": null,
       "sources": [
-        "https://peoplaid.com/2023/05/27/pasig-officials/",
-        "https://en.wikipedia.org/wiki/2026_Philippine_barangay_and_Sangguniang_Kabataan_elections"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government"
       ],
-      "verify": true,
-      "note_fil": "Iba ang pangalan sa kabilang talaan ng mga ex-officio (Wikipedia, Okt 2026). Kumpirmahin sa Sangguniang Panlungsod.",
-      "note_en": "Conflicts with the other ex-officio list (Wikipedia, Oct 2026). Confirm with the Sangguniang Panlungsod."
+      "verify": false
     },
     {
       "id": "exo-sk-georgia-clemente",
-      "name": "Georgia Lynne P. Clemente",
+      "name": "Keil P. Custillas",
       "position": "Ex-officio",
       "role_fil": "Pangulo, Sangguniang Kabataan Federation (Pasig)",
       "role_en": "President, Sangguniang Kabataan Federation (Pasig)",
       "district": null,
       "party": null,
       "sources": [
-        "https://peoplaid.com/2023/05/27/pasig-officials/",
-        "https://en.wikipedia.org/wiki/2026_Philippine_barangay_and_Sangguniang_Kabataan_elections"
+        "https://pasigcity.gov.ph/about-pasig-city/city-government"
       ],
-      "verify": true,
-      "note_fil": "Iba ang pangalan sa kabilang talaan ng mga ex-officio (Wikipedia, Okt 2026). Kumpirmahin sa Sangguniang Panlungsod.",
-      "note_en": "Conflicts with the other ex-officio list (Wikipedia, Oct 2026). Confirm with the Sangguniang Panlungsod."
+      "verify": false
     }
   ],
   "department_heads": [

@@ -37,7 +37,8 @@
 | H-02 | Hotline is dated | Open the home emergency strip | Number and checked date show | PRD-F2 / US-02 |
 | H-03 | Resident test | 30 residents, 10 seniors, each asked for an office, a fee, and the requirements | At least 24 finish in under 60 seconds | PRD-F3 / US-03 |
 | H-04 | Disclaimer and equal cards | Open any page, then `/opisyal` | Not-official line is visible. Cards share one size and one sort | PRD-F4 / US-04 |
-| H-05 | English matches | Open the same fact at `/` and under `/en/` | Facts match. Filipino stays the default | PRD-F4 / US-05 |
+| H-05 | English matches | Open the same fact at `/` and under `/fil/` | Facts match. English stays the default | PRD-F4 / US-05 |
+| H-06 | Banned source host | A data file cites a banned host (for example Wikipedia) and run `bun run build` | Build fails (`src/lib/source-policy.ts`, D7) | PRD-F1 / PRD-F4 |
 | S-01 | Missing source | Remove `sources` from a service and build | Build fails, or the page does not state the fee as fact | PRD-F1 / US-01 |
 | S-02 | Unconfirmed contact | A hotline still has `verify` true | The UI shows "Sinusuri pa" | PRD-F2 / US-02 |
 | S-03 | Test misses the bar | Fewer than 24 of 30 residents finish in a minute | No public launch. Fix the pages and rerun | PRD-F3 / US-03 |

@@ -22,7 +22,7 @@ These operating docs are Draft. Flag that and do not invent a requirement to fil
 |--------------|------|----------------|
 | PRD-F1 to PRD-F4 | PRD §3 and §4, then the SDD trace table | QAD rows tagged with that id |
 | A JSON edit | SDD §3 and `data/README.md` | A source URL is present. Unknowns stay `null` |
-| A page | `docs/design-system.md`, PRD §5 | Disclaimer, Filipino default, no party colors |
+| A page | `docs/design-system.md`, PRD §5 | Disclaimer, English default with Filipino twin, no party colors |
 | Public copy | CLR and §5.2 below | No engine vocabulary on the README or the UI |
 
 ---
@@ -87,11 +87,11 @@ if (!service || service.sources.length === 0) {
 
 **Repo layout:** `src/pages` routes, `src/components` UI, `src/lib/data.ts` reads `data/*.json`, `design/tokens` for color and type, `docs/` for the narrative and these operating docs.
 
-**Naming:** Filipino URLs. English under `/en/`. Stable `id` values. Do not rename an id because a title changed.
+**Naming:** English at the root, Filipino under `/fil/`. Stable `id` values. Do not rename an id because a title changed.
 
-**Always:** a source on every fact. `null` when a fee or number is unknown. Filipino copy first. Any other free maintainer reviews a pull request that changes a fact. The author does not wait on a named person.
+**Always:** a trusted source on every fact (official or major news, never Wikipedia, directories or blogs; see D7). `null` when a fee or number is unknown. Both languages on every page, English default. Any other free maintainer reviews a pull request that changes a fact. The author does not wait on a named person.
 
-**Never:** commit a secret. Invent a fee, a phone number, or a date. Use party colors or an endorsement. Add an account or a tracking cookie. Make one person the gate for a lane someone else can finish.
+**Never:** commit a secret. Invent a fee, a phone number, or a date. Use party colors or an endorsement. Add an account or a tracking cookie. Cite Wikipedia, a directory, an aggregator or a blog. Make one person the gate for a lane someone else can finish.
 
 **Who does the work.** BetterPasig maintainers own these docs as a group. A person or an agent may take a backlog item and do it from these docs. A steward confirms only their own barangay. The core team talks on Messenger. That chat is not a gate. A decision that changes the site is written in GitHub, so someone outside the chat can still contribute.
 

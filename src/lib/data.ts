@@ -18,6 +18,7 @@ import pasyalanFile from "../../data/pasyalan.json";
 import { assertDataFile } from "./schemas";
 import { assertRecentData } from "./validate-recent";
 import { namePattern, nameVariants } from "./no-translate";
+import { assertTrustedSources } from "./source-policy";
 
 assertDataFile("site", site);
 assertDataFile("hotlines", hotlinesFile);
@@ -34,6 +35,27 @@ assertDataFile("pasig-places", placesFile);
 assertDataFile("pasig-service-updates", serviceUpdatesFile);
 
 assertDataFile("pasig-opportunities", opportunitiesFile);
+
+// Hard rule (docs/state.md D7): every citation is official or a major news outlet. photos.json holds image
+// credits and licences, not facts, so it is not checked here.
+for (const [file, data] of Object.entries({
+  site,
+  hotlines: hotlinesFile,
+  services: servicesFile,
+  barangays: barangaysFile,
+  city: cityFile,
+  programs: programsFile,
+  "officials-directory": officialsDirectoryFile,
+  facilities: facilitiesFile,
+  officials: officialsFile,
+  transparency: transparencyFile,
+  sources: pasigSourcesFile,
+  places: placesFile,
+  "service-updates": serviceUpdatesFile,
+  opportunities: opportunitiesFile,
+  "life-events": lifeEventsFile,
+  pasyalan: pasyalanFile,
+})) assertTrustedSources(file, data);
 
 export { site };
 

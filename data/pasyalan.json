@@ -26,8 +26,8 @@
       "name": "RC Park sa Maybunga Rainforest Park",
       "kind": "bago",
       "barangay_id": "maybunga",
-      "line_fil": "May putik, tubig at mga hadlang sa bagong lugar para sa RC car. Puwede ring pumunta ang mga hindi taga-Pasig.",
-      "line_en": "A new park for remote-controlled cars with mud, water and obstacles; open to non-residents too.",
+      "line_fil": "Binuksan noong Hulyo 5, 2026 ang parke para sa mga remote-controlled na sasakyan sa Rainforest Adventure Experience, katuwang ang Pasig RC Crawlers.",
+      "line_en": "A remote-controlled vehicle park opened on July 5, 2026 at the Rainforest Adventure Experience, developed with the Pasig RC Crawlers.",
       "address": "Sa loob ng Maybunga Rainforest Park, F. Legaspi St., Maybunga, Pasig City",
       "hours_fil": null,
       "hours_en": null,
@@ -35,8 +35,7 @@
       "fee_en": null,
       "opened": "2026-07-05",
       "sources": [
-        "https://tribune.net.ph/2026/07/05/vico-opens-new-rc-vehicle-park",
-        "https://www.topgear.com.ph/news/motoring-news/pasig-city-maybunga-rainforest-rc-park-a6888-20260706"
+        "https://tribune.net.ph/2026/07/05/vico-opens-new-rc-vehicle-park"
       ],
       "verify": false,
       "photo_id": null
@@ -46,17 +45,17 @@
       "name": "Plaza Rizal",
       "kind": "pasyalan",
       "barangay_id": null,
-      "line_fil": "Plasa sa poblacion ng Pasig, katabi ng Pasig City Museum at ng Katedral ng Pasig.",
-      "line_en": "A plaza in Pasig's poblacion, beside the Pasig City Museum and Pasig Cathedral.",
-      "address": "Plaza Rizal, F. Concepcion St., Pasig City",
+      "line_fil": "Plasa sa poblacion ng Pasig, malapit sa Katedral ng Pasig; idineklarang makasaysayang landmark ng lungsod.",
+      "line_en": "A plaza in Pasig's poblacion, near Pasig Cathedral; declared a historical landmark of the city.",
+      "address": "Plaza Rizal, Pasig City",
       "hours_fil": null,
       "hours_en": null,
       "fee_fil": null,
       "fee_en": null,
       "opened": null,
       "sources": [
-        "https://pasigcity.gov.ph/news-and-releases/inagurasyon-ng-pasig-city-museum-525",
-        "https://en.wikipedia.org/wiki/Pasig_Cathedral"
+        "https://assets.pasigcity.gov.ph/storage/city_resolution/2024/07/01/66da592f617701725585711Reso%20135-11.pdf",
+        "https://tribune.net.ph/2026/06/29/pride-in-heritage-a-short-tour-of-pasigs-historic-center"
       ],
       "verify": true,
       "photo_id": "plaza-rizal"
@@ -65,9 +64,9 @@
       "id": "pasig-cathedral",
       "name": "Katedral ng Pasig (Immaculate Conception Cathedral)",
       "kind": "pasyalan",
-      "barangay_id": "malinao",
-      "line_fil": "Simbahang itinatag ng mga Agustino noong Hulyo 2, 1573, kasabay ng pagkatatag ng bayan ng Pasig.",
-      "line_en": "A church founded by the Augustinians on July 2, 1573, together with the town of Pasig.",
+      "barangay_id": null,
+      "line_fil": "Simbahan sa tapat ng Plaza Rizal. Ang unang simbahan sa lugar ay itinayo noong 1575, at ang kasalukuyang gusali ay nagsilbing British military headquarters noong 1762–1764.",
+      "line_en": "A church across from Plaza Rizal. The first church on the site was built in 1575, and the present structure served as a British military headquarters in 1762–1764.",
       "address": "Plaza Rizal, Pasig City",
       "hours_fil": null,
       "hours_en": null,
@@ -75,7 +74,7 @@
       "fee_en": null,
       "opened": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/Pasig_Cathedral"
+        "https://tribune.net.ph/2026/06/29/pride-in-heritage-a-short-tour-of-pasigs-historic-center"
       ],
       "verify": true,
       "photo_id": "pasig-cathedral"
@@ -85,18 +84,16 @@
       "name": "Pasig City Museum",
       "kind": "bago",
       "barangay_id": null,
-      "line_fil": "Muling binuksan ang museo sa dating Concepcion Mansion noong Marso 26, 2025. Libre ang pagpasok.",
-      "line_en": "The museum in the old Concepcion Mansion reopened on March 26, 2025; entry is free.",
-      "address": "Plaza Rizal, F. Concepcion St., Pasig City",
-      "hours_fil": "Martes hanggang Linggo, 9:00 n.u.–4:00 n.h. Magpa-appointment para sa guided tour tuwing Sabado at Linggo.",
-      "hours_en": "Tuesday to Sunday, 9:00 AM–4:00 PM; guided tours on Saturdays and Sundays, by appointment",
+      "line_fil": "Muling binuksan ang museo noong Marso 26, 2025. Libre ang pagpasok.",
+      "line_en": "The museum reopened on March 26, 2025; entry is free.",
+      "address": "Pasig City",
+      "hours_fil": "Martes hanggang Linggo, 9:00 n.u.–4:00 n.h.",
+      "hours_en": "Tuesday to Sunday, 9:00 AM–4:00 PM",
       "fee_fil": "Libre",
       "fee_en": "Free",
       "opened": "2025-03-26",
       "sources": [
-        "https://pasigcity.gov.ph/news-and-releases/pasig-city-museum-is-now-open-618",
-        "https://pasigcity.gov.ph/news-and-releases/inagurasyon-ng-pasig-city-museum-525",
-        "https://en.wikipedia.org/wiki/Pasig_City_Museum"
+        "https://pasigcity.gov.ph/news-and-releases/pasig-city-museum-is-now-open-618"
       ],
       "verify": false,
       "photo_id": "plaza-rizal"
@@ -106,16 +103,16 @@
       "name": "Bahay na Tisa",
       "kind": "pasyalan",
       "barangay_id": "san-jose",
-      "line_fil": "Ito ang pinakamatandang gusaling nakatayo pa sa Pasig. Itinayo ito noong 1846 at pag-aari ng pamilyang Tech.",
-      "line_en": "The oldest standing building in Pasig; built in 1846 and owned by the Tech family.",
-      "address": "P. Gomez Street, Pasig City",
+      "line_fil": "Ito ang pinakamatandang gusaling nakatayo pa sa lungsod. Itinayo ito noong 1846 ni Don Cecilio Tech at tirahan pa rin ng pamilyang Tech.",
+      "line_en": "The oldest surviving structure in the city, built in 1846 by Don Cecilio Tech and still a family home of the Tech family.",
+      "address": "Barangay San Jose, Pasig City",
       "hours_fil": null,
       "hours_en": null,
       "fee_fil": null,
       "fee_en": null,
       "opened": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/Bahay_na_Tisa"
+        "https://tribune.net.ph/2026/06/29/pride-in-heritage-a-short-tour-of-pasigs-historic-center"
       ],
       "verify": true,
       "photo_id": "bahay-na-tisa"

@@ -102,7 +102,7 @@ The mark is the real outline of Pasig, unioned from the 30 PSA barangay polygons
 
 ## Voice
 
-Plain Filipino first, English second. Short sentences. Say who to go to, how long, how much. Never praise or criticize an official.
+Plain English and Filipino, English the default. Short sentences. Say who to go to, how long, how much. Never praise or criticize an official.
 
 ## Canvases and mockups
 

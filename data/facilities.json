@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-10-19",
+  "retrieved": "2026-11-18",
   "hospitals": [
     {
       "name": "Pasig City General Hospital",
@@ -7,20 +7,19 @@
       "address": "M. Eusebio Avenue, Maybunga, Pasig City",
       "contact": "(02) 8643-3333; (02) 8642-7379; (02) 8642-7381",
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
-        "https://healthspace.ph/facility/pasig-city-general-hospital-FCD00603",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393",
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     },
     {
       "name": "Pasig City Children's Hospital - Child's Hope",
       "type": "public",
-      "address": "Industria St. cor. Alcalde Jose St., Kapasigan, Pasig City",
+      "address": "15A Industria St. cor. Alcalde Jose St., Kapasigan, Pasig City",
       "contact": "(02) 8643-2222 loc. 601",
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
-        "https://www.clinicfinderph.com/clinic/pasig-city-childrens-hospital-childs-hope"
+        "https://pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393",
+        "https://assets.pasigcity.gov.ph/storage/attachments/pasig_city_children's_hospital(_p_c_c_h)/686b59734213c1751865715Citizen_s%20Charter%20English.pdf"
       ],
       "verify": true
     },
@@ -28,21 +27,20 @@
       "name": "Rizal Medical Center (DOH-retained)",
       "type": "public",
       "address": "Pasig Boulevard, Bagong Ilog, Pasig City",
-      "contact": "(02) 8865-8400",
+      "contact": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
-        "https://www.clinicfinderph.com/clinic/rizal-medical-center"
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     },
     {
       "name": "The Medical City Ortigas",
       "type": "private",
-      "address": "Don Eugenio Lopez Sr. Medical Complex, Ortigas Avenue, Brgy. Ugong, Pasig City",
+      "address": "The Medical City Compound, Don Eugenio Lopez Sr. Medical Complex, Ortigas Avenue, Pasig City",
       "contact": "(02) 8988-1000 / 8988-7000 (ER locals 2222, 2338)",
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines",
-        "https://www.themedicalcity.com/clinical-departments/services/emergency-department"
+        "https://www.themedicalcity.com/clinical-departments/services/emergency-department",
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     },
@@ -52,7 +50,7 @@
       "address": "269 C. Raymundo Avenue, Maybunga, Pasig City",
       "contact": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     },
@@ -62,7 +60,7 @@
       "address": "254 Amang Rodriguez Avenue, Manggahan, Pasig City",
       "contact": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     },
@@ -72,7 +70,7 @@
       "address": "116 E. Amang Rodriguez Avenue, Santolan, Pasig City",
       "contact": null,
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_hospitals_in_the_Philippines"
+        "https://www.philhealth.gov.ph/partners/providers/facilities/accredited/HOSP_093026.pdf"
       ],
       "verify": true
     }

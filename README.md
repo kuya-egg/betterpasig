@@ -35,7 +35,7 @@ bun run build     # static site in dist/
 bun run check     # type-check .astro and .ts files
 ```
 
-Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Site.astro` with the shared editorial styles in `src/styles/site.css`. Barangay content stays in Filipino on both routes.
+Pages live in `src/pages/` (English at `/`, Filipino under `/fil/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Site.astro` with the shared editorial styles in `src/styles/site.css`. Barangay names are never translated.
 
 ### UI components
 
@@ -79,7 +79,7 @@ The public site uses **Astro**, JSON content, **Pagefind**, shadcn/ui, and **Clo
 2. **Be a barangay steward.** Call your barangay hall, confirm the numbers and officials, and update `data/officials-directory.json` with the date you checked.
 3. **Build a page.** Pick an unchecked item in [docs/backlog.md](docs/backlog.md).
 
-Rules: every fact needs a source; never guess (use `null`); Filipino first; no party colors, endorsements or political funding; collect no personal data.
+Rules: every fact needs a trusted source (official or major news; never Wikipedia, directories or blogs); never guess (use `null`); English and Filipino; no party colors, endorsements or political funding; collect no personal data.
 
 ## Branches
 
