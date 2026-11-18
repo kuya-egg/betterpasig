@@ -12,12 +12,12 @@ export function refreshDatedContent(now = new Date()) {
  document.querySelectorAll<HTMLElement>('[data-event-date]').forEach(row=>{
   const state=eventState(row.dataset.eventDate,now);
   const status=row.querySelector<HTMLElement>('[data-event-status]');
-  if(status)status.textContent=state==='past'?(en?'The scheduled event date has passed.':'Lumipas na ang nakatakdang petsa ng aktibidad.'):state==='today'?(en?'Scheduled for today; confirm with the organizer.':'Nakatakda ngayong araw; kumpirmahin sa tagapag-ayos.'):(en?'Scheduled event; live availability is unknown.':'Nakatakdang aktibidad; hindi alam ang live na kapasidad.');
+  if(status)status.textContent=state==='past'?(en?'The scheduled event date has passed.':'Lumipas na ang petsa ng aktibidad.'):state==='today'?(en?'Scheduled for today; confirm with the organizer.':'Ngayong araw ang iskedyul. Kumpirmahin sa tagapag-ayos.'):(en?'Scheduled event; live availability is unknown.':'Nakatakda ang aktibidad. Magtanong sa tagapag-ayos kung may slot pa.');
   if(state==='past')row.querySelectorAll('[data-registration]').forEach(link=>link.remove());
  });
  document.querySelectorAll<HTMLElement>('[data-source-date]').forEach(row=>{
   if(isSourceFresh(row.dataset.sourceDate,now)||row.querySelector('[data-stale]'))return;
-  const note=document.createElement('span');note.dataset.stale='true';note.textContent=en?'This announcement is over 30 days old. Check the official page for a newer notice.':'Lampas 30 araw na ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso.';row.append(note);
+  const note=document.createElement('span');note.dataset.stale='true';note.textContent=en?'This announcement is over 30 days old. Check the official page for a newer notice.':'Mahigit 30 araw na ang lumipas mula nang ilabas ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso.';row.append(note);
  });
  document.querySelectorAll<HTMLElement>('[data-alert-expires]').forEach(row=>{row.hidden=Boolean(row.dataset.alertExpires&&row.dataset.alertExpires<manilaDate(now));});
  document.querySelectorAll<HTMLElement>('[data-current-feed]').forEach(feed=>{

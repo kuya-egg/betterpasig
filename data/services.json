@@ -3,37 +3,37 @@
   "categories": [
     {
       "id": "civil-registry",
-      "name_fil": "Sibil na rehistro at dokumento",
+      "name_fil": "Mga sertipiko at rehistrong sibil",
       "name_en": "Civil registry & documents",
-      "description_fil": "Pagpaparehistro ng kapanganakan, kasal at pagkamatay, at pagkuha ng mga sertipiko at clearance.",
+      "description_fil": "Pagpaparehistro ng kapanganakan, kasal at pagkamatay. Kasama rin ang pagkuha ng mga sertipiko at clearance.",
       "icon": "document"
     },
     {
       "id": "business",
-      "name_fil": "Negosyo at permit",
+      "name_fil": "Negosyo at mga permit",
       "name_en": "Business & permits",
-      "description_fil": "Pagkuha, pag-renew at pagsasara ng business permit at iba pang permit sa negosyo.",
+      "description_fil": "Mga permit para sa pagbubukas, pag-renew at pagsasara ng negosyo.",
       "icon": "business"
     },
     {
       "id": "property-tax",
       "name_fil": "Ari-arian, buwis at bayarin",
       "name_en": "Property, tax & payments",
-      "description_fil": "Pagbabayad ng amilyar at iba pang buwis, at mga dokumento ng ari-arian.",
+      "description_fil": "Pagbabayad ng amilyar at iba pang buwis. Kasama rin ang pagkuha ng mga dokumento ng ari-arian.",
       "icon": "receipt"
     },
     {
       "id": "building-land",
       "name_fil": "Gusali, zoning at lupa",
       "name_en": "Building, zoning & land use",
-      "description_fil": "Mga permit sa pagtatayo, zoning, at usapin ng lupa sa lungsod.",
+      "description_fil": "Mga permit sa pagtatayo, zoning at iba pang usapin tungkol sa lupa sa Pasig.",
       "icon": "home"
     },
     {
       "id": "health",
       "name_fil": "Kalusugan",
       "name_en": "Health",
-      "description_fil": "Serbisyo ng ospital, health center at mga programang pangkalusugan ng lungsod.",
+      "description_fil": "Mga serbisyo ng mga ospital at health center, at mga programang pangkalusugan ng lungsod.",
       "icon": "health"
     },
     {
@@ -45,30 +45,30 @@
     },
     {
       "id": "education",
-      "name_fil": "Edukasyon at scholarship",
+      "name_fil": "Pag-aaral at scholarship",
       "name_en": "Education & scholarships",
-      "description_fil": "Scholarship, pamantasan at paaralan ng lungsod, at day care.",
+      "description_fil": "Mga scholarship, pagpasok sa mga paaralan ng lungsod at mga serbisyo ng day care.",
       "icon": "school"
     },
     {
       "id": "jobs-livelihood",
       "name_fil": "Trabaho at kabuhayan",
       "name_en": "Jobs & livelihood",
-      "description_fil": "Paghahanap ng trabaho, programa para sa kabataan, at pautang pangkabuhayan.",
+      "description_fil": "Tulong sa paghahanap ng trabaho, mga programa para sa kabataan at mga pautang para sa kabuhayan.",
       "icon": "briefcase"
     },
     {
       "id": "environment-animals",
-      "name_fil": "Kalikasan at hayop",
+      "name_fil": "Kalikasan at mga alagang hayop",
       "name_en": "Environment, sanitation & animals",
-      "description_fil": "Permit sa puno, reklamo sa kapaligiran, at serbisyo para sa alagang hayop.",
+      "description_fil": "Mga permit para sa pagputol o paglipat ng puno, reklamo tungkol sa kapaligiran at serbisyo para sa mga alagang hayop.",
       "icon": "leaf"
     },
     {
       "id": "safety-traffic",
-      "name_fil": "Kaligtasan, sakuna at trapiko",
+      "name_fil": "Emergency at trapiko",
       "name_en": "Safety, disaster & traffic",
-      "description_fil": "Emergency, paghahanda sa sakuna, trapiko at prangkisa ng tricycle.",
+      "description_fil": "Tulong sa emergency, paghahanda sa sakuna, mga usapin sa trapiko at prangkisa ng tricycle.",
       "icon": "shield"
     },
     {
@@ -342,7 +342,7 @@
       "category": "civil-registry",
       "title_fil": "Iparehistro ang kapanganakan ng bata",
       "title_en": "Register a birth",
-      "summary_fil": "Iparehistro sa City Civil Registry ang kapanganakan, kasama ang late, supplemental at legitimation.",
+      "summary_fil": "Sa City Civil Registry puwedeng magparehistro ng kapanganakan. Doon din inaasikaso ang late registration, pagdaragdag ng impormasyon sa rekord at legitimation.",
       "office": "ccr",
       "audience": [
         "families",
@@ -377,9 +377,9 @@
     {
       "id": "certified-copy-civil-document",
       "category": "civil-registry",
-      "title_fil": "Kumuha ng certified copy ng birth o marriage certificate (lokal na kopya)",
+      "title_fil": "Kumuha ng certified true copy ng birth certificate o rekord ng kasal",
       "title_en": "Get a certified copy of a birth or marriage record",
-      "summary_fil": "Humingi ng certified true copy ng rekord na nakarehistro sa Pasig City Civil Registry.",
+      "summary_fil": "Humingi ng certified true copy ng rekord na nakarehistro sa City Civil Registry ng Pasig.",
       "office": "ccr",
       "audience": [
         "everyone"
@@ -411,7 +411,7 @@
       "category": "civil-registry",
       "title_fil": "Kumuha ng marriage license",
       "title_en": "Apply for a marriage license",
-      "summary_fil": "Mag-apply ng lisensya sa kasal sa City Civil Registry; ilalabas ito pagkalipas ng 10 araw.",
+      "summary_fil": "Mag-apply para sa marriage license sa City Civil Registry. Ilalabas ang lisensya pagkalipas ng 10 araw.",
       "office": "ccr",
       "audience": [
         "residents",
@@ -452,7 +452,7 @@
       "category": "civil-registry",
       "title_fil": "Iparehistro ang kasal",
       "title_en": "Register a marriage certificate",
-      "summary_fil": "Iparehistro ang marriage certificate sa loob ng 15 araw mula sa kasal, o mag-late registration.",
+      "summary_fil": "Iparehistro ang marriage certificate sa loob ng 15 araw mula sa kasal. Kung lumampas na, magpa-late registration.",
       "office": "ccr",
       "audience": [
         "families"
@@ -487,7 +487,7 @@
       "category": "civil-registry",
       "title_fil": "Iparehistro ang pagkamatay at kumuha ng burial o cremation permit",
       "title_en": "Register a death and get a burial or cremation permit",
-      "summary_fil": "Iparehistro ang death certificate at kumuha ng permit sa libing o cremation.",
+      "summary_fil": "Iparehistro ang death certificate at kumuha ng permit para sa libing o cremation.",
       "office": "ccr",
       "audience": [
         "families"
@@ -518,9 +518,9 @@
     {
       "id": "correct-civil-record",
       "category": "civil-registry",
-      "title_fil": "Itama ang mali sa birth certificate o palitan ang first name",
+      "title_fil": "Magpatama ng birth certificate o magpalit ng unang pangalan",
       "title_en": "Correct a civil registry record (RA 9048 / RA 10172)",
-      "summary_fil": "Mag-petisyon para itama ang clerical error, palitan ang first name, o itama ang kasarian, araw o buwan ng kapanganakan.",
+      "summary_fil": "Maghain ng petisyon kung may clerical error, papalitan ang unang pangalan o itatama ang kasarian, araw o buwan ng kapanganakan.",
       "office": "ccr",
       "audience": [
         "everyone"
@@ -587,9 +587,9 @@
     {
       "id": "court-decree-annotation",
       "category": "civil-registry",
-      "title_fil": "Iparehistro ang court decree (annulment, adoption) at annotation",
+      "title_fil": "Iparehistro ang desisyon ng korte at ipatala ito sa rekord",
       "title_en": "Register a court decree and annotate records",
-      "summary_fil": "Iparehistro ang desisyon ng korte (nullity, legal separation, foreign divorce, adoption, correction) para ma-annotate ang rekord.",
+      "summary_fil": "Iparehistro ang desisyon ng korte para maidagdag ito sa rekord. Kasama rito ang pagpapawalang-bisa ng kasal, legal separation, diborsyo sa ibang bansa, pag-ampon at pagwawasto.",
       "office": "ccr",
       "audience": [
         "everyone"
@@ -621,9 +621,9 @@
     {
       "id": "register-foundling",
       "category": "civil-registry",
-      "title_fil": "Iparehistro ang foundling (napulot na bata)",
+      "title_fil": "Iparehistro ang batang natagpuan na hindi kilala ang mga magulang (foundling)",
       "title_en": "Register a foundling certificate",
-      "summary_fil": "Iparehistro ang batang napulot o hindi kilala ang magulang, sa tulong ng institusyong may hawak sa bata.",
+      "summary_fil": "Magpatulong sa institusyong nangangalaga sa bata para maiparehistro siya.",
       "office": "ccr",
       "audience": [
         "families"
@@ -652,9 +652,9 @@
     {
       "id": "cemetery-burial",
       "category": "civil-registry",
-      "title_fil": "Mag-apply ng puwesto sa Pasig City Cemetery",
+      "title_fil": "Mag-apply para sa puwesto sa Pasig City Cemetery",
       "title_en": "Arrange a burial at the city cemetery",
-      "summary_fil": "Kumuha ng apartment, lote, columbarium o bonery sa sementeryo ng lungsod.",
+      "summary_fil": "Puwedeng kumuha ng apartment, lote, columbarium o bonery sa sementeryo ng lungsod.",
       "office": "ccr",
       "audience": [
         "families",
@@ -686,9 +686,9 @@
     {
       "id": "civil-wedding",
       "category": "civil-registry",
-      "title_fil": "Magpa-iskedyul ng civil wedding sa Mayor",
+      "title_fil": "Magpa-iskedyul ng civil wedding na pangungunahan ng alkalde",
       "title_en": "Schedule a civil wedding with the Mayor",
-      "summary_fil": "Humiling ng petsa ng civil wedding na isasagawa ng City Mayor.",
+      "summary_fil": "Humiling ng petsa para sa civil wedding na pangungunahan ng alkalde.",
       "office": "ocm",
       "audience": [
         "residents",
@@ -718,7 +718,7 @@
       "category": "civil-registry",
       "title_fil": "Dumalo sa pre-marriage counseling",
       "title_en": "Attend pre-marriage counseling",
-      "summary_fil": "Seminar para sa mga mag-a-apply ng marriage license; may certificate pagkatapos.",
+      "summary_fil": "Seminar ito para sa mga kukuha ng marriage license. May sertipiko pagkatapos.",
       "office": "cswdo",
       "audience": [
         "residents",
@@ -748,7 +748,7 @@
       "category": "civil-registry",
       "title_fil": "Kumuha ng Mayor's Clearance",
       "title_en": "Get a Mayor's Clearance",
-      "summary_fil": "Clearance na hinihingi para sa pag-apply sa AFP, PNP, BFP, PMA, Coast Guard, o kasal sa uniformed personnel.",
+      "summary_fil": "Para sa mga nag-a-apply sa AFP, PNP, BFP, PMA o Coast Guard, at sa ikakasal sa miyembro ng uniformed services.",
       "office": "oca",
       "audience": [
         "residents"
@@ -782,7 +782,7 @@
       "category": "civil-registry",
       "title_fil": "Kumuha ng certification para sa DFA",
       "title_en": "Get a city certification for DFA",
-      "summary_fil": "Sertipikasyon mula sa City Administrator na hinihingi sa ilang transaksyon sa DFA.",
+      "summary_fil": "May ilang transaksiyon sa DFA na nangangailangan ng sertipikasyon mula sa City Administrator.",
       "office": "oca",
       "audience": [
         "residents"
@@ -809,9 +809,9 @@
     {
       "id": "crasm",
       "category": "civil-registry",
-      "title_fil": "Iparehistro ang awtoridad ng simbahan na magkasal (CRASM)",
+      "title_fil": "Iparehistro ang awtoridad ng simbahan na magsagawa ng kasal (CRASM)",
       "title_en": "Register a religious group's authority to solemnize marriage",
-      "summary_fil": "Para sa mga relihiyosong organisasyon na magkakasal sa Pasig.",
+      "summary_fil": "Para sa mga relihiyosong organisasyong magsasagawa ng kasal sa Pasig.",
       "office": "oca",
       "audience": [
         "everyone"
@@ -838,9 +838,9 @@
     {
       "id": "posting-certification",
       "category": "civil-registry",
-      "title_fil": "Magpa-post ng notice o pleading at kumuha ng certification",
+      "title_fil": "Magpapaskil ng notice o pleading at kumuha ng sertipikasyon",
       "title_en": "Post a legal notice and get a certification of posting",
-      "summary_fil": "Ipa-post sa City Hall ang notice o pleading at kumuha ng sertipikasyon.",
+      "summary_fil": "Ipaasikaso sa City Hall ang pagpapaskil ng notice o pleading. Humingi ng sertipikasyong nagpapatunay na naipaskil ito.",
       "office": "oca",
       "audience": [
         "everyone"
@@ -870,7 +870,7 @@
       "category": "business",
       "title_fil": "Kumuha ng bagong business permit",
       "title_en": "Register a new business (Mayor's/Business Permit)",
-      "summary_fil": "Mag-apply ng business permit para sa bagong negosyo sa Pasig.",
+      "summary_fil": "Mag-apply para sa permit ng bagong negosyo sa Pasig.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -906,7 +906,7 @@
       "category": "business",
       "title_fil": "I-renew ang business permit",
       "title_en": "Renew a business permit",
-      "summary_fil": "Taunang pag-renew ng business permit ng rehistradong negosyo.",
+      "summary_fil": "I-renew taon-taon ang permit ng rehistradong negosyo.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -939,9 +939,9 @@
     {
       "id": "business-permit-amendment",
       "category": "business",
-      "title_fil": "Baguhin ang detalye ng negosyo (pangalan, address, linya)",
+      "title_fil": "Baguhin ang impormasyon ng rehistradong negosyo",
       "title_en": "Amend business details",
-      "summary_fil": "I-update ang pangalan, linya ng negosyo, lawak, empleyado o address ng negosyo.",
+      "summary_fil": "Puwedeng baguhin ang pangalan, uri ng negosyo, lawak, bilang ng empleyado o address.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -967,9 +967,9 @@
     {
       "id": "business-retirement",
       "category": "business",
-      "title_fil": "Isara o i-retire ang negosyo",
+      "title_fil": "Irehistro ang pagsasara ng negosyo",
       "title_en": "Close or retire a business",
-      "summary_fil": "Opisyal na pagsasara ng negosyo; may inspeksyon at Certificate of Retirement.",
+      "summary_fil": "May inspeksyon bago makuha ang Certificate of Retirement para sa opisyal na pagsasara ng negosyo.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -1004,9 +1004,9 @@
     {
       "id": "business-cancellation",
       "category": "business",
-      "title_fil": "Kanselahin ang business record na hindi nag-operate",
+      "title_fil": "Ipakansela ang rehistro ng negosyong hindi nagbukas",
       "title_en": "Cancel a business record that never operated",
-      "summary_fil": "Ipakansela ang business registration kung napatunayang hindi nag-operate.",
+      "summary_fil": "Puwedeng ipakansela ang rehistro kung napatunayang hindi nagsimulang mag-operate ang negosyo.",
       "office": "miso",
       "audience": [
         "businesses"
@@ -1034,7 +1034,7 @@
       "category": "business",
       "title_fil": "Kumuha ng Mayor's Permit para sa empleyado (occupational permit)",
       "title_en": "Get an occupational (worker's) Mayor's Permit",
-      "summary_fil": "Permit para sa mga manggagawang sakop ng Revenue Code; libre para sa first-time job seekers.",
+      "summary_fil": "Kailangan ito ng mga manggagawang sakop ng Revenue Code. Libre ito sa mga unang beses na naghahanap ng trabaho.",
       "office": "bpld",
       "audience": [
         "workers"
@@ -1068,7 +1068,7 @@
       "category": "business",
       "title_fil": "Kumuha ng special business permit (sari-sari, TODA, HOA, peddler)",
       "title_en": "Get a special business permit",
-      "summary_fil": "Permit para sa sari-sari store, TODA, terminal, peddler, HOA, NGO at iba pa.",
+      "summary_fil": "Para ito sa mga sari-sari store, TODA, terminal, naglalako, HOA, NGO at iba pa.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -1092,9 +1092,9 @@
     {
       "id": "business-payment-history",
       "category": "business",
-      "title_fil": "Humingi ng history of payment ng negosyo",
+      "title_fil": "Kumuha ng talaan ng mga nabayaran ng negosyo",
       "title_en": "Request a business payment history",
-      "summary_fil": "Kumuha ng printout ng mga nabayaran ng negosyo.",
+      "summary_fil": "Humingi ng printout ng mga nabayaran ng negosyo.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -1120,7 +1120,7 @@
       "category": "business",
       "title_fil": "Kumuha ng certification o certified true copy ng business permit",
       "title_en": "Get a business certification or certified true copy",
-      "summary_fil": "Certified copy ng business permit o Tax Order para sa iba't ibang gamit.",
+      "summary_fil": "Humingi ng sertipikasyon o certified true copy ng business permit o Tax Order.",
       "office": "bpld",
       "audience": [
         "businesses"
@@ -1147,7 +1147,7 @@
       "category": "business",
       "title_fil": "Kumuha ng Certificate of Conformance (zoning para sa negosyo)",
       "title_en": "Get a Certificate of Conformance for a business",
-      "summary_fil": "Patunay na pinapayagan ang negosyo sa zone; kailangan bago ang business permit.",
+      "summary_fil": "Patunay ito na puwedeng magnegosyo sa lokasyong napili. Kailangan ito bago kumuha ng business permit.",
       "office": "cpdo",
       "audience": [
         "businesses"
@@ -1182,7 +1182,7 @@
       "category": "business",
       "title_fil": "Kumuha ng Environmental Permit to Operate",
       "title_en": "Get an Environmental Permit to Operate (EPO)",
-      "summary_fil": "Permit mula CENRO na kailangan ng negosyo bago ang business permit.",
+      "summary_fil": "Kumuha ng permit mula sa CENRO bago mag-apply para sa business permit.",
       "office": "cenro",
       "audience": [
         "businesses"
@@ -1208,7 +1208,7 @@
       "category": "business",
       "title_fil": "Kumuha ng certificate para sa smoking/vaping area",
       "title_en": "Get a smoking and vaping area certificate",
-      "summary_fil": "Para sa establisimyentong maglalagay ng itinalagang smoking o vaping area.",
+      "summary_fil": "Para sa mga establisimyentong maglalaan ng lugar para sa paninigarilyo o pag-vape.",
       "office": "cenro",
       "audience": [
         "businesses"
@@ -1234,9 +1234,9 @@
     {
       "id": "dti-business-name",
       "category": "business",
-      "title_fil": "Magparehistro ng business name sa DTI (may tulong ng LEDIO)",
+      "title_fil": "Iparehistro ang pangalan ng negosyo sa DTI sa tulong ng LEDIO",
       "title_en": "Register a DTI business name (assisted)",
-      "summary_fil": "Tutulungan ka ng LEDIO na magparehistro ng business name online sa DTI BNRS.",
+      "summary_fil": "Tutulungan ka ng LEDIO na iparehistro ang pangalan ng negosyo sa DTI BNRS online.",
       "office": "ledio",
       "audience": [
         "businesses"
@@ -1261,7 +1261,7 @@
       "category": "business",
       "title_fil": "Magparehistro bilang BMBE",
       "title_en": "Register as a Barangay Micro Business Enterprise",
-      "summary_fil": "Para sa maliliit na negosyong may assets na PHP 3 milyon pababa; may tax at iba pang benepisyo.",
+      "summary_fil": "Para sa maliliit na negosyong may ari-ariang nagkakahalaga ng PHP 3 milyon o mas mababa. May mga benepisyo sa buwis at iba pang benepisyo para sa mga rehistradong BMBE.",
       "office": "ledio",
       "audience": [
         "businesses"
@@ -1287,7 +1287,7 @@
       "category": "business",
       "title_fil": "Kumuha ng special permit para sa event, parada, fun run o motorcade",
       "title_en": "Get a special permit for events, parades, fun runs or motorcades",
-      "summary_fil": "Permit mula sa City Administrator para sa mga event at aktibidad sa kalsada o pampublikong lugar.",
+      "summary_fil": "Kumuha ng permit sa City Administrator para sa aktibidad sa kalsada o iba pang pampublikong lugar.",
       "office": "oca",
       "audience": [
         "everyone",
@@ -1320,9 +1320,9 @@
     {
       "id": "special-permit-bazaar-vendor",
       "category": "business",
-      "title_fil": "Kumuha ng permit para sa bazaar, tiangge, perya o seasonal vendor",
+      "title_fil": "Kumuha ng permit para sa tiangge, perya o pansamantalang pagtitinda",
       "title_en": "Get a permit for a bazaar, tiangge, mini-fair or seasonal vending",
-      "summary_fil": "Special permit para sa pansamantalang pagtitinda at perya.",
+      "summary_fil": "Para sa mga bazaar, tiangge, perya at iba pang pansamantalang puwesto ng tindahan.",
       "office": "oca",
       "audience": [
         "businesses"
@@ -1348,9 +1348,9 @@
     {
       "id": "film-photo-drone-permit",
       "category": "business",
-      "title_fil": "Kumuha ng permit para sa shooting, photoshoot o drone",
+      "title_fil": "Kumuha ng permit para mag-film, mag-photoshoot o gumamit ng drone",
       "title_en": "Get a filming, photoshoot or drone permit",
-      "summary_fil": "Special permit para sa paggawa ng pelikula, photoshoot o paggamit ng drone sa Pasig.",
+      "summary_fil": "Kumuha ng special permit para sa paggawa ng pelikula, photoshoot o paggamit ng drone sa Pasig.",
       "office": "oca",
       "audience": [
         "everyone",
@@ -1380,7 +1380,7 @@
       "category": "business",
       "title_fil": "Magbayad ng amusement tax para sa event na may tiket",
       "title_en": "Settle amusement tax for ticketed events",
-      "summary_fil": "Para sa mga organizer ng event na may bayad na tiket: rehistro ng tiket, bond at 10% amusement tax.",
+      "summary_fil": "Kung may bayad ang tiket sa event, iparehistro ang mga tiket at bayaran ang bond at 10% na amusement tax.",
       "office": "cto",
       "audience": [
         "businesses"
@@ -1406,9 +1406,9 @@
     {
       "id": "calibrate-weighing-scale",
       "category": "business",
-      "title_fil": "Ipa-calibrate ang timbangan o gasoline pump",
+      "title_fil": "Ipasuri at ipa-calibrate ang timbangan o bomba ng gasolina",
       "title_en": "Calibrate weighing scales and fuel pumps",
-      "summary_fil": "Inspeksyon, calibration at sealing ng timbangan at gasoline pump ng mga establisimyento.",
+      "summary_fil": "Kasama ang inspeksyon, calibration at paglalagay ng selyo sa timbangan at bomba ng gasolina ng mga establisimyento.",
       "office": "cto",
       "audience": [
         "businesses"
@@ -1433,9 +1433,9 @@
     {
       "id": "market-stall-application",
       "category": "business",
-      "title_fil": "Mag-apply ng bakanteng puwesto sa palengke",
+      "title_fil": "Mag-apply para sa bakanteng puwesto sa palengke",
       "title_en": "Apply for a vacant market stall",
-      "summary_fil": "Para sa taga-Pasig na rehistradong botante na gustong umupa ng fixed stall sa Mutya ng Pasig Mega Market.",
+      "summary_fil": "Para sa mga taga-Pasig na rehistradong botante at gustong umupa ng nakatalagang puwesto sa Mutya ng Pasig Mega Market.",
       "office": "mao",
       "audience": [
         "residents",
@@ -1471,7 +1471,7 @@
       "category": "business",
       "title_fil": "Kumuha ng permit o certification para sa puwesto sa palengke",
       "title_en": "Market stallholder permits and certifications",
-      "summary_fil": "Renovation at welding permit, certification bilang stallholder, at paglipat ng puwesto.",
+      "summary_fil": "Kumuha ng permit para sa pag-aayos o welding, humingi ng sertipikasyon bilang umuupa ng puwesto o magpalipat ng puwesto.",
       "office": "mao",
       "audience": [
         "businesses"
@@ -1496,9 +1496,9 @@
     {
       "id": "market-promo-permit",
       "category": "business",
-      "title_fil": "Kumuha ng permit sa product promotion o advertisement sa palengke",
+      "title_fil": "Kumuha ng permit para mag-promote o mag-advertise sa palengke",
       "title_en": "Get a market promotion or advertising permit",
-      "summary_fil": "Para sa kumpanyang magpo-promote o maglalagay ng ad sa pampublikong palengke.",
+      "summary_fil": "Para sa mga kumpanyang magpapakilala ng produkto o maglalagay ng advertisement sa pampublikong palengke.",
       "office": "mao",
       "audience": [
         "businesses"
@@ -1525,7 +1525,7 @@
       "category": "business",
       "title_fil": "Kumuha ng veterinary clearance at meat handler license",
       "title_en": "Get a veterinary clearance and meat/livestock handler license",
-      "summary_fil": "Para sa meat establishments, pet shop, vet clinic at mga meat handler.",
+      "summary_fil": "Para sa mga negosyong may kinalaman sa karne, pet shop, vet clinic at mga humahawak ng karne sa trabaho.",
       "office": "doves",
       "audience": [
         "businesses",
@@ -1552,9 +1552,9 @@
     {
       "id": "city-space-rental",
       "category": "business",
-      "title_fil": "Umupa ng food stall, kiosk o commercial space ng lungsod",
+      "title_fil": "Umupa ng puwesto para sa negosyo sa pasilidad ng lungsod",
       "title_en": "Rent a city-owned food stall, kiosk or commercial space",
-      "summary_fil": "Mag-apply na umupa ng puwesto ng lungsod na pinamamahalaan ng LEDIO.",
+      "summary_fil": "Mag-apply sa LEDIO para umupa ng food stall, kiosk o commercial space ng lungsod.",
       "office": "ledio",
       "audience": [
         "businesses",
@@ -1587,7 +1587,7 @@
       "category": "property-tax",
       "title_fil": "Magbayad ng amilyar (real property tax)",
       "title_en": "Pay real property tax (amilyar)",
-      "summary_fil": "Magpa-bill at magbayad ng amilyar sa City Hall, annex, o online.",
+      "summary_fil": "Kunin ang bill at magbayad ng amilyar sa City Hall, sa annex o online.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1624,7 +1624,7 @@
       "category": "property-tax",
       "title_fil": "Magbayad ng business tax online",
       "title_en": "Pay business tax online",
-      "summary_fil": "Bayaran ang business tax gamit ang online payment portal ng lungsod.",
+      "summary_fil": "Magbayad sa online payment portal ng lungsod.",
       "office": "cto",
       "audience": [
         "businesses"
@@ -1657,7 +1657,7 @@
       "category": "property-tax",
       "title_fil": "Kumuha ng real property tax clearance",
       "title_en": "Get a real property tax clearance",
-      "summary_fil": "Patunay na bayad ang amilyar; kailangan sa bentahan o paglipat ng titulo.",
+      "summary_fil": "Patunay ito na bayad na ang amilyar. Kailangan ito sa bentahan o paglipat ng titulo.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1693,9 +1693,9 @@
     {
       "id": "rpt-payment-history",
       "category": "property-tax",
-      "title_fil": "Humingi ng history of payment ng amilyar",
+      "title_fil": "Kumuha ng talaan ng mga binayarang amilyar",
       "title_en": "Request a real property tax payment history",
-      "summary_fil": "Listahan ng mga nabayarang amilyar ng property.",
+      "summary_fil": "Humingi ng listahan ng mga binayarang amilyar sa ari-arian.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1755,9 +1755,9 @@
     {
       "id": "rpt-compromise",
       "category": "property-tax",
-      "title_fil": "Mag-apply ng hulugang bayad sa atrasadong amilyar o business tax",
+      "title_fil": "Humiling na hulugan ang atrasadong amilyar o business tax",
       "title_en": "Apply for a compromise (installment) agreement on delinquent taxes",
-      "summary_fil": "Kasunduan para hulugan ang atrasadong amilyar o business tax.",
+      "summary_fil": "Makipagkasundo sa lungsod para mabayaran nang hulugan ang atrasadong amilyar o business tax.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1788,9 +1788,9 @@
     {
       "id": "tax-penalty-discount",
       "category": "property-tax",
-      "title_fil": "Humiling ng discount o waiver ng multa sa buwis",
+      "title_fil": "Humiling na bawasan o alisin ang multa sa buwis",
       "title_en": "Request a discount or waiver of tax penalties",
-      "summary_fil": "Humiling na bawasan ang multa sa late na bayad ayon sa Revenue Code.",
+      "summary_fil": "Humiling ng bawas sa multa sa nahuling pagbabayad, ayon sa Revenue Code.",
       "office": "oca",
       "audience": [
         "residents",
@@ -1817,9 +1817,9 @@
     {
       "id": "lift-levy",
       "category": "property-tax",
-      "title_fil": "Ipa-alis ang levy sa ari-arian",
+      "title_fil": "Ipatanggal ang levy sa ari-arian",
       "title_en": "Lift a levy on real property",
-      "summary_fil": "Ipatanggal ang levy matapos bayaran ang atrasadong buwis.",
+      "summary_fil": "Ipatanggal ang levy sa ari-arian kapag nabayaran na ang atrasadong buwis.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1848,7 +1848,7 @@
       "category": "property-tax",
       "title_fil": "Mag-apply ng tax refund o tax credit",
       "title_en": "Apply for a local tax refund or credit",
-      "summary_fil": "Para sa sobra o maling bayad ng buwis.",
+      "summary_fil": "Mag-apply kung sobra o mali ang nabayaran mong buwis.",
       "office": "cto",
       "audience": [
         "residents",
@@ -1874,9 +1874,9 @@
     {
       "id": "tax-assessment-protest",
       "category": "property-tax",
-      "title_fil": "Mag-protesta sa tax assessment",
+      "title_fil": "Tutulan ang tax assessment",
       "title_en": "Protest a tax assessment",
-      "summary_fil": "Kontestahin ang Notice of Assessment sa loob ng 60 araw.",
+      "summary_fil": "Kung tututol ka sa Notice of Assessment, maghain ng protesta sa loob ng 60 araw.",
       "office": "cto",
       "audience": [
         "businesses",
@@ -1904,7 +1904,7 @@
       "category": "property-tax",
       "title_fil": "Kumuha ng cedula (community tax certificate)",
       "title_en": "Get a community tax certificate (cedula)",
-      "summary_fil": "Kumuha ng cedula para sa indibidwal o negosyo sa cashier ng Treasurer.",
+      "summary_fil": "Kumuha ng cedula para sa sarili o sa negosyo sa cashier ng City Treasurer.",
       "office": "cto",
       "audience": [
         "everyone"
@@ -1932,7 +1932,7 @@
       "category": "property-tax",
       "title_fil": "Magbayad ng professional tax",
       "title_en": "Pay professional tax",
-      "summary_fil": "Taunang buwis ng mga lisensyadong propesyonal.",
+      "summary_fil": "Taunang buwis ito para sa mga lisensyadong propesyonal.",
       "office": "cto",
       "audience": [
         "workers"
@@ -1957,9 +1957,9 @@
     {
       "id": "property-assessment",
       "category": "property-tax",
-      "title_fil": "Ipa-assess ang lupa, bahay o makinarya at kumuha ng tax declaration",
+      "title_fil": "Ipasuri ang lupa, gusali o makinarya para sa tax declaration",
       "title_en": "Get a property assessed and a tax declaration issued",
-      "summary_fil": "Pag-assess ng bagong lupa, gusali o makinarya para magkaroon ng tax declaration.",
+      "summary_fil": "Magpa-assess ng bagong lupa, gusali o makinarya para makakuha ng tax declaration.",
       "office": "assessor",
       "audience": [
         "residents",
@@ -1991,9 +1991,9 @@
     {
       "id": "property-reassessment",
       "category": "property-tax",
-      "title_fil": "Ipa-reassess o ipa-reclassify ang ari-arian",
+      "title_fil": "Ipasuri muli ang halaga o klasipikasyon ng ari-arian",
       "title_en": "Reassess or reclassify property",
-      "summary_fil": "I-update ang assessment kung may binago sa gamit o istruktura ng property.",
+      "summary_fil": "Ipa-update ang assessment kung nagbago ang gamit o istruktura ng ari-arian.",
       "office": "assessor",
       "audience": [
         "residents",
@@ -2021,7 +2021,7 @@
       "category": "property-tax",
       "title_fil": "Ipakansela ang assessment ng giniba o nasunog na istruktura",
       "title_en": "Cancel the assessment of a demolished or destroyed property",
-      "summary_fil": "Itigil ang pagbubuwis sa istrukturang wala na.",
+      "summary_fil": "Ipakansela ang assessment para matigil ang pagbubuwis sa istrukturang wala na.",
       "office": "assessor",
       "audience": [
         "residents",
@@ -2049,7 +2049,7 @@
       "category": "property-tax",
       "title_fil": "Ilipat sa bagong may-ari ang tax declaration",
       "title_en": "Transfer or update a tax declaration",
-      "summary_fil": "Ilipat ang tax declaration matapos ang bentahan, donasyon o mana, o i-segregate/consolidate.",
+      "summary_fil": "Ipalipat ang tax declaration pagkatapos ng bentahan, donasyon o mana. Dito rin inaasikaso ang paghahati o pagsasama ng mga rekord.",
       "office": "assessor",
       "audience": [
         "residents",
@@ -2078,9 +2078,9 @@
     {
       "id": "assessor-certifications",
       "category": "property-tax",
-      "title_fil": "Kumuha ng certified copy ng tax declaration o certification ng ari-arian",
+      "title_fil": "Kumuha ng certified true copy ng tax declaration o sertipikasyon ng ari-arian",
       "title_en": "Get a certified tax declaration or property certification",
-      "summary_fil": "Certified true copy ng tax declaration, certification of property holdings o no property.",
+      "summary_fil": "Humingi ng certified true copy ng tax declaration o sertipikasyon kung may ari-arian ka o wala.",
       "office": "assessor",
       "audience": [
         "everyone"
@@ -2106,7 +2106,7 @@
       "category": "property-tax",
       "title_fil": "Kumuha ng Certificate of No Improvement",
       "title_en": "Get a Certificate of No Improvement",
-      "summary_fil": "Patunay na walang istruktura sa lupa; kailangan sa ilang transaksyon gaya ng transfer tax.",
+      "summary_fil": "Patunay ito na walang istruktura sa lupa. Kailangan ito sa ilang transaksiyon, gaya ng pagbabayad ng transfer tax.",
       "office": "assessor",
       "audience": [
         "residents",
@@ -2159,7 +2159,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng building permit",
       "title_en": "Get a building permit",
-      "summary_fil": "Permit bago magtayo, mag-renovate o mag-convert ng gusali.",
+      "summary_fil": "Kailangan ang permit bago magtayo, mag-renovate o mag-convert ng gusali.",
       "office": "obo",
       "audience": [
         "residents",
@@ -2196,7 +2196,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng Certificate of Occupancy",
       "title_en": "Get a Certificate of Occupancy",
-      "summary_fil": "Kailangan bago gamitin ang bagong gawa o inayos na gusali.",
+      "summary_fil": "Kunin ito bago gamitin ang bagong tayo o inayos na gusali.",
       "office": "obo",
       "audience": [
         "residents",
@@ -2228,7 +2228,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng demolition permit",
       "title_en": "Get a demolition permit",
-      "summary_fil": "Permit bago gibain ang gusali o istruktura.",
+      "summary_fil": "Kunin ang permit bago gibain ang gusali o istruktura.",
       "office": "obo",
       "audience": [
         "residents",
@@ -2256,9 +2256,9 @@
     {
       "id": "fencing-sign-excavation-permit",
       "category": "building-land",
-      "title_fil": "Kumuha ng fencing, sign o excavation permit",
+      "title_fil": "Kumuha ng permit para sa bakod, karatula o paghuhukay",
       "title_en": "Get a fencing, signage or excavation permit",
-      "summary_fil": "Permit para sa bakod (hanggang 1.80 m), karatula/billboard, o paghuhukay.",
+      "summary_fil": "Para sa bakod na hanggang 1.80 m, karatula o billboard, o paghuhukay.",
       "office": "obo",
       "audience": [
         "residents",
@@ -2287,7 +2287,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng Certificate of Final Electrical Inspection (para sa Meralco)",
       "title_en": "Get a Certificate of Final Electrical Inspection (CFEI)",
-      "summary_fil": "Kailangan para makabitan ng Meralco meter ang bagong electrical installation.",
+      "summary_fil": "Kailangan ito para makabitan ng metro ng Meralco ang bagong electrical installation.",
       "office": "obo",
       "audience": [
         "residents",
@@ -2315,9 +2315,9 @@
     {
       "id": "mechanical-permit-to-operate",
       "category": "building-land",
-      "title_fil": "Kumuha ng permit to operate ng elevator, generator o iba pang makina",
+      "title_fil": "Kumuha ng permit para magpatakbo ng elevator, generator o iba pang makina",
       "title_en": "Get a permit to operate mechanical equipment",
-      "summary_fil": "Certificate of operation para sa elevator, escalator, generator, pump at iba pa.",
+      "summary_fil": "Kumuha ng certificate of operation para sa elevator, escalator, generator, pump at iba pang makina.",
       "office": "obo",
       "audience": [
         "businesses"
@@ -2346,7 +2346,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng locational clearance para sa pagtatayo",
       "title_en": "Get a locational (zoning) clearance for construction",
-      "summary_fil": "Kailangan bago ang building permit; tinitingnan kung pasok sa zoning ang proyekto.",
+      "summary_fil": "Kunin ito bago mag-apply para sa building permit. Tinitingnan dito kung pasok sa zoning ang proyekto.",
       "office": "cpdo",
       "audience": [
         "residents",
@@ -2377,7 +2377,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng zoning certificate",
       "title_en": "Get a zoning certificate",
-      "summary_fil": "Patunay ng zoning classification ng property; kailangan din sa residential free patent ng DENR.",
+      "summary_fil": "Patunay ito ng zoning classification ng ari-arian. Kailangan din ito sa pagkuha ng residential free patent sa DENR.",
       "office": "cpdo",
       "audience": [
         "residents",
@@ -2407,7 +2407,7 @@
       "category": "building-land",
       "title_fil": "Kumuha ng development permit para sa subdivision o malaking proyekto",
       "title_en": "Get a development permit",
-      "summary_fil": "Para sa mga developer ng subdivision at malaking proyekto; dumadaan sa Sangguniang Panlungsod.",
+      "summary_fil": "Para sa mga developer ng subdivision at malalaking proyekto. Dumadaan ang aplikasyon sa Sangguniang Panlungsod.",
       "office": "cpdo",
       "audience": [
         "businesses"
@@ -2468,9 +2468,9 @@
     {
       "id": "land-sell-donate-city",
       "category": "building-land",
-      "title_fil": "Mag-alok na ibenta o idonate ang lupa sa lungsod",
+      "title_fil": "Mag-alok na ibenta o ibigay bilang donasyon ang lupa sa lungsod",
       "title_en": "Offer to sell or donate land to the city",
-      "summary_fil": "Kasama rin ang pagdonate ng open space at kalsada ng HOA.",
+      "summary_fil": "Kasama rin dito ang pagdonasyon ng open space at mga kalsadang pag-aari ng HOA.",
       "office": "lmro",
       "audience": [
         "residents",
@@ -2497,9 +2497,9 @@
     {
       "id": "land-legal-advice",
       "category": "building-land",
-      "title_fil": "Humingi ng libreng legal advice tungkol sa lupa",
+      "title_fil": "Humingi ng libreng payong legal tungkol sa lupa",
       "title_en": "Get free legal advice on land matters",
-      "summary_fil": "Libreng konsultasyon o written legal opinion tungkol sa usapin ng lupa.",
+      "summary_fil": "Puwedeng humingi ng libreng konsultasyon o nakasulat na payong legal tungkol sa lupa.",
       "office": "lmro",
       "audience": [
         "everyone"
@@ -2525,7 +2525,7 @@
       "category": "health",
       "title_fil": "Magpagamot sa emergency room ng Pasig City General Hospital",
       "title_en": "Get emergency care at Pasig City General Hospital",
-      "summary_fil": "Bukas 24/7 ang ER; inuuna ang pasyente ayon sa triage.",
+      "summary_fil": "Bukas ang ER 24/7. Inuuna ang mga pasyenteng mas nangangailangan ng agarang lunas.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2553,7 +2553,7 @@
       "category": "health",
       "title_fil": "Magpakonsulta sa OPD ng Pasig City General Hospital",
       "title_en": "Get an outpatient consultation at PCGH",
-      "summary_fil": "Konsultasyon para sa hindi emergency; may discount ang senior at PWD.",
+      "summary_fil": "Para sa konsultasyong hindi emergency. May diskuwento ang mga senior citizen at PWD.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2581,9 +2581,9 @@
     {
       "id": "pcgh-lab-imaging",
       "category": "health",
-      "title_fil": "Magpa-laboratory, X-ray, ultrasound, CT o MRI sa PCGH",
+      "title_fil": "Magpa-lab test, X-ray, ultrasound, CT scan o MRI sa PCGH",
       "title_en": "Get lab tests and imaging at PCGH",
-      "summary_fil": "Outpatient laboratory at radiology services ng ospital ng lungsod.",
+      "summary_fil": "Mga laboratory test at radiology service para sa mga outpatient ng ospital.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2609,7 +2609,7 @@
       "category": "health",
       "title_fil": "Kumuha ng medical certificate o medical records sa PCGH",
       "title_en": "Get a medical certificate or medical records from PCGH",
-      "summary_fil": "Medical certificate, medico-legal, at SSS o insurance forms.",
+      "summary_fil": "Puwedeng humingi ng medical certificate, medico-legal na dokumento o form para sa SSS o insurance.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2632,9 +2632,9 @@
     {
       "id": "pcgh-medical-assistance",
       "category": "health",
-      "title_fil": "Humingi ng guarantee letter o tulong pinansyal sa ospital (Medical Social Work)",
+      "title_fil": "Humingi ng guarantee letter o tulong pinansyal sa Medical Social Work ng ospital",
       "title_en": "Get medical financial assistance at PCGH",
-      "summary_fil": "Sinusuri ng Medical Social Work ang pasyente para sa discount, libreng serbisyo o guarantee letter.",
+      "summary_fil": "Titingnan ng Medical Social Work kung kwalipikado ang pasyente sa diskuwento, libreng serbisyo o guarantee letter.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2659,9 +2659,9 @@
     {
       "id": "philhealth-enrollment-hospital",
       "category": "health",
-      "title_fil": "Magpa-enroll sa PhilHealth sa ospital (point of service)",
+      "title_fil": "Magparehistro sa PhilHealth sa ospital (point of service)",
       "title_en": "Enroll in PhilHealth at the hospital (point of service)",
-      "summary_fil": "Para sa pasyenteng walang PhilHealth o inactive ang membership.",
+      "summary_fil": "Para sa mga pasyenteng wala pang PhilHealth o hindi aktibo ang membership.",
       "office": "pcgh",
       "audience": [
         "everyone"
@@ -2687,7 +2687,7 @@
       "category": "health",
       "title_fil": "Magpabakuna sa health center",
       "title_en": "Get vaccinated at a health center",
-      "summary_fil": "Libreng bakuna para sa sanggol, batang nag-aaral, dalagitang 9-14 taon, at senior.",
+      "summary_fil": "May libreng bakuna para sa mga sanggol, mga batang nag-aaral, mga dalagitang 9 hanggang 14 taong gulang at mga senior citizen.",
       "office": "chd",
       "audience": [
         "families",
@@ -2712,7 +2712,7 @@
       "category": "health",
       "title_fil": "Magpakonsulta tungkol sa family planning",
       "title_en": "Get family planning counseling and methods",
-      "summary_fil": "Counseling at family planning methods sa City Health.",
+      "summary_fil": "May counseling at mga paraan ng family planning sa City Health.",
       "office": "chd",
       "audience": [
         "families",
@@ -2734,9 +2734,9 @@
     {
       "id": "child-health-newborn",
       "category": "health",
-      "title_fil": "Magpa-check-up ng bata at newborn screening",
+      "title_fil": "Ipa-checkup ang bata o ipa-newborn screening ang sanggol",
       "title_en": "Child health services and newborn screening",
-      "summary_fil": "Serbisyo para sa batang 0-9 taon at newborn screening para sa indigent na sanggol.",
+      "summary_fil": "May checkup para sa mga batang 0 hanggang 9 taong gulang at newborn screening para sa mga sanggol mula sa pamilyang kapos sa kita.",
       "office": "chd",
       "audience": [
         "families"
@@ -2815,7 +2815,7 @@
       "category": "health",
       "title_fil": "Magpa-cancer screening",
       "title_en": "Get cancer screening",
-      "summary_fil": "Screening at prevention program para sa taga-Pasig na 20 taon pataas.",
+      "summary_fil": "Para sa mga taga-Pasig na 20 taong gulang pataas. Kasama ang screening at pag-iwas sa cancer.",
       "office": "chd",
       "audience": [
         "residents"
@@ -2841,7 +2841,7 @@
       "category": "health",
       "title_fil": "Magpatingin ng mata at kumuha ng salamin",
       "title_en": "Get an eye check and eyeglasses",
-      "summary_fil": "Visual acuity test at salamin sa CHAMP Wellness Clinic.",
+      "summary_fil": "Magpasuri ng paningin at kumuha ng salamin sa CHAMP Wellness Clinic.",
       "office": "chd",
       "audience": [
         "seniors",
@@ -2867,7 +2867,7 @@
       "category": "health",
       "title_fil": "Humingi ng assistive device, gamot o supplies (Hospice)",
       "title_en": "Get hospice support (devices, medicines, home therapy)",
-      "summary_fil": "Para sa indigent na taga-Pasig na may malubha o terminal na sakit.",
+      "summary_fil": "Para sa mga taga-Pasig na kapos sa kita at may malubha o terminal na sakit.",
       "office": "chd",
       "audience": [
         "residents",
@@ -2897,9 +2897,9 @@
     {
       "id": "smoking-cessation",
       "category": "health",
-      "title_fil": "Dumalo sa smoking cessation program",
+      "title_fil": "Humingi ng tulong para tumigil sa paninigarilyo",
       "title_en": "Join the smoking cessation program",
-      "summary_fil": "Seminar at nicotine replacement therapy para sa naninigarilyo, kasama ang mga nahuling lumabag.",
+      "summary_fil": "May seminar at nicotine replacement therapy para sa mga naninigarilyo, kasama ang mga nahuling lumabag.",
       "office": "chd",
       "audience": [
         "everyone"
@@ -2923,9 +2923,9 @@
     {
       "id": "drug-rehab-outpatient",
       "category": "health",
-      "title_fil": "Magpa-assess at sumali sa outpatient drug treatment (SATOP)",
+      "title_fil": "Magpasuri at magpagamot bilang outpatient sa SATOP",
       "title_en": "Drug dependency assessment and outpatient treatment",
-      "summary_fil": "Screening, Drug Dependency Exam at outpatient program para sa may problema sa droga.",
+      "summary_fil": "May screening, Drug Dependency Exam at outpatient na programa para sa mga may problema sa paggamit ng droga.",
       "office": "chd",
       "audience": [
         "everyone"
@@ -2950,9 +2950,9 @@
     {
       "id": "nutrition-services",
       "category": "health",
-      "title_fil": "Kumuha ng nutrition services para sa bata at buntis",
+      "title_fil": "Humingi ng tulong sa nutrisyon para sa bata o buntis",
       "title_en": "Get nutrition services for children and mothers",
-      "summary_fil": "Feeding, supplementation at counseling para sa malnourished na bata at buntis.",
+      "summary_fil": "May feeding, supplements at counseling para sa mga bata at buntis na kulang sa nutrisyon.",
       "office": "chd",
       "audience": [
         "families"
@@ -2975,7 +2975,7 @@
       "category": "social-welfare",
       "title_fil": "Humingi ng tulong pinansyal (AICS) para sa gamot, libing o pag-aaral",
       "title_en": "Get crisis assistance (AICS) for medical, burial or education needs",
-      "summary_fil": "Tulong pinansyal para sa taga-Pasig na nasa krisis.",
+      "summary_fil": "Tulong pinansyal para sa mga taga-Pasig na dumaranas ng krisis.",
       "office": "swac",
       "audience": [
         "residents",
@@ -3008,7 +3008,7 @@
       "category": "social-welfare",
       "title_fil": "Humingi ng libreng kabaong at serbisyo sa libing (Project Damayan)",
       "title_en": "Get free funeral services (Project Damayan)",
-      "summary_fil": "Libreng kabaong at funeral service para sa taga-Pasig.",
+      "summary_fil": "May libreng kabaong at serbisyo sa libing para sa mga taga-Pasig.",
       "office": "swac",
       "audience": [
         "residents",
@@ -3037,9 +3037,9 @@
     {
       "id": "pagcor-op-endorsement",
       "category": "social-welfare",
-      "title_fil": "Kumuha ng endorsement letter sa PAGCOR o Office of the President para sa gamutan",
+      "title_fil": "Humingi ng endorsement ng alkalde para sa tulong medikal mula sa PAGCOR o Office of the President",
       "title_en": "Get an endorsement letter to PAGCOR or the Office of the President for medical aid",
-      "summary_fil": "Endorsement mula sa Mayor para makahingi ng medical assistance sa PAGCOR o OP.",
+      "summary_fil": "Humingi ng endorsement mula sa alkalde para makapag-apply ng tulong sa gamutan sa PAGCOR o Office of the President.",
       "office": "ocm",
       "audience": [
         "residents"
@@ -3095,7 +3095,7 @@
       "category": "social-welfare",
       "title_fil": "Kumuha ng Senior Citizen ID at booklet",
       "title_en": "Get a Senior Citizen ID and booklets",
-      "summary_fil": "ID at booklet para sa discount ng senior citizen na taga-Pasig.",
+      "summary_fil": "Para sa mga senior citizen na taga-Pasig na gagamit ng ID at booklet para sa diskuwento.",
       "office": "osca",
       "audience": [
         "seniors"
@@ -3129,7 +3129,7 @@
       "category": "social-welfare",
       "title_fil": "Kumuha ng Senior Citizen Benefit Card (Landbank)",
       "title_en": "Get a Senior Citizen Benefit Card",
-      "summary_fil": "Card para sa mga benepisyong pinansyal ng senior mula sa lungsod.",
+      "summary_fil": "Gamitin ang card para matanggap ang tulong pinansyal ng lungsod para sa mga senior citizen.",
       "office": "osca",
       "audience": [
         "seniors"
@@ -3157,9 +3157,9 @@
     {
       "id": "senior-burial-assistance",
       "category": "social-welfare",
-      "title_fil": "Humingi ng burial assistance para sa namatay na senior",
+      "title_fil": "Humingi ng tulong sa pagpapalibing ng senior citizen",
       "title_en": "Claim senior citizen burial assistance",
-      "summary_fil": "Tulong sa libing para sa pamilya ng namatay na senior citizen ng Pasig.",
+      "summary_fil": "Para sa pamilya ng namatay na senior citizen ng Pasig.",
       "office": "osca",
       "audience": [
         "seniors",
@@ -3187,9 +3187,9 @@
     {
       "id": "senior-octogenarian-centenarian",
       "category": "social-welfare",
-      "title_fil": "Mag-apply ng benepisyo para sa 80, 90 at 100 taong gulang",
+      "title_fil": "Mag-apply para sa benepisyo ng mga 80, 90 at 100 taong gulang",
       "title_en": "Apply for octogenarian, nonagenarian and centenarian benefits",
-      "summary_fil": "Lokal at pambansang cash gift para sa senior na umabot ng 80, 90 o 100.",
+      "summary_fil": "Cash gift mula sa lungsod at sa pambansang pamahalaan para sa mga senior citizen na umabot sa edad na 80, 90 o 100.",
       "office": "osca",
       "audience": [
         "seniors"
@@ -3215,9 +3215,9 @@
     {
       "id": "senior-pension",
       "category": "social-welfare",
-      "title_fil": "Mag-apply ng social pension para sa senior (lokal at DSWD)",
+      "title_fil": "Mag-apply para sa social pension ng senior citizen (lungsod at DSWD)",
       "title_en": "Apply for senior citizen social pension (local and DSWD)",
-      "summary_fil": "Buwanang pension para sa indigent na senior citizen.",
+      "summary_fil": "Buwanang pensyon para sa mga senior citizen na kapos sa kita.",
       "office": "osca",
       "audience": [
         "seniors"
@@ -3242,9 +3242,9 @@
     {
       "id": "pwd-id",
       "category": "social-welfare",
-      "title_fil": "Kumuha ng PWD ID (bago, renewal, transfer o nawala)",
+      "title_fil": "Kumuha, mag-renew, maglipat o magpapalit ng PWD ID",
       "title_en": "Get a PWD ID",
-      "summary_fil": "ID para sa taong may kapansanan na taga-Pasig; may booklet para sa discount.",
+      "summary_fil": "Para sa mga taong may kapansanan na taga-Pasig. May booklet din para sa diskuwento.",
       "office": "pdao",
       "audience": [
         "pwd"
@@ -3277,9 +3277,9 @@
     {
       "id": "pwd-doh-registry",
       "category": "social-welfare",
-      "title_fil": "Ipa-verify o iparehistro ang PWD ID sa DOH registry (PRPWD)",
+      "title_fil": "Ipaberipika o iparehistro ang PWD ID sa DOH registry (PRPWD)",
       "title_en": "Register your PWD ID in the DOH registry",
-      "summary_fil": "Siguraduhing nakarehistro ang Pasig PWD ID sa Philippine Registry for PWDs.",
+      "summary_fil": "Tiyaking nakarehistro ang Pasig PWD ID sa Philippine Registry for PWDs.",
       "office": "pdao",
       "audience": [
         "pwd"
@@ -3307,9 +3307,9 @@
     {
       "id": "pwd-burial",
       "category": "social-welfare",
-      "title_fil": "Humingi ng burial donation para sa namatay na PWD",
+      "title_fil": "Humingi ng tulong sa pagpapalibing ng taong may kapansanan",
       "title_en": "Claim burial donation for a deceased PWD",
-      "summary_fil": "Tulong sa libing para sa pamilya ng PWD na may valid na Pasig PWD ID.",
+      "summary_fil": "Para sa pamilya ng namatay na may bisa pang PWD ID mula sa Pasig.",
       "office": "pdao",
       "audience": [
         "pwd",
@@ -3339,7 +3339,7 @@
       "category": "social-welfare",
       "title_fil": "Kumuha ng Solo Parent ID",
       "title_en": "Get a Solo Parent ID",
-      "summary_fil": "ID para sa solo parent na taga-Pasig ayon sa batas.",
+      "summary_fil": "Para sa mga taga-Pasig na pasok sa mga kwalipikasyon sa batas para sa solo parent.",
       "office": "cswdo",
       "audience": [
         "solo-parents"
@@ -3376,7 +3376,7 @@
       "category": "social-welfare",
       "title_fil": "Kumuha ng social case study report",
       "title_en": "Get a social case study report",
-      "summary_fil": "Report ng social worker na kailangan sa paghingi ng medical o ibang tulong.",
+      "summary_fil": "Ulat ito ng social worker na kailangan sa paghingi ng tulong medikal o iba pang tulong.",
       "office": "cswdo",
       "audience": [
         "residents"
@@ -3404,7 +3404,7 @@
       "category": "social-welfare",
       "title_fil": "Humingi ng wheelchair, saklay o diaper",
       "title_en": "Request a wheelchair, crutches, diapers or similar aid",
-      "summary_fil": "Para sa indigent na PWD o kanilang pamilya sa Pasig.",
+      "summary_fil": "Para sa mga taong may kapansanan na kapos sa kita o sa kanilang pamilya sa Pasig.",
       "office": "cswdo",
       "audience": [
         "pwd"
@@ -3434,7 +3434,7 @@
       "category": "social-welfare",
       "title_fil": "Kumuha ng Certificate of Indigency mula sa lungsod",
       "title_en": "Get a city Certificate of Indigency",
-      "summary_fil": "Patunay na mahirap ang pamilya; ginagamit sa paghingi ng tulong.",
+      "summary_fil": "Dokumentong nagpapatunay na kapos sa kita ang pamilya. Maaaring kailanganin ito sa paghingi ng tulong.",
       "office": "cswdo",
       "audience": [
         "residents"
@@ -3461,7 +3461,7 @@
       "category": "social-welfare",
       "title_fil": "Humingi ng referral para sa tulong sa pamasahe",
       "title_en": "Get a referral for transportation assistance",
-      "summary_fil": "Para sa indibidwal o pamilyang stranded o nangangailangan ng pamasahe.",
+      "summary_fil": "Para sa mga tao o pamilyang hindi makauwi o nangangailangan ng pamasahe.",
       "office": "cswdo",
       "audience": [
         "residents"
@@ -3487,9 +3487,9 @@
     {
       "id": "disaster-affected-certificate",
       "category": "social-welfare",
-      "title_fil": "Kumuha ng certificate na naapektuhan ng sakuna",
+      "title_fil": "Kumuha ng sertipikasyon kung naapektuhan ng sakuna",
       "title_en": "Get a certificate of being affected by disaster",
-      "summary_fil": "Patunay na biktima ng sunog o sakuna, para sa paghingi ng tulong.",
+      "summary_fil": "Patunay ito na naapektuhan ka ng sunog o iba pang sakuna. Magagamit ito sa paghingi ng tulong.",
       "office": "cswdo",
       "audience": [
         "families"
@@ -3515,9 +3515,9 @@
     {
       "id": "philhealth-indigent-assessment",
       "category": "social-welfare",
-      "title_fil": "Kumuha ng financial assessment para sa PhilHealth (indigent)",
+      "title_fil": "Magpasuri ng kakayahang pinansyal para sa PhilHealth",
       "title_en": "Get a financial assessment for indigent PhilHealth coverage",
-      "summary_fil": "Assessment para masakop ng PhilHealth ang indigent na pasyente, buntis o estudyante.",
+      "summary_fil": "Para sa mga pasyente, buntis o estudyanteng kapos sa kita na nangangailangan ng PhilHealth coverage.",
       "office": "cswdo",
       "audience": [
         "residents",
@@ -3544,9 +3544,9 @@
     {
       "id": "counseling-women-children",
       "category": "social-welfare",
-      "title_fil": "Humingi ng counseling at proteksyon para sa inaabusong babae at bata",
+      "title_fil": "Humingi ng counseling at proteksyon para sa babae at batang nakararanas ng pang-aabuso",
       "title_en": "Get counseling and protection for abused women and children",
-      "summary_fil": "Counseling, pansamantalang tirahan, paralegal aid at tulong sa pagsasampa ng kaso.",
+      "summary_fil": "May counseling, pansamantalang matutuluyan, tulong mula sa paralegal at gabay sa pagsasampa ng kaso.",
       "office": "cswdo",
       "audience": [
         "families",
@@ -3572,9 +3572,9 @@
     {
       "id": "adoption-cdclaa",
       "category": "social-welfare",
-      "title_fil": "Mag-proseso ng certification na legally available for adoption ang bata",
+      "title_fil": "Kumuha ng sertipikasyon na puwede nang ampunin ang bata",
       "title_en": "Process a certification declaring a child legally available for adoption",
-      "summary_fil": "Para sa batang inabandona, ulila o isinuko, bilang hakbang sa adoption.",
+      "summary_fil": "Hakbang ito sa pag-ampon ng batang inabandona, naulila o isinuko para sa pag-ampon.",
       "office": "cswdo",
       "audience": [
         "families"
@@ -3599,7 +3599,7 @@
       "category": "social-welfare",
       "title_fil": "Humingi ng relief goods pagkatapos ng sakuna",
       "title_en": "Request relief goods after a disaster",
-      "summary_fil": "Pamamahagi ng relief goods sa mga naapektuhan ng sakuna matapos ma-validate ng CSWDO.",
+      "summary_fil": "Namamahagi ng relief goods matapos kumpirmahin ng CSWDO kung sino ang naapektuhan ng sakuna.",
       "office": "drrmo",
       "audience": [
         "families",
@@ -3624,9 +3624,9 @@
     {
       "id": "scholarship-new",
       "category": "education",
-      "title_fil": "Mag-apply ng Pasig City scholarship",
+      "title_fil": "Mag-apply para sa Pasig City scholarship",
       "title_en": "Apply for a Pasig City scholarship",
-      "summary_fil": "Scholarship para sa taga-Pasig: academic, arts, sports, out-of-school learners at iba pa.",
+      "summary_fil": "May scholarship para sa mga taga-Pasig, kabilang ang mga nakatuon sa akademiko, sining at sports, at para sa mga out-of-school learner.",
       "office": "pced",
       "audience": [
         "students"
@@ -3662,7 +3662,7 @@
       "category": "education",
       "title_fil": "I-renew ang Pasig City scholarship",
       "title_en": "Renew a Pasig City scholarship",
-      "summary_fil": "Pag-renew para sa senior high at college scholars.",
+      "summary_fil": "Para sa mga scholar sa senior high school at kolehiyo na magre-renew.",
       "office": "pced",
       "audience": [
         "students"
@@ -3692,7 +3692,7 @@
       "category": "education",
       "title_fil": "Mag-apply ng Pag-Asa Scholarship",
       "title_en": "Apply for the Pag-Asa Scholarship",
-      "summary_fil": "Scholarship para sa priority programs sa private college o TVI na may MOA sa lungsod.",
+      "summary_fil": "Para sa mga priority program sa pribadong kolehiyo o technical-vocational institute na may kasunduan sa lungsod.",
       "office": "pced",
       "audience": [
         "students"
@@ -3723,7 +3723,7 @@
       "category": "education",
       "title_fil": "Humingi ng tulong pinansyal para sa board o bar exam",
       "title_en": "Get financial assistance for board or bar exam takers",
-      "summary_fil": "Tulong para sa review at paghahanda sa licensure o bar exam.",
+      "summary_fil": "Tulong sa gastos sa review at paghahanda para sa licensure o bar exam.",
       "office": "pced",
       "audience": [
         "students",
@@ -3755,7 +3755,7 @@
       "category": "education",
       "title_fil": "Mag-apply sa CHIP-IN (Continuing High School Program)",
       "title_en": "Apply for CHIP-IN allowance for high school students",
-      "summary_fil": "Allowance program para tuloy-tuloy ang pag-aaral ng high school students.",
+      "summary_fil": "Allowance para makapagpatuloy sa pag-aaral ang mga estudyante sa high school.",
       "office": "pced",
       "audience": [
         "students"
@@ -3783,9 +3783,9 @@
     {
       "id": "latin-honors-incentive",
       "category": "education",
-      "title_fil": "Kumuha ng insentibo para sa Latin honors at topnotcher",
+      "title_fil": "Kumuha ng insentibo kung may Latin honors o topnotcher sa board o bar exam",
       "title_en": "Claim incentives for Latin honors and exam topnotchers",
-      "summary_fil": "Cash incentive para sa graduate na may Latin honors o topnotcher sa board/bar exam.",
+      "summary_fil": "May gantimpalang pera para sa mga nagtapos na may Latin honors o nanguna sa board o bar exam.",
       "office": "pced",
       "audience": [
         "students",
@@ -3810,9 +3810,9 @@
     {
       "id": "scholarship-certification",
       "category": "education",
-      "title_fil": "Kumuha ng certification ng pagiging scholar ng lungsod",
+      "title_fil": "Kumuha ng sertipikasyon tungkol sa Pasig City Scholarship",
       "title_en": "Get a city scholarship certification",
-      "summary_fil": "Sertipikasyon na kasama o hindi kasama sa listahan ng Pasig scholars.",
+      "summary_fil": "Humingi ng sertipikasyon kung kasama ka o wala sa listahan ng mga scholar ng Pasig.",
       "office": "pced",
       "audience": [
         "students"
@@ -3837,7 +3837,7 @@
       "category": "education",
       "title_fil": "Mag-enroll sa Pamantasan ng Lungsod ng Pasig",
       "title_en": "Submit entrance credentials and enroll at PLP",
-      "summary_fil": "Para sa mga pumasa sa admission ng PLP: pagsumite ng credentials at enrollment.",
+      "summary_fil": "Kung pumasa ka sa admission ng PLP, isumite ang mga dokumento at mag-enroll.",
       "office": "plp",
       "audience": [
         "students"
@@ -3870,7 +3870,7 @@
       "category": "education",
       "title_fil": "Mag-apply sa Pasig City Science High School (Grade 7 o 11)",
       "title_en": "Apply to Pasig City Science High School",
-      "summary_fil": "Admission para sa papasok na Grade 7 at Grade 11 mula sa paaralan sa Pasig.",
+      "summary_fil": "Para sa mga papasok sa Grade 7 o Grade 11 mula sa mga paaralan sa Pasig.",
       "office": "pcshs",
       "audience": [
         "students"
@@ -3902,9 +3902,9 @@
     {
       "id": "pcshs-records",
       "category": "education",
-      "title_fil": "Humingi ng school records o credentials sa Pasig City Science High School",
+      "title_fil": "Kumuha ng school records sa Pasig City Science High School",
       "title_en": "Request school records from PCSHS",
-      "summary_fil": "Para sa lumipat o nagtapos: SF10, certificate at iba pang credentials.",
+      "summary_fil": "Para sa mga lumipat o nagtapos na nangangailangan ng SF10, mga sertipiko o iba pang school records.",
       "office": "pcshs",
       "audience": [
         "students"
@@ -3929,9 +3929,9 @@
     {
       "id": "eccd-daycare",
       "category": "education",
-      "title_fil": "I-enroll ang bata sa day care (ECCD)",
+      "title_fil": "Ipasok ang bata sa day care (ECCD)",
       "title_en": "Enroll a child in a city day care center (ECCD)",
-      "summary_fil": "Libreng day care para sa batang 3 hanggang 4 taon at 11 buwan sa 107 center.",
+      "summary_fil": "May libreng day care sa 107 center para sa mga batang 3 taong gulang hanggang 4 na taon at 11 buwan.",
       "office": "cswdo",
       "audience": [
         "families"
@@ -3962,9 +3962,9 @@
     {
       "id": "supervised-play-center",
       "category": "education",
-      "title_fil": "Iwan ang anak sa Supervised Play Center habang may transaksyon sa City Hall",
+      "title_fil": "Iwan muna ang bata sa Supervised Play Center habang may inaasikaso sa City Hall",
       "title_en": "Use the City Hall supervised play center",
-      "summary_fil": "Libreng bantay sa batang 3-6 taon habang may transaksyon ang magulang sa City Hall.",
+      "summary_fil": "May libreng magbabantay sa mga batang 3 hanggang 6 na taong gulang habang may inaasikaso ang magulang sa City Hall.",
       "office": "cswdo",
       "audience": [
         "families"
@@ -3990,7 +3990,7 @@
       "category": "education",
       "title_fil": "Kumuha ng Education Specialist Certificate",
       "title_en": "Get an Education Specialist Certificate",
-      "summary_fil": "Sertipikasyon mula sa City Administrator na hinihingi ng ilang paaralan.",
+      "summary_fil": "May ilang paaralang humihingi ng sertipikasyong ito mula sa City Administrator.",
       "office": "oca",
       "audience": [
         "students"
@@ -4019,7 +4019,7 @@
       "category": "jobs-livelihood",
       "title_fil": "Maghanap ng trabaho at kumuha ng referral sa PESO",
       "title_en": "Find a job and get a referral from PESO",
-      "summary_fil": "Tingnan ang job vacancies at magpa-refer sa kumpanya.",
+      "summary_fil": "Tingnan ang mga bakanteng trabaho at humingi ng referral sa kumpanya.",
       "office": "peso",
       "audience": [
         "workers"
@@ -4050,7 +4050,7 @@
       "category": "jobs-livelihood",
       "title_fil": "Sumali sa JobStart Philippines",
       "title_en": "Join JobStart Philippines",
-      "summary_fil": "Training at tulong sa trabaho para sa kabataang 18-24 na hindi nag-aaral o nagtatrabaho.",
+      "summary_fil": "May pagsasanay at tulong sa paghahanap ng trabaho para sa mga kabataang 18 hanggang 24 na taong gulang na hindi nag-aaral o nagtatrabaho.",
       "office": "peso",
       "audience": [
         "workers",
@@ -4078,7 +4078,7 @@
       "category": "jobs-livelihood",
       "title_fil": "Mag-apply sa SPES (trabaho para sa estudyante)",
       "title_en": "Apply for SPES (student employment)",
-      "summary_fil": "Summer o bakasyong trabaho para sa estudyante at out-of-school youth na 15-30 taon.",
+      "summary_fil": "Trabaho tuwing bakasyon para sa mga estudyante at kabataang hindi nag-aaral na 15 hanggang 30 taong gulang.",
       "office": "peso",
       "audience": [
         "students"
@@ -4107,7 +4107,7 @@
       "category": "jobs-livelihood",
       "title_fil": "Mag-apply sa Government Internship Program (GIP)",
       "title_en": "Apply for the Government Internship Program",
-      "summary_fil": "Internship sa gobyerno para sa 18-30 taon na wala pang work experience.",
+      "summary_fil": "Internship sa gobyerno para sa mga 18 hanggang 30 taong gulang na wala pang karanasan sa trabaho.",
       "office": "peso",
       "audience": [
         "workers",
@@ -4137,7 +4137,7 @@
       "category": "jobs-livelihood",
       "title_fil": "Sumali sa KAAGAPAY (pansamantalang trabaho)",
       "title_en": "Join KAAGAPAY emergency employment",
-      "summary_fil": "Pansamantalang trabaho (10-30 araw) para sa indigent na walang trabaho, 18-70 taon.",
+      "summary_fil": "Pansamantalang trabaho na 10 hanggang 30 araw para sa mga 18 hanggang 70 taong gulang na walang trabaho at kapos sa kita.",
       "office": "peso",
       "audience": [
         "workers"
@@ -4163,9 +4163,9 @@
     {
       "id": "peso-company-accreditation",
       "category": "jobs-livelihood",
-      "title_fil": "Ipa-accredit ang kumpanya sa PESO para mag-hire",
+      "title_fil": "Ipa-accredit ang kumpanya sa PESO para makapag-recruit",
       "title_en": "Accredit a company with PESO for hiring",
-      "summary_fil": "Para sa kumpanyang gustong mag-post ng bakante at mag-recruit sa PESO.",
+      "summary_fil": "Para sa mga kumpanyang gustong magpaskil ng bakanteng trabaho at maghanap ng aplikante sa tulong ng PESO.",
       "office": "peso",
       "audience": [
         "businesses"
@@ -4195,9 +4195,9 @@
     {
       "id": "tapat-livelihood-loan",
       "category": "jobs-livelihood",
-      "title_fil": "Mag-apply ng TAPAT livelihood loan",
+      "title_fil": "Mag-apply para sa pautang pangkabuhayan ng TAPAT",
       "title_en": "Apply for a TAPAT livelihood micro-loan",
-      "summary_fil": "Maliit na pautang para sa start-up o rehistradong negosyo.",
+      "summary_fil": "Maliit na pautang para sa mga bagong negosyo o negosyong rehistrado na.",
       "office": "ledio",
       "audience": [
         "businesses",
@@ -4224,9 +4224,9 @@
     {
       "id": "tree-cutting-permit",
       "category": "environment-animals",
-      "title_fil": "Kumuha ng permit para putulin, i-trim o ilipat ang puno",
+      "title_fil": "Kumuha ng permit para magputol, magbawas ng sanga o maglipat ng puno",
       "title_en": "Get a permit to cut, trim or ball a tree",
-      "summary_fil": "Kailangan ng permit at kapalit na punla bago galawin ang puno.",
+      "summary_fil": "Kailangan ang permit at kapalit na punla bago putulin, bawasan ang mga sanga o ilipat ang puno.",
       "office": "cenro",
       "audience": [
         "residents",
@@ -4289,7 +4289,7 @@
       "category": "environment-animals",
       "title_fil": "Magreklamo tungkol sa polusyon, ingay o paglabag sa kalikasan",
       "title_en": "File an environmental complaint",
-      "summary_fil": "Mabilis na aksyon ng CENRO sa reklamo sa usok, ingay, basura at iba pa.",
+      "summary_fil": "Tumutugon agad ang CENRO sa mga reklamo tungkol sa usok, ingay, basura at iba pang suliranin sa kapaligiran.",
       "office": "cenro",
       "audience": [
         "everyone"
@@ -4319,7 +4319,7 @@
       "category": "environment-animals",
       "title_fil": "Kunin ang plaka na kinumpiska dahil sa smoke belching",
       "title_en": "Redeem a plate confiscated for smoke belching",
-      "summary_fil": "Bayaran ang multa at ipakita ang pumasang emission test para makuha ang plaka.",
+      "summary_fil": "Bayaran ang multa at ipakita ang resulta na pumasa ang sasakyan sa emission test para makuha ang plaka.",
       "office": "cenro",
       "audience": [
         "everyone"
@@ -4345,9 +4345,9 @@
     {
       "id": "smoking-violation-settlement",
       "category": "environment-animals",
-      "title_fil": "Ayusin ang violation sa paninigarilyo o pag-vape sa bawal na lugar",
+      "title_fil": "Ayusin ang paglabag sa pagbabawal sa paninigarilyo o pag-vape",
       "title_en": "Settle a smoking or vaping violation",
-      "summary_fil": "Bayaran ang multa o dumalo sa cessation program.",
+      "summary_fil": "Bayaran ang multa o dumalo sa programang tumutulong sa pagtigil sa paninigarilyo.",
       "office": "cenro",
       "audience": [
         "everyone"
@@ -4398,9 +4398,9 @@
     {
       "id": "pet-registration",
       "category": "environment-animals",
-      "title_fil": "Iparehistro ang alaga at lagyan ng microchip",
+      "title_fil": "Iparehistro ang alagang aso o pusa at palagyan ng microchip",
       "title_en": "Register a pet with an RFID microchip",
-      "summary_fil": "Isang beses na pagrehistro ng aso o pusa gamit ang microchip.",
+      "summary_fil": "Isang beses lang kailangang iparehistro ang aso o pusa gamit ang microchip.",
       "office": "doves",
       "audience": [
         "residents"
@@ -4424,7 +4424,7 @@
     {
       "id": "pet-impound-redemption",
       "category": "environment-animals",
-      "title_fil": "Kunin ang alagang nahuli at na-impound",
+      "title_fil": "Kunin ang alagang dinala sa Pasig Animal Pound",
       "title_en": "Redeem an impounded pet",
       "summary_fil": "Bayaran ang multa at kunin ang alaga sa Pasig Animal Pound.",
       "office": "doves",
@@ -4477,7 +4477,7 @@
       "category": "environment-animals",
       "title_fil": "Ipakapon ang aso o pusa",
       "title_en": "Get a pet spayed or neutered",
-      "summary_fil": "Kapon para sa aso (8 buwan pataas) at pusa (1 taon pataas) ng taga-Pasig.",
+      "summary_fil": "Para sa aso na 8 buwan pataas o pusa na 1 taon pataas na alaga ng taga-Pasig.",
       "office": "doves",
       "audience": [
         "residents"
@@ -4506,7 +4506,7 @@
       "category": "environment-animals",
       "title_fil": "Kumuha ng veterinary health certificate para sa hayop",
       "title_en": "Get a veterinary health certificate for an animal",
-      "summary_fil": "Sertipiko ng kalusugan para sa alaga, manok-panabong o hayop sa bukid.",
+      "summary_fil": "Sertipiko ng kalusugan para sa alaga, manok na panabong o hayop sa bukid.",
       "office": "doves",
       "audience": [
         "residents"
@@ -4532,7 +4532,7 @@
       "category": "safety-traffic",
       "title_fil": "Tumawag sa emergency hotline para sa ambulansya, sunog o rescue",
       "title_en": "Call the city emergency hotline",
-      "summary_fil": "Tumawag sa 8643-0000 para sa medical, sunog, rescue at iba pang emergency sa Pasig.",
+      "summary_fil": "Tumawag sa 8643-0000 kung may nangangailangan ng agarang tulong medikal, may sunog, may kailangang i-rescue o may iba pang emergency sa Pasig.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4560,9 +4560,9 @@
     {
       "id": "patient-transport",
       "category": "safety-traffic",
-      "title_fil": "Humingi ng ambulansya para sa hindi emergency na paglipat ng pasyente",
+      "title_fil": "Humingi ng ambulansya para sa nakaiskedyul na paglipat ng pasyente",
       "title_en": "Request non-urgent patient transport",
-      "summary_fil": "Pagdadala ng pasyente sa ospital o pauwi, sa loob o labas ng Pasig.",
+      "summary_fil": "Magpahatid ng pasyente sa ospital o pauwi, sa loob o labas ng Pasig.",
       "office": "drrmo",
       "audience": [
         "residents"
@@ -4587,9 +4587,9 @@
     {
       "id": "event-ambulance-standby",
       "category": "safety-traffic",
-      "title_fil": "Humingi ng ambulansya o medical standby para sa event",
+      "title_fil": "Humingi ng ambulansya o medical team na nakaantabay sa event",
       "title_en": "Request ambulance and medical standby for an event",
-      "summary_fil": "Para sa organizer ng sports, concert, fiesta at fun run.",
+      "summary_fil": "Para sa mga organizer ng palaro, concert, pista o fun run.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4612,9 +4612,9 @@
     {
       "id": "drrm-training",
       "category": "safety-traffic",
-      "title_fil": "Mag-training sa first aid, rescue at disaster response",
+      "title_fil": "Magsanay sa first aid, rescue at pagtugon sa sakuna",
       "title_en": "Take DRRM, first aid or rescue training",
-      "summary_fil": "Kurso sa first aid, BLS, search and rescue, swimming at iba pa sa RED Training Center.",
+      "summary_fil": "May mga kurso sa first aid, BLS, search and rescue, paglangoy at iba pa sa RED Training Center.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4641,7 +4641,7 @@
       "category": "safety-traffic",
       "title_fil": "Humingi ng kopya ng CCTV footage ng lungsod",
       "title_en": "Request city CCTV footage",
-      "summary_fil": "Para sa may police report o barangay blotter na kailangan ng footage.",
+      "summary_fil": "Para sa mga may police report o barangay blotter na nangangailangan ng kopya ng video.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4668,7 +4668,7 @@
       "category": "safety-traffic",
       "title_fil": "Humingi ng DRRM plan, contingency plan o hazard map",
       "title_en": "Request DRRM plans and hazard maps",
-      "summary_fil": "Kopya ng plano at hazard map para sa residente, barangay, paaralan at mananaliksik.",
+      "summary_fil": "Puwedeng humingi ng mga plano at hazard map ang mga residente, barangay, paaralan at mananaliksik.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4726,7 +4726,7 @@
     {
       "id": "redeem-impounded-vehicle",
       "category": "safety-traffic",
-      "title_fil": "Kunin ang sasakyang na-impound",
+      "title_fil": "Kunin ang sasakyang dinala sa impounding area",
       "title_en": "Redeem an impounded vehicle",
       "summary_fil": "Bayaran ang multa at kunin ang sasakyan sa impounding area.",
       "office": "tpmo",
@@ -4755,7 +4755,7 @@
       "category": "safety-traffic",
       "title_fil": "Kumuha ng traffic clearance para sa pagsasara ng kalsada o event",
       "title_en": "Get a traffic clearance for road use or closure",
-      "summary_fil": "Para sa parada, prusisyon, fiesta, fun run at iba pang gagamit ng kalsada.",
+      "summary_fil": "Para sa parada, prusisyon, pista, fun run at iba pang aktibidad na gagamit ng kalsada.",
       "office": "tpmo",
       "audience": [
         "everyone",
@@ -4779,9 +4779,9 @@
     {
       "id": "traffic-concern-report",
       "category": "safety-traffic",
-      "title_fil": "Mag-report o magmungkahi tungkol sa traffic sign at road marking",
+      "title_fil": "Mag-ulat o magmungkahi tungkol sa mga karatula at marka sa kalsada",
       "title_en": "Report a traffic sign or road marking concern",
-      "summary_fil": "Ipaalam sa TPMO ang problema sa signage, marking at iba pang usapin sa trapiko.",
+      "summary_fil": "Ipaalam sa TPMO kung may problema sa mga karatula, marka sa kalsada o iba pang usapin sa trapiko.",
       "office": "tpmo",
       "audience": [
         "everyone"
@@ -4806,7 +4806,7 @@
       "category": "safety-traffic",
       "title_fil": "I-renew ang prangkisa o supervision ng tricycle",
       "title_en": "Renew a tricycle franchise or yearly supervision",
-      "summary_fil": "Taunang supervision renewal at franchise renewal tuwing 3 taon para sa tricycle operator.",
+      "summary_fil": "Para sa mga operator ng tricycle. Taon-taon ang supervision renewal at tuwing 3 taon ang pag-renew ng prangkisa.",
       "office": "toro",
       "audience": [
         "workers",
@@ -4870,7 +4870,7 @@
       "category": "safety-traffic",
       "title_fil": "Kumuha ng special permit sa tricycle (delivery, family, school service)",
       "title_en": "Get a special tricycle permit (delivery, family, school service)",
-      "summary_fil": "Permit to operate para sa tricycle na hindi pampasada.",
+      "summary_fil": "Para sa mga tricycle na hindi pampasada at ginagamit sa delivery, pangpamilya o school service.",
       "office": "toro",
       "audience": [
         "residents",
@@ -4899,9 +4899,9 @@
     {
       "id": "volunteer-group-recognition",
       "category": "safety-traffic",
-      "title_fil": "Ipa-recognize ang fire, rescue o EMS volunteer group",
+      "title_fil": "Humiling ng pagkilala para sa volunteer group sa fire, rescue o EMS",
       "title_en": "Get recognition for a private fire, rescue or EMS volunteer group",
-      "summary_fil": "Pagkilala at endorsement sa BFP para sa volunteer responder groups.",
+      "summary_fil": "Para sa mga grupong boluntaryong tumutugon sa emergency na nangangailangan ng pagkilala at endorsement sa BFP.",
       "office": "drrmo",
       "audience": [
         "everyone"
@@ -4927,9 +4927,9 @@
     {
       "id": "ugnayan-complaint",
       "category": "transparency-feedback",
-      "title_fil": "Magreklamo o magbigay ng feedback sa Ugnayan sa Pasig",
+      "title_fil": "Magreklamo o magbigay ng komento sa Ugnayan sa Pasig",
       "title_en": "File a complaint or feedback through Ugnayan sa Pasig",
-      "summary_fil": "Ang Ugnayan sa Pasig ang tumatanggap ng reklamo at feedback para sa mga opisina ng lungsod.",
+      "summary_fil": "Tumatanggap ang Ugnayan sa Pasig ng mga reklamo at komento tungkol sa mga opisina ng lungsod.",
       "office": "ugnayan",
       "audience": [
         "everyone"
@@ -4954,7 +4954,7 @@
       "category": "transparency-feedback",
       "title_fil": "Humingi ng impormasyon o dokumento ng lungsod (FOI)",
       "title_en": "Request city information or documents (FOI)",
-      "summary_fil": "May lokal na FOI ordinance ang Pasig at FOI center na hinahawakan ng Ugnayan sa Pasig.",
+      "summary_fil": "Lumapit sa FOI center ng Ugnayan sa Pasig para humiling ng impormasyon sa ilalim ng ordinansa ng lungsod sa FOI.",
       "office": "ugnayan",
       "audience": [
         "everyone"
@@ -4977,9 +4977,9 @@
     {
       "id": "letter-to-mayor",
       "category": "transparency-feedback",
-      "title_fil": "Magpadala ng sulat o request sa Mayor",
+      "title_fil": "Magpadala ng sulat o kahilingan sa alkalde",
       "title_en": "Send a letter or request to the Mayor's Office",
-      "summary_fil": "Tumatanggap ang Mayor's Office ng sulat mula sa residente, organisasyon at ahensya.",
+      "summary_fil": "Tumatanggap ng sulat ang Mayor's Office mula sa mga residente, organisasyon at ahensya.",
       "office": "ocm",
       "audience": [
         "everyone"
@@ -5002,9 +5002,9 @@
     {
       "id": "meet-the-mayor",
       "category": "transparency-feedback",
-      "title_fil": "Makipagkita sa Mayor (appointment o People's Day)",
+      "title_fil": "Makipagkita sa alkalde sa appointment o sa People's Day",
       "title_en": "Meet the Mayor (appointment or People's Day)",
-      "summary_fil": "Humiling ng meeting o courtesy call, o pumunta sa People's Day.",
+      "summary_fil": "Humiling ng appointment o courtesy call, o pumunta sa People's Day.",
       "office": "ocm",
       "audience": [
         "everyone"
@@ -5028,9 +5028,9 @@
     {
       "id": "hoa-concerns",
       "category": "transparency-feedback",
-      "title_fil": "Ipaabot ang concern ng homeowners association o samahan",
+      "title_fil": "Ipaabot ang mga tanong o problema ng homeowners association o samahan",
       "title_en": "Raise a homeowners association or community concern",
-      "summary_fil": "Ang HOA Desk ng Mayor's Office ang tumatanggap at umaaksyon sa concern ng mga samahan.",
+      "summary_fil": "Ang HOA Desk ng Mayor's Office ang tumatanggap at umaasikaso sa mga usapin ng mga samahan.",
       "office": "ocm",
       "audience": [
         "residents"
@@ -5055,7 +5055,7 @@
       "category": "transparency-feedback",
       "title_fil": "I-follow up ang reklamong ipinasa ng 8888 o ibang ahensya",
       "title_en": "Follow up a concern referred by 8888 or a national agency",
-      "summary_fil": "Ang OCA Grievance Section ang nagpapasa sa tamang departamento ng reklamo mula sa 8888, CSC, DTI at iba pa.",
+      "summary_fil": "Ipinapasa ng OCA Grievance Section sa tamang departamento ang mga reklamong galing sa 8888, CSC, DTI at iba pang ahensya.",
       "office": "oca",
       "audience": [
         "everyone"
@@ -5078,9 +5078,9 @@
     {
       "id": "pasig-pass-account",
       "category": "transparency-feedback",
-      "title_fil": "Gumawa o i-recover ang Pasig Pass account",
+      "title_fil": "Gumawa ng Pasig Pass account o humingi ng tulong para mabuksan ito muli",
       "title_en": "Create or recover a Pasig Pass account",
-      "summary_fil": "Ang Pasig Pass ang account para sa online services ng lungsod; tutulong ang MISO Help Desk.",
+      "summary_fil": "Ginagamit ang Pasig Pass sa mga online na serbisyo ng lungsod. Humingi ng tulong sa MISO Help Desk.",
       "office": "miso",
       "audience": [
         "everyone",
@@ -5113,7 +5113,7 @@
       "category": "transparency-feedback",
       "title_fil": "Humingi ng datos tungkol sa mga negosyo sa Pasig",
       "title_en": "Request business information data",
-      "summary_fil": "Para sa estudyante, ahensya at iba pa na nangangailangan ng datos ng negosyo.",
+      "summary_fil": "Para sa mga estudyante, ahensya at iba pang nangangailangan ng impormasyon tungkol sa mga negosyo sa Pasig.",
       "office": "miso",
       "audience": [
         "students",
@@ -5137,7 +5137,7 @@
     {
       "id": "hospital-complaint",
       "category": "transparency-feedback",
-      "title_fil": "Magreklamo o magbigay ng feedback sa Pasig City General Hospital",
+      "title_fil": "Magreklamo o magbigay ng komento sa Pasig City General Hospital",
       "title_en": "File a complaint at Pasig City General Hospital",
       "summary_fil": "Lumapit sa Public Assistance and Complaint Desk (PACD) ng ospital.",
       "office": "pcgh",
@@ -5164,7 +5164,7 @@
       "category": "housing-community",
       "title_fil": "Mag-apply sa pabahay ng lungsod (rent-to-own o lease-purchase)",
       "title_en": "Apply for city public housing (rent-to-own)",
-      "summary_fil": "Para sa informal settlers sa daluyan ng tubig o danger zone, apektado ng proyekto, at underprivileged na pamilya.",
+      "summary_fil": "Para sa mga pamilyang impormal na naninirahan sa tabi ng daluyan ng tubig o sa delikadong lugar, mga apektado ng proyekto at mga pamilyang kapos sa kita.",
       "office": "puso",
       "audience": [
         "families",
@@ -5201,9 +5201,9 @@
     {
       "id": "public-rental-housing",
       "category": "housing-community",
-      "title_fil": "Mag-apply sa public rental housing",
+      "title_fil": "Mag-apply para sa paupahang pabahay ng lungsod",
       "title_en": "Apply for public rental housing",
-      "summary_fil": "Paupahang pabahay para sa 4Ps at indigent na pamilya.",
+      "summary_fil": "Para sa mga pamilyang nasa 4Ps at mga pamilyang kapos sa kita.",
       "office": "puso",
       "audience": [
         "families"
@@ -5230,7 +5230,7 @@
       "category": "housing-community",
       "title_fil": "Magbayad ng buwanang hulog sa pabahay ng lungsod",
       "title_en": "Pay monthly amortization for city housing",
-      "summary_fil": "Para sa beneficiaries at awardees ng housing projects ng lungsod.",
+      "summary_fil": "Para sa mga benepisyaryo at nabigyan ng puwesto sa mga proyekto sa pabahay ng lungsod.",
       "office": "puso",
       "audience": [
         "families"
@@ -5254,9 +5254,9 @@
     {
       "id": "housing-utility-certification",
       "category": "housing-community",
-      "title_fil": "Kumuha ng certification para sa kuryente o tubig (urban poor)",
+      "title_fil": "Kumuha ng sertipikasyon para makapagpakabit ng kuryente o tubig",
       "title_en": "Get a PUSO certification for electricity or water connection",
-      "summary_fil": "Certification para makakabit ng Meralco o Manila Water ang urban poor na komunidad.",
+      "summary_fil": "Para makapagpakabit ng serbisyo ng Meralco o Manila Water sa mga komunidad na kapos sa kita.",
       "office": "puso",
       "audience": [
         "residents",
@@ -5284,7 +5284,7 @@
       "category": "housing-community",
       "title_fil": "Bilhin ang lupang tinitirhan sa Community Mortgage Program",
       "title_en": "Acquire land through the Community Mortgage Program",
-      "summary_fil": "Tulong sa rehistradong HOA para mabili ang lupang tinitirhan gamit ang CMP.",
+      "summary_fil": "Tulong para sa mga rehistradong HOA na gustong bilhin ang lupang tinitirhan sa pamamagitan ng Community Mortgage Program (CMP).",
       "office": "puso",
       "audience": [
         "residents",
@@ -5309,9 +5309,9 @@
     {
       "id": "tanghalang-venue-rental",
       "category": "housing-community",
-      "title_fil": "Magrenta ng venue o bus sa Tanghalang Pasigueño",
+      "title_fil": "Umupa ng venue o bus sa Tanghalang Pasigueño",
       "title_en": "Rent Tanghalang Pasigueño venue or bus",
-      "summary_fil": "Para sa pribadong okasyon, seminar o event, at bus/coaster para sa lakbay.",
+      "summary_fil": "May venue para sa pribadong okasyon o seminar. May bus o coaster din para sa biyahe.",
       "office": "tp",
       "audience": [
         "everyone"
@@ -5341,9 +5341,9 @@
     {
       "id": "rainforest-fitness",
       "category": "housing-community",
-      "title_fil": "Mag-member sa gym ng Maybunga Rainforest Park",
+      "title_fil": "Magpamiyembro sa gym ng Maybunga Rainforest Park",
       "title_en": "Get a fitness membership at Maybunga Rainforest Park",
-      "summary_fil": "Gym at cardio para sa taga-Pasig; may discount ang senior.",
+      "summary_fil": "May gym at cardio equipment para sa mga taga-Pasig. May diskuwento ang mga senior citizen.",
       "office": "rave",
       "audience": [
         "residents",
@@ -5370,9 +5370,9 @@
     {
       "id": "rainforest-park-reservation",
       "category": "housing-community",
-      "title_fil": "Magpa-reserve ng venue o pumasok sa water park ng Maybunga Rainforest Park",
+      "title_fil": "Magpareserba ng venue o bumisita sa water park ng Maybunga Rainforest Park",
       "title_en": "Visit or reserve a venue at Maybunga Rainforest Park",
-      "summary_fil": "Water park, butterfly house, boating at venue para sa event.",
+      "summary_fil": "May water park, butterfly house, boating at venue para sa mga okasyon.",
       "office": "rave",
       "audience": [
         "everyone"
@@ -5398,7 +5398,7 @@
       "category": "housing-community",
       "title_fil": "Humingi ng tulong sa venue, sasakyan o event mula sa Mayor's Office",
       "title_en": "Request event, venue or transport assistance",
-      "summary_fil": "Ang Events Unit ng Mayor's Office ang tumatanggap ng request para sa venue, sasakyan at non-goods assistance.",
+      "summary_fil": "Tumatanggap ang Events Unit ng Mayor's Office ng mga kahilingan para sa venue, sasakyan at iba pang tulong na hindi pamimigay ng gamit.",
       "office": "ocm",
       "audience": [
         "everyone"

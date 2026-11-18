@@ -11,7 +11,7 @@
       "as_of_en": "2024 (PSA POPCEN, reference date July 1, 2024)",
       "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
       "verify": false,
-      "note_fil": "Sumasang-ayon ang dalawang pangalawang sanggunian sa iniulat na bilang ng PSA; hindi pa nakuha ang mismong release ng PSA.",
+      "note_fil": "Parehong iniulat ng dalawang sanggunian ang bilang na iniuugnay sa PSA. Hindi pa nakuha ang mismong ulat ng PSA.",
       "note_en": "Two secondary sources agree with the reported PSA figure; PSA release itself not fetched."
     },
     {
@@ -33,7 +33,7 @@
       "as_of": null,
       "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
       "verify": true,
-      "note_fil": "Magkasalungat: 48.46 km² ang nasa Wikipedia; 31.46 km² naman ang nasa novagov.ph (bilang na istilong-PSA).",
+      "note_fil": "Magkaiba ang nakalistang sukat. 48.46 km² ang nasa Wikipedia at 31.46 km² ang nasa novagov.ph (bilang na nasa format ng PSA).",
       "note_en": "Conflict: Wikipedia gives 48.46 km²; novagov.ph (PSA-style figure) gives 31.46 km²."
     },
     {
@@ -50,7 +50,7 @@
       "id": "districts",
       "label_fil": "Distrito",
       "label_en": "Districts",
-      "value_fil": "2 distrito ng konseho; 1 nag-iisang distritong pang-kongreso",
+      "value_fil": "2 distrito para sa konseho at 1 distrito para sa Kongreso",
       "value_en": "2 council districts; 1 lone congressional district",
       "as_of": "2025",
       "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://en.wikipedia.org/wiki/2025_Pasig_local_elections"],
@@ -70,7 +70,7 @@
       "id": "income-class",
       "label_fil": "Klase ng kita",
       "label_en": "Income class",
-      "value_fil": "Unang klase (1st class)",
+      "value_fil": "Unang klase (first class)",
       "value_en": "1st class",
       "as_of": null,
       "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
@@ -90,14 +90,14 @@
     },
     {
       "id": "motto",
-      "label_fil": "Motto ng lungsod",
+      "label_fil": "Moto ng lungsod",
       "label_en": "City motto",
       "value_fil": "Umaagos ang Pag-asa",
       "value_en": "Umaagos ang Pag-asa (Hope Flows)",
       "as_of": null,
       "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://assets.pasigcity.gov.ph/storage/executive_order/2022/04/19/6333b6abc54bd1664333483EO%20PCG%20-%2016%20s.%202022.pdf"],
       "verify": false,
-      "note_fil": "Makikita ang motto sa opisyal na letterhead ng lungsod (PDF ng EO PCG-16 s.2022).",
+      "note_fil": "Makikita ang moto sa opisyal na letterhead ng lungsod (PDF ng EO PCG-16 s.2022).",
       "note_en": "Motto appears on official city letterhead (EO PCG-16 s.2022 PDF)."
     },
     {
@@ -114,7 +114,7 @@
     },
     {
       "id": "founded",
-      "label_fil": "Taon ng pagkakatatag",
+      "label_fil": "Petsa ng pagkakatatag",
       "label_en": "Founded",
       "value_fil": "Hulyo 2, 1573",
       "value_en": "July 2, 1573",

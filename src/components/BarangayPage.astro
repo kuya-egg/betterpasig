@@ -63,7 +63,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
 
 <Kit
   title={barangay.name}
-  description={en ? `${barangay.name}, Pasig: barangay contacts, evacuation centers and recent places with official sources.` : `${barangay.name}, Pasig: mga kontak ng barangay, evacuation center at mga kamakailang lugar na may opisyal na sanggunian.`}
+  description={en ? `${barangay.name}, Pasig: barangay contacts, evacuation centers and recent places with official sources.` : `${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
 >
   <section class="section section--flow" aria-labelledby="brgy-h">
     <div class="wrap">
@@ -75,12 +75,12 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
               <p>
                 {en ? "District" : "Distrito"} {barangay.district}
                 <br />
-                {en ? "Older directory information; being checked." : "Mas lumang datos ng direktoryo; sinusuri pa."}
+                {en ? "Older directory information; being checked." : "Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon."}
               </p>
             )}
           </div>
           {barangay.district && (
-            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "Directory source" : "Sanggunian ng direktoryo"}</a></p>
+            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "Directory source" : "Tingnan ang direktoryong pinagmulan"}</a></p>
           )}
 
           <ul class="rows bp-brgy__facts">
@@ -101,7 +101,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
             )}
             {contactGroups.length > 0 && (
               <li>
-                <span class="rows__name">{en ? "Contact numbers" : "Mga numero ng kontak"}{barangay.verify && <Verify />}</span>
+                <span class="rows__name">{en ? "Contact numbers" : "Mga numero ng telepono"}{barangay.verify && <Verify />}</span>
                 <div class="bp-brgy__val bp-brgy__phones">
                   {contactGroups.map((group) => (
                     <div class="bp-brgy__group">
@@ -121,7 +121,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
                       {group.source && <small>{group.source}</small>}
                     </div>
                   ))}
-                  <small>{en ? "Published numbers; not checked by phone." : "Nakalathalang numero; hindi pa nasusubukang tawagan."}</small>
+                  <small>{en ? "Published numbers; not checked by phone." : "Nakalista ang mga numerong ito sa sanggunian. Hindi pa namin nakukumpirma sa pagtawag."}</small>
                 </div>
               </li>
             )}
@@ -141,7 +141,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
   <section class="section section--flow ground-surface" aria-labelledby="brgy-recent-h">
     <div class="wrap" data-current-feed>
       <div class="section-head">
-        <h2 id="brgy-recent-h">{en ? "Recent places with official sources" : "Mga lugar na may opisyal na sanggunian sa nakaraang 30 araw"}</h2>
+        <h2 id="brgy-recent-h">{en ? "Recent places with official sources" : "Mga lugar na nabanggit sa opisyal na abiso sa nakaraang 30 araw"}</h2>
       </div>
 
       {recentPlaces.length ? (
@@ -163,7 +163,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
         <p>
           {en
             ? "No information supported by an official announcement from the past 30 days has been added for this barangay yet."
-            : "Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito."}
+            : "Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw."}
         </p>
       )}
 
@@ -191,7 +191,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
           </ul>
         </div>
       )}
-      {recentPlaces.length > 0 && <p data-feed-empty hidden>{en ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
+      {recentPlaces.length > 0 && <p data-feed-empty hidden>{en ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.'}</p>}
     </div>
   </section>
 
