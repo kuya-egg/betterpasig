@@ -17,6 +17,11 @@ const { title, description = t.tagline } = Astro.props;
 const fullTitle = title ? `${title} · BetterPasig` : "BetterPasig";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const enPath = pathIn("en", Astro.url);
+// Pagefind indexes only <main> of detail pages. The home page, the services list and 404 are left out so a
+// result is the page that answers the query. `kind` (the section) becomes the result's category label.
+const [section = "", detail] = Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").split("/").filter(Boolean);
+const needsDetail = ["serbisyo", "lugar", "barangay"].includes(section);
+const indexed = section !== "" && section !== "404" && (!needsDetail || Boolean(detail));
 ---
 
 <!doctype html>
@@ -69,7 +74,8 @@ const enPath = pathIn("en", Astro.url);
     </a>
     <Header />
     <EmergencyStrip />
-    <main id="main">
+    <main id="main" data-pagefind-body={indexed || undefined} data-pagefind-meta={indexed ? `kind:${section}` : undefined}>
+      {indexed && title && <span hidden data-pagefind-meta="title[data-title]" data-title={title} />}
       <slot />
     </main>
     <Footer />

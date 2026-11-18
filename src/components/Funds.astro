@@ -23,14 +23,15 @@ const links = transparencyLinks.filter((link) => /^https?:\/\//.test(link.url));
     <div class="grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
       {
         figures.map((figure) => {
-          const note = "note" in figure && typeof figure.note === "string" ? figure.note : "";
+          const note = (lang === "en" ? figure.note_en : figure.note_fil) ?? "";
+          const value = lang === "en" ? figure.value_en : figure.value_fil;
           return (
             <div class="min-w-0 border-t border-line py-4 first:border-t-0 sm:border-t-0 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0">
-              <p class:list={["num font-semibold leading-snug", figure.value.length > 24 ? "text-[19px]" : "text-[28px] tracking-[-0.03em]"]}>
-                {figure.value}
+              <p class:list={["num font-semibold leading-snug", value.length > 24 ? "text-[19px]" : "text-[28px] tracking-[-0.03em]"]}>
+                {value}
                 {figure.verify && <Verify />}
               </p>
-              <p class="mt-1.5">{figure.label_fil}</p>
+              <p class="mt-1.5">{lang === "en" ? figure.label_en : figure.label_fil}</p>
               {figure.as_of && <p class="mt-1 text-[13px] text-muted">{figure.as_of}</p>}
               {note && <p class="mt-1 text-[13px] text-muted">{note}</p>}
               <p class="mt-2 text-[14px]">

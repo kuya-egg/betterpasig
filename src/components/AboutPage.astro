@@ -8,6 +8,9 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const repo = "https://github.com/kuya-egg/betterpasig";
 const h2 = "text-[30px] font-bold tracking-[-0.03em]";
+// Textual as_of values are split into as_of_fil/as_of_en; plain years and dates stay in as_of.
+const asOf = (fact: (typeof city.facts)[number]) =>
+  (lang === "en" ? ("as_of_en" in fact ? fact.as_of_en : null) : ("as_of_fil" in fact ? fact.as_of_fil : null)) ?? fact.as_of ?? null;
 ---
 
 <Base title={t.aboutTitle}>
@@ -80,15 +83,15 @@ const h2 = "text-[30px] font-bold tracking-[-0.03em]";
                   {lang === "en" ? fact.label_en : fact.label_fil}
                 </th>
                 <td class="py-3">
-                  <span class="num">{fact.value}</span>
+                  <span class="num">{lang === "en" ? fact.value_en : fact.value_fil}</span>
                   {fact.verify && <Verify />}
-                  {fact.as_of && (
+                  {asOf(fact) && (
                     <p class="text-[14px] text-muted">
-                      {t.aboutAsOf}: <span class="num">{fact.as_of}</span>
+                      {t.aboutAsOf}: <span class="num">{asOf(fact)}</span>
                     </p>
                   )}
-                  {fact.note && (fact.verify || fact.id === "land-area") && (
-                    <p class="mt-1 text-[14px] text-muted">{fact.note}</p>
+                  {(lang === "en" ? fact.note_en : fact.note_fil) && (fact.verify || fact.id === "land-area") && (
+                    <p class="mt-1 text-[14px] text-muted">{lang === "en" ? fact.note_en : fact.note_fil}</p>
                   )}
                   <p class="mt-1 text-[14px] text-muted">
                     {t.sources}:{" "}

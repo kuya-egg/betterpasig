@@ -1,6 +1,6 @@
 {
-  "html_pages": 439,
-  "checked_internal_links": 35665,
+  "html_pages": 449,
+  "checked_internal_links": 38543,
   "browser_checks": [
     "fil keyboard search -> place",
     "fil event midnight expiry",
@@ -11,8 +11,8 @@
     "No-JS dated source action, no live registration promise"
   ],
   "payload": {
-    "local_gzip_bytes": 128793,
-    "decoded_bytes": 387246,
+    "local_gzip_bytes": 89629,
+    "decoded_bytes": 244443,
     "under_300KB": true
   },
   "result": "PASS"

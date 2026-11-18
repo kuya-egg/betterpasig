@@ -12,8 +12,10 @@
 | `verify_pasig_research.mjs` | Checks saved source dates, hashes, image evidence and research references |
 | `verify_recent_contracts.mjs` | Validates the recent data contracts and rejects deliberately invalid mutations |
 | `verify_freshness.mjs` | Checks Manila calendar boundaries, source age, event dates and exact cutoffs |
-| `verify_pasig_browser.mjs` | Checks the built site using Windows Edge, including routes, search and expiry |
+| `verify_pasig_browser.mjs` | Checks the built site in Edge or Chrome, including routes, Pagefind search and expiry |
 | `check_page_weight.mjs` | Fails when a built page needs more than 300 KB on first load (gzip HTML, CSS, JS and woff2 fonts). Run after `bun run build`; CI runs it on every push and pull request |
+
+The search index is not a script: `bun run build` runs `pagefind --site dist` after `astro build` and writes `dist/pagefind/`. Preview with `bun run build` then `bun run preview`; `astro dev` has no search index.
 
 Run Python with `pip install shapely` for the geometry scripts.
 
@@ -34,4 +36,4 @@ bun scripts/verify_pasig_browser.mjs
 bun scripts/count_verify.mjs data
 ```
 
-The browser check uses `C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe` and writes its report and screenshots under `research/implementation-audit/`. See [the data guide](../data/README.md) for source retrieval, field evidence and review rules, and [the research index](../research/README.md) for archived implementation records.
+The browser check uses `C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe` unless `BROWSER_PATH` points at another Chromium browser (macOS Chrome: `BROWSER_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`), and writes its report and screenshots under `research/implementation-audit/`. Run `bun run build` first: search needs the Pagefind index. See [the data guide](../data/README.md) for source retrieval, field evidence and review rules, and [the research index](../research/README.md) for archived implementation records.
