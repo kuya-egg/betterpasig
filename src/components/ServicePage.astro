@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
-import { categories, officeById, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
+import { categories, officeById, programs, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 interface Props {
@@ -22,6 +22,27 @@ const steps = lines(service.steps);
 const online = service.id !== "pay-business-tax-online" && service.online?.url && /^https?:\/\//.test(service.online.url) ? service.online.url : "";
 const fee = typeof service.fee === "string" && service.fee.trim() ? service.fee : "";
 const time = typeof service.processing_time === "string" && service.processing_time.trim() ? service.processing_time : "";
+/*
+ * Related benefits: explicit program id -> office ids (from data/services.json `offices`).
+ * Each mapping mirrors the office(s) named in that program's `office` string in
+ * data/programs.json. A service is related when its `office` is listed here.
+ * Programs whose office has no entry in `offices` (barangay, DepEd, mental health,
+ * City Government generally) are intentionally unmapped, so they never mislink.
+ */
+const programOffices: Record<string, string[]> = {
+  "local-senior-pension": ["osca"],
+  "senior-year-end-cash-gift": ["osca"],
+  "senior-milestone-incentive": ["osca"],
+  "senior-burial-assistance": ["osca"],
+  "senior-health-perks": ["osca", "pcgh", "chd"],
+  "solo-parent-subsidy": ["cswdo"],
+  "pwd-cash-gift": ["pdao"],
+  "pwd-business-assistance": ["pdao"],
+  "pagasa-scholarship": ["pced"],
+  "pasig-city-scholars": ["pced"],
+  "plp-admission": ["plp"],
+};
+const relatedPrograms = programs.filter((program) => programOffices[program.id]?.includes(service.office));
 function lines(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
@@ -125,6 +146,23 @@ function lines(value: unknown): string[] {
       )
     }
 
+    {
+      relatedPrograms.length > 0 && (
+        <>
+          <h2 class="mt-10 text-[19px] font-semibold tracking-[-0.01em]">{t.relatedBenefits}</h2>
+          <ul class="mt-3">
+            {relatedPrograms.map((program) => (
+              <li class="border-b border-line">
+                <a class="rel" href={href(lang, `/tulong/#${program.id}`)}>
+                  {lang === "en" ? program.title_en : program.title_fil}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
     <p class="mt-8 text-[14px] text-muted">
       {t.sources}:{" "}
       {
@@ -140,3 +178,7 @@ function lines(value: unknown): string[] {
     </p>
   </article>
 </Base>
+
+<style>
+  .rel { display: inline-flex; min-height: 48px; align-items: center; }
+</style>

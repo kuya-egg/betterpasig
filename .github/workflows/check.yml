@@ -1,0 +1,29 @@
+name: Check
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+      - name: Data contracts
+        run: |
+          bun scripts/verify_recent_contracts.mjs
+          bun scripts/verify_freshness.mjs
+      - run: bun run check
+      - run: bun run build
+      - name: First-load budget (300 KB)
+        run: bun scripts/check_page_weight.mjs
+      - name: Values still marked "Sinusuri pa"
+        run: bun scripts/count_verify.mjs data

@@ -63,6 +63,13 @@ export const transparencyLinks = transparencyFile.links;
 export const transparencyFigures = transparencyFile.figures;
 export const servicesRetrieved = servicesFile.retrieved;
 export const cityHallHotline = hotlines.find((item) => item.id === "pasig-city-hall-trunkline");
+export const hotlineConflicts = hotlinesFile.conflicts;
+export const officialsRetrieved = officialsFile.retrieved;
+export const departmentHeads = officialsFile.department_heads;
+export const officialsDirectory = officialsDirectoryFile;
+export const facilities = facilitiesFile;
+export const programsRetrieved = programsFile.retrieved;
+export const transparencyRetrieved = transparencyFile.retrieved;
 
 export const pasigDataEdition = pasigSourcesFile.edition_date;
 export const pasigSources = pasigSourcesFile.sources;

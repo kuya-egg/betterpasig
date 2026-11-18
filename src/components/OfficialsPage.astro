@@ -1,0 +1,299 @@
+---
+// Equal-listing order rule (applies to every person, no exceptions):
+// 1. by office rank (Mayor, Vice Mayor, Representative, Councilors, ex-officio, department heads),
+// 2. then by district (1 before 2; barangays grouped District 1 then District 2),
+// 3. then alphabetical by name exactly as listed in the source.
+// Every person gets the same row treatment: name, role, sources, "Sinusuri pa" when unconfirmed.
+// No photos, no party, no praise or criticism.
+import Base from "../layouts/Base.astro";
+import CopyButton from "./CopyButton.astro";
+import Verify from "./Verify.astro";
+import {
+  barangays,
+  departmentHeads,
+  officials,
+  officialsDirectory,
+  officialsRetrieved,
+  sourceLabel,
+  telHref,
+} from "../lib/data";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const byName = (a: { name: string }, b: { name: string }) =>
+  a.name.localeCompare(b.name, "fil", { sensitivity: "base" });
+const uniq = (lists: (readonly string[] | undefined)[]) => [...new Set(lists.flatMap((l) => l ?? []))];
+
+const top = ["Mayor", "Vice Mayor", "Representative"].flatMap((position) =>
+  officials.filter((p) => p.position === position).sort(byName),
+);
+const councilFor = (district: number) =>
+  officials.filter((p) => p.position === "Councilor" && p.district === district).sort(byName);
+const exOfficioCity = officials.filter((p) => p.position === "Ex-officio").sort(byName);
+const exOfficioDirectory = [...officialsDirectory.ex_officio].sort(byName);
+
+function role(position: string): string {
+  if (position === "Mayor") return t.mayor;
+  if (position === "Vice Mayor") return t.viceMayor;
+  if (position === "Representative") return t.representative;
+  if (position === "Councilor") return t.councilor;
+  return position;
+}
+
+// Department heads: directory offices, plus officials.json heads that are not already there (merged by name).
+type Office = {
+  office: string;
+  head: string | null;
+  position: string | null;
+  phones: readonly { number: string; label?: string | null }[];
+  email: string | null;
+  location: string | null;
+  sources: string[];
+  verify: boolean;
+  note: string | null;
+};
+const offices: Office[] = officialsDirectory.departments.map((d) => {
+  const extra = departmentHeads.find((h) => h.name === d.head);
+  return {
+    office: d.office,
+    head: d.head || null,
+    position: d.position ?? null,
+    phones: d.phones,
+    email: d.email,
+    location: d.location,
+    sources: uniq([d.sources, extra?.sources]),
+    verify: d.verify || Boolean(extra?.verify),
+    note: d.note ?? null,
+  };
+});
+for (const h of departmentHeads) {
+  if (offices.some((o) => o.head === h.name)) continue;
+  offices.push({
+    office: h.office,
+    head: h.name,
+    position: null,
+    phones: [],
+    email: null,
+    location: null,
+    sources: [...h.sources],
+    verify: h.verify,
+    note: h.note ?? null,
+  });
+}
+offices.sort((a, b) => a.office.localeCompare(b.office, "fil", { sensitivity: "base" }));
+
+// Barangays: resolve the site id by name; no link when it fails to match.
+const barangayRows = officialsDirectory.barangays.map((b) => {
+  const match = barangays.find((x) => x.name === b.name);
+  return { ...b, id: match?.id ?? null, slug: match?.id ?? b.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") };
+});
+const districts = [1, 2].map((d) => ({
+  district: d,
+  rows: barangayRows.filter((b) => b.district === d).sort(byName),
+}));
+---
+
+<Base title={t.officialsPageTitle}>
+  <article class="wrap py-10">
+    <h1 class="text-[34px] md:text-[52px] font-bold leading-[1.05] tracking-[-0.04em]">{t.officialsPageTitle}</h1>
+    <p class="mt-4 text-[17px]">{officialsDirectory.term}</p>
+    <p class="mt-2 max-w-[760px] text-[14px] text-muted">
+      {officialsDirectory.term_note}
+      {" "}{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+      {" "}· {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+    </p>
+
+    <section class="mt-12" aria-labelledby="opisyal-lungsod-h">
+      <h2 id="opisyal-lungsod-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.cityOfficialsHeading}</h2>
+      <ul class="mt-4 border-t-2 border-ink">
+        {top.map((p) => (
+          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} class="border-b border-line py-3">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+              <span class="text-muted">{role(p.position)}</span>
+              <strong class="font-semibold">{p.name}{p.verify && <Verify />}</strong>
+            </div>
+            <p class="mt-1 text-[14px] text-muted">
+              {p.note && <>{p.note} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        {[1, 2].map((d) => (
+          <div id={`opisyal-council-${d}`}>
+            <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{d === 1 ? t.council1 : t.council2}</h3>
+            <ul class="mt-2 border-t-2 border-ink">
+              {councilFor(d).map((p) => (
+                <li class="border-b border-line py-2.5">
+                  <span>{p.name}{p.verify && <Verify />}</span>
+                  {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                  <p class="mt-0.5 text-[14px] text-muted">
+                    {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="mt-4 text-[14px] text-muted">{t.checked}: {formatDate(lang, officialsRetrieved)}</p>
+    </section>
+
+    <section id="opisyal-ex-officio" class="mt-12" aria-labelledby="opisyal-ex-officio-h">
+      <h2 id="opisyal-ex-officio-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.exOfficioHeading}</h2>
+      <p class="mt-2 max-w-[760px]">{t.exOfficioConflict}</p>
+      <div class="mt-6 grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{t.exOfficioSetA}</h3>
+          <ul class="mt-2 border-t-2 border-ink">
+            {exOfficioCity.map((p) => (
+              <li class="border-b border-line py-2.5">
+                <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
+                {"role" in p && p.role && <p class="text-[15px]">{p.role}</p>}
+                {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                <p class="mt-0.5 text-[14px] text-muted">
+                  {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+                  · {t.checked}: {formatDate(lang, officialsRetrieved)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{t.exOfficioSetB}</h3>
+          <ul class="mt-2 border-t-2 border-ink">
+            {exOfficioDirectory.map((p) => (
+              <li class="border-b border-line py-2.5">
+                <strong class="font-semibold">{p.name}</strong>{p.verify && <Verify />}
+                <p class="text-[15px]">{p.position}{p.barangay && <> · {p.barangay}</>}</p>
+                {p.note && <p class="mt-0.5 text-[14px] text-muted">{p.note}</p>}
+                <p class="mt-0.5 text-[14px] text-muted">
+                  {t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+                  · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="opisyal-departamento" class="mt-12" aria-labelledby="opisyal-departamento-h">
+      <h2 id="opisyal-departamento-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.departmentsHeading}</h2>
+      <ul class="mt-4 border-t-2 border-ink">
+        {offices.map((o) => (
+          <li class="border-b border-line py-4">
+            <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{o.office}</h3>
+            {o.head && (
+              <p class="mt-1">
+                {o.position ? <span class="text-muted">{o.position}: </span> : null}
+                <strong class="font-semibold">{o.head}</strong>{o.verify && <Verify />}
+              </p>
+            )}
+            {!o.head && o.verify && <p class="mt-1"><Verify /></p>}
+            {o.location && <p class="mt-1 text-[15px]">{o.location}</p>}
+            {o.phones.length > 0 && (
+              <ul class="mt-1">
+                {o.phones.map((ph) => (
+                  <li class="flex flex-wrap items-center gap-x-2">
+                    <a class="num" href={telHref(ph.number)}>{ph.number}</a>
+                    <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
+                    {ph.label && <span class="text-[14px] text-muted">{ph.label}</span>}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {o.email && <p class="mt-1"><a href={`mailto:${o.email}`}>{o.email}</a></p>}
+            {o.note && <p class="mt-1 text-[14px] text-muted">{o.note}</p>}
+            <p class="mt-1 text-[14px] text-muted">
+              {t.sources}: {o.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+              · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section id="opisyal-barangay" class="mt-12" aria-labelledby="opisyal-barangay-h">
+      <h2 id="opisyal-barangay-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.barangayOfficialsHeading}</h2>
+      <p class="mt-2 text-[14px] text-muted">{t.barangayOfficialsNote}</p>
+      {districts.map((g) => (
+        <div class="mt-8">
+          <h3 class="text-[24px] font-bold tracking-[-0.02em]">{g.district === 1 ? t.district1 : t.district2}</h3>
+          <ul class="mt-2 border-t-2 border-ink">
+            {g.rows.map((b) => {
+              const srcs = uniq([
+                b.punong_barangay.sources,
+                b.sk_chair.sources,
+                ...b.kagawad.map((k) => k.sources),
+                ...b.phones.map((ph) => ph.sources),
+                b.hall_address.value ? b.hall_address.sources : [],
+              ]);
+              return (
+                <li id={`opisyal-${b.slug}`} class="border-b border-line py-4">
+                  <h4 class="text-[19px] font-semibold tracking-[-0.01em]">
+                    {b.id ? <a href={href(lang, `/barangay/${b.id}/`)}>{b.name}</a> : b.name}
+                  </h4>
+                  <dl class="mt-2 grid gap-1 text-[15px]">
+                    <div>
+                      <dt class="text-[14px] font-medium text-muted">{t.punongBarangay}</dt>
+                      <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
+                    </div>
+                    <div>
+                      <dt class="text-[14px] font-medium text-muted">{t.skChair}</dt>
+                      <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>
+                    </div>
+                    {b.kagawad.length > 0 && (
+                      <div>
+                        <dt class="text-[14px] font-medium text-muted">{t.kagawad}</dt>
+                        <dd>
+                          <ul>
+                            {[...b.kagawad].sort(byName).map((k) => (
+                              <li>{k.name}{k.verify && <Verify />}</li>
+                            ))}
+                          </ul>
+                        </dd>
+                      </div>
+                    )}
+                    {b.hall_address.value && (
+                      <div>
+                        <dt class="text-[14px] font-medium text-muted">{t.hallAddress}</dt>
+                        <dd>{b.hall_address.value}{b.hall_address.verify && <Verify />}</dd>
+                      </div>
+                    )}
+                    {b.phones.length > 0 && (
+                      <div>
+                        <dt class="text-[14px] font-medium text-muted">{t.phones}</dt>
+                        <dd>
+                          <ul>
+                            {b.phones.map((ph) => (
+                              <li class="flex flex-wrap items-center gap-x-2">
+                                <a class="num" href={telHref(ph.number)}>{ph.number}</a>
+                                <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
+                                {ph.verify && <Verify />}
+                              </li>
+                            ))}
+                          </ul>
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                  <p class="mt-2 text-[14px] text-muted">
+                    {t.sources}: {srcs.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
+                    · {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </section>
+  </article>
+</Base>
+
+<style>
+  a { display: inline-flex; min-height: 48px; align-items: center; }
+  p a { display: inline; min-height: 0; }
+</style>

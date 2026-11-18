@@ -1,7 +1,7 @@
 ---
 import Verify from "./Verify.astro";
 import { cityHallHotline, mapsHref, site, telHref } from "../lib/data";
-import { formatDate, langFromUrl, ui } from "../i18n";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
@@ -18,6 +18,11 @@ const trunk = cityHallHotline?.numbers[0];
         {t.partOf} <a href="https://bettergov.ph">BetterGov.ph</a>. {t.dataUpdated}:{" "}
         <span class="num">{formatDate(lang, site.updated)}</span>.
       </p>
+      <nav class="grid" aria-label={t.aboutTitle}>
+        <a href={href(lang, "/tungkol/")}>{t.aboutTitle}</a>
+        <a href="https://github.com/kuya-egg/betterpasig">{t.aboutGithub}</a>
+        <a href="https://github.com/kuya-egg/betterpasig/issues/new">{t.aboutReport}</a>
+      </nav>
     </div>
     <div class="grid max-w-[36ch] content-start gap-1.5">
       <strong class="text-ink">{hall.name}</strong>
@@ -39,3 +44,7 @@ const trunk = cityHallHotline?.numbers[0];
     </div>
   </div>
 </footer>
+
+<style>
+  nav a { display: inline-flex; min-height: 48px; align-items: center; }
+</style>
