@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-19",
-  "notice_fil": "Mga boluntaryo ang nagpapatakbo ng Better Pasig at hindi ito opisyal na website ng Lungsod ng Pasig. Para sa opisyal na transaksiyon, pumunta sa pasigcity.gov.ph.",
-  "notice_en": "Better Pasig is run by volunteers and is not the official Pasig City website. For official transactions, go to pasigcity.gov.ph.",
+  "notice_fil": "Mga boluntaryo ang nagpapatakbo ng BetterPasig at hindi ito opisyal na website ng Lungsod ng Pasig. Para sa opisyal na transaksiyon, pumunta sa pasigcity.gov.ph.",
+  "notice_en": "BetterPasig is run by volunteers and is not the official Pasig City website. For official transactions, go to pasigcity.gov.ph.",
   "alerts": [],
   "alert_example": {
     "level": "info|warning|danger",
