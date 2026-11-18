@@ -229,15 +229,15 @@ const districts = [1, 2].map((d) => ({
     </div>
   </section>
 
-  <section lang="fil" id="opisyal-barangay" class="section section--flow ground-surface" aria-labelledby="opisyal-barangay-h">
+  <section id="opisyal-barangay" class="section section--flow ground-surface" aria-labelledby="opisyal-barangay-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="opisyal-barangay-h">{ui.fil.barangayOfficialsHeading}</h2>
-        <p>{ui.fil.barangayOfficialsNote}</p>
+        <h2 id="opisyal-barangay-h">{t.barangayOfficialsHeading}</h2>
+        <p>{t.barangayOfficialsNote}</p>
       </div>
       {districts.map((g) => (
         <div class="bp-off__district">
-          <h3 class="bp-off__h2">{g.district === 1 ? ui.fil.district1 : ui.fil.district2}</h3>
+          <h3 class="bp-off__h2">{g.district === 1 ? t.district1 : t.district2}</h3>
           <ul class="grid bp-off__cards">
             {g.rows.map((b) => {
               const srcs = uniq([
@@ -255,20 +255,20 @@ const districts = [1, 2].map((d) => ({
                     </h4>
                     <dl class="bp-off__dl">
                       <div>
-                        <dt class="t-small muted">{ui.fil.punongBarangay}</dt>
-                        <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify lang="fil" />}</dd>
+                        <dt class="t-small muted">{t.punongBarangay}</dt>
+                        <dd>{b.punong_barangay.name}{b.punong_barangay.verify && <Verify />}</dd>
                       </div>
                       <div>
-                        <dt class="t-small muted">{ui.fil.skChair}</dt>
-                        <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify lang="fil" />}</dd>
+                        <dt class="t-small muted">{t.skChair}</dt>
+                        <dd>{b.sk_chair.name}{b.sk_chair.verify && <Verify />}</dd>
                       </div>
                       {b.kagawad.length > 0 && (
                         <div>
-                          <dt class="t-small muted">{ui.fil.kagawad}</dt>
+                          <dt class="t-small muted">{t.kagawad}</dt>
                           <dd>
                             <ul>
                               {[...b.kagawad].sort(byName).map((k) => (
-                                <li>{k.name}{k.verify && <Verify lang="fil" />}</li>
+                                <li>{k.name}{k.verify && <Verify />}</li>
                               ))}
                             </ul>
                           </dd>
@@ -276,20 +276,20 @@ const districts = [1, 2].map((d) => ({
                       )}
                       {b.hall_address.value && (
                         <div>
-                          <dt class="t-small muted">{ui.fil.hallAddress}</dt>
-                          <dd>{b.hall_address.value}{b.hall_address.verify && <Verify lang="fil" />}</dd>
+                          <dt class="t-small muted">{t.hallAddress}</dt>
+                          <dd>{b.hall_address.value}{b.hall_address.verify && <Verify />}</dd>
                         </div>
                       )}
                       {b.phones.length > 0 && (
                         <div>
-                          <dt class="t-small muted">{ui.fil.phones}</dt>
+                          <dt class="t-small muted">{t.phones}</dt>
                           <dd>
                             <ul class="bp-off__phones">
                               {b.phones.map((ph) => (
                                 <li>
                                   <a class="bp-off__tel" href={telHref(ph.number)}>{ph.number}</a>
-                                  <CopyButton value={ph.number} label={ui.fil.copyNumber(ph.number)} />
-                                  {ph.verify && <Verify lang="fil" />}
+                                  <CopyButton value={ph.number} label={t.copyNumber(ph.number)} />
+                                  {ph.verify && <Verify />}
                                 </li>
                               ))}
                             </ul>
@@ -298,8 +298,8 @@ const districts = [1, 2].map((d) => ({
                       )}
                     </dl>
                     <p class="t-small muted bp-off__meta">
-                      <span>{ui.fil.sources}: {srcs.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
-                      <span>{ui.fil.checked}: {formatDate("fil", officialsDirectory.retrieved)}</span>
+                      <span>{t.sources}: {srcs.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
+                      <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>
                     </p>
                   </article>
                 </li>

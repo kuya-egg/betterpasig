@@ -34,7 +34,11 @@ const recentUpdates = serviceUpdates.filter(
       places.some((place) => place.id === id && place.barangay_id === barangay.id),
     ) && isSourceFresh(item.published_date, new Date()),
 );
-const t = ui.fil;
+const t = ui[lang];
+const en = lang === "en";
+const emptyFeed = en
+  ? "No official announcement about this barangay has been listed in the past 30 days."
+  : "Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.";
 const evacCenters = centersForBarangay(barangay.id);
 
 
@@ -63,32 +67,33 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
 
 <Site
   title={barangay.name}
-  contentLang="fil"
-  description={`${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
+  description={en
+    ? `${barangay.name}, Pasig: barangay numbers, evacuation centers and places with new official announcements.`
+    : `${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
 >
   <section class="section section--flow" aria-labelledby="brgy-h">
     <div class="wrap">
-      <a class="link bp-brgy__back" href={href(lang, "/#mapa")}>← Lahat ng barangay</a>
+      <a class="link bp-brgy__back" href={href(lang, "/#mapa")}>← {en ? "All barangays" : "Lahat ng barangay"}</a>
       <div class="grid grid--top">
         <div class="span-7">
           <div class="section-head bp-brgy__head">
             <h1 id="brgy-h">{barangay.name}</h1>
             {barangay.district && (
               <p>
-                Distrito {barangay.district}
+                {barangay.district === 1 ? t.district1 : t.district2}
                 <br />
-                Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon.
+                {en ? "From an older directory. The information is still being confirmed." : "Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon."}
               </p>
             )}
           </div>
           {barangay.district && (
-            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>Tingnan ang direktoryong pinagmulan</a></p>
+            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "See the source directory" : "Tingnan ang direktoryong pinagmulan"}</a></p>
           )}
 
           <ul class="rows bp-brgy__facts">
             {barangay.punong_barangay && (
               <li>
-                <span class="rows__name">Punong barangay{barangay.verify && <Verify lang="fil" />}</span>
+                <span class="rows__name">{t.punongBarangay}{barangay.verify && <Verify />}</span>
                 <span class="bp-brgy__val">
                   {barangay.punong_barangay}
                   {barangay.punong_barangay_term && <small>{barangay.punong_barangay_term}</small>}
@@ -97,13 +102,13 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
             )}
             {barangay.hall_address && (
               <li>
-                <span class="rows__name">Tanggapan ng barangay</span>
+                <span class="rows__name">{t.hallAddress}</span>
                 <span class="bp-brgy__val">{barangay.hall_address}</span>
               </li>
             )}
             {contactGroups.length > 0 && (
               <li>
-                <span class="rows__name">Mga numero ng telepono{barangay.verify && <Verify lang="fil" />}</span>
+                <span class="rows__name">{en ? "Phone numbers" : "Mga numero ng telepono"}{barangay.verify && <Verify />}</span>
                 <div class="bp-brgy__val bp-brgy__phones">
                   {contactGroups.map((group) => (
                     <div class="bp-brgy__group">
@@ -123,7 +128,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
                       {group.source && <small>{group.source}</small>}
                     </div>
                   ))}
-                  <small>Nakalista ang mga numerong ito sa sanggunian. Hindi pa namin nakukumpirma sa pagtawag.</small>
+                  <small>{en ? "These numbers are listed in the source. We have not confirmed them by calling yet." : "Nakalista ang mga numerong ito sa sanggunian. Hindi pa namin nakukumpirma sa pagtawag."}</small>
                 </div>
               </li>
             )}
@@ -131,7 +136,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
         </div>
         {shape && (
           <div class="span-4 start-9 bp-brgy__map">
-            <svg viewBox="100 0 360 560" role="img" aria-label={`Lokasyon ng ${barangay.name} sa Pasig`}>
+            <svg viewBox="100 0 360 560" role="img" aria-label={en ? `Location of ${barangay.name} in Pasig` : `Lokasyon ng ${barangay.name} sa Pasig`}>
               {map.barangays.map((item) => <path d={item.d} class={item.name === barangay.name ? "on" : undefined} />)}
             </svg>
           </div>
@@ -143,7 +148,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
   <section class="section section--flow ground-surface" aria-labelledby="brgy-recent-h">
     <div class="wrap" data-current-feed>
       <div class="section-head">
-        <h2 id="brgy-recent-h">Mga lugar na nabanggit sa opisyal na abiso sa nakaraang 30 araw</h2>
+        <h2 id="brgy-recent-h">{en ? "Places named in official announcements in the past 30 days" : "Mga lugar na nabanggit sa opisyal na abiso sa nakaraang 30 araw"}</h2>
       </div>
 
       {recentPlaces.length ? (
@@ -153,21 +158,19 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
               <a class="bp-brgy__title" href={href(lang, `/lugar/${place.id}/`)}>{place.name}</a>
               <p class="muted">
                 {place.address ??
-                  "Hindi nakasaad ang address sa nasuring anunsyo."}
+                  (en ? "The announcement checked does not state the address." : "Hindi nakasaad ang address sa nasuring anunsyo.")}
               </p>
-              <SourceNote lang="fil" refs={Object.values(place.evidence).flat()} />
+              <SourceNote refs={Object.values(place.evidence).flat()} />
             </li>
           ))}
         </ul>
       ) : (
-        <p>
-          Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.
-        </p>
+        <p>{emptyFeed}</p>
       )}
 
       {recentUpdates.length > 0 && (
         <div class="bp-brgy__updates">
-          <h3 class="t-label muted">Mga bagong abiso sa serbisyo</h3>
+          <h3 class="t-label muted">{en ? "New service notices" : "Mga bagong abiso sa serbisyo"}</h3>
           <ul class="bp-brgy__list">
             {recentUpdates.map((item) => {
               const source = pasigSources.find(
@@ -178,16 +181,16 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
                 : source?.url;
               return (
                 <li data-published-date={item.published_date}>
-                  <a class="bp-brgy__title" href={destination}>{item.title_fil}</a>
-                  <p class="muted">{formatDate("fil", item.published_date)}</p>
-                  <SourceNote lang="fil" refs={item.evidence} />
+                  <a class="bp-brgy__title" href={destination}>{en ? item.title_en : item.title_fil}</a>
+                  <p class="muted">{formatDate(lang, item.published_date)}</p>
+                  <SourceNote refs={item.evidence} />
                 </li>
               );
             })}
           </ul>
         </div>
       )}
-      {recentPlaces.length > 0 && <p data-feed-empty hidden>Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.</p>}
+      {recentPlaces.length > 0 && <p data-feed-empty hidden>{emptyFeed}</p>}
     </div>
   </section>
 
@@ -201,7 +204,7 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
         <ul class="bp-brgy__list">
           {evacCenters.map((c) => (
             <li>
-              <p class="bp-brgy__title">{c.name}{c.verify && <Verify lang="fil" />}</p>
+              <p class="bp-brgy__title">{c.name}{c.verify && <Verify />}</p>
               {c.address && <p class="muted">{c.address}</p>}
               <p class="t-small muted bp-brgy__srcs">
                 <span>{t.sources}:</span>

@@ -78,7 +78,7 @@ function historySummary(id: string, english: string): string {
             <a
               class="link bp-place__back"
               href={lang === "en" ? `/en/barangay/${place.barangay_id}/` : `/barangay/${place.barangay_id}/`}
-            lang="fil">Impormasyon ng barangay</a>
+            >{lang === "en" ? "Barangay information" : "Impormasyon ng barangay"}</a>
           </p>
         )}
       </div>

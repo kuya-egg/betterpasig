@@ -8,7 +8,8 @@ import Verify from "./Verify.astro";
 import { isSourceFresh } from "../lib/freshness";
 
 const lang = langFromUrl(Astro.url);
-const t = ui.fil;
+const t = ui[lang];
+const en = lang === "en";
 const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
 const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
 const recentPlaceDates = (barangayId: string) =>
@@ -30,7 +31,7 @@ function districtLabel(district: number | null): string | null {
 }
 ---
 
-<section class="section bp-barangay" lang="fil" id="mapa" aria-labelledby="mapa-h">
+<section class="section bp-barangay" id="mapa" aria-labelledby="mapa-h">
   <div class="wrap grid grid--top bp-map">
     <div class="span-5 info">
       <div class="section-head">
@@ -53,16 +54,16 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.district}</dt>
                   <dd>
                     {district}
-                    {barangay.verify && <Verify lang="fil" />}
+                    {barangay.verify && <Verify />}
                   </dd>
                 </div>
               )}
               {barangay.punong_barangay && (
                 <div>
-                  <dt>{t.captain}</dt>
+                  <dt>{t.punongBarangay}</dt>
                   <dd>
                     {barangay.punong_barangay}
-                    {barangay.verify && <Verify lang="fil" />}
+                    {barangay.verify && <Verify />}
                   </dd>
                 </div>
               )}
@@ -71,17 +72,17 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.address}</dt>
                   <dd>
                     {barangay.hall_address}
-                    {barangay.verify && <Verify lang="fil" />}
+                    {barangay.verify && <Verify />}
                   </dd>
                 </div>
               )}
               <div>
-                <dt>Mga bagong lugar</dt>
+                <dt>{en ? "New places" : "Mga bagong lugar"}</dt>
                 <dd data-place-source-dates={JSON.stringify(dates)}>{dates.filter((date) => isSourceFresh(date, new Date())).length}</dd>
               </div>
               <div class="more">
                 <a class="link" href={href(lang, `/barangay/${barangay.id}/`)}>
-                  Tingnan ang detalye ng barangay
+                  {en ? "Open barangay details" : "Tingnan ang detalye ng barangay"}
                 </a>
               </div>
             </dl>
@@ -105,7 +106,7 @@ function districtLabel(district: number | null): string | null {
       </svg>
     </div>
     <div class="bp-map__directory">
-      <h3>Mga barangay ayon sa pangalan</h3>
+      <h3>{en ? "Barangays by name" : "Mga barangay ayon sa pangalan"}</h3>
       <ul>
         {choices.map((barangay) => (
           <li><a href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a></li>
