@@ -1,0 +1,206 @@
+---
+// /pasyalan/ (handoff 2026-11): category chips, place cards from data/pasyalan.json and a sticky mini 3D map whose
+// barangay follows the hovered or focused card. Every card is visible without JS; the chips and the map pick are
+// enhancements (the chip group stays hidden until the script runs).
+import { Picture } from "astro:assets";
+import Site from "../layouts/Site.astro";
+import PageHead from "./site/PageHead.astro";
+import Verify from "./Verify.astro";
+import Map3D from "./map/Map3D.astro";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { barangays, pasyalan, pasyalanRetrieved } from "../lib/data";
+import { photo, photoAlt } from "../lib/photos";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const en = lang === "en";
+
+const kinds = [
+  { id: "all", label: en ? "All" : "Lahat" },
+  { id: "pasyalan", label: en ? "Parks and sights" : "Pasyalan" },
+  { id: "kainan", label: en ? "Food" : "Kainan" },
+  { id: "bago", label: en ? "New" : "Bago" },
+];
+const kindLabel = (kind: string) => kinds.find((item) => item.id === kind)?.label ?? kind;
+
+const cards = pasyalan.map((place) => ({
+  place,
+  picture: place.photo_id ? photo(place.photo_id) : null,
+  barangay: barangays.find((item) => item.id === place.barangay_id),
+  hours: en ? place.hours_en : place.hours_fil,
+  fee: en ? place.fee_en : place.fee_fil,
+}));
+const highlight = [...new Set(pasyalan.map((place) => place.barangay_id).filter((id): id is string => Boolean(id)))];
+---
+
+<Site title={t.pasyalanTitle} description={t.pasyalanLead}>
+  <section class="section" aria-labelledby="page-h">
+    <div class="wrap">
+      <PageHead crumbs={[[t.guideExplore]]} kicker={t.guideExplore} lead={t.pasyalanLead}>
+        {en ? <>Places to <em>visit</em> in Pasig</> : <>Mga <em>pasyalan</em> sa Pasig</>}
+      </PageHead>
+
+      <div class="bp-pas__chips" role="group" aria-label={en ? "Type of place" : "Uri ng lugar"} data-pas-chips hidden>
+        {kinds.map((kind, index) => (
+          <button type="button" class="chip" data-kind={kind.id} aria-pressed={index === 0 ? "true" : "false"}>{kind.label}</button>
+        ))}
+      </div>
+
+      <div class="bp-pas__layout">
+        <ul class="bp-pas__list" aria-label={en ? "Places" : "Mga lugar"} data-pas-list>
+          {cards.map(({ place, picture, barangay, hours, fee }, index) => (
+            <li class="bp-pas__item" data-kind={place.kind} data-barangay={place.barangay_id ?? undefined}>
+              <article class={`bp-pas__card${picture ? "" : " bp-pas__card--text"}`} tabindex="-1">
+                {picture && (
+                  <div class="bp-pas__photo">
+                    <Picture
+                      src={picture.image}
+                      alt={photoAlt(picture, lang)}
+                      formats={["avif", "webp"]}
+                      fallbackFormat="webp"
+                      widths={[320, 480, 640]}
+                      sizes="(max-width: 767px) 92vw, (max-width: 1099px) 46vw, 30vw"
+                      width={480}
+                      quality={49}
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+                  </div>
+                )}
+                <div class="bp-pas__body">
+                  <p class="kicker">{kindLabel(place.kind)}</p>
+                  <h2 id={`pasyalan-${place.id}`}>{place.name}{place.verify && <Verify />}</h2>
+                  <p class="bp-pas__line">{en ? place.line_en : place.line_fil}</p>
+                  <dl class="bp-pas__facts">
+                    {barangay && (
+                      <div>
+                        <dt>Barangay</dt>
+                        <dd><a class="link bp-pas__tap" href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a></dd>
+                      </div>
+                    )}
+                    {place.address && <div><dt>{en ? "Address" : "Lokasyon"}</dt><dd>{place.address}</dd></div>}
+                    {hours && <div><dt>{en ? "Hours" : "Oras"}</dt><dd>{hours}</dd></div>}
+                    {fee && <div><dt>{t.colFee}</dt><dd>{fee}</dd></div>}
+                    {place.kind === "bago" && place.opened && <div><dt>{t.openedOn}</dt><dd>{formatDate(lang, place.opened)}</dd></div>}
+                  </dl>
+                  <p class="bp-pas__sources t-small">
+                    {place.sources.map((url, i) => (
+                      <a class="link bp-pas__tap" href={url}>{place.sources.length === 1 ? t.sourceWord : `${t.sourceWord} ${i + 1}`}</a>
+                    ))}
+                    <span>{t.checked} {formatDate(lang, pasyalanRetrieved)}</span>
+                  </p>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+
+        <aside class="bp-pas__map" aria-label={en ? "Map of Pasig" : "Mapa ng Pasig"}>
+          <Map3D size="mini" card highlight={highlight} label={en ? "Map of Pasig; darker barangays have a place to visit" : "Mapa ng Pasig; mas madilim ang barangay na may pasyalan"} />
+          <p class="t-small muted">{en ? "The darker barangays have a place on this list." : "Mas madilim ang mga barangay na may lugar sa listahang ito."}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .bp-pas__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-block: var(--s-6);
+  }
+  .bp-pas__chips[hidden] { display: none; }
+  .bp-pas__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+    gap: var(--s-6);
+    align-items: start;
+    margin-block-start: var(--s-6);
+  }
+  .bp-pas__chips:not([hidden]) + .bp-pas__layout { margin-block-start: 0; }
+  .bp-pas__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
+    gap: var(--s-4);
+  }
+  .bp-pas__item[hidden] { display: none; }
+  .bp-pas__card {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    transition: border-color var(--mid) var(--ease), background-color var(--mid) var(--ease);
+  }
+  .bp-pas__card:hover,
+  .bp-pas__card:focus-within { border-color: var(--blue); background: #f5f8fe; }
+  .bp-pas__photo { aspect-ratio: 16 / 10; background: var(--surface); }
+  .bp-pas__photo :global(img) { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .bp-pas__body { display: grid; align-content: start; gap: var(--s-2); padding: var(--s-4); flex: 1; }
+  .bp-pas__card--text .bp-pas__body { padding: var(--s-5); }
+  .bp-pas__body h2 { font-size: var(--t-h3); }
+  .bp-pas__body p { margin: 0; }
+  .bp-pas__line { color: var(--muted); font-size: var(--t-meta); }
+  .bp-pas__facts { margin: 0; font-size: var(--t-meta); }
+  .bp-pas__facts > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--s-2);
+    padding-block: var(--s-2);
+    border-block-start: 1px solid var(--line);
+  }
+  .bp-pas__facts dt { font-weight: 600; overflow-wrap: anywhere; }
+  .bp-pas__facts dd { margin: 0; }
+  .bp-pas__sources { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-4); color: var(--muted); overflow-wrap: anywhere; }
+  .bp-pas__sources a { min-inline-size: 0; }
+  .bp-pas__tap { display: inline-flex; align-items: center; min-block-size: 2.75rem; }
+  .bp-pas__map {
+    position: sticky;
+    top: var(--sticky-offset);
+    display: grid;
+    gap: var(--s-3);
+    padding: var(--s-5);
+    background: var(--pale);
+    border-radius: var(--r-panel);
+  }
+  .bp-pas__map p { margin: 0; }
+  @media (max-width: 63.9375rem) {
+    .bp-pas__layout { grid-template-columns: minmax(0, 1fr); }
+    .bp-pas__map { position: static; }
+  }
+</style>
+
+<script>
+  const chips = document.querySelector<HTMLElement>("[data-pas-chips]");
+  const items = [...document.querySelectorAll<HTMLElement>(".bp-pas__item")];
+  if (chips) {
+    chips.hidden = false;
+    chips.addEventListener("click", (event) => {
+      const chip = (event.target as HTMLElement).closest<HTMLButtonElement>("button[data-kind]");
+      if (!chip) return;
+      const kind = chip.dataset.kind;
+      for (const button of chips.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button === chip));
+      for (const item of items) item.hidden = kind !== "all" && item.dataset.kind !== kind;
+    });
+  }
+
+  // hovering or focusing a card selects its barangay on the map
+  const map = document.querySelector<HTMLElement>("[data-map3d]");
+  if (map) {
+    const pick = (event: Event) => {
+      const id = (event.currentTarget as HTMLElement).dataset.barangay;
+      if (id) map.dispatchEvent(new CustomEvent("bp-map-pick", { detail: { id } }));
+    };
+    for (const item of items) {
+      item.addEventListener("pointerenter", pick);
+      item.addEventListener("focusin", pick);
+    }
+  }
+</script>

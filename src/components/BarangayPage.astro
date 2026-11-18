@@ -1,6 +1,7 @@
 ---
 import Site from "../layouts/Site.astro";
-import map from "../../design/map/pasig-map.json";
+import Map3D from "./map/Map3D.astro";
+import PageHead from "./site/PageHead.astro";
 import CopyButton from "./CopyButton.astro";
 import SourceNote from "./SourceNote.astro";
 import { barangays, pasigSources, places, serviceUpdates, sourceLabel, telHref } from "../lib/data";
@@ -62,7 +63,7 @@ const contactGroups = (barangay.contact ?? "")
     [],
   )
   .filter((group) => group.rows.length);
-const shape = map.barangays.find((item) => item.name === barangay.name);
+
 ---
 
 <Site
@@ -71,25 +72,18 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
     ? `${barangay.name}, Pasig: barangay numbers, evacuation centers and places with new official announcements.`
     : `${barangay.name}, Pasig: mga numero ng barangay, evacuation center at mga lugar na may bagong opisyal na abiso.`}
 >
-  <section class="section section--flow" aria-labelledby="brgy-h">
+  <section class="section section--flow" aria-labelledby="page-h">
     <div class="wrap">
-      <a class="link bp-brgy__back" href={href(lang, "/#mapa")}>← {en ? "All barangays" : "Lahat ng barangay"}</a>
-      <div class="grid grid--top">
-        <div class="span-7">
-          <div class="section-head bp-brgy__head">
-            <h1 id="brgy-h">{barangay.name}</h1>
-            {barangay.district && (
-              <p>
-                {barangay.district === 1 ? t.district1 : t.district2}
-                <br />
-                {en ? "From an older directory. The information is still being confirmed." : "Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon."}
-              </p>
-            )}
-          </div>
-          {barangay.district && (
-            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "See the source directory" : "Tingnan ang direktoryong pinagmulan"}</a></p>
-          )}
-
+      <PageHead
+        crumbs={[[en ? "Barangays" : "Barangay", "/barangay/"], [barangay.name]]}
+        kicker={barangay.district ? (barangay.district === 1 ? t.district1 : t.district2) : undefined}
+        lead={barangay.district ? (en ? "From an older directory. The information is still being confirmed." : "Mula sa lumang direktoryo. Kinukumpirma pa ang impormasyon.") : undefined}
+      >{barangay.name}</PageHead>
+      {barangay.district && (
+        <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "See the source directory" : "Tingnan ang direktoryong pinagmulan"}</a></p>
+      )}
+      <div class="bp-brgy__top">
+        <div>
           <ul class="rows bp-brgy__facts">
             {barangay.punong_barangay && (
               <li>
@@ -134,13 +128,10 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
             )}
           </ul>
         </div>
-        {shape && (
-          <div class="span-4 start-9 bp-brgy__map">
-            <svg viewBox="100 0 360 560" role="img" aria-label={en ? `Location of ${barangay.name} in Pasig` : `Lokasyon ng ${barangay.name} sa Pasig`}>
-              {map.barangays.map((item) => <path d={item.d} class={item.name === barangay.name ? "on" : undefined} />)}
-            </svg>
-          </div>
-        )}
+        <div class="bp-brgy__aside">
+          <Map3D size="mini" selected={barangay.id} label={en ? `Location of ${barangay.name} in Pasig` : `Lokasyon ng ${barangay.name} sa Pasig`} />
+          <p><a class="link" href={href(lang, "/barangay/")}>← {en ? "All barangays" : "Lahat ng barangay"}</a></p>
+        </div>
       </div>
     </div>
   </section>
@@ -224,14 +215,11 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
 </Site>
 
 <style>
-  .bp-brgy__back { display: inline-flex; align-items: center; min-height: 3rem; margin-bottom: var(--s-2); }
-  .bp-brgy__map { background: var(--surface); border-radius: var(--r-lg); padding: var(--s-5); }
-  .bp-brgy__head {
-    margin-bottom: var(--s-4);
-  }
+  .bp-brgy__aside { display: grid; gap: var(--s-4); align-content: start; background: var(--pale); border-radius: var(--r-panel); padding: var(--s-5); }
   .bp-brgy__src {
-    margin: 0 0 var(--s-6);
+    margin: var(--s-3) 0 0;
   }
+  .bp-brgy__disclaimer { color: var(--muted); max-width: 52ch; }
   .bp-brgy__src a,
   .bp-brgy__all a {
     display: inline-flex;
@@ -249,7 +237,6 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
   }
   .bp-brgy__facts > li:first-child {
     padding-top: var(--s-4);
-    border-top: 1px solid var(--line);
   }
   .bp-brgy__facts :global(.verify) {
     display: block;
@@ -312,27 +299,9 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
   .bp-brgy__tel:hover {
     text-decoration-color: currentColor;
   }
-  .bp-brgy__map {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  .bp-brgy__map svg {
-    display: block;
-    width: min(100%, 224px);
-    height: auto;
-    aspect-ratio: 360 / 560;
-  }
-  .bp-brgy__map path {
-    fill: var(--subtle);
-    stroke: var(--bg);
-    stroke-width: 1.5;
-    stroke-linejoin: round;
-  }
-  .bp-brgy__map path.on {
-    fill: var(--hover);
-    stroke: var(--ink);
-  }
+  .bp-brgy__top { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-7); align-items: start; margin-block-start: var(--s-6); }
+  .bp-brgy__facts { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding-inline: var(--s-5); }
+  .bp-brgy__facts > li:last-child { border-block-end: 0; }
   .bp-brgy__list {
     list-style: none;
     margin: 0;
@@ -384,12 +353,9 @@ const shape = map.barangays.find((item) => item.name === barangay.name);
     margin-top: var(--s-4);
   }
   @media (max-width: 1023px) {
-    .bp-brgy__map {
-      grid-column: 1 / -1;
-      justify-content: flex-start;
-    }
-    .bp-brgy__map svg {
-      width: min(100%, 160px);
+    .bp-brgy__top {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-5);
     }
     .bp-brgy__facts > li {
       grid-template-columns: minmax(0, 1fr);

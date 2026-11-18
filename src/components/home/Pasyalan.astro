@@ -1,138 +1,92 @@
 ---
+// Places to visit: one large card and three compact ones from data/pasyalan.json, with their photos.
+// A card opens the place page at /lugar/<id>/ when one exists, else the place's card on /pasyalan/.
 import { Picture } from "astro:assets";
+import SectionHead from "./SectionHead.astro";
 import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
-import { barangays, pasyalan, pasyalanRetrieved } from "../../lib/data";
+import { barangays, pasyalan, pasyalanRetrieved, places } from "../../lib/data";
 import { photo, photoAlt } from "../../lib/photos";
+import { arrowPath } from "./content";
 
 interface Props { ids: string[] }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const en = lang === "en";
-const chapters = Astro.props.ids.map((id) => {
+const kindLabel: Record<string, { fil: string; en: string }> = {
+  pasyalan: { fil: "Pasyalan", en: "Place to visit" },
+  kainan: { fil: "Kainan", en: "Food" },
+  bago: { fil: "Bago", en: "New" },
+};
+const cards = Astro.props.ids.map((id) => {
   const place = pasyalan.find((item) => item.id === id);
   if (!place?.photo_id) throw new Error(`Pasyalan needs a photo for ${id}`);
-  return { place, picture: photo(place.photo_id), barangay: barangays.find((item) => item.id === place.barangay_id) };
+  const target = places.some((item) => item.id === place.id) ? href(lang, `/lugar/${place.id}/`) : href(lang, `/pasyalan/#pasyalan-${place.id}`);
+  const barangay = barangays.find((item) => item.id === place.barangay_id);
+  const hasTimes = Boolean(place.hours_fil || place.fee_fil);
+  return { place, target, barangay, hasTimes, picture: photo(place.photo_id) };
 });
+const [lead, ...rest] = cards;
 ---
 
-<section class="section bp-discover" id="pasyalan" data-pagefind-body data-pagefind-meta="kind:pasyalan" aria-labelledby="pasyalan-h">
+<section class="section--home bp-places" id="pasyalan" aria-labelledby="pl-h">
   <div class="wrap">
-    <div class="section-head">
-      <h2 id="pasyalan-h">{t.pasyalanTitle}</h2>
-      <p>{t.pasyalanLead}</p>
+    <SectionHead id="pl-h">
+      {t.pasyalanTitle}
+      <a slot="action" href={href(lang, "/pasyalan/")}>{en ? "All places" : "Lahat ng pasyalan"} <svg class="ic" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg></a>
+    </SectionHead>
+    <div class="bp-places__layout">
+      {lead && (
+        <a class="cd bp-places__lead" href={lead.target}>
+          <span class="bp-places__photo">
+            <Picture src={lead.picture.image} alt={photoAlt(lead.picture, lang)} formats={["avif", "webp"]} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(max-width: 1023px) 92vw, 640px" width={960} quality={55} loading="lazy" decoding="async" />
+          </span>
+          <span class="bp-places__body">
+            <span class="kicker">{kindLabel[lead.place.kind]?.[lang] ?? ""}{lead.barangay && <span class="bp-places__brgy">{lead.barangay.name}</span>}</span>
+            <h3 id={`pasyalan-${lead.place.id}`}>{lead.place.name}{lead.place.verify && <Verify />}</h3>
+            <span class="bp-places__line">{en ? lead.place.line_en : lead.place.line_fil}</span>
+            {lead.hasTimes && <span class="bp-places__line muted">{en ? "Hours and fee" : "Oras at bayad"}: {en ? "checked" : "sinuri noong"} {formatDate(lang, pasyalanRetrieved)}</span>}
+          </span>
+        </a>
+      )}
+      <ul class="bp-places__side">
+        {rest.map(({ place, target, barangay, picture }) => (
+          <li>
+            <a class="cd bp-places__small" href={target}>
+              <span class="bp-places__thumb">
+                <Picture src={picture.image} alt={photoAlt(picture, lang)} formats={["avif", "webp"]} fallbackFormat="webp" widths={[224, 336]} sizes="112px" width={224} quality={55} loading="lazy" decoding="async" />
+              </span>
+              <span class="bp-places__small-body">
+                <span class="kicker">{kindLabel[place.kind]?.[lang] ?? ""}</span>
+                <h3 id={`pasyalan-${place.id}`}>{place.name}{place.verify && <Verify />}</h3>
+                {barangay && <span class="muted bp-places__where">{barangay.name}</span>}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
-    <ul class="bp-discover__places">
-      {
-        chapters.map(({ place, picture, barangay }, index) => {
-          const hours = en ? place.hours_en : place.hours_fil;
-          const fee = en ? place.fee_en : place.fee_fil;
-          return (
-            <li>
-              <article class="bp-discover__place">
-                <div class="bp-discover__photo">
-                  <Picture
-                    src={picture.image}
-                    alt={photoAlt(picture, lang)}
-                    formats={["avif", "webp"]}
-                    fallbackFormat="webp"
-                    widths={[400, 640, 800]}
-                    sizes={`(max-width: 767px) 92vw, ${index === 0 ? "min(51vw, 720px)" : "min(29vw, 426px)"}`}
-                    width={640}
-                    quality={49}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="bp-discover__body">
-                  <h3 id={`pasyalan-${place.id}`}>{place.name}</h3>
-                  {place.verify && <Verify />}
-                  <p>{en ? place.line_en : place.line_fil}</p>
-                  {(place.address || hours || fee) && (
-                    <dl>
-                      {place.address && <div><dt>{en ? "Address" : "Lokasyon"}</dt><dd>{place.address}</dd></div>}
-                      {hours && <div><dt>{en ? "Opening hours" : "Oras"}</dt><dd>{hours}</dd></div>}
-                      {fee && <div><dt>{t.colFee}</dt><dd>{fee}</dd></div>}
-                    </dl>
-                  )}
-                  {barangay && <a class="bp-discover__barangay" href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a>}
-                  <p class="bp-discover__sources">
-                    {place.sources.map((url, index) => (
-                      <a href={url}>{place.sources.length === 1 ? t.sourceWord : `${t.sourceWord} ${index + 1}`}</a>
-                    ))}
-                    <span>{t.checked} {formatDate(lang, pasyalanRetrieved)}</span>
-                  </p>
-                </div>
-              </article>
-            </li>
-          );
-        })
-      }
-    </ul>
   </div>
 </section>
 
 <style>
-  .bp-discover { background: var(--bg); }
-  .bp-discover .section-head { margin-block-end: var(--s-6); }
-  .bp-discover__places {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
-    align-items: start;
-  }
-  .bp-discover__places > li:first-child { grid-column: 1 / -1; }
-  .bp-discover__places > li:first-child .bp-discover__place {
-    display: grid;
-    grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
-    border-radius: var(--r-lg);
-    background: var(--surface);
-  }
-  .bp-discover__photo { position: relative; aspect-ratio: 16 / 10; background: var(--surface); }
-  .bp-discover__photo :global(img) {
-    position: absolute;
-    inset: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    border-radius: var(--r-md);
-  }
-  .bp-discover__places > li:first-child .bp-discover__photo {
-    aspect-ratio: auto;
-    min-block-size: 20rem;
-  }
-  .bp-discover__places > li:first-child .bp-discover__photo :global(img) {
-    border-radius: var(--r-lg) 0 0 var(--r-lg);
-  }
-  .bp-discover__body { display: grid; justify-items: start; gap: var(--s-2); padding-block: var(--s-4); }
-  .bp-discover__places > li:first-child .bp-discover__body { padding: clamp(1.25rem, 3vw, 2.5rem); }
-  .bp-discover__places > li:first-child h3 { font-size: var(--t-h2); text-wrap: balance; }
-  .bp-discover__body h3 { font-size: clamp(1.65rem, 1.35rem + .9vw, 2.3rem); }
-  .bp-discover__body > p { color: var(--muted); }
-  .bp-discover__body dl { inline-size: 100%; margin: var(--s-2) 0 0; font-size: .9375rem; }
-  .bp-discover__body dl > div {
-    display: grid;
-    grid-template-columns: minmax(5.25rem, 1fr) minmax(0, 3fr);
-    gap: var(--s-2);
-    padding-block: var(--s-2);
-    border-block-start: 1px solid var(--line);
-  }
-  .bp-discover__body dt { font-weight: 800; overflow-wrap: anywhere; }
-  .bp-discover__body dd { margin: 0; }
-  .bp-discover__sources, .bp-discover__barangay { font-size: .875rem; }
-  .bp-discover__sources { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); align-items: center; }
-  .bp-discover__body a {
-    display: inline-flex;
-    align-items: center;
-    min-block-size: 3rem;
-    color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: .25em;
-  }
-  @media (max-width: 47.9375rem) {
-    .bp-discover__places, .bp-discover__places > li:first-child .bp-discover__place { grid-template-columns: minmax(0, 1fr); }
-    .bp-discover__places > li:first-child .bp-discover__photo { aspect-ratio: 16 / 10; min-block-size: 0; }
-    .bp-discover__places > li:first-child .bp-discover__photo :global(img) { border-radius: var(--r-lg) var(--r-lg) 0 0; }
-  }
+  .bp-places__layout { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: stretch; }
+  .bp-places__lead { flex: 2 1 35rem; min-inline-size: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .bp-places__photo { display: block; block-size: 23.75rem; background: var(--pale); }
+  .bp-places__photo :global(img) { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .bp-places__body { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-5) var(--s-6); }
+  .bp-places__body .kicker { display: flex; flex-wrap: wrap; gap: 0 var(--s-4); }
+  .bp-places__brgy { color: var(--muted); }
+  .bp-places__body h3 { font-size: 2.25rem; line-height: 1.1; }
+  .bp-places__line { font-size: var(--t-meta); line-height: 1.5; }
+  .bp-places__side { flex: 1 1 21.25rem; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--s-4); }
+  .bp-places__side > li { flex: 1; display: grid; }
+  .bp-places__small { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-3); }
+  .bp-places__thumb { flex: none; inline-size: 7rem; block-size: 7rem; border-radius: var(--r-md); overflow: hidden; background: var(--pale); }
+  .bp-places__thumb :global(img) { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .bp-places__small-body { display: flex; flex-direction: column; gap: var(--s-1); min-inline-size: 0; }
+  .bp-places__small-body h3 { font-size: 1.5rem; line-height: 1.15; }
+  .bp-places__where { font-size: var(--t-meta); }
+  @media (max-width: 40rem) { .bp-places__photo { block-size: 15rem; } .bp-places__body { padding: var(--s-5); } .bp-places__body h3 { font-size: 1.75rem; } }
 </style>

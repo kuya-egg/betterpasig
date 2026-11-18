@@ -1,0 +1,26 @@
+---
+// The four "Iba pa" pages as a row of links under the page head (the handoff shows them as tabs; here each is its own URL).
+import { href, langFromUrl } from "../i18n";
+
+interface Props { current: "weekly" | "officials" | "funds" | "about" }
+const { current } = Astro.props;
+const lang = langFromUrl(Astro.url);
+const en = lang === "en";
+const items = [
+  ["weekly", "/ngayong-linggo/", en ? "Notices" : "Mga abiso"],
+  ["officials", "/opisyal/", en ? "Officials" : "Mga opisyal"],
+  ["funds", "/pondo/", en ? "Public funds" : "Pondo ng bayan"],
+  ["about", "/tungkol/", en ? "About" : "Tungkol"],
+] as const;
+---
+<nav class="bp-tabs" aria-label={en ? "More about the city" : "Iba pang pahina"}>
+  <ul>
+    {items.map(([key, path, label]) => (
+      <li><a class="chip" href={href(lang, path)} aria-current={key === current ? "page" : undefined}>{label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .bp-tabs ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+</style>

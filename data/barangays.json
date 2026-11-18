@@ -1,20 +1,19 @@
 {
-  "retrieved": "2026-10-19",
-  "notes": "Names follow the PSA PSGC list (30 barangays, as of 31 July 2025). The district values are Pasig's two councilor (Sangguniang Panlungsod) districts as given on Wikipedia; Pasig is a single (lone) congressional district. The punong barangay names and contact numbers come only from secondary directories (barangaydirectory.com and phshirt.com), so every row has verify=true. Many directory numbers are in the old 7-digit format or look malformed. No hall addresses were found.",
+  "retrieved": "2026-11-18",
+  "notes": "Names follow the PSA PSGC list (30 barangays, as of 31 July 2025); the district values are Pasig's two Sangguniang Panlungsod districts. Punong barangay names and the barangay hall telephone number come from the DILG Barangay Information System (BIS) officials directory (dilg.gov.ph/barangay-officials-directory), a self-reported government database; every row stays verify=true. The hall number is the one most members of that barangay list in the BIS. Palatiw has no Punong Barangay listed in the BIS, so it is left empty. No hall street addresses appear in the BIS, so hall_address is null. Term dates are not shown in the BIS, so they are null.",
   "barangays": [
     {
       "id": "bagong-ilog",
       "name": "Bagong Ilog",
       "district": 1,
       "hall_address": null,
-      "contact": "671-0681 (barangaydirectory.com); 0936 180 8499 / 0912 815 4041 / 0915 901 9134 (phshirt.com)",
+      "contact": "671-0681 (DILG BIS)",
       "punong_barangay": "Ferdinand Alicante Avis",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-ilog",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=001"
       ],
       "verify": true
     },
@@ -23,14 +22,13 @@
       "name": "Bagong Katipunan",
       "district": 1,
       "hall_address": null,
-      "contact": "8477-4262 (barangaydirectory.com); 8477 4262 (phshirt.com)",
+      "contact": "84774262 (DILG BIS)",
       "punong_barangay": "Jeronimo Reyes Alba",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/bagong-katipunan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=002"
       ],
       "verify": true
     },
@@ -39,14 +37,13 @@
       "name": "Bambang",
       "district": 1,
       "hall_address": null,
-      "contact": "70039869 (barangaydirectory.com); 7003 2600 (phshirt.com)",
+      "contact": "70039869 (DILG BIS)",
       "punong_barangay": "Rodel Abelgas Samaniego",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/bambang",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=003"
       ],
       "verify": true
     },
@@ -55,14 +52,13 @@
       "name": "Buting",
       "district": 1,
       "hall_address": null,
-      "contact": "0286411440 (barangaydirectory.com); 0916 664 7744 / 0968 214 1115 (phshirt.com)",
+      "contact": "86411440 (DILG BIS)",
       "punong_barangay": "Marlon Santos Servillon",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/buting",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=004"
       ],
       "verify": true
     },
@@ -71,14 +67,13 @@
       "name": "Caniogan",
       "district": 1,
       "hall_address": null,
-      "contact": "84424091 (barangaydirectory.com); 0967 039 3182 / 0908 643 6720 (phshirt.com)",
+      "contact": "84424091 (DILG BIS)",
       "punong_barangay": "Petri Santos Cortez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/caniogan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=005"
       ],
       "verify": true
     },
@@ -87,14 +82,13 @@
       "name": "Dela Paz",
       "district": 2,
       "hall_address": null,
-      "contact": "86452331 (barangaydirectory.com); 0999 998 8844 (phshirt.com)",
+      "contact": "86452331 (DILG BIS)",
       "punong_barangay": "Dietmar Lee Romualdez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/dela-paz",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=006"
       ],
       "verify": true
     },
@@ -103,14 +97,13 @@
       "name": "Kalawaan",
       "district": 1,
       "hall_address": null,
-      "contact": "02-742-6653 (barangaydirectory.com)",
+      "contact": "0287426653 (DILG BIS)",
       "punong_barangay": "Jessie Bolivar Gaviola",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/kalawaan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=007"
       ],
       "verify": true
     },
@@ -119,14 +112,13 @@
       "name": "Kapasigan",
       "district": 1,
       "hall_address": null,
-      "contact": "7005-71-70 (barangaydirectory.com); 8725 4023 (phshirt.com)",
+      "contact": "7005-71-70 (DILG BIS)",
       "punong_barangay": "Jenifer Reyes Marcelo",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/kapasigan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=008"
       ],
       "verify": true
     },
@@ -135,14 +127,13 @@
       "name": "Kapitolyo",
       "district": 1,
       "hall_address": null,
-      "contact": "86314397 (barangaydirectory.com); 0967 098 4620 / 8632 7598 (phshirt.com)",
+      "contact": "86314397 (DILG BIS)",
       "punong_barangay": "Alexis Rafael Marcilla Torres",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/kapitolyo",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=009"
       ],
       "verify": true
     },
@@ -151,14 +142,13 @@
       "name": "Malinao",
       "district": 1,
       "hall_address": null,
-      "contact": "6327605 (barangaydirectory.com); 8641 6672 / 8632 7605 (phshirt.com)",
+      "contact": "86416672 (DILG BIS)",
       "punong_barangay": "Joel Sioco Dela Cruz",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/malinao",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=010"
       ],
       "verify": true
     },
@@ -167,14 +157,13 @@
       "name": "Manggahan",
       "district": 2,
       "hall_address": null,
-      "contact": "86820424 (barangaydirectory.com); 0917 172 9744 / 0908 865 3031 (phshirt.com)",
+      "contact": "86820424 (DILG BIS)",
       "punong_barangay": "Quin Antonio Cruz",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/manggahan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=011"
       ],
       "verify": true
     },
@@ -183,14 +172,13 @@
       "name": "Maybunga",
       "district": 2,
       "hall_address": null,
-      "contact": "86428645 (barangaydirectory.com)",
+      "contact": "86428645 (DILG BIS)",
       "punong_barangay": "Arnold Reyes Alvarez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/maybunga",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=012"
       ],
       "verify": true
     },
@@ -199,14 +187,13 @@
       "name": "Oranbo",
       "district": 1,
       "hall_address": null,
-      "contact": "86310254 (barangaydirectory.com); 0915 406 2290 / 8631 0254 (phshirt.com)",
+      "contact": "86310254 (DILG BIS)",
       "punong_barangay": "Richard Masiglat Pua",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/oranbo",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=013"
       ],
       "verify": true
     },
@@ -215,14 +202,13 @@
       "name": "Palatiw",
       "district": 1,
       "hall_address": null,
-      "contact": "885327813 (barangaydirectory.com); 8373 9234 / 8374 0082 (phshirt.com)",
-      "punong_barangay": "Eriberto Mabini Guevarra",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "contact": "8855718 (DILG BIS)",
+      "punong_barangay": null,
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/palatiw",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=014"
       ],
       "verify": true
     },
@@ -231,14 +217,13 @@
       "name": "Pinagbuhatan",
       "district": 2,
       "hall_address": null,
-      "contact": "88809394 (barangaydirectory.com); 8880 4609 / 0923 857 4110 / 0915 266 1400 (phshirt.com)",
+      "contact": "8809394 (DILG BIS)",
       "punong_barangay": "Robin Rin Salandanan",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/pinagbuhatan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=015"
       ],
       "verify": true
     },
@@ -247,14 +232,13 @@
       "name": "Pineda",
       "district": 1,
       "hall_address": null,
-      "contact": "85848355 (barangaydirectory.com); 0993 789 0331 (phshirt.com)",
+      "contact": "85848355 (DILG BIS)",
       "punong_barangay": "Michael Dedase Publico",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/pineda",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=016"
       ],
       "verify": true
     },
@@ -263,14 +247,13 @@
       "name": "Rosario",
       "district": 2,
       "hall_address": null,
-      "contact": "86407705 (barangaydirectory.com); 7956 5695 (phshirt.com)",
-      "punong_barangay": "Aquilino Santos Dela Cruz Sr.",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "contact": "86407705 (DILG BIS)",
+      "punong_barangay": "Aquilino Santos Dela Cruz Sr",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/rosario",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=017"
       ],
       "verify": true
     },
@@ -279,14 +262,13 @@
       "name": "Sagad",
       "district": 1,
       "hall_address": null,
-      "contact": "86405088 (barangaydirectory.com); 8628 0227 (phshirt.com)",
+      "contact": "86405088 (DILG BIS)",
       "punong_barangay": "Marvin Domingo Benito",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/sagad",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=018"
       ],
       "verify": true
     },
@@ -295,14 +277,13 @@
       "name": "San Antonio",
       "district": 1,
       "hall_address": null,
-      "contact": "86310099 (barangaydirectory.com); 0918 625 4428 (phshirt.com)",
+      "contact": "86310099 (DILG BIS)",
       "punong_barangay": "Thomas Raymond Umale Lising",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-antonio",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=019"
       ],
       "verify": true
     },
@@ -311,14 +292,13 @@
       "name": "San Joaquin",
       "district": 1,
       "hall_address": null,
-      "contact": "86439657 (barangaydirectory.com); 0920 306 5643 (phshirt.com)",
+      "contact": "86439657 (DILG BIS)",
       "punong_barangay": "Franz Julius Balanday Sanchez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-joaquin",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=020"
       ],
       "verify": true
     },
@@ -327,14 +307,13 @@
       "name": "San Jose",
       "district": 1,
       "hall_address": null,
-      "contact": "86400994 (barangaydirectory.com); 0967 059 8674 (phshirt.com)",
+      "contact": "86400994 (DILG BIS)",
       "punong_barangay": "Noel Antonio Dela Cruz",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-jose",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=021"
       ],
       "verify": true
     },
@@ -343,14 +322,13 @@
       "name": "San Miguel",
       "district": 2,
       "hall_address": null,
-      "contact": "6400138 (barangaydirectory.com); 0956 928 2660 (phshirt.com)",
+      "contact": "6400138 (DILG BIS)",
       "punong_barangay": "Manuel Estrella Alba",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-miguel",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=022"
       ],
       "verify": true
     },
@@ -359,14 +337,13 @@
       "name": "San Nicolas",
       "district": 1,
       "hall_address": null,
-      "contact": "79002062 (barangaydirectory.com); 0906 274 8238; hall landline 7239 7463 (phshirt.com)",
+      "contact": "79002062 (DILG BIS)",
       "punong_barangay": "Rigor Javiniar Enriquez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/san-nicolas",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=023"
       ],
       "verify": true
     },
@@ -375,14 +352,13 @@
       "name": "Santa Cruz",
       "district": 1,
       "hall_address": null,
-      "contact": "3398911 (barangaydirectory.com); 7343 0611 (phshirt.com)",
+      "contact": "3398911 (DILG BIS)",
       "punong_barangay": "Ralph Renz Sulit Andaya",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-cruz",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=024"
       ],
       "verify": true
     },
@@ -391,14 +367,13 @@
       "name": "Santa Lucia",
       "district": 2,
       "hall_address": null,
-      "contact": "0962 496 4778 (phshirt.com)",
+      "contact": null,
       "punong_barangay": "Aldwin Malabanan Ilagan",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-lucia",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=030"
       ],
       "verify": true
     },
@@ -407,14 +382,13 @@
       "name": "Santa Rosa",
       "district": 1,
       "hall_address": null,
-      "contact": "72560509 (barangaydirectory.com); 7256 0509 / 0961 762 5452 (phshirt.com)",
+      "contact": "72560509 (DILG BIS)",
       "punong_barangay": "Arcel Trinidad Umipig",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/santa-rosa",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=025"
       ],
       "verify": true
     },
@@ -423,14 +397,13 @@
       "name": "Santo Tomas",
       "district": 1,
       "hall_address": null,
-      "contact": "86583063 (barangaydirectory.com); 7148 9575 (phshirt.com)",
+      "contact": "86583063 (DILG BIS)",
       "punong_barangay": "Amelia Lati Raymundo",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/santo-tomas",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=026"
       ],
       "verify": true
     },
@@ -439,14 +412,13 @@
       "name": "Santolan",
       "district": 2,
       "hall_address": null,
-      "contact": "86811614 (barangaydirectory.com); hall 0917 311 9756; fire & rescue 8682 1019 / 0919 450 0133; ambulance 0951 335 7000 (phshirt.com)",
+      "contact": "86811614 (DILG BIS)",
       "punong_barangay": "Jose Gabriel Garra Bayan",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/santolan",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=027"
       ],
       "verify": true
     },
@@ -455,14 +427,13 @@
       "name": "Sumilang",
       "district": 1,
       "hall_address": null,
-      "contact": "89423557 (barangaydirectory.com); 0926 728 3919 (phshirt.com)",
+      "contact": "89974899 (DILG BIS)",
       "punong_barangay": "Irma Ramos Gomez",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/sumilang",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=028"
       ],
       "verify": true
     },
@@ -471,14 +442,13 @@
       "name": "Ugong",
       "district": 1,
       "hall_address": null,
-      "contact": "84510028 (barangaydirectory.com); 0917 816 4987 (phshirt.com)",
+      "contact": "84510028 (DILG BIS)",
       "punong_barangay": "Gloria Pascual Cruz",
-      "punong_barangay_term": "2023-2026 (per barangaydirectory.com, updated 2026-05-24)",
+      "punong_barangay_term": null,
       "sources": [
         "https://psa.gov.ph/classification/psgc/barangays/1381200000",
-        "https://en.wikipedia.org/wiki/Pasig",
-        "https://www.barangaydirectory.com/barangay/city-of-pasig/ugong",
-        "https://phshirt.com/pasig-city/pasig-city-emergency-hotlines/"
+        "https://dilg.gov.ph/barangay-officials-directory/index",
+        "https://bis.dilg.gov.ph/bops/default/master-filter?region=13&province=812&citymun=00&brgy=029"
       ],
       "verify": true
     }

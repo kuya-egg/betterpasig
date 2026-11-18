@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://betterpasig.org",
   trailingSlash: "ignore",
-  integrations: [react(), sitemap()],
+  // English at /, Filipino at /fil/: the sitemap lists each page with its hreflang alternate.
+  integrations: [react(), sitemap({ i18n: { defaultLocale: "en", locales: { en: "en", fil: "fil" } } })],
   vite: { plugins: [tailwindcss()] },
 });

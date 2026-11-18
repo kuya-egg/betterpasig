@@ -1,0 +1,202 @@
+---
+import Site from "../layouts/Site.astro";
+import Map3D from "./map/Map3D.astro";
+import PageHead from "./site/PageHead.astro";
+import Verify from "./Verify.astro";
+import { barangays, telHref } from "../lib/data";
+import { href, langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const en = lang === "en";
+const t = ui[lang];
+const districtName = (d: number | null) => (d === 1 ? t.district1 : d === 2 ? t.district2 : "");
+
+// Only what the panel shows, from data/barangays.json. null stays out; verify keeps the badge.
+const phones = (contact: string | null) => [
+  ...new Set((contact ?? "").replace(/\([^)]*\)/g, "").match(/\d[\d\s-]*\d/g)?.map((n) => n.trim()) ?? []),
+];
+const sorted = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
+const info = Object.fromEntries(
+  sorted.map((b) => [
+    b.id,
+    {
+      name: b.name,
+      district: districtName(b.district),
+      punong: b.punong_barangay ?? null,
+      hall: b.hall_address ?? null,
+      phones: phones(b.contact).map((n) => ({ n, tel: telHref(n) })),
+      verify: !!b.verify,
+      url: href(lang, `/barangay/${b.id}/`),
+    },
+  ]),
+);
+const labels = {
+  punong: t.punongBarangay,
+  hall: t.hallAddress,
+  phone: en ? "Phone" : "Telepono",
+  full: en ? "Full barangay page" : "Buong pahina ng barangay",
+  none: en ? "Pick a barangay on the map or in the list." : "Pumili ng barangay sa mapa o sa listahan.",
+  empty: en ? "No barangay matches." : "Walang tugmang barangay.",
+};
+---
+
+<Site
+  title={en ? "Barangays" : "Mga barangay"}
+  description={en
+    ? "All 30 barangays of Pasig on a map, with the punong barangay, hall address and phone numbers listed in the sources."
+    : "Ang 30 barangay ng Pasig sa mapa, kasama ang punong barangay, address ng hall at mga numerong nakalista sa mga sanggunian."}
+>
+  <section class="section section--flow" aria-labelledby="page-h">
+    <div class="wrap">
+      <PageHead
+        crumbs={[[en ? "Barangays" : "Barangay"]]}
+        lead={en ? "Tap your barangay on the map, or find it in the list below." : "Pindutin ang barangay mo sa mapa, o hanapin sa listahan sa ibaba."}
+      >
+        {en ? <>The 30 barangays of <em>Pasig</em></> : <>Ang 30 barangay ng <em>Pasig</em></>}
+      </PageHead>
+
+      <div class="bp-bi__grid" data-bi>
+        <div class="bp-bi__map">
+          <Map3D size="page" controls remember />
+        </div>
+
+        <aside class="bp-bi__panel" aria-live="polite" aria-label={en ? "Barangay details" : "Detalye ng barangay"} data-panel>
+          <p class="bp-bi__none" data-none>{labels.none}</p>
+          <div data-detail hidden>
+            <p class="kicker" data-f="district"></p>
+            <h2 data-f="name" translate="no"></h2>
+            <dl class="bp-bi__facts">
+              <div data-row="punong"><dt>{labels.punong}</dt><dd><span data-f="punong"></span><span data-verify hidden><Verify /></span></dd></div>
+              <div data-row="hall"><dt>{labels.hall}</dt><dd data-f="hall" translate="no"></dd></div>
+              <div data-row="phone"><dt>{labels.phone}</dt><dd><ul data-f="phones"></ul></dd></div>
+            </dl>
+            <a class="bp-bi__full" data-f="url" href={href(lang, "/barangay/")}>{labels.full} <span aria-hidden="true">→</span></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flow ground-surface" aria-labelledby="az-h" data-az>
+    <div class="wrap">
+      <div class="bp-bi__azhead">
+        <h2 id="az-h">{en ? "List A–Z" : "Listahan A–Z"}</h2>
+        <div class="bp-bi__search">
+          <label for="bq">{en ? "Find a barangay" : "Hanapin ang barangay"}</label>
+          <input id="bq" type="search" autocomplete="off" data-q />
+        </div>
+      </div>
+      <ul class="bp-bi__list" data-list>
+        {sorted.map((b) => (
+          <li data-id={b.id} data-district={b.district ?? ""} data-name={b.name.toLowerCase()}>
+            <a class="row" href={href(lang, `/barangay/${b.id}/`)}>
+              <span class="bp-bi__name">{b.name}</span>
+              <span class="bp-bi__dist">{districtName(b.district)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="bp-bi__empty" data-empty hidden>{labels.empty}</p>
+    </div>
+  </section>
+</Site>
+
+<script is:inline type="application/json" id="bi-data" set:html={JSON.stringify(info)} />
+
+<script>
+  const data = JSON.parse(document.getElementById("bi-data")!.textContent!) as Record<
+    string,
+    { name: string; district: string; punong: string | null; hall: string | null; phones: { n: string; tel: string }[]; verify: boolean; url: string }
+  >;
+  const root = document.querySelector<HTMLElement>("[data-bi]")!;
+  const map = root.querySelector<HTMLElement>("[data-map3d]")!;
+  const panel = root.querySelector<HTMLElement>("[data-panel]")!;
+  const field = (name: string) => panel.querySelector<HTMLElement>(`[data-f="${name}"]`)!;
+  const row = (name: string) => panel.querySelector<HTMLElement>(`[data-row="${name}"]`)!;
+  const detail = panel.querySelector<HTMLElement>("[data-detail]")!;
+  const none = panel.querySelector<HTMLElement>("[data-none]")!;
+  const list = document.querySelector<HTMLElement>("[data-list]")!;
+  const items = [...list.querySelectorAll<HTMLElement>("li")];
+  const q = document.querySelector<HTMLInputElement>("[data-q]")!;
+  const empty = document.querySelector<HTMLElement>("[data-empty]")!;
+  let district = "";
+
+  const show = (id: string) => {
+    const b = data[id];
+    if (!b) return;
+    none.hidden = true;
+    detail.hidden = false;
+    field("district").textContent = b.district;
+    field("name").textContent = b.name;
+    field("punong").textContent = b.punong ?? "";
+    row("punong").hidden = !b.punong;
+    panel.querySelector<HTMLElement>("[data-verify]")!.hidden = !b.verify;
+    field("hall").textContent = b.hall ?? "";
+    row("hall").hidden = !b.hall;
+    const ul = field("phones");
+    ul.replaceChildren(
+      ...b.phones.map(({ n, tel }) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = tel;
+        a.textContent = n;
+        li.append(a);
+        return li;
+      }),
+    );
+    row("phone").hidden = !b.phones.length;
+    (field("url") as HTMLAnchorElement).href = b.url;
+  };
+
+  const apply = () => {
+    const term = q.value.trim().toLowerCase();
+    let n = 0;
+    for (const li of items) {
+      const ok = (!district || li.dataset.district === district) && (!term || li.dataset.name!.includes(term));
+      li.hidden = !ok;
+      if (ok) n++;
+    }
+    empty.hidden = n > 0;
+  };
+
+  map.addEventListener("bp-map-select", (e) => show((e as CustomEvent<{ id: string }>).detail.id));
+  map.addEventListener("bp-map-filter", (e) => {
+    district = String((e as CustomEvent<{ district: string | number | null }>).detail.district ?? "");
+    apply();
+  });
+  q.addEventListener("input", apply);
+
+  // the map may have restored a remembered selection before this script ran
+  if (map.dataset.selected) show(map.dataset.selected);
+</script>
+
+<style>
+  .bp-bi__grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-5); margin-block-start: var(--s-7); align-items: start; }
+  .bp-bi__map { background: var(--pale); border-radius: var(--r-panel); padding: var(--s-5); min-block-size: 36rem; }
+  .bp-bi__panel { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-panel); padding: var(--s-5); display: grid; gap: var(--s-4); position: sticky; top: var(--sticky-offset); }
+  .bp-bi__panel h2 { font-size: 2.25rem; margin-block: var(--s-1) var(--s-4); }
+  .bp-bi__none { color: var(--muted); }
+  .bp-bi__facts { margin: 0; display: grid; }
+  .bp-bi__facts > div { padding-block: var(--s-3); border-block-start: 1px solid var(--line); }
+  .bp-bi__facts dt { color: var(--muted); font-size: var(--t-small); font-weight: 600; }
+  .bp-bi__facts dd { margin: var(--s-1) 0 0; }
+  .bp-bi__facts ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; column-gap: var(--s-4); }
+  .bp-bi__facts a { display: inline-flex; align-items: center; min-height: 2.75rem; font-variant-numeric: tabular-nums; text-decoration: underline; text-underline-offset: 3px; }
+  .bp-bi__full { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 3rem; margin-block-start: var(--s-3); padding-inline: var(--s-5); border-radius: var(--r-btn); background: var(--blue); color: #fff; font-weight: 600; }
+  .bp-bi__azhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: var(--s-4); margin-block-end: var(--s-5); }
+  .bp-bi__search { display: grid; gap: var(--s-1); inline-size: 22.5rem; max-inline-size: 100%; }
+  .bp-bi__search label { font-size: var(--t-small); font-weight: 600; color: var(--muted); }
+  .bp-bi__search input { min-height: 3rem; padding-inline: var(--s-4); border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--bg); color: var(--ink); font: inherit; }
+  .bp-bi__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16.25rem, 1fr)); column-gap: var(--s-5); }
+  .bp-bi__list > li { border-block-start: 1px solid var(--line); }
+  .bp-bi__list > li[hidden] { display: none; }
+  .bp-bi__list .row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); min-height: 3.5rem; padding: var(--s-3) var(--s-2); border-radius: var(--r-sm); }
+  .bp-bi__name { font-weight: 600; font-size: var(--t-body); }
+  .bp-bi__dist { font-size: var(--t-small); color: var(--muted); }
+  .bp-bi__empty { margin-block-start: var(--s-4); }
+  @media (max-width: 1023px) {
+    .bp-bi__grid { grid-template-columns: minmax(0, 1fr); }
+    .bp-bi__map { min-block-size: 0; padding: var(--s-3); }
+    .bp-bi__panel { position: static; }
+  }
+</style>

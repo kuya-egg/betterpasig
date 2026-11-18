@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig — Iba pa: abiso, opisyal, pondo, tungkol</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F8FAFC;color:#172741;font-family:'Manrope',system-ui,sans-serif;font-size:18px;line-height:1.65}
+*{box-sizing:border-box}
+a{color:#1A47A8;text-underline-offset:3px}a:hover{color:#10307A}
+h1,h2,h3{font-family:'Newsreader',Georgia,serif;font-weight:500;margin:0;letter-spacing:-0.02em;line-height:1.04}
+p{margin:0}
+.ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #1A47A8;outline-offset:3px}
+.nl{color:#172741;text-decoration:none;font-weight:600;padding:8px 14px;border-radius:999px;transition:background .15s,color .15s}
+.nl:hover{background:#E8EFFA;color:#1A47A8}
+.nla{background:#E8EFFA;color:#1A47A8}
+.cd{text-decoration:none;color:#172741;background:#FFFFFF;border:1px solid #CCD6E3;border-radius:16px;transition:border-color .24s,background .24s,transform .24s cubic-bezier(.22,.8,.24,1)}
+.cd:hover{border-color:#1A47A8;background:#F5F8FE;color:#172741;transform:translateY(-3px)}
+.cd:hover .ar{transform:translateX(5px);color:#1A47A8}
+.ar{transition:transform .24s cubic-bezier(.22,.8,.24,1)}
+.row{text-decoration:none;color:#172741;transition:background .15s,color .15s}
+.row:hover{background:#E8EFFA;color:#1A47A8}
+.row:hover .ar{transform:translateX(5px)}
+.btn{transition:background .15s}.btn:hover{background:#10307A;color:#FFFFFF}
+.btn2{transition:background .15s}.btn2:hover{background:#E8EFFA}
+.mp path{stroke:#FFFFFF;stroke-width:1.4;stroke-linejoin:round;cursor:pointer;transition:transform .45s cubic-bezier(.22,.8,.24,1),fill .2s}
+.d1{fill:#DCE5F8}.d2{fill:#A9BFEF}.dim{fill:#EEF2F6}
+.on{fill:#1A47A8;transform:translateY(-10px)}
+.mp a:hover path{fill:#7F9DE3;transform:translateY(-5px)}
+.mp a:hover path.on{fill:#1A47A8;transform:translateY(-10px)}
+.mp a:focus-visible{outline:none}.mp a:focus-visible path{stroke:#172741;stroke-width:2.5}
+.ext{filter:drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC)}
+.tilt{transform:perspective(1600px) rotateX(48deg) rotateZ(-12deg);transform-origin:50% 55%;transition:transform .9s cubic-bezier(.22,.8,.24,1)}
+.flat{transform:none}
+.bob{animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.tilt,.cd,.ar,.mp path{transition:none}.bob{animation:none}}
+</style>
+<style>
+.tab{cursor:pointer;transition:background .15s,color .15s}
+.tab:hover{background:#E8EFFA}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #F8FAFC">
+<a href="#main" class="sr">Lumaktaw sa nilalaman</a>
+<div style="background: #981D28; color: #FFFFFF; font-size: 15px">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 9px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 24px">
+    <span style="font-weight: 700">Emergency</span>
+    <a href="tel:+63286430000" style="color: #FFFFFF; text-decoration: none">Pasig DRRMO <strong>(02) 8643-0000</strong></a>
+    <a href="tel:911" style="color: #FFFFFF; text-decoration: none">Pambansa <strong>911</strong></a>
+    <a href="Hotlines.dc.html" style="color: #FFFFFF; font-weight: 700; margin-left: auto">Lahat ng hotline →</a>
+  </div>
+</div>
+<header style="position: sticky; top: 0; z-index: 20; background: #FFFFFF; border-bottom: 1px solid #CCD6E3">
+  <nav aria-label="Pangunahing menu" style="max-width: 1280px; margin: 0 auto; padding: 12px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 4px">
+    <a href="Main.dc.html" aria-label="BetterPasig, home" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #172741; margin-right: 28px">
+      <svg viewBox="100 0 360 560" width="22" height="34" aria-hidden="true"><path d="M243 327L239 340L234 377L230 387L218 397L212 399L200 395L193 384L187 382L189 377L200 312L200 303L207 302L215 303L218 308L217 317L243 327ZM250 392L248 403L238 392L250 392ZM301 402L314 419L320 423L321 430L316 427L303 428L277 424L269 425L252 424L238 417L246 409L247 403L250 406L261 406L262 403L276 404L277 401L294 405L301 402ZM210 407L231 414L224 427L216 429L216 433L206 435L191 434L186 428L193 410L199 401L210 407ZM319 317L309 337L286 327L279 340L274 345L251 357L237 359L239 340L247 311L252 304L267 290L275 299L292 301L303 307L301 314L319 317ZM413 101L398 104L400 91L398 83L393 72L377 80L371 98L373 102L355 110L360 95L343 96L347 24L374 27L377 33L400 28L399 40L401 58L413 101ZM321 430L327 434L343 429L349 435L356 460L357 466L320 475L319 465L295 463L281 461L280 448L275 442L276 432L269 425L277 424L303 428L316 427L321 430ZM259 366L260 376L255 379L240 379L234 377L237 359L251 357L255 365L259 366ZM143 280L197 327L195 343L178 343L163 348L138 345L136 336L131 336L120 326L136 316L137 289L143 280ZM301 402L294 405L277 401L276 404L262 403L261 406L250 406L248 403L250 392L255 383L260 382L278 389L278 394L301 402ZM413 101L422 130L444 167L400 168L402 176L391 175L388 190L381 189L375 191L348 189L347 180L340 180L335 161L329 170L313 197L299 193L289 194L288 180L289 155L288 141L291 132L303 131L310 135L316 143L317 151L324 156L333 153L334 140L325 123L321 114L316 109L325 102L331 110L342 111L343 105L340 101L343 96L360 95L355 110L373 102L371 98L377 80L393 72L398 83L400 91L398 104L413 101ZM366 258L383 282L400 306L391 315L379 328L372 333L360 334L358 322L341 322L319 317L301 314L303 307L292 301L275 299L267 290L280 276L290 253L316 260L331 260L357 264L366 258ZM207 302L200 303L200 312L197 327L166 299L181 282L181 270L195 270L206 265L210 273L210 287L207 302ZM334 373L313 372L305 393L298 387L295 373L285 370L287 361L285 356L294 350L298 351L302 363L321 359L333 363L334 373ZM313 372L355 374L357 380L378 373L373 378L369 386L379 396L377 406L379 419L384 427L395 426L400 431L422 444L438 459L445 467L443 471L430 472L422 503L423 513L421 529L417 529L410 552L407 552L404 536L382 519L376 510L368 501L369 488L367 482L359 475L356 460L349 435L343 429L327 434L321 430L320 423L314 419L301 402L313 372ZM195 343L189 377L187 382L176 379L160 364L151 359L129 353L111 340L114 333L120 326L131 336L136 336L138 345L163 348L178 343L195 343ZM444 167L444 177L448 183L449 196L417 196L417 189L411 188L409 216L398 214L348 209L351 220L358 242L366 258L357 264L331 260L316 260L290 253L295 230L292 208L289 194L299 193L313 197L329 170L335 161L340 180L347 180L348 189L375 191L381 189L388 190L391 175L402 176L400 168L444 167ZM280 356L264 358L263 367L259 366L255 365L251 357L274 345L279 340L279 352L280 356ZM170 207L182 220L181 270L181 282L166 299L143 280L159 260L160 251L158 209L170 207ZM238 417L252 424L269 425L276 432L275 442L280 448L281 461L272 466L264 465L259 467L245 459L251 448L231 439L216 429L224 427L231 414L238 417ZM255 379L255 383L250 392L238 392L230 387L234 377L240 379L255 379ZM372 333L370 357L366 365L378 373L357 380L355 374L334 373L333 363L321 359L302 363L298 351L294 350L285 356L280 356L279 352L279 340L286 327L309 337L319 317L341 322L358 322L360 334L372 333ZM265 364L264 370L278 376L281 380L298 387L305 393L301 402L278 394L278 389L260 382L255 383L255 379L260 376L259 366L263 367L264 358L265 364ZM278 376L264 370L265 364L277 362L278 376ZM237 391L225 412L210 407L199 401L200 395L212 399L218 397L230 387L237 391ZM298 387L281 380L278 376L277 362L265 364L264 358L285 356L287 361L285 370L295 373L298 387ZM348 21L343 96L340 101L343 105L342 111L331 110L325 102L316 109L307 101L272 75L265 60L266 50L275 36L281 32L285 23L285 14L289 14L296 8L302 9L313 16L322 16L324 21L348 21ZM237 391L247 403L246 409L238 417L225 412L237 391ZM292 208L295 230L290 253L280 276L267 290L252 304L247 311L243 327L217 317L218 308L215 303L207 302L210 287L210 273L206 265L195 270L181 270L182 220L170 207L207 198L216 190L230 191L239 190L261 193L274 198L274 211L292 208ZM398 214L439 223L437 235L438 250L441 255L441 263L435 275L427 277L395 300L383 282L366 258L358 242L351 220L348 209L398 214Z" fill="#1A47A8" stroke="#1A47A8" stroke-width="6" stroke-linejoin="round"></path></svg>
+      <span style="font-weight: 800; font-size: 21px; letter-spacing: -0.02em">BetterPasig</span>
+    </a>
+<a class="nl" href="Serbisyo.dc.html">Serbisyo</a>
+<a class="nl" href="Tulong.dc.html">Tulong</a>
+<a class="nl" href="Barangay.dc.html">Barangay</a>
+<a class="nl" href="Pasyalan.dc.html">Pasyalan</a>
+<a class="nl nla" href="IbaPa.dc.html" aria-current="page">Iba pa</a>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+      <a class="btn2" href="Serbisyo.dc.html" aria-label="Maghanap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 999px; color: #172741">
+        <svg class="ic" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M21 21l-4.3-4.3"></path></svg>
+      </a>
+      <a class="btn2" href="#" lang="en" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; color: #172741; text-decoration: none; font-weight: 600">
+        <svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20 M2 12h20 M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"></path></svg>English
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <section style="background: #FFFFFF; border-bottom: 1px solid #CCD6E3">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 40px 40px 0">
+      <nav aria-label="Breadcrumb" style="font-size: 15px; color: #515D6B; margin-bottom: 24px"><a href="Main.dc.html">Home</a> <span aria-hidden="true">›</span> Iba pa</nav>
+      <h1 style="font-size: clamp(52px, 6vw, 88px)">Ang nangyayari sa <em style="color: #1A47A8">lungsod</em></h1>
+      <p style="font-size: 20px; color: #515D6B; margin-top: 12px; max-width: 52ch">Mga abiso, mga opisyal, at saan napupunta ang pondo — may sanggunian ang bawat isa.</p>
+      <div role="tablist" aria-label="Mga seksyon" style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 36px">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+          <button class="tab" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="font: inherit; font-weight: 700; font-size: 18px; min-height: 56px; padding: 0 22px; border: 0; border-bottom: 3px solid {{t.line}}; border-radius: 10px 10px 0 0; background: transparent; color: {{t.fg}}">{{t.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <div role="tabpanel" style="max-width: 1280px; margin: 0 auto; padding: 56px 40px 0">
+
+    <sc-if value="{{show.abiso}}" hint-placeholder-val="{{ true }}">
+      <section aria-labelledby="ab-h">
+        <h2 id="ab-h" style="font-size: 44px; margin-bottom: 8px">Mga bagong abiso at oportunidad</h2>
+        <p style="color: #515D6B; margin-bottom: 28px">May link sa opisyal na anunsyo ang bawat isa.</p>
+        <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+          <sc-for list="{{news}}" as="n" hint-placeholder-count="5">
+            <li style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; background: #FFFFFF; border: 1px solid #CCD6E3; border-radius: 18px; padding: 24px">
+              <div style="flex: 0 0 96px; text-align: center; background: #E8EFFA; border-radius: 14px; padding: 12px 8px">
+                <p style="font-size: 14px; font-weight: 700; color: #1A47A8; text-transform: uppercase">{{n.m}}</p>
+                <p style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1">{{n.d}}</p>
+              </div>
+              <div style="flex: 1 1 400px; min-width: 0">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px">
+                  <span style="font-size: 13px; font-weight: 700; color: #515D6B; background: #EEF2F6; border-radius: 6px; padding: 1px 8px">{{n.tag}}</span>
+                  <span style="font-size: 13px; font-weight: 700; color: #744500; background: #FBF0DC; border-radius: 6px; padding: 1px 8px">Sinusuri pa</span>
+                </div>
+                <h3 style="font-size: 28px; line-height: 1.15">{{n.t}}</h3>
+                <p style="font-size: 16px; color: #515D6B; margin-top: 6px">{{n.sub}}</p>
+              </div>
+              <a href="https://pasigcity.gov.ph" style="align-self: center; font-weight: 700; white-space: nowrap">Opisyal na anunsyo →</a>
+            </li>
+          </sc-for>
+        </ol>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{show.opisyal}}" hint-placeholder-val="{{ false }}">
+      <section aria-labelledby="op-h">
+        <h2 id="op-h" style="font-size: 44px; margin-bottom: 8px">Mga opisyal ng Pasig</h2>
+        <p style="color: #515D6B; margin-bottom: 28px">Lungsod: 2025–2028. Barangay at SK: hanggang Nob 2028 (RA 12326).</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+          <sc-for list="{{officials}}" as="o" hint-placeholder-count="3">
+            <div style="background: #FFFFFF; border: 1px solid #CCD6E3; border-radius: 20px; padding: 24px; display: flex; gap: 18px; align-items: center">
+              <span aria-hidden="true" style="display: inline-flex; width: 72px; height: 72px; border-radius: 999px; align-items: center; justify-content: center; background: #DCE5F8; color: #1A47A8; font-family: 'Newsreader', Georgia, serif; font-size: 30px; flex-shrink: 0">{{o.ini}}</span>
+              <span>
+                <span style="display: block; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #1A47A8">{{o.role}}</span>
+                <span style="display: block; font-family: 'Newsreader', Georgia, serif; font-size: 26px; line-height: 1.15">{{o.name}}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+        <a class="cd" href="#" style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; font-weight: 700">Mga konsehal ng una at ikalawang distrito <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14 M13 6l6 6-6 6"></path></svg></a>
+        <p style="font-size: 14px; color: #515D6B; margin-top: 16px">Pantay ang paglista. Walang iniendorso at walang kulay ng partido.</p>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{show.pondo}}" hint-placeholder-val="{{ false }}">
+      <section aria-labelledby="po-h">
+        <h2 id="po-h" style="font-size: 44px; margin-bottom: 8px">Pondo ng bayan</h2>
+        <p style="color: #515D6B; margin-bottom: 28px">Mula sa mga dokumento at balita. May markang “Sinusuri pa” ang kinukumpirma pa.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+          <sc-for list="{{funds}}" as="f" hint-placeholder-count="4">
+            <div style="background: {{f.bg}}; border: 1px solid {{f.bd}}; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 15px; font-weight: 700; color: {{f.lc}}">{{f.label}} · {{f.yr}}</span>
+              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 52px; line-height: 1; color: {{f.vc}}">{{f.v}}</span>
+              <sc-if value="{{f.check}}" hint-placeholder-val="{{ false }}"><span style="align-self: flex-start; font-size: 13px; font-weight: 700; color: #744500; background: #FBF0DC; border-radius: 6px; padding: 1px 8px">Sinusuri pa</span></sc-if>
+              <span style="font-size: 14px; color: {{f.lc}}">{{f.src}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{show.tungkol}}" hint-placeholder-val="{{ false }}">
+      <section aria-labelledby="tu-h" style="display: flex; flex-wrap: wrap; gap: 48px">
+        <div style="flex: 1 1 360px; min-width: 0">
+          <h2 id="tu-h" style="font-size: 44px; margin-bottom: 16px">Tungkol sa BetterPasig</h2>
+          <p style="font-size: 19px; color: #515D6B">Pinagsasama-sama namin ang impormasyon tungkol sa mga serbisyo, benepisyo at desisyon ng Lungsod ng Pasig — sa Filipino at English, may sanggunian.</p>
+          <p style="font-size: 19px; color: #515D6B; margin-top: 16px">Walang account, walang tracking cookie. Bukas sa GitHub ang code at datos.</p>
+          <a class="btn" href="https://github.com/kuya-egg/betterpasig" style="display: inline-flex; align-items: center; margin-top: 24px; min-height: 52px; padding: 0 22px; border-radius: 999px; background: #1A47A8; color: #FFFFFF; text-decoration: none; font-weight: 700">Tumulong sa GitHub →</a>
+        </div>
+        <ol style="flex: 2 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+          <sc-for list="{{principles}}" as="p" hint-placeholder-count="7">
+            <li style="background: #FFFFFF; border: 1px solid #CCD6E3; border-radius: 18px; padding: 20px">
+              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 36px; color: #1A47A8; line-height: 1">{{p.n}}</span>
+              <p style="font-weight: 700; font-size: 18px; margin-top: 8px; line-height: 1.35">{{p.t}}</p>
+            </li>
+          </sc-for>
+        </ol>
+      </section>
+    </sc-if>
+  </div>
+</main>
+<footer style="margin-top: 120px; background: #172741; color: #E8EFFA">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 72px 40px 40px">
+    <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+      <div style="flex: 1 1 340px; max-width: 420px">
+        <p style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1.1; color: #FFFFFF">Para sa bawat Pasigueño.</p>
+        <p style="margin-top: 16px; font-size: 16px; color: #C3CEDF">Pinapatakbo ng volunteers. <strong style="color: #FFFFFF">Hindi ito opisyal na website ng Pasig City.</strong> Para sa opisyal na transaksyon, pumunta sa <a href="https://pasigcity.gov.ph" style="color: #FFFFFF">pasigcity.gov.ph</a>.</p>
+      </div>
+      <div style="flex: 2 1 520px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; font-size: 16px">
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Serbisyo</p><a href="Serbisyo.dc.html" style="color: #C3CEDF">Lahat ng serbisyo</a><a href="Tulong.dc.html" style="color: #C3CEDF">Benepisyo at tulong</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Anunsyo</a></div>
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Lungsod</p><a href="Barangay.dc.html" style="color: #C3CEDF">Mga barangay</a><a href="Pasyalan.dc.html" style="color: #C3CEDF">Pasyalan</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Mga opisyal</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Pondo ng lungsod</a></div>
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Tulong</p><a href="Hotlines.dc.html" style="color: #C3CEDF">Emergency</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Tungkol sa BetterPasig</a><a href="https://github.com/kuya-egg/betterpasig" style="color: #C3CEDF">I-report ang mali</a></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 20px; border-top: 1px solid #3A4B68; font-size: 14px; color: #C3CEDF">
+      <span>© 2026 BetterPasig · Bahagi ng <a href="https://bettergov.ph" style="color: #FFFFFF">BetterGov.ph</a> · Code at data sa GitHub · Larawan mula Wikimedia Commons</span>
+      <span>Huling update ng datos: Okt 19, 2026</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 0 }; }
+  renderVals() {
+    const T = ['Mga abiso', 'Mga opisyal', 'Pondo ng bayan', 'Tungkol'];
+    const keys = ['abiso', 'opisyal', 'pondo', 'tungkol'];
+    const t = this.state.tab;
+    const show = {}; keys.forEach((k, i) => { show[k] = i === t; });
+    const blue = (label, v, yr, src, check) => ({ label, v, yr, src, check, bg: '#1A47A8', bd: '#1A47A8', lc: '#DCE5F8', vc: '#FFFFFF' });
+    const white = (label, v, yr, src, check) => ({ label, v, yr, src, check, bg: '#FFFFFF', bd: '#CCD6E3', lc: '#515D6B', vc: '#172741' });
+    return {
+      show,
+      tabs: T.map((label, i) => ({ label, on: i === t ? 'true' : 'false', line: i === t ? '#1A47A8' : 'transparent', fg: i === t ? '#1A47A8' : '#515D6B', pick: () => this.setState({ tab: i }) })),
+      news: [
+        { m: 'Okt', d: '4', tag: 'Buwis', t: 'Pagbabayad ng business tax, ika-4 na quarter ng 2026', sub: 'Inihambing sa opisyal na anunsyo · Sinuri Okt 28, 2026' },
+        { m: 'Okt', d: '3', tag: 'Ari-arian', t: 'Maagang pagbabayad ng amilyar para sa 2027', sub: 'Inihambing sa opisyal na anunsyo · Sinuri Okt 28, 2026' },
+        { m: 'Okt', d: '3', tag: 'Alagang hayop', t: 'CaSpay: libreng kapon sa Oktubre 30', sub: 'Kumpirmahin sa tagapag-ayos ang iskedyul' },
+        { m: 'Okt', d: '1', tag: 'Transportasyon', t: 'Paggamit ng PasigPass sa Libreng Sakay', sub: 'Anim na ruta · puwedeng magparehistro nang walang QR code' },
+        { m: 'Okt', d: '1', tag: 'Kaligtasan', t: 'Tulong sa Fire Safety Inspection System', sub: 'Linya para sa transaksyon sa BFP, Lun–Biy 8:00–17:00' }
+      ],
+      officials: [
+        { ini: 'VS', role: 'Alkalde', name: 'Victor Ma. Regis N. “Vico” Sotto' },
+        { ini: 'DJ', role: 'Bise alkalde', name: 'Robert Vincent Jude B. “Dodot” Jaworski Jr.' },
+        { ini: 'RR', role: 'Kinatawan', name: 'Roman T. Romulo' }
+      ],
+      funds: [
+        blue('Taunang badyet', '₱17B', '2024', 'tribune.net.ph, novagov.ph', true),
+        white('Kabuuang ari-arian (COA)', '₱53.12B', '2024', 'philstar.com', false),
+        white('Kabuuang pananagutan (COA)', '₱7.42B', '2024', 'philstar.com', false),
+        white('Kontrata ng Bagong City Hall', '₱9.2B', '2025', 'mb.com.ph, philstar.com', false)
+      ],
+      principles: [
+        'Magpakita ng sanggunian.', 'Ituro kung saang opisina lalapit.', 'Maging patas sa lahat ng partido.',
+        'Gawing madaling gamitin sa anumang edad.', 'Buksan sa publiko ang code at datos.', 'Itama agad ang mali.', 'Ingatan ang personal na impormasyon.'
+      ].map((x, i) => ({ n: i + 1, t: x }))
+    };
+  }
+}
+</script>
+</body>
+</html>

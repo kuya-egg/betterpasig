@@ -1,59 +1,14 @@
 {
-  "retrieved": "2026-10-19",
+  "retrieved": "2026-11-18",
   "facts": [
-    {
-      "id": "population",
-      "label_fil": "Populasyon",
-      "label_en": "Population",
-      "value_fil": "853,050",
-      "value_en": "853,050",
-      "as_of_fil": "2024 (PSA POPCEN, petsa ng sanggunian: Hulyo 1, 2024)",
-      "as_of_en": "2024 (PSA POPCEN, reference date July 1, 2024)",
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
-      "verify": false,
-      "note_fil": "Parehong iniulat ng dalawang sanggunian ang bilang na iniuugnay sa PSA. Hindi pa nakuha ang mismong ulat ng PSA.",
-      "note_en": "Two secondary sources agree with the reported PSA figure; PSA release itself not fetched."
-    },
-    {
-      "id": "households",
-      "label_fil": "Bilang ng sambahayan",
-      "label_en": "Households",
-      "value_fil": "212,895",
-      "value_en": "212,895",
-      "as_of": "2024",
-      "sources": ["https://en.wikipedia.org/wiki/Pasig"],
-      "verify": true
-    },
-    {
-      "id": "land-area",
-      "label_fil": "Lawak ng lupa",
-      "label_en": "Land area",
-      "value_fil": "48.46 km²",
-      "value_en": "48.46 km²",
-      "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
-      "verify": true,
-      "note_fil": "Magkaiba ang nakalistang sukat. 48.46 km² ang nasa Wikipedia at 31.46 km² ang nasa novagov.ph (bilang na nasa format ng PSA).",
-      "note_en": "Conflict: Wikipedia gives 48.46 km²; novagov.ph (PSA-style figure) gives 31.46 km²."
-    },
-    {
-      "id": "barangays",
-      "label_fil": "Bilang ng barangay",
-      "label_en": "Barangays",
-      "value_fil": "30",
-      "value_en": "30",
-      "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
-      "verify": false
-    },
     {
       "id": "districts",
       "label_fil": "Distrito",
       "label_en": "Districts",
       "value_fil": "2 distrito para sa konseho at 1 distrito para sa Kongreso",
       "value_en": "2 council districts; 1 lone congressional district",
-      "as_of": "2025",
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://en.wikipedia.org/wiki/2025_Pasig_local_elections"],
+      "as_of": null,
+      "sources": ["https://pasigcity.gov.ph/about-pasig-city/city-government", "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/2625"],
       "verify": false
     },
     {
@@ -63,17 +18,7 @@
       "value_fil": "Lubos na Urbanisadong Lungsod (Highly Urbanized City, HUC)",
       "value_en": "Highly Urbanized City (HUC)",
       "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
-      "verify": false
-    },
-    {
-      "id": "income-class",
-      "label_fil": "Klase ng kita",
-      "label_en": "Income class",
-      "value_fil": "Unang klase (first class)",
-      "value_en": "1st class",
-      "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://novagov.ph/lgu/pasig-city"],
+      "sources": ["https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/2625"],
       "verify": false
     },
     {
@@ -83,10 +28,11 @@
       "value_fil": "463,885",
       "value_en": "463,885",
       "as_of": "2025",
-      "sources": ["https://en.wikipedia.org/wiki/Pasig"],
-      "verify": true,
-      "note_fil": "Hindi nahanap ang pinagmulan mula sa COMELEC.",
-      "note_en": "COMELEC source not found."
+      "sources": [
+        "https://www.comelec.gov.ph/php-tpls-attachments/2025NLE/Statistics/CONSOLIDATED_2025_Number_Of_Registered_Voters.pdf",
+        "https://www.comelec.gov.ph/php-tpls-attachments/2025NLE/Statistics/2025_NLE_VotersTurnoutbyCityMun_OFOV_112525.pdf"
+      ],
+      "verify": false
     },
     {
       "id": "motto",
@@ -95,7 +41,7 @@
       "value_fil": "Umaagos ang Pag-asa",
       "value_en": "Umaagos ang Pag-asa (Hope Flows)",
       "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://assets.pasigcity.gov.ph/storage/executive_order/2022/04/19/6333b6abc54bd1664333483EO%20PCG%20-%2016%20s.%202022.pdf"],
+      "sources": ["https://assets.pasigcity.gov.ph/storage/executive_order/2022/04/19/6333b6abc54bd1664333483EO%20PCG%20-%2016%20s.%202022.pdf", "https://pasigcity.gov.ph/about-pasig-city"],
       "verify": false,
       "note_fil": "Makikita ang moto sa opisyal na letterhead ng lungsod (PDF ng EO PCG-16 s.2022).",
       "note_en": "Motto appears on official city letterhead (EO PCG-16 s.2022 PDF)."
@@ -104,68 +50,73 @@
       "id": "cityhood",
       "label_fil": "Pagiging lungsod",
       "label_en": "Cityhood",
-      "value_fil": "Batas Republika Blg. 7829 (nilagdaan noong Disyembre 1994); pinagtibay sa plebisito noong Enero 21, 1995",
-      "value_en": "Republic Act No. 7829 (signed December 1994); ratified by plebiscite January 21, 1995",
-      "as_of": "1995",
-      "sources": ["https://en.wikipedia.org/wiki/Pasig", "https://chanrobles.com/laws/republicacts/79_republicacts.php?id=7833", "https://batasnatin.com/laws/ra-7829"],
-      "verify": true,
-      "note_fil": "Sa Wikipedia lang galing ang petsa ng plebisito.",
-      "note_en": "Plebiscite date from Wikipedia only."
+      "value_fil": "Batas Republika Blg. 7829, inaprubahan noong Disyembre 8, 1994, na nagpalit sa Munisipalidad ng Pasig bilang highly urbanized city na tinatawag na Lungsod ng Pasig",
+      "value_en": "Republic Act No. 7829, approved December 8, 1994, converting the Municipality of Pasig into a highly urbanized city to be known as the City of Pasig",
+      "as_of": "1994",
+      "sources": ["https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/2625", "https://issuances-library.senate.gov.ph/legislative%2Bissuances/Republic%20Act%20No.%207829"],
+      "verify": false
     },
     {
       "id": "founded",
-      "label_fil": "Petsa ng pagkakatatag",
-      "label_en": "Founded",
-      "value_fil": "Hulyo 2, 1573",
-      "value_en": "July 2, 1573",
+      "label_fil": "Araw ng Pasig",
+      "label_en": "Araw ng Pasig (founding anniversary)",
+      "value_fil": "Ipinagdiriwang tuwing Hulyo 2 ang pagkakatatag ng poblacion ng Pasig sa kasalukuyan nitong lokasyon noong 1573",
+      "value_en": "Celebrated every July 2: the founding of Pasig's poblacion at its present location in 1573",
       "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig"],
-      "verify": true
+      "sources": ["https://pasigcity.gov.ph/news-and-releases/tingnan-paglulunsad-ng-ika-450-araw-ng-pasig-panahon-ng-pasigueno-607", "https://pasigcity.gov.ph/news-and-releases/maligayang-araw-ng-pasig-2026-394"],
+      "verify": false
     },
     {
       "id": "patron-fiesta",
       "label_fil": "Patron at pista",
       "label_en": "Patron saint and fiesta",
-      "value_fil": "Immaculate Conception; pista tuwing Disyembre 8",
-      "value_en": "Immaculate Conception; fiesta December 8",
+      "value_fil": "Immaculate Conception; Pista ng Bayan prusisyon tuwing Disyembre 8, pinangungunahan ng Immaculate Conception Cathedral ng Pasig",
+      "value_en": "Immaculate Conception; the Pista ng Bayan procession is held on December 8, led by the Immaculate Conception Cathedral of Pasig",
       "as_of": null,
-      "sources": ["https://en.wikipedia.org/wiki/Pasig"],
-      "verify": true
+      "sources": ["https://pasigcity.gov.ph/news-and-releases/traffic-advisory-conduct-of-devotional-replica-procession-and-the-pista-ng-bayan-procession-264", "https://pasigcity.gov.ph/news-and-releases/2024-celebration-of-the-solemnity-of-the-immaculate-conception-674"],
+      "verify": false
     },
     {
       "id": "old-city-hall-closure",
-      "label_fil": "Pagsasara ng lumang City Hall",
-      "label_en": "Old City Hall closure",
-      "value_fil": "Isinara sa publiko ang lumang City Hall sa Caruncho Ave., Brgy. San Nicolas sa bisa ng executive order na may petsang Pebrero 7, 2025, para sa muling pagpapaunlad",
-      "value_en": "Old City Hall on Caruncho Ave., Brgy. San Nicolas closed to the public by executive order dated February 7, 2025, for redevelopment",
+      "label_fil": "Lumang City Hall",
+      "label_en": "Old City Hall",
+      "value_fil": "Noong Marso 2025, isinasagawa na ang demolition ng lumang City Hall complex sa Caruncho Ave., Brgy. San Nicolas para magbigay-daan sa Bagong City Hall. Pansamantalang huminto noong Marso 20, 2025 ang PSA CRS Outlet doon dahil dito",
+      "value_en": "As of March 2025, the old City Hall complex on Caruncho Ave., Brgy. San Nicolas was being demolished to make way for the New City Hall. The PSA CRS Outlet there stopped operating on March 20, 2025 because of this",
       "as_of": "2025",
-      "sources": ["https://en.wikipedia.org/wiki/List_of_city_and_municipal_halls_in_Metro_Manila"],
-      "verify": true
+      "sources": ["https://pasigcity.gov.ph/news-and-releases/pansamantalang-pagsasara-ng-psa-crs-outlet-sa-pasig-city-kaugnay-ng-demolition-ng-lumang-city-hall-987"],
+      "verify": false
     }
   ],
   "contact": {
-    "city_hall_address": "Pasig City Temporary City Hall, Eulogio Amang Rodriguez Avenue, Bridgetowne, Barangay Rosario, Pasig City (operating since September 16, 2024, while the New City Hall is built at the Caruncho Ave., Brgy. San Nicolas site)",
+    "city_hall_address": "Pasig City Temporary City Hall, Eulogio Amang Rodriguez Avenue, Bridgetowne, Barangay Rosario, Pasig City (some offices began moving in on September 16, 2024, while the New City Hall is built at the Caruncho Ave., Brgy. San Nicolas site)",
     "trunkline": "(02) 8643-1111",
-    "trunkline_verify": true,
-    "trunkline_note": "A 2023 Manila Bulletin item gives the pre-8-digit form '(02) 643-1111 loc. 1162' for PDAO. Confirm the current number with the city.",
+    "trunkline_verify": false,
+    "trunkline_note": "The Pasig City Hall trunkline (8643 1111) was announced as operational on April 14, 2024. A 2023 Manila Bulletin item gives the older form '(02) 643-1111 loc. 1162' for PDAO.",
     "website": "https://pasigcity.gov.ph",
     "facebook": "https://www.facebook.com/PasigPIO",
-    "facebook_note": "Pasig City Public Information Office page, cited by Spot.ph as the official source for updates.",
-    "sources": ["https://www.spot.ph/newsfeatures/policy/110053/pasig-city-hall-is-moving-where-can-i-get-government-services-a5229-20240919", "https://gmanetwork.com/news/topstories/metro/923706/pasig-announces-transfer-of-some-offices-to-temporary-city-hall/story", "https://tribune.net.ph/2024/09/17/pasig-temporary-city-hall-partially-opens", "https://en.wikipedia.org/wiki/Pasig_City_Hall", "https://mb.com.ph/2023/5/15/pasig-lgu-offers-financial-assistance-to-pw-ds-with-small-businesses", "https://en.wikipedia.org/wiki/Pasig"],
+    "facebook_note": "Pasig City Public Information Office page, linked from the official pasigcity.gov.ph website.",
+    "sources": [
+      "https://pasigcity.gov.ph/news-and-releases/abiso-sa-paglipat-ng-ilang-operations-sa-temporary-city-hall-351",
+      "https://pasigcity.gov.ph/news-and-releases/advisory-pasig-city-hall-trunkline-number-is-now-operational-april-14-2024-980",
+      "https://pasigcity.gov.ph/about-pasig-city/directory",
+      "https://gmanetwork.com/news/topstories/metro/923706/pasig-announces-transfer-of-some-offices-to-temporary-city-hall/story",
+      "https://tribune.net.ph/2024/09/17/pasig-temporary-city-hall-partially-opens",
+      "https://mb.com.ph/2023/5/15/pasig-lgu-offers-financial-assistance-to-pw-ds-with-small-businesses"
+    ],
     "other_sites": [
       {
         "name": "Annex 1",
-        "address": "Ayala The 30th, Barangay Ugong",
-        "as_of": "2024-09",
-        "sources": ["https://www.spot.ph/newsfeatures/policy/110053/pasig-city-hall-is-moving-where-can-i-get-government-services-a5229-20240919"],
-        "verify": true
+        "address": "Pasig City Hall Annex 1, Ayala Malls The 30th, Barangay Ugong",
+        "as_of": "2026-11",
+        "sources": ["https://pasigcity.gov.ph/about-pasig-city/directory"],
+        "verify": false
       },
       {
         "name": "Annex 2",
-        "address": "Robinsons Metro East, Barangay Dela Paz",
-        "as_of": "2024-09",
-        "sources": ["https://www.spot.ph/newsfeatures/policy/110053/pasig-city-hall-is-moving-where-can-i-get-government-services-a5229-20240919"],
-        "verify": true
+        "address": "Pasig City Hall Annex 2, Robinsons Metro East, Barangay Dela Paz",
+        "as_of": "2026-11",
+        "sources": ["https://pasigcity.gov.ph/about-pasig-city/directory"],
+        "verify": false
       }
     ]
   }

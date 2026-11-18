@@ -1,27 +1,31 @@
 ---
+// Sources and trust line: where the facts come from, the "being checked" label, and how to report a mistake.
+import Verify from "../Verify.astro";
 import { href, langFromUrl, ui } from "../../i18n";
+
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<section class="section bp-trust" id="pinagmulan" aria-labelledby="pinagmulan-h">
+<section class="section--home bp-trust" id="pinagmulan" aria-labelledby="pinagmulan-h">
   <div class="wrap bp-trust__content">
-    <div>
+    <div class="bp-trust__text">
       <h2 id="pinagmulan-h">{t.trustTitle}</h2>
-      <p>{t.trustBefore} <strong>{t.trustStrong}</strong>{t.trustAfter}</p>
+      <p>{t.trustBefore} <strong>{t.trustStrong}</strong>{t.trustAfter} <Verify /></p>
     </div>
     <div class="bp-trust__links">
-      <a href={href(lang, "/tungkol/")}>{t.aboutTitle} <span aria-hidden="true">→</span></a>
-      <a href="https://github.com/kuya-egg/betterpasig/issues/new">{t.aboutReport} <span aria-hidden="true">↗</span></a>
+      <a class="pill pill--secondary" href={href(lang, "/tungkol/")}>{t.aboutTitle}</a>
+      <a class="pill pill--secondary" href="https://github.com/kuya-egg/betterpasig/issues/new">{t.aboutReport}</a>
     </div>
   </div>
 </section>
 
 <style>
-  .bp-trust { background: var(--pale); }
-  .bp-trust .bp-trust__content { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: center; gap: var(--s-5); }
-  .bp-trust p { margin-top: var(--s-3); max-width: 62ch; }
-  .bp-trust__links { display: grid; gap: var(--s-2); }
-  .bp-trust__links a { display: flex; align-items: center; justify-content: space-between; min-height: 3rem; gap: var(--s-3); font-weight: 650; color: var(--blue); border-bottom: 1px solid var(--line-strong); }
-  @media (max-width: 39.9375rem) { .bp-trust .bp-trust__content { grid-template-columns: minmax(0, 1fr); } }
+  .bp-trust { padding-block-start: var(--s-7); }
+  .bp-trust__content { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-6); padding-block-start: var(--s-7); border-block-start: 1px solid var(--line); }
+  .bp-trust__text { flex: 1 1 28rem; min-inline-size: 0; display: grid; gap: var(--s-3); }
+  .bp-trust h2 { font-size: var(--t-h3); }
+  .bp-trust__text p { color: var(--muted); font-size: var(--t-meta); max-inline-size: 72ch; }
+  .bp-trust__text strong { font-weight: 600; color: var(--ink); }
+  .bp-trust__links { display: flex; flex-wrap: wrap; gap: var(--s-3); }
 </style>

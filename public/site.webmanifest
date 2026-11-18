@@ -1,8 +1,8 @@
 {
   "name": "BetterPasig",
   "short_name": "BetterPasig",
-  "description": "Bawat serbisyo, benepisyo at opisyal ng Lungsod ng Pasig, malinaw at nasa isang lugar.",
-  "lang": "fil",
+  "description": "Every Pasig City service, benefit and official, clear and in one place.",
+  "lang": "en",
   "start_url": "/",
   "display": "browser",
   "background_color": "#F8FAFC",

@@ -30,11 +30,12 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 
 ## Rules for editing
 
-1. **Every entry needs a source.** Put the URL in `sources` (or `source`). Prefer official city documents (`assets.pasigcity.gov.ph`), then national agencies, then reputable news.
+1. **Every entry needs a trusted source.** Put the URL in `sources` (or `source`). Prefer official city documents (`assets.pasigcity.gov.ph`), then national agencies, then the major news outlets in rule 6. Nothing else counts.
 2. **Use `verify`.** Set `"verify": true` when a value comes only from a secondary site, conflicts with another source, or might be outdated. The site shows these with a "being checked" label. Set it to `false` only after someone confirms it against an official source or by calling.
 3. **Never guess.** If a fee, requirement or number is unknown, use `null`. The site hides empty fields.
 4. **Keep IDs stable.** `id` values are used in URLs and in `site.json`. Rename the title, not the ID.
-5. **Filipino first.** Fields ending in `_fil` are the default; `_en` is the English toggle. Prose and values that people read get both (`*_fil` and `*_en`); keep every number, peso amount, date, name and phone number identical between the two. A name, URL or plain number stays a single field.
+5. **English is the default page language.** Fields ending in `_fil` are the Filipino version; `_en` is the English version. Prose and values that people read get both (`*_fil` and `*_en`); keep every number, peso amount, date, name and phone number identical between the two. A name, URL or plain number stays a single field.
+6. **Trusted sources only (D7).** Every fact cites an official source (`*.gov.ph` or `*.gov`, an official account of a government office, an agency's own system, or an institution's own site for its own facts) or a major news outlet (Inquirer, Philstar, GMA, Rappler, Manila Bulletin, ABS-CBN, Manila Times, Daily Tribune, Malaya, BusinessWorld, BusinessMirror, VERA Files, DZRH, PNA). Never Wikipedia, directories, listing or aggregator sites, or blogs. A fact without a trusted source is removed or set to `null`. The build fails when a citation's host is not on the reviewed list in `src/lib/source-policy.ts`; adding a host is a reviewed pull request.
 
 ## Services schema
 
@@ -63,10 +64,9 @@ Add an object to `alerts` in `site.json`, following `alert_example`. Always incl
 
 ## Known gaps (help wanted)
 
-- Fire (BFP Pasig) landline not confirmed; only a mobile number found.
-- Police number 8477-7953 comes from secondary sites.
-- Pasig City General Hospital ER line not identified.
-- No barangay hall addresses yet; barangay captains and numbers are from directories and need checking.
+- Fire (BFP Pasig) landline not confirmed; only the mobile number on the BFP Pasig page.
+- Pasig City General Hospital ER line not identified; the city and PhilHealth list three general lines.
+- No barangay hall addresses yet. Punong barangay, SK chair, kagawad and hall numbers come from the DILG Barangay Officials Directory (self-reported by barangays), so they keep `verify: true`.
 - Health Department services lack requirements (its charter is 539 pages).
 - 2025–2026 city budget totals not sourced.
 - Land area conflict: 48.46 km² vs 31.46 km².

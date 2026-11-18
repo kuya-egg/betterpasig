@@ -47,7 +47,7 @@ Our stance is to amplify the city's transparency, not compete with it. Every pag
 1. **Source every claim.** Each fact links to the official document it came from, with the date we checked it.
 2. **Point to the city, never replace it.** We explain and guide; payments, applications and complaints go through official channels.
 3. **Non-partisan always.** No endorsements, no party colors, no political funding. Officials are listed equally.
-4. **Built for every age.** Plain Filipino first, large text, works on a budget phone and slow data.
+4. **Built for every age.** Plain English and Filipino, large text, works on a budget phone and slow data.
 5. **Open by default.** Code and data are public on GitHub; anyone can suggest a correction.
 6. **Admit mistakes fast.** Corrections are fixed within 48 hours and logged publicly.
 7. **Collect nothing personal.** No accounts, no stored complaints, no tracking cookies.

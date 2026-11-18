@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>BetterPasig — Gabay sa mga serbisyo at lugar sa Pasig</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F8FAFC;color:#172741;font-family:'Manrope',system-ui,sans-serif;font-size:18px;line-height:1.65}
+*{box-sizing:border-box}
+a{color:#1A47A8;text-underline-offset:3px}a:hover{color:#10307A}
+h1,h2,h3{font-family:'Newsreader',Georgia,serif;font-weight:500;margin:0;letter-spacing:-0.02em;line-height:1.04}
+p{margin:0}
+.ic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #1A47A8;outline-offset:3px}
+.nl{color:#172741;text-decoration:none;font-weight:600;padding:8px 14px;border-radius:999px;transition:background .15s,color .15s}
+.nl:hover{background:#E8EFFA;color:#1A47A8}
+.nla{background:#E8EFFA;color:#1A47A8}
+.cd{text-decoration:none;color:#172741;background:#FFFFFF;border:1px solid #CCD6E3;border-radius:16px;transition:border-color .24s,background .24s,transform .24s cubic-bezier(.22,.8,.24,1)}
+.cd:hover{border-color:#1A47A8;background:#F5F8FE;color:#172741;transform:translateY(-3px)}
+.cd:hover .ar{transform:translateX(5px);color:#1A47A8}
+.ar{transition:transform .24s cubic-bezier(.22,.8,.24,1)}
+.row{text-decoration:none;color:#172741;transition:background .15s,color .15s}
+.row:hover{background:#E8EFFA;color:#1A47A8}
+.row:hover .ar{transform:translateX(5px)}
+.btn{transition:background .15s}.btn:hover{background:#10307A;color:#FFFFFF}
+.btn2{transition:background .15s}.btn2:hover{background:#E8EFFA}
+.mp path{stroke:#FFFFFF;stroke-width:1.4;stroke-linejoin:round;cursor:pointer;transition:transform .45s cubic-bezier(.22,.8,.24,1),fill .2s}
+.d1{fill:#DCE5F8}.d2{fill:#A9BFEF}.dim{fill:#EEF2F6}
+.on{fill:#1A47A8;transform:translateY(-10px)}
+.mp a:hover path{fill:#7F9DE3;transform:translateY(-5px)}
+.mp a:hover path.on{fill:#1A47A8;transform:translateY(-10px)}
+.mp a:focus-visible{outline:none}.mp a:focus-visible path{stroke:#172741;stroke-width:2.5}
+.ext{filter:drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC),drop-shadow(0 1px 0 #6E86BC)}
+.tilt{transform:perspective(1600px) rotateX(48deg) rotateZ(-12deg);transform-origin:50% 55%;transition:transform .9s cubic-bezier(.22,.8,.24,1)}
+.flat{transform:none}
+.bob{animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.tilt,.cd,.ar,.mp path{transition:none}.bob{animation:none}}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100vh; background: #F8FAFC">
+<a href="#main" class="sr">Lumaktaw sa nilalaman</a>
+<div style="background: #981D28; color: #FFFFFF; font-size: 15px">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 9px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 24px">
+    <span style="font-weight: 700">Emergency</span>
+    <a href="tel:+63286430000" style="color: #FFFFFF; text-decoration: none">Pasig DRRMO <strong>(02) 8643-0000</strong></a>
+    <a href="tel:911" style="color: #FFFFFF; text-decoration: none">Pambansa <strong>911</strong></a>
+    <a href="Hotlines.dc.html" style="color: #FFFFFF; font-weight: 700; margin-left: auto">Lahat ng hotline →</a>
+  </div>
+</div>
+<header style="position: sticky; top: 0; z-index: 20; background: #FFFFFF; border-bottom: 1px solid #CCD6E3">
+  <nav aria-label="Pangunahing menu" style="max-width: 1280px; margin: 0 auto; padding: 12px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 4px">
+    <a href="Main.dc.html" aria-label="BetterPasig, home" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #172741; margin-right: 28px">
+      <svg viewBox="100 0 360 560" width="22" height="34" aria-hidden="true"><path d="M243 327L239 340L234 377L230 387L218 397L212 399L200 395L193 384L187 382L189 377L200 312L200 303L207 302L215 303L218 308L217 317L243 327ZM250 392L248 403L238 392L250 392ZM301 402L314 419L320 423L321 430L316 427L303 428L277 424L269 425L252 424L238 417L246 409L247 403L250 406L261 406L262 403L276 404L277 401L294 405L301 402ZM210 407L231 414L224 427L216 429L216 433L206 435L191 434L186 428L193 410L199 401L210 407ZM319 317L309 337L286 327L279 340L274 345L251 357L237 359L239 340L247 311L252 304L267 290L275 299L292 301L303 307L301 314L319 317ZM413 101L398 104L400 91L398 83L393 72L377 80L371 98L373 102L355 110L360 95L343 96L347 24L374 27L377 33L400 28L399 40L401 58L413 101ZM321 430L327 434L343 429L349 435L356 460L357 466L320 475L319 465L295 463L281 461L280 448L275 442L276 432L269 425L277 424L303 428L316 427L321 430ZM259 366L260 376L255 379L240 379L234 377L237 359L251 357L255 365L259 366ZM143 280L197 327L195 343L178 343L163 348L138 345L136 336L131 336L120 326L136 316L137 289L143 280ZM301 402L294 405L277 401L276 404L262 403L261 406L250 406L248 403L250 392L255 383L260 382L278 389L278 394L301 402ZM413 101L422 130L444 167L400 168L402 176L391 175L388 190L381 189L375 191L348 189L347 180L340 180L335 161L329 170L313 197L299 193L289 194L288 180L289 155L288 141L291 132L303 131L310 135L316 143L317 151L324 156L333 153L334 140L325 123L321 114L316 109L325 102L331 110L342 111L343 105L340 101L343 96L360 95L355 110L373 102L371 98L377 80L393 72L398 83L400 91L398 104L413 101ZM366 258L383 282L400 306L391 315L379 328L372 333L360 334L358 322L341 322L319 317L301 314L303 307L292 301L275 299L267 290L280 276L290 253L316 260L331 260L357 264L366 258ZM207 302L200 303L200 312L197 327L166 299L181 282L181 270L195 270L206 265L210 273L210 287L207 302ZM334 373L313 372L305 393L298 387L295 373L285 370L287 361L285 356L294 350L298 351L302 363L321 359L333 363L334 373ZM313 372L355 374L357 380L378 373L373 378L369 386L379 396L377 406L379 419L384 427L395 426L400 431L422 444L438 459L445 467L443 471L430 472L422 503L423 513L421 529L417 529L410 552L407 552L404 536L382 519L376 510L368 501L369 488L367 482L359 475L356 460L349 435L343 429L327 434L321 430L320 423L314 419L301 402L313 372ZM195 343L189 377L187 382L176 379L160 364L151 359L129 353L111 340L114 333L120 326L131 336L136 336L138 345L163 348L178 343L195 343ZM444 167L444 177L448 183L449 196L417 196L417 189L411 188L409 216L398 214L348 209L351 220L358 242L366 258L357 264L331 260L316 260L290 253L295 230L292 208L289 194L299 193L313 197L329 170L335 161L340 180L347 180L348 189L375 191L381 189L388 190L391 175L402 176L400 168L444 167ZM280 356L264 358L263 367L259 366L255 365L251 357L274 345L279 340L279 352L280 356ZM170 207L182 220L181 270L181 282L166 299L143 280L159 260L160 251L158 209L170 207ZM238 417L252 424L269 425L276 432L275 442L280 448L281 461L272 466L264 465L259 467L245 459L251 448L231 439L216 429L224 427L231 414L238 417ZM255 379L255 383L250 392L238 392L230 387L234 377L240 379L255 379ZM372 333L370 357L366 365L378 373L357 380L355 374L334 373L333 363L321 359L302 363L298 351L294 350L285 356L280 356L279 352L279 340L286 327L309 337L319 317L341 322L358 322L360 334L372 333ZM265 364L264 370L278 376L281 380L298 387L305 393L301 402L278 394L278 389L260 382L255 383L255 379L260 376L259 366L263 367L264 358L265 364ZM278 376L264 370L265 364L277 362L278 376ZM237 391L225 412L210 407L199 401L200 395L212 399L218 397L230 387L237 391ZM298 387L281 380L278 376L277 362L265 364L264 358L285 356L287 361L285 370L295 373L298 387ZM348 21L343 96L340 101L343 105L342 111L331 110L325 102L316 109L307 101L272 75L265 60L266 50L275 36L281 32L285 23L285 14L289 14L296 8L302 9L313 16L322 16L324 21L348 21ZM237 391L247 403L246 409L238 417L225 412L237 391ZM292 208L295 230L290 253L280 276L267 290L252 304L247 311L243 327L217 317L218 308L215 303L207 302L210 287L210 273L206 265L195 270L181 270L182 220L170 207L207 198L216 190L230 191L239 190L261 193L274 198L274 211L292 208ZM398 214L439 223L437 235L438 250L441 255L441 263L435 275L427 277L395 300L383 282L366 258L358 242L351 220L348 209L398 214Z" fill="#1A47A8" stroke="#1A47A8" stroke-width="6" stroke-linejoin="round"></path></svg>
+      <span style="font-weight: 800; font-size: 21px; letter-spacing: -0.02em">BetterPasig</span>
+    </a>
+<a class="nl" href="Serbisyo.dc.html">Serbisyo</a>
+<a class="nl" href="Tulong.dc.html">Tulong</a>
+<a class="nl" href="Barangay.dc.html">Barangay</a>
+<a class="nl" href="Pasyalan.dc.html">Pasyalan</a>
+<a class="nl" href="IbaPa.dc.html">Iba pa</a>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px">
+      <a class="btn2" href="Serbisyo.dc.html" aria-label="Maghanap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 999px; color: #172741">
+        <svg class="ic" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M21 21l-4.3-4.3"></path></svg>
+      </a>
+      <a class="btn2" href="#" lang="en" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; color: #172741; text-decoration: none; font-weight: 600">
+        <svg class="ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20 M2 12h20 M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"></path></svg>English
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section aria-labelledby="hero-h" style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 48px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+  <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+    <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1A47A8">Gabay ng mamamayan · Lungsod ng Pasig</p>
+    <h1 id="hero-h" style="font-size: clamp(56px, 6.4vw, 96px)">Gabay sa mga serbisyo at lugar sa <em style="color: #1A47A8">Pasig</em>.</h1>
+    <p style="font-size: 21px; color: #515D6B; max-width: 36ch">Kung saan lalapit, ano ang dadalhin, at paano humingi ng tulong — sa simpleng salita.</p>
+
+    <form role="search" style="display: flex; gap: 8px; align-items: center; max-width: 600px; background: #FFFFFF; border: 1px solid #8A9BB4; border-radius: 18px; padding: 8px 8px 8px 20px">
+      <label for="q" class="sr">Ano ang hinahanap mo?</label>
+      <svg class="ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color: #515D6B"><path d="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M21 21l-4.3-4.3"></path></svg>
+      <input id="q" type="search" placeholder="Hal. amilyar, senior ID, scholarship" style="flex: 1; min-width: 0; border: 0; font: inherit; font-size: 19px; background: transparent; color: #172741; padding: 10px 0">
+      <button class="btn" type="submit" style="min-height: 52px; padding: 0 24px; border-radius: 12px; border: 0; background: #1A47A8; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer">Hanapin</button>
+    </form>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 16px">
+      <span style="color: #515D6B">Madalas hanapin:</span>
+      <a href="ServiceDetail.dc.html" style="font-weight: 600">Senior ID</a>
+      <a href="Serbisyo.dc.html" style="font-weight: 600">Business permit</a>
+      <a href="Tulong.dc.html" style="font-weight: 600">AICS ayuda</a>
+      <a href="Serbisyo.dc.html" style="font-weight: 600">Amilyar</a>
+    </div>
+  </div>
+
+  <!-- 3D MAP -->
+  <div id="mapa" style="flex: 1 1 520px; min-width: 0; position: relative; background: #E8EFFA; border-radius: 32px; min-height: 660px; overflow: hidden">
+    <div style="position: absolute; top: 28px; left: 32px; right: 32px; display: flex; justify-content: space-between; gap: 16px; z-index: 2">
+      <div>
+        <p style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; line-height: 1.1">Hanapin ang barangay mo</p>
+        <p style="font-size: 15px; color: #515D6B; margin-top: 4px">Pindutin ang mapa · 30 barangay</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #172741">
+        <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #DCE5F8; border: 1px solid #8A9BB4"></span>Unang Distrito</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #A9BFEF; border: 1px solid #8A9BB4"></span>Ikalawang Distrito</span>
+      </div>
+    </div>
+    <div style="position: absolute; inset: 70px 0 0 0; display: flex; align-items: center; justify-content: center">
+      <div class="tilt" style="width: 420px; max-width: 80%">
+        <svg class="mp" viewBox="100 0 360 560" role="group" aria-label="Mapa ng 30 barangay ng Pasig" style="width: 100%; height: auto; overflow: visible; display: block">
+          <g class="ext">
+<a href="#mapa" aria-label="Bagong Ilog" onClick="{{pk.bagong_ilog}}"><path class="{{cl.bagong_ilog}}" d="M243 327L239 340L234 377L230 387L218 397L212 399L200 395L193 384L187 382L189 377L200 312L200 303L207 302L215 303L218 308L217 317L243 327Z"></path></a>
+<a href="#mapa" aria-label="Bagong Katipunan" onClick="{{pk.bagong_katipunan}}"><path class="{{cl.bagong_katipunan}}" d="M250 392L248 403L238 392L250 392Z"></path></a>
+<a href="#mapa" aria-label="Bambang" onClick="{{pk.bambang}}"><path class="{{cl.bambang}}" d="M301 402L314 419L320 423L321 430L316 427L303 428L277 424L269 425L252 424L238 417L246 409L247 403L250 406L261 406L262 403L276 404L277 401L294 405L301 402Z"></path></a>
+<a href="#mapa" aria-label="Buting" onClick="{{pk.buting}}"><path class="{{cl.buting}}" d="M210 407L231 414L224 427L216 429L216 433L206 435L191 434L186 428L193 410L199 401L210 407Z"></path></a>
+<a href="#mapa" aria-label="Caniogan" onClick="{{pk.caniogan}}"><path class="{{cl.caniogan}}" d="M319 317L309 337L286 327L279 340L274 345L251 357L237 359L239 340L247 311L252 304L267 290L275 299L292 301L303 307L301 314L319 317Z"></path></a>
+<a href="#mapa" aria-label="Dela Paz" onClick="{{pk.dela_paz}}"><path class="{{cl.dela_paz}}" d="M413 101L398 104L400 91L398 83L393 72L377 80L371 98L373 102L355 110L360 95L343 96L347 24L374 27L377 33L400 28L399 40L401 58L413 101Z"></path></a>
+<a href="#mapa" aria-label="Kalawaan" onClick="{{pk.kalawaan}}"><path class="{{cl.kalawaan}}" d="M321 430L327 434L343 429L349 435L356 460L357 466L320 475L319 465L295 463L281 461L280 448L275 442L276 432L269 425L277 424L303 428L316 427L321 430Z"></path></a>
+<a href="#mapa" aria-label="Kapasigan" onClick="{{pk.kapasigan}}"><path class="{{cl.kapasigan}}" d="M259 366L260 376L255 379L240 379L234 377L237 359L251 357L255 365L259 366Z"></path></a>
+<a href="#mapa" aria-label="Kapitolyo" onClick="{{pk.kapitolyo}}"><path class="{{cl.kapitolyo}}" d="M143 280L197 327L195 343L178 343L163 348L138 345L136 336L131 336L120 326L136 316L137 289L143 280Z"></path></a>
+<a href="#mapa" aria-label="Malinao" onClick="{{pk.malinao}}"><path class="{{cl.malinao}}" d="M301 402L294 405L277 401L276 404L262 403L261 406L250 406L248 403L250 392L255 383L260 382L278 389L278 394L301 402Z"></path></a>
+<a href="#mapa" aria-label="Manggahan" onClick="{{pk.manggahan}}"><path class="{{cl.manggahan}}" d="M413 101L422 130L444 167L400 168L402 176L391 175L388 190L381 189L375 191L348 189L347 180L340 180L335 161L329 170L313 197L299 193L289 194L288 180L289 155L288 141L291 132L303 131L310 135L316 143L317 151L324 156L333 153L334 140L325 123L321 114L316 109L325 102L331 110L342 111L343 105L340 101L343 96L360 95L355 110L373 102L371 98L377 80L393 72L398 83L400 91L398 104L413 101Z"></path></a>
+<a href="#mapa" aria-label="Maybunga" onClick="{{pk.maybunga}}"><path class="{{cl.maybunga}}" d="M366 258L383 282L400 306L391 315L379 328L372 333L360 334L358 322L341 322L319 317L301 314L303 307L292 301L275 299L267 290L280 276L290 253L316 260L331 260L357 264L366 258Z"></path></a>
+<a href="#mapa" aria-label="Oranbo" onClick="{{pk.oranbo}}"><path class="{{cl.oranbo}}" d="M207 302L200 303L200 312L197 327L166 299L181 282L181 270L195 270L206 265L210 273L210 287L207 302Z"></path></a>
+<a href="#mapa" aria-label="Palatiw" onClick="{{pk.palatiw}}"><path class="{{cl.palatiw}}" d="M334 373L313 372L305 393L298 387L295 373L285 370L287 361L285 356L294 350L298 351L302 363L321 359L333 363L334 373Z"></path></a>
+<a href="#mapa" aria-label="Pinagbuhatan" onClick="{{pk.pinagbuhatan}}"><path class="{{cl.pinagbuhatan}}" d="M313 372L355 374L357 380L378 373L373 378L369 386L379 396L377 406L379 419L384 427L395 426L400 431L422 444L438 459L445 467L443 471L430 472L422 503L423 513L421 529L417 529L410 552L407 552L404 536L382 519L376 510L368 501L369 488L367 482L359 475L356 460L349 435L343 429L327 434L321 430L320 423L314 419L301 402L313 372Z"></path></a>
+<a href="#mapa" aria-label="Pineda" onClick="{{pk.pineda}}"><path class="{{cl.pineda}}" d="M195 343L189 377L187 382L176 379L160 364L151 359L129 353L111 340L114 333L120 326L131 336L136 336L138 345L163 348L178 343L195 343Z"></path></a>
+<a href="#mapa" aria-label="Rosario" onClick="{{pk.rosario}}"><path class="{{cl.rosario}}" d="M444 167L444 177L448 183L449 196L417 196L417 189L411 188L409 216L398 214L348 209L351 220L358 242L366 258L357 264L331 260L316 260L290 253L295 230L292 208L289 194L299 193L313 197L329 170L335 161L340 180L347 180L348 189L375 191L381 189L388 190L391 175L402 176L400 168L444 167Z"></path></a>
+<a href="#mapa" aria-label="Sagad" onClick="{{pk.sagad}}"><path class="{{cl.sagad}}" d="M280 356L264 358L263 367L259 366L255 365L251 357L274 345L279 340L279 352L280 356Z"></path></a>
+<a href="#mapa" aria-label="San Antonio" onClick="{{pk.san_antonio}}"><path class="{{cl.san_antonio}}" d="M170 207L182 220L181 270L181 282L166 299L143 280L159 260L160 251L158 209L170 207Z"></path></a>
+<a href="#mapa" aria-label="San Joaquin" onClick="{{pk.san_joaquin}}"><path class="{{cl.san_joaquin}}" d="M238 417L252 424L269 425L276 432L275 442L280 448L281 461L272 466L264 465L259 467L245 459L251 448L231 439L216 429L224 427L231 414L238 417Z"></path></a>
+<a href="#mapa" aria-label="San Jose" onClick="{{pk.san_jose}}"><path class="{{cl.san_jose}}" d="M255 379L255 383L250 392L238 392L230 387L234 377L240 379L255 379Z"></path></a>
+<a href="#mapa" aria-label="San Miguel" onClick="{{pk.san_miguel}}"><path class="{{cl.san_miguel}}" d="M372 333L370 357L366 365L378 373L357 380L355 374L334 373L333 363L321 359L302 363L298 351L294 350L285 356L280 356L279 352L279 340L286 327L309 337L319 317L341 322L358 322L360 334L372 333Z"></path></a>
+<a href="#mapa" aria-label="San Nicolas" onClick="{{pk.san_nicolas}}"><path class="{{cl.san_nicolas}}" d="M265 364L264 370L278 376L281 380L298 387L305 393L301 402L278 394L278 389L260 382L255 383L255 379L260 376L259 366L263 367L264 358L265 364Z"></path></a>
+<a href="#mapa" aria-label="Santa Cruz" onClick="{{pk.santa_cruz}}"><path class="{{cl.santa_cruz}}" d="M278 376L264 370L265 364L277 362L278 376Z"></path></a>
+<a href="#mapa" aria-label="Santa Rosa" onClick="{{pk.santa_rosa}}"><path class="{{cl.santa_rosa}}" d="M237 391L225 412L210 407L199 401L200 395L212 399L218 397L230 387L237 391Z"></path></a>
+<a href="#mapa" aria-label="Santo Tomas" onClick="{{pk.santo_tomas}}"><path class="{{cl.santo_tomas}}" d="M298 387L281 380L278 376L277 362L265 364L264 358L285 356L287 361L285 370L295 373L298 387Z"></path></a>
+<a href="#mapa" aria-label="Santolan" onClick="{{pk.santolan}}"><path class="{{cl.santolan}}" d="M348 21L343 96L340 101L343 105L342 111L331 110L325 102L316 109L307 101L272 75L265 60L266 50L275 36L281 32L285 23L285 14L289 14L296 8L302 9L313 16L322 16L324 21L348 21Z"></path></a>
+<a href="#mapa" aria-label="Sumilang" onClick="{{pk.sumilang}}"><path class="{{cl.sumilang}}" d="M237 391L247 403L246 409L238 417L225 412L237 391Z"></path></a>
+<a href="#mapa" aria-label="Ugong" onClick="{{pk.ugong}}"><path class="{{cl.ugong}}" d="M292 208L295 230L290 253L280 276L267 290L252 304L247 311L243 327L217 317L218 308L215 303L207 302L210 287L210 273L206 265L195 270L181 270L182 220L170 207L207 198L216 190L230 191L239 190L261 193L274 198L274 211L292 208Z"></path></a>
+<a href="#mapa" aria-label="Santa Lucia" onClick="{{pk.santa_lucia}}"><path class="{{cl.santa_lucia}}" d="M398 214L439 223L437 235L438 250L441 255L441 263L435 275L427 277L395 300L383 282L366 258L358 242L351 220L348 209L398 214Z"></path></a>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div aria-live="polite" style="position: absolute; left: 24px; bottom: 24px; background: #FFFFFF; border: 1px solid #CCD6E3; border-radius: 18px; padding: 18px 20px; width: 290px; z-index: 2; box-shadow: 0 12px 32px #18365F21">
+      <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #515D6B">{{sel.dist}}</p>
+      <p style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; line-height: 1.1; margin-top: 2px">{{sel.name}}</p>
+      <a href="Barangay.dc.html" style="display: inline-block; margin-top: 8px; font-weight: 700">Buksan ang barangay →</a>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR -->
+<section aria-labelledby="pop-h" style="max-width: 1280px; margin: 0 auto; padding: 72px 40px 0">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px">
+    <h2 id="pop-h" style="font-size: clamp(36px, 4vw, 56px)">Mga madalas hanaping serbisyo</h2>
+    <a href="Serbisyo.dc.html" style="font-weight: 700">Lahat ng serbisyo →</a>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px">
+    <sc-for list="{{popular}}" as="p" hint-placeholder-count="6">
+      <a class="cd" href="ServiceDetail.dc.html" style="display: flex; align-items: center; gap: 18px; padding: 22px 24px; min-height: 104px">
+        <span style="display: inline-flex; width: 56px; height: 56px; border-radius: 999px; align-items: center; justify-content: center; background: #E8EFFA; color: #1A47A8; flex-shrink: 0">
+          <svg class="ic" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="{{p.icon}}"></path></svg>
+        </span>
+        <span style="flex: 1; font-weight: 700; font-size: 20px; line-height: 1.3">{{p.title}}</span>
+        <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14 M13 6l6 6-6 6"></path></svg>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<!-- LIFE SITUATIONS -->
+<section aria-labelledby="life-h" style="margin-top: 112px; background: #FFFFFF; border-top: 1px solid #CCD6E3; border-bottom: 1px solid #CCD6E3">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 80px 40px">
+    <div style="max-width: 640px; margin-bottom: 40px">
+      <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1A47A8; margin-bottom: 12px">Ayon sa sitwasyon</p>
+      <h2 id="life-h" style="font-size: clamp(36px, 4vw, 56px)">Ano ang pinagdadaanan mo ngayon?</h2>
+      <p style="font-size: 19px; color: #515D6B; margin-top: 14px">Piliin ang isa. Makikita mo ang lahat ng serbisyong para sa'yo, sunod-sunod.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); border-top: 1px solid #CCD6E3; border-left: 1px solid #CCD6E3">
+      <sc-for list="{{life}}" as="l" hint-placeholder-count="12">
+        <a class="row" href="Tulong.dc.html" style="display: flex; flex-direction: column; gap: 14px; padding: 28px 24px; border-right: 1px solid #CCD6E3; border-bottom: 1px solid #CCD6E3; min-height: 196px">
+          <svg class="ic" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color: #1A47A8"><path d="{{l.icon}}"></path></svg>
+          <span style="font-family: 'Newsreader', Georgia, serif; font-size: 27px; line-height: 1.1">{{l.title}}</span>
+          <span style="font-size: 16px; color: #515D6B; line-height: 1.45">{{l.sub}}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section aria-labelledby="ben-h" style="background: #1A47A8; color: #FFFFFF">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 80px 40px; display: flex; flex-wrap: wrap; gap: 48px">
+    <div style="flex: 1 1 320px; min-width: 0">
+      <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #CCD9F7; margin-bottom: 12px">Benepisyo at ayuda</p>
+      <h2 id="ben-h" style="font-size: clamp(40px, 4.6vw, 64px); color: #FFFFFF">Baka may <em>para sa'yo</em>.</h2>
+      <p style="font-size: 19px; color: #DCE5F8; margin-top: 16px; max-width: 30ch">Mga programa ng lungsod na madalas hindi alam ng mga puwedeng makinabang.</p>
+      <a href="Tulong.dc.html" style="display: inline-flex; align-items: center; margin-top: 28px; min-height: 52px; padding: 0 24px; border-radius: 999px; background: #FFFFFF; color: #1A47A8; text-decoration: none; font-weight: 700">Lahat ng benepisyo →</a>
+    </div>
+    <div style="flex: 2 1 600px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+      <sc-for list="{{benefits}}" as="b" hint-placeholder-count="4">
+        <a class="cd" href="Tulong.dc.html" style="display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 24px; min-height: 176px; border-color: #FFFFFF">
+          <span style="font-family: 'Newsreader', Georgia, serif; font-size: 28px; line-height: 1.12">{{b.title}}</span>
+          <span style="display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 16px; color: #515D6B">Para sa {{b.who}}<svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="color: #172741"><path d="M5 12h14 M13 6l6 6-6 6"></path></svg></span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section aria-labelledby="top-h" style="max-width: 1280px; margin: 0 auto; padding: 112px 40px 0; display: flex; flex-wrap: wrap; gap: 48px">
+  <div style="flex: 1 1 300px; min-width: 0">
+    <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1A47A8; margin-bottom: 12px">Ayon sa paksa</p>
+    <h2 id="top-h" style="font-size: clamp(36px, 4vw, 56px)">Lahat ng serbisyo, nakapangkat.</h2>
+  </div>
+  <ul style="flex: 2 1 640px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); column-gap: 32px">
+    <sc-for list="{{topics}}" as="t" hint-placeholder-count="12">
+      <li style="border-top: 1px solid #CCD6E3">
+        <a class="row" href="Serbisyo.dc.html" style="display: flex; align-items: center; gap: 16px; padding: 18px 10px; min-height: 68px; border-radius: 10px">
+          <svg class="ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color: #1A47A8"><path d="{{t.icon}}"></path></svg>
+          <span style="flex: 1; font-weight: 600; font-size: 19px">{{t.title}}</span>
+          <svg class="ic ar" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14 M13 6l6 6-6 6"></path></svg>
+        </a>
+      </li>
+    </sc-for>
+  </ul>
+</section>
+
+<!-- PLACES + NEW -->
+<section aria-labelledby="pl-h" style="max-width: 1280px; margin: 0 auto; padding: 112px 40px 0">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px">
+    <h2 id="pl-h" style="font-size: clamp(36px, 4vw, 56px)">Pasyalan sa Pasig</h2>
+    <a href="Pasyalan.dc.html" style="font-weight: 700">Lahat ng pasyalan →</a>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 16px">
+    <a class="cd" href="Pasyalan.dc.html" style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; overflow: hidden">
+      <span style="display: flex; align-items: flex-end; height: 380px; background: #A9BFEF; padding: 16px"><span style="font-size: 13px; background: #FFFFFF; border-radius: 999px; padding: 4px 10px; color: #515D6B">[Larawan: Maybunga Rainforest Park · Wikimedia Commons]</span></span>
+      <span style="padding: 24px 28px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 14px; font-weight: 700; color: #1A47A8; text-transform: uppercase; letter-spacing: 0.08em">Parke · Maybunga</span>
+        <span style="font-family: 'Newsreader', Georgia, serif; font-size: 36px; line-height: 1.1">Maybunga Rainforest Park</span>
+        <span style="font-size: 16px; color: #515D6B">Oras at bayad: sinuri noong Nob 18, 2026</span>
+      </span>
+    </a>
+    <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+      <sc-for list="{{places}}" as="p" hint-placeholder-count="3">
+        <a class="cd" href="Pasyalan.dc.html" style="display: flex; gap: 16px; align-items: center; padding: 12px; flex: 1">
+          <span style="width: 112px; height: 112px; border-radius: 12px; background: {{p.bg}}; flex-shrink: 0" aria-hidden="true"></span>
+          <span style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 13px; font-weight: 700; color: #1A47A8; text-transform: uppercase; letter-spacing: 0.08em">{{p.tag}}</span>
+            <span style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; line-height: 1.15">{{p.name}}</span>
+            <span style="font-size: 15px; color: #515D6B">{{p.where}}</span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px; display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid #CCD6E3; border-bottom: 1px solid #CCD6E3">
+    <h3 style="font-size: 26px">Bago sa Pasig</h3>
+    <sc-for list="{{news}}" as="n" hint-placeholder-count="4">
+      <span style="font-size: 16px"><strong style="font-weight: 700">{{n.title}}</strong> <span style="color: #515D6B">· {{n.date}}</span></span>
+    </sc-for>
+  </div>
+</section>
+
+<!-- HOTLINES -->
+<section aria-labelledby="hot-h" style="max-width: 1280px; margin: 0 auto; padding: 112px 40px 0">
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+    <div style="flex: 1 1 300px; min-width: 0">
+      <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #981D28; margin-bottom: 12px">Emergency</p>
+      <h2 id="hot-h" style="font-size: clamp(36px, 4vw, 56px)">I-save ang mga numerong ito.</h2>
+      <p style="font-size: 16px; color: #515D6B; margin-top: 12px">Sinuri noong Okt 19, 2026.</p>
+    </div>
+    <div style="flex: 2 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+      <sc-for list="{{hot}}" as="h" hint-placeholder-count="4">
+        <a class="cd" href="{{h.href}}" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px">
+          <span style="display: flex; flex-direction: column">
+            <span style="font-size: 15px; color: #515D6B; font-weight: 600">{{h.label}}</span>
+            <span style="font-size: 28px; font-weight: 800; letter-spacing: -0.01em; color: #172741">{{h.num}}</span>
+          </span>
+          <span style="display: inline-flex; width: 48px; height: 48px; border-radius: 999px; align-items: center; justify-content: center; background: #981D28; color: #FFFFFF; flex-shrink: 0">
+            <svg class="ic" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+  <p style="margin-top: 48px; font-size: 16px; color: #515D6B; max-width: 72ch">Galing ang bayad, oras at numero sa Citizen's Charter at opisyal na pahina ng lungsod. Ang may tatak na <span style="background: #FBF0DC; color: #744500; border-radius: 6px; padding: 1px 8px; font-weight: 700">Sinusuri pa</span> ay hindi pa kumpirmado.</p>
+</section>
+
+</main>
+<footer style="margin-top: 120px; background: #172741; color: #E8EFFA">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 72px 40px 40px">
+    <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+      <div style="flex: 1 1 340px; max-width: 420px">
+        <p style="font-family: 'Newsreader', Georgia, serif; font-size: 40px; line-height: 1.1; color: #FFFFFF">Para sa bawat Pasigueño.</p>
+        <p style="margin-top: 16px; font-size: 16px; color: #C3CEDF">Pinapatakbo ng volunteers. <strong style="color: #FFFFFF">Hindi ito opisyal na website ng Pasig City.</strong> Para sa opisyal na transaksyon, pumunta sa <a href="https://pasigcity.gov.ph" style="color: #FFFFFF">pasigcity.gov.ph</a>.</p>
+      </div>
+      <div style="flex: 2 1 520px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; font-size: 16px">
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Serbisyo</p><a href="Serbisyo.dc.html" style="color: #C3CEDF">Lahat ng serbisyo</a><a href="Tulong.dc.html" style="color: #C3CEDF">Benepisyo at tulong</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Anunsyo</a></div>
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Lungsod</p><a href="Barangay.dc.html" style="color: #C3CEDF">Mga barangay</a><a href="Pasyalan.dc.html" style="color: #C3CEDF">Pasyalan</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Mga opisyal</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Pondo ng lungsod</a></div>
+        <div style="display: flex; flex-direction: column; gap: 10px"><p style="font-weight: 700; color: #FFFFFF">Tulong</p><a href="Hotlines.dc.html" style="color: #C3CEDF">Emergency</a><a href="IbaPa.dc.html" style="color: #C3CEDF">Tungkol sa BetterPasig</a><a href="https://github.com/kuya-egg/betterpasig" style="color: #C3CEDF">I-report ang mali</a></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 20px; border-top: 1px solid #3A4B68; font-size: 14px; color: #C3CEDF">
+      <span>© 2026 BetterPasig · Bahagi ng <a href="https://bettergov.ph" style="color: #FFFFFF">BetterGov.ph</a> · Code at data sa GitHub · Larawan mula Wikimedia Commons</span>
+      <span>Huling update ng datos: Okt 19, 2026</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 'kapasigan' }; }
+  renderVals() {
+    const B = [["Bagong Ilog","bagong_ilog",215,351,1],["Bagong Katipunan","bagong_katipunan",246,398,1],["Bambang","bambang",276,413,1],["Buting","buting",208,420,1],["Caniogan","caniogan",280,322,1],["Dela Paz","dela_paz",374,65,2],["Kalawaan","kalawaan",317,454,1],["Kapasigan","kapasigan",247,371,1],["Kapitolyo","kapitolyo",156,307,1],["Malinao","malinao",269,398,1],["Manggahan","manggahan",377,134,2],["Maybunga","maybunga",331,295,2],["Oranbo","oranbo",190,293,1],["Palatiw","palatiw",311,371,1],["Pinagbuhatan","pinagbuhatan",399,463,2],["Pineda","pineda",166,356,1],["Rosario","rosario",321,212,2],["Sagad","sagad",268,354,1],["San Antonio","san_antonio",171,255,1],["San Joaquin","san_joaquin",255,440,1],["San Jose","san_jose",243,385,1],["San Miguel","san_miguel",325,345,2],["San Nicolas","san_nicolas",268,380,1],["Santa Cruz","santa_cruz",271,367,1],["Santa Rosa","santa_rosa",216,400,1],["Santo Tomas","santo_tomas",284,371,1],["Santolan","santolan",307,68,2],["Sumilang","sumilang",238,406,1],["Ugong","ugong",234,259,1],["Santa Lucia","santa_lucia",401,253,2]];
+
+    const sel = this.state.sel;
+    const cl = {}, pk = {};
+    B.forEach((b) => { cl[b[1]] = b[1] === sel ? 'on' : (b[4] === 2 ? 'd2' : 'd1'); pk[b[1]] = () => this.setState({ sel: b[1] }); });
+    const cur = B.find((b) => b[1] === sel) || B[7];
+    const I = {
+      receipt: 'M5 2h14v20l-3.5-2-3.5 2-3.5-2L5 22z M9 8h6 M9 12h6 M9 16h4',
+      id: 'M3 5h18v14H3z M8 9a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M13 10h5 M13 14h4 M5.5 17c.5-1.5 1.5-2 2.5-2s2 .5 2.5 2',
+      hand: 'M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16 M7 20l1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.8-2.8L14.4 13 M2 15l6 6',
+      file: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h6',
+      store: 'M3 9l1.5-5h15L21 9 M3 9v11h18V9 M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3 M9 20v-5h6v5',
+      grad: 'M22 10L12 5 2 10l10 5 10-5z M6 12v5c3 3 9 3 12 0v-5 M22 10v6',
+      baby: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18 M9 12h.01 M15 12h.01 M10 16c.6.4 1.2.5 2 .5s1.4-.1 2-.5',
+      brief: 'M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2 M2 13h20',
+      rings: 'M9 9a6 6 0 1 0 0 12a6 6 0 1 0 0-12 M15 3a6 6 0 1 0 0 12a6 6 0 1 0 0-12',
+      home: 'M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10',
+      senior: 'M12 2a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M10 22l1-8-3-3 2-3h3l3 4h3 M17 13v9',
+      pwd: 'M12 2a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M5 8h14 M12 8v6 M9 22l3-8 3 8',
+      parent: 'M8 2a3 3 0 1 0 0 6a3 3 0 1 0 0-6 M17 9a2 2 0 1 0 0 4a2 2 0 1 0 0-4 M4 22v-7a4 4 0 0 1 8 0v7 M14 22v-4a3 3 0 0 1 6 0v4',
+      plus: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6z',
+      storm: 'M17.5 17H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9z M13 11l-3 5h4l-3 5',
+      candle: 'M12 2c1.5 2 2 3.3 2 4.5a2 2 0 0 1-4 0C10 5.3 10.5 4 12 2z M9 10h6v12H9z',
+      building: 'M4 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18 M16 10h2a2 2 0 0 1 2 2v10 M2 22h20 M8 6h4 M8 10h4 M8 14h4',
+      heart: 'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z',
+      users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 3a4 4 0 1 0 0 8a4 4 0 1 0 0-8 M22 21v-2a4 4 0 0 0-3-3.9 M16 3.1a4 4 0 0 1 0 7.8',
+      leaf: 'M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z M2 21c0-3 1.9-5.4 5.1-6 2.4-.5 4.9-2 5.9-4',
+      alert: 'M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',
+      eye: 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6',
+      house: 'M3 21h18 M5 21V8l7-5 7 5v13 M10 21v-6h4v6'
+    };
+    return {
+      cl, pk,
+      sel: { name: cur[0], dist: cur[4] === 2 ? 'Ikalawang Distrito' : 'Unang Distrito' },
+      popular: [
+        { title: 'Magbayad ng amilyar', icon: I.receipt },
+        { title: 'Kumuha ng Senior Citizen ID', icon: I.id },
+        { title: 'Humingi ng tulong pinansyal (AICS)', icon: I.hand },
+        { title: 'Kumuha ng rekord ng civil registry', icon: I.file },
+        { title: 'Mag-renew ng business permit', icon: I.store },
+        { title: 'Mag-apply ng scholarship', icon: I.grad }
+      ],
+      life: [
+        { title: 'May bagong baby', sub: 'Birth registration, checkup, bakuna', icon: I.baby },
+        { title: 'Nag-aaral', sub: 'Scholarship, PLP, fare aid', icon: I.grad },
+        { title: 'Naghahanap ng trabaho', sub: 'PESO, internship, student jobs', icon: I.brief },
+        { title: 'Magnenegosyo', sub: 'Permit, puwesto sa palengke, puhunan', icon: I.store },
+        { title: 'Ikakasal', sub: 'Marriage license, seminar, civil wedding', icon: I.rings },
+        { title: 'May bahay o lupa', sub: 'Amilyar, tax dec, building permit', icon: I.home },
+        { title: 'Senior citizen', sub: 'ID, pension, libreng gamot', icon: I.senior },
+        { title: 'May kapansanan', sub: 'PWD ID, mobility aid, cash gift', icon: I.pwd },
+        { title: 'Solo parent', sub: 'ID, buwanang ayuda, day care', icon: I.parent },
+        { title: 'May sakit', sub: 'Konsulta at tulong sa gastos', icon: I.plus },
+        { title: 'Nasalanta', sub: 'Hotline, relief goods, certification', icon: I.storm },
+        { title: 'May namatay', sub: 'Death certificate, kabaong, libing', icon: I.candle }
+      ],
+      benefits: [
+        { title: 'Local Senior Pension', who: 'senior citizen' },
+        { title: 'PAG-ASA Scholarship Program', who: 'mga estudyante' },
+        { title: 'Buwanang ayuda sa solo parent', who: 'may Solo Parent ID' },
+        { title: 'PWD cash gift', who: 'may PWD ID' }
+      ],
+      topics: [
+        { title: 'Sertipiko at civil registry', icon: I.file },
+        { title: 'Negosyo at mga permit', icon: I.store },
+        { title: 'Ari-arian, buwis at bayarin', icon: I.receipt },
+        { title: 'Gusali, zoning at lupa', icon: I.building },
+        { title: 'Kalusugan', icon: I.heart },
+        { title: 'Social welfare', icon: I.users },
+        { title: 'Edukasyon at scholarship', icon: I.grad },
+        { title: 'Trabaho at kabuhayan', icon: I.brief },
+        { title: 'Kalikasan at alagang hayop', icon: I.leaf },
+        { title: 'Emergency at trapiko', icon: I.alert },
+        { title: 'Transparency at feedback', icon: I.eye },
+        { title: 'Pabahay at pasilidad', icon: I.house }
+      ],
+      places: [
+        { name: 'Pasig City Museum', tag: 'Libreng pasok', where: 'Dating Concepcion Mansion', bg: '#DCE5F8' },
+        { name: 'Kapitolyo Food District', tag: 'Kainan', where: 'Kapitolyo', bg: '#CCD9F7' },
+        { name: 'Bahay na Tisa', tag: 'Kasaysayan', where: 'San Jose', bg: '#E8EFFA' }
+      ],
+      news: [
+        { title: 'Ilaya Buting Linear Park', date: 'Okt 8, 2026' },
+        { title: 'RC Park, Maybunga', date: 'Hul 5, 2026' },
+        { title: 'Parke ng Pag-asa', date: 'Abr 22, 2025' },
+        { title: 'East Bank Linear Park', date: 'Peb 27, 2025' }
+      ],
+      hot: [
+        { label: 'Pasig DRRMO', num: '(02) 8643-0000', href: 'tel:+63286430000' },
+        { label: 'Pambansang emergency', num: '911', href: 'tel:911' },
+        { label: 'Pasig KaTXT (SMS)', num: '0908-899-3333', href: 'sms:+639088993333' },
+        { label: 'City Hall', num: '(02) 8643-1111', href: 'tel:+63286431111' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

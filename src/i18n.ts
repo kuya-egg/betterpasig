@@ -1,4 +1,4 @@
-// Interface text in Filipino (default, served at /) and English (served at /en/).
+// Interface text in English (default, served at /) and Filipino (served at /fil/).
 // Content text comes from the _fil / _en fields in data/.
 
 export const langs = ["fil", "en"] as const;
@@ -127,6 +127,15 @@ export const ui = {
     groupPoliceFire: "Pulis at bumbero",
     groupMedical: "Ospital",
     groupOther: "Rescue at iba pa",
+    groupCity: "Lungsod ng Pasig",
+    callVerb: "Tumawag",
+    textVerb: "Mag-text",
+    emergencyHeroKicker: "Emergency",
+    emergencyHeroTitle: "May emergency?",
+    emergencyHeroLead: "Tumawag agad. Sabihin kung nasaan ka, ano ang nangyari, at ilan ang nangangailangan ng tulong.",
+    checkedOn: (d: string) => `Sinuri noong ${d}`,
+    reportWrong: "May mali?",
+    reportWrongLink: "I-report sa GitHub",
 
     verify: "Sinusuri pa",
     verifyTitle: "Mula sa luma o di-opisyal na sanggunian. Kinukumpirma pa ang impormasyon.",
@@ -260,6 +269,18 @@ export const ui = {
     closeTitle: "Alamin kung saan lalapit",
     closeLead: "Dito mo malalaman kung paano magbayad, mag-apply o magreklamo sa tamang tanggapan ng lungsod.",
     footCity: "Lungsod",
+    footTitle: "Para sa bawat Pasigueño",
+    mapFindTitle: "Hanapin ang barangay mo",
+    mapTapHint: "Pindutin ang mapa. 30 barangay",
+    mapOpenBarangay: "Buksan ang barangay",
+    mapView3d: "3D",
+    mapViewFlat: "Patag",
+    mapViewLabel: "Itsura ng mapa",
+    mapAllDistricts: "Lahat",
+    mapDistrictLabel: "Distrito",
+    mapNoSelection: "Pumili ng barangay sa mapa",
+    crumbsLabel: "Kinaroroonan sa site",
+    crumbHome: "Home",
     footHelp: "Tulong",
     photoCredits: "Mga larawan mula sa Wikimedia Commons",
     creditsTitle: "Mga larawan sa BetterPasig",
@@ -402,6 +423,15 @@ export const ui = {
     groupPoliceFire: "Police and fire",
     groupMedical: "Hospitals",
     groupOther: "Rescue and others",
+    groupCity: "Pasig City",
+    callVerb: "Call",
+    textVerb: "Text",
+    emergencyHeroKicker: "Emergency",
+    emergencyHeroTitle: "In an emergency?",
+    emergencyHeroLead: "Call right away. Say where you are, what happened and how many people need help.",
+    checkedOn: (d: string) => `Checked ${d}`,
+    reportWrong: "Something wrong?",
+    reportWrongLink: "Report it on GitHub",
 
     verify: "Being checked",
     verifyTitle: "From an unofficial or older source. We're still confirming it.",
@@ -534,6 +564,18 @@ export const ui = {
     closeTitle: "Find the service you need",
     closeLead: "Payments, applications and complaints go to the city itself. Here you find out where and how.",
     footCity: "City",
+    footTitle: "For every Pasigueño",
+    mapFindTitle: "Find your barangay",
+    mapTapHint: "Tap the map. 30 barangays",
+    mapOpenBarangay: "Open the barangay",
+    mapView3d: "3D",
+    mapViewFlat: "Flat",
+    mapViewLabel: "Map view",
+    mapAllDistricts: "All",
+    mapDistrictLabel: "District",
+    mapNoSelection: "Pick a barangay on the map",
+    crumbsLabel: "Breadcrumb",
+    crumbHome: "Home",
     footHelp: "Help",
     photoCredits: "Photographs via Wikimedia Commons",
     creditsTitle: "Photographs on BetterPasig",
@@ -559,20 +601,28 @@ export const ui = {
 
 export type UI = (typeof ui)[Lang];
 
+// English is the default language, served at /; Filipino is served at /fil/ (SEO: each language has its own
+// crawlable URL, linked by hreflang, with English as x-default).
+const FIL_PREFIX = /^\/fil(?=\/|$)/;
+
 export function langFromUrl(url: URL): Lang {
-  return url.pathname === "/en" || url.pathname.startsWith("/en/") ? "en" : "fil";
+  return FIL_PREFIX.test(url.pathname) ? "fil" : "en";
 }
 
-/** The same page in the other language: /foo <-> /en/foo. */
+/** The path without its language prefix: /fil/serbisyo/ -> /serbisyo/. */
+export function basePath(pathname: string): string {
+  return pathname.replace(FIL_PREFIX, "") || "/";
+}
+
+/** The same page in the other language: /foo <-> /fil/foo. */
 export function pathIn(lang: Lang, url: URL): string {
-  if (/\/(?:en\/)?404(?:\.html)?\/?$/.test(url.pathname)) return lang === 'en' ? '/en/' : '/';
-  const base = url.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
-  return lang === "en" ? `/en${base === "/" ? "/" : base}` : base;
+  if (/\/(?:fil\/)?404(?:\.html)?\/?$/.test(url.pathname)) return href(lang, "/");
+  return href(lang, basePath(url.pathname));
 }
 
-/** Link to a page in `lang`, e.g. href("en", "/#hotlines") -> "/en/#hotlines". */
+/** Link to a page in `lang`, e.g. href("fil", "/#hotlines") -> "/fil/#hotlines". */
 export function href(lang: Lang, path: string): string {
-  return lang === "en" ? `/en${path}` : path;
+  return lang === "fil" ? `/fil${path}` : path;
 }
 
 /** "2026-10-19" -> "Okt 19, 2026" / "Oct 19, 2026". */

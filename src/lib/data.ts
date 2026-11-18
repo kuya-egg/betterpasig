@@ -17,6 +17,8 @@ import lifeEventsFile from "../../data/life-events.json";
 import pasyalanFile from "../../data/pasyalan.json";
 import { assertDataFile } from "./schemas";
 import { assertRecentData } from "./validate-recent";
+import { namePattern, nameVariants } from "./no-translate";
+import { assertTrustedSources } from "./source-policy";
 
 assertDataFile("site", site);
 assertDataFile("hotlines", hotlinesFile);
@@ -34,6 +36,27 @@ assertDataFile("pasig-service-updates", serviceUpdatesFile);
 
 assertDataFile("pasig-opportunities", opportunitiesFile);
 
+// Hard rule (docs/state.md D7): every citation is official or a major news outlet. photos.json holds image
+// credits and licences, not facts, so it is not checked here.
+for (const [file, data] of Object.entries({
+  site,
+  hotlines: hotlinesFile,
+  services: servicesFile,
+  barangays: barangaysFile,
+  city: cityFile,
+  programs: programsFile,
+  "officials-directory": officialsDirectoryFile,
+  facilities: facilitiesFile,
+  officials: officialsFile,
+  transparency: transparencyFile,
+  sources: pasigSourcesFile,
+  places: placesFile,
+  "service-updates": serviceUpdatesFile,
+  opportunities: opportunitiesFile,
+  "life-events": lifeEventsFile,
+  pasyalan: pasyalanFile,
+})) assertTrustedSources(file, data);
+
 export { site };
 
 export const hotlines = hotlinesFile.hotlines;
@@ -43,6 +66,9 @@ export const offices = servicesFile.offices;
 export const services = servicesFile.services;
 export const barangays = barangaysFile.barangays;
 export const city = cityFile;
+/** every barangay name as a page may print it ("Santa Lucia", "Sta. Lucia"); see lib/no-translate.ts */
+export const barangayNames = nameVariants(barangays.map((item) => item.name));
+export const barangayNamePattern = namePattern(barangayNames);
 
 export type Hotline = (typeof hotlines)[number];
 export type Service = (typeof services)[number];
@@ -57,7 +83,6 @@ function byId<T extends { id: string }>(items: T[], ids: string[]): T[] {
 
 export const emergencyHotlines = byId(hotlines, site.emergency_featured);
 export const featuredServices = byId(services, site.featured_services);
-export const otherHotlines = hotlines.filter((h) => !site.emergency_featured.includes(h.id));
 export const programs = programsFile.programs;
 export const officials = officialsFile.officials;
 export const officialsTerm = officialsFile.term;
@@ -158,10 +183,12 @@ export function sourceLabel(url: string): string {
   try {
     const parsed = new URL(url);
     const host = parsed.hostname.replace(/^www\./, "");
-    const file = decodeURIComponent(parsed.pathname.split("/").filter(Boolean).pop() ?? "");
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const file = decodeURIComponent(parts.pop() ?? "");
     if (!file) return host;
+    // a shortened URL: host, then the file, eliding any folders between
     const short = file.length > 36 ? `…${file.slice(-32)}` : file;
-    return `${host} · ${short}`;
+    return parts.length ? `${host}/…/${short}` : `${host}/${short}`;
   } catch {
     return url;
   }

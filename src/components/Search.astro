@@ -2,6 +2,7 @@
 import { SearchField } from "./SearchField";
 import { Button } from "./ui/button";
 import { href, langFromUrl, ui } from "../i18n";
+import { barangayNames } from "../lib/data";
 
 interface Props { includePlaces?: boolean }
 
@@ -27,6 +28,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
   data-archived={t.searchArchived}
   data-older={t.searchOlderSource}
   data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
+  data-barangays={JSON.stringify(barangayNames)}
 >
   <label class="bp-search__label" for="q">{label}</label>
   <form role="search">
@@ -50,6 +52,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
 <script>
   import { eventState, isSourceFresh } from "../lib/freshness";
   import { searchVariants } from "../lib/search-synonyms";
+  import { markNamesInNode, namePattern } from "../lib/no-translate";
 
   type SubResult = { title: string; url: string; anchor?: { id: string; element?: string } };
   type PageData = { url: string; meta: { title?: string; kind?: string }; sub_results: SubResult[] };
@@ -72,6 +75,8 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     const many = box.dataset.many ?? "{n}";
     const keys = box.dataset.keys ?? "";
     const kinds = JSON.parse(box.dataset.kinds ?? "{}") as Record<string, string>;
+    // result titles are written here, after the build marked the page's barangay names (lib/no-translate.ts)
+    const barangayPattern = namePattern(JSON.parse(box.dataset.barangays ?? "[]") as string[]);
     const archivedLabel = box.dataset.archived ?? "";
     const olderLabel = box.dataset.older ?? "";
     const archiveHref = box.dataset.archiveHref ?? "";
@@ -188,7 +193,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
       if (!id || !notice) return null;
       const now = new Date();
       const expired = notice.historical || !isSourceFresh(notice.published, now) || eventState(notice.event, now) === "past";
-      const prefix = page.url.startsWith("/en/") ? "/en" : "";
+      const prefix = page.url.startsWith("/fil/") ? "/fil" : "";
       return {
         href: expired ? `${archiveHref}#${id}` : `${prefix}/ngayong-linggo/#${id}`,
         title: sub.title || page.meta.title || "",
@@ -212,7 +217,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
           }
         }
         if (kind === "pasyalan") {
-          for (const sub of anchored.filter(({ anchor }) => anchor?.element === "h3" && anchor.id.startsWith("pasyalan-"))) {
+          for (const sub of anchored.filter(({ anchor }) => (anchor?.element === "h2" || anchor?.element === "h3") && anchor.id.startsWith("pasyalan-"))) {
             rows.push({ href: sub.url, title: sub.title, kind: kinds[kind] ?? "", note: "" });
           }
           continue;
@@ -273,8 +278,9 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
           link.setAttribute("aria-selected", "false");
           const title = document.createElement("span");
           title.append(highlight(row.title, words));
+          markNamesInNode(title, barangayPattern);
           const category = document.createElement("small");
-          category.textContent = row.note ? `${row.kind} · ${row.note}` : row.kind;
+          category.textContent = row.note ? `${row.kind}, ${row.note}` : row.kind;
           link.append(title, category);
           results.append(link);
           links.push(link);
@@ -282,7 +288,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
         results.hidden = false;
         input.setAttribute("aria-expanded", "true");
         shownQuery = query;
-        showStatus(`${countLabel(rows.length)} · ${keys}`, false);
+        showStatus(`${countLabel(rows.length)}. ${keys}`, false);
       } catch {
         if (ticket === latest) showStatus(box.dataset.unavailable ?? "", true);
       }
@@ -427,5 +433,5 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     text-decoration: underline;
     text-underline-offset: 4px;
   }
-  .bp-search__label { display: block; margin-bottom: var(--s-2); font-size: .875rem; font-weight: 750; }
+  .bp-search__label { display: block; margin-bottom: var(--s-2); font-size: var(--t-small); font-weight: 600; }
 </style>

@@ -70,7 +70,7 @@ try {
   const runtimeErrors = [];
   layout.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-  for (const locale of ["", "/en"]) {
+  for (const locale of ["", "/fil"]) {
     for (const colorScheme of ["light", "dark"]) {
       await layout.emulateMedia({ colorScheme, reducedMotion: "reduce" });
       for (const width of [320, 390, 768, 1024, 1440]) {
@@ -94,21 +94,21 @@ try {
       await layout.locator(".bp-quick li a").evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
       taskIds.map((id) => `${locale}/serbisyo/${id}/`),
     );
-    const shortcuts = await layout.locator(".bp-quick").boundingBox();
-    const plaza = layout.getByRole("img", { name: /Plaza Rizal/ }).first();
-    const photo = await plaza.boundingBox();
-    assert.ok(photo && shortcuts && photo.y >= shortcuts.y + shortcuts.height, "mobile shortcuts come before the photo");
-    assert.equal(await layout.locator(".bp-map__directory a").count(), 30);
-    assert.equal(await layout.locator("#mapa").getAttribute("lang"), "fil");
-    assert.equal(await layout.locator("#mapa-h").innerText(), "Ang 30 barangay ng Pasig");
-    const hasEnglish = locale === "/en";
+    const hasEnglish = locale === "";
+    // on a phone the search and its shortcuts come before the map
+    const heroSearch = await layout.locator(".home-hero #q").boundingBox();
+    const heroMap = await layout.locator("#mapa [data-map3d]").boundingBox();
+    assert.ok(heroSearch && heroMap && heroMap.y >= heroSearch.y + heroSearch.height, "mobile search comes before the map");
+    // every barangay on the map is a link to its page; the map follows the page language
+    assert.equal(await layout.locator("#mapa [data-map3d] a[data-id]").count(), 30);
+    assert.equal(await layout.locator("#mapa").getAttribute("lang"), null);
+    assert.equal(await layout.locator(".home-hero__map-title").innerText(), hasEnglish ? "Find your barangay" : "Hanapin ang barangay mo");
     await layout.getByRole("navigation", { name: hasEnglish ? "Main menu" : "Pangunahing menu" })
       .getByRole("link", { name: hasEnglish ? "Explore Pasig" : "Pasyalan" }).click();
-    assert.ok(layout.url().endsWith("#pasyalan"));
+    await layout.waitForURL(`**${locale}/pasyalan/`);
     const park = layout.locator("#pasyalan-maybunga-rainforest-park").locator("..");
     assert.match(await park.innerText(), hasEnglish ? /7:00 AM/ : /7:00 n\.u\./);
-    await layout.locator(".home-topics__park").click();
-    await layout.waitForURL("**/#pasyalan-maybunga-rainforest-park");
+    await layout.goto(origin + locale + "/");
 
     const details = layout.locator(".bp-header__more");
     const summary = details.locator("summary");
@@ -119,16 +119,17 @@ try {
     assert.equal(await details.evaluate((element) => element.open), false);
 
     await layout.goto(origin + locale + "/barangay/maybunga/");
-    assert.equal(await layout.locator("main").getAttribute("lang"), "fil");
-    assert.match(await layout.locator("main").innerText(), /Punong barangay/);
+    // barangay pages and the officials' barangay section follow the page language (no Filipino pin)
+    assert.equal(await layout.locator("main").getAttribute("lang"), null);
+    assert.match(await layout.locator("main").innerText(), /Punong [Bb]arangay/);
     assert.doesNotMatch(await layout.locator("main").innerText(), /Directory source|Published numbers/);
     await layout.goto(origin + locale + "/opisyal/#opisyal-barangay");
-    assert.equal(await layout.locator("#opisyal-barangay").getAttribute("lang"), "fil");
+    assert.equal(await layout.locator("#opisyal-barangay").getAttribute("lang"), null);
 
     await layout.goto(origin + locale + "/");
     await layout.locator(".bp-quick a[href$='/scholarship-new/']").click();
     await layout.waitForURL(`**${locale}/serbisyo/scholarship-new/`);
-    assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /Pasig residents/ : /taga-Pasig/);
+    assert.match(await layout.locator(".bp-svc__summary").innerText(), hasEnglish ? /Pasig residents/ : /taga-Pasig/);
     const requirementsJump = layout.locator(".bp-svc__jump a[href='#service-requirements']");
     await requirementsJump.focus();
     await requirementsJump.press("Enter");
@@ -144,7 +145,7 @@ try {
     await layout.goto(origin + locale + "/");
     await layout.locator(".bp-quick a[href$='/aics/']").click();
     await layout.waitForURL(`**${locale}/serbisyo/aics/`);
-    assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /residents in crisis/ : /taga-Pasig.*krisis/);
+    assert.match(await layout.locator(".bp-svc__summary").innerText(), hasEnglish ? /residents in crisis/ : /taga-Pasig.*krisis/);
 
     const searchPage = await browser.newPage();
     await searchPage.goto(origin + locale + "/serbisyo/");
@@ -161,7 +162,7 @@ try {
     await clearSearch.waitFor({ state: "hidden" });
     await search.fill("Maybunga Rainforest Park");
     await first.waitFor();
-    assert.equal(await first.getAttribute("href"), `${locale}/#pasyalan-maybunga-rainforest-park`);
+    assert.equal(await first.getAttribute("href"), `${locale}/pasyalan/#pasyalan-maybunga-rainforest-park`);
     await search.press("ArrowDown");
     assert.equal(await search.getAttribute("aria-activedescendant"), await first.getAttribute("id"));
     await search.press("Escape");
@@ -170,7 +171,7 @@ try {
     await first.waitFor();
     await search.press("ArrowDown");
     await search.press("Enter");
-    await searchPage.waitForURL(`**${locale}/#pasyalan-maybunga-rainforest-park`);
+    await searchPage.waitForURL(`**${locale}/pasyalan/#pasyalan-maybunga-rainforest-park`);
     await searchPage.close();
   }
   assert.deepEqual(runtimeErrors, []);
@@ -182,26 +183,26 @@ try {
   await touch.close();
 
   const noScript = await browser.newPage({ javaScriptEnabled: false, colorScheme: "dark", viewport: { width: 390, height: 844 } });
-  await noScript.goto(origin + "/en/");
+  await noScript.goto(origin + "/");
   await assertHotlines(noScript);
   await assertLightMode(noScript);
   assert.equal(await noScript.locator("[data-ph-clock]").isVisible(), false);
   assert.equal(await noScript.locator(".bp-urgent__clock").innerText(), "UTC+8");
-  assert.equal(await noScript.locator(".bp-map__directory a").count(), 30);
+  assert.equal(await noScript.locator("#mapa [data-map3d] a[data-id]").count(), 30);
   await noScript.locator(".bp-header__more summary").click();
   assert.equal(await noScript.locator(".bp-header__more").evaluate((element) => element.open), true);
   await noScript.locator(".bp-quick__all").click();
   assert.ok(await noScript.locator("#service-categories a").first().isVisible());
-  await noScript.goto(origin + "/en/");
-  const education = noScript.locator(".home-topics__list a[href='/en/serbisyo/#education']");
+  await noScript.goto(origin + "/");
+  const education = noScript.locator(".home-topics__list a[href='/serbisyo/#education']");
   await education.focus();
   await education.press("Enter");
-  await noScript.waitForURL("**/en/serbisyo/#education");
+  await noScript.waitForURL("**/serbisyo/#education");
   assert.match(await noScript.locator("#education").innerText(), /Education & scholarships/);
   await noScript.close();
 
   const searchStates = await browser.newPage();
-  await searchStates.goto(origin + "/serbisyo/");
+  await searchStates.goto(origin + "/fil/serbisyo/");
   const input = searchStates.getByRole("combobox");
   await input.fill("zzqqxnoresult");
   const status = searchStates.locator(".bp-search__status");
@@ -218,7 +219,7 @@ try {
   const clock = await browser.newPage({ timezoneId: "America/Los_Angeles" });
   await clock.clock.install({ time: new Date("2026-11-18T11:59:50+08:00") });
   await clock.clock.pauseAt(new Date("2026-11-18T11:59:59+08:00"));
-  await clock.goto(origin + "/en/");
+  await clock.goto(origin + "/");
   await clock.locator("[data-ph-clock]").waitFor();
   await assertClock(clock, "11:59 AM", "Wed, Nov 18, 2026");
   await clock.clock.runFor(1_100);
@@ -233,7 +234,7 @@ try {
     document.dispatchEvent(new Event("visibilitychange"));
   });
   await assertClock(clock, "12:00 AM", "Thu, Nov 19, 2026");
-  await clock.goto(origin + "/");
+  await clock.goto(origin + "/fil/");
   await clock.locator("[data-ph-clock]").waitFor();
   await assertClock(clock, "12:00 AM", "Huw, Nob 19, 2026");
   await clock.close();
@@ -257,7 +258,7 @@ try {
         await park.locator("img").evaluate((image) => image.decode());
         await park.screenshot({ path: join(output, "explore-mobile.jpg"), quality: 84 });
       }
-      await layout.goto(origin + (name === "desktop" ? "/en/serbisyo/business-permit-renewal/" : "/serbisyo/aics/"), { waitUntil: "networkidle" });
+      await layout.goto(origin + (name === "desktop" ? "/serbisyo/business-permit-renewal/" : "/fil/serbisyo/aics/"), { waitUntil: "networkidle" });
       await layout.screenshot({ path: join(output, `service-${name}.jpg`), quality: 84 });
     }
   }
