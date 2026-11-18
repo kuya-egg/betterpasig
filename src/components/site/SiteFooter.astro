@@ -4,6 +4,7 @@ import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
 import { photos } from "../../lib/photos";
+import { buildCommit, buildVersion } from "../../lib/version";
 
 interface Props {
   /** ids from data/photos.json shown on this page; when any, the legal row links the credits page. */
@@ -81,11 +82,15 @@ const columns = [
         }
       </div>
       <div class="footer__legal">
-        <span>&copy; {year} BetterPasig</span>
-        <a href="https://github.com/kuya-egg/betterpasig">{t.aboutGithub}</a>
-        {
-          showsPhotos && <a href={href(lang, "/larawan/")}>{t.photoCredits}</a>
-        }
+        <p class="footer__legal-meta">
+          {buildVersion && <a href={`https://github.com/kuya-egg/betterpasig/commit/${buildCommit}`}>{t.footVersion} {buildVersion}</a>}
+          <span>{year} BetterPasig. {t.footRights}</span>
+        </p>
+        <p class="footer__legal-links">
+          <a href="https://github.com/kuya-egg/betterpasig">{t.footContribute}</a>
+          <a href="/sitemap-index.xml">{t.footSitemap}</a>
+          {showsPhotos && <a href={href(lang, "/larawan/")}>{t.photoCredits}</a>}
+        </p>
       </div>
     </div>
   </div>
