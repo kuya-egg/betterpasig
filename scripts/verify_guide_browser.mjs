@@ -32,8 +32,10 @@ const pageFamilies = [
   "/larawan/",
 ];
 
-function clockText(page) {
-  return page.locator("[data-ph-clock]").innerText().then((text) => text.replace(/\s+/g, " "));
+async function assertClock(page, time, date) {
+  const clock = page.locator("[data-ph-clock]");
+  assert.equal((await clock.locator("[data-clock-time]").innerText()).replace(/\s+/g, " "), time);
+  assert.equal(await clock.locator("[data-clock-date]").innerText(), date);
 }
 
 async function assertFits(page, label) {
@@ -184,7 +186,7 @@ try {
   await assertHotlines(noScript);
   await assertLightMode(noScript);
   assert.equal(await noScript.locator("[data-ph-clock]").isVisible(), false);
-  assert.match(await noScript.locator(".bp-urgent__clock").innerText(), /Philippine time/);
+  assert.equal(await noScript.locator(".bp-urgent__clock").innerText(), "UTC+8");
   assert.equal(await noScript.locator(".bp-map__directory a").count(), 30);
   await noScript.locator(".bp-header__more summary").click();
   assert.equal(await noScript.locator(".bp-header__more").evaluate((element) => element.open), true);
@@ -218,9 +220,9 @@ try {
   await clock.clock.pauseAt(new Date("2026-11-18T11:59:59+08:00"));
   await clock.goto(origin + "/en/");
   await clock.locator("[data-ph-clock]").waitFor();
-  assert.equal(await clockText(clock), "11:59 AM");
+  await assertClock(clock, "11:59 AM", "Wed, Nov 18, 2026");
   await clock.clock.runFor(1_100);
-  assert.equal(await clockText(clock), "12:00 PM");
+  await assertClock(clock, "12:00 PM", "Wed, Nov 18, 2026");
   await clock.evaluate(() => {
     Object.defineProperty(document, "hidden", { configurable: true, value: true });
     document.dispatchEvent(new Event("visibilitychange"));
@@ -230,7 +232,10 @@ try {
     Reflect.deleteProperty(document, "hidden");
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  assert.equal(await clockText(clock), "12:00 AM");
+  await assertClock(clock, "12:00 AM", "Thu, Nov 19, 2026");
+  await clock.goto(origin + "/");
+  await clock.locator("[data-ph-clock]").waitFor();
+  await assertClock(clock, "12:00 AM", "Huw, Nob 19, 2026");
   await clock.close();
 
   await layout.setViewportSize({ width: 1440, height: 900 });
