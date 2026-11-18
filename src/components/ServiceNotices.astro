@@ -1,7 +1,7 @@
 ---
 import SourceNote from "./SourceNote.astro";
 import { opportunities, places, pasigSources, serviceUpdates } from "../lib/data";
-import { formatDate, langFromUrl } from "../i18n";
+import { formatDate, href, langFromUrl } from "../i18n";
 import { currentServiceState } from "../lib/freshness";
 
 interface Props { serviceId: string }
@@ -35,7 +35,7 @@ const dayNames: Record<string, string> = lang === "en" ? { MO:"Mon",TU:"Tue",WE:
   <p>{langText(`Hanggang 5:00 PM lang ng ${formatDate(lang, business.online_cutoff_at.slice(0, 10))} puwedeng magbayad online para sa ikaapat na quarter. ${onlineStatus === "past" ? "Lumipas na ang takdang oras ng pagbabayad online." : ""}`, `The notice accepted fourth-quarter online transactions only until ${formatDate(lang, business.online_cutoff_at.slice(0, 10))}, 5:00 PM. ${onlineStatus === "past" ? "That cutoff has passed." : ""}`)}</p>
   <p>{langText(`Ayon sa abiso, hanggang ${formatDate(lang, business.onsite_deadline_date)} ang pagbabayad sa mga tanggapan. Magiging ${formatDate(lang, business.conditional_deadline_date)} lang ang huling araw kung ideklarang special non-working holiday ang Oktubre 31. Kumpirmahin sa opisyal na anunsyo.`, `The notice lists ${formatDate(lang, business.onsite_deadline_date)} as the onsite deadline. It gives a conditional ${formatDate(lang, business.conditional_deadline_date)} only if October 31 is declared a special non-working holiday; that declaration is not confirmed here.`)}</p>
   <p>{langText("Mga lugar na puwedeng pagbayaran ng business tax:", "Business tax locations:")}</p>
-  <ul class="bp-notice__list">{business.place_ids.map((id) => <li><a class="bp-act" href={lang === "en" ? `/en/lugar/${id}/` : `/lugar/${id}/`}>{places.find((place) => place.id === id)?.name ?? id}</a></li>)}</ul>
+  <ul class="bp-notice__list">{business.place_ids.map((id) => <li><a class="bp-act" href={href(lang, `/lugar/${id}/`)}>{places.find((place) => place.id === id)?.name ?? id}</a></li>)}</ul>
   {businessSource && <SourceNote refs={business.evidence} />}
 </section>}
 

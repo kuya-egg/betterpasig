@@ -1,4 +1,4 @@
-// Interface text in Filipino (default, served at /) and English (served at /en/).
+// Interface text in English (default, served at /) and Filipino (served at /fil/).
 // Content text comes from the _fil / _en fields in data/.
 
 export const langs = ["fil", "en"] as const;
@@ -601,20 +601,28 @@ export const ui = {
 
 export type UI = (typeof ui)[Lang];
 
+// English is the default language, served at /; Filipino is served at /fil/ (SEO: each language has its own
+// crawlable URL, linked by hreflang, with English as x-default).
+const FIL_PREFIX = /^\/fil(?=\/|$)/;
+
 export function langFromUrl(url: URL): Lang {
-  return url.pathname === "/en" || url.pathname.startsWith("/en/") ? "en" : "fil";
+  return FIL_PREFIX.test(url.pathname) ? "fil" : "en";
 }
 
-/** The same page in the other language: /foo <-> /en/foo. */
+/** The path without its language prefix: /fil/serbisyo/ -> /serbisyo/. */
+export function basePath(pathname: string): string {
+  return pathname.replace(FIL_PREFIX, "") || "/";
+}
+
+/** The same page in the other language: /foo <-> /fil/foo. */
 export function pathIn(lang: Lang, url: URL): string {
-  if (/\/(?:en\/)?404(?:\.html)?\/?$/.test(url.pathname)) return lang === 'en' ? '/en/' : '/';
-  const base = url.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
-  return lang === "en" ? `/en${base === "/" ? "/" : base}` : base;
+  if (/\/(?:fil\/)?404(?:\.html)?\/?$/.test(url.pathname)) return href(lang, "/");
+  return href(lang, basePath(url.pathname));
 }
 
-/** Link to a page in `lang`, e.g. href("en", "/#hotlines") -> "/en/#hotlines". */
+/** Link to a page in `lang`, e.g. href("fil", "/#hotlines") -> "/fil/#hotlines". */
 export function href(lang: Lang, path: string): string {
-  return lang === "en" ? `/en${path}` : path;
+  return lang === "fil" ? `/fil${path}` : path;
 }
 
 /** "2026-10-19" -> "Okt 19, 2026" / "Oct 19, 2026". */

@@ -1,13 +1,13 @@
 ---
 // Header (handoff 2026-11): the red emergency strip, then a sticky white nav. The same on every page.
 import Mark from "../../../design/logo/mark-blue.svg";
-import { href, langFromUrl, pathIn, ui } from "../../i18n";
+import { basePath, href, langFromUrl, pathIn, ui } from "../../i18n";
 import EmergencyStrip from "./EmergencyStrip.astro";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const other = lang === "en" ? "fil" : "en";
-const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/$/, "") || "/";
+const path = basePath(Astro.url.pathname).replace(/\/$/, "") || "/";
 const links = [
   { label: t.navServices, path: "/serbisyo/" },
   { label: t.guideHelp, path: "/tulong/" },

@@ -193,7 +193,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
       if (!id || !notice) return null;
       const now = new Date();
       const expired = notice.historical || !isSourceFresh(notice.published, now) || eventState(notice.event, now) === "past";
-      const prefix = page.url.startsWith("/en/") ? "/en" : "";
+      const prefix = page.url.startsWith("/fil/") ? "/fil" : "";
       return {
         href: expired ? `${archiveHref}#${id}` : `${prefix}/ngayong-linggo/#${id}`,
         title: sub.title || page.meta.title || "",

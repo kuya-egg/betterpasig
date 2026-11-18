@@ -186,7 +186,7 @@ function historySummary(id: string, english: string): string {
         <ul class="bp-place__list">
           {childDesks.map(child => (
             <li>
-              <a class="bp-place__title" href={lang === 'en' ? `/en/lugar/${child.id}/` : `/lugar/${child.id}/`}>{child.name}</a>
+              <a class="bp-place__title" href={href(lang, `/lugar/${child.id}/`)}>{child.name}</a>
               {child.business_tax_schedule && <p>{lang === 'en' ? 'Q4 2026 business tax only' : 'Para lamang sa business tax, ikaapat na quarter ng 2026'}: {formatSchedule(child.business_tax_schedule)}</p>}
               <SourceNote refs={child.evidence.business_tax_schedule ?? Object.values(child.evidence).flat()} />
             </li>
@@ -216,11 +216,7 @@ function historySummary(id: string, english: string): string {
               <li>
                 <a
                   class="bp-place__title"
-                  href={item.service_id
-                    ? lang === "en"
-                      ? `/en/serbisyo/${item.service_id}`
-                      : `/serbisyo/${item.service_id}`
-                    : source?.url}
+                  href={item.service_id ? href(lang, `/serbisyo/${item.service_id}/`) : source?.url}
                 >
                   {lang === "en" ? item.title_en : item.title_fil}
                 </a>

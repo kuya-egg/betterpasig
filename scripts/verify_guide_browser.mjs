@@ -70,7 +70,7 @@ try {
   const runtimeErrors = [];
   layout.on("pageerror", (error) => runtimeErrors.push(error.message));
 
-  for (const locale of ["", "/en"]) {
+  for (const locale of ["", "/fil"]) {
     for (const colorScheme of ["light", "dark"]) {
       await layout.emulateMedia({ colorScheme, reducedMotion: "reduce" });
       for (const width of [320, 390, 768, 1024, 1440]) {
@@ -94,7 +94,7 @@ try {
       await layout.locator(".bp-quick li a").evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
       taskIds.map((id) => `${locale}/serbisyo/${id}/`),
     );
-    const hasEnglish = locale === "/en";
+    const hasEnglish = locale === "";
     // on a phone the search and its shortcuts come before the map
     const heroSearch = await layout.locator(".home-hero #q").boundingBox();
     const heroMap = await layout.locator("#mapa [data-map3d]").boundingBox();
@@ -183,7 +183,7 @@ try {
   await touch.close();
 
   const noScript = await browser.newPage({ javaScriptEnabled: false, colorScheme: "dark", viewport: { width: 390, height: 844 } });
-  await noScript.goto(origin + "/en/");
+  await noScript.goto(origin + "/");
   await assertHotlines(noScript);
   await assertLightMode(noScript);
   assert.equal(await noScript.locator("[data-ph-clock]").isVisible(), false);
@@ -193,16 +193,16 @@ try {
   assert.equal(await noScript.locator(".bp-header__more").evaluate((element) => element.open), true);
   await noScript.locator(".bp-quick__all").click();
   assert.ok(await noScript.locator("#service-categories a").first().isVisible());
-  await noScript.goto(origin + "/en/");
-  const education = noScript.locator(".home-topics__list a[href='/en/serbisyo/#education']");
+  await noScript.goto(origin + "/");
+  const education = noScript.locator(".home-topics__list a[href='/serbisyo/#education']");
   await education.focus();
   await education.press("Enter");
-  await noScript.waitForURL("**/en/serbisyo/#education");
+  await noScript.waitForURL("**/serbisyo/#education");
   assert.match(await noScript.locator("#education").innerText(), /Education & scholarships/);
   await noScript.close();
 
   const searchStates = await browser.newPage();
-  await searchStates.goto(origin + "/serbisyo/");
+  await searchStates.goto(origin + "/fil/serbisyo/");
   const input = searchStates.getByRole("combobox");
   await input.fill("zzqqxnoresult");
   const status = searchStates.locator(".bp-search__status");
@@ -219,7 +219,7 @@ try {
   const clock = await browser.newPage({ timezoneId: "America/Los_Angeles" });
   await clock.clock.install({ time: new Date("2026-11-18T11:59:50+08:00") });
   await clock.clock.pauseAt(new Date("2026-11-18T11:59:59+08:00"));
-  await clock.goto(origin + "/en/");
+  await clock.goto(origin + "/");
   await clock.locator("[data-ph-clock]").waitFor();
   await assertClock(clock, "11:59 AM", "Wed, Nov 18, 2026");
   await clock.clock.runFor(1_100);
@@ -234,7 +234,7 @@ try {
     document.dispatchEvent(new Event("visibilitychange"));
   });
   await assertClock(clock, "12:00 AM", "Thu, Nov 19, 2026");
-  await clock.goto(origin + "/");
+  await clock.goto(origin + "/fil/");
   await clock.locator("[data-ph-clock]").waitFor();
   await assertClock(clock, "12:00 AM", "Huw, Nob 19, 2026");
   await clock.close();
@@ -258,7 +258,7 @@ try {
         await park.locator("img").evaluate((image) => image.decode());
         await park.screenshot({ path: join(output, "explore-mobile.jpg"), quality: 84 });
       }
-      await layout.goto(origin + (name === "desktop" ? "/en/serbisyo/business-permit-renewal/" : "/serbisyo/aics/"), { waitUntil: "networkidle" });
+      await layout.goto(origin + (name === "desktop" ? "/serbisyo/business-permit-renewal/" : "/fil/serbisyo/aics/"), { waitUntil: "networkidle" });
       await layout.screenshot({ path: join(output, `service-${name}.jpg`), quality: 84 });
     }
   }
