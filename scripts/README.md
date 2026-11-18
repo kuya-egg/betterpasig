@@ -15,6 +15,8 @@
 | `verify_pasig_browser.mjs` | Checks the built site using Windows Edge, including routes, search and expiry |
 | `check_page_weight.mjs` | Fails when a built page needs more than 300 KB on first load (gzip HTML, CSS, JS and woff2 fonts). Run after `bun run build`; CI runs it on every push and pull request |
 
+The search index is not a script: `bun run build` runs `pagefind --site dist` after `astro build` and writes `dist/pagefind/`. Preview with `bun run build` then `bun run preview`; `astro dev` has no search index.
+
 Run Python with `pip install shapely` for the geometry scripts.
 
 ```bash

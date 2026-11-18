@@ -1,92 +1,21 @@
 ---
-import { barangays, categories, facilities, historicalUpdates, hotlines, officials, officialsDirectory, opportunities, pasigSources, places, programs, serviceUpdates, services, transparencyFigures } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
-import { eventState, isSourceFresh } from "../lib/freshness";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-// Where a city official is listed on /opisyal (ids from OfficialsPage).
-function officialAnchor(person: (typeof officials)[number]): string {
-  if (person.position === "Councilor") return `opisyal-council-${person.district}`;
-  if (person.position === "Ex-officio") return "opisyal-ex-officio";
-  return `opisyal-${person.position.toLowerCase().replaceAll(" ", "-")}`;
-}
-
-// Everyday Filipino words and the terms the data uses. Each side is added to a row that contains the other,
-// so "sedula" finds the community tax certificate and "real property tax" finds amilyar rows.
-const synonyms: [string, string[]][] = [
-  ["amilyar", ["real property tax"]],
-  ["sedula", ["community tax", "cedula"]],
-  ["kapanganakan", ["birth"]],
-  ["kasal", ["marriage"]],
-  ["namatay", ["death"]],
-  ["libing", ["burial"]],
-  ["negosyo", ["business"]],
-  ["trabaho", ["job", "employment"]],
-  ["lisensya", ["license"]],
-  ["pensyon", ["pension"]],
-  ["iskolar", ["scholarship"]],
-  ["nakatatanda", ["senior"]],
-  ["kapansanan", ["pwd", "disability"]],
-  ["ospital", ["hospital"]],
-  ["baha", ["flood"]],
-];
-function withSynonyms(text: string): string {
-  const extra = synonyms.flatMap(([word, terms]) =>
-    terms.some((term) => text.includes(term)) ? [word] : text.includes(word) ? terms : [],
-  );
-  return extra.length ? `${text} ${extra.join(" ")}` : text;
-}
-
-const index = [
-  ...services.map((service) => {
-  const category = categories.find((item) => item.id === service.category);
-  const summary = service.summary_fil ?? "";
-  return {
-    id: service.id,
-    href: href(lang, `/serbisyo/${service.id}`),
-    title: lang === "en" ? service.title_en : service.title_fil,
-    category: lang === "en" ? (category?.name_en ?? "") : (category?.name_fil ?? ""),
-    text: `${service.title_fil} ${service.title_en} ${summary} ${category?.name_fil ?? ""} ${category?.name_en ?? ""}`.toLowerCase(),
-  };
-  }),
-  ...places.map((place) => { const date = Object.values(place.evidence).flat().map((ref) => pasigSources.find((source) => source.id === ref.split(":")[0])?.published_date ?? "").sort().at(-1) ?? ""; const fresh = isSourceFresh(date, new Date()); return { id: place.id, href: href(lang, `/lugar/${place.id}/`), title: place.name, category: `${lang === "en" ? "Place" : "Lugar"}${fresh ? "" : (lang === "en" ? " · older source" : " · lumang sanggunian")}`, text: `${place.name} ${place.address ?? ""} ${place.barangay_id ?? ""}`.toLowerCase() }; }),
-  ...serviceUpdates.map((item) => { const fresh = isSourceFresh(item.published_date, new Date()); return { id: item.id, href: !fresh ? href(lang, "/ngayong-linggo/arkibo/") : item.service_id ? href(lang, `/serbisyo/${item.service_id}`) : href(lang, "/ngayong-linggo/"), title: lang === "en" ? item.title_en : item.title_fil, category: `${lang === "en" ? "Service notice" : "Abiso sa serbisyo"}${fresh ? "" : (lang === "en" ? " · archived" : " · arkibo")}`, text: `${item.title_fil} ${item.title_en} ${item.id}`.toLowerCase() }; }),
-  ...opportunities.map((item) => { const past = eventState(item.event_date, new Date()) === "past"; const fresh = isSourceFresh(item.published_date, new Date()); return { id: item.id, href: past || !fresh ? href(lang, "/ngayong-linggo/arkibo/") : href(lang, "/ngayong-linggo/"), title: lang === "en" ? item.title_en : item.title_fil, category: `${lang === "en" ? "Dated opportunity" : "Oportunidad na may petsa"}${past || !fresh ? (lang === "en" ? " · past" : " · nagdaan") : ""}`, text: `${item.title_fil} ${item.title_en} ${item.id}`.toLowerCase() }; }),
-  ...historicalUpdates.map((item) => ({ id: item.id, href: href(lang, "/ngayong-linggo/arkibo/"), title: item.id, category: lang === "en" ? "Past notice" : "Nagdaang abiso", text: `${item.id} ${item.summary}`.toLowerCase() })),
-  ...barangays.map((item) => ({ id: item.id, href: href(lang, `/barangay/${item.id}/`), title: item.name, category: lang === "en" ? "Barangay" : "Barangay", text: `${item.name} ${item.district ?? ""}`.toLowerCase() })),
-  ...[
-    { path: "/opisyal/", title: t.officialsPageTitle, keys: "opisyal officials alkalde mayor konsehal councilor kapitan punong barangay department head" },
-    { path: "/emergency/", title: t.emergencyPageTitle, keys: "emergency hotline ospital hospital evacuation evacuation center baha flood rescue" },
-    { path: "/tulong/", title: t.benefitsTitle, keys: "benepisyo benefits tulong ayuda programs" },
-    { path: "/pondo/", title: t.fundsTitle, keys: "pondo budget funds transparency foi coa" },
-    { path: "/tungkol/", title: t.aboutTitle, keys: "tungkol about github correction mali" },
-  ].map((page) => ({ id: `page${page.path}`, href: href(lang, page.path), title: page.title, category: t.searchKindPage, text: `${page.title} ${page.keys}`.toLowerCase() })),
-  ...programs.map((item) => ({ id: `program-${item.id}`, href: href(lang, `/tulong/#${item.id}`), title: lang === "en" ? item.title_en : item.title_fil, category: t.searchKindProgram, text: `${item.title_fil} ${item.title_en} ${item.office} ${item.for}`.toLowerCase() })),
-  ...officials.map((item) => ({ id: `official-${item.id}`, href: href(lang, `/opisyal/#${officialAnchor(item)}`), title: item.name, category: t.searchKindOfficial, text: `${item.name} ${item.position} ${"role" in item ? item.role : ""}`.toLowerCase() })),
-  ...officialsDirectory.departments.map((item, index) => ({ id: `department-${index}`, href: href(lang, "/opisyal/#opisyal-departamento"), title: item.office, category: t.searchKindOffice, text: `${item.office} ${item.head ?? ""} ${item.position ?? ""}`.toLowerCase() })),
-  ...hotlines.map((item) => ({ id: `hotline-${item.id}`, href: href(lang, "/emergency/#hotlines"), title: lang === "en" ? item.label_en : item.label_fil, category: t.searchKindHotline, text: `${item.label_fil} ${item.label_en} ${item.name} ${item.kind} ${item.numbers.join(" ")}`.toLowerCase() })),
-  ...facilities.hospitals.map((item, index) => ({ id: `hospital-${index}`, href: href(lang, "/emergency/#ospital"), title: item.name, category: t.searchKindHospital, text: `${item.name} ${item.address ?? ""} ospital hospital`.toLowerCase() })),
-  ...facilities.evacuation_centers.map((item, index) => ({ id: `evacuation-${index}`, href: href(lang, "/emergency/#evacuation"), title: item.name, category: t.searchKindEvacuation, text: `${item.name} ${item.barangay} evacuation center`.toLowerCase() })),
-  ...transparencyFigures.map((item) => ({ id: `figure-${item.id}`, href: href(lang, `/pondo/#${item.id}`), title: item.label_fil, category: t.fundsTitle, text: `${item.label_fil} ${item.value}`.toLowerCase() })),
-].map((row) => ({ ...row, text: withSynonyms(row.text) }));
-const datedIndex = index.map(row => {
-  const place = places.find(item => item.id === row.id);
-  const update = serviceUpdates.find(item => item.id === row.id);
-  const opportunity = opportunities.find(item => item.id === row.id);
-  const history = historicalUpdates.find(item => item.id === row.id);
-  const date = place ? Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1) : update?.published_date ?? opportunity?.published_date ?? history?.published_date;
-  return {...row, publishedDate: date, eventDate: opportunity?.event_date, archiveHref: href(lang, '/ngayong-linggo/arkibo/'), kind: place ? 'place' : update ? 'service_update' : opportunity ? 'opportunity' : history ? 'historical' : barangays.some(item => item.id === row.id) ? 'barangay' : 'service'};
-});
-const json = JSON.stringify(datedIndex).replace(/</g, "\\u003c");
 ---
 
 <div
   class="bp-search mt-6 max-w-[580px]"
+  data-pagefind-ignore
   data-empty={t.noMatch}
   data-one={t.matchOne}
   data-many={t.matchMany}
   data-keys={t.searchKeys}
+  data-kinds={JSON.stringify(t.searchKinds)}
+  data-archived={t.searchArchived}
+  data-older={t.searchOlderSource}
+  data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
 >
   <div class="field">
   <form role="search">
@@ -112,148 +41,235 @@ const json = JSON.stringify(datedIndex).replace(/</g, "\\u003c");
     ))}
   </div>
 </div>
-<script type="application/json" id="bp-search" is:inline set:html={json} />
-
 <script>
-  import {isSourceFresh,eventState} from '../lib/freshness';
+  import { eventState, isSourceFresh } from "../lib/freshness";
+  import { searchVariants } from "../lib/search-synonyms";
+
+  type SubResult = { title: string; url: string; anchor?: { id: string } };
+  type PageData = { url: string; meta: { title?: string; kind?: string }; sub_results: SubResult[] };
+  type Pagefind = { options: (options: object) => Promise<void>; search: (query: string) => Promise<{ results: { id: string; score: number; data: () => Promise<PageData> }[] }> };
+  type Dates = { notices: Record<string, { published: string; event: string | null; historical: boolean }>; places: Record<string, string> };
+  type Row = { href: string; title: string; kind: string; note: string };
+
   const box = document.querySelector<HTMLElement>(".bp-search");
-  const dataEl = document.getElementById("bp-search");
-  if (box && dataEl?.textContent) {
-    type Row = { id: string; href: string; title: string; category: string; text: string; publishedDate?: string; eventDate?: string; archiveHref: string; kind: string };
-    const rows = JSON.parse(dataEl.textContent) as Row[];
-    const form = box.querySelector("form");
-    const input = box.querySelector("input");
-    const results = box.querySelector<HTMLElement>(".results");
-    if (form && input && results) {
-      const empty = box.dataset.empty ?? "";
-      const one = box.dataset.one ?? "";
-      const many = box.dataset.many ?? "{n}";
-      const keys = box.dataset.keys ?? "";
-      let links: HTMLAnchorElement[] = [];
-      let active = -1;
+  const form = box?.querySelector("form");
+  const input = box?.querySelector("input");
+  const results = box?.querySelector<HTMLElement>(".results");
+  if (box && form && input && results) {
+    const empty = box.dataset.empty ?? "";
+    const one = box.dataset.one ?? "";
+    const many = box.dataset.many ?? "{n}";
+    const keys = box.dataset.keys ?? "";
+    const kinds = JSON.parse(box.dataset.kinds ?? "{}") as Record<string, string>;
+    const archivedLabel = box.dataset.archived ?? "";
+    const olderLabel = box.dataset.older ?? "";
+    const archiveHref = box.dataset.archiveHref ?? "";
+    let links: HTMLAnchorElement[] = [];
+    let active = -1;
+    let latest = 0;
+    let timer = 0;
 
-      const countLabel = (n: number) => (n === 1 ? one : many.replace("{n}", String(n)));
+    // Pagefind and the date table load on first use, not with the page. Pagefind picks the index of <html lang>.
+    let pagefind: Promise<Pagefind | null> | undefined;
+    const loadPagefind = () => {
+      const url = "/pagefind/pagefind.js";
+      // pageLength 0.1: hub pages (officials, emergency, funds) are long; the default would rank short pages that merely mention a name above them.
+      pagefind ??= import(/* @vite-ignore */ url).then(async (module: Pagefind) => {
+        await module.options({ ranking: { pageLength: 0.1 } });
+        return module;
+      }, () => null);
+      return pagefind;
+    };
+    let dates: Promise<Dates> | undefined;
+    const loadDates = () => {
+      dates ??= fetch("/notice-dates.json").then((response) => response.json() as Promise<Dates>);
+      return dates;
+    };
 
-      const highlight = (text: string, words: string[]) => {
-        const frag = document.createDocumentFragment();
-        const lower = text.toLowerCase();
-        const usable = words.filter((word) => word.length > 1);
-        let i = 0;
-        while (i < text.length) {
-          let at = -1;
-          let len = 0;
-          for (const word of usable) {
-            const found = lower.indexOf(word, i);
-            if (found !== -1 && (at === -1 || found < at)) {
-              at = found;
-              len = word.length;
-            }
+    const countLabel = (n: number) => (n === 1 ? one : many.replace("{n}", String(n)));
+
+    const highlight = (text: string, words: string[]) => {
+      const frag = document.createDocumentFragment();
+      const lower = text.toLowerCase();
+      const usable = words.filter((word) => word.length > 1);
+      let i = 0;
+      while (i < text.length) {
+        let at = -1;
+        let len = 0;
+        for (const word of usable) {
+          const found = lower.indexOf(word, i);
+          if (found !== -1 && (at === -1 || found < at)) {
+            at = found;
+            len = word.length;
           }
-          if (at === -1) {
-            frag.append(text.slice(i));
-            break;
-          }
-          if (at > i) frag.append(text.slice(i, at));
-          const mark = document.createElement("mark");
-          mark.textContent = text.slice(at, at + len);
-          frag.append(mark);
-          i = at + len;
         }
-        return frag;
-      };
+        if (at === -1) {
+          frag.append(text.slice(i));
+          break;
+        }
+        if (at > i) frag.append(text.slice(i, at));
+        const mark = document.createElement("mark");
+        mark.textContent = text.slice(at, at + len);
+        frag.append(mark);
+        i = at + len;
+      }
+      return frag;
+    };
 
-      const paint = () => {
-        links.forEach((link, index) => {
-          link.classList.toggle("active", index === active);
-          link.setAttribute("aria-selected", index === active ? "true" : "false");
-        });
-        if (active >= 0) links[active]?.scrollIntoView({ block: "nearest" });
-      };
+    const paint = () => {
+      links.forEach((link, index) => {
+        link.classList.toggle("active", index === active);
+        link.setAttribute("aria-selected", index === active ? "true" : "false");
+      });
+      if (active >= 0) links[active]?.scrollIntoView({ block: "nearest" });
+    };
 
-      const close = () => {
-        results.classList.remove("open");
-        input.setAttribute("aria-expanded", "false");
-      };
+    const close = () => {
+      results.classList.remove("open");
+      input.setAttribute("aria-expanded", "false");
+    };
 
-      const run = () => {
-        const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    // Every notice is indexed once, on the current-notices page. An expired one (old source, past event,
+    // or a historical record) is sent to the archive with the same anchor and labelled, never offered as current.
+    const noticeRow = (page: PageData, sub: SubResult, dateTable: Dates): Row | null => {
+      const id = sub.anchor?.id;
+      const notice = id ? dateTable.notices[id] : undefined;
+      if (!id || !notice) return null;
+      const now = new Date();
+      const expired = notice.historical || !isSourceFresh(notice.published, now) || eventState(notice.event, now) === "past";
+      const prefix = page.url.startsWith("/en/") ? "/en" : "";
+      return {
+        href: expired ? `${archiveHref}#${id}` : `${prefix}/ngayong-linggo/#${id}`,
+        title: sub.title || page.meta.title || "",
+        kind: kinds["ngayong-linggo"] ?? "",
+        note: expired ? archivedLabel : "",
+      };
+    };
+
+    const toRows = async (pages: PageData[]): Promise<Row[]> => {
+      const needsDates = pages.some((page) => page.meta.kind === "ngayong-linggo" || page.meta.kind === "lugar");
+      const dateTable = needsDates ? await loadDates().catch(() => null) : null;
+      const rows: Row[] = [];
+      for (const page of pages) {
+        const kind = page.meta.kind ?? "";
+        const anchored = page.sub_results.filter((sub) => sub.anchor);
+        if (kind === "ngayong-linggo" && dateTable) {
+          const notices = anchored.map((sub) => noticeRow(page, sub, dateTable)).filter((row): row is Row => row !== null);
+          if (notices.length) {
+            rows.push(...notices);
+            continue;
+          }
+        }
+        let note = "";
+        if (kind === "lugar" && dateTable) {
+          const published = dateTable.places[page.url.split("/").filter(Boolean).pop() ?? ""];
+          if (!isSourceFresh(published, new Date())) note = olderLabel;
+        }
+        // Without the date table a notice links to the notices page itself, which hides expired rows on its own.
+        rows.push({ href: kind === "ngayong-linggo" ? page.url : (page.sub_results[0]?.url ?? page.url), title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
+      }
+      // Expired and older-source results sort after current ones (stable).
+      return rows.sort((a, b) => Number(a.note !== "") - Number(b.note !== ""));
+    };
+
+    const run = async () => {
+      const query = input.value.trim();
+      const ticket = ++latest;
+      if (!query) {
         results.replaceChildren();
         links = [];
         active = -1;
-        if (words.length === 0) {
-          close();
-          return;
+        close();
+        return;
+      }
+      const variants = searchVariants(query);
+      const words = [...new Set(variants.flatMap((variant) => variant.split(/\s+/)))];
+      const pf = await loadPagefind();
+      const found = pf ? await Promise.all(variants.map((variant) => pf.search(variant))).catch(() => []) : [];
+      // One result per page, best score first, across the query and its synonym variants.
+      const best = new Map<string, (typeof found)[number]["results"][number]>();
+      for (const result of found.flatMap((set) => set.results)) {
+        if ((best.get(result.id)?.score ?? -1) < result.score) best.set(result.id, result);
+      }
+      const unique = [...best.values()].sort((a, b) => b.score - a.score);
+      const pages = await Promise.all(unique.slice(0, 12).map((result) => result.data())).catch(() => []);
+      const rows = await toRows(pages);
+      if (ticket !== latest) return;
+      results.replaceChildren();
+      links = [];
+      active = -1;
+      if (rows.length === 0) {
+        const note = document.createElement("p");
+        note.textContent = empty;
+        results.append(note);
+      } else {
+        for (const row of rows.slice(0, 7)) {
+          const link = document.createElement("a");
+          link.href = row.href;
+          link.setAttribute("role", "option");
+          const title = document.createElement("span");
+          title.append(highlight(row.title, words));
+          const category = document.createElement("small");
+          category.textContent = row.note ? `${row.kind} · ${row.note}` : row.kind;
+          link.append(title, category);
+          results.append(link);
+          links.push(link);
         }
-        const expired = (row: Row) => Boolean(row.publishedDate && !isSourceFresh(row.publishedDate,new Date())) || eventState(row.eventDate,new Date()) === 'past' || row.kind === 'historical';
-        const hits = rows.filter((row) => words.every((word) => row.text.includes(word))).sort((a,b) => Number(expired(a))-Number(expired(b)));
-        if (hits.length === 0) {
-          const note = document.createElement("p");
-          note.textContent = empty;
-          results.append(note);
-        } else {
-          for (const hit of hits.slice(0, 7)) {
-            const link = document.createElement("a");
-            link.href = expired(hit) ? hit.archiveHref : hit.href;
-            link.setAttribute("role", "option");
-            const title = document.createElement("span");
-            title.append(highlight(hit.title, words));
-            const category = document.createElement("small");
-            category.textContent = hit.category.split(' · ')[0] + (expired(hit) ? (document.documentElement.lang === 'en' ? ' · archived' : ' · arkibo') : '');
-            link.append(title, category);
-            results.append(link);
-            links.push(link);
-          }
-          const hint = document.createElement("div");
-          hint.className = "hint";
-          const shown = document.createElement("span");
-          shown.textContent = countLabel(hits.length);
-          const help = document.createElement("span");
-          help.textContent = keys;
-          hint.append(shown, help);
-          results.append(hint);
-        }
-        results.classList.add("open");
-        input.setAttribute("aria-expanded", "true");
-      };
+        const hint = document.createElement("div");
+        hint.className = "hint";
+        const shown = document.createElement("span");
+        shown.textContent = countLabel(rows.length);
+        const help = document.createElement("span");
+        help.textContent = keys;
+        hint.append(shown, help);
+        results.append(hint);
+      }
+      results.classList.add("open");
+      input.setAttribute("aria-expanded", "true");
+    };
+    const runSoon = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(run, 80);
+    };
 
-      input.addEventListener("input", run);
-      input.addEventListener("focus", () => {
-        if (input.value.trim()) run();
-      });
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowDown") {
-          event.preventDefault();
-          if (!links.length) return;
-          active = (active + 1) % links.length;
-          paint();
-        } else if (event.key === "ArrowUp") {
-          event.preventDefault();
-          if (!links.length) return;
-          active = (active - 1 + links.length) % links.length;
-          paint();
-        } else if (event.key === "Escape") {
-          close();
-        } else if (event.key === "Enter" && active >= 0) {
-          event.preventDefault();
-          links[active]?.click();
-        }
-      });
-      form.addEventListener("submit", (event) => {
+    input.addEventListener("input", runSoon);
+    input.addEventListener("focus", () => {
+      void loadPagefind();
+      if (input.value.trim()) void run();
+    });
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
         event.preventDefault();
-        if (active >= 0) links[active]?.click();
-        else run();
-      });
-      box.addEventListener("click", (event) => {
-        const button = (event.target as Element).closest<HTMLButtonElement>("[data-q]");
-        if (!button) return;
-        input.value = button.dataset.q ?? "";
-        run();
-        input.focus();
-      });
-      document.addEventListener("click", (event) => {
-        if (!(event.target as Element).closest(".bp-search")) close();
-      });
-    }
+        if (!links.length) return;
+        active = (active + 1) % links.length;
+        paint();
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        if (!links.length) return;
+        active = (active - 1 + links.length) % links.length;
+        paint();
+      } else if (event.key === "Escape") {
+        close();
+      } else if (event.key === "Enter" && active >= 0) {
+        event.preventDefault();
+        links[active]?.click();
+      }
+    });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (active >= 0) links[active]?.click();
+      else void run();
+    });
+    box.addEventListener("click", (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>("[data-q]");
+      if (!button) return;
+      input.value = button.dataset.q ?? "";
+      void run();
+      input.focus();
+    });
+    document.addEventListener("click", (event) => {
+      if (!(event.target as Element).closest(".bp-search")) close();
+    });
   }
 </script>
 
