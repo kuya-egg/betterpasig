@@ -1,6 +1,5 @@
 ---
 // "Bago sa Pasig": places that opened with a recorded date, newest first.
-import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { pasyalan, places } from "../../lib/data";
 
@@ -21,7 +20,6 @@ const target = (id: string) => (places.some((place) => place.id === id) ? href(l
           {rows.map((place) => (
             <li>
               <a class="bp-new__name" href={target(place.id)}>{place.name}</a>
-              {place.verify && <Verify />}
               <span class="bp-new__date muted">{t.openedOn} {formatDate(lang, place.opened!)}</span>
             </li>
           ))}

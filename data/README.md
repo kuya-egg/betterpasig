@@ -31,7 +31,7 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 ## Rules for editing
 
 1. **Every entry needs a trusted source.** Put the URL in `sources` (or `source`). Prefer official city documents (`assets.pasigcity.gov.ph`), then national agencies, then the major news outlets in rule 6. Nothing else counts.
-2. **Use `verify`.** Set `"verify": true` when a value comes only from a secondary site, conflicts with another source, or might be outdated. The site shows these with a "being checked" label. Set it to `false` only after someone confirms it against an official source or by calling.
+2. **Use `verify`.** Set `"verify": true` when a record comes only from a secondary source, conflicts with another source, or might be outdated. It stays in the source files for review but does not appear in public pages or search. For barangays, the name and district stay public while flagged hall and official details are hidden. Set the flag to `false` only after confirming the information.
 3. **Never guess.** If a fee, requirement or number is unknown, use `null`. The site hides empty fields.
 4. **Keep IDs stable.** `id` values are used in URLs and in `site.json`. Rename the title, not the ID.
 5. **English is the default page language.** Fields ending in `_fil` are the Filipino version; `_en` is the English version. Prose and values that people read get both (`*_fil` and `*_en`); keep every number, peso amount, date, name and phone number identical between the two. A name, URL or plain number stays a single field.

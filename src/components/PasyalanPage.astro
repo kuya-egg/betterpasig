@@ -5,7 +5,6 @@
 import { Picture } from "astro:assets";
 import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
-import Verify from "./Verify.astro";
 import Map3D from "./map/Map3D.astro";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 import { barangays, pasyalan, pasyalanRetrieved } from "../lib/data";
@@ -69,7 +68,7 @@ const highlight = [...new Set(pasyalan.map((place) => place.barangay_id).filter(
                 )}
                 <div class="bp-pas__body">
                   <p class="kicker">{kindLabel(place.kind)}</p>
-                  <h2 id={`pasyalan-${place.id}`}>{place.name}{place.verify && <Verify />}</h2>
+                  <h2 id={`pasyalan-${place.id}`}>{place.name}</h2>
                   <p class="bp-pas__line">{en ? place.line_en : place.line_fil}</p>
                   <dl class="bp-pas__facts">
                     {barangay && (

@@ -4,7 +4,7 @@ import Site from '../layouts/Site.astro';
 import SourceNote from './SourceNote.astro';
 import PageHead from './site/PageHead.astro';
 import IbaPaTabs from './IbaPaTabs.astro';
-import {historicalUpdates,opportunities,pasigSources,serviceUpdates} from '../lib/data';
+import {historicalUpdates,opportunities,pasigSources,serviceUpdates,services} from '../lib/data';
 import {formatDate,href,langFromUrl} from '../i18n';
 import {eventState,isSourceFresh} from '../lib/freshness';
 interface Props { archive?: boolean }
@@ -28,7 +28,7 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
     {rows.map(row=>{const current=!row.historical&&isSourceFresh(row.date,new Date())&&eventState(row.eventDate,new Date())!=='past';const source=pasigSources.find(s=>s.id===row.refs[0].split(':')[0]);const reg=opportunities.find(o=>o.id===row.id)?.registration_url;const when=new Date(`${row.date}T00:00:00Z`);const month=new Intl.DateTimeFormat(en?'en-PH':'fil-PH',{month:'short',timeZone:'UTC'}).format(when);return <li id={row.id} data-pagefind-title={row.title} data-published-date={row.date} data-event-date={row.eventDate} data-archive-record={archive||undefined} data-historical={String(row.historical)} hidden={archive?current:!current} class="weekly__item">
      <div class="weekly__date" aria-hidden="true"><span class="weekly__month">{month}</span><span class="weekly__day">{when.getUTCDate()}</span></div>
      <div class="weekly__body">
-      <h2 class="weekly__title"><a class="link" href={row.service?href(lang,`/serbisyo/${row.service}`):source?.url}>{row.title}</a></h2>
+      <h2 class="weekly__title"><a class="link" href={services.some(service=>service.id===row.service)?href(lang,`/serbisyo/${row.service}/`):source?.url}>{row.title}</a></h2>
       <div class="weekly__dates t-small">
        <span>{en?'Published':'Inanunsyo'}: {formatDate(lang,row.date)}</span>
        {row.eventDate&&<span>{en?'Scheduled':'Nakatakda'}: {formatDate(lang,row.eventDate)}</span>}
@@ -42,7 +42,8 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
      </div>
     </li>;})}
    </ol>
-   {!archive&&<p class="muted" data-feed-empty hidden>{en?'No recent official notices are listed.':'Wala pang nakalistang bagong opisyal na abiso. Tingnan ang arkibo para sa mga naunang abiso.'}</p>}
+   {!archive && <p class="muted" data-feed-empty hidden={rows.length > 0}>{en ? "No recent official notices are listed." : "Wala pang nakalistang bagong opisyal na abiso."}</p>}
+   {archive && rows.length === 0 && <p class="muted">{en ? "No archived notices are listed." : "Wala pang nakalistang abiso sa arkibo."}</p>}
    <p class="weekly__more"><ButtonLink variant="outline" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</ButtonLink></p>
   </div>
  </section>

@@ -1,6 +1,5 @@
 ---
 // Emergency hotlines from data/hotlines.json: tap to call (tel:) or text (sms:), with the date they were checked.
-import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { emergencyHotlines, hotlinesRetrieved, telHref } from "../../lib/data";
 import { arrowPath, messagePath, phonePath } from "./content";
@@ -29,7 +28,7 @@ const smsHref = (number: string) => `sms:${number.replace(/[^\d+]/g, "")}`;
           <li>
             <a class="cd bp-hot__card" href={sms ? smsHref(number) : telHref(number)}>
               <span class="bp-hot__text">
-                <span class="bp-hot__label">{label}{hotline.verify && <Verify />}</span>
+                <span class="bp-hot__label">{label}</span>
                 <span class="bp-hot__number num">{number}</span>
               </span>
               <span class="bp-hot__call" aria-hidden="true"><svg class="ic" width="22" height="22" viewBox="0 0 24 24"><path d={sms ? messagePath : phonePath} /></svg></span>

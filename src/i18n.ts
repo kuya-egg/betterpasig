@@ -138,9 +138,6 @@ export const ui = {
     reportWrong: "May mali?",
     reportWrongLink: "I-report sa GitHub",
 
-    verify: "Sinusuri pa",
-    verifyTitle: "Mula sa luma o di-opisyal na sanggunian. Kinukumpirma pa ang impormasyon.",
-
     partOf: "Bahagi ng",
     dataUpdated: "Huling pag-update ng datos",
 
@@ -152,12 +149,11 @@ export const ui = {
     officialsPageTitle: "Mga opisyal ng Pasig",
     cityOfficialsHeading: "Mga opisyal ng lungsod",
     exOfficioHeading: "Ex-officio sa Sangguniang Panlungsod",
-    exOfficioConflict: "Magkaiba ang mga pangalang nakalista sa dalawang sanggunian. Makikita rito ang dalawang talaan habang kinukumpirma pa kung sino ang nakaupo.",
     exOfficioSetA: "Unang talaan (opisyal ng lungsod)",
     exOfficioSetB: "Ikalawang talaan (direktoryo)",
     departmentsHeading: "Mga pinuno ng tanggapan",
     barangayOfficialsHeading: "Mga opisyal ng barangay",
-    barangayOfficialsNote: "Nakalista rito ang mga opisyal ng 30 barangay. Kinukumpirma pa ang mga pangalan sa opisyal na sanggunian.",
+    barangayOfficialsNote: "Wala pang kumpirmadong detalye ng mga opisyal ng barangay na nakalista rito.",
     punongBarangay: "Punong barangay",
     skChair: "Tagapangulo ng SK",
     kagawad: "Mga kagawad",
@@ -170,8 +166,6 @@ export const ui = {
     emergencyLead: "Mga hotline, ospital at evacuation center sa Pasig. Kung may agarang panganib, tumawag kaagad.",
     emergencyGroupMain: "Mga pangunahing hotline",
     emergencyJump: "Pumunta sa seksyon",
-    conflictsTitle: "Mga numerong kinukumpirma pa",
-    conflictsIntro: "Iba-iba ang numerong nakalista sa mga sanggunian. Sa emergency, subukan muna ang mga hotline sa itaas.",
     hospitalsTitle: "Mga ospital",
     hospitalPublic: "Pampubliko",
     hospitalPrivate: "Pribado",
@@ -195,7 +189,7 @@ export const ui = {
     relatedBenefits: "Kaugnay na benepisyo",
 
     // Page /pondo (title: fundsTitle)
-    fundsPageIntro: "Mula sa mga dokumento at balita tungkol sa lungsod ang mga bilang dito. May markang “Sinusuri pa” ang mga bilang na kinukumpirma pa.",
+    fundsPageIntro: "Mula sa mga dokumento at balita tungkol sa lungsod ang mga bilang dito.",
     fundsAll: "Lahat ng halaga at link",
     figuresTitle: "Mga halaga at bilang",
     figureLabel: "Paglalarawan",
@@ -262,7 +256,7 @@ export const ui = {
     trustTitle: "Saan galing ang impormasyon?",
     trustBefore: "Mula sa Citizen's Charter o opisyal na pahina ng lungsod ang mga bayad, tagal at numerong nakalista rito.",
     trustStrong: "Makikita rin kung kailan sinuri ang impormasyon",
-    trustAfter: ". May markang “Sinusuri pa” ang impormasyong kinukumpirma pa.",
+    trustAfter: ". Hindi muna namin inilalathala ang impormasyong kinukumpirma pa.",
     mapTitle: "Ang 30 barangay ng Pasig",
     mapLead: "Piliin ang barangay sa mapa o sa listahan para makita kung sino ang punong barangay at saan makikipag-ugnayan. Mula sa PSA PSGC ang mga hangganan sa mapa.",
     hotlinesTitle: "Mga hotline sa emergency",
@@ -439,9 +433,6 @@ export const ui = {
     reportWrong: "Something wrong?",
     reportWrongLink: "Report it on GitHub",
 
-    verify: "Being checked",
-    verifyTitle: "From an unofficial or older source. We're still confirming it.",
-
     partOf: "Part of",
     dataUpdated: "Data updated",
 
@@ -453,12 +444,11 @@ export const ui = {
     officialsPageTitle: "Pasig officials",
     cityOfficialsHeading: "City officials",
     exOfficioHeading: "Ex-officio members of the City Council",
-    exOfficioConflict: "The two sources disagree on who the ex-officio members are. We show both while this is being confirmed.",
     exOfficioSetA: "First list (city officials)",
     exOfficioSetB: "Second list (directory)",
     departmentsHeading: "Office heads",
     barangayOfficialsHeading: "Barangay officials",
-    barangayOfficialsNote: "All 30 barangays. These names come from lists not yet confirmed by an official source.",
+    barangayOfficialsNote: "No confirmed barangay official details are listed yet.",
     punongBarangay: "Punong Barangay",
     skChair: "SK Chairperson",
     kagawad: "Kagawad",
@@ -471,8 +461,6 @@ export const ui = {
     emergencyLead: "Numbers and places that can help in a disaster. In a serious emergency, call right away.",
     emergencyGroupMain: "Main emergency lines",
     emergencyJump: "Jump to",
-    conflictsTitle: "Numbers the sources disagree on",
-    conflictsIntro: "The sources disagree on these numbers. Which one to try first is not confirmed. Do not rely on only one; try the numbers above first.",
     hospitalsTitle: "Hospitals",
     hospitalPublic: "Public",
     hospitalPrivate: "Private",
@@ -496,7 +484,7 @@ export const ui = {
     relatedBenefits: "Related benefits",
 
     // Page /pondo (title: fundsTitle)
-    fundsPageIntro: "These figures come from city documents and news. Anything not yet confirmed is marked \"Being checked\".",
+    fundsPageIntro: "These figures come from city documents and news.",
     fundsAll: "All figures and links",
     figuresTitle: "Figures",
     figureLabel: "Description",
@@ -562,7 +550,7 @@ export const ui = {
     trustTitle: "Every fact has a source",
     trustBefore: "Every fee, time and number here comes from a Citizen's Charter or an official city page,",
     trustStrong: "dated when we checked it",
-    trustAfter: ". When a fact is not confirmed yet, it says “Being checked”.",
+    trustAfter: ". We leave out information that still needs verification.",
     mapTitle: "Pasig's 30 barangays",
     mapLead: "Tap your barangay on the map or pick it from the list for its captain and hall. Boundaries from PSA PSGC.",
     hotlinesTitle: "Emergency numbers",

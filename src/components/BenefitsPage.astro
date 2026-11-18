@@ -1,7 +1,6 @@
 ---
 // /tulong/: pick a situation (links to /buhay/<id>/), then every program as an accordion grouped by audience.
 import Site from "../layouts/Site.astro";
-import Verify from "./Verify.astro";
 import PageHead from "./site/PageHead.astro";
 import LifeIcon from "./home/LifeIcon.astro";
 import { lifeEvents, programs, programsRetrieved, sourceLabel } from "../lib/data";
@@ -79,7 +78,6 @@ const countLabel = en ? `${programs.length} programs` : `${programs.length} na p
                     <details id={program.id} class="bp-benefits__item">
                       <summary>
                         <span class="bp-benefits__name">{title}</span>
-                        {program.verify && <Verify />}
                         <span class="bp-benefits__sign" aria-hidden="true" />
                       </summary>
                       <div class="bp-benefits__body">

@@ -2,7 +2,6 @@
 import Site from "../layouts/Site.astro";
 import Map3D from "./map/Map3D.astro";
 import PageHead from "./site/PageHead.astro";
-import Verify from "./Verify.astro";
 import { barangays, telHref } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
 
@@ -11,7 +10,7 @@ const en = lang === "en";
 const t = ui[lang];
 const districtName = (d: number | null) => (d === 1 ? t.district1 : d === 2 ? t.district2 : "");
 
-// Only what the panel shows, from data/barangays.json. null stays out; verify keeps the badge.
+// Only publish the fields the panel has room to show.
 const phones = (contact: string | null) => [
   ...new Set((contact ?? "").replace(/\([^)]*\)/g, "").match(/\d[\d\s-]*\d/g)?.map((n) => n.trim()) ?? []),
 ];
@@ -25,7 +24,6 @@ const info = Object.fromEntries(
       punong: b.punong_barangay ?? null,
       hall: b.hall_address ?? null,
       phones: phones(b.contact).map((n) => ({ n, tel: telHref(n) })),
-      verify: !!b.verify,
       url: href(lang, `/barangay/${b.id}/`),
     },
   ]),
@@ -43,8 +41,8 @@ const labels = {
 <Site
   title={en ? "Barangays" : "Mga barangay"}
   description={en
-    ? "All 30 barangays of Pasig on a map, with the punong barangay, hall address and phone numbers listed in the sources."
-    : "Ang 30 barangay ng Pasig sa mapa, kasama ang punong barangay, address ng hall at mga numerong nakalista sa mga sanggunian."}
+    ? "Find any of Pasig's 30 barangays on the map or in the A–Z list."
+    : "Hanapin ang alinman sa 30 barangay ng Pasig sa mapa o sa listahang A–Z."}
 >
   <section class="section section--flow" aria-labelledby="page-h">
     <div class="wrap">
@@ -66,7 +64,7 @@ const labels = {
             <p class="kicker" data-f="district"></p>
             <h2 data-f="name" translate="no"></h2>
             <dl class="bp-bi__facts">
-              <div data-row="punong"><dt>{labels.punong}</dt><dd><span data-f="punong"></span><span data-verify hidden><Verify /></span></dd></div>
+              <div data-row="punong"><dt>{labels.punong}</dt><dd data-f="punong"></dd></div>
               <div data-row="hall"><dt>{labels.hall}</dt><dd data-f="hall" translate="no"></dd></div>
               <div data-row="phone"><dt>{labels.phone}</dt><dd><ul data-f="phones"></ul></dd></div>
             </dl>
@@ -106,7 +104,7 @@ const labels = {
 <script>
   const data = JSON.parse(document.getElementById("bi-data")!.textContent!) as Record<
     string,
-    { name: string; district: string; punong: string | null; hall: string | null; phones: { n: string; tel: string }[]; verify: boolean; url: string }
+    { name: string; district: string; punong: string | null; hall: string | null; phones: { n: string; tel: string }[]; url: string }
   >;
   const root = document.querySelector<HTMLElement>("[data-bi]")!;
   const map = root.querySelector<HTMLElement>("[data-map3d]")!;
@@ -130,7 +128,6 @@ const labels = {
     field("name").textContent = b.name;
     field("punong").textContent = b.punong ?? "";
     row("punong").hidden = !b.punong;
-    panel.querySelector<HTMLElement>("[data-verify]")!.hidden = !b.verify;
     field("hall").textContent = b.hall ?? "";
     row("hall").hidden = !b.hall;
     const ul = field("phones");

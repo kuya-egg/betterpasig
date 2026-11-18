@@ -8,20 +8,18 @@ const origin = process.env.BETTERPASIG_PREVIEW_URL ?? "http://localhost:4321";
 const output = process.env.BETTERPASIG_AUDIT_DIR;
 const browser = await chromium.launch({ executablePath: process.env.BROWSER_PATH });
 const taskIds = [
-  "pay-real-property-tax",
   "senior-citizen-id",
   "aics",
   "certified-copy-civil-document",
-  "business-permit-renewal",
   "scholarship-new",
 ];
 const pageFamilies = [
   "/",
   "/serbisyo/",
-  "/serbisyo/business-permit-renewal/",
+  "/serbisyo/certified-copy-civil-document/",
   "/tulong/",
   "/barangay/kapitolyo/",
-  "/lugar/temporary-city-hall/",
+  "/pasyalan/",
   "/buhay/nag-aaral/",
   "/ngayong-linggo/",
   "/ngayong-linggo/arkibo/",
@@ -121,7 +119,7 @@ try {
     await layout.goto(origin + locale + "/barangay/maybunga/");
     // barangay pages and the officials' barangay section follow the page language (no Filipino pin)
     assert.equal(await layout.locator("main").getAttribute("lang"), null);
-    assert.match(await layout.locator("main").innerText(), /Punong [Bb]arangay/);
+    assert.doesNotMatch(await layout.locator("main").innerText(), /Punong [Bb]arangay/);
     assert.doesNotMatch(await layout.locator("main").innerText(), /Directory source|Published numbers/);
     await layout.goto(origin + locale + "/opisyal/#opisyal-barangay");
     assert.equal(await layout.locator("#opisyal-barangay").getAttribute("lang"), null);
@@ -139,9 +137,9 @@ try {
       return top >= 0 && bottom <= innerHeight;
     }));
     await layout.goto(origin + locale + "/");
-    await layout.locator(".bp-quick a[href$='/business-permit-renewal/']").click();
-    await layout.waitForURL(`**${locale}/serbisyo/business-permit-renewal/`);
-    assert.match(await layout.locator(".bp-svc__instructions").innerText(), hasEnglish ? /Proof of gross sales/ : /Patunay ng gross sales/);
+    await layout.locator(".bp-quick a[href$='/certified-copy-civil-document/']").click();
+    await layout.waitForURL(`**${locale}/serbisyo/certified-copy-civil-document/`);
+    assert.match(await layout.locator("#service-facts").innerText(), /City Civil Registry/);
     await layout.goto(origin + locale + "/");
     await layout.locator(".bp-quick a[href$='/aics/']").click();
     await layout.waitForURL(`**${locale}/serbisyo/aics/`);
@@ -258,7 +256,7 @@ try {
         await park.locator("img").evaluate((image) => image.decode());
         await park.screenshot({ path: join(output, "explore-mobile.jpg"), quality: 84 });
       }
-      await layout.goto(origin + (name === "desktop" ? "/serbisyo/business-permit-renewal/" : "/fil/serbisyo/aics/"), { waitUntil: "networkidle" });
+      await layout.goto(origin + (name === "desktop" ? "/serbisyo/certified-copy-civil-document/" : "/fil/serbisyo/aics/"), { waitUntil: "networkidle" });
       await layout.screenshot({ path: join(output, `service-${name}.jpg`), quality: 84 });
     }
   }
