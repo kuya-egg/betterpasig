@@ -81,6 +81,14 @@ try {
           await assertFits(layout, `${colorScheme} at ${width}px: ${path}`);
           await assertHotlines(layout);
           await assertLightMode(layout);
+          if (route === "/" && colorScheme === "light" && width >= 768) {
+            const heights = await layout.locator(".bp-ben__card").evaluateAll(async (cards) => {
+              await document.fonts.ready;
+              return cards.map((card) => card.getBoundingClientRect().height);
+            });
+            assert.ok(heights.length > 1 && Math.max(...heights) - Math.min(...heights) <= 1,
+              `Benefit card heights at ${width}px on ${path}: ${heights.join(", ")}`);
+          }
         }
       }
     }

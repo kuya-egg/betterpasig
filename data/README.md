@@ -17,7 +17,7 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 | `site.json` | Notice text, alerts, which hotlines and services to feature, City Hall location | Homepage |
 | `hotlines.json` | Emergency and city phone numbers (`label_fil` / `label_en` are the short names shown on the site), plus `conflicts` still to resolve (`text_fil` / `text_en`) | Emergency strip, `/emergency` |
 | `services.json` | 12 `categories`, 31 `offices`, 173 `services` from the Pasig Citizen's Charters | Services pages, search |
-| `programs.json` | Benefits and programs (senior pension, solo parent, scholarships, etc.): `for_*`, `benefit_*`, `how_*`, `note_*` | `/tulong`, homepage benefits |
+| `programs.json` | Benefits and programs (senior pension, solo parent, scholarships, etc.): `for_*`, `benefit_*`, `how_*`, `note_*`; optional `preview_fil` and `preview_en` summarize the sourced benefit for homepage cards | `/tulong`, homepage benefits |
 | `barangays.json` | All 30 barangays with district, captain, contact | Barangay pages |
 | `facilities.json` | Hospitals, evacuation centers, flood notes (`text_*`), list caveat (`notes_*`) | Barangay pages, `/emergency` |
 | `officials.json` | Elected officials 2025–2028, some department heads | `/opisyal`, homepage officials |
