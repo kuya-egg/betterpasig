@@ -105,6 +105,8 @@ try {
     assert.ok(layout.url().endsWith("#pasyalan"));
     const park = layout.locator("#pasyalan-maybunga-rainforest-park").locator("..");
     assert.match(await park.innerText(), hasEnglish ? /7:00 AM/ : /7:00 n\.u\./);
+    await layout.locator(".home-topics__park").click();
+    await layout.waitForURL("**/#pasyalan-maybunga-rainforest-park");
 
     const details = layout.locator(".bp-header__more");
     const summary = details.locator("summary");
@@ -179,6 +181,12 @@ try {
   assert.equal(await noScript.locator(".bp-header__more").evaluate((element) => element.open), true);
   await noScript.locator(".bp-quick__all").click();
   assert.ok(await noScript.locator("#service-categories a").first().isVisible());
+  await noScript.goto(origin + "/en/");
+  const education = noScript.locator(".home-topics__list a[href='/en/serbisyo/#education']");
+  await education.focus();
+  await education.press("Enter");
+  await noScript.waitForURL("**/en/serbisyo/#education");
+  assert.match(await noScript.locator("#education").innerText(), /Education & scholarships/);
   await noScript.close();
 
   const searchStates = await browser.newPage();

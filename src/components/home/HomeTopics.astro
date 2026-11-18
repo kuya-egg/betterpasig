@@ -1,0 +1,132 @@
+---
+import { Picture } from "astro:assets";
+import { href, langFromUrl, ui } from "../../i18n";
+import { categories, pasyalan } from "../../lib/data";
+import { photo, photoAlt } from "../../lib/photos";
+
+const lang = langFromUrl(Astro.url);
+const en = lang === "en";
+const t = ui[lang];
+const plaza = photo("plaza-rizal");
+const park = pasyalan.find((place) => place.id === "maybunga-rainforest-park");
+if (!park) throw new Error("Missing Maybunga Rainforest Park in the visitor guide");
+---
+
+<section class="home-topics" aria-labelledby="home-topics-h">
+  <div class="wrap home-topics__layout">
+    <div>
+      <h2 id="home-topics-h">{en ? "Browse services by topic" : "Mga serbisyo ayon sa paksa"}</h2>
+      <ul class="home-topics__list">
+        {categories.map((category) => (
+          <li>
+            <a href={href(lang, `/serbisyo/#${category.id}`)}>
+              {en ? category.name_en : category.name_fil}
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="home-topics__visit">
+      <h2>{t.guideExplore}</h2>
+      <figure>
+        <div class="home-topics__image">
+          <Picture
+            src={plaza.image}
+            alt={photoAlt(plaza, lang)}
+            formats={["avif", "webp"]}
+            fallbackFormat="webp"
+            widths={[360, 480, 640, 900]}
+            sizes="(max-width: 767px) 92vw, (max-width: 1440px) 32vw, 430px"
+            width={640}
+            quality={54}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          <a href={href(lang, "/#pasyalan-pasig-city-museum")}>
+            Plaza Rizal {en ? "and" : "at ang"} Pasig City Museum
+          </a>
+        </figcaption>
+      </figure>
+      <a class="home-topics__park link" href={href(lang, `/#pasyalan-${park.id}`)}>
+        {en ? "Opening hours at" : "Oras sa"} {park.name}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-topics {
+    padding-block: clamp(2rem, 5vw, 4.5rem);
+    background: var(--bg);
+  }
+  .home-topics__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5.5rem);
+  }
+  .home-topics h2 {
+    margin-block-end: var(--s-4);
+    font: 800 clamp(1.5rem, 1.15rem + 1.1vw, 2.35rem)/1.18 var(--font-text);
+    letter-spacing: -.032em;
+    text-wrap: wrap;
+  }
+  .home-topics__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .home-topics__list li { border-block-start: 1px solid var(--line); }
+  .home-topics__list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    min-block-size: 3.25rem;
+    padding-block: var(--s-2);
+    color: var(--blue);
+    font-weight: 750;
+    font-size: .9375rem;
+    line-height: 1.45;
+  }
+  .home-topics__list svg { flex: none; }
+  .home-topics__image :global(img) {
+    display: block;
+    inline-size: 100%;
+    aspect-ratio: 16 / 8;
+    object-fit: cover;
+    object-position: center 58%;
+    border-radius: var(--r-md) var(--r-md) 0 0;
+  }
+  .home-topics figcaption {
+    padding-inline: var(--s-4);
+    background: var(--pale);
+    border-radius: 0 0 var(--r-md) var(--r-md);
+  }
+  .home-topics figcaption a, .home-topics__park {
+    display: flex;
+    align-items: center;
+    min-block-size: 3rem;
+    font-size: .9375rem;
+    font-weight: 750;
+    line-height: 1.4;
+    padding-block: var(--s-2);
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: .23em;
+  }
+  .home-topics__park { margin-block-start: var(--s-2); }
+
+  @media (hover: hover) {
+    .home-topics__list a:hover { text-decoration: underline; text-underline-offset: .23em; }
+  }
+  @media (max-width: 47.9375rem) {
+    .home-topics__layout { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 22.5rem) {
+    .home-topics__list { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

@@ -1,10 +1,11 @@
 # BetterPasig city guide
 
-The November 18, 2026 design puts search and common service links beside a licensed photograph of Plaza Rizal at desktop widths. On phones, the tasks come before the photo. The shared interface uses a light palette, Manrope for controls and body text, Newsreader for editorial headings, and Pasig Blue for actions. [Photo and credit records](../../data/photos.json)
+The homepage opens with search and six direct service links. A topic directory and a licensed photograph of Plaza Rizal follow. On phones, the order is search, shortcuts, topics, and places. The shared interface uses a light palette, Manrope for controls and body text, Newsreader for editorial headings, and Pasig Blue for actions. [Photo and credit records](../../data/photos.json)
 
 | Reference | Application in BetterPasig |
 | --- | --- |
-| [City of Helsinki](https://www.hel.fi/en) | Keep the search on a solid ground alongside a recognizable image of the city. |
+| [BetterGov.ph](https://bettergov.ph/) | Lead with search and popular tasks, then offer a broader topic directory. The Pasig directory uses plain links to the corresponding sections. |
+| [City of Helsinki](https://www.hel.fi/en) | Use a solid ground for search and recognizable photography for the city guide. |
 | [City of Sydney](https://www.cityofsydney.nsw.gov.au/) | Link common tasks directly from the welcome area, including amilyar, permit renewal, and scholarship applications. |
 | [LifeSG](https://www.life.gov.sg/) | Browse by a life event with a short explanation of each guide. |
 | [GOV.UK birth registration](https://www.gov.uk/register-birth) | Use plain headings and direct links to service details, requirements, and steps. |
@@ -16,5 +17,6 @@ Impeccable informed the layout, type hierarchy, and browser review. UI UX Pro Ma
 ## Screenshots
 
 - [Desktop homepage](home-desktop.jpg) and [mobile homepage](home-mobile.jpg)
+- [Desktop topic directory and Pasyalan](topics-desktop.jpg)
 - [Desktop service answer](service-desktop.jpg) and [mobile service answer](service-mobile.jpg)
 - [Mobile park guide](explore-mobile.jpg)

@@ -30,10 +30,15 @@ const labels: Record<string, { fil: string; en: string }> = {
 </section>
 
 <style>
-  .bp-quick { margin-block-start: var(--s-5); }
+  .bp-quick {
+    padding: clamp(.875rem, 2.5vw, 1.75rem);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+  }
   .bp-quick h2 {
     margin-block-end: var(--s-2);
-    font: 800 1.0625rem/1.4 var(--font-text);
+    font: 800 clamp(1.125rem, 1.04rem + .35vw, 1.375rem)/1.3 var(--font-text);
     letter-spacing: 0;
   }
   .bp-quick ul {
@@ -70,7 +75,7 @@ const labels: Record<string, { fil: string; en: string }> = {
     .bp-quick li a svg { transition: translate var(--fast) var(--ease); }
     .bp-quick li a:hover svg { translate: .16rem; }
   }
-  @media (max-width: 22.5rem), (min-width: 48rem) and (max-width: 59rem) {
+  @media (max-width: 22.5rem) {
     .bp-quick ul { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

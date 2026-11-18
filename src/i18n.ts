@@ -293,7 +293,7 @@ export const ui = {
 
     emergency: "Emergency",
     moreNumbers: "More numbers",
-    guideHelp: "Assistance",
+    guideHelp: "Help",
     guideExplore: "Explore Pasig",
     guideMore: "More",
     guideNational: "National",

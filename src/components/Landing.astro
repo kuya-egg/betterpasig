@@ -1,6 +1,7 @@
 ---
 import Site from "../layouts/Site.astro";
 import HomeHero from "./home/HomeHero.astro";
+import HomeTopics from "./home/HomeTopics.astro";
 import LifeDoors from "./home/LifeDoors.astro";
 import Pasyalan from "./home/Pasyalan.astro";
 import NewInPasig from "./home/NewInPasig.astro";
@@ -25,6 +26,7 @@ const featuredHelp = helpIds.map((id) => {
 
 <Site description={t.pageDescription} photos={["plaza-rizal", ...chapterPhotos]}>
   <HomeHero />
+  <HomeTopics />
   <section class="section bp-assistance" aria-labelledby="home-help">
     <div class="wrap bp-assistance__layout">
       <div class="section-head">

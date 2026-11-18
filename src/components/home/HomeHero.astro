@@ -1,113 +1,53 @@
 ---
-import { Picture } from "astro:assets";
 import Search from "../Search.astro";
 import TopServices from "./TopServices.astro";
-import { href, langFromUrl, ui } from "../../i18n";
+import { langFromUrl, ui } from "../../i18n";
 import { liveAlerts } from "../../lib/alerts";
-import { photo, photoAlt } from "../../lib/photos";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const alert = liveAlerts(lang)[0];
-const image = photo("plaza-rizal");
 ---
 
-<section class="wrap civic-hero" aria-labelledby="hero-h">
-  <div class="civic-hero__tasks">
-    {alert && (
-      <p class="civic-hero__alert" data-alert-expires={alert.expires}>
-        {alert.text} <a href={alert.source}>{alert.host}</a>
-      </p>
-    )}
-    <h1 id="hero-h">{t.homeTitle}</h1>
-    <p class="civic-hero__intro">{t.homeLead}</p>
-    <Search includePlaces />
+<section class="civic-hero" aria-labelledby="hero-h">
+  <div class="wrap civic-hero__layout">
+    <div class="civic-hero__intro">
+      {alert && (
+        <p class="civic-hero__alert" data-alert-expires={alert.expires}>
+          {alert.text} <a href={alert.source}>{alert.host}</a>
+        </p>
+      )}
+      <h1 id="hero-h">{t.homeTitle}</h1>
+      <p class="civic-hero__lead">{t.homeLead}</p>
+      <Search includePlaces />
+    </div>
     <TopServices />
   </div>
-  <figure class="civic-hero__landmark">
-    <div class="civic-hero__image">
-      <Picture
-        src={image.image}
-        alt={photoAlt(image, lang)}
-        formats={["avif", "webp"]}
-        fallbackFormat="webp"
-        widths={[360, 480, 640, 900, 1200]}
-        sizes="(max-width: 767px) 92vw, (max-width: 1440px) 40vw, 570px"
-        width={640}
-        quality={54}
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
-    <figcaption>
-      <a href={href(lang, "/#pasyalan-pasig-city-museum")}>
-        Plaza Rizal <span>{lang === "en" ? "and" : "at ang"} Pasig City Museum</span>
-        <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>
-      </a>
-    </figcaption>
-  </figure>
 </section>
 
 <style>
   .civic-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
-    padding-block: clamp(1.25rem, 3vw, 2.75rem) var(--s-4);
-  }
-  .civic-hero__tasks {
-    min-inline-size: 0;
-    padding: clamp(1.125rem, 3.2vw, 3rem);
     background: var(--pale);
-    border-radius: var(--r-lg) 0 0 var(--r-lg);
+    border-block-end: 1px solid var(--line);
+    padding-block: clamp(1.5rem, 4.5vw, 4.25rem);
   }
-  .civic-hero__tasks h1 {
-    max-inline-size: 16ch;
-    color: var(--ink);
-    font-size: clamp(2.7rem, 1.9rem + 2.4vw, 5.35rem);
-    line-height: 1;
+  .civic-hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+  }
+  .civic-hero__intro h1 {
+    max-inline-size: 18ch;
+    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.05 var(--font-text);
+    letter-spacing: -.04em;
     text-wrap: balance;
   }
-  .civic-hero__intro {
+  .civic-hero__lead {
     max-inline-size: 48ch;
     color: var(--muted);
     margin-block: var(--s-3) var(--s-5);
   }
-  .civic-hero__landmark {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    min-inline-size: 0;
-    background: var(--surface);
-    border-radius: 0 var(--r-lg) var(--r-lg) 0;
-    overflow: clip;
-  }
-  .civic-hero__image { position: relative; min-block-size: 17rem; }
-  .civic-hero__image :global(img) {
-    position: absolute;
-    inset: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    object-position: 52% 50%;
-  }
-  .civic-hero figcaption {
-    padding-inline: clamp(1rem, 2.5vw, 2rem);
-    background: var(--blue);
-    color: white;
-  }
-  .civic-hero figcaption a {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 var(--s-1);
-    min-block-size: 3.5rem;
-    padding-block: var(--s-2);
-    font-size: .9375rem;
-    font-weight: 750;
-  }
-  .civic-hero figcaption span { font-weight: 550; }
-  .civic-hero figcaption svg { flex: none; margin-inline-start: auto; }
-  .civic-hero figcaption a:focus-visible { outline-color: white; outline-offset: -3px; }
-  .civic-hero figcaption a:hover { text-decoration: underline; text-underline-offset: .26em; }
   .civic-hero__alert {
     margin-block-end: var(--s-4);
     padding: var(--s-2) var(--s-3);
@@ -116,11 +56,9 @@ const image = photo("plaza-rizal");
     background: var(--bg);
   }
   .civic-hero__alert a { color: var(--blue); text-decoration: underline; }
-  @media (max-width: 47.9375rem) {
-    .civic-hero { grid-template-columns: minmax(0, 1fr); }
-    .civic-hero__tasks { border-radius: var(--r-lg) var(--r-lg) 0 0; }
-    .civic-hero__tasks h1 { text-wrap: wrap; }
-    .civic-hero__landmark { border-radius: 0 0 var(--r-lg) var(--r-lg); }
-    .civic-hero__image { min-block-size: 0; aspect-ratio: 4 / 3; }
+
+  @media (max-width: 54rem) {
+    .civic-hero__layout { grid-template-columns: minmax(0, 1fr); }
+    .civic-hero__intro h1 { max-inline-size: 22ch; text-wrap: wrap; }
   }
 </style>

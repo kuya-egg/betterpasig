@@ -162,4 +162,12 @@ const navState = (target: string) => {
     .bp-header__nav li:has(details[open]) { flex: 1 0 100%; }
     .bp-header__language { padding-inline: var(--s-1); }
   }
+
+  @media (max-width: 31rem) {
+    .bp-header__nav > ul { column-gap: var(--s-1); }
+    .bp-header__nav > ul > li > a, .bp-header__more summary {
+      min-inline-size: 3rem;
+      padding-inline: 0;
+    }
+  }
 </style>
