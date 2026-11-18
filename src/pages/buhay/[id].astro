@@ -1,0 +1,12 @@
+---
+import LifePage from "../../components/LifePage.astro";
+import { lifeEvents } from "../../lib/data";
+
+export function getStaticPaths() {
+  return lifeEvents.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+
+<LifePage event={event} />

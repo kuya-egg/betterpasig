@@ -1,0 +1,76 @@
+{
+  "note": "Photographs of real places in Pasig from Wikimedia Commons, kept in src/assets/photos/. Credit every one used on a page in that page's footer.",
+  "retrieved": "2026-11-18",
+  "photos": [
+    {
+      "id": "manggahan-floodway",
+      "file": "manggahan-floodway.jpg",
+      "alt_fil": "Ang Manggahan Floodway sa Pasig, kalmadong tubig na sumasalamin sa asul na langit",
+      "alt_en": "The Manggahan Floodway in Pasig, calm water reflecting a blue sky",
+      "by": "Elmer B. Domingo",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Floodway_Manggahan_Pasig_City.jpg"
+    },
+    {
+      "id": "plaza-rizal",
+      "file": "plaza-rizal.jpg",
+      "alt_fil": "Plaza Rizal at ang Pasig City Museum sa ilalim ng mga palma",
+      "alt_en": "Plaza Rizal and the Pasig City Museum under palm trees",
+      "by": "EyeTrick",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Plaza_Rizal_and_the_Pasig_City_Museum.jpg"
+    },
+    {
+      "id": "kapitolyo-ortigas",
+      "file": "kapitolyo-ortigas.jpg",
+      "alt_fil": "Mga bubong ng Kapitolyo at ang mga gusali ng Ortigas Center sa likod",
+      "alt_en": "Kapitolyo rooftops with the Ortigas Center towers behind",
+      "by": "Patrick Roque",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Ph-mm-pasig-kapitolyo;_ortigas_center_skyline_(2015)_01.JPG"
+    },
+    {
+      "id": "pasig-museum",
+      "file": "pasig-museum.jpg",
+      "alt_fil": "Ang dilaw na Pasig City Museum sa hapon, may mga taong nakaupo sa plaza",
+      "alt_en": "The yellow Pasig City Museum in afternoon light, people sitting on the plaza",
+      "by": "Elmer B. Domingo",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Pasig_City_Museum_opposite_the_Pasig_Cathedral.jpg"
+    },
+    {
+      "id": "pasig-cathedral",
+      "file": "pasig-cathedral.jpg",
+      "alt_fil": "Ang harapan at kampanaryo ng Pasig Cathedral, may mga palma",
+      "alt_en": "The facade and bell tower of Pasig Cathedral, with palm trees",
+      "by": "Ryomaandres",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Pasig_City_(103)_Cathedral.jpg"
+    },
+    {
+      "id": "maybunga-rainforest-park",
+      "file": "maybunga-rainforest-park.jpg",
+      "alt_fil": "Daanan sa gitna ng mga halaman at bulaklak sa Maybunga Rainforest Park",
+      "alt_en": "A path through plants and flowers in Maybunga Rainforest Park",
+      "by": "Valenzuela400",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Pasig_Rainforest_Park_Maybunga10.jpg"
+    },
+    {
+      "id": "bahay-na-tisa",
+      "file": "bahay-na-tisa.jpg",
+      "alt_fil": "Ang Bahay na Tisa, lumang bahay na bato at kahoy na may bintanang capiz",
+      "alt_en": "Bahay na Tisa, an old stone and wood house with capiz windows",
+      "by": "Ronaldbunag",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Bahay_na_Tisa2.JPG"
+    }
+  ]
+}

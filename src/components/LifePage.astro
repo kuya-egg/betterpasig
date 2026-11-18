@@ -1,0 +1,159 @@
+---
+// /buhay/<id>/: every service and benefit for one life event, then the events people often need next.
+import Kit from "../layouts/Kit.astro";
+import Verify from "./Verify.astro";
+import LifeIcon from "./home/LifeIcon.astro";
+import { href, langFromUrl, ui } from "../i18n";
+import { lifeEvents, officeName, type LifeEvent } from "../lib/data";
+
+interface Props {
+  event: LifeEvent;
+}
+
+const { event } = Astro.props;
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const en = lang === "en";
+const title = en ? event.title_en : event.title_fil;
+const related = event.related.map((id) => lifeEvents.find((item) => item.id === id)!);
+const pick = (fil: string | null | undefined, eng: string | null | undefined) => (en ? eng || fil : fil || eng) ?? null;
+---
+
+<Kit title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
+  <section class="section bp-life" aria-labelledby="life-h">
+    <div class="wrap">
+      <div class="section-head bp-life__head">
+        <LifeIcon id={event.id} />
+        <h1 id="life-h">{title}</h1>
+        <p>{en ? event.line_en : event.line_fil}</p>
+      </div>
+
+      <h2 class="t-label muted">{t.lifeServices}</h2>
+      <ul class="rows bp-life__rows">
+        {
+          event.serviceList.map((service) => (
+            <li>
+              <span class="rows__name">
+                <a class="bp-life__link" href={href(lang, `/serbisyo/${service.id}/`)}>{en ? service.title_en : service.title_fil}</a>
+                {service.verify && <Verify />}
+                <small>
+                  {t.office}: {officeName(service.office)}
+                  {service.fee && <>. {t.fee}: {service.fee}</>}
+                </small>
+              </span>
+              {service.processing_time && <span class="rows__value bp-life__time">{service.processing_time}</span>}
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        event.programList.length > 0 && (
+          <>
+            <h2 class="t-label muted bp-life__h">{t.lifePrograms}</h2>
+            <ul class="rows bp-life__rows">
+              {event.programList.map((program) => (
+                <li>
+                  <span class="rows__name">
+                    <a class="bp-life__link" href={href(lang, `/tulong/#${program.id}`)}>{en ? program.title_en : program.title_fil}</a>
+                    {program.verify && <Verify />}
+                    <small>{pick(program.for_fil, program.for_en)}</small>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <h2 class="t-label muted bp-life__h">{t.lifeRelated}</h2>
+      <ul class="grid bp-life__related">
+        {
+          related.map((item) => (
+            <li class="span-6">
+              <a class="card bp-life__card" href={href(lang, `/buhay/${item.id}/`)}>
+                <LifeIcon id={item.id} />
+                <span>
+                  <span class="t-card">{en ? item.title_en : item.title_fil}</span>
+                  <span class="t-small muted bp-life__card-line">{en ? item.line_en : item.line_fil}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Kit>
+
+<style>
+  .bp-life {
+    height: auto;
+  }
+  .bp-life__head {
+    margin-bottom: var(--s-8);
+  }
+  .bp-life__h {
+    margin-top: var(--s-8);
+  }
+  .bp-life__rows {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .bp-life__rows > li {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
+  }
+  .bp-life__rows .rows__name {
+    display: grid;
+    gap: var(--s-1);
+  }
+  .bp-life__rows small {
+    color: var(--muted);
+    font-size: var(--t-small);
+    font-weight: 400;
+  }
+  .bp-life__link {
+    font-size: var(--t-card);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
+  }
+  .bp-life__link:hover {
+    text-decoration-color: currentColor;
+  }
+  .bp-life__time {
+    color: var(--muted);
+    font-size: var(--t-small);
+    text-align: right;
+  }
+  .bp-life__related {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .bp-life__card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: center;
+    height: 100%;
+  }
+  .bp-life__card-line {
+    display: block;
+    margin-top: var(--s-1);
+  }
+  @media (max-width: 1023px) {
+    .bp-life__related > li {
+      grid-column: 1 / -1;
+    }
+    .bp-life__rows > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bp-life__time {
+      text-align: left;
+    }
+  }
+</style>

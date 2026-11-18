@@ -108,6 +108,24 @@ export const dataSchemas = {
     links: z.array(fact),
     figures: z.array(fact),
   }),
+  pasyalan: z.object({
+    places: z.array(fact),
+  }),
+  // Curation only: each id points at a sourced service or program record, which keeps the facts.
+  "life-events": z.object({
+    events: z.array(
+      z.object({
+        id: z.string().regex(/^[a-z0-9-]+$/),
+        title_fil: z.string().min(1),
+        title_en: z.string().min(1),
+        line_fil: z.string().min(1),
+        line_en: z.string().min(1),
+        services: z.array(z.string().min(1)).min(1),
+        programs: z.array(z.string().min(1)),
+        related: z.array(z.string().min(1)),
+      }),
+    ),
+  }),
   ...recentSchemas,
 } satisfies Record<string, z.ZodType>;
 

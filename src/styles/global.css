@@ -5,6 +5,7 @@
 @import "@fontsource/geist/latin-600.css";
 @import "@fontsource/geist/latin-700.css";
 @import "../../design/tokens/tokens.css";
+@import "./shared.css";
 
 @theme inline {
   --color-bg: var(--bg);
@@ -74,56 +75,4 @@
 .link-draw:focus-visible {
   color: var(--blue);
   text-decoration-color: currentColor;
-}
-
-.copy-btn {
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 auto;
-}
-.copy-btn:hover {
-  background: var(--bg);
-  color: var(--ink);
-}
-.copy-btn svg {
-  width: 16px;
-  height: 16px;
-}
-.copy-btn .check {
-  display: none;
-}
-.copy-btn.is-copied .check {
-  display: block;
-}
-.copy-btn.is-copied .glyph {
-  display: none;
-}
-
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  z-index: 60;
-  transform: translate(-50%, 16px);
-  opacity: 0;
-  background: var(--ink);
-  color: var(--bg);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  transition:
-    opacity var(--mid) var(--ease),
-    transform var(--mid) var(--ease);
-  pointer-events: none;
-}
-.toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "check": "copy-headings",
+    "target": "ol.span-6.bp-new-list > li.bp-new-item:nth-of-type(1) > div > h3",
+    "reason": "Each heading is the proper name of a real park in Pasig (Ilaya Buting Linear Park, RC Park, Parke ng Pag-asa, East Bank Linear Park); a place name is the right heading for a place."
+  },
+  {
+    "check": "off-grid",
+    "target": "div.grid > div.span-5.stack-4 > a.nav__logo > span",
+    "reason": "The footer logo lockup starts on the page margin with the Pasig mark; the wordmark span follows the mark inside the same link, as in the header."
+  },
+  {
+    "check": "scroll-reveal",
+    "target": "li.span-6:nth-of-type(1) > div.bp-hotline > div > a.bp-hotline__number",
+    "reason": "Nothing reveals: the kit's phone action bar observes this link as its twin (same tel: href). Scrolling it into view with the pointer parked fires no transition (probe: transitionrun log empty); the colour change is a hover state."
+  },
+  {
+    "check": "scroll-reveal",
+    "target": "footer#contact > div.wrap > div.closing__cta.close--type > a.btn.btn--primary",
+    "reason": "Nothing reveals: the kit's action bar observes the closing button as the twin of its main action; the button's colour transition is its own hover state, not a scroll effect."
+  },
+  {
+    "check": "scroll-reveal",
+    "target": "div.span-2.start-7 > ul.bp-foot-links > li:nth-of-type(1) > a",
+    "reason": "Nothing reveals: the kit's action bar observes this link as a twin (same /serbisyo/ href); its colour transition is the hover state only."
+  }
+]

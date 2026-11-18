@@ -13,6 +13,8 @@ import pasigSourcesFile from "../../data/sources.json";
 import placesFile from "../../data/places.json";
 import serviceUpdatesFile from "../../data/service-updates.json";
 import opportunitiesFile from "../../data/opportunities.json";
+import lifeEventsFile from "../../data/life-events.json";
+import pasyalanFile from "../../data/pasyalan.json";
 import { assertDataFile } from "./schemas";
 import { assertRecentData } from "./validate-recent";
 
@@ -107,6 +109,37 @@ for (const item of [...opportunities, ...historicalUpdates]) {
   for (const id of refs) if (!placeIds.has(id)) throw new Error(`Unknown place ${id} (${item.id})`);
   for (const ref of item.evidence) if (!sourceIds.has(ref.split(":")[0])) throw new Error(`Unknown evidence source ${ref} (${item.id})`);
 }
+
+assertDataFile("life-events", lifeEventsFile);
+requireUnique(lifeEventsFile.events.map((event) => event.id), "life event");
+const eventIds = new Set(lifeEventsFile.events.map((event) => event.id));
+// A life event groups existing records; the services and programs keep their own sources.
+export const lifeEvents = lifeEventsFile.events.map((event) => {
+  for (const id of event.related) if (!eventIds.has(id)) throw new Error(`Unknown related life event ${id} (${event.id})`);
+  return {
+    ...event,
+    serviceList: event.services.map((id) => {
+      const service = services.find((item) => item.id === id);
+      if (!service) throw new Error(`Unknown service ${id} (life event ${event.id})`);
+      return service;
+    }),
+    programList: event.programs.map((id) => {
+      const program = programs.find((item) => item.id === id);
+      if (!program) throw new Error(`Unknown program ${id} (life event ${event.id})`);
+      return program;
+    }),
+  };
+});
+
+assertDataFile("pasyalan", pasyalanFile);
+requireUnique(pasyalanFile.places.map((place) => place.id), "pasyalan");
+for (const place of pasyalanFile.places) {
+  if (place.barangay_id && !barangays.some((barangay) => barangay.id === place.barangay_id)) throw new Error(`Unknown barangay ${place.barangay_id} (pasyalan ${place.id})`);
+}
+// Places to visit; `kind: "bago"` with `opened` marks a place that opened recently.
+export const pasyalan = pasyalanFile.places;
+export const pasyalanRetrieved = pasyalanFile.retrieved;
+export type LifeEvent = (typeof lifeEvents)[number];
 
 export function serviceStaticPaths() {
   return services.map((service) => {

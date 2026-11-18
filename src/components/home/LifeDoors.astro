@@ -1,0 +1,95 @@
+---
+// Twelve life events, each a linked card to /buhay/<id>/ with what it holds.
+import { href, langFromUrl, ui } from "../../i18n";
+import { lifeEvents } from "../../lib/data";
+import LifeIcon from "./LifeIcon.astro";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+---
+
+<section class="section ground-surface" id="buhay" aria-labelledby="buhay-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="buhay-h">{t.doorsTitle}</h2>
+      <p>{t.doorsLead}</p>
+    </div>
+    <ul class="grid bp-doors">
+      {
+        lifeEvents.map((event) => (
+          <li class="span-3">
+            <a class="card bp-door" href={href(lang, `/buhay/${event.id}/`)}>
+              <LifeIcon id={event.id} />
+              <h3>{lang === "en" ? event.title_en : event.title_fil}</h3>
+              <p class="bp-door__line">{lang === "en" ? event.line_en : event.line_fil}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .bp-doors {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: var(--s-4);
+  }
+  .bp-door {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-content: start;
+    column-gap: var(--s-4);
+    row-gap: var(--s-1);
+    padding: var(--s-4);
+    background: var(--bg);
+  }
+  .bp-door :global(.bp-life-icon) {
+    grid-row: 1 / span 2;
+  }
+  .bp-door h3 {
+    margin: 0;
+    font-size: var(--t-card);
+    line-height: 1.25;
+  }
+  .bp-door p {
+    margin: 0;
+  }
+  .bp-door__line {
+    font-size: var(--t-small);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  @media (max-width: 1023px) {
+    .bp-doors > li {
+      grid-column: span 6;
+    }
+  }
+  @media (max-width: 639px) {
+    .bp-doors > li {
+      grid-column: span 6;
+    }
+    .bp-door {
+      grid-template-columns: minmax(0, 1fr);
+      padding: var(--s-4);
+      row-gap: var(--s-3);
+    }
+    .bp-door :global(.bp-life-icon) {
+      grid-row: auto;
+    }
+    .bp-door h3 {
+      font-size: var(--t-body);
+    }
+    .bp-door__line {
+      display: none;
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    #buhay {
+      --h: 2;
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+// Emergency numbers as rows: the featured city lines, then police, fire and the city hospitals.
+// Tap to call, a button to copy, the date the list was checked.
+import CopyButton from "../CopyButton.astro";
+import Verify from "../Verify.astro";
+import { formatDate, href, langFromUrl, ui } from "../../i18n";
+import { emergencyHotlines, hotlines, hotlinesRetrieved, telHref } from "../../lib/data";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const en = lang === "en";
+const extra = ["pasig-police-station", "bfp-pasig", "pasig-city-general-hospital", "pasig-city-childrens-hospital"];
+const rows = [...emergencyHotlines, ...extra.map((id) => hotlines.find((item) => item.id === id)).filter((item) => item !== undefined)];
+---
+
+<section class="section ground-surface" id="emergency" aria-labelledby="emergency-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="emergency-h">{t.hotlinesTitle}</h2>
+      <p>{t.hotlinesChecked.replace("{date}", formatDate(lang, hotlinesRetrieved))}</p>
+    </div>
+    <ul class="grid bp-hotlines">
+      {
+        rows.map((hotline) => (
+          <li class="span-6">
+            <div class="bp-hotline">
+              <div>
+                <p class="t-small muted">
+                  {en ? hotline.label_en : hotline.label_fil}
+                  {hotline.verify && <Verify />}
+                </p>
+                <a class="bp-hotline__number" href={telHref(hotline.numbers[0])}>{hotline.numbers[0]}</a>
+                {hotline.numbers.length > 1 && (
+                  <p class="t-small bp-hotline__more">
+                    {hotline.numbers.slice(1).map((number, index) => (
+                      <>
+                        {index > 0 && ", "}
+                        <a href={telHref(number)}>{number}</a>
+                      </>
+                    ))}
+                  </p>
+                )}
+              </div>
+              <CopyButton value={hotline.numbers[0]} label={t.copyNumber(hotline.numbers[0])} />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="bp-hotlines__all"><a class="link" href={href(lang, "/emergency/")}>{t.allHotlines}</a></p>
+  </div>
+</section>
+
+<style>
+  .bp-hotlines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: 0;
+  }
+  .bp-hotline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+    padding-block: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-hotline p {
+    margin: 0;
+  }
+  .bp-hotline__number {
+    font: var(--display-weight) clamp(26px, 2.2vw, 34px) / 1.1 var(--font-display);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    transition: color var(--m-in, 150ms) var(--ease);
+  }
+  .bp-hotline__more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-variant-numeric: tabular-nums;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  .bp-hotlines__all {
+    margin-top: var(--s-6);
+  }
+  @media (max-width: 1023px) {
+    .bp-hotlines > li {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 639px) {
+    #emergency {
+      --hm: 2;
+    }
+  }
+</style>
