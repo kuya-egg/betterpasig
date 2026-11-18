@@ -6,6 +6,7 @@
       "title_fil": "Opisyal na website ng Lungsod ng Pasig",
       "title_en": "Official Pasig City website",
       "description_fil": "Opisyal na website ng pamahalaang lungsod: balita, serbisyo, at mga dokumento.",
+      "description_en": "Official website of the city government: news, services, and documents.",
       "url": "https://pasigcity.gov.ph",
       "sources": ["https://en.wikipedia.org/wiki/Pasig"]
     },
@@ -14,6 +15,7 @@
       "title_fil": "Mga ordinansa ng lungsod",
       "title_en": "City ordinances database",
       "description_fil": "Listahan ng mga ordinansang ipinasa ng Sangguniang Panlungsod ng Pasig.",
+      "description_en": "List of ordinances passed by the Pasig City Council (Sangguniang Panlungsod).",
       "url": "https://pasigcity.gov.ph/city-ordinances",
       "sources": ["https://pasigcity.gov.ph/city-ordinances"],
       "note": "Found in search results; page not fetched (robots-disallowed for WebFetch)."
@@ -23,6 +25,7 @@
       "title_fil": "Annual Procurement Plan 2026 (pinakabagong update)",
       "title_en": "Annual Procurement Plan FY 2026 (12th update)",
       "description_fil": "Plano ng lahat ng bibilhin at ipapagawa ng lungsod sa 2026, may tinatayang badyet bawat proyekto.",
+      "description_en": "Plan of everything the city will buy and build in 2026, with estimated budget per project.",
       "url": "https://assets.pasigcity.gov.ph/storage/procurement_reports//2026/10/06/6ac588c581f891791330501APP%20for%20FY%202026_12th%20Update_removed.pdf",
       "sources": ["https://assets.pasigcity.gov.ph/storage/procurement_reports//2026/10/06/6ac588c581f891791330501APP%20for%20FY%202026_12th%20Update_removed.pdf", "https://assets.pasigcity.gov.ph/storage/procurement_reports//2026/01/28/697c4362c7abe1769751394Indicative%20APP%202026%20(Final).pdf"],
       "note": "Procurement reports are hosted under assets.pasigcity.gov.ph/storage/procurement_reports/. The landing page for BAC postings was not found."
@@ -32,6 +35,7 @@
       "title_fil": "eFOI: Lungsod ng Pasig (USAP)",
       "title_en": "eFOI portal: City of Pasig (USAP)",
       "description_fil": "Humiling ng dokumento sa Pasig online sa national eFOI portal. Mahigit 1,160 request na ang nakalista.",
+      "description_en": "Request documents from Pasig online through the national eFOI portal. More than 1,160 requests are listed.",
       "url": "https://www.foi.gov.ph/agencies/usap/",
       "sources": ["https://www.foi.gov.ph/agencies/usap/"]
     },
@@ -40,6 +44,7 @@
       "title_fil": "Pasig Transparency Mechanism Ordinance (Ord. Blg. 37, s. 2018)",
       "title_en": "Pasig Transparency Mechanism Ordinance (Ordinance No. 37, s. 2018)",
       "description_fil": "Lokal na FOI ordinance: karapatan ng sinuman na humingi ng pampublikong rekord nang walang kailangang dahilan; dapat aksyunan sa loob ng 10 araw; may parusa sa hindi susunod.",
+      "description_en": "Local FOI ordinance: anyone may request a public record without giving a reason; it must be acted on within 10 days; there are penalties for those who do not comply.",
       "url": "https://newsinfo.inquirer.net/1040986/pasig-passes-own-version-of-foi-bill/amp",
       "sources": ["https://newsinfo.inquirer.net/1040986/pasig-passes-own-version-of-foi-bill/amp", "https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"]
     },
@@ -48,6 +53,7 @@
       "title_fil": "Ugnayan sa Pasig (FOI at reklamo)",
       "title_en": "Ugnayan sa Pasig (FOI and feedback office)",
       "description_fil": "Tanggapan para sa FOI request, tanong, at reklamo. Inilunsad noong Hulyo 15, 2019. Maaaring mag-file sa social media, mobile, o personal.",
+      "description_en": "Office for FOI requests, questions, and complaints. Launched July 15, 2019. You can file through social media, mobile, or in person.",
       "url": "https://www.gmanetwork.com/news/news/metro/701043/vico-sotto-leads-launching-of-pasig-foi-center/story",
       "sources": ["https://www.gmanetwork.com/news/news/metro/701043/vico-sotto-leads-launching-of-pasig-foi-center/story", "https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"],
       "note": "No dedicated official URL found; link is a news source."
@@ -57,6 +63,7 @@
       "title_fil": "EO Blg. PCG-16, s. 2022 (CSO Desk at People's Council)",
       "title_en": "Executive Order No. PCG-16, s. 2022 (CSO Desk / People's Council)",
       "description_fil": "Itinatag ang CSO Desk (Abril 18, 2022) para buuin ang Pasig People's Council ng mga accredited na CSO at PO at para sa partisipasyon nila sa pagpaplano, budget, at pagmomonitor.",
+      "description_en": "Established the CSO Desk (April 18, 2022) to form the Pasig People's Council of accredited CSOs and POs and for their participation in planning, budgeting, and monitoring.",
       "url": "https://assets.pasigcity.gov.ph/storage/executive_order/2022/04/19/6333b6abc54bd1664333483EO%20PCG%20-%2016%20s.%202022.pdf",
       "sources": ["https://assets.pasigcity.gov.ph/storage/executive_order/2022/04/19/6333b6abc54bd1664333483EO%20PCG%20-%2016%20s.%202022.pdf", "https://mb.com.ph/2022/08/06/from-beneficiaries-to-partners-pasig-city-opens-landmark-accreditation-process-for-csos/"]
     },
@@ -65,6 +72,7 @@
       "title_fil": "DILG Full Disclosure Policy Portal",
       "title_en": "DILG Full Disclosure Policy Portal",
       "description_fil": "Pambansang portal kung saan inilalathala ng mga LGU ang budget, pananalapi, at bidding (DILG MC 2024-021).",
+      "description_en": "National portal where LGUs publish their budget, finances, and bidding (DILG MC 2024-021).",
       "url": "https://fdpp.dilg.gov.ph/fdpp/about",
       "sources": ["https://fdpp.dilg.gov.ph/fdpp/about", "https://batasnatin.com/laws/mc-2024-021"],
       "note": "Pasig-specific FDP page URL not found."
@@ -74,6 +82,7 @@
       "title_fil": "Commission on Audit: Annual Audit Reports",
       "title_en": "COA Annual Audit Reports",
       "description_fil": "Taunang audit ng COA sa pananalapi ng Pasig (hanapin ang 'City of Pasig' sa LGU reports ng NCR).",
+      "description_en": "COA's annual audit of Pasig's finances (search 'City of Pasig' in the NCR LGU reports).",
       "url": "https://www.coa.gov.ph",
       "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/"],
       "note": "Direct URL for Pasig's AAR not found; Philstar cites COA's 2019 and 2024 AARs."
@@ -83,26 +92,27 @@
       "title_fil": "Pasig City Public Information Office (Facebook)",
       "title_en": "Pasig City PIO Facebook page",
       "description_fil": "Opisyal na anunsyo ng lungsod: iskedyul ng ayuda, payout, at abiso.",
+      "description_en": "Official city announcements: schedules of aid, payouts, and notices.",
       "url": "https://www.facebook.com/PasigPIO",
       "sources": ["https://www.spot.ph/newsfeatures/policy/110053/pasig-city-hall-is-moving-where-can-i-get-government-services-a5229-20240919"]
     }
   ],
   "figures": [
-    { "id": "budget-2024", "label_fil": "Taunang budget ng lungsod (2024)", "value": "₱17 billion (novagov.ph lists ₱17.2 billion)", "as_of": "2024", "sources": ["https://tribune.net.ph/2024/01/12/pasig-allots-p3b-for-healthcare", "https://novagov.ph/lgu/pasig-city"], "verify": true },
-    { "id": "budget-2023-proposed", "label_fil": "Panukalang budget (2023)", "value": "₱15 billion", "as_of": "2023", "sources": ["https://tribune.net.ph/2022/10/13/vico-seeks-p15-b-budgets-quick-passage"], "verify": false },
-    { "id": "budget-approx-2025", "label_fil": "Tinatayang taunang budget (2025)", "value": "About ₱20 billion (Mayor Sotto: grew from about ₱10B to ₱20B over five years)", "as_of": "2025", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": true, "note": "Rough figure; the 2025 and 2026 appropriation ordinance totals were not found." },
-    { "id": "savings-2025", "label_fil": "Naiulat na 'savings' ng lungsod", "value": "₱3 billion", "as_of": "2025", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": false },
-    { "id": "coa-assets-2024", "label_fil": "Kabuuang ari-arian (COA)", "value": "₱53.12 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/", "https://en.wikipedia.org/wiki/Pasig"], "verify": false },
-    { "id": "coa-liabilities-2024", "label_fil": "Kabuuang pananagutan (COA)", "value": "₱7.42 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/", "https://en.wikipedia.org/wiki/Pasig"], "verify": false },
-    { "id": "coa-net-assets-2024", "label_fil": "Net assets/equity (COA)", "value": "₱45.70 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/"], "verify": false },
-    { "id": "coa-sef-2023", "label_fil": "Special Education Fund na nagastos (COA 2023)", "value": "₱573.6 million of ₱1.69 billion (about 34%)", "as_of": "2023", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": false },
-    { "id": "new-city-hall-contract", "label_fil": "Halaga ng kontrata ng Bagong City Hall", "value": "₱9.2 billion (winning bid; approved budget ceiling ₱9.6 billion)", "as_of": "2025-01-13", "sources": ["https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1", "https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027"], "verify": false },
-    { "id": "new-city-hall-contractor", "label_fil": "Kontratista ng Bagong City Hall", "value": "Pasig City Hall Construction Consortium (Sta. Clara International Corp., Bandar Hebat Builders, PhilJaya Property Management Corp.)", "as_of": "2025", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall", "https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027", "https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1"], "verify": false, "note": "Partner names other than Sta. Clara come from Wikipedia only." },
-    { "id": "new-city-hall-groundbreaking", "label_fil": "Groundbreaking ng Bagong City Hall", "value": "October 15, 2025", "as_of": "2025-10-15", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall", "https://pia.gov.ph/news/pasig-city-breaks-ground-on-new-city-hall-mayor-vico-vows-corruption-free-construction/", "https://www.manilatimes.net/2025/10/17/news/national/construction-of-new-pasig-city-hall-begins/2202525"], "verify": false },
-    { "id": "new-city-hall-floor-area", "label_fil": "Floor area ng Bagong City Hall", "value": "72,405 square meters; about 2 hectares with plazas and road network", "as_of": "2025", "sources": ["https://pia.gov.ph/news/pasig-city-breaks-ground-on-new-city-hall-mayor-vico-vows-corruption-free-construction/", "https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1"], "verify": false },
-    { "id": "new-city-hall-topping-off", "label_fil": "Topping-off ng Bagong City Hall", "value": "June 15, 2026", "as_of": "2026-06-15", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall"], "verify": true },
-    { "id": "new-city-hall-opening", "label_fil": "Target na pagbubukas ng Bagong City Hall", "value": "Late 2027 (Philstar summary: by September 2027); funded from city resources without loans", "as_of": "2026-08-03", "sources": ["https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027"], "verify": false },
-    { "id": "new-city-hall-architect", "label_fil": "Arkitekto ng Bagong City Hall", "value": "Royal Pineda (Royal Pineda + Architecture Design)", "as_of": "2025", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall"], "verify": true },
-    { "id": "ugnayan-requests-2024", "label_fil": "Mga FOI request at reklamo na hinawakan ng Ugnayan sa Pasig (Ene-Mayo 2024)", "value": "29,189", "as_of": "2024-05", "sources": ["https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"], "verify": false }
+    { "id": "budget-2024", "label_fil": "Taunang budget ng lungsod (2024)", "label_en": "City annual budget (2024)", "value_fil": "₱17 bilyon (₱17.2 bilyon ayon sa novagov.ph)", "value_en": "₱17 billion (novagov.ph lists ₱17.2 billion)", "as_of": "2024", "sources": ["https://tribune.net.ph/2024/01/12/pasig-allots-p3b-for-healthcare", "https://novagov.ph/lgu/pasig-city"], "verify": true },
+    { "id": "budget-2023-proposed", "label_fil": "Panukalang budget (2023)", "label_en": "Proposed budget (2023)", "value_fil": "₱15 bilyon", "value_en": "₱15 billion", "as_of": "2023", "sources": ["https://tribune.net.ph/2022/10/13/vico-seeks-p15-b-budgets-quick-passage"], "verify": false },
+    { "id": "budget-approx-2025", "label_fil": "Tinatayang taunang budget (2025)", "label_en": "Approximate annual budget (2025)", "value_fil": "Humigit-kumulang ₱20 bilyon (ayon kay Mayor Sotto: lumaki mula humigit-kumulang ₱10B hanggang ₱20B sa loob ng limang taon)", "value_en": "About ₱20 billion (Mayor Sotto: grew from about ₱10B to ₱20B over five years)", "as_of": "2025", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": true, "note_fil": "Magaspang na tantiya; hindi nakita ang kabuuan ng appropriation ordinance para sa 2025 at 2026.", "note_en": "Rough figure; the 2025 and 2026 appropriation ordinance totals were not found." },
+    { "id": "savings-2025", "label_fil": "Naiulat na 'savings' ng lungsod", "label_en": "Reported city savings", "value_fil": "₱3 bilyon", "value_en": "₱3 billion", "as_of": "2025", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": false },
+    { "id": "coa-assets-2024", "label_fil": "Kabuuang ari-arian (COA)", "label_en": "Total assets (COA)", "value_fil": "₱53.12 bilyon", "value_en": "₱53.12 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/", "https://en.wikipedia.org/wiki/Pasig"], "verify": false },
+    { "id": "coa-liabilities-2024", "label_fil": "Kabuuang pananagutan (COA)", "label_en": "Total liabilities (COA)", "value_fil": "₱7.42 bilyon", "value_en": "₱7.42 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/", "https://en.wikipedia.org/wiki/Pasig"], "verify": false },
+    { "id": "coa-net-assets-2024", "label_fil": "Net assets/equity (COA)", "label_en": "Net assets/equity (COA)", "value_fil": "₱45.70 bilyon", "value_en": "₱45.70 billion", "as_of": "2024", "sources": ["https://www.philstar.com/headlines/2026/06/12/2534510/fact-check-why-pasig-city-net-worth-leap-viral-post-misleading/amp/"], "verify": false },
+    { "id": "coa-sef-2023", "label_fil": "Special Education Fund na nagastos (COA 2023)", "label_en": "Special Education Fund spent (COA 2023)", "value_fil": "₱573.6 milyon sa ₱1.69 bilyon (mga 34%)", "value_en": "₱573.6 million of ₱1.69 billion (about 34%)", "as_of": "2023", "sources": ["https://www.philstar.com/nation/2025/08/16/2465947/vico-sotto-pasigs-p3-billion-savings-not-achievement-challenge-spend-better"], "verify": false },
+    { "id": "new-city-hall-contract", "label_fil": "Halaga ng kontrata ng Bagong City Hall", "label_en": "New City Hall contract amount", "value_fil": "₱9.2 bilyon (nanalong bid; aprubadong ceiling ng budget na ₱9.6 bilyon)", "value_en": "₱9.2 billion (winning bid; approved budget ceiling ₱9.6 billion)", "as_of": "2025-01-13", "sources": ["https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1", "https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027"], "verify": false },
+    { "id": "new-city-hall-contractor", "label_fil": "Kontratista ng Bagong City Hall", "label_en": "New City Hall contractor", "value_fil": "Pasig City Hall Construction Consortium (Sta. Clara International Corp., Bandar Hebat Builders, PhilJaya Property Management Corp.)", "value_en": "Pasig City Hall Construction Consortium (Sta. Clara International Corp., Bandar Hebat Builders, PhilJaya Property Management Corp.)", "as_of": "2025", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall", "https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027", "https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1"], "verify": false, "note_fil": "Sa Wikipedia lang galing ang mga pangalan ng kasosyo maliban sa Sta. Clara.", "note_en": "Partner names other than Sta. Clara come from Wikipedia only." },
+    { "id": "new-city-hall-groundbreaking", "label_fil": "Groundbreaking ng Bagong City Hall", "label_en": "New City Hall groundbreaking", "value_fil": "Oktubre 15, 2025", "value_en": "October 15, 2025", "as_of": "2025-10-15", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall", "https://pia.gov.ph/news/pasig-city-breaks-ground-on-new-city-hall-mayor-vico-vows-corruption-free-construction/", "https://www.manilatimes.net/2025/10/17/news/national/construction-of-new-pasig-city-hall-begins/2202525"], "verify": false },
+    { "id": "new-city-hall-floor-area", "label_fil": "Floor area ng Bagong City Hall", "label_en": "New City Hall floor area", "value_fil": "72,405 metro kuwadrado; mga 2 ektarya kasama ang mga plaza at network ng kalsada", "value_en": "72,405 square meters; about 2 hectares with plazas and road network", "as_of": "2025", "sources": ["https://pia.gov.ph/news/pasig-city-breaks-ground-on-new-city-hall-mayor-vico-vows-corruption-free-construction/", "https://mb.com.ph/2025/1/14/future-ready-city-hall-mayor-vico-leads-contract-signing-for-p9-2-b-new-pasig-city-hall-1"], "verify": false },
+    { "id": "new-city-hall-topping-off", "label_fil": "Topping-off ng Bagong City Hall", "label_en": "New City Hall topping-off", "value_fil": "Hunyo 15, 2026", "value_en": "June 15, 2026", "as_of": "2026-06-15", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall"], "verify": true },
+    { "id": "new-city-hall-opening", "label_fil": "Target na pagbubukas ng Bagong City Hall", "label_en": "Target opening of the New City Hall", "value_fil": "Huling bahagi ng 2027 (buod ng Philstar: pagsapit ng Setyembre 2027); pinondohan mula sa pondo ng lungsod, walang utang", "value_en": "Late 2027 (Philstar summary: by September 2027); funded from city resources without loans", "as_of": "2026-08-03", "sources": ["https://www.philstar.com/headlines/climate-and-environment/2026/08/03/2546524/new-pasig-city-hall-open-2027"], "verify": false },
+    { "id": "new-city-hall-architect", "label_fil": "Arkitekto ng Bagong City Hall", "label_en": "New City Hall architect", "value_fil": "Royal Pineda (Royal Pineda + Architecture Design)", "value_en": "Royal Pineda (Royal Pineda + Architecture Design)", "as_of": "2025", "sources": ["https://en.wikipedia.org/wiki/Pasig_City_Hall"], "verify": true },
+    { "id": "ugnayan-requests-2024", "label_fil": "Mga FOI request at reklamo na hinawakan ng Ugnayan sa Pasig (Ene-Mayo 2024)", "label_en": "FOI requests and complaints handled by Ugnayan sa Pasig (Jan-May 2024)", "value_fil": "29,189", "value_en": "29,189", "as_of": "2024-05", "sources": ["https://gmanetwork.com/news/topstories/metro/918628/pasig-city-showcases-initiatives-on-foi-gad/story"], "verify": false }
   ]
 }

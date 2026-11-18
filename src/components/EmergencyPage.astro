@@ -115,9 +115,9 @@ const retrieved = formatDate(lang, facilities.retrieved);
       <p class="mt-1 max-w-[65ch]">{t.conflictsIntro}</p>
       <ul class="mt-3 border-t-2 border-ink">
         {
-          hotlineConflicts.map((text) => (
+          hotlineConflicts.map((c) => (
             <li class="border-b border-line py-3">
-              <p class="max-w-[70ch]">{text}<Verify /></p>
+              <p class="max-w-[70ch]">{lang === "en" ? c.text_en : c.text_fil}<Verify /></p>
             </li>
           ))
         }
@@ -176,7 +176,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
 
     <section id="evacuation" class="mt-12" aria-labelledby="evacuation-h">
       <h2 id="evacuation-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.evacTitle}</h2>
-      <p class="mt-1 max-w-[70ch] text-[15px] text-muted"><strong class="font-semibold">{t.evacCaveat}</strong> {facilities.notes}</p>
+      <p class="mt-1 max-w-[70ch] text-[15px] text-muted"><strong class="font-semibold">{t.evacCaveat}</strong> {lang === "en" ? facilities.notes_en : facilities.notes_fil}</p>
       {
         evacGroups.map((g) => (
           <>
@@ -212,7 +212,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
         {
           facilities.flood_prone_notes.map((n) => (
             <li class="border-b border-line py-3">
-              <p class="max-w-[70ch]">{n.text}</p>
+              <p class="max-w-[70ch]">{lang === "en" ? n.text_en : n.text_fil}</p>
               <p class="text-[14px] text-muted">
                 {t.sources}:{" "}
                 {n.sources.map((s, i) => (

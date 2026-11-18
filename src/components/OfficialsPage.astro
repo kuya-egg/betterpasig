@@ -97,9 +97,9 @@ const districts = [1, 2].map((d) => ({
 <Base title={t.officialsPageTitle}>
   <article class="wrap py-10">
     <h1 class="text-[34px] md:text-[52px] font-bold leading-[1.05] tracking-[-0.04em]">{t.officialsPageTitle}</h1>
-    <p class="mt-4 text-[17px]">{officialsDirectory.term}</p>
+    <p class="mt-4 text-[17px]">{lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}</p>
     <p class="mt-2 max-w-[760px] text-[14px] text-muted">
-      {officialsDirectory.term_note}
+      {lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}
       {" "}{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
       {" "}· {t.checked}: {formatDate(lang, officialsDirectory.retrieved)}
     </p>

@@ -367,29 +367,34 @@
   ],
   "flood_prone_notes": [
     {
-      "text": "During the 17 August 2026 habagat rains, Pasig opened 18 evacuation centers in 10 barangays: Bagong Ilog, Dela Paz, Kapasigan, Pinagbuhatan, Maybunga, Rosario, Santolan, San Miguel, Sta. Lucia and Ugong. Manggahan and Sumilang had centers on standby.",
+      "text_fil": "Noong Agosto 17, 2026, sa habagat na ulan, nagbukas ang Pasig ng 18 evacuation center sa 10 barangay: Bagong Ilog, Dela Paz, Kapasigan, Pinagbuhatan, Maybunga, Rosario, Santolan, San Miguel, Sta. Lucia at Ugong. May mga center na naka-standby sa Manggahan at Sumilang.",
+      "text_en": "During the 17 August 2026 habagat rains, Pasig opened 18 evacuation centers in 10 barangays: Bagong Ilog, Dela Paz, Kapasigan, Pinagbuhatan, Maybunga, Rosario, Santolan, San Miguel, Sta. Lucia and Ugong. Manggahan and Sumilang had centers on standby.",
       "sources": [
         "https://newsinfo.inquirer.net/2286819/pasig-evacuates-3189-residents-amid-habagat-rains"
       ]
     },
     {
-      "text": "On 22 July 2025, rains displaced residents in 15 barangays: Bagong Ilog, Caniogan, Dela Paz, Kapasigan, Pinagbuhatan, Malinao, Manggahan, Maybunga, San Joaquin, San Miguel, Santolan, Rosario, Sta. Lucia, Sta. Rosa and Ugong. These barangays repeatedly need evacuation; most lie along the Pasig and Marikina rivers or the Manggahan Floodway (location inferred, not stated in the source).",
+      "text_fil": "Noong Hulyo 22, 2025, inilikas ng ulan ang mga residente sa 15 barangay: Bagong Ilog, Caniogan, Dela Paz, Kapasigan, Pinagbuhatan, Malinao, Manggahan, Maybunga, San Joaquin, San Miguel, Santolan, Rosario, Sta. Lucia, Sta. Rosa at Ugong. Paulit-ulit na kailangang ilikas ang mga barangay na ito; karamihan ay nasa tabi ng Ilog Pasig at Marikina o ng Manggahan Floodway (hinuha ang lokasyon, hindi nakasaad sa sanggunian).",
+      "text_en": "On 22 July 2025, rains displaced residents in 15 barangays: Bagong Ilog, Caniogan, Dela Paz, Kapasigan, Pinagbuhatan, Malinao, Manggahan, Maybunga, San Joaquin, San Miguel, Santolan, Rosario, Sta. Lucia, Sta. Rosa and Ugong. These barangays repeatedly need evacuation; most lie along the Pasig and Marikina rivers or the Manggahan Floodway (location inferred, not stated in the source).",
       "sources": [
         "https://newsinfo.inquirer.net/2085311/over-3000-families-in-pasig-city-seek-temporary-shelter-amid-rains"
       ]
     },
     {
-      "text": "The DILG-NCR iDRRM profile lists Pasig's hazards as earthquake, liquefaction, fire and flood.",
+      "text_fil": "Ayon sa iDRRM profile ng DILG-NCR, ang mga panganib sa Pasig ay lindol, liquefaction, sunog, at baha.",
+      "text_en": "The DILG-NCR iDRRM profile lists Pasig's hazards as earthquake, liquefaction, fire and flood.",
       "sources": [
         "https://idrrm.ncr.dilg.gov.ph/lgu-profile/22"
       ]
     },
     {
-      "text": "Pasig DRRMO rescue bases (from the DRRMO Citizen's Charter, about 2022): Fire and Rescue Base at Red TC, Caniogan; San Joaquin Base on Elisco Rd.; Fire and Rescue Boat at Bambang-Kalawaan Bridge; Panthom (sic) Base at Mega Market, Palatiw; Falcon Base at Bartville Subd., Dela Paz.",
+      "text_fil": "Mga rescue base ng Pasig DRRMO (mula sa Citizen's Charter ng DRRMO, mga 2022): Fire and Rescue Base sa Red TC, Caniogan; San Joaquin Base sa Elisco Rd.; Fire and Rescue Boat sa Bambang-Kalawaan Bridge; Panthom (sic) Base sa Mega Market, Palatiw; Falcon Base sa Bartville Subd., Dela Paz.",
+      "text_en": "Pasig DRRMO rescue bases (from the DRRMO Citizen's Charter, about 2022): Fire and Rescue Base at Red TC, Caniogan; San Joaquin Base on Elisco Rd.; Fire and Rescue Boat at Bambang-Kalawaan Bridge; Panthom (sic) Base at Mega Market, Palatiw; Falcon Base at Bartville Subd., Dela Paz.",
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/disaster_risk_reduction_and_management_office/633f8800db42116651079686335211cbe1911664426268CCh_DRRMO.docx.pdf"
       ]
     }
   ],
-  "notes": "Evacuation centers are the ones the city opened during specific rain events in July 2025 and August 2026, as reported by Inquirer; this is not an official master list. verify=true marks a center that appears in only one of the two events. Health centers (barangay health centers) were not found."
+  "notes_fil": "Ang mga evacuation center dito ay ang binuksan ng lungsod noong mga tiyak na pag-ulan noong Hulyo 2025 at Agosto 2026, ayon sa Inquirer; hindi ito opisyal na master list. Ang may markang \"Sinusuri pa\" ay center na lumabas lang sa isa sa dalawang pangyayari. Hindi nahanap ang mga health center (barangay health center).",
+  "notes_en": "Evacuation centers are the ones the city opened during specific rain events in July 2025 and August 2026, as reported by Inquirer; this is not an official master list. verify=true marks a center that appears in only one of the two events. Health centers (barangay health centers) were not found."
 }

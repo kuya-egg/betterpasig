@@ -180,12 +180,33 @@
     }
   ],
   "conflicts": [
-    "No source found ties 8642-1111 to any Pasig agency; it is not confirmed as a Command Center line. The official Pasig Info post names 8643-0000 as the emergency hotline and 8643-1111 as the City Hall trunkline.",
-    "The BFP Pasig landline 8641-2815 could not be confirmed. The only number found was the mobile 0932-779-8621, from a commercial site. Official BFP-NCR pages (ncr.bfp.gov.ph/fire-district-4) failed to load.",
-    "News roundups from 2020 and 2024 list 8632-0099 as Pasig City's rescue line, but current official posts use 8643-0000. It is unclear whether 8632-0099 still works.",
-    "8477-7953 appears to be the Pasig City Police Station (two secondary sources agree), but no official PNP or NCRPO source confirmed it.",
-    "The DRRMO Citizen's Charter (about 2022) gives the Sangguniang Secretariat as '641-1111 local 246'. This suggests the trunkline was once 8641-1111; the current trunkline per Pasig Info (April 2024) is 8643-1111.",
-    "Pasig City General Hospital numbers differ by source: healthspace.ph gives 8643-3333 and 8642-7379, while phshirt.com gives 8642-7379 and 8642-7381. No source names the ER line.",
-    "The official 'Emergency Contact Numbers ng Lungsod ng Pasig' page (pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393) blocks automated fetching, so the full official list could not be checked directly."
+    {
+      "text_fil": "Walang nahanap na sanggunian na nag-uugnay ng 8642-1111 sa anumang ahensya ng Pasig; hindi ito kumpirmadong linya ng Command Center. Ayon sa opisyal na post ng Pasig Info, ang 8643-0000 ang emergency hotline at ang 8643-1111 ang trunkline ng City Hall.",
+      "text_en": "No source found ties 8642-1111 to any Pasig agency; it is not confirmed as a Command Center line. The official Pasig Info post names 8643-0000 as the emergency hotline and 8643-1111 as the City Hall trunkline."
+    },
+    {
+      "text_fil": "Hindi makumpirma ang landline ng BFP Pasig na 8641-2815. Ang tanging numerong nahanap ay ang mobile na 0932-779-8621, mula sa isang komersyal na site. Hindi nag-load ang mga opisyal na pahina ng BFP-NCR (ncr.bfp.gov.ph/fire-district-4).",
+      "text_en": "The BFP Pasig landline 8641-2815 could not be confirmed. The only number found was the mobile 0932-779-8621, from a commercial site. Official BFP-NCR pages (ncr.bfp.gov.ph/fire-district-4) failed to load."
+    },
+    {
+      "text_fil": "Nakalista sa mga news roundup noong 2020 at 2024 ang 8632-0099 bilang rescue line ng Lungsod ng Pasig, pero 8643-0000 na ang ginagamit sa mga kasalukuyang opisyal na post. Hindi tiyak kung gumagana pa ang 8632-0099.",
+      "text_en": "News roundups from 2020 and 2024 list 8632-0099 as Pasig City's rescue line, but current official posts use 8643-0000. It is unclear whether 8632-0099 still works."
+    },
+    {
+      "text_fil": "Mukhang ang 8477-7953 ay ang Pasig City Police Station (nagkakasundo ang dalawang pangalawang sanggunian), pero walang opisyal na sanggunian ng PNP o NCRPO na nagkumpirma nito.",
+      "text_en": "8477-7953 appears to be the Pasig City Police Station (two secondary sources agree), but no official PNP or NCRPO source confirmed it."
+    },
+    {
+      "text_fil": "Ang Citizen's Charter ng DRRMO (mga 2022) ay nagbibigay ng '641-1111 local 246' para sa Sangguniang Secretariat. Ipinahihiwatig nito na dating 8641-1111 ang trunkline; ang kasalukuyang trunkline ayon sa Pasig Info (Abril 2024) ay 8643-1111.",
+      "text_en": "The DRRMO Citizen's Charter (about 2022) gives the Sangguniang Secretariat as '641-1111 local 246'. This suggests the trunkline was once 8641-1111; the current trunkline per Pasig Info (April 2024) is 8643-1111."
+    },
+    {
+      "text_fil": "Magkakaiba ang mga numero ng Pasig City General Hospital depende sa sanggunian: 8643-3333 at 8642-7379 ang ibinibigay ng healthspace.ph, habang 8642-7379 at 8642-7381 ang sa phshirt.com. Walang sanggunian na nagbibigay ng linya ng ER.",
+      "text_en": "Pasig City General Hospital numbers differ by source: healthspace.ph gives 8643-3333 and 8642-7379, while phshirt.com gives 8642-7379 and 8642-7381. No source names the ER line."
+    },
+    {
+      "text_fil": "Hinaharang ng opisyal na pahinang 'Emergency Contact Numbers ng Lungsod ng Pasig' (pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393) ang awtomatikong pag-fetch, kaya hindi direktang masuri ang buong opisyal na listahan.",
+      "text_en": "The official 'Emergency Contact Numbers ng Lungsod ng Pasig' page (pasigcity.gov.ph/news-and-releases/emergency-contact-numbers-ng-lungsod-ng-pasig-393) blocks automated fetching, so the full official list could not be checked directly."
+    }
   ]
 }
