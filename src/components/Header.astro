@@ -130,28 +130,12 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
 </header>
 
 <script>
-  // Load plugin declarations without importing the default CSS animation engine.
-  import type {} from "gsap";
-  import { gsap } from "gsap/gsap-core";
-  import { CustomEase } from "gsap/CustomEase";
-
-  gsap.registerPlugin(CustomEase);
-  const slideEase = CustomEase.create("header-slide", ".45, 0, .2, 1");
   const header = document.getElementById("top")!;
   const nav = header.querySelector<HTMLElement>(".primary-nav")!;
   const triggers = [...nav.querySelectorAll<HTMLButtonElement>("button[data-section]")];
   const contents = [...nav.querySelectorAll<HTMLElement>(".dropdown-content")];
   const viewport = nav.querySelector<HTMLElement>(".dropdown-viewport")!;
   const panel = nav.querySelector<HTMLElement>(".dropdown")!;
-  // Animate one numeric value with GSAP core; no CSS animation plugin is needed.
-  const position = { y: 0 };
-  const renderPosition = () => { panel.style.transform = `translate3d(0, ${position.y}px, 0)`; };
-  const clearMotion = () => {
-    gsap.killTweensOf(position);
-    position.y = 0;
-    panel.style.removeProperty("transform");
-    panel.style.removeProperty("will-change");
-  };
   const themeButton = header.querySelector<HTMLButtonElement>(".theme-switch")!;
   const root = document.documentElement;
   const systemTheme = matchMedia("(prefers-color-scheme: dark)");
@@ -226,9 +210,11 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
   }
   new ResizeObserver(fitBarangays).observe(panel);
   void document.fonts.ready.then(fitBarangays);
+  // The panel slides by a CSS transition on `data-open`; hiding waits for it to end.
+  let closeTimer = 0;
   const finishClose = () => {
+    window.clearTimeout(closeTimer);
     if (!activeTrigger) viewport.hidden = true;
-    panel.style.removeProperty("will-change");
   };
   const closeMenu = () => {
     cancelHover();
@@ -236,22 +222,19 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
     activeTrigger.setAttribute("aria-expanded", "false");
     activeTrigger = null;
     viewport.inert = true;
-    if (reducedMotion.matches) {
-      clearMotion();
-      finishClose();
-      return;
-    }
-    panel.style.willChange = "transform";
-    gsap.to(position, {
-      y: -panel.offsetHeight, duration: 0.46, ease: slideEase,
-      overwrite: true, onUpdate: renderPosition, onComplete: finishClose,
-    });
+    delete viewport.dataset.open;
+    window.clearTimeout(closeTimer);
+    if (reducedMotion.matches) finishClose();
+    else closeTimer = window.setTimeout(finishClose, 300);
   };
+  panel.addEventListener("transitionend", (event) => {
+    if (event.target === panel && !viewport.dataset.open) finishClose();
+  });
   const openMenu = (trigger: HTMLButtonElement) => {
     cancelHover();
     if (activeTrigger === trigger) return;
     const switching = activeTrigger !== null;
-    const wasHidden = viewport.hidden;
+    window.clearTimeout(closeTimer);
     activeTrigger?.setAttribute("aria-expanded", "false");
     if (switching && viewport.contains(document.activeElement)) trigger.focus({ preventScroll: true });
     for (const content of contents) content.hidden = content.id !== trigger.getAttribute("aria-controls");
@@ -264,23 +247,9 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
     if (trigger.dataset.section === "mapa") fitBarangays();
     // One persistent surface: changing section only swaps its content.
     if (switching) return;
-    if (reducedMotion.matches) {
-      clearMotion();
-      return;
-    }
-    if (wasHidden) {
-      position.y = -panel.offsetHeight;
-      renderPosition();
-    }
-    panel.style.willChange = "transform";
-    gsap.to(position, {
-      y: 0, duration: 0.58, ease: slideEase, overwrite: true,
-      onUpdate: renderPosition,
-      onComplete: () => {
-        panel.style.removeProperty("will-change");
-        panel.style.removeProperty("transform");
-      },
-    });
+    // Commit the closed position before opening so the transition has a start.
+    void panel.offsetHeight;
+    viewport.dataset.open = "";
   };
   const scheduleClose = (event: PointerEvent) => {
     if (event.pointerType !== "mouse") return;
@@ -337,9 +306,7 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
     if (event.target instanceof Element && event.target.closest("a")) closeMenu();
   });
   reducedMotion.addEventListener("change", () => {
-    if (!reducedMotion.matches) return;
-    clearMotion();
-    if (!activeTrigger) finishClose();
+    if (reducedMotion.matches && !activeTrigger) finishClose();
   });
   const syncLocation = () => {
     const path = location.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
@@ -490,7 +457,10 @@ const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${
     background: var(--bg);
     border-bottom: 1px solid var(--line);
     pointer-events: auto;
+    transform: translate3d(0, -100%, 0);
+    transition: transform var(--mid) var(--ease);
   }
+  .dropdown-viewport[data-open] .dropdown { transform: none; }
   .dropdown-inner { padding-block: 24px; }
   .dropdown-viewport[inert] { pointer-events: none; }
   .dropdown-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 16px; }
