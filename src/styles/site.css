@@ -9,39 +9,37 @@
 }
 
 @font-face {
-  font-family: "Plus Jakarta Sans";
+  font-family: "Manrope";
   font-style: normal;
   font-display: swap;
   font-weight: 200 800;
-  src: url("../../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2");
+  src: url("../../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2") format("woff2");
 }
 
 :root {
   color-scheme: only light;
-  --paper: #f7f4ec;
-  --bg: #fffdf7;
-  --surface: #efeadf;
-  --ink: #182032;
+  --paper: #f8fafc;
+  --bg: #fff;
+  --surface: #eef2f6;
+  --ink: #172741;
   --muted: #515d6b;
   --blue: #1a47a8;
-  --pale: #e9eef9;
+  --pale: #e8effa;
   --hover: #ccd9f7;
-  --line: #dad4c6;
-  --line-strong: #afa698;
+  --line: #ccd6e3;
+  --line-strong: #8a9bb4;
   --amber: #744500;
   --red: #981d28;
   --mark-bg: #dce5f8;
-  --shadow: rgb(43 32 16 / .09);
+  --shadow: rgb(24 54 95 / .13);
   --action: var(--blue);
   --action-ink: #fff;
   --accent: var(--blue);
   --accent-ink: var(--action-ink);
   --subtle: var(--surface);
-  --night: #121d31;
-  --ivory: #fff8e9;
 
   --font-display: "Newsreader", Georgia, serif;
-  --font-text: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-text: "Manrope", system-ui, sans-serif;
   --display-weight: 500;
   --t-label: .8125rem;
   --t-small: .875rem;
@@ -59,8 +57,8 @@
   --s-7: 3rem;
   --s-8: 4rem;
   --r-sm: .625rem;
-  --r-md: 1.125rem;
-  --r-lg: 1.625rem;
+  --r-md: .75rem;
+  --r-lg: .875rem;
   --r-btn: 999px;
   --padt: 4rem;
   --padb: 4rem;
@@ -85,8 +83,9 @@ a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; color: inherit; }
 ul, ol { list-style: none; padding: 0; }
 :where(main, footer) a { overflow-wrap: anywhere; }
-:where(a, button, summary, input, select):focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+:where(a, button, summary, input, select):focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 :where(section, article, h2, h3)[id] { scroll-margin-block-start: var(--s-6); }
+::selection { background: var(--mark-bg); color: var(--ink); }
 .skip-link {
   position: absolute;
   inset: var(--s-2) auto auto var(--gut);
@@ -163,8 +162,7 @@ main > .section--flow:first-of-type { background: var(--bg); }
 .nav__logo .bp-mark { height: 1.5rem; width: auto; flex: none; color: var(--blue); }
 
 .bp-footer {
-  --bg: #192640; --surface: var(--night); --ink: var(--ivory); --muted: #c3cee0;
-  --line: #44516a; --blue: #bfd1ff; --amber: #ffcb87;
+  border-block-start: 1px solid var(--line);
   padding-block: clamp(3rem, 7vw, 6rem) var(--s-5); background: var(--surface); color: var(--ink);
 }
 .bp-footer__column { font: 700 .875rem/1.5 var(--font-text); letter-spacing: 0; }

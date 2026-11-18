@@ -1,8 +1,13 @@
 ---
 import { href, langFromUrl, ui } from "../i18n";
 
+interface Props { includePlaces?: boolean }
+
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const label = Astro.props.includePlaces
+  ? (lang === "en" ? "Search for a service or place" : "Maghanap ng serbisyo o lugar")
+  : t.searchLabel;
 const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ? "#service-categories" : href(lang, "/serbisyo/");
 ---
 
@@ -21,7 +26,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
   data-older={t.searchOlderSource}
   data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
 >
-  <label class="bp-search__label" for="q">{t.searchLabel}</label>
+  <label class="bp-search__label" for="q">{label}</label>
   <form role="search">
     <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
       <circle cx="10.8" cy="10.8" r="6.3" /><path d="m15.5 15.5 4 4" />
@@ -40,7 +45,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     <button type="submit">{t.searchButton}</button>
   </form>
   <div class="bp-search__popup" hidden>
-    <div id="search-results" class="results" role="listbox" aria-label={t.searchLabel} hidden></div>
+    <div id="search-results" class="results" role="listbox" aria-label={label} hidden></div>
     <p class="bp-search__status" aria-hidden="true"></p>
     <a class="bp-search__browse" href={browseHref}>{t.allServices}</a>
   </div>
@@ -350,7 +355,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     gap: var(--s-2);
     padding: var(--s-1);
     border: 1px solid var(--muted);
-    border-radius: calc(var(--r-btn) + 5px);
+    border-radius: var(--r-sm);
     background: var(--bg);
   }
   form > svg { color: var(--blue); flex: none; margin-inline-start: var(--s-2); }
@@ -367,10 +372,10 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     color: var(--ink);
   }
   input::placeholder { color: var(--muted); font-size: .9375rem; }
-  input:focus-visible { outline-offset: -2px; }
+  input:focus-visible { outline-offset: -3px; }
   form button {
     border: 0;
-    border-radius: var(--r-btn);
+    border-radius: calc(var(--r-sm) - var(--s-1));
     background: var(--action);
     color: var(--action-ink);
     font: 700 .9375rem var(--font-text);

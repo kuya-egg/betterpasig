@@ -97,7 +97,8 @@ const navState = (target: string) => {
   .bp-header {
     position: relative;
     z-index: 5;
-    background: var(--paper);
+    background: var(--bg);
+    border-block-end: 1px solid var(--line);
   }
 
   .bp-header .skip-link { z-index: 1; }
@@ -107,12 +108,7 @@ const navState = (target: string) => {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    min-height: 4rem;
-    margin-block: var(--s-4);
-    padding-inline: var(--s-5);
-    border-radius: var(--r-btn);
-    background: var(--bg);
-    box-shadow: 0 7px 27px var(--shadow);
+    min-height: 4.5rem;
     column-gap: var(--s-4);
   }
 
@@ -157,7 +153,7 @@ const navState = (target: string) => {
   }
 
   @media (max-width: 56rem) {
-    .bp-header__inner { border-radius: var(--r-md); padding-inline: var(--s-3); margin-block: var(--s-2) var(--s-3); }
+    .bp-header__inner { padding-block-start: var(--s-1); }
     .bp-header__nav { order: 1; flex-basis: 100%; border-top: 1px solid var(--line); }
     .bp-header__nav > ul { justify-content: space-between; gap: 0; }
     .bp-header__nav a, .bp-header__nav summary { padding-inline: var(--s-1); font-size: .875rem; }

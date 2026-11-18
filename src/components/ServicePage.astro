@@ -29,6 +29,9 @@ const fee = typeof service.fee === "string" && service.fee.trim()
 const time = typeof service.processing_time === "string" && service.processing_time.trim()
   ? (english?.processing_time ?? service.processing_time)
   : "";
+const factsTitle = fee
+  ? (lang === "en" ? "Office and fee" : "Opisina at bayad")
+  : (lang === "en" ? "Service details" : "Mga detalye ng serbisyo");
 const onlineHost = online ? new URL(online).hostname.replace(/^www\./, "") : "";
 /*
  * Related benefits: explicit program id -> office ids (from data/services.json `offices`).
@@ -58,7 +61,7 @@ function lines(value: unknown): string[] {
 ---
 
 <Site title={title} description={lang === "en" ? english?.summary || title : summary || title}>
-  <section class="section section--flow" aria-labelledby="service-h">
+  <section class="section section--flow bp-service-page" aria-labelledby="service-h">
     <div class="wrap bp-svc">
       <div class="section-head">
         <a class="bp-svc__back" href={href(lang, `/serbisyo/#${service.category}`)}><span aria-hidden="true">←</span> {categoryName || t.allServices}</a>
@@ -67,15 +70,23 @@ function lines(value: unknown): string[] {
         {service.verify && <Verify />}
       </div>
 
+      <nav class="bp-svc__jump" aria-label={lang === "en" ? "On this page" : "Sa pahinang ito"} data-pagefind-ignore>
+        <ul>
+          <li><a href="#service-facts">{factsTitle}</a></li>
+          {requirements.length > 0 && <li><a href="#service-requirements">{t.requirements}</a></li>}
+          {steps.length > 0 && <li><a href="#service-steps">{t.stepsLabel}</a></li>}
+        </ul>
+      </nav>
+
       <div class="bp-svc__answers">
-        <div class="bp-svc__overview">
-          <div class="bp-svc__sheet">
+        <section class="bp-svc__overview" aria-labelledby="service-facts">
+          <h2 id="service-facts" tabindex="-1">{factsTitle}</h2>
           <dl class="bp-svc__facts">
             <div><dt>{t.colOffice}</dt><dd>{officeLabel}</dd></div>
             {office?.location && <div><dt>{t.whereLabel}</dt><dd>{office.location}</dd></div>}
-            {office?.contact && <div><dt>{t.officeContact}</dt><dd>{office.contact}</dd></div>}
             {fee && <div><dt>{t.colFee}</dt><dd class="num" lang={detailLanguage}>{fee}</dd></div>}
             {time && <div><dt>{t.colTime}</dt><dd class="num" lang={detailLanguage}>{time}</dd></div>}
+            {office?.contact && <div><dt>{t.officeContact}</dt><dd>{office.contact}</dd></div>}
           </dl>
           {online && (
             <a class="btn btn--primary bp-svc__online" href={online}>
@@ -88,13 +99,12 @@ function lines(value: unknown): string[] {
             {service.sources.map((url) => <a href={url}>{sourceLabel(url)}</a>)}
             <span>{t.checked} {formatDate(lang, servicesRetrieved)}</span>
           </p>
-          </div>
-        </div>
+        </section>
 
         <div class="bp-svc__instructions">
           {requirements.length > 0 && (
             <section aria-labelledby="service-requirements">
-              <h2 id="service-requirements">{t.requirements}</h2>
+              <h2 id="service-requirements" tabindex="-1">{t.requirements}</h2>
               <ul class="bp-svc__list" lang={detailLanguage}>
                 {requirements.map((item) => <li>{item}</li>)}
               </ul>
@@ -102,7 +112,7 @@ function lines(value: unknown): string[] {
           )}
           {steps.length > 0 && (
             <section aria-labelledby="service-steps">
-              <h2 id="service-steps">{t.stepsLabel}</h2>
+              <h2 id="service-steps" tabindex="-1">{t.stepsLabel}</h2>
               <ol class="bp-svc__list" lang={detailLanguage}>
                 {steps.map((item) => <li>{item}</li>)}
               </ol>
@@ -128,6 +138,7 @@ function lines(value: unknown): string[] {
 </Site>
 
 <style>
+  .bp-service-page { padding-block-start: clamp(1.25rem, 3vw, 2.5rem); }
   .bp-svc__back {
     display: inline-flex;
     gap: var(--s-2);
@@ -140,6 +151,24 @@ function lines(value: unknown): string[] {
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+  .bp-svc .section-head h1 {
+    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.08 var(--font-text);
+    letter-spacing: -.035em;
+    max-inline-size: 29ch;
+    text-wrap: wrap;
+  }
+  .bp-svc__jump { margin-block: var(--s-5) var(--s-6); border-block: 1px solid var(--line); }
+  .bp-svc__jump ul { display: flex; flex-wrap: wrap; column-gap: var(--s-5); }
+  .bp-svc__jump a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 3rem;
+    color: var(--blue);
+    font-weight: 750;
+    font-size: .9375rem;
+    text-decoration: underline;
+    text-underline-offset: .24em;
+  }
   .bp-svc__answers {
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
@@ -147,18 +176,16 @@ function lines(value: unknown): string[] {
     gap: clamp(1.5rem, 5vw, 4rem);
   }
   .bp-svc__overview {
-    border-radius: calc(var(--r-lg) + .4375rem);
-    padding: .4375rem;
-    background: var(--surface);
-  }
-  .bp-svc__sheet {
     border-radius: var(--r-lg);
     padding: clamp(1rem, 3vw, 2rem);
-    background: var(--paper);
+    background: var(--pale);
   }
-  .bp-svc .section-head h1 { max-width: 23ch; text-wrap: wrap; }
-  .bp-svc__instructions h2 { padding-block-end: var(--s-3); border-block-end: 1px solid var(--line);
+  .bp-svc__overview h2, .bp-svc__instructions h2, .bp-svc__related h2 {
+    font: 800 clamp(1.28rem, 1.1rem + .8vw, 1.85rem)/1.3 var(--font-text);
+    letter-spacing: -.025em;
   }
+  .bp-svc__overview h2 { margin-block-end: var(--s-3); }
+  .bp-svc__instructions h2 { padding-block-end: var(--s-3); border-block-end: 1px solid var(--line); }
   .bp-svc__facts { margin: 0; }
   .bp-svc__facts > div {
     display: grid;
@@ -179,7 +206,6 @@ function lines(value: unknown): string[] {
   }
   .bp-svc__source a { display: inline-flex; align-items: center; min-height: 3rem; color: var(--blue); text-decoration: underline; }
   .bp-svc__instructions > section + section { margin-top: var(--s-6); }
-  .bp-svc__instructions h2, .bp-svc__related h2 { font-size: var(--t-h3); }
   .bp-svc__list { margin: var(--s-2) 0 0; padding-inline-start: var(--s-5); }
   .bp-svc__list :global(li::marker) { color: var(--blue); font-weight: 750; }
   ul.bp-svc__list { list-style: disc; }

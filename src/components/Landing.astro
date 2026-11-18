@@ -23,7 +23,7 @@ const featuredHelp = helpIds.map((id) => {
 });
 ---
 
-<Site description={t.pageDescription} photos={["pasig-museum", ...chapterPhotos]}>
+<Site description={t.pageDescription} photos={["plaza-rizal", ...chapterPhotos]}>
   <HomeHero />
   <section class="section bp-assistance" aria-labelledby="home-help">
     <div class="wrap bp-assistance__layout">
@@ -41,9 +41,9 @@ const featuredHelp = helpIds.map((id) => {
       </div>
     </div>
   </section>
-  <Pasyalan ids={chapters} />
-  <PasigMap />
   <LifeDoors />
+  <PasigMap />
+  <Pasyalan ids={chapters} />
   <NewInPasig skip={chapters} />
   <Trust />
   <HomeHotlines />

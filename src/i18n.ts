@@ -234,9 +234,9 @@ export const ui = {
     aboutReport: "Ipaalam kung may mali",
     aboutPhotos: "Tingnan ang mga kredito at lisensya ng mga larawan",
 
-    // Home page ({services}, {programs}, {date} are filled from data)
-    homeTitle: "Hanapin ang mga serbisyo ng Pasig",
-    homeLead: "Gabay sa {services} serbisyo at {programs} benepisyo ng lungsod. Alamin kung saan lalapit, ano ang kailangan at kung may bayad.",
+    // Home page
+    homeTitle: "Gabay sa mga serbisyo at lugar sa Pasig",
+    homeLead: "Alamin kung saan lalapit, paano humingi ng tulong, at anong mga lugar ang puwedeng puntahan.",
     mainAction: "Maghanap ng serbisyo",
     navFundsShort: "Pondo",
     emergencyCardLabel: "Para sa sunog, rescue o ibang emergency",

@@ -31,14 +31,14 @@ const chapters = Astro.props.ids.map((id) => {
           return (
             <li>
               <article class="bp-discover__place">
-                <div class="bp-discover__photo" data-visit-photo>
+                <div class="bp-discover__photo">
                   <Picture
                     src={picture.image}
                     alt={photoAlt(picture, lang)}
                     formats={["avif", "webp"]}
                     fallbackFormat="webp"
                     widths={[400, 640, 800]}
-                    sizes={`(max-width: 767px) 90vw, ${index === 0 || index === 3 ? 53 : 35}vw`}
+                    sizes={`(max-width: 767px) 92vw, ${index === 0 ? "min(51vw, 720px)" : "min(29vw, 426px)"}`}
                     width={640}
                     quality={49}
                     loading="lazy"
@@ -46,17 +46,17 @@ const chapters = Astro.props.ids.map((id) => {
                   />
                 </div>
                 <div class="bp-discover__body">
-                  {barangay && <a class="bp-discover__barangay" href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a>}
                   <h3 id={`pasyalan-${place.id}`}>{place.name}</h3>
                   {place.verify && <Verify />}
                   <p>{en ? place.line_en : place.line_fil}</p>
                   {(place.address || hours || fee) && (
                     <dl>
-                      {place.address && <div><dt>{t.address}</dt><dd>{place.address}</dd></div>}
-                      {hours && <div><dt>{t.hours}</dt><dd>{hours}</dd></div>}
+                      {place.address && <div><dt>{en ? "Address" : "Lokasyon"}</dt><dd>{place.address}</dd></div>}
+                      {hours && <div><dt>{en ? "Opening hours" : "Oras"}</dt><dd>{hours}</dd></div>}
                       {fee && <div><dt>{t.colFee}</dt><dd>{fee}</dd></div>}
                     </dl>
                   )}
+                  {barangay && <a class="bp-discover__barangay" href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a>}
                   <p class="bp-discover__sources">
                     {place.sources.map((url, index) => (
                       <a href={url}>{place.sources.length === 1 ? t.sourceWord : `${t.sourceWord} ${index + 1}`}</a>
@@ -73,57 +73,66 @@ const chapters = Astro.props.ids.map((id) => {
   </div>
 </section>
 
-<script>
-  if (matchMedia("(prefers-reduced-motion: no-preference)").matches && "IntersectionObserver" in window && "animate" in Element.prototype) {
-    const observer = new IntersectionObserver((entries) => {
-      for (const { target, isIntersecting } of entries) {
-        if (!isIntersecting) continue;
-        observer.unobserve(target);
-        target.animate([
-          { opacity: .7, transform: "translateY(10px)" },
-          { opacity: 1, transform: "translateY(0)" },
-        ], { duration: 540, easing: "cubic-bezier(.22,.8,.24,1)" });
-      }
-    }, { threshold: .2 });
-    for (const photo of document.querySelectorAll("[data-visit-photo]")) observer.observe(photo);
-  }
-</script>
-
 <style>
-  .bp-discover { background: var(--surface); }
-  .bp-discover .section-head { margin-bottom: var(--s-7); }
+  .bp-discover { background: var(--bg); }
+  .bp-discover .section-head { margin-block-end: var(--s-6); }
   .bp-discover__places {
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: clamp(1rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
     align-items: start;
   }
-  .bp-discover__places > li {
-    grid-column: span 5;
-    border-radius: calc(var(--r-lg) + .5rem);
-    padding: .5rem;
-    background: var(--paper);
+  .bp-discover__places > li:first-child { grid-column: 1 / -1; }
+  .bp-discover__places > li:first-child .bp-discover__place {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+    border-radius: var(--r-lg);
+    background: var(--surface);
   }
-  .bp-discover__places > li:is(:first-child, :last-child) { grid-column: span 7; }
-  .bp-discover__places > li:nth-child(2) { margin-block-start: var(--s-7); }
-  .bp-discover__place { background: var(--bg); border-radius: var(--r-lg); }
-  .bp-discover__photo { aspect-ratio: 16 / 9; background: var(--surface); border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; }
-  .bp-discover__places > li:nth-child(2) .bp-discover__photo { aspect-ratio: 5 / 4; }
-  .bp-discover__photo :global(picture) { display: block; height: 100%; }
-  .bp-discover__body h3 { font-size: clamp(1.65rem, 1.35rem + 1.2vw, 2.55rem); }
-  .bp-discover__photo :global(img) { width: 100%; height: 100%; object-fit: cover; outline: 1px solid rgb(0 0 0 / .1); outline-offset: -1px; }
-  .bp-discover__body { display: grid; justify-items: start; gap: var(--s-2); padding: var(--s-5); }
+  .bp-discover__photo { position: relative; aspect-ratio: 16 / 10; background: var(--surface); }
+  .bp-discover__photo :global(img) {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: var(--r-md);
+  }
+  .bp-discover__places > li:first-child .bp-discover__photo {
+    aspect-ratio: auto;
+    min-block-size: 20rem;
+  }
+  .bp-discover__places > li:first-child .bp-discover__photo :global(img) {
+    border-radius: var(--r-lg) 0 0 var(--r-lg);
+  }
+  .bp-discover__body { display: grid; justify-items: start; gap: var(--s-2); padding-block: var(--s-4); }
+  .bp-discover__places > li:first-child .bp-discover__body { padding: clamp(1.25rem, 3vw, 2.5rem); }
+  .bp-discover__places > li:first-child h3 { font-size: var(--t-h2); text-wrap: balance; }
+  .bp-discover__body h3 { font-size: clamp(1.65rem, 1.35rem + .9vw, 2.3rem); }
   .bp-discover__body > p { color: var(--muted); }
-  .bp-discover__body dl { width: 100%; margin: var(--s-2) 0 0; font-size: .9375rem; }
-  .bp-discover__body dl > div { border-top: 1px solid var(--line); padding-block: var(--s-2); display: grid; grid-template-columns: minmax(5rem, 1fr) 3fr; gap: var(--s-2); }
-  .bp-discover__body dt { font-weight: 700; }
+  .bp-discover__body dl { inline-size: 100%; margin: var(--s-2) 0 0; font-size: .9375rem; }
+  .bp-discover__body dl > div {
+    display: grid;
+    grid-template-columns: minmax(5.25rem, 1fr) minmax(0, 3fr);
+    gap: var(--s-2);
+    padding-block: var(--s-2);
+    border-block-start: 1px solid var(--line);
+  }
+  .bp-discover__body dt { font-weight: 800; overflow-wrap: anywhere; }
   .bp-discover__body dd { margin: 0; }
   .bp-discover__sources, .bp-discover__barangay { font-size: .875rem; }
   .bp-discover__sources { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); align-items: center; }
-  .bp-discover__body a { display: inline-flex; align-items: center; min-height: 3rem; color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  .bp-discover__body a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 3rem;
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: .25em;
+  }
   @media (max-width: 47.9375rem) {
-    .bp-discover__places { grid-template-columns: minmax(0, 1fr); }
-    .bp-discover__places > li, .bp-discover__places > li:is(:first-child, :last-child) { grid-column: 1; margin-block-start: 0; }
-    .bp-discover__places > li:nth-child(2) .bp-discover__photo { aspect-ratio: 16 / 9; }
+    .bp-discover__places, .bp-discover__places > li:first-child .bp-discover__place { grid-template-columns: minmax(0, 1fr); }
+    .bp-discover__places > li:first-child .bp-discover__photo { aspect-ratio: 16 / 10; min-block-size: 0; }
+    .bp-discover__places > li:first-child .bp-discover__photo :global(img) { border-radius: var(--r-lg) var(--r-lg) 0 0; }
   }
 </style>

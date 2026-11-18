@@ -92,6 +92,10 @@ try {
       await layout.locator(".bp-quick li a").evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
       taskIds.map((id) => `${locale}/serbisyo/${id}/`),
     );
+    const shortcuts = await layout.locator(".bp-quick").boundingBox();
+    const plaza = layout.getByRole("img", { name: /Plaza Rizal/ }).first();
+    const photo = await plaza.boundingBox();
+    assert.ok(photo && shortcuts && photo.y >= shortcuts.y + shortcuts.height, "mobile shortcuts come before the photo");
     assert.equal(await layout.locator(".bp-map__directory a").count(), 30);
     assert.equal(await layout.locator("#mapa").getAttribute("lang"), "fil");
     assert.equal(await layout.locator("#mapa-h").innerText(), "Ang 30 barangay ng Pasig");
@@ -117,12 +121,25 @@ try {
     await layout.goto(origin + locale + "/opisyal/#opisyal-barangay");
     assert.equal(await layout.locator("#opisyal-barangay").getAttribute("lang"), "fil");
 
-    await layout.goto(origin + locale + "/serbisyo/scholarship-new/");
+    await layout.goto(origin + locale + "/");
+    await layout.locator(".bp-quick a[href$='/scholarship-new/']").click();
+    await layout.waitForURL(`**${locale}/serbisyo/scholarship-new/`);
     assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /Pasig residents/ : /taga-Pasig/);
-    assert.ok(await layout.locator("#service-requirements").isVisible());
-    await layout.goto(origin + locale + "/serbisyo/business-permit-renewal/");
+    const requirementsJump = layout.locator(".bp-svc__jump a[href='#service-requirements']");
+    await requirementsJump.focus();
+    await requirementsJump.press("Enter");
+    await layout.waitForURL("**/#service-requirements");
+    assert.ok(await layout.locator("#service-requirements").evaluate((heading) => {
+      const { top, bottom } = heading.getBoundingClientRect();
+      return top >= 0 && bottom <= innerHeight;
+    }));
+    await layout.goto(origin + locale + "/");
+    await layout.locator(".bp-quick a[href$='/business-permit-renewal/']").click();
+    await layout.waitForURL(`**${locale}/serbisyo/business-permit-renewal/`);
     assert.match(await layout.locator(".bp-svc__instructions").innerText(), hasEnglish ? /Proof of gross sales/ : /Patunay ng gross sales/);
-    await layout.goto(origin + locale + "/serbisyo/aics/");
+    await layout.goto(origin + locale + "/");
+    await layout.locator(".bp-quick a[href$='/aics/']").click();
+    await layout.waitForURL(`**${locale}/serbisyo/aics/`);
     assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /residents in crisis/ : /taga-Pasig.*krisis/);
 
     const searchPage = await browser.newPage();
