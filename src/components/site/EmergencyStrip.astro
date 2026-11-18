@@ -23,11 +23,13 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
     </ul>
     <a class="bp-urgent__all" href={href(lang, "/emergency/#hotlines")}>{t.allHotlines} <span aria-hidden="true">→</span></a>
     <p class="bp-urgent__clock">
-      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <circle cx="10" cy="10" r="7.5" /><path d="M10 5.8v4.4l2.5 1.5" />
-      </svg>
-      <span>{t.guideTime}</span>
-      <time data-ph-clock hidden></time>
+      <time data-ph-clock hidden>
+        <span class="sr-only">{t.guideTime} </span>
+        <strong data-clock-time></strong>
+        <span class="bp-urgent__clock-divider" aria-hidden="true">·</span>
+        <span data-clock-date></span>
+      </time>
+      <noscript>UTC+8</noscript>
     </p>
   </div>
 </div>
@@ -36,25 +38,36 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
   import { manilaTimeZone } from "../../lib/freshness";
 
   const clock = document.querySelector<HTMLTimeElement>("[data-ph-clock]");
-  if (clock) {
-    const formatter = new Intl.DateTimeFormat("en-PH", {
+  const time = clock?.querySelector("[data-clock-time]");
+  const date = clock?.querySelector("[data-clock-date]");
+
+  if (clock && time && date) {
+    const timeFormatter = new Intl.DateTimeFormat("en-PH", {
       timeZone: manilaTimeZone,
       hour: "numeric",
       minute: "2-digit",
       hourCycle: "h12",
     });
+    const dateFormatter = new Intl.DateTimeFormat(document.documentElement.lang === "fil" ? "fil-PH" : "en-PH", {
+      timeZone: manilaTimeZone,
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
     const minute = 60_000;
     let timer = 0;
 
-    function update() {
+    const update = () => {
       window.clearTimeout(timer);
-      if (document.hidden || !clock) return;
+      if (document.hidden) return;
       const now = new Date();
-      clock.textContent = formatter.format(now);
+      time.textContent = timeFormatter.format(now);
+      date.textContent = dateFormatter.format(now);
       clock.dateTime = now.toISOString();
       clock.hidden = false;
       timer = window.setTimeout(update, minute - (now.getTime() % minute));
-    }
+    };
 
     document.addEventListener("visibilitychange", update);
     window.addEventListener("pageshow", update);
@@ -79,14 +92,15 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
   .bp-urgent__links strong { font-size: 1rem; font-weight: 750; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .bp-urgent__all { text-decoration: underline; }
   .bp-urgent :is(a, button):focus-visible { outline-color: white; }
-  .bp-urgent__clock { margin-inline-start: auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); font-size: .8125rem; }
-  .bp-urgent__clock time { min-width: 8ch; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .bp-urgent__clock { margin-inline-start: auto; font-size: .8125rem; }
+  .bp-urgent__clock time { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bp-urgent__clock strong { font-weight: 750; }
+  .bp-urgent__clock-divider { margin-inline: var(--s-1); }
   @media (hover: hover) { .bp-urgent a:hover { text-decoration: underline; } }
   @media (max-width: 56rem) {
     .bp-urgent__inner { gap: 0 var(--s-3); }
     .bp-urgent__links { flex-basis: 100%; gap: 0 var(--s-3); }
     .bp-urgent__clock { margin-inline-start: 0; padding-block: var(--s-2); }
-    .bp-urgent__clock svg { display: none; }
     .bp-urgent__all { margin-inline-end: auto; }
   }
 </style>
