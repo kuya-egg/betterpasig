@@ -1,0 +1,17 @@
+name: Release source
+
+# main is production. Changes reach it only through dev: open the pull request against dev first,
+# then release dev to main. The main ruleset requires this check.
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  release-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only dev can be released to main
+        if: github.head_ref != 'dev' || github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "::error::Pull requests into main must come from dev in this repository. Retarget this pull request to dev."
+          exit 1
