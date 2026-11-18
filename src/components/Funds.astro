@@ -1,7 +1,7 @@
 ---
 import Verify from "./Verify.astro";
 import { sourceLabel, transparencyFigures, transparencyLinks } from "../lib/data";
-import { langFromUrl, ui } from "../i18n";
+import { href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
@@ -53,5 +53,6 @@ const links = transparencyLinks.filter((link) => /^https?:\/\//.test(link.url));
         ))
       }
     </div>
+    <p class="mt-4"><a href={href(lang, "/pondo/")}>{t.fundsAll}</a></p>
   </div>
 </section>

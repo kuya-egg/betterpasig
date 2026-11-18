@@ -1,10 +1,43 @@
 ---
-import { barangays, categories, historicalUpdates, opportunities, pasigSources, places, serviceUpdates, services } from "../lib/data";
+import { barangays, categories, facilities, historicalUpdates, hotlines, officials, officialsDirectory, opportunities, pasigSources, places, programs, serviceUpdates, services, transparencyFigures } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
 import { eventState, isSourceFresh } from "../lib/freshness";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+// Where a city official is listed on /opisyal (ids from OfficialsPage).
+function officialAnchor(person: (typeof officials)[number]): string {
+  if (person.position === "Councilor") return `opisyal-council-${person.district}`;
+  if (person.position === "Ex-officio") return "opisyal-ex-officio";
+  return `opisyal-${person.position.toLowerCase().replaceAll(" ", "-")}`;
+}
+
+// Everyday Filipino words and the terms the data uses. Each side is added to a row that contains the other,
+// so "sedula" finds the community tax certificate and "real property tax" finds amilyar rows.
+const synonyms: [string, string[]][] = [
+  ["amilyar", ["real property tax"]],
+  ["sedula", ["community tax", "cedula"]],
+  ["kapanganakan", ["birth"]],
+  ["kasal", ["marriage"]],
+  ["namatay", ["death"]],
+  ["libing", ["burial"]],
+  ["negosyo", ["business"]],
+  ["trabaho", ["job", "employment"]],
+  ["lisensya", ["license"]],
+  ["pensyon", ["pension"]],
+  ["iskolar", ["scholarship"]],
+  ["nakatatanda", ["senior"]],
+  ["kapansanan", ["pwd", "disability"]],
+  ["ospital", ["hospital"]],
+  ["baha", ["flood"]],
+];
+function withSynonyms(text: string): string {
+  const extra = synonyms.flatMap(([word, terms]) =>
+    terms.some((term) => text.includes(term)) ? [word] : text.includes(word) ? terms : [],
+  );
+  return extra.length ? `${text} ${extra.join(" ")}` : text;
+}
+
 const index = [
   ...services.map((service) => {
   const category = categories.find((item) => item.id === service.category);
@@ -22,7 +55,21 @@ const index = [
   ...opportunities.map((item) => { const past = eventState(item.event_date, new Date()) === "past"; const fresh = isSourceFresh(item.published_date, new Date()); return { id: item.id, href: past || !fresh ? href(lang, "/ngayong-linggo/arkibo/") : href(lang, "/ngayong-linggo/"), title: lang === "en" ? item.title_en : item.title_fil, category: `${lang === "en" ? "Dated opportunity" : "Oportunidad na may petsa"}${past || !fresh ? (lang === "en" ? " · past" : " · nagdaan") : ""}`, text: `${item.title_fil} ${item.title_en} ${item.id}`.toLowerCase() }; }),
   ...historicalUpdates.map((item) => ({ id: item.id, href: href(lang, "/ngayong-linggo/arkibo/"), title: item.id, category: lang === "en" ? "Past notice" : "Nagdaang abiso", text: `${item.id} ${item.summary}`.toLowerCase() })),
   ...barangays.map((item) => ({ id: item.id, href: href(lang, `/barangay/${item.id}/`), title: item.name, category: lang === "en" ? "Barangay" : "Barangay", text: `${item.name} ${item.district ?? ""}`.toLowerCase() })),
-];
+  ...[
+    { path: "/opisyal/", title: t.officialsPageTitle, keys: "opisyal officials alkalde mayor konsehal councilor kapitan punong barangay department head" },
+    { path: "/emergency/", title: t.emergencyPageTitle, keys: "emergency hotline ospital hospital evacuation evacuation center baha flood rescue" },
+    { path: "/tulong/", title: t.benefitsTitle, keys: "benepisyo benefits tulong ayuda programs" },
+    { path: "/pondo/", title: t.fundsTitle, keys: "pondo budget funds transparency foi coa" },
+    { path: "/tungkol/", title: t.aboutTitle, keys: "tungkol about github correction mali" },
+  ].map((page) => ({ id: `page${page.path}`, href: href(lang, page.path), title: page.title, category: t.searchKindPage, text: `${page.title} ${page.keys}`.toLowerCase() })),
+  ...programs.map((item) => ({ id: `program-${item.id}`, href: href(lang, `/tulong/#${item.id}`), title: lang === "en" ? item.title_en : item.title_fil, category: t.searchKindProgram, text: `${item.title_fil} ${item.title_en} ${item.office} ${item.for}`.toLowerCase() })),
+  ...officials.map((item) => ({ id: `official-${item.id}`, href: href(lang, `/opisyal/#${officialAnchor(item)}`), title: item.name, category: t.searchKindOfficial, text: `${item.name} ${item.position} ${"role" in item ? item.role : ""}`.toLowerCase() })),
+  ...officialsDirectory.departments.map((item, index) => ({ id: `department-${index}`, href: href(lang, "/opisyal/#opisyal-departamento"), title: item.office, category: t.searchKindOffice, text: `${item.office} ${item.head ?? ""} ${item.position ?? ""}`.toLowerCase() })),
+  ...hotlines.map((item) => ({ id: `hotline-${item.id}`, href: href(lang, "/emergency/#hotlines"), title: lang === "en" ? item.label_en : item.label_fil, category: t.searchKindHotline, text: `${item.label_fil} ${item.label_en} ${item.name} ${item.kind} ${item.numbers.join(" ")}`.toLowerCase() })),
+  ...facilities.hospitals.map((item, index) => ({ id: `hospital-${index}`, href: href(lang, "/emergency/#ospital"), title: item.name, category: t.searchKindHospital, text: `${item.name} ${item.address ?? ""} ospital hospital`.toLowerCase() })),
+  ...facilities.evacuation_centers.map((item, index) => ({ id: `evacuation-${index}`, href: href(lang, "/emergency/#evacuation"), title: item.name, category: t.searchKindEvacuation, text: `${item.name} ${item.barangay} evacuation center`.toLowerCase() })),
+  ...transparencyFigures.map((item) => ({ id: `figure-${item.id}`, href: href(lang, `/pondo/#${item.id}`), title: item.label_fil, category: t.fundsTitle, text: `${item.label_fil} ${item.value}`.toLowerCase() })),
+].map((row) => ({ ...row, text: withSynonyms(row.text) }));
 const datedIndex = index.map(row => {
   const place = places.find(item => item.id === row.id);
   const update = serviceUpdates.find(item => item.id === row.id);

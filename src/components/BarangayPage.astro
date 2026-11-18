@@ -1,8 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
 import SourceNote from "./SourceNote.astro";
-import { barangays, pasigSources, places, serviceUpdates } from "../lib/data";
-import { formatDate, langFromUrl } from "../i18n";
+import { barangays, pasigSources, places, serviceUpdates, sourceLabel } from "../lib/data";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
+import Verify from "./Verify.astro";
+import { centersForBarangay } from "../lib/evacuation";
 import { isSourceFresh } from "../lib/freshness";
 
 interface Props {
@@ -30,6 +32,8 @@ const recentUpdates = serviceUpdates.filter(
       places.some((place) => place.id === id && place.barangay_id === barangay.id),
     ) && isSourceFresh(item.published_date, new Date()),
 );
+const t = ui[lang];
+const evacCenters = centersForBarangay(barangay.id);
 ---
 
 <Base title={barangay.name}>
@@ -100,6 +104,32 @@ const recentUpdates = serviceUpdates.filter(
       </section>
     )}
     {recentPlaces.length > 0 && <p data-feed-empty hidden class="mt-3">{lang === 'en' ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
+
+    <section class="mt-8" aria-labelledby="evac-h">
+      <h2 id="evac-h" class="text-[23px] font-bold">{t.evacBarangayTitle}</h2>
+      {evacCenters.length ? (
+        <>
+          <p class="mt-1 text-[15px] text-muted">{t.evacBarangayNote}</p>
+          <ul class="mt-3 divide-y divide-line border-y border-line">
+            {evacCenters.map((c) => (
+              <li class="py-3">
+                <p class="font-semibold">{c.name}{c.verify && <Verify />}</p>
+                {c.address && <p class="text-[15px] text-muted">{c.address}</p>}
+                <p class="text-[14px] text-muted">
+                  {t.sources}:{" "}
+                  {c.sources.map((s, i) => (
+                    <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
+                  ))}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p class="mt-3">{t.evacBarangayNone}</p>
+      )}
+      <p class="mt-2"><a class="link-draw" href={href(lang, "/emergency/#evacuation")}>{t.evacBarangayAll}</a></p>
+    </section>
   </article>
 </Base>
 

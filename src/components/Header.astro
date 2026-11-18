@@ -6,45 +6,50 @@ import { barangays, categories, programs, transparencyLinks } from "../lib/data"
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const other = lang === "en" ? "fil" : "en";
+// `page` is the menu's own page; menus without one point at a homepage section.
 const menus = [
   {
-    id: "serbisyo", label: t.navServices, title: t.allServices,
+    id: "serbisyo", label: t.navServices, title: t.allServices, page: "/serbisyo/",
     links: categories.map((item) => ({
       label: lang === "en" ? item.name_en : item.name_fil,
       url: href(lang, `/serbisyo#${item.id}`),
     })),
   },
   {
-    id: "benepisyo", label: t.navBenefits, title: t.benefitsTitle,
+    id: "benepisyo", label: t.navBenefits, title: t.benefitsTitle, page: "/tulong/",
     links: programs.map((item) => ({
       label: lang === "en" ? item.title_en : item.title_fil,
-      url: href(lang, `/#benepisyo-${item.id}`),
+      url: href(lang, `/tulong/#${item.id}`),
     })),
   },
   {
-    id: "mapa", label: t.navBarangay, title: t.mapPrompt,
+    id: "mapa", label: t.navBarangay, title: t.mapPrompt, page: null,
     links: [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil")).map((item) => ({
       label: item.name, url: href(lang, `/?barangay=${item.id}#mapa`),
     })),
   },
   {
-    id: "opisyal", label: t.navOfficials, title: t.navOfficials,
+    id: "opisyal", label: t.navOfficials, title: t.officialsPageTitle, page: "/opisyal/",
     links: [
-      { label: t.mayor, url: href(lang, "/#opisyal-mayor") },
-      { label: t.viceMayor, url: href(lang, "/#opisyal-vice-mayor") },
-      { label: t.representative, url: href(lang, "/#opisyal-representative") },
-      { label: t.council1, url: href(lang, "/#opisyal-council-1") },
-      { label: t.council2, url: href(lang, "/#opisyal-council-2") },
+      { label: t.mayor, url: href(lang, "/opisyal/#opisyal-mayor") },
+      { label: t.viceMayor, url: href(lang, "/opisyal/#opisyal-vice-mayor") },
+      { label: t.representative, url: href(lang, "/opisyal/#opisyal-representative") },
+      { label: t.council1, url: href(lang, "/opisyal/#opisyal-council-1") },
+      { label: t.council2, url: href(lang, "/opisyal/#opisyal-council-2") },
+      { label: t.navExOfficio, url: href(lang, "/opisyal/#opisyal-ex-officio") },
+      { label: t.navDepartments, url: href(lang, "/opisyal/#opisyal-departamento") },
+      { label: t.navBarangayOfficials, url: href(lang, "/opisyal/#opisyal-barangay") },
     ],
   },
   {
-    id: "pondo", label: t.navFunds, title: t.fundsTitle,
+    id: "pondo", label: t.navFunds, title: t.fundsTitle, page: "/pondo/",
     links: transparencyLinks.filter((item) => /^https?:\/\//.test(item.url)).map((item) => ({
       label: lang === "en" && item.title_en ? item.title_en : item.title_fil,
       url: item.url,
     })),
   },
 ];
+const menuHref = (menu: (typeof menus)[number]) => href(lang, menu.page ?? `/#${menu.id}`);
 ---
 
 <header id="top" class="site-header">
@@ -57,8 +62,8 @@ const menus = [
       <ul class="nav-items">
         {menus.map((menu) => (
           <li>
-            <a class="nav-trigger nav-fallback" href={href(lang, `/#${menu.id}`)}>{menu.label}</a>
-            <button type="button" class="nav-trigger" data-section={menu.id} aria-expanded="false" aria-controls={`nav-${menu.id}`} hidden>
+            <a class="nav-trigger nav-fallback" href={menuHref(menu)}>{menu.label}</a>
+            <button type="button" class="nav-trigger" data-section={menu.id} data-page={menu.page ?? ""} aria-expanded="false" aria-controls={`nav-${menu.id}`} hidden>
               <span class="nav-label">{menu.label}</span>
               <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
             </button>
@@ -72,7 +77,7 @@ const menus = [
               <div class="wrap dropdown-inner">
                 <div class="dropdown-heading">
                   <h2>{menu.title}</h2>
-                  <a class="link-draw" href={href(lang, `/#${menu.id}`)}>{t.viewSection}<span aria-hidden="true"> &rarr;</span></a>
+                  <a class="link-draw" href={menuHref(menu)}>{menu.page ? t.viewPage : t.viewSection}<span aria-hidden="true"> &rarr;</span></a>
                 </div>
                 <ul class="dropdown-links">
                   {menu.links.map((link) => <li><a href={link.url}>{link.label}</a></li>)}
@@ -337,10 +342,12 @@ const menus = [
     if (!activeTrigger) finishClose();
   });
   const syncLocation = () => {
-    const servicePage = /^\/(en\/)?serbisyo(?:\/|$)/.test(location.pathname);
+    const path = location.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
     for (const trigger of triggers) {
-      const active = (servicePage && trigger.dataset.section === "serbisyo") ||
-        (!servicePage && location.hash.replace(/^#/, "").split("-")[0] === trigger.dataset.section);
+      const page = trigger.dataset.page?.replace(/\/$/, "");
+      const active = page
+        ? path === page || path.startsWith(`${page}/`)
+        : path === "/" && location.hash.replace(/^#/, "").split("-")[0] === trigger.dataset.section;
       if (active) trigger.setAttribute("aria-current", "location");
       else trigger.removeAttribute("aria-current");
     }
