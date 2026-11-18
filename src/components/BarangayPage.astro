@@ -1,7 +1,9 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
+import map from "../../design/map/pasig-map.json";
+import CopyButton from "./CopyButton.astro";
 import SourceNote from "./SourceNote.astro";
-import { barangays, pasigSources, places, serviceUpdates, sourceLabel } from "../lib/data";
+import { barangays, pasigSources, places, serviceUpdates, sourceLabel, telHref } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 import Verify from "./Verify.astro";
 import { centersForBarangay } from "../lib/evacuation";
@@ -34,105 +36,366 @@ const recentUpdates = serviceUpdates.filter(
 );
 const t = ui[lang];
 const evacCenters = centersForBarangay(barangay.id);
+const en = lang === "en";
+
+// The directory stores contacts as one string: "numbers (source); label numbers (source)".
+// Split it into labelled numbers, each group with the directory that published it.
+const contactGroups = (barangay.contact ?? "")
+  .split(";")
+  .reduce<{ rows: { label: string; numbers: string[] }[]; source: string | null }[]>(
+    (groups, part) => {
+      if (!groups.length || groups.at(-1)!.source !== null) groups.push({ rows: [], source: null });
+      const group = groups.at(-1)!;
+      const source = part.match(/\(([^)]+)\)\s*$/)?.[1] ?? null;
+      const text = part.replace(/\([^)]*\)\s*$/, "").trim();
+      const found = text.match(/\d[\d\s-]*\d/g) ?? [];
+      const first = text.search(/\d/);
+      const label = first > 0 ? text.slice(0, first).trim() : "";
+      if (found.length) group.rows.push({ label, numbers: found.map((n) => n.trim()) });
+      if (source) group.source = source;
+      return groups;
+    },
+    [],
+  )
+  .filter((group) => group.rows.length);
+const shape = map.barangays.find((item) => item.name === barangay.name);
 ---
 
-<Base title={barangay.name}>
-  <article class="wrap max-w-[820px] py-10" data-current-feed>
-    <h1 class="text-[34px] font-bold leading-tight tracking-[-0.04em]">{barangay.name}</h1>
-    {barangay.district && (
-      <p class="mt-2 text-muted">{lang === "en" ? "District" : "Distrito"} {barangay.district} · {lang === "en" ? "Older directory information; being checked." : "Mas lumang datos ng direktoryo; sinusuri pa."} <a href={barangay.sources[1]}>{lang === 'en' ? 'Directory source' : 'Sanggunian ng direktoryo'}</a></p>
-    )}
+<Kit
+  title={barangay.name}
+  description={en ? `${barangay.name}, Pasig: barangay contacts, evacuation centers and recent places with official sources.` : `${barangay.name}, Pasig: mga kontak ng barangay, evacuation center at mga kamakailang lugar na may opisyal na sanggunian.`}
+>
+  <section class="section section--flow" aria-labelledby="brgy-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-7">
+          <div class="section-head bp-brgy__head">
+            <h1 id="brgy-h">{barangay.name}</h1>
+            {barangay.district && (
+              <p>
+                {en ? "District" : "Distrito"} {barangay.district}
+                <br />
+                {en ? "Older directory information; being checked." : "Mas lumang datos ng direktoryo; sinusuri pa."}
+              </p>
+            )}
+          </div>
+          {barangay.district && (
+            <p class="bp-brgy__src"><a class="link" href={barangay.sources[1]}>{en ? "Directory source" : "Sanggunian ng direktoryo"}</a></p>
+          )}
 
-    <h2 class="mt-8 text-[23px] font-bold">
-      {lang === "en"
-        ? "Recent places with official sources"
-        : "Mga lugar na may opisyal na sanggunian sa nakaraang 30 araw"}
-    </h2>
-
-    {recentPlaces.length ? (
-      <ul class="mt-3 divide-y divide-line border-y border-line">
-        {recentPlaces.map((place) => (
-          <li class="py-4" data-published-date={Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1)}>
-            <a
-              class="font-semibold"
-              href={lang === "en" ? `/en/lugar/${place.id}/` : `/lugar/${place.id}/`}
-            >
-              {place.name}
-            </a>
-            <p class="text-[15px] text-muted">
-              {place.address ??
-                (lang === "en"
-                  ? "Address not stated in the announcement checked."
-                  : "Hindi nakasaad ang address sa nasuring anunsyo.")}
-            </p>
-            <SourceNote refs={Object.values(place.evidence).flat()} />
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p class="mt-3">
-        {lang === "en"
-          ? "No information supported by an official announcement from the past 30 days has been added for this barangay yet."
-          : "Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito."}
-      </p>
-    )}
-
-    {recentUpdates.length > 0 && (
-      <section class="mt-8">
-        <h2 class="text-[23px] font-bold">
-          {lang === "en" ? "Recent service notices" : "Mga bagong abiso sa serbisyo"}
-        </h2>
-        <ul class="mt-3 divide-y divide-line border-y border-line">
-          {recentUpdates.map((item) => {
-            const source = pasigSources.find(
-              (row) => row.id === item.evidence[0]?.split(":")[0],
-            );
-            const destination = item.service_id
-              ? lang === "en"
-                ? `/en/serbisyo/${item.service_id}`
-                : `/serbisyo/${item.service_id}`
-              : source?.url;
-            return (
-              <li class="py-4" data-published-date={item.published_date}>
-                <a href={destination}>{lang === "en" ? item.title_en : item.title_fil}</a>
-                <p>{formatDate(lang, item.published_date)}</p>
-                <SourceNote refs={item.evidence} />
+          <ul class="rows bp-brgy__facts">
+            {barangay.punong_barangay && (
+              <li>
+                <span class="rows__name">{en ? "Punong barangay" : "Punong barangay"}{barangay.verify && <Verify />}</span>
+                <span class="bp-brgy__val">
+                  {barangay.punong_barangay}
+                  {barangay.punong_barangay_term && <small>{barangay.punong_barangay_term}</small>}
+                </span>
               </li>
-            );
-          })}
-        </ul>
-      </section>
-    )}
-    {recentPlaces.length > 0 && <p data-feed-empty hidden class="mt-3">{lang === 'en' ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
-
-    <section class="mt-8" aria-labelledby="evac-h">
-      <h2 id="evac-h" class="text-[23px] font-bold">{t.evacBarangayTitle}</h2>
-      {evacCenters.length ? (
-        <>
-          <p class="mt-1 text-[15px] text-muted">{t.evacBarangayNote}</p>
-          <ul class="mt-3 divide-y divide-line border-y border-line">
-            {evacCenters.map((c) => (
-              <li class="py-3">
-                <p class="font-semibold">{c.name}{c.verify && <Verify />}</p>
-                {c.address && <p class="text-[15px] text-muted">{c.address}</p>}
-                <p class="text-[14px] text-muted">
-                  {t.sources}:{" "}
-                  {c.sources.map((s, i) => (
-                    <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
+            )}
+            {barangay.hall_address && (
+              <li>
+                <span class="rows__name">{en ? "Barangay hall" : "Barangay hall"}</span>
+                <span class="bp-brgy__val">{barangay.hall_address}</span>
+              </li>
+            )}
+            {contactGroups.length > 0 && (
+              <li>
+                <span class="rows__name">{en ? "Contact numbers" : "Mga numero ng kontak"}{barangay.verify && <Verify />}</span>
+                <div class="bp-brgy__val bp-brgy__phones">
+                  {contactGroups.map((group) => (
+                    <div class="bp-brgy__group">
+                      {group.rows.map((row) => (
+                        <div>
+                          {row.label && <span class="t-small muted">{row.label}</span>}
+                          <ul>
+                            {row.numbers.map((n) => (
+                              <li>
+                                <a class="bp-brgy__tel" href={telHref(n)}>{n}</a>
+                                <CopyButton value={n} label={t.copyNumber(n)} />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                      {group.source && <small>{group.source}</small>}
+                    </div>
                   ))}
-                </p>
+                  <small>{en ? "Published numbers; not checked by phone." : "Nakalathalang numero; hindi pa nasusubukang tawagan."}</small>
+                </div>
               </li>
-            ))}
+            )}
           </ul>
-        </>
+        </div>
+        {shape && (
+          <div class="span-4 start-9 bp-brgy__map">
+            <svg viewBox="100 0 360 560" role="img" aria-label={en ? `Location of ${barangay.name} in Pasig` : `Lokasyon ng ${barangay.name} sa Pasig`}>
+              {map.barangays.map((item) => <path d={item.d} class={item.name === barangay.name ? "on" : undefined} />)}
+            </svg>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flow ground-surface" aria-labelledby="brgy-recent-h">
+    <div class="wrap" data-current-feed>
+      <div class="section-head">
+        <h2 id="brgy-recent-h">{en ? "Recent places with official sources" : "Mga lugar na may opisyal na sanggunian sa nakaraang 30 araw"}</h2>
+      </div>
+
+      {recentPlaces.length ? (
+        <ul class="bp-brgy__list">
+          {recentPlaces.map((place) => (
+            <li data-published-date={Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1)}>
+              <a class="bp-brgy__title" href={en ? `/en/lugar/${place.id}/` : `/lugar/${place.id}/`}>{place.name}</a>
+              <p class="muted">
+                {place.address ??
+                  (en
+                    ? "Address not stated in the announcement checked."
+                    : "Hindi nakasaad ang address sa nasuring anunsyo.")}
+              </p>
+              <SourceNote refs={Object.values(place.evidence).flat()} />
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p class="mt-3">{t.evacBarangayNone}</p>
+        <p>
+          {en
+            ? "No information supported by an official announcement from the past 30 days has been added for this barangay yet."
+            : "Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito."}
+        </p>
       )}
-      <p class="mt-2"><a class="link-draw" href={href(lang, "/emergency/#evacuation")}>{t.evacBarangayAll}</a></p>
-    </section>
-  </article>
-</Base>
+
+      {recentUpdates.length > 0 && (
+        <div class="bp-brgy__updates">
+          <h3 class="t-label muted">{en ? "Recent service notices" : "Mga bagong abiso sa serbisyo"}</h3>
+          <ul class="bp-brgy__list">
+            {recentUpdates.map((item) => {
+              const source = pasigSources.find(
+                (row) => row.id === item.evidence[0]?.split(":")[0],
+              );
+              const destination = item.service_id
+                ? en
+                  ? `/en/serbisyo/${item.service_id}`
+                  : `/serbisyo/${item.service_id}`
+                : source?.url;
+              return (
+                <li data-published-date={item.published_date}>
+                  <a class="bp-brgy__title" href={destination}>{en ? item.title_en : item.title_fil}</a>
+                  <p class="muted">{formatDate(lang, item.published_date)}</p>
+                  <SourceNote refs={item.evidence} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {recentPlaces.length > 0 && <p data-feed-empty hidden>{en ? 'No information supported by an official announcement from the past 30 days has been added for this barangay yet.' : 'Wala pang naidagdag na impormasyong may opisyal na anunsyo sa nakaraang 30 araw para sa barangay na ito.'}</p>}
+    </div>
+  </section>
+
+  <section class="section section--flow" aria-labelledby="evac-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="evac-h">{t.evacBarangayTitle}</h2>
+        {evacCenters.length > 0 && <p>{t.evacBarangayNote}</p>}
+      </div>
+      {evacCenters.length ? (
+        <ul class="bp-brgy__list">
+          {evacCenters.map((c) => (
+            <li>
+              <p class="bp-brgy__title">{c.name}{c.verify && <Verify />}</p>
+              {c.address && <p class="muted">{c.address}</p>}
+              <p class="t-small muted bp-brgy__srcs">
+                <span>{t.sources}:</span>
+                {c.sources.map((s) => (
+                  <a href={s}>{sourceLabel(s)}</a>
+                ))}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>{t.evacBarangayNone}</p>
+      )}
+      <p class="bp-brgy__all"><a class="link" href={href(lang, "/emergency/#evacuation")}>{t.evacBarangayAll}</a></p>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
+  .bp-brgy__head {
+    margin-bottom: var(--s-4);
+  }
+  .bp-brgy__src {
+    margin: 0 0 var(--s-6);
+  }
+  .bp-brgy__src a,
+  .bp-brgy__all a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .bp-brgy__facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .bp-brgy__facts > li {
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+    align-items: start;
+  }
+  .bp-brgy__facts > li:first-child {
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-brgy__facts :global(.verify) {
+    display: block;
+    margin-left: 0;
+  }
+  .bp-brgy__val {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    gap: var(--s-1);
+    text-align: left;
+    white-space: normal;
+    max-width: none;
+  }
+  .bp-brgy__val small,
+  .bp-brgy__phones small {
+    color: var(--muted);
+    font-size: var(--t-small);
+  }
+  .bp-brgy__phones,
+  .bp-brgy__group,
+  .bp-brgy__group > div {
+    display: grid;
+    gap: var(--s-1);
+  }
+  .bp-brgy__phones {
+    gap: var(--s-4);
+  }
+  .bp-brgy__group {
+    gap: var(--s-3);
+  }
+  .bp-brgy__group + .bp-brgy__group {
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-brgy__group > div {
+    gap: 0;
+  }
+  .bp-brgy__group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--s-4);
+  }
+  .bp-brgy__group li {
+    display: inline-flex;
+    align-items: center;
+  }
+  .bp-brgy__tel {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-variant-numeric: tabular-nums;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  .bp-brgy__tel:hover {
+    text-decoration-color: currentColor;
+  }
+  .bp-brgy__map {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .bp-brgy__map svg {
+    display: block;
+    width: min(100%, 224px);
+    height: auto;
+    aspect-ratio: 360 / 560;
+  }
+  .bp-brgy__map path {
+    fill: var(--subtle);
+    stroke: var(--bg);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+  }
+  .bp-brgy__map path.on {
+    fill: var(--hover);
+    stroke: var(--ink);
+  }
+  .bp-brgy__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .bp-brgy__list > li {
+    display: grid;
+    gap: var(--s-1);
+    padding-block: var(--s-4);
+    border-top: 1px solid var(--line);
+    max-width: 64ch;
+  }
+  .bp-brgy__list p {
+    margin: 0;
+  }
+  .bp-brgy__title {
+    font-size: var(--t-card);
+    font-weight: 500;
+  }
+  a.bp-brgy__title {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
+  }
+  a.bp-brgy__title:hover {
+    text-decoration-color: currentColor;
+  }
+  .bp-brgy__updates {
+    margin-top: var(--s-8);
+  }
+  .bp-brgy__srcs {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--s-4);
+  }
+  .bp-brgy__srcs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  [data-feed-empty] {
+    margin-top: var(--s-4);
+  }
+  @media (max-width: 1023px) {
+    .bp-brgy__map {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+    }
+    .bp-brgy__map svg {
+      width: min(100%, 160px);
+    }
+    .bp-brgy__facts > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bp-brgy__val {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
 </style>

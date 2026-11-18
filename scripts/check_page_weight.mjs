@@ -1,5 +1,6 @@
 // Fails when any built page needs more than 300 KB on first load (roadmap guardrail).
-// Counts gzip size of the HTML and its local CSS and JS (with JS imports), plus the woff2 fonts the CSS references.
+// Counts gzip size of the HTML and its local CSS and JS (with JS imports), the woff2 fonts the CSS references,
+// and every image that is not loading="lazy".
 // Run after `bun run build`: bun scripts/check_page_weight.mjs [dist]
 import { readFileSync, readdirSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
@@ -33,14 +34,17 @@ function assets(html, file) {
     if (path.endsWith(".css")) {
       for (const [, font] of text.matchAll(/url\(([^)]+\.woff2)\)/g)) add(font, path);
     } else if (path.endsWith(".js")) {
-      for (const [, dep] of text.matchAll(/(?:import|from)\s*["']([^"']+\.js)["']/g)) add(dep, path);
+      // Block comments can quote import lines from usage notes; only real imports count.
+      const code = text.replace(/\/\*[\s\S]*?\*\//g, "");
+      for (const [, dep] of code.matchAll(/(?:import|from)\s*["']([^"']+\.js)["']/g)) add(dep, path);
     }
   };
   for (const [tag] of html.matchAll(/<link\b[^>]*>/g)) {
     if (/rel="?(?:stylesheet|modulepreload)/.test(tag)) add(tag.match(/href="?([^"\s>]+)/)[1], file);
   }
   for (const [, src] of html.matchAll(/<script\b[^>]*\bsrc="?([^"\s>]+)/g)) add(src, file);
-  for (const [, src] of html.matchAll(/<img\b[^>]*\bsrc="?([^"\s>]+)/g)) add(src, file);
+  // Lazy images wait until they near the screen, so they are not part of the first load.
+  for (const [tag, src] of html.matchAll(/<img\b[^>]*\bsrc="?([^"\s>]+)[^>]*>/g)) if (!/\bloading="?lazy/.test(tag)) add(src, file);
   return found;
 }
 

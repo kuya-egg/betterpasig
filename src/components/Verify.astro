@@ -5,6 +5,15 @@ import { langFromUrl, ui } from "../i18n";
 const t = ui[langFromUrl(Astro.url)];
 ---
 
-<span class="ml-1.5 align-middle text-[13px] font-semibold whitespace-nowrap text-amber" title={t.verifyTitle}>
-  {t.verify}
-</span>
+<span class="verify" title={t.verifyTitle}>{t.verify}</span>
+
+<style>
+  .verify {
+    margin-left: 6px;
+    vertical-align: middle;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--amber);
+  }
+</style>

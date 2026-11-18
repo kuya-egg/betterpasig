@@ -6,7 +6,7 @@ const t = ui[lang];
 ---
 
 <div
-  class="bp-search mt-6 max-w-[580px]"
+  class="bp-search"
   data-pagefind-ignore
   data-empty={t.noMatch}
   data-one={t.matchOne}
@@ -18,8 +18,8 @@ const t = ui[lang];
   data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
 >
   <div class="field">
+  <label class="bp-search__label" for="q">{t.searchLabel}</label>
   <form role="search">
-    <label class="sr-only" for="q">{t.searchLabel}</label>
     <input
       id="q"
       type="search"
@@ -34,18 +34,12 @@ const t = ui[lang];
   </form>
   <div id="search-results" class="results" role="listbox"></div>
   </div>
-  <div class="popular">
-    <span>{t.popularLabel}</span>
-    {t.popular.map((term) => (
-      <button type="button" data-q={term}>{term}</button>
-    ))}
-  </div>
 </div>
 <script>
   import { eventState, isSourceFresh } from "../lib/freshness";
   import { searchVariants } from "../lib/search-synonyms";
 
-  type SubResult = { title: string; url: string; anchor?: { id: string } };
+  type SubResult = { title: string; url: string; anchor?: { id: string; element?: string } };
   type PageData = { url: string; meta: { title?: string; kind?: string }; sub_results: SubResult[] };
   type Pagefind = { options: (options: object) => Promise<void>; search: (query: string) => Promise<{ results: { id: string; score: number; data: () => Promise<PageData> }[] }> };
   type Dates = { notices: Record<string, { published: string; event: string | null; historical: boolean }>; places: Record<string, string> };
@@ -166,7 +160,10 @@ const t = ui[lang];
           if (!isSourceFresh(published, new Date())) note = olderLabel;
         }
         // Without the date table a notice links to the notices page itself, which hides expired rows on its own.
-        rows.push({ href: kind === "ngayong-linggo" ? page.url : (page.sub_results[0]?.url ?? page.url), title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
+        // A match in the page's own h1 section opens the page at its top, not at the heading's anchor.
+        const first = page.sub_results[0];
+        const pageHref = !first || first.anchor?.element === "h1" ? page.url : first.url;
+        rows.push({ href: kind === "ngayong-linggo" ? page.url : pageHref, title: page.meta.title ?? "", kind: kinds[kind] ?? "", note });
       }
       // Expired and older-source results sort after current ones (stable).
       return rows.sort((a, b) => Number(a.note !== "") - Number(b.note !== ""));
@@ -260,13 +257,6 @@ const t = ui[lang];
       if (active >= 0) links[active]?.click();
       else void run();
     });
-    box.addEventListener("click", (event) => {
-      const button = (event.target as Element).closest<HTMLButtonElement>("[data-q]");
-      if (!button) return;
-      input.value = button.dataset.q ?? "";
-      void run();
-      input.focus();
-    });
     document.addEventListener("click", (event) => {
       if (!(event.target as Element).closest(".bp-search")) close();
     });
@@ -274,16 +264,22 @@ const t = ui[lang];
 </script>
 
 <style>
+  .bp-search {
+    max-width: 600px;
+  }
   form {
     display: flex;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    overflow: hidden;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: calc(var(--r-btn) + 6px);
     background: var(--bg);
-    transition: box-shadow var(--mid) var(--ease);
+    transition: border-color var(--m-in, 150ms) var(--ease), box-shadow var(--m-in, 150ms) var(--ease);
   }
   form:focus-within {
-    box-shadow: 0 0 0 4px var(--mark-bg);
+    border-color: var(--action);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--action) 18%, transparent);
   }
   input {
     flex: 1 1 auto;
@@ -291,22 +287,33 @@ const t = ui[lang];
     min-height: 48px;
     border: 0;
     outline: 0;
-    font: 500 18px var(--font);
-    padding: 12px 16px;
+    font: 400 18px var(--font-text);
+    padding: 0 var(--s-3);
     background: transparent;
     color: var(--ink);
   }
   input::placeholder {
     color: var(--muted);
   }
+  input::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
   form button {
     border: 0;
-    background: var(--ink);
-    color: var(--bg);
-    font-weight: 600;
-    font-size: 16px;
-    padding: 0 22px;
+    border-radius: var(--r-btn);
+    background: var(--action);
+    color: var(--action-ink);
+    font: 500 16px var(--font-text);
+    padding: 0 var(--s-5);
     min-height: 48px;
+    cursor: pointer;
+    transition: background-color var(--m-in, 150ms) var(--ease), transform var(--m-press, 90ms) var(--ease);
+  }
+  form button:hover {
+    background: color-mix(in oklab, var(--action) 86%, var(--ink));
+  }
+  form button:active {
+    transform: translateY(1px) scale(.985);
   }
   .field {
     position: relative;
@@ -319,9 +326,8 @@ const t = ui[lang];
     right: 0;
     top: calc(100% + 8px);
     background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    box-shadow: 0 18px 44px var(--shadow);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-md);
     max-height: 400px;
     overflow: auto;
   }
@@ -342,7 +348,7 @@ const t = ui[lang];
   }
   .results :global(a:hover),
   .results :global(a.active) {
-    background: var(--subtle);
+    background: var(--surface);
   }
   .results :global(small) {
     color: var(--muted);
@@ -367,28 +373,13 @@ const t = ui[lang];
     font-size: 13px;
     color: var(--muted);
     border-top: 1px solid var(--line);
-    background: var(--subtle);
+    background: var(--surface);
   }
-  .popular {
-    margin-top: 16px;
-    font-size: 15px;
+  .bp-search__label {
+    display: block;
+    margin-bottom: var(--s-2);
+    font-size: var(--t-small);
+    font-weight: 500;
     color: var(--muted);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-  .popular button {
-    background: var(--subtle);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    min-height: 48px;
-    padding: 8px 12px;
-    color: var(--ink);
-    font-size: 15px;
-  }
-  .popular button:hover {
-    border-color: var(--blue);
-    color: var(--blue);
   }
 </style>

@@ -1,128 +1,197 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import Verify from "./Verify.astro";
 import { city, site, sourceLabel } from "../lib/data";
-import { formatDate, langFromUrl, ui } from "../i18n";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const repo = "https://github.com/kuya-egg/betterpasig";
-const h2 = "text-[30px] font-bold tracking-[-0.03em]";
 // Textual as_of values are split into as_of_fil/as_of_en; plain years and dates stay in as_of.
 const asOf = (fact: (typeof city.facts)[number]) =>
   (lang === "en" ? ("as_of_en" in fact ? fact.as_of_en : null) : ("as_of_fil" in fact ? fact.as_of_fil : null)) ?? fact.as_of ?? null;
 ---
 
-<Base title={t.aboutTitle}>
-  <div class="wrap max-w-[820px] py-12">
-    <h1 class="text-[34px] font-bold leading-[1.05] tracking-[-0.04em] md:text-[52px]">{t.aboutTitle}</h1>
+<Kit title={t.aboutTitle} description={t.aboutMission}>
+  <section class="section section--flow" aria-labelledby="tungkol-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h1 id="tungkol-h">{t.aboutTitle}</h1>
+        <p>{t.aboutMission}</p>
+      </div>
 
-    <section class="mt-12" aria-labelledby="misyon">
-      <h2 id="misyon" class={h2}>{t.aboutMissionTitle}</h2>
-      <p class="mt-3 max-w-[60ch]">{t.aboutMission}</p>
-      <p class="mt-3 max-w-[60ch]">{t.aboutStance}</p>
-    </section>
+      <div class="grid bp-about__split" id="misyon-bloke">
+        <div class="span-6">
+          <h2 id="misyon" class="bp-about__h">{t.aboutMissionTitle}</h2>
+          <p class="bp-about__p">{t.aboutStance}</p>
+        </div>
+        <div class="span-6">
+          <h2 id="non-partisan" class="bp-about__h">{t.aboutPledgeTitle}</h2>
+          <p class="bp-about__p">{t.aboutPledge}</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="mt-12" aria-labelledby="prinsipyo">
-      <h2 id="prinsipyo" class={h2}>{t.aboutPrinciplesTitle}</h2>
-      <ol class="mt-4 divide-y divide-line border-y border-line">
+  <section class="section section--flow ground-surface" aria-labelledby="prinsipyo">
+    <div class="wrap">
+      <h2 id="prinsipyo" class="bp-about__h">{t.aboutPrinciplesTitle}</h2>
+      <ol class="rows bp-about__rows">
         {
           t.aboutPrinciples.map(([title, body], i) => (
-            <li class="flex gap-4 py-4">
-              <span class="num w-6 shrink-0 text-muted">{i + 1}</span>
-              <div>
-                <h3 class="text-[19px] font-semibold tracking-[-0.01em]">{title}</h3>
-                <p class="mt-1 max-w-[60ch] text-[15px] text-muted">{body}</p>
-              </div>
+            <li>
+              <span class="rows__name"><span class="muted">{i + 1}</span> {title}</span>
+              <p class="muted">{body}</p>
             </li>
           ))
         }
       </ol>
-    </section>
+    </div>
+  </section>
 
-    <section class="mt-12" aria-labelledby="non-partisan">
-      <h2 id="non-partisan" class={h2}>{t.aboutPledgeTitle}</h2>
-      <p class="mt-3 max-w-[60ch]">{t.aboutPledge}</p>
-    </section>
-
-    <section class="mt-12" aria-labelledby="datos">
-      <h2 id="datos" class={h2}>{t.aboutDataTitle}</h2>
-      <ul class="mt-4 divide-y divide-line border-y border-line">
+  <section class="section section--flow" aria-labelledby="pasig">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="pasig">{t.aboutGlanceTitle}</h2>
+        <p>{t.aboutGlanceNote}</p>
+      </div>
+      <ul class="rows bp-about__rows">
         {
-          t.aboutDataSources.map(([name, url, use]) => (
-            <li class="py-3">
-              {url ? <a href={url}>{name}</a> : <span>{name}</span>}
-              <span class="text-muted"> — {use}</span>
+          city.facts.map((fact) => (
+            <li>
+              <span class="rows__name">{lang === "en" ? fact.label_en : fact.label_fil}</span>
+              <span class="rows__value">
+                {lang === "en" ? fact.value_en : fact.value_fil}
+                {fact.verify && <Verify />}
+              </span>
+              <div class="bp-about__meta t-small muted">
+                {asOf(fact) && (
+                  <p>
+                    {t.aboutAsOf}: {asOf(fact)}
+                  </p>
+                )}
+                {(lang === "en" ? fact.note_en : fact.note_fil) && (fact.verify || fact.id === "land-area") && (
+                  <p>{lang === "en" ? fact.note_en : fact.note_fil}</p>
+                )}
+                <p>
+                  {t.sources}:{" "}
+                  {fact.sources.map((url, i) => (
+                    <>
+                      {i > 0 && ", "}
+                      <a href={url}>{sourceLabel(url)}</a>
+                    </>
+                  ))}
+                </p>
+              </div>
             </li>
           ))
         }
       </ul>
-      <p class="mt-3 max-w-[60ch] text-[15px] text-muted">{t.aboutDataNote}</p>
-    </section>
+      <p class="t-small muted bp-about__checked">{t.checked}: {formatDate(lang, city.retrieved)}</p>
+    </div>
+  </section>
 
-    <section class="mt-12" aria-labelledby="paunawa">
-      <h2 id="paunawa" class={h2}>{t.aboutDisclaimerTitle}</h2>
-      <p class="mt-3 max-w-[60ch]">{lang === "en" ? site.notice_en : site.notice_fil}</p>
-    </section>
-
-    <section class="mt-12" aria-labelledby="pasig">
-      <h2 id="pasig" class={h2}>{t.aboutGlanceTitle}</h2>
-      <p class="mt-2 text-[15px] text-muted">{t.aboutGlanceNote}</p>
-      <table class="mt-4 w-full border-collapse text-left">
-        <thead class="border-t-2 border-ink">
-          <tr class="border-b border-line">
-            <th scope="col" class="py-2 pr-4 text-[14px] font-medium text-muted">{t.aboutFactHead}</th>
-            <th scope="col" class="py-2 text-[14px] font-medium text-muted">{t.aboutValueHead}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            city.facts.map((fact) => (
-              <tr class="border-b border-line align-top">
-                <th scope="row" class="w-[34%] py-3 pr-4 text-[15px] font-semibold">
-                  {lang === "en" ? fact.label_en : fact.label_fil}
-                </th>
-                <td class="py-3">
-                  <span class="num">{lang === "en" ? fact.value_en : fact.value_fil}</span>
-                  {fact.verify && <Verify />}
-                  {asOf(fact) && (
-                    <p class="text-[14px] text-muted">
-                      {t.aboutAsOf}: <span class="num">{asOf(fact)}</span>
-                    </p>
-                  )}
-                  {(lang === "en" ? fact.note_en : fact.note_fil) && (fact.verify || fact.id === "land-area") && (
-                    <p class="mt-1 text-[14px] text-muted">{lang === "en" ? fact.note_en : fact.note_fil}</p>
-                  )}
-                  <p class="mt-1 text-[14px] text-muted">
-                    {t.sources}:{" "}
-                    {fact.sources.map((url, i) => (
-                      <>
-                        {i > 0 && ", "}
-                        <a href={url}>{sourceLabel(url)}</a>
-                      </>
-                    ))}
-                  </p>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {formatDate(lang, city.retrieved)}</p>
-    </section>
-
-    <section class="mt-12" aria-labelledby="ambag">
-      <h2 id="ambag" class={h2}>{t.aboutContribTitle}</h2>
-      <p class="mt-3 max-w-[60ch]">{t.aboutContribText}</p>
-      <ul class="mt-3">
-        <li><a href={repo}>{t.aboutGithub}</a></li>
-        <li><a href={`${repo}/issues/new`}>{t.aboutReport}</a></li>
+  <section class="section section--flow ground-surface" aria-labelledby="datos">
+    <div class="wrap">
+      <h2 id="datos" class="bp-about__h">{t.aboutDataTitle}</h2>
+      <ul class="rows bp-about__rows">
+        {
+          t.aboutDataSources.map(([name, url, use]) => (
+            <li>
+              <span class="rows__name">{url ? <a class="bp-about__link" href={url}>{name}</a> : name}</span>
+              <p class="muted">{use}</p>
+            </li>
+          ))
+        }
       </ul>
-    </section>
-  </div>
-</Base>
+      <p class="t-small muted bp-about__note">{t.aboutDataNote}</p>
+      <p class="bp-about__note"><a class="link" href={href(lang, "/larawan/")}>{t.aboutPhotos}</a></p>
+    </div>
+  </section>
+
+  <section class="section section--flow" aria-labelledby="paunawa">
+    <div class="wrap">
+      <div class="grid bp-about__split">
+        <div class="span-6">
+          <h2 id="paunawa" class="bp-about__h">{t.aboutDisclaimerTitle}</h2>
+          <p class="bp-about__p">{lang === "en" ? site.notice_en : site.notice_fil}</p>
+        </div>
+        <div class="span-6" id="ambag-bloke">
+          <h2 id="ambag" class="bp-about__h">{t.aboutContribTitle}</h2>
+          <p class="bp-about__p">{t.aboutContribText}</p>
+          <div class="bp-about__actions">
+            <a class="btn btn--primary" href={`${repo}/issues/new`}>{t.aboutReport}</a>
+            <a class="btn btn--secondary" href={repo}>{t.aboutGithub}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
-  td p a { min-height: 0; display: inline; }
+  .bp-about__h {
+    font-size: var(--t-card);
+    font-weight: 600;
+  }
+  .bp-about__p {
+    margin-top: var(--s-3);
+    max-width: 60ch;
+  }
+  .bp-about__rows {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .bp-about__rows > li {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+  }
+  .bp-about__rows .rows__name {
+    grid-column: 1;
+  }
+  .bp-about__rows .rows__value {
+    white-space: normal;
+  }
+  .bp-about__rows > li > p {
+    grid-column: 1 / -1;
+  }
+  .bp-about__meta {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--s-1);
+  }
+  .bp-about__rows :global(.verify) {
+    margin-left: var(--s-2);
+  }
+  .bp-about__checked,
+  .bp-about__note {
+    margin-top: var(--s-4);
+    max-width: 60ch;
+  }
+  .bp-about__link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .bp-about__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+  }
+  .bp-about__split {
+    row-gap: var(--s-6);
+  }
+  @media (max-width: 1023px) {
+    .bp-about__rows > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bp-about__rows .rows__value {
+      grid-column: 1;
+      grid-row: auto;
+      text-align: left;
+    }
+  }
 </style>

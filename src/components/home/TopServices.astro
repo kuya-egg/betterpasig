@@ -1,0 +1,145 @@
+---
+// The most used services as rows (office and time from the Citizen's Charter), beside a checklist fragment
+// holding one of them's real requirements: what a service page gives you before you go.
+import Verify from "../Verify.astro";
+import { href, langFromUrl, ui } from "../../i18n";
+import { featuredServices, officeName } from "../../lib/data";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const en = lang === "en";
+// The checklist shows this featured service: five short requirements fit the fragment's five steps.
+const sample = featuredServices.find((service) => service.id === "senior-citizen-id");
+if (!sample?.requirements?.length) throw new Error('TopServices needs "senior-citizen-id" with requirements in site.featured_services');
+const steps = sample.requirements.slice(0, 5);
+const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg>';
+---
+
+<section class="section ground-surface" id="serbisyo" aria-labelledby="serbisyo-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="serbisyo-h">{t.topTitle}</h2>
+      <p>{t.topLead}</p>
+    </div>
+    <div class="grid grid--top">
+      <ul class="rows span-6 bp-top">
+        {
+          featuredServices.map((service) => (
+            <li>
+              <span class="rows__name">
+                <a class="bp-top__link" href={href(lang, `/serbisyo/${service.id}/`)}>{en ? service.title_en : service.title_fil}</a>
+                <small>
+                  {officeName(service.office)}
+                  {service.verify && <Verify />}
+                </small>
+              </span>
+              {service.processing_time && <span class="rows__value bp-top__time">{service.processing_time}</span>}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="span-6 start-7 panel bp-req">
+        <div class="ui ui-panel ui-checks" data-ui="checklist" lang="fil">
+          <div class="ui-checks__head">
+            <div class="ui-title">{t.reqTitle}</div>
+            <span class="ui-spacer"></span>
+            <div class="ui-meta" data-checks-count>{t.reqCount(0, steps.length)}</div>
+          </div>
+          <div class="ui-checks__bar"><i data-checks-bar style="--k:0"></i></div>
+          <ul class="ui-checks__list">
+            {
+              steps.map((step) => (
+                <li class="ui-check">
+                  <span class="ui-check__box" set:html={tick} />
+                  <span class="ui-check__label">{step}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bp-top {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .bp-top > li {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 11rem);
+    padding-block: var(--s-3);
+  }
+  .bp-top .rows__name {
+    display: grid;
+    gap: var(--s-1);
+  }
+  .bp-top small {
+    color: var(--muted);
+    font-size: var(--t-small);
+    font-weight: 400;
+  }
+  .bp-top__link {
+    font-size: var(--t-card);
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
+  }
+  .bp-top__link:hover {
+    text-decoration-color: currentColor;
+  }
+  .bp-top__time {
+    white-space: normal;
+    text-align: right;
+    color: var(--muted);
+    font-size: var(--t-small);
+  }
+  .bp-req {
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+    min-height: 360px;
+    border-radius: var(--r-lg, 16px);
+  }
+  /* the kit's lit grounds (sand, sky, sage) are off the city palette: the panel stands on Pasig pale,
+     the light value on dark pages too, so the fragment always sits on a lit ground */
+  .bp-req.panel {
+    background: #e6ecf8;
+  }
+  .bp-req .ui-checks {
+    width: min(400px, calc(100% - 48px));
+  }
+  @media (max-width: 1023px) {
+    .bp-top,
+    .bp-req {
+      grid-column: 1 / -1;
+    }
+    .bp-top > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bp-top__time {
+      grid-column: 1;
+      grid-row: auto;
+      max-width: none;
+      text-align: left;
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    #serbisyo {
+      --h: 2;
+    }
+  }
+  @media (max-width: 639px) {
+    .bp-req {
+      min-height: 520px;
+    }
+    #serbisyo {
+      --hm: 2;
+    }
+  }
+</style>

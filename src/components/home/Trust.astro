@@ -1,0 +1,21 @@
+---
+// word-highlight (dealt moment): one statement on how every fact is sourced, lit word by word on scroll.
+import { href, langFromUrl, ui } from "../../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+---
+
+<section class="section statement" id="pinagmulan" data-moment="word-highlight" aria-labelledby="pinagmulan-h">
+  <div class="wrap">
+    <h2 id="pinagmulan-h" class="t-label muted">{t.trustTitle}</h2>
+    <p class="mo-wh__text">{t.trustBefore} <strong>{t.trustStrong}</strong>{t.trustAfter}</p>
+    <p class="bp-trust-link"><a class="link" href={href(lang, "/tungkol/")}>{t.aboutTitle}</a></p>
+  </div>
+</section>
+
+<style>
+  .bp-trust-link {
+    margin-top: var(--s-7);
+  }
+</style>

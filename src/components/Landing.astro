@@ -1,43 +1,29 @@
 ---
-import Base from "../layouts/Base.astro";
-import Alerts from "./Alerts.astro";
-import Search from "./Search.astro";
+// Home page (kind: service; plan in .taste-skill/plan.md). Every section links on to the page that holds the detail.
+import Kit from "../layouts/Kit.astro";
+import HomeHero from "./home/HomeHero.astro";
+import LifeDoors from "./home/LifeDoors.astro";
+import TopServices from "./home/TopServices.astro";
+import Pasyalan from "./home/Pasyalan.astro";
+import NewInPasig from "./home/NewInPasig.astro";
+import Trust from "./home/Trust.astro";
 import PasigMap from "./PasigMap.astro";
-import Featured from "./Featured.astro";
-import Categories from "./Categories.astro";
-import Programs from "./Programs.astro";
-import OfficialsPreview from "./OfficialsPreview.astro";
-import Funds from "./Funds.astro";
-import Hotlines from "./Hotlines.astro";
-import RecentUpdates from "./RecentUpdates.astro";
+import HomeHotlines from "./home/HomeHotlines.astro";
 import { langFromUrl, ui } from "../i18n";
+import { pasyalan } from "../lib/data";
 
 const t = ui[langFromUrl(Astro.url)];
+const chapters = ["maybunga-rainforest-park", "pasig-city-museum", "kapitolyo-food-district", "bahay-na-tisa"];
+const chapterPhotos = chapters.map((id) => pasyalan.find((place) => place.id === id)?.photo_id).filter((id): id is string => Boolean(id));
 ---
 
-<Base description={t.pageDescription}>
-  <Alerts />
-  <section class="wrap grid items-start gap-10 py-12 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-14 md:py-14">
-    <div class="min-w-0">
-      <h1 class="max-w-[14ch] text-[34px] font-bold leading-[1.05] tracking-[-0.04em] md:max-w-[12ch] md:text-[52px]">
-        {t.heroTitle}
-      </h1>
-      <p class="mt-4 max-w-[46ch] text-muted">{t.heroLede}</p>
-      <Search />
-    </div>
-    <PasigMap />
-  </section>
-  <Featured />
-  <Categories />
-  <RecentUpdates />
-  <section class="border-t border-line py-14">
-    <div class="wrap grid gap-14 md:grid-cols-2">
-      <Programs />
-      <OfficialsPreview />
-    </div>
-  </section>
-  <Funds />
-  <div class="wrap border-t border-line py-14">
-    <Hotlines />
-  </div>
-</Base>
+<Kit description={t.pageDescription} moments={["photo-chapters", "word-highlight"]} fragments={["checklist"]} photos={["manggahan-floodway", ...chapterPhotos]}>
+  <HomeHero />
+  <LifeDoors />
+  <TopServices />
+  <PasigMap />
+  <Pasyalan ids={chapters} />
+  <NewInPasig skip={chapters} />
+  <Trust />
+  <HomeHotlines />
+</Kit>

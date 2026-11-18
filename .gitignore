@@ -10,3 +10,9 @@ video/frames2/
 video/scene_built.html
 video/src/mix.wav
 __pycache__/
+# design-tool scratch (Hallmark, Impeccable, taste-skill); the plan and waivers are kept
+.hallmark/
+.impeccable/
+.taste-skill/*
+!.taste-skill/plan.md
+!.taste-skill/waivers.json

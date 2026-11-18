@@ -17,7 +17,7 @@ export function refreshDatedContent(now = new Date()) {
  });
  document.querySelectorAll<HTMLElement>('[data-source-date]').forEach(row=>{
   if(isSourceFresh(row.dataset.sourceDate,now)||row.querySelector('[data-stale]'))return;
-  const note=document.createElement('span');note.dataset.stale='true';note.textContent=en?' · This announcement is over 30 days old. Check the official page for a newer notice.':' · Lampas 30 araw na ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso.';row.append(note);
+  const note=document.createElement('span');note.dataset.stale='true';note.textContent=en?'This announcement is over 30 days old. Check the official page for a newer notice.':'Lampas 30 araw na ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso.';row.append(note);
  });
  document.querySelectorAll<HTMLElement>('[data-alert-expires]').forEach(row=>{row.hidden=Boolean(row.dataset.alertExpires&&row.dataset.alertExpires<manilaDate(now));});
  document.querySelectorAll<HTMLElement>('[data-current-feed]').forEach(feed=>{

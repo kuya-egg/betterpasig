@@ -51,8 +51,8 @@ Versions below are the ones declared in `package.json` and `.node-version` on 20
 | Runtime | Bun | 1.4.2 | 2026-10-22 | `package.json` `packageManager` |
 | Language | TypeScript | 6 | 2026-10-22 | `package.json` |
 | Framework | Astro | 7.4.1 | 2026-10-22 | `package.json` |
-| CSS | Tailwind CSS | 4.3.3 | 2026-10-22 | `package.json` |
-| Font | Geist via `@fontsource/geist` | 5.3.0 | 2026-10-22 | `package.json` |
+| CSS | Plain CSS: design kit in `public/kit/` plus `src/styles/kit-site.css` (Tailwind removed) | n/a | 2026-11-18 | `src/layouts/Kit.astro` |
+| Font | Manrope via `@fontsource-variable/manrope` | 5.3.0 | 2026-11-18 | `package.json` |
 | Host | Cloudflare Pages | `wrangler.toml` compatibility_date 2026-10-01 | 2026-10-22 | `wrangler.toml` |
 
 ### Deprecations register
@@ -62,8 +62,9 @@ Versions below are the ones declared in `package.json` and `.node-version` on 20
 | A React or Next.js data fetch for this content | Import JSON through `src/lib/data.ts`, then content collections | 2026-10-22 | `docs/research.md` |
 | A database for page content | Edit `data/*.json` in a pull request | 2026-10-22 | SDD §3 |
 | Cookie analytics | Cookieless Cloudflare Web Analytics, or nothing | 2026-10-22 | CLR §1 |
+| Tailwind utility classes, `Base.astro`, Geist | `src/layouts/Kit.astro`, kit classes and tokens, Manrope | 2026-11-18 | `docs/design-system.md` |
 
-**Verify live every time:** Astro, Tailwind CSS, Cloudflare Pages. The currency check warns when a date in this file is over 90 days old.
+**Verify live every time:** Astro, Cloudflare Pages. The currency check warns when a date in this file is over 90 days old.
 
 ---
 

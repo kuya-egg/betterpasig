@@ -35,7 +35,7 @@ bun run build     # static site in dist/
 bun run check     # type-check .astro and .ts files
 ```
 
-Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and style with Tailwind, whose colors come from `design/tokens/tokens.css`.
+Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface text in `src/i18n.ts`), read content straight from `data/*.json` (via `src/lib/data.ts`) and render through `src/layouts/Kit.astro`: plain CSS from the design kit in `public/kit/` plus the city colors in `src/styles/kit-site.css` (see `docs/design-system.md`).
 
 ### Deploy (Cloudflare Pages)
 
@@ -65,7 +65,7 @@ Data is current to **October 21, 2026**. The barangay officials elected in Octob
 
 ## Planned stack
 
-Static first, no backend: **Astro** with content collections reading `data/*.json`, Tailwind or plain CSS using `design/tokens/tokens.css`, **Pagefind** for search, **Cloudflare Pages** for hosting and preview deploys, Cloudflare Web Analytics (no cookies). Running cost is about the domain fee.
+Static first, no backend: **Astro** with content collections reading `data/*.json`, plain CSS (design kit plus the city tokens), **Pagefind** for search, **Cloudflare Pages** for hosting and preview deploys, Cloudflare Web Analytics (no cookies). Running cost is about the domain fee.
 
 ## How to help
 
@@ -84,5 +84,6 @@ Rules: every fact needs a source; never guess (use `null`); Filipino first; no p
 
 - Barangay boundaries: PSA PSGC via [faeldon/philippines-json-maps](https://github.com/faeldon/philippines-json-maps) (MIT). The logo is our own drawing of that outline; we do not use the official city seal.
 - Service data: Pasig City Citizen's Charters 2025 (`assets.pasigcity.gov.ph`).
-- Typeface: [Geist](https://vercel.com/font) (SIL Open Font License).
+- Typeface: [Manrope](https://github.com/sharanda/manrope) (SIL Open Font License), self-hosted. The logo lockup files use Geist (SIL Open Font License).
+- Photographs: Wikimedia Commons, each credited with author and licence at `/larawan/` (`data/photos.json`).
 - Launch video music and sound effects are synthesized in code; the voice is Microsoft Edge neural TTS (fil-PH-AngeloNeural).

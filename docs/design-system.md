@@ -4,6 +4,18 @@ Information first. Calm, modern, readable by a lola on a budget phone and a stud
 
 Source of truth for values: [`design/tokens/tokens.json`](../design/tokens/tokens.json) and [`design/tokens/tokens.css`](../design/tokens/tokens.css). Working reference: [`prototype/index.html`](../prototype/index.html).
 
+## 2026 redesign (Kit layout)
+
+Every page renders through `src/layouts/Kit.astro`; `Base.astro`, Tailwind and Geist on the web were removed in November 2026. Colors do not change: `src/styles/kit-site.css` maps the table below onto the kit's tokens, light and dark. Reference pages (services, barangays, directories) use `section section--flow` so they grow with their content.
+
+- **Kit**: plain CSS and ES modules in `public/kit/` (design-taste-frontend): `system.css/js` (sections, buttons, nav, action bar), `layout/` (split hero, float card), `motion/` (hero entrance, hover), `moments/` (photo chapters, word highlight) and `ui/` (the checklist fragment). Copy kit files in; do not edit them. Site-specific styles go in `kit-site.css` or the component's `<style>`.
+- **Type**: Manrope (variable, self-hosted from `@fontsource-variable/manrope`, no Google Fonts).
+- **Page attributes**: `data-type="service" data-radius="soft" data-buttons="tonal"`. One primary button (verb + object, "Hanapin ang serbisyo") and one secondary.
+- **Sections**: each is one or two screens tall (`--h`); on phones (`--hm`) a section may grow to its content. Light sections alternate with `ground-surface`.
+- **Home page order**: split hero (search, Manggahan Floodway photo, emergency float card) → life doors (`data/life-events.json`) → most used services with a requirements checklist → barangay map → places to visit (photo chapters, `data/pasyalan.json`) → new in Pasig with a numbered locator map → where the facts come from (word highlight) → emergency numbers → closing call and footer.
+- **Photographs**: Wikimedia Commons only, registered in `data/photos.json`, served by `astro:assets` as AVIF/WebP. The footer has one credits line linking `/larawan/`; no captions on images.
+- **Motion**: hero entrance once, the two scroll moments, hover and press states, and cross-document view transitions (`src/styles/shared.css`). All off under `prefers-reduced-motion`. No scroll reveals.
+
 ## Principles
 
 1. **Information before decoration.** Emergency numbers, search and the most-used services are visible without scrolling.
@@ -31,7 +43,7 @@ Source of truth for values: [`design/tokens/tokens.json`](../design/tokens/token
 
 ## Type
 
-Geist (400, 500, 600, 700), fallback Segoe UI / system-ui. Base 17px for older readers.
+Manrope (variable, self-hosted), fallback system-ui. Base 17px for older readers. The table below is the original Geist scale, kept for the logo and print files; on the site the kit's type scale applies (`--t-label`, `--t-small`, `--t-body`, `--t-card`, display sizes from `public/kit/system.css`).
 
 | Role | Size | Weight | Tracking |
 | --- | --- | --- | --- |

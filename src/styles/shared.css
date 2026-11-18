@@ -1,0 +1,72 @@
+/* Rules both layouts need: page-to-page transitions, copy buttons and the copy status toast. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: 180ms cubic-bezier(.2, .8, .2, 1) both bp-page-out;
+  }
+  ::view-transition-new(root) {
+    animation: 320ms cubic-bezier(.22, 1, .36, 1) both bp-page-in;
+  }
+}
+@keyframes bp-page-out {
+  to { opacity: 0; }
+}
+@keyframes bp-page-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+.copy-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+.copy-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.copy-btn .check {
+  display: none;
+}
+.copy-btn.is-copied .check {
+  display: block;
+}
+.copy-btn.is-copied .glyph {
+  display: none;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  transition:
+    opacity var(--mid) var(--ease),
+    transform var(--mid) var(--ease);
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

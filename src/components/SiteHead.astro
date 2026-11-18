@@ -1,0 +1,58 @@
+---
+// Shared <head> tags for every layout: title, language links, icons, share tags and the two
+// pre-paint scripts (saved theme, saved language).
+import { langFromUrl, langs, pathIn, ui } from "../i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+  themeColor?: string;
+}
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const { title, description = t.tagline, themeColor = "#1A47A8" } = Astro.props;
+const fullTitle = title ? `${title} · BetterPasig` : "BetterPasig";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const enPath = pathIn("en", Astro.url);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<script is:inline>
+  // Restore before first paint; without a saved choice, CSS follows the device.
+  try {
+    const theme = localStorage.getItem("bp-theme");
+    if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+  } catch (e) { /* storage may be blocked */ }
+</script>
+{
+  lang === "fil" && (
+    <script is:inline define:vars={{ enPath }}>
+      // Visitors who picked English before (this browser only) go straight to the English page.
+      try { if (localStorage.getItem("bp-lang") === "en") location.replace(enPath + location.hash); } catch (e) {}
+    </script>
+  )
+}
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{langs.map((l) => <link rel="alternate" hreflang={ui[l].htmlLang} href={new URL(pathIn(l, Astro.url), Astro.site)} />)}
+<link rel="alternate" hreflang="x-default" href={new URL(pathIn("fil", Astro.url), Astro.site)} />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content={themeColor} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={t.ogLocale} />
+<meta property="og:locale:alternate" content={ui[lang === "en" ? "fil" : "en"].ogLocale} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="BetterPasig" />
+<meta property="og:image" content={new URL("/og.png", Astro.site)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={t.ogImageAlt} />
+<meta name="twitter:card" content="summary_large_image" />

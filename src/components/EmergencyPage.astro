@@ -1,5 +1,5 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import CopyButton from "./CopyButton.astro";
 import Verify from "./Verify.astro";
 import {
@@ -60,174 +60,322 @@ const jump = [
 const retrieved = formatDate(lang, facilities.retrieved);
 ---
 
-<Base title={t.emergencyPageTitle}>
-  <article class="wrap py-10">
-    <h1 class="text-[34px] font-bold leading-[1.05] tracking-[-0.04em] md:text-[52px]">{t.emergencyPageTitle}</h1>
-    <p class="mt-3 max-w-[60ch] text-[19px] text-red">{t.emergencyLead}</p>
+<Kit title={t.emergencyPageTitle} description={t.emergencyLead}>
+  <section class="section section--flow bp-em" aria-labelledby="emergency-page-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h1 id="emergency-page-h">{t.emergencyPageTitle}</h1>
+        <p>{t.emergencyLead}</p>
+      </div>
+      <nav aria-label={t.emergencyJump}>
+        <ul class="bp-em__jump">
+          {jump.map(([id, label]) => <li><a class="link" href={`#${id}`}>{label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
 
-    <nav class="mt-4" aria-label={t.emergencyJump}>
-      <ul class="flex flex-wrap gap-x-4 text-[15px]">
-        {jump.map(([id, label]) => <li><a class="link-draw" href={`#${id}`}>{label}</a></li>)}
-      </ul>
-    </nav>
-
-    <section id="hotlines" class="mt-12" aria-labelledby="hotlines-h">
-      <h2 id="hotlines-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.allHotlines}</h2>
-      <p class="mt-1 text-[15px] text-muted">{t.tapToCall}</p>
+  <section id="hotlines" class="section section--flow ground-surface bp-em" aria-labelledby="hotlines-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="hotlines-h">{t.allHotlines}</h2>
+        <p>{t.tapToCall}</p>
+      </div>
       {
         groups.map((g, gi) => (
-          <>
-            <h3 class:list={["mt-6 text-[14px] font-medium", gi === 0 ? "text-red" : "text-muted"]}>{g.title}</h3>
-            <ul class:list={["mt-1 border-t-2", gi === 0 ? "border-red" : "border-ink"]}>
+          <div class="bp-em__group">
+            <h3 class:list={["t-label", gi === 0 ? "bp-em__emergency" : "muted"]}>{g.title}</h3>
+            <ul class:list={["grid", "bp-hotlines", gi === 0 && "bp-hotlines--main"]}>
               {g.items.map((h) => (
-                <li class="border-b border-line py-2.5">
-                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
-                    <span>
+                <li class="span-6">
+                  <div class="bp-hotline">
+                    <p class="t-small muted">
                       {lang === "en" ? h.label_en : h.label_fil}
                       {h.verify && <Verify />}
-                    </span>
-                    <span class="flex flex-wrap items-center gap-x-1">
+                    </p>
+                    <ul class="bp-hotline__nums">
                       {h.numbers.map((n) => (
-                        <span class="inline-flex items-center">
-                          <a class="num font-semibold whitespace-nowrap text-ink" href={telHref(n)}>{n}</a>
+                        <li>
+                          <a class="bp-hotline__number" href={telHref(n)}>{n}</a>
                           <CopyButton value={n} label={t.copyNumber(n)} />
-                        </span>
+                        </li>
                       ))}
-                    </span>
+                    </ul>
+                    <p class="t-small muted">
+                      {t.sources}:{" "}
+                      {h.sources.map((s, i) => (
+                        <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
+                      ))}
+                    </p>
                   </div>
-                  <p class="text-[14px] text-muted">
-                    {t.sources}:{" "}
-                    {h.sources.map((s, i) => (
-                      <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
-                    ))}
-                  </p>
                 </li>
               ))}
             </ul>
-          </>
+          </div>
         ))
       }
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
-    </section>
+      <p class="t-small muted bp-em__checked">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
+    </div>
+  </section>
 
-    <section id="conflicts" class="mt-12" aria-labelledby="conflicts-h">
-      <h2 id="conflicts-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.conflictsTitle}</h2>
-      <p class="mt-1 max-w-[65ch]">{t.conflictsIntro}</p>
-      <ul class="mt-3 border-t-2 border-ink">
+  <section id="conflicts" class="section section--flow bp-em" aria-labelledby="conflicts-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="conflicts-h">{t.conflictsTitle}</h2>
+        <p>{t.conflictsIntro}</p>
+      </div>
+      <ul class="bp-em__list">
         {
           hotlineConflicts.map((c) => (
-            <li class="border-b border-line py-3">
-              <p class="max-w-[70ch]">{lang === "en" ? c.text_en : c.text_fil}<Verify /></p>
+            <li>
+              <p>{lang === "en" ? c.text_en : c.text_fil}<Verify /></p>
             </li>
           ))
         }
       </ul>
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
-    </section>
+      <p class="t-small muted bp-em__checked">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
+    </div>
+  </section>
 
-    <section id="ospital" class="mt-12" aria-labelledby="ospital-h">
-      <h2 id="ospital-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.hospitalsTitle}</h2>
-      <ul class="mt-3 border-t-2 border-ink">
+  <section id="ospital" class="section section--flow ground-surface bp-em" aria-labelledby="ospital-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="ospital-h">{t.hospitalsTitle}</h2>
+      </div>
+      <ul class="bp-em__list">
         {
           facilities.hospitals.map((h) => (
-            <li class="border-b border-line py-3">
-              <h3 class="text-[19px] font-semibold tracking-[-0.01em]">
+            <li class="bp-em__item">
+              <h3 class="bp-em__name">
                 {h.name}
                 {h.verify && <Verify />}
               </h3>
-              <p class="text-[14px] font-medium text-muted">{hospitalType(h.type)}</p>
+              <p class="t-small muted">{hospitalType(h.type)}</p>
               {h.address && (
-                <p class="text-[15px]">
-                  {h.address} ·{" "}
-                  <a class="link-draw" href={mapsHref(`${h.name}, ${h.address}`)}>{t.openMaps}</a>
+                <p class="bp-em__addr">
+                  {h.address}
+                  <a class="link" href={mapsHref(`${h.name}, ${h.address}`)}>{t.openMaps}</a>
                 </p>
               )}
               {h.contact ? (
-                <ul class="flex flex-wrap items-center gap-x-4 text-[15px]">
+                <ul class="bp-em__contacts">
                   {parseContact(h.contact).map((c) => (
-                    <li class="inline-flex items-center">
+                    <li>
                       {c.number ? (
                         <>
-                          <a class="num font-semibold whitespace-nowrap text-ink" href={telHref(c.number)}>{c.number}</a>
+                          <a class="bp-em__tel" href={telHref(c.number)}>{c.number}</a>
                           <CopyButton value={c.number} label={t.copyNumber(c.number)} />
-                          {c.rest && <span class="ml-1 text-muted">{c.rest}</span>}
+                          {c.rest && <span class="t-small muted">{c.rest}</span>}
                         </>
                       ) : (
-                        <span class="text-muted">{c.rest}</span>
+                        <span class="t-small muted">{c.rest}</span>
                       )}
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p class="text-[15px] text-muted">{t.noContactListed}</p>
+                <p class="t-small muted">{t.noContactListed}</p>
               )}
-              <p class="text-[14px] text-muted">
+              <p class="t-small muted">
                 {t.sources}:{" "}
                 {h.sources.map((s, i) => (
-                  <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
+                  <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
                 ))}
               </p>
             </li>
           ))
         }
       </ul>
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {retrieved}</p>
-    </section>
+      <p class="t-small muted bp-em__checked">{t.checked}: {retrieved}</p>
+    </div>
+  </section>
 
-    <section id="evacuation" class="mt-12" aria-labelledby="evacuation-h">
-      <h2 id="evacuation-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.evacTitle}</h2>
-      <p class="mt-1 max-w-[70ch] text-[15px] text-muted"><strong class="font-semibold">{t.evacCaveat}</strong> {lang === "en" ? facilities.notes_en : facilities.notes_fil}</p>
+  <section id="evacuation" class="section section--flow bp-em" aria-labelledby="evacuation-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="evacuation-h">{t.evacTitle}</h2>
+        <p><strong>{t.evacCaveat}</strong> {lang === "en" ? facilities.notes_en : facilities.notes_fil}</p>
+      </div>
       {
         evacGroups.map((g) => (
-          <>
-            <h3 class="mt-6 text-[19px] font-semibold tracking-[-0.01em]">
-              {g.id ? <a href={href(lang, `/barangay/${g.id}/`)}>{g.name}</a> : g.name}
+          <div class="bp-em__group">
+            <h3 class="bp-em__name">
+              {g.id ? <a class="bp-em__link" href={href(lang, `/barangay/${g.id}/`)}>{g.name}</a> : g.name}
             </h3>
-            <ul class="mt-1 border-t-2 border-ink">
+            <ul class="bp-em__list">
               {g.centers.map((c) => (
-                <li class="border-b border-line py-2.5">
+                <li class="bp-em__item">
                   <p>
                     {c.name}
                     {c.verify && <Verify />}
                   </p>
-                  <p class="text-[15px] text-muted">{c.address ?? t.evacNoAddress}</p>
-                  <p class="text-[14px] text-muted">
+                  <p class="t-small muted">{c.address ?? t.evacNoAddress}</p>
+                  <p class="t-small muted">
                     {t.sources}:{" "}
                     {c.sources.map((s, i) => (
-                      <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
+                      <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
                     ))}
                   </p>
                 </li>
               ))}
             </ul>
-          </>
+          </div>
         ))
       }
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {retrieved}</p>
-    </section>
+      <p class="t-small muted bp-em__checked">{t.checked}: {retrieved}</p>
+    </div>
+  </section>
 
-    <section id="baha" class="mt-12" aria-labelledby="baha-h">
-      <h2 id="baha-h" class="text-[30px] font-bold tracking-[-0.03em]">{t.floodTitle}</h2>
-      <ul class="mt-3 border-t-2 border-ink">
+  <section id="baha" class="section section--flow ground-surface bp-em" aria-labelledby="baha-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="baha-h">{t.floodTitle}</h2>
+      </div>
+      <ul class="bp-em__list">
         {
           facilities.flood_prone_notes.map((n) => (
-            <li class="border-b border-line py-3">
-              <p class="max-w-[70ch]">{lang === "en" ? n.text_en : n.text_fil}</p>
-              <p class="text-[14px] text-muted">
+            <li class="bp-em__item">
+              <p>{lang === "en" ? n.text_en : n.text_fil}</p>
+              <p class="t-small muted">
                 {t.sources}:{" "}
                 {n.sources.map((s, i) => (
-                  <>{i > 0 && ", "}<a href={s}>{sourceLabel(s)}</a></>
+                  <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
                 ))}
               </p>
             </li>
           ))
         }
       </ul>
-      <p class="mt-3 text-[14px] text-muted">{t.checked}: {retrieved}</p>
-    </section>
-  </article>
-</Base>
+      <p class="t-small muted bp-em__checked">{t.checked}: {retrieved}</p>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  a { display: inline-flex; min-height: 48px; align-items: center; }
+  .bp-em section,
+  section.bp-em {
+    scroll-margin-top: var(--s-8);
+  }
+  .bp-em__jump {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-5);
+  }
+  .bp-em__jump a,
+  .bp-em__src,
+  .bp-em__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .bp-em__src {
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  .bp-em__link {
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 4px;
+  }
+  .bp-em__group {
+    margin-top: var(--s-7);
+  }
+  .bp-em__group > h3 {
+    margin: 0;
+  }
+  .bp-em__emergency {
+    color: var(--red);
+  }
+  .bp-hotlines {
+    list-style: none;
+    margin: var(--s-3) 0 0;
+    padding: 0;
+    row-gap: 0;
+  }
+  .bp-hotline {
+    display: grid;
+    gap: var(--s-1);
+    padding-block: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-hotlines--main .bp-hotline {
+    border-top-color: var(--red);
+  }
+  .bp-hotline p,
+  .bp-em__list p {
+    margin: 0;
+  }
+  .bp-hotline__nums,
+  .bp-em__contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--s-4);
+  }
+  .bp-hotline__nums li,
+  .bp-em__contacts li {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  .bp-hotline__number,
+  .bp-em__tel {
+    font: var(--display-weight) var(--t-card) / 1.2 var(--font-display);
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+  .bp-hotlines--main .bp-hotline__number {
+    font-size: clamp(26px, 2.2vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .bp-em__list {
+    list-style: none;
+    margin: var(--s-3) 0 0;
+    padding: 0;
+    max-width: 70ch;
+  }
+  .bp-em__item,
+  .bp-em__list > li {
+    display: grid;
+    gap: var(--s-1);
+    padding-block: var(--s-4);
+    border-top: 1px solid var(--line);
+  }
+  .bp-em__name {
+    font-size: var(--t-card);
+    font-weight: 500;
+  }
+  .bp-em__addr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--s-4);
+  }
+  .bp-em__addr a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .bp-em__checked {
+    margin-top: var(--s-5);
+  }
+  @media (max-width: 1023px) {
+    .bp-hotlines > li {
+      grid-column: 1 / -1;
+    }
+  }
 </style>

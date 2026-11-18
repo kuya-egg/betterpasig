@@ -1,15 +1,27 @@
 ---
-// Barangay picker. The choice is remembered in localStorage on this browser only.
+// The home page's barangay section: a picker and its panel left, the 30-barangay map right.
+// The choice is remembered in localStorage on this browser only. Without script each shape links to its page.
 import map from "../../design/map/pasig-map.json";
 import { barangays, places, pasigSources } from "../lib/data";
-import { langFromUrl, ui } from "../i18n";
+import { href, langFromUrl, ui } from "../i18n";
 import Verify from "./Verify.astro";
 import { isSourceFresh } from "../lib/freshness";
 
-const t = ui[langFromUrl(Astro.url)];
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
 const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
 const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
-const recentPlaceDates = (barangayId: string) => places.filter(place => place.barangay_id === barangayId).map(place => Object.values(place.evidence).flat().map(ref => pasigSources.find(source => source.id === ref.split(':')[0])?.published_date ?? '').sort().at(-1) ?? '');
+const recentPlaceDates = (barangayId: string) =>
+  places
+    .filter((place) => place.barangay_id === barangayId)
+    .map(
+      (place) =>
+        Object.values(place.evidence)
+          .flat()
+          .map((ref) => pasigSources.find((source) => source.id === ref.split(":")[0])?.published_date ?? "")
+          .sort()
+          .at(-1) ?? "",
+    );
 
 function districtLabel(district: number | null): string | null {
   if (district === 1) return t.district1;
@@ -18,86 +30,85 @@ function districtLabel(district: number | null): string | null {
 }
 ---
 
-<div id="mapa" class="bp-map grid grid-cols-[120px_minmax(0,1fr)] items-start gap-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-6">
-  <svg viewBox="100 0 360 560" role="group" aria-label={t.mapLabel}>
-    {
-      map.barangays.map((shape) => (
-        <a
-          href="#mapa"
-          data-id={idByName.get(shape.name)}
-          data-name={shape.name}
-          data-x={shape.x}
-          data-y={shape.y}
-          aria-label={shape.name}
-        >
-          <path d={shape.d} />
-        </a>
-      ))
-    }
-    <text class="tip" text-anchor="middle"></text>
-  </svg>
-  <div class="info">
-    <label for="bsel">{t.yourBarangay}</label>
-    <select id="bsel">
-      <option value="" selected disabled>{t.mapPrompt}</option>
-      {choices.map((barangay) => <option value={barangay.id}>{barangay.name}</option>)}
-    </select>
-    {
-      choices.map((barangay) => {
-        const district = districtLabel(barangay.district);
-        return (
-          <dl class="panel" data-panel={barangay.id}>
-            {district && (
+<section class="section" id="mapa" aria-labelledby="mapa-h">
+  <div class="wrap grid grid--top bp-map">
+    <div class="span-5 info">
+      <div class="section-head">
+        <h2 id="mapa-h">{t.mapTitle}</h2>
+        <p>{t.mapLead}</p>
+      </div>
+      <label for="bsel">{t.yourBarangay}</label>
+      <select id="bsel">
+        <option value="" selected disabled>{t.mapPrompt}</option>
+        {choices.map((barangay) => <option value={barangay.id}>{barangay.name}</option>)}
+      </select>
+      {
+        choices.map((barangay) => {
+          const district = districtLabel(barangay.district);
+          const dates = recentPlaceDates(barangay.id);
+          return (
+            <dl class="bp-panel" data-panel={barangay.id}>
+              {district && (
+                <div>
+                  <dt>{t.district}</dt>
+                  <dd>
+                    {district}
+                    {barangay.verify && <Verify />}
+                  </dd>
+                </div>
+              )}
+              {barangay.punong_barangay && (
+                <div>
+                  <dt>{t.captain}</dt>
+                  <dd>
+                    {barangay.punong_barangay}
+                    {barangay.verify && <Verify />}
+                  </dd>
+                </div>
+              )}
+              {barangay.hall_address && (
+                <div>
+                  <dt>{t.address}</dt>
+                  <dd>
+                    {barangay.hall_address}
+                    {barangay.verify && <Verify />}
+                  </dd>
+                </div>
+              )}
               <div>
-                <dt>{t.district}</dt>
-                <dd>
-                  {district}
-                  {barangay.verify && <Verify />}
-                </dd>
+                <dt>{lang === "en" ? "Recent places" : "Mga bagong lugar"}</dt>
+                <dd data-place-source-dates={JSON.stringify(dates)}>{dates.filter((date) => isSourceFresh(date, new Date())).length}</dd>
               </div>
-            )}
-            {barangay.punong_barangay && (
-              <div>
-                <dt>{t.captain}</dt>
-                <dd>
-                  {barangay.punong_barangay}
-                  {barangay.verify && <Verify />}
-                </dd>
+              <div class="more">
+                <a class="link" href={href(lang, `/barangay/${barangay.id}/`)}>
+                  {lang === "en" ? "Open barangay details" : "Tingnan ang detalye ng barangay"}
+                </a>
               </div>
-            )}
-            {barangay.contact && (
-              <div>
-                <dt>{t.phone}</dt>
-                <dd>
-                  {barangay.contact}
-                  {barangay.verify && <Verify />}
-                </dd>
-              </div>
-            )}
-            {barangay.hall_address && (
-              <div>
-                <dt>{t.address}</dt>
-                <dd>
-                  {barangay.hall_address}
-                  {barangay.verify && <Verify />}
-                </dd>
-              </div>
-            )}
-            <div>
-              <dt>{langFromUrl(Astro.url) === "en" ? "Recent places" : "Mga bagong lugar"}</dt>
-              <dd data-place-source-dates={JSON.stringify(recentPlaceDates(barangay.id))}>{recentPlaceDates(barangay.id).filter(date => isSourceFresh(date,new Date())).length}</dd>
-            </div>
-            <div><dt></dt><dd><a class="mt-2 inline-flex min-h-12 items-center" href={langFromUrl(Astro.url) === "en" ? `/en/barangay/${barangay.id}/` : `/barangay/${barangay.id}/`}>{langFromUrl(Astro.url) === "en" ? "Open barangay details" : "Tingnan ang detalye ng barangay"}</a></dd></div>
-          </dl>
-        );
-      })
-    }
-    <p>{t.mapCaption}</p>
+            </dl>
+          );
+        })
+      }
+    </div>
+    <div class="span-6 start-7 bp-map__art">
+      <svg viewBox="100 0 360 560" role="group" aria-label={t.mapLabel}>
+        {
+          map.barangays.map((shape) => {
+            const id = idByName.get(shape.name);
+            return (
+              <a href={id ? href(lang, `/barangay/${id}/`) : "#mapa"} data-id={id} data-name={shape.name} data-x={shape.x} data-y={shape.y} aria-label={shape.name}>
+                <path d={shape.d} />
+              </a>
+            );
+          })
+        }
+        <text class="tip" text-anchor="middle" />
+      </svg>
+    </div>
   </div>
-</div>
+</section>
 
 <script>
-  const root = document.querySelector<HTMLElement>("#mapa");
+  const root = document.querySelector<HTMLElement>(".bp-map");
   const select = root?.querySelector<HTMLSelectElement>("select");
   const anchors = root ? [...root.querySelectorAll<SVGAElement>("a[data-id]")] : [];
   const panels = root ? [...root.querySelectorAll<HTMLElement>("[data-panel]")] : [];
@@ -160,9 +171,17 @@ function districtLabel(district: number | null): string | null {
 </script>
 
 <style>
+  /* Hallmark · dropped #mapa, {langFromUrl(Astro.url) === "en" ? `/en/barangay/${barangay.id}/` : `/barangay/${barangay.id}/`} · the same barangay pages are linked through href(lang, `/barangay/<id>/`) and the map anchor through href(lang, "/#mapa") in the nav and footer */
+  .bp-map__art {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 0;
+  }
   svg {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: min(620px, calc(100svh - var(--padt) - var(--padb) - 40px));
+    max-width: 100%;
     overflow: visible;
   }
   a path {
@@ -171,17 +190,14 @@ function districtLabel(district: number | null): string | null {
     stroke-width: 1.5;
     stroke-linejoin: round;
     cursor: pointer;
-    transition: fill var(--mid) var(--ease);
+    transition: fill var(--m-in, 150ms) var(--ease);
   }
   a:hover path,
   a:focus-visible path {
     fill: var(--hover);
   }
   a.on path {
-    fill: var(--blue);
-  }
-  a:focus-visible {
-    outline: none;
+    fill: var(--accent);
   }
   a:focus-visible path {
     stroke: var(--ink);
@@ -189,7 +205,7 @@ function districtLabel(district: number | null): string | null {
   }
   .tip {
     pointer-events: none;
-    font: 600 13px var(--font);
+    font: 500 13px var(--font-text);
     fill: var(--ink);
     paint-order: stroke;
     stroke: var(--bg);
@@ -201,57 +217,70 @@ function districtLabel(district: number | null): string | null {
   }
   .info {
     display: grid;
-    gap: 10px;
+    gap: var(--s-3);
+    align-content: start;
     min-width: 0;
   }
+  .info .section-head {
+    margin-bottom: var(--s-5);
+  }
   label {
-    font-size: 14px;
+    font-size: var(--t-label);
+    font-weight: 500;
     color: var(--muted);
   }
   select {
-    font: 600 18px var(--font);
-    padding: 10px 12px;
-    border: 1px solid var(--muted);
-    border-radius: 8px;
+    font: 500 18px var(--font-text);
+    padding: 0 var(--s-4);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
     background: var(--bg);
     color: var(--ink);
     min-height: 48px;
     width: 100%;
   }
-  .panel {
+  select:focus-visible {
+    outline: 2px solid var(--action);
+    outline-offset: 2px;
+  }
+  .bp-panel {
     display: none;
-    margin: 4px 0 0;
+    margin: 0;
   }
-  .panel.on {
+  .bp-panel.on {
     display: grid;
   }
-  .panel div {
+  .bp-panel div {
     display: grid;
-    gap: 2px;
-    padding: 10px 0;
-    border-top: 1px solid var(--line);
-    font-size: 15px;
-  }
-  .panel div:last-child {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--s-3);
+    padding: var(--s-3) 0;
     border-bottom: 1px solid var(--line);
+  }
+  .bp-panel .more {
+    display: block;
+    border-bottom: 0;
   }
   dt {
     color: var(--muted);
-    font-size: 14px;
+    font-size: var(--t-small);
   }
   dd {
     margin: 0;
     font-weight: 500;
     overflow-wrap: anywhere;
   }
-  p {
+  .caption {
     margin: 0;
-    font-size: 13px;
-    color: var(--muted);
   }
-  @media (prefers-reduced-motion: reduce) {
-    a path {
-      transition: none;
+  @media (max-width: 1023px) {
+    .info,
+    .bp-map__art {
+      grid-column: 1 / -1;
+    }
+    svg {
+      height: auto;
+      width: min(100%, 420px);
     }
   }
 </style>

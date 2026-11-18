@@ -1,0 +1,201 @@
+{
+  "retrieved": "2026-11-18",
+  "places": [
+    {
+      "id": "maybunga-rainforest-park",
+      "name": "Maybunga Rainforest Park",
+      "kind": "pasyalan",
+      "barangay_id": "maybunga",
+      "line_fil": "Parke sa Maybunga na may water park, butterfly house, boating, gym at picnic area.",
+      "line_en": "A park in Maybunga with a water park, butterfly house, boating, gym and picnic area.",
+      "address": "F. Legaspi St., Maybunga, Pasig City",
+      "hours_fil": "Lunes hanggang Linggo, 7:00 n.u.–5:00 n.h., maliban kung holiday (abiso noong Nob. 11, 2025)",
+      "hours_en": "Monday to Sunday, 7:00 AM–5:00 PM, except on holidays (advisory of Nov. 11, 2025)",
+      "fee_fil": "Water park: PHP 100 ang adult na taga-Pasig (kailangan ng ID na may address sa Pasig)",
+      "fee_en": "Water park: PHP 100 for a Pasig-resident adult (ID with a Pasig address required)",
+      "opened": null,
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/maybunga-rainforest-park-advisory-november-11-2025-820",
+        "https://assets.pasigcity.gov.ph/storage/attachments/rainforest_adventure_experience_park/68677212dca471751609874Citizen_s%20Charter%20English.pdf"
+      ],
+      "verify": false,
+      "photo_id": "maybunga-rainforest-park"
+    },
+    {
+      "id": "rc-park-maybunga",
+      "name": "RC Park sa Maybunga Rainforest Park",
+      "kind": "bago",
+      "barangay_id": "maybunga",
+      "line_fil": "Bagong lugar para sa RC car, may putik, tubig at mga hadlang; bukas din sa hindi taga-Pasig.",
+      "line_en": "A new park for remote-controlled cars with mud, water and obstacles; open to non-residents too.",
+      "address": "Sa loob ng Maybunga Rainforest Park, F. Legaspi St., Maybunga, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": "2026-07-05",
+      "sources": [
+        "https://tribune.net.ph/2026/07/05/vico-opens-new-rc-vehicle-park",
+        "https://www.topgear.com.ph/news/motoring-news/pasig-city-maybunga-rainforest-rc-park-a6888-20260706"
+      ],
+      "verify": false,
+      "photo_id": null
+    },
+    {
+      "id": "plaza-rizal",
+      "name": "Plaza Rizal",
+      "kind": "pasyalan",
+      "barangay_id": null,
+      "line_fil": "Plasa sa poblacion ng Pasig, katabi ng Pasig City Museum at ng Katedral ng Pasig.",
+      "line_en": "A plaza in Pasig's poblacion, beside the Pasig City Museum and Pasig Cathedral.",
+      "address": "Plaza Rizal, F. Concepcion St., Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": null,
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/inagurasyon-ng-pasig-city-museum-525",
+        "https://en.wikipedia.org/wiki/Pasig_Cathedral"
+      ],
+      "verify": true,
+      "photo_id": "plaza-rizal"
+    },
+    {
+      "id": "pasig-cathedral",
+      "name": "Katedral ng Pasig (Immaculate Conception Cathedral)",
+      "kind": "pasyalan",
+      "barangay_id": "malinao",
+      "line_fil": "Simbahang itinatag ng mga Agustino noong Hulyo 2, 1573, kasabay ng pagkatatag ng bayan ng Pasig.",
+      "line_en": "A church founded by the Augustinians on July 2, 1573, together with the town of Pasig.",
+      "address": "Plaza Rizal, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pasig_Cathedral"
+      ],
+      "verify": true,
+      "photo_id": "pasig-cathedral"
+    },
+    {
+      "id": "pasig-city-museum",
+      "name": "Pasig City Museum",
+      "kind": "bago",
+      "barangay_id": null,
+      "line_fil": "Muling binuksan noong Marso 26, 2025 ang museo sa dating Concepcion Mansion, libre ang pasok.",
+      "line_en": "The museum in the old Concepcion Mansion reopened on March 26, 2025; entry is free.",
+      "address": "Plaza Rizal, F. Concepcion St., Pasig City",
+      "hours_fil": "Martes hanggang Linggo, 9:00 n.u.–4:00 n.h.; guided tour tuwing Sabado at Linggo, by appointment",
+      "hours_en": "Tuesday to Sunday, 9:00 AM–4:00 PM; guided tours on Saturdays and Sundays, by appointment",
+      "fee_fil": "Libre",
+      "fee_en": "Free",
+      "opened": "2025-03-26",
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/pasig-city-museum-is-now-open-618",
+        "https://pasigcity.gov.ph/news-and-releases/inagurasyon-ng-pasig-city-museum-525",
+        "https://en.wikipedia.org/wiki/Pasig_City_Museum"
+      ],
+      "verify": false,
+      "photo_id": "pasig-museum"
+    },
+    {
+      "id": "bahay-na-tisa",
+      "name": "Bahay na Tisa",
+      "kind": "pasyalan",
+      "barangay_id": "san-jose",
+      "line_fil": "Pinakamatandang gusaling nakatayo pa sa Pasig; itinayo noong 1846 at pag-aari ng pamilyang Tech.",
+      "line_en": "The oldest standing building in Pasig; built in 1846 and owned by the Tech family.",
+      "address": "P. Gomez Street, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Bahay_na_Tisa"
+      ],
+      "verify": true,
+      "photo_id": "bahay-na-tisa"
+    },
+    {
+      "id": "kapitolyo-food-district",
+      "name": "Kapitolyo Food District",
+      "kind": "kainan",
+      "barangay_id": "kapitolyo",
+      "line_fil": "Kilalang kainan at café sa Kapitolyo, dating sentro ng lalawigan ng Rizal; may Gastro Tour noong 2025.",
+      "line_en": "A known strip of restaurants and cafés in Kapitolyo, once the Rizal provincial seat; a Gastro Tour ran in 2025.",
+      "address": "Brgy. Kapitolyo, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": null,
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/flavors-of-kapitolyo-tampok-sa-maiden-run-ng-gastro-tour-sa-pasig-442"
+      ],
+      "verify": false,
+      "photo_id": "kapitolyo-ortigas"
+    },
+    {
+      "id": "east-bank-linear-park",
+      "name": "East Bank Linear Park at Skate Park",
+      "kind": "bago",
+      "barangay_id": "santa-lucia",
+      "line_fil": "Binuksan noong Pebrero 27, 2025 ang unang skate park ng Pasig at linear park sa Manggahan Floodway.",
+      "line_en": "Pasig's first skate park and a linear park along the Manggahan Floodway opened on February 27, 2025.",
+      "address": "East Bank Road, Manggahan Floodway, Barangay Sta. Lucia, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": "2025-02-27",
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/in-photos-inagurasyon-ng-east-bank-linear-park-at-skate-park-765",
+        "https://pasigcity.gov.ph/news-and-releases/highlights-inauguration-of-east-bank-linear-park-and-skate-park-501"
+      ],
+      "verify": false,
+      "photo_id": null
+    },
+    {
+      "id": "parke-ng-pag-asa",
+      "name": "Parke ng Pag-asa",
+      "kind": "bago",
+      "barangay_id": "san-antonio",
+      "line_fil": "Maliit na urban green space sa Ortigas na itinampok noong Abril 22, 2025, Earth Day.",
+      "line_en": "A small urban green space in Ortigas unveiled on April 22, 2025, Earth Day.",
+      "address": "Doña Julia Vargas Street corner Meralco Avenue, Ortigas, Brgy. San Antonio, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": "2025-04-22",
+      "sources": [
+        "https://pasigcity.gov.ph/news-and-releases/pagbubukas-ng-parke-ng-pag-asa-764"
+      ],
+      "verify": false,
+      "photo_id": null
+    },
+    {
+      "id": "ilaya-buting-linear-park",
+      "name": "Ilaya Buting Linear Park",
+      "kind": "bago",
+      "barangay_id": "buting",
+      "line_fil": "Ikatlong linear park ng Pasig, binuksan noong Oktubre 8, 2026, may palaruan, basketball court at ilaw.",
+      "line_en": "Pasig's third linear park, inaugurated on October 8, 2026, with a playground, basketball court and lighting.",
+      "address": "Barangay Buting, Pasig City",
+      "hours_fil": null,
+      "hours_en": null,
+      "fee_fil": null,
+      "fee_en": null,
+      "opened": "2026-10-08",
+      "sources": [
+        "https://www.pna.gov.ph/article/mmda-pasig-open-citys-3rd-linear-park"
+      ],
+      "verify": false,
+      "photo_id": null
+    }
+  ]
+}

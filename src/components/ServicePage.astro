@@ -1,5 +1,5 @@
 ---
-import Base from "../layouts/Base.astro";
+import Kit from "../layouts/Kit.astro";
 import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
 import { categories, officeById, programs, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
@@ -49,110 +49,90 @@ function lines(value: unknown): string[] {
 }
 ---
 
-<Base title={title} description={lang === "en" ? service.title_en : service.summary_fil || title}>
-  <article class="wrap max-w-[760px] py-12">
-    <p>
-      <a class="link-draw" href={href(lang, `/serbisyo#${service.category}`)}>{categoryName || t.allServices}</a>
-    </p>
-    <h1 class="mt-3 text-[34px] font-bold leading-[1.15] tracking-[-0.04em]">
-      {title}
-      {service.verify && <Verify />}
-    </h1>
-    {
-      service.summary_fil && (
-        <p class="mt-4 text-muted" lang={lang === "en" ? "fil" : undefined}>
-          {service.summary_fil}
-        </p>
-      )
-    }
-
-    <dl class="mt-8 border-t-2 border-ink">
-      <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-        <dt class="text-[14px] font-medium text-muted">{t.colOffice}</dt>
-        <dd>{officeLabel}</dd>
+<Kit title={title} description={lang === "en" ? service.title_en : service.summary_fil || title}>
+  <section class="section section--flow" aria-labelledby="service-h">
+    <div class="wrap bp-svc">
+      <div class="section-head">
+        <a class="bp-svc__back" href={href(lang, `/serbisyo#${service.category}`)}>{categoryName || t.allServices}</a>
+        <h1 id="service-h">
+          {title}
+          {service.verify && <Verify />}
+        </h1>
+        {service.summary_fil && <p lang={lang === "en" ? "fil" : undefined}>{service.summary_fil}</p>}
       </div>
-      {
-        office?.location && (
-          <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-            <dt class="text-[14px] font-medium text-muted">{t.whereLabel}</dt>
-            <dd>{office.location}</dd>
-          </div>
-        )
-      }
-      {
-        office?.contact && (
-          <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-            <dt class="text-[14px] font-medium text-muted">{t.officeContact}</dt>
-            <dd class="[overflow-wrap:anywhere]">{office.contact}</dd>
-          </div>
-        )
-      }
-      {
-        time && (
-          <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-            <dt class="text-[14px] font-medium text-muted">{t.colTime}</dt>
-            <dd class="num">{time}</dd>
-          </div>
-        )
-      }
-      {
-        fee && (
-          <div class="grid gap-0.5 border-b border-line py-3 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-baseline sm:gap-4">
-            <dt class="text-[14px] font-medium text-muted">{t.colFee}</dt>
-            <dd class="num">{fee}</dd>
-          </div>
-        )
-      }
-    </dl>
 
-    <ServiceNotices serviceId={service.id} />
+      <ul class="rows rows--spec bp-svc__rows">
+        <li>
+          <span class="rows__name">{t.colOffice}</span>
+          <span class="bp-svc__val">{officeLabel}</span>
+        </li>
+        {office?.location && (
+          <li>
+            <span class="rows__name">{t.whereLabel}</span>
+            <span class="bp-svc__val">{office.location}</span>
+          </li>
+        )}
+        {office?.contact && (
+          <li>
+            <span class="rows__name">{t.officeContact}</span>
+            <span class="bp-svc__val bp-svc__break">{office.contact}</span>
+          </li>
+        )}
+        {time && (
+          <li>
+            <span class="rows__name">{t.colTime}</span>
+            <span class="bp-svc__val num">{time}</span>
+          </li>
+        )}
+        {fee && (
+          <li>
+            <span class="rows__name">{t.colFee}</span>
+            <span class="bp-svc__val num">{fee}</span>
+          </li>
+        )}
+      </ul>
 
-    {
-      requirements.length > 0 && (
+      <ServiceNotices serviceId={service.id} />
+
+      {requirements.length > 0 && (
         <>
-          <h2 class="mt-10 text-[19px] font-semibold tracking-[-0.01em]">{t.requirements}</h2>
-          <ul class="mt-3 grid gap-2">
+          <h2 class="t-label muted bp-svc__h">{t.requirements}</h2>
+          <ul class="bp-svc__list">
             {requirements.map((item) => (
-              <li class="border-b border-line py-2">{item}</li>
+              <li>{item}</li>
             ))}
           </ul>
         </>
-      )
-    }
+      )}
 
-    {
-      steps.length > 0 && (
+      {steps.length > 0 && (
         <>
-          <h2 class="mt-10 text-[19px] font-semibold tracking-[-0.01em]">{t.stepsLabel}</h2>
-          <ol class="mt-3 grid gap-2">
+          <h2 class="t-label muted bp-svc__h">{t.stepsLabel}</h2>
+          <ol class="bp-svc__list">
             {steps.map((item, index) => (
-              <li class="border-b border-line py-2">
-                <span class="num text-muted">{index + 1}. </span>
-                {item}
+              <li>
+                <span class="num muted">{index + 1}.</span>
+                <span>{item}</span>
               </li>
             ))}
           </ol>
         </>
-      )
-    }
+      )}
 
-    {
-      online && (
-        <p class="mt-8">
-          <a href={online}>
+      {online && (
+        <p class="bp-svc__online">
+          <a class="btn btn--primary" href={online}>
             {t.doOnline}: {new URL(online).hostname.replace(/^www\./, "")}
           </a>
         </p>
-      )
-    }
+      )}
 
-    {
-      relatedPrograms.length > 0 && (
+      {relatedPrograms.length > 0 && (
         <>
-          <h2 class="mt-10 text-[19px] font-semibold tracking-[-0.01em]">{t.relatedBenefits}</h2>
-          <ul class="mt-3">
+          <h2 class="t-label muted bp-svc__h">{t.relatedBenefits}</h2>
+          <ul class="bp-svc__list">
             {relatedPrograms.map((program) => (
-              <li class="border-b border-line">
+              <li>
                 <a class="rel" href={href(lang, `/tulong/#${program.id}`)}>
                   {lang === "en" ? program.title_en : program.title_fil}
                 </a>
@@ -160,25 +140,86 @@ function lines(value: unknown): string[] {
             ))}
           </ul>
         </>
-      )
-    }
+      )}
 
-    <p class="mt-8 text-[14px] text-muted">
-      {t.sources}:{" "}
-      {
-        service.sources.map((url, index) => (
-          <>
-            {index > 0 && ", "}
-            <a href={url}>{sourceLabel(url)}</a>
-          </>
-        ))
-      }
-      {" · "}
-      {t.checked}: <span class="num">{formatDate(lang, servicesRetrieved)}</span>
-    </p>
-  </article>
-</Base>
+      <p class="t-small muted bp-svc__source">
+        <span>
+          {t.sources}:{" "}
+          {service.sources.map((url, index) => (
+            <>
+              {index > 0 && ", "}
+              <a href={url}>{sourceLabel(url)}</a>
+            </>
+          ))}
+        </span>
+        <span>{t.checked}: <span class="num">{formatDate(lang, servicesRetrieved)}</span></span>
+      </p>
+    </div>
+  </section>
+</Kit>
 
 <style>
-  .rel { display: inline-flex; min-height: 48px; align-items: center; }
+  .bp-svc {
+    max-width: 760px;
+  }
+  .bp-svc__back {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-self: start;
+    color: var(--muted);
+    font-size: var(--t-small);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .bp-svc__rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .bp-svc__rows > li {
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    align-items: baseline;
+  }
+  .bp-svc__val {
+    min-width: 0;
+  }
+  .bp-svc__break {
+    overflow-wrap: anywhere;
+  }
+  .bp-svc__h {
+    margin-top: var(--s-8);
+  }
+  .bp-svc__list {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .bp-svc__list > li {
+    display: flex;
+    gap: var(--s-3);
+    padding-block: var(--s-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .bp-svc__online {
+    margin-top: var(--s-7);
+  }
+  .rel {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .bp-svc__source {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-5);
+    margin-top: var(--s-8);
+  }
+  @media (max-width: 639px) {
+    .bp-svc__rows > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
 </style>

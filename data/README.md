@@ -22,6 +22,9 @@ Run `bun scripts/verify_recent_contracts.mjs`, `bun scripts/verify_freshness.mjs
 | `officials-directory.json` | Full directory: terms (`term_*`, `term_note_*`), ex-officio, department heads, and every barangay's officials and contact numbers | `/opisyal` |
 | `city.json` | City facts (`value_*`, `note_*`) and City Hall contact | `/tungkol` "Pasig at a glance" |
 | `transparency.json` | Links to official disclosure portals (`description_*`) and key figures (`label_*`, `value_*`, `note_*`) | `/pondo`, homepage funds |
+| `life-events.json` | 12 life events (`title_*`, `line_*`) that group existing `services` and `programs` ids, plus `related` events. Curation only: every fact stays on the service or program it points to | Homepage doors, `/buhay/<id>` |
+| `pasyalan.json` | Parks, heritage sites and food streets (`kind`: `pasyalan`, `kainan` or `bago`), each with `sources`, `verify`, `opened` date (or `null`), `hours_*`, `fee_*`, `address`, `barangay_id` and `photo_id`; one top-level `retrieved` date | Homepage places and "Bago sa Pasig" |
+| `photos.json` | Wikimedia Commons photographs used on the site: file in `src/assets/photos/`, `alt_*`, author, licence and Commons page | Homepage, `/larawan` credits |
 
 ## Rules for editing
 
