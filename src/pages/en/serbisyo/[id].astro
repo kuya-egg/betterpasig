@@ -1,0 +1,16 @@
+---
+import ServicePage from "../../../components/ServicePage.astro";
+import { services, serviceStaticPaths } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return serviceStaticPaths();
+}
+
+const { id } = Astro.params;
+const service = services.find((item) => item.id === id);
+if (!service || !service.sources?.length) {
+  throw new Error("A service page needs at least one source");
+}
+---
+
+<ServicePage service={service} />

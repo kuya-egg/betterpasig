@@ -1,0 +1,2 @@
+# Preserve retrieved evidence exactly so saved SHA-256 hashes survive checkout.
+research/pasig-2026-10-28/snapshots/** -text -whitespace

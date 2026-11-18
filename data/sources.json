@@ -1,0 +1,209 @@
+{
+    "edition_date":  "2026-10-28",
+    "timezone":  "Asia/Manila",
+    "sources":  [
+                    {
+                        "id":  "S01",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/maligayang-ika-52-anibersaryo-mutya-ng-pasig-mega-market-327",
+                        "published_date":  "2026-10-05",
+                        "checked_at":  "2026-10-28T23:41:33.6728942+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "Maligayang Ika-52 Anibersaryo, Mutya ng Pasig Mega Market!",
+                        "verify":  true,
+                        "published_at":  "2026-10-05",
+                        "retrieved_at":  "2026-10-28T23:41:33.6728942+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S01.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S02",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/bfp-pasig-hinikayat-ang-mga-business-owner-na-gamitin-ang-online-fsis-para-sa-mas-mabilis-na-fire-safety-inspection-transactions-835",
+                        "published_date":  "2026-10-01",
+                        "checked_at":  "2026-10-28T23:41:34.2856010+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "BFP-Pasig, Hinikayat ang mga Business Owner na Gamitin ang Online FSIS para sa Mas Mabilis na Fire Safety Inspection Transactions",
+                        "verify":  true,
+                        "published_at":  "2026-10-01",
+                        "retrieved_at":  "2026-10-28T23:41:34.2856010+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S02.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S03",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/updated-as-of-october-4-2026-4th-quarter-assessment-and-payment-of-business-taxes-and-fees-303",
+                        "published_date":  "2026-10-04",
+                        "checked_at":  "2026-10-28T23:41:34.5472964+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "[UPDATED AS OF OCTOBER 4, 2026] 4th Quarter Assessment and Payment of Business Taxes and Fees",
+                        "verify":  true,
+                        "published_at":  "2026-10-04",
+                        "retrieved_at":  "2026-10-28T23:41:34.5472964+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S03.article.txt",
+                        "locators":  [
+                                         "article text",
+                                         "image 1"
+                                     ]
+                    },
+                    {
+                        "id":  "S04",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/heads-up-property-owners-in-pasig-city-591",
+                        "published_date":  "2026-10-03",
+                        "checked_at":  "2026-10-28T23:41:34.8535305+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "HEADS UP, PROPERTY OWNERS IN PASIG CITY!",
+                        "verify":  true,
+                        "published_at":  "2026-10-03",
+                        "retrieved_at":  "2026-10-28T23:41:34.8535305+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S04.article.txt",
+                        "locators":  [
+                                         "article text",
+                                         "image 2",
+                                         "image 3"
+                                     ]
+                    },
+                    {
+                        "id":  "S05",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/libreng-sakay-x-pasigpass-367",
+                        "published_date":  "2026-10-01",
+                        "checked_at":  "2026-10-28T23:41:35.1626290+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "LIBRENG SAKAY x PASIGPASS",
+                        "verify":  true,
+                        "published_at":  "2026-10-01",
+                        "retrieved_at":  "2026-10-28T23:41:35.1626290+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S05.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S06",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/pcsdo-pasig-city-blood-collecting-team-magsasagawa-ng-blood-donation-drive-sa-manggahan-208",
+                        "published_date":  "2026-10-06",
+                        "checked_at":  "2026-10-28T23:41:35.4462889+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "PCSDO, Pasig City Blood Collecting Team Magsasagawa ng Blood Donation Drive sa Manggahan",
+                        "verify":  true,
+                        "published_at":  "2026-10-06",
+                        "retrieved_at":  "2026-10-28T23:41:35.4462889+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S06.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S07",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/in-photos-inagurasyon-ng-bagong-gawang-kanal-at-bangketa-sa-sta-lucia-210",
+                        "published_date":  "2026-10-01",
+                        "checked_at":  "2026-10-28T23:41:35.7696205+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "IN PHOTOS: INAGURASYON NG BAGONG GAWANG KANAL AT BANGKETA SA STA. LUCIA",
+                        "verify":  true,
+                        "published_at":  "2026-10-01",
+                        "retrieved_at":  "2026-10-28T23:41:35.7696205+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S07.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S08",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/caspay-fridays-845",
+                        "published_date":  "2026-10-03",
+                        "checked_at":  "2026-10-28T23:41:36.0741068+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "CaSpay Fridays",
+                        "verify":  true,
+                        "published_at":  "2026-10-03",
+                        "retrieved_at":  "2026-10-28T23:41:36.0741068+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S08.article.txt",
+                        "locators":  [
+                                         "article text",
+                                         "image 1",
+                                         "image 2"
+                                     ]
+                    },
+                    {
+                        "id":  "S09",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/abiso-pasig-city-mega-parking-i-near-mutya-ng-pasig-mega-market-caruncho-ave-brgy-san-nicolas-584",
+                        "published_date":  "2026-10-06",
+                        "checked_at":  "2026-10-28T23:41:36.3859821+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "ABISO Pasig City Mega Parking I (Near Mutya ng Pasig Mega Market, Caruncho Ave., Brgy. San Nicolas)",
+                        "verify":  true,
+                        "published_at":  "2026-10-06",
+                        "retrieved_at":  "2026-10-28T23:41:36.3859821+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S09.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S10",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/higit-1000-jobseekers-lumahok-sa-tara-trabaho-g-mega-job-fair-879",
+                        "published_date":  "2026-10-06",
+                        "checked_at":  "2026-10-28T23:41:36.6895927+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "HIGIT 1,000 JOBSEEKERS, LUMAHOK SA TARA TRABAHO, G? MEGA JOB FAIR!",
+                        "verify":  true,
+                        "published_at":  "2026-10-06",
+                        "retrieved_at":  "2026-10-28T23:41:36.6895927+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S10.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    },
+                    {
+                        "id":  "S11",
+                        "url":  "https://pasigcity.gov.ph/news-and-releases/trabaho-ba-ang-hanap-mo-may-mga-oportunidad-para-sa-iyo-sa-tara-trabaho-g-mega-job-fair-980",
+                        "published_date":  "2026-09-29",
+                        "checked_at":  "2026-10-28T23:41:36.9961961+08:00",
+                        "publisher":  "Pasig City",
+                        "title":  "TRABAHO BA ANG HANAP MO? MAY MGA OPORTUNIDAD PARA SA IYO SA â€œTARA TRABAHO, G? MEGA JOB FAIR!â€",
+                        "verify":  true,
+                        "published_at":  "2026-09-29",
+                        "retrieved_at":  "2026-10-28T23:41:36.9961961+08:00",
+                        "reviewed_at":  null,
+                        "review_status":  "pending",
+                        "verification_method":  "official_document",
+                        "evidence_path":  "research/pasig-2026-10-28/snapshots/S11.article.txt",
+                        "locators":  [
+                                         "article text"
+                                     ]
+                    }
+                ]
+}

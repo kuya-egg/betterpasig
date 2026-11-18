@@ -1,0 +1,256 @@
+﻿{
+    "as_of_date":  "2026-10-28",
+    "total_barangays":  30,
+    "with_documented_places":  6,
+    "without_qualifying_places":  24,
+    "unassigned_place_ids":  [
+                                 "revolving-tower-rpt"
+                             ],
+    "barangays":  [
+                      {
+                          "barangay_id":  "bagong-ilog",
+                          "name":  "Bagong Ilog",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "bagong-katipunan",
+                          "name":  "Bagong Katipunan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "bambang",
+                          "name":  "Bambang",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "buting",
+                          "name":  "Buting",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "caniogan",
+                          "name":  "Caniogan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "dela-paz",
+                          "name":  "Dela Paz",
+                          "place_ids":  [
+                                            "robinsons-metro-east",
+                                            "city-hall-annex-2"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      },
+                      {
+                          "barangay_id":  "kalawaan",
+                          "name":  "Kalawaan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "kapasigan",
+                          "name":  "Kapasigan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "kapitolyo",
+                          "name":  "Kapitolyo",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "malinao",
+                          "name":  "Malinao",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "manggahan",
+                          "name":  "Manggahan",
+                          "place_ids":  [
+                                            "pcist-manggahan"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      },
+                      {
+                          "barangay_id":  "maybunga",
+                          "name":  "Maybunga",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "oranbo",
+                          "name":  "Oranbo",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "palatiw",
+                          "name":  "Palatiw",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "pinagbuhatan",
+                          "name":  "Pinagbuhatan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "pineda",
+                          "name":  "Pineda",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "rosario",
+                          "name":  "Rosario",
+                          "place_ids":  [
+                                            "temporary-city-hall",
+                                            "bpld-temporary-city-hall"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      },
+                      {
+                          "barangay_id":  "sagad",
+                          "name":  "Sagad",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "san-antonio",
+                          "name":  "San Antonio",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "san-joaquin",
+                          "name":  "San Joaquin",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "san-jose",
+                          "name":  "San Jose",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "san-miguel",
+                          "name":  "San Miguel",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "san-nicolas",
+                          "name":  "San Nicolas",
+                          "place_ids":  [
+                                            "mutya-ng-pasig-mega-market",
+                                            "bpld-mega-market",
+                                            "mega-parking-1"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      },
+                      {
+                          "barangay_id":  "santa-cruz",
+                          "name":  "Santa Cruz",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "santa-lucia",
+                          "name":  "Santa Lucia",
+                          "place_ids":  [
+                                            "camia-de-castro",
+                                            "sm-city-east-ortigas"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      },
+                      {
+                          "barangay_id":  "santa-rosa",
+                          "name":  "Santa Rosa",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "santo-tomas",
+                          "name":  "Santo Tomas",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "santolan",
+                          "name":  "Santolan",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "sumilang",
+                          "name":  "Sumilang",
+                          "place_ids":  [
+
+                                        ],
+                          "status":  "no_qualifying_place_in_this_batch"
+                      },
+                      {
+                          "barangay_id":  "ugong",
+                          "name":  "Ugong",
+                          "place_ids":  [
+                                            "city-hall-annex-1"
+                                        ],
+                          "status":  "documented_places_awaiting_review"
+                      }
+                  ]
+}

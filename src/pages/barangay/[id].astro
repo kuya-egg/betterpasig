@@ -1,0 +1,6 @@
+---
+import BarangayPage from "../../components/BarangayPage.astro";
+import { barangays } from "../../lib/data";
+export function getStaticPaths() { return barangays.map(({ id }) => ({ params: { id } })); }
+---
+<BarangayPage barangayId={Astro.params.id!} />

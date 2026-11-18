@@ -1,0 +1,57 @@
+---
+import Verify from "./Verify.astro";
+import { sourceLabel, transparencyFigures, transparencyLinks } from "../lib/data";
+import { langFromUrl, ui } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+const ids = ["coa-assets-2024", "new-city-hall-contract", "new-city-hall-opening", "ugnayan-requests-2024"];
+const figures = ids.map((id) => {
+  const figure = transparencyFigures.find((item) => item.id === id);
+  if (!figure) throw new Error(`data/transparency.json is missing figure "${id}"`);
+  return figure;
+});
+const links = transparencyLinks.filter((link) => /^https?:\/\//.test(link.url));
+---
+
+<section id="pondo" class="border-t border-line py-14">
+  <div class="wrap">
+    <div class="mb-6">
+      <h2 class="text-[30px] font-bold tracking-[-0.03em]">{t.fundsTitle}</h2>
+      <p class="mt-1.5 text-muted">{t.fundsLede}</p>
+    </div>
+    <div class="grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
+      {
+        figures.map((figure) => {
+          const note = "note" in figure && typeof figure.note === "string" ? figure.note : "";
+          return (
+            <div class="min-w-0 border-t border-line py-4 first:border-t-0 sm:border-t-0 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0">
+              <p class:list={["num font-semibold leading-snug", figure.value.length > 24 ? "text-[19px]" : "text-[28px] tracking-[-0.03em]"]}>
+                {figure.value}
+                {figure.verify && <Verify />}
+              </p>
+              <p class="mt-1.5">{figure.label_fil}</p>
+              {figure.as_of && <p class="mt-1 text-[13px] text-muted">{figure.as_of}</p>}
+              {note && <p class="mt-1 text-[13px] text-muted">{note}</p>}
+              <p class="mt-2 text-[14px]">
+                {figure.sources.map((url, index) => (
+                  <>
+                    {index > 0 && ", "}
+                    <a href={url}>{sourceLabel(url)}</a>
+                  </>
+                ))}
+              </p>
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="mt-6 flex flex-wrap gap-x-7 gap-y-2">
+      {
+        links.map((link) => (
+          <a href={link.url}>{lang === "en" && link.title_en ? link.title_en : link.title_fil}</a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+{
+  "as_of_date": "2026-10-28",
+  "timezone": "Asia/Manila",
+  "window_start": "2026-09-29",
+  "window_end": "2026-10-28",
+  "sources": [
+    {"id":"S01","expected_published":"2026-10-05","slug":"maligayang-ika-52-anibersaryo-mutya-ng-pasig-mega-market-327"},
+    {"id":"S02","expected_published":"2026-10-01","slug":"bfp-pasig-hinikayat-ang-mga-business-owner-na-gamitin-ang-online-fsis-para-sa-mas-mabilis-na-fire-safety-inspection-transactions-835"},
+    {"id":"S03","expected_published":"2026-10-04","slug":"updated-as-of-october-4-2026-4th-quarter-assessment-and-payment-of-business-taxes-and-fees-303"},
+    {"id":"S04","expected_published":"2026-10-03","slug":"heads-up-property-owners-in-pasig-city-591"},
+    {"id":"S05","expected_published":"2026-10-01","slug":"libreng-sakay-x-pasigpass-367"},
+    {"id":"S06","expected_published":"2026-10-06","slug":"pcsdo-pasig-city-blood-collecting-team-magsasagawa-ng-blood-donation-drive-sa-manggahan-208"},
+    {"id":"S07","expected_published":"2026-10-01","slug":"in-photos-inagurasyon-ng-bagong-gawang-kanal-at-bangketa-sa-sta-lucia-210"},
+    {"id":"S08","expected_published":"2026-10-03","slug":"caspay-fridays-845"},
+    {"id":"S09","expected_published":"2026-10-06","slug":"abiso-pasig-city-mega-parking-i-near-mutya-ng-pasig-mega-market-caruncho-ave-brgy-san-nicolas-584"},
+    {"id":"S10","expected_published":"2026-10-06","slug":"higit-1000-jobseekers-lumahok-sa-tara-trabaho-g-mega-job-fair-879"},
+    {"id":"S11","expected_published":"2026-09-29","slug":"trabaho-ba-ang-hanap-mo-may-mga-oportunidad-para-sa-iyo-sa-tara-trabaho-g-mega-job-fair-980"},
+    {"id":"S12","expected_published":null,"url":"https://pasigcity.gov.ph/news-and-releases","purpose":"discovery_only"},
+    {"id":"S13","expected_published":null,"url":"https://pagasa.dost.gov.ph/regional-forecast/ncrprsd","purpose":"dynamic_regional_source_only"}
+  ]
+}

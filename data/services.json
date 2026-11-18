@@ -1600,7 +1600,7 @@
       "requirements": [
         "Kopya ng tax declaration o pinakahuling official receipt"
       ],
-      "fee": "2.5% ng assessed value (residential), 3% (commercial/industrial); discount 15% kung buong taon ay bayad bago Dec 31, 10% sa Enero, 5% sa Peb-Mar; interest 2%/buwan",
+      "fee": null,
       "processing_time": "Mga 5 minuto sa billing + 2 minuto sa cashier; online 3-5 working days bago ma-release ang OR",
       "steps": [
         "Ipakita ang tax declaration o resibo",
@@ -1614,7 +1614,10 @@
         "https://assets.pasigcity.gov.ph/storage/attachments/city_treasurer's_office/662a11053090b1714032901ENGLSIH.pdf",
         "https://pia.gov.ph/early-real-tax-payers-in-pasig-gets-15-discount/"
       ],
-      "verify": false
+      "verify": true,
+      "recent_update_ids": [
+        "rpt-2027-advance-payment"
+      ]
     },
     {
       "id": "pay-business-tax-online",
@@ -1644,7 +1647,10 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/city_treasurer's_office/686b08431a5401751844931Citizen_s%20Charter%20English.pdf"
       ],
-      "verify": false
+      "verify": false,
+      "recent_update_ids": [
+        "business-tax-q4-2026"
+      ]
     },
     {
       "id": "rpt-tax-clearance",
@@ -4490,7 +4496,10 @@
       "sources": [
         "https://assets.pasigcity.gov.ph/storage/attachments/veterinary_services/633e88604de921665042528CCh_Vet.pdf"
       ],
-      "verify": true
+      "verify": true,
+      "recent_update_ids": [
+        "caspay-2026-10-30"
+      ]
     },
     {
       "id": "veterinary-health-certificate",

@@ -1,0 +1,6 @@
+---
+import PlacePage from "../../../components/PlacePage.astro";
+import { places } from "../../../lib/data";
+export function getStaticPaths() { return places.map(({ id }) => ({ params: { id } })); }
+---
+<PlacePage placeId={Astro.params.id!} />

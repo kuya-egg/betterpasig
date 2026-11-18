@@ -41,7 +41,7 @@ Pages live in `src/pages/` (Filipino at `/`, English under `/en/`; interface tex
 
 Connect the repo in Cloudflare Pages with framework preset **Astro**, build command `bun run build`, output directory `dist`. Pages detects `bun.lock` and installs with Bun.
 
-Set the environment variable **`BUN_VERSION=1.4.2`** in the Pages project (Settings → Variables and Secrets, for Production and Preview). The build image's default Bun is too old to read `bun.lock`, and Bun can't be pinned from a file. Node is pinned by `.node-version` (Astro needs 22.22+). Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
+Set the environment variable **`BUN_VERSION=1.4.2`** in the Pages project (Settings → Variables and Secrets, for Production and Preview). The build image's default Bun is too old to read `bun.lock`, and Bun can't be pinned from a file. Node is pinned by `.node-version` (Astro needs 22.23.4+). Security and cache headers are in `public/_headers`. To deploy from a laptop instead: `bun run build && bunx wrangler pages deploy` (reads `wrangler.toml`).
 
 Until launch, `/` is a "ginagawa pa" placeholder with an interactive barangay map and the emergency hotlines.
 

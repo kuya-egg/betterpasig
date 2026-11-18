@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>News and Releases | Pasig City</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+        content="Based on the 2010 Census of Population and Housing, Pasig City ranked fourth in terms of population size among the 16 cities and 1 municipality of Metro Manila with a total population of 669,773. "
+        name="description">
+    <meta
+        content="Pasig,Pasig City,Pasig City Government,Pasig Website,Mayor Vico,Vico Sotto, Lungsod ng Pasig, Metro Manila, Umaagos ang Pag-asa"
+        name="keywords">
+
+    <meta property="og:title" content="Pasig City">
+    <meta property="og:description"
+        content="Based on the 2010 Census of Population and Housing, Pasig City ranked fourth in terms of population size among the 16 cities and 1 municipality of Metro Manila with a total population of 669,773. ">
+    <meta property="og:image" content="http://pasigcity.gov.ph/img/fb-meta-img.jpg">
+
+    
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+    <link href="/css/styles.css?v=12182025" rel="stylesheet" />
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/aos.css" rel="stylesheet" />
+    <link href="/css/hamburgers.css?v=12" rel="stylesheet" />
+    <link href="/css/component.css?v=1" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="/css/owl.theme.default.css" rel="stylesheet" />
+    <link href="/css/owl.carousel.css" rel="stylesheet" />
+    <link href="/css/dncalendar-skin.css" rel="stylesheet" />
+    <link href="/css/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/modernizr.custom.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/dncalendar.js"></script>
+    <script src="/js/jquery.fancybox.js"></script>
+    <script src="/js/jquery.fancybox.pack.js"></script>
+    <script src="/js/fontawesome.min.js"></script>
+    
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script>
+        function date_time(id) {
+            date = new Date;
+            year = date.getFullYear();
+            month = date.getMonth();
+            months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December');
+            d = date.getDate();
+            day = date.getDay();
+            days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+            result = ' ' + months[month] + ' ' + d + '' + ', ' + year + ' | ' + days[day];
+            document.getElementById(id).innerHTML = result;
+            //setTimeout('date_time("' + id + '");', '1000');
+            return true;
+        }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127318880-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-127318880-1');
+    </script>
+</head>
+
+<body>
+    <div id="menu-overlay"></div>
+    <!-- START HEADER -->
+    
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between flex-column align-items-center align-items-sm-center flex-sm-column flex-md-row flex-lg-row p-2">
+            <div class="date logo">
+                <p class="hidden-sm hidden-xs" id="date_time"></p>
+                <script type="text/javascript">
+                    window.onload = date_time('date_time');
+                </script>
+            </div>
+            <div class="social d-flex flex-row align-items-center nav-flex-icons">
+                <a href="https://www.facebook.com/PasigPIO/" target="_blank">
+                    <svg class="social-icon fb" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
+                    <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848 c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588 l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/pasiginfo" target="_blank">
+                    <svg class="social-icon twitter" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
+                    <path d="M 6.9199219 6 L 21.136719 26.726562 L 6.2285156 44 L 9.40625 44 L 22.544922 28.777344 L 32.986328 44 L 43 44 L 28.123047 22.3125 L 42.203125 6 L 39.027344 6 L 26.716797 20.261719 L 16.933594 6 L 6.9199219 6 z"></path>
+                    </svg>
+                </a>
+                <a href="https://www.foi.gov.ph/requests?agency=USAP" class="" target="_blank"
+                    style="color:#fff;padding: 0 8px;border-left: 1px solid #fff;border-right: 1px solid #fff;">eFOI</a>
+                <a href="https://www.facebook.com/PasigCityGADOffice" class="ml-2" target="_blank"
+                    style="color:#fff;">GAD Corner</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="container navbar navbar-toggleable-md navbar-expand-lg justify-content-between flex-nowrap">
+        <div class="navbar-brand logo">
+            <a href="/"><img src="/img/logo-with-seal.png?v=1" class="img-fluid" /></a>
+        </div>
+        <ul class="nav navbar-nav nav-flex-icons desktop-nav">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"><span class="clearfix d-none d-md-inline-block">About Pasig City</span></a>
+              <div class="dropdown-menu">
+                <a href="/about-pasig-city/city-government" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">City Government</span></a>
+                <a href="/about-pasig-city/directory" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">Directory</span></a>
+                <a href="/programs" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">Programs</span></a>
+                <a href="/services" class="dropdown-item"> <span class="clearfix d-none d-md-inline-block">Services</span></a>
+                <a href="/zoning-ordinance" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">2023 Official Zoning Map</span></a>
+                
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="clearfix d-none d-md-inline-block">Online Services</span></a>
+              <div class="dropdown-menu">
+                <a href="https://onlinepayments.pasigcity.gov.ph" target="_blank" class="dropdown-item uppercase">Real Property Tax</a>
+                <a href="https://onlinepayments.pasigcity.gov.ph" target="_blank" class="dropdown-item uppercase">Business Permit</a>
+                <a href="https://pasigpass.pasigcity.gov.ph/" target="_blank" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">PasigPass</span></a>
+                <a href="https://clima.pasigcity.gov.ph/clima/" target="_blank" class="dropdown-item"><span class="clearfix d-none d-md-inline-block">CLIMA</span></a>
+                
+                <!-- <a href="https://appointments.pasigcity.gov.ph/" target="_blank" class="dropdown-item"> <span class="clearfix d-none d-md-inline-block">Business Permit Appointment</span></a> -->
+                <!-- <a href="http://safetyseal.pasigcity.gov.ph/" target="_blank" class="dropdown-item"> <span class="clearfix d-none d-md-inline-block">Safety Seal Application</span></a> -->
+              </div>
+          </li>
+          <li class="nav-item">
+            <a href="/news-and-releases" class="nav-link"> <span class="clearfix d-none d-md-inline-block">News Releases</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="/full-disclosure-portal" class="nav-link"> <span class="clearfix d-none d-md-inline-block">Full Disclosure Portal</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="https://hrdo.gemspasig.ph/login" target="_blank" class="nav-link"> <span class="clearfix d-none d-md-inline-block">Careers</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="/downloadable-forms" class="nav-link"> <span class="clearfix d-none d-md-inline-block">Downloadable Forms</span></a>
+          </li>
+        </ul>
+        <button id="showRightPush" class="hamburger hamburger--spin" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+    </nav>
+
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+        <div class="m-logo"><img src="/img/logo-white.png" class="img-fluid" /></div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"><span >About Pasig City</span></a>
+              <div class="dropdown-menu">
+                <a href="/about-pasig-city/city-government" class="dropdown-item"><span >City Government</span></a>
+                <a href="/about-pasig-city/directory" class="dropdown-item"><span>Directory</span></a>
+                <a href="/programs" class="dropdown-item"><span>Programs</span></a>
+                <a href="/services" class="dropdown-item"><span>Services</span></a>
+                <a href="/zoning-ordinance" class="dropdown-item"><span>2023 Official Zoning Map</span></a>
+                
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+             <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"><span>Online Services</span></a>
+              <div class="dropdown-menu">
+                <a href="https://onlinepayments.pasigcity.gov.ph" target="_blank" class="dropdown-item ">Real Property Tax</a>
+                <a href="https://onlinepayments.pasigcity.gov.ph" target="_blank" class="dropdown-item ">Business Permit</a>
+                <a href="https://pasigpass.pasigcity.gov.ph/" target="_blank" class="dropdown-item"><span>PasigPass</span></a>
+                <a href="https://clima.pasigcity.gov.ph/clima/" target="_blank" class="dropdown-item"><span>CLIMA</span></a>
+              </div>
+          </li>
+          <li class="nav-item">
+            <a href="/news-and-releases" class="nav-link"> <span>News Releases</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="/full-disclosure-portal" class="nav-link"> <span>Full Disclosure Portal</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="https://hrdo.gemspasig.ph/login" target="_blank" class="nav-link"> <span>Careers</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="/downloadable-forms" class="nav-link"> <span>Downloadable Forms</span></a>
+          </li>
+        </ul>
+        <!-- <a href="/about-pasig-city">About Pasig City</a>
+        <a href="/about-pasig-city/city-government">Programs</a>
+        <a href="/services">Services</a>
+        <a href="/news-and-releases">News Releases</a>
+        <a href="/full-disclosure-portal">Full Disclosure Portal</a>
+        <a href="https://hrdo.pasigcity.gov.ph/login" target="_blank">Careers</a>
+        <a href="/downloadable-forms">Downloadable Forms</a> -->
+    </nav>
+    <!-- END HEADER -->
+
+    
+<div class="container-fluid news-banner" style="background-image: url(https://assets.pasigcity.gov.ph/storage/page/banners/news/633e7b25e50b71665039141NEWS (1).png);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row pl-3 mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">News Releases</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-md-12 text-right">
+                    <div class="dropdown show">
+                      <a class="btn newspage-dropdown dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Category
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="https://pasigcity.gov.ph/news-and-releases?type=news">News</a>
+                        <a class="dropdown-item" href="https://pasigcity.gov.ph/news-and-releases?type=event">Events</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div id="news-list" class="row">
+                <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/abiso-pasig-city-mega-parking-i-near-mutya-ng-pasig-mega-market-caruncho-ave-brgy-san-nicolas-584">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03fca279f61792032714pc.jpeg" alt="ABISO Pasig City Mega Parking I (Near Mutya ng Pasig Mega Market, Caruncho Ave., Brgy. San Nicolas)" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>ABISO Pasig City Mega Parking I (Near Mutya ng Pasig Mega Market, Caruncho Ave., Brgy. San Nicolas)</h4>
+            <p>Pansamantalang isasara ang 3rd Floor ng Mega Parking I bukas, Miyerkules, October 7, 2026, mula 08:00AM hanggang 12:00NN.Ito ay upang bigyang-daan ang ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/tingnan-national-cooperative-month-2026-kick-off-program-857">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03f32bf1331792032562fc.jpg" alt="TINGNAN: National Cooperative Month 2026 Kick-Off Program" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>TINGNAN: National Cooperative Month 2026 Kick-Off Program</h4>
+            <p>Opisyal nang binuksan ng Pamahalaang Lungsod ng Pasig ang pagdiriwang ng National Cooperative Month 2026 sa Lungsod ng Pasig sa isang kick-off program ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/higit-1000-jobseekers-lumahok-sa-tara-trabaho-g-mega-job-fair-879">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03bbd6d8191792031677j.jpeg" alt="HIGIT 1,000 JOBSEEKERS, LUMAHOK SA TARA TRABAHO, G? MEGA JOB FAIR!" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>HIGIT 1,000 JOBSEEKERS, LUMAHOK SA TARA TRABAHO, G? MEGA JOB FAIR!</h4>
+            <p>Matagumpay na isinagawa ang back-to-back na Tara Trabaho, G? Mega Job Fair noong October 1-2, 2026 sa SM City East Ortigas at Robinsons Metro East, na ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/pamahalaang-lungsod-ng-pasig-mas-palalakasin-ang-serbisyo-para-sa-mga-ofw-at-kanilang-pamilya-sa-pakikipagtulungan-sa-dmw-dole-owwa-at-tesda-582">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad039dc7de571792031196m.jpeg" alt="PAMAHALAANG LUNGSOD NG PASIG, MAS PALALAKASIN ANG SERBISYO PARA SA MGA OFW AT KANILANG PAMILYA SA PAKIKIPAGTULUNGAN SA DMW, DOLE, OWWA, AT TESDA" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>PAMAHALAANG LUNGSOD NG PASIG, MAS PALALAKASIN ANG SERBISYO PARA SA MGA OFW AT KANILANG PAMILYA SA PAKIKIPAGTULUNGAN SA DMW, DOLE, OWWA, AT TESDA</h4>
+            <p>Pormal na nilagdaan ng Pamahalaang Lungsod ng Pasig, Department of Migrant Workers (DMW) - National Capital Region (NCR) Department of Labor and Emplo ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/advisory-para-sa-atm-cash-card-holders-936">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad0393d610ab1792031037adv.jpeg" alt="ADVISORY    PARA SA ATM CASH CARD HOLDERS" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>ADVISORY    PARA SA ATM CASH CARD HOLDERS</h4>
+            <p>Naipasok na po sa inyong Benefit Cash Card (ATM) ang 2026 Third Quarter (July-September) Local Senior Pension mula sa Pamahalaang Lungsod ng Pasig.Maa ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/pcsdo-pasig-city-blood-collecting-team-magsasagawa-ng-blood-donation-drive-sa-manggahan-208">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03833df67a1792030771b1.jpg" alt="PCSDO, Pasig City Blood Collecting Team Magsasagawa ng Blood Donation Drive sa Manggahan" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>PCSDO, Pasig City Blood Collecting Team Magsasagawa ng Blood Donation Drive sa Manggahan</h4>
+            <p>Maaaring maliit na bagay lamang para sa atin ang pagdo-donate ng dugo, ngunit para sa mga nangangailangan nito, isa itong mahalagang pagkakataon upang ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/mga-panawagan-mula-sa-pasig-city-social-welfare-and-development-office-892">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03796b90281792030614panawagan.jpeg" alt="MGA PANAWAGAN MULA SA PASIG CITY SOCIAL WELFARE AND DEVELOPMENT OFFICE" srcset="">
+            </div>
+            <p class="date">October 6, 2026</p>
+            <h4>MGA PANAWAGAN MULA SA PASIG CITY SOCIAL WELFARE AND DEVELOPMENT OFFICE</h4>
+            <p>Kung may nakakakilala sa mga indibidwal na nasa mga panawagan o may impormasyon tungkol sa kanilang mga pamilya, hinihiling po namin ang inyong tulong ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/maligayang-ika-52-anibersaryo-mutya-ng-pasig-mega-market-327">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad036112199d1792030225mutya.jpeg" alt="Maligayang Ika-52 Anibersaryo, Mutya ng Pasig Mega Market!" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>Maligayang Ika-52 Anibersaryo, Mutya ng Pasig Mega Market!</h4>
+            <p>Dumalo at makisaya sa 52nd Anniversary Celebration ng Mutya ng Pasig Mega Market bukas, October 6, 2026 Martes, 10:00AM, sa Fountain Area ng Mutya ng  ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/traffic-advisory-october-5-2026-316">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad035c7104a21792030151oct-5.jpeg" alt="TRAFFIC ADVISORY - October 5, 2026" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>TRAFFIC ADVISORY - October 5, 2026</h4>
+            <p>In celebration of Araw ng Barangay Rosario, please be informed that a religious procession will be held on Wednesday, October 7, 2026, from 05:00PM on ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/opening-of-bids-october-5-2026-565">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad03580465301792030080bid.jpeg" alt="Opening of Bids - October 5, 2026" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>Opening of Bids - October 5, 2026</h4>
+            <p>EARLIER TODAY | October 5, 2026 | Submission and opening of bids at the Meeting Room 202, 2/F, Temporary Pasig City Hall for the procurement of the fo ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/flag-raising-ceremony-highlights-october-5-2026-855">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad034f97f4cb1792029945screenshot-2026-10-15-100300.png" alt="Flag Raising Ceremony Highlights | October 5, 2026" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>Flag Raising Ceremony Highlights | October 5, 2026</h4>
+            <p>Pasig City Mayor Vico Sotto addressed the following points during this week’s flag-raising ceremony:00:01–00:15: Acknowledgment of City officials  ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/watch-regular-session-12th-sangguniang-panlungsod-ng-pasig-october-5-2026-984">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02fb5c164a1792028597sk.png" alt="WATCH | Regular Session | 12th Sangguniang Panlungsod ng Pasig | October 5, 2026" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>WATCH | Regular Session | 12th Sangguniang Panlungsod ng Pasig | October 5, 2026</h4>
+            <p>WATCH | Regular Session | 12th Sangguniang Panlungsod ng Pasig&amp;nbsp;October 5, 2026&amp;nbsp;Vice Mayor Robert Vincent Jude B. Jaworski Jr.&amp;nbsp;Presiding ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/schedule-ng-libreng-anti-rabies-vaccination-849">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02a60df7c01792027232anti-rabies.jpeg" alt="Schedule ng LIBRENG Anti-Rabies Vaccination" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>Schedule ng LIBRENG Anti-Rabies Vaccination</h4>
+            <p>October 8, 2026 | Thursday | 09:00AM - 12:00NNAng schedule ng Anti-Rabies Vaccination para sa October 8, 2026 lamang ang bukas para sa mga taga-Barang ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/flag-raising-ceremony-october-5-2026-921">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad029db562441792027099screenshot-2026-10-15-091502.png" alt="Flag Raising Ceremony | October 5, 2026" srcset="">
+            </div>
+            <p class="date">October 5, 2026</p>
+            <h4>Flag Raising Ceremony | October 5, 2026</h4>
+            <p>Watch the full Livestream here ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/traffic-advisory-october-4-2026-144">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad028ca5b3f71792026826ta.jpeg" alt="TRAFFIC ADVISORY - October 4, 2026" srcset="">
+            </div>
+            <p class="date">October 4, 2026</p>
+            <h4>TRAFFIC ADVISORY - October 4, 2026</h4>
+            <p>Please be informed that from 11:00AM to 12:00MN on Tuesday, October 6, 2026, a music festival will be conducted as part of the Araw ng Barangay Rosari ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/updated-as-of-october-4-2026-4th-quarter-assessment-and-payment-of-business-taxes-and-fees-303">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad027b47561617920265484th.jpeg" alt="[UPDATED AS OF OCTOBER 4, 2026] 4th Quarter Assessment and Payment of Business Taxes and Fees" srcset="">
+            </div>
+            <p class="date">October 4, 2026</p>
+            <h4>[UPDATED AS OF OCTOBER 4, 2026] 4th Quarter Assessment and Payment of Business Taxes and Fees</h4>
+            <p>Please be reminded that the assessment and payment for the 4th quarter business taxes and fees is scheduled from October 1-31*, 2026. Failure to pay w ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/heads-up-property-owners-in-pasig-city-591">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02715723c11792026389pay.jpeg" alt="HEADS UP, PROPERTY OWNERS IN PASIG CITY!" srcset="">
+            </div>
+            <p class="date">October 3, 2026</p>
+            <h4>HEADS UP, PROPERTY OWNERS IN PASIG CITY!</h4>
+            <p>Settle your 2027 Real Property Tax early! Pay your 2027 Real Property Tax in full before December 28, 2026 and enjoy a 15% discount!Check the material ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/pasiguenos-inaanyayahang-makilahok-sa-webinar-tungkol-sa-adolescent-mental-health-737">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad026bf5acab1792026303kk.jpeg" alt="Pasigueños, Inaanyayahang Makilahok sa Webinar Tungkol sa Adolescent Mental Health" srcset="">
+            </div>
+            <p class="date">October 3, 2026</p>
+            <h4>Pasigueños, Inaanyayahang Makilahok sa Webinar Tungkol sa Adolescent Mental Health</h4>
+            <p>Tuwing buwan ng Oktubre, ipinagdiriwang ang World Mental Health Month upang bigyang-pansin ang kahalagahan ng mental health at ang pag-unawa sa mga ha ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/caspay-fridays-845">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad026468df271792026182aspin.jpeg" alt="CaSpay Fridays" srcset="">
+            </div>
+            <p class="date">October 3, 2026</p>
+            <h4>CaSpay Fridays</h4>
+            <p>(Libreng Kapon para sa lalaking puspin at aspin)Registration for October 9, October 16, October 23, and October 30, 2026I-check ang material mula sa @ ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/mahalagang-anunsyo-tungkol-sa-distribusyon-ng-3rd-quarter-local-senior-pension-940">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/15/6ad02572ce78d1792025970101.jpeg" alt="MAHALAGANG ANUNSYO TUNGKOL SA DISTRIBUSYON NG 3RD QUARTER LOCAL SENIOR PENSION" srcset="">
+            </div>
+            <p class="date">October 2, 2026</p>
+            <h4>MAHALAGANG ANUNSYO TUNGKOL SA DISTRIBUSYON NG 3RD QUARTER LOCAL SENIOR PENSION</h4>
+            <p>Sa darating na Martes, October 6, 2026, ay magkakaroon ng distribusyon ng Local Senior Pension (LSP) mula sa Pamahalaang Lungsod ng Pasig para sa ikat ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/traffic-advisory-october-2-2026-307">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf3d85bab7e1791966597img-2334.jpeg" alt="TRAFFIC ADVISORY - October 2, 2026" srcset="">
+            </div>
+            <p class="date">October 2, 2026</p>
+            <h4>TRAFFIC ADVISORY - October 2, 2026</h4>
+            <p>Please be informed that on Saturday, October 3, 2026, from 12:00NN to 12:00MN, a concert will be held in line with the Araw ng Barangay Rosario celebr ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/anunsyo-mula-sa-pasig-city-skills-development-office-413">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf3956d92ec17919655261.jpg" alt="ANUNSYO MULA SA Pasig City Skills Development Office" srcset="">
+            </div>
+            <p class="date">October 2, 2026</p>
+            <h4>ANUNSYO MULA SA Pasig City Skills Development Office</h4>
+            <p>Narito na ang pinakahihintay ng mga qualified graduate ng Computer Literacy Program at Livelihood Program na nagsipagtapos noong August 14, 2026. Gaga ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/family-day-2026-ipinagdiwang-sa-lungsod-ng-pasig-sa-pamamagitan-ng-serbisyo-at-talakayan-931">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf3887996f71791965319nfd.jpeg" alt="Family Day 2026, Ipinagdiwang sa Lungsod ng Pasig sa pamamagitan ng Serbisyo at Talakayan" srcset="">
+            </div>
+            <p class="date">October 2, 2026</p>
+            <h4>Family Day 2026, Ipinagdiwang sa Lungsod ng Pasig sa pamamagitan ng Serbisyo at Talakayan</h4>
+            <p>Pinangunahan ng Pamahalaang Lungsod ng Pasig, sa pamamagitan ng City Social Welfare and Development Office (Pasig CSWDO), katuwang ang Pantawid Pamily ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/bfp-pasig-hinikayat-ang-mga-business-owner-na-gamitin-ang-online-fsis-para-sa-mas-mabilis-na-fire-safety-inspection-transactions-835">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf1b16e580d1791957782reso.jpeg" alt="BFP-Pasig, Hinikayat ang mga Business Owner na Gamitin ang Online FSIS para sa Mas Mabilis na Fire Safety Inspection Transactions" srcset="">
+            </div>
+            <p class="date">October 1, 2026</p>
+            <h4>BFP-Pasig, Hinikayat ang mga Business Owner na Gamitin ang Online FSIS para sa Mas Mabilis na Fire Safety Inspection Transactions</h4>
+            <p>Ipinapabatid ng BFP NCR Pasig City sa lahat ng business owners na maaaring gamitin ang online payment facility nito na Bureau of Fire Protection (BFP) ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/libreng-sakay-x-pasigpass-367">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf1a58b73a61791957592libreng-sakay.jpg" alt="LIBRENG SAKAY x PASIGPASS" srcset="">
+            </div>
+            <p class="date">October 1, 2026</p>
+            <h4>LIBRENG SAKAY x PASIGPASS</h4>
+            <p>Kasunod ng paglunsad ng ANIM NA RUTA, maaari na ring gamitin ang inyong PasigPass QR Code para less hassle sa pag-fill out ng form sa Libreng Sakay.Da ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/pamahalaang-lungsod-ng-pasig-at-munisipalidad-ng-taytay-magtutulungan-para-sa-mas-maayos-na-biyahe-ng-kanilang-mga-mananakay-498">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf180227cfb17919569941.jpeg" alt="Pamahalaang Lungsod ng Pasig at Munisipalidad ng Taytay, Magtutulungan para sa Mas Maayos na Biyahe ng Kanilang mga Mananakay" srcset="">
+            </div>
+            <p class="date">October 1, 2026</p>
+            <h4>Pamahalaang Lungsod ng Pasig at Munisipalidad ng Taytay, Magtutulungan para sa Mas Maayos na Biyahe ng Kanilang mga Mananakay</h4>
+            <p>Pumasok sa isang kasunduan ang Pamahalaang Lungsod ng Pasig at Munisipalidad ng Taytay, sa pangunguna nina Pasig City Mayor Vico Sotto at Taytay Mayor ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/in-photos-inagurasyon-ng-bagong-gawang-kanal-at-bangketa-sa-sta-lucia-210">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf16c7cefb61791956679inagurasyon.jpeg" alt="IN PHOTOS: INAGURASYON NG BAGONG GAWANG KANAL AT BANGKETA SA STA. LUCIA" srcset="">
+            </div>
+            <p class="date">October 1, 2026</p>
+            <h4>IN PHOTOS: INAGURASYON NG BAGONG GAWANG KANAL AT BANGKETA SA STA. LUCIA</h4>
+            <p>Idinaos ng Pamahalaang Lungsod ng Pasig ang inagurasyon at pagbabasbas para sa bagong gawang kanal at bangketa sa Camia St., De Castro, Brgy. Sta. Luc ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/handa-na-ba-ang-inyong-resume-may-trabaho-para-sa-iyo-sa-tara-trabaho-g-mega-job-fair-257">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/14/6acf151fd66cd1791956255job-fair.jpeg" alt="HANDA NA BA ANG INYONG RESUME? MAY TRABAHO PARA SA IYO SA TARA TRABAHO, G? MEGA JOB FAIR!" srcset="">
+            </div>
+            <p class="date">September 30, 2026</p>
+            <h4>HANDA NA BA ANG INYONG RESUME? MAY TRABAHO PARA SA IYO SA TARA TRABAHO, G? MEGA JOB FAIR!</h4>
+            <p>Magsisimula na bukas ang Tara Trabaho, G? Mega Job Fair, kung saan iba’t ibang local companies at overseas manpower agencies ang magbibigay ng mga o ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/alam-niyo-ba-na-isa-sa-bawat-apat-na-tao-ang-maaaring-may-pinagdadaanan-pagdating-sa-kanilang-mental-health-778">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/13/6acdd386224e31791873926img-2323.jpeg" alt="Alam niyo ba na isa sa bawat apat na tao ang maaaring may pinagdadaanan pagdating sa kanilang mental health?" srcset="">
+            </div>
+            <p class="date">September 30, 2026</p>
+            <h4>Alam niyo ba na isa sa bawat apat na tao ang maaaring may pinagdadaanan pagdating sa kanilang mental health?</h4>
+            <p>Maaaring sila ay nakangiti at tila maayos sa panlabas, ngunit hindi natin alam kung gaano kabigat ang kanilang dinadala. Kaya mahalagang kumustahin an ...</p>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4 news-content">
+        <a href="https://pasigcity.gov.ph/news-and-releases/pamahalaang-lungsod-ng-pasig-nakiisa-sa-pagdiriwang-ng-world-rabies-day-2026-146">
+            <div class="news-image-container news-img">
+                <img class="news-image" src="https://assets.pasigcity.gov.ph/storage/news/2026/10/13/6acdd2a0534421791873696img-2311.jpeg" alt="Pamahalaang Lungsod ng Pasig, Nakiisa sa Pagdiriwang ng World Rabies Day 2026" srcset="">
+            </div>
+            <p class="date">September 30, 2026</p>
+            <h4>Pamahalaang Lungsod ng Pasig, Nakiisa sa Pagdiriwang ng World Rabies Day 2026</h4>
+            <p>Pinangunahan ng Veterinary Services Department of Pasig City ang Training of Trainers na pinamagatang “Empowering Educators: Rabies-Free Pasig City  ...</p>
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('load-more').style.display = 'block';
+    </script>
+            </div>
+
+                            <div class="text-center mt-4">
+                    <button id="loadMore" class="btn btn-primary" data-page="2">View More</button>
+                </div>
+                    </div>
+    </section>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', '#loadMore', function() {
+                let page = $(this).data('page');
+                let url = "https://pasigcity.gov.ph/news-and-releases?page=" + page;
+               
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    beforeSend: function() {
+                        $('#loadMore').text('Loading...');
+                    },
+                    success: function(response) {
+                        $('#news-list').append(response);
+                        $('#loadMore').text('View More').data('page', page + 1);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <p><strong>Vision</strong></p>
+                    <p><small>Pasig City envisions itself to be the exemplar of participatory good governance where
+                            communities enjoy a high quality of life in a competitive and inclusive economy,
+                            ecologically-balanced environment, innovative and resilient infrastructure guided by a
+                            responsive, transparent and accountable government.</small></p>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <p><strong>Portals</strong></p>
+                    <ul>
+                        
+                        <li><a href="https://pasigpass.pasigcity.gov.ph/" target="_blank">Pasig Pass</a></li>
+                        
+                        <li><a href="https://hrdo.gemspasig.ph/login" target="_blank">Pasig City GEMS</a></li>
+                        <li><a href="https://www.foi.gov.ph/requests?agency=USAP" target="_blank">FOI</a></li>
+                        
+                        <li><a href="https://www.facebook.com/PasigCityGADOffice" target="_blank">GAD Corner</a></li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <p style="color: #999; margin-bottom: 0" class="text-center">Powered By <a href="https://raksoct.com/" target="_blank"><img src="https://i.ibb.co/Ms2Xshg/rakso-logo.png" alt="rakso" width="80"></a></p>
+                </div>
+            </div>
+
+            <!-- END FOOTER -->
+
+            <script src="/js/classie.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    AOS.init({
+                        once: true,
+                        duration: 1000
+                    });
+                    var forEach = function(t, o, r) {
+                        if ("[object Object]" === Object.prototype.toString.call(t))
+                            for (var c in t) Object.prototype.hasOwnProperty.call(t, c) && o.call(r, t[c], c, t);
+                        else
+                            for (var e = 0, l = t.length; l > e; e++) o.call(r, t[e], e, t)
+                    };
+
+                    var hamburgers = document.querySelectorAll(".hamburger");
+                    if (hamburgers.length > 0) {
+                        forEach(hamburgers, function(hamburger) {
+                            hamburger.addEventListener("click", function() {
+                                this.classList.toggle("is-active");
+                            }, false);
+                        });
+                    }
+
+                    var menuRight = document.getElementById('cbp-spmenu-s2'),
+                        showRightPush = document.getElementById('showRightPush'),
+                        body = document.body;
+                        overlay = document.getElementById('menu-overlay');
+
+                    showRightPush.onclick = function() {
+                        classie.toggle(this, 'active');
+                        classie.toggle(body, 'cbp-spmenu-push-toleft');
+                        classie.toggle(menuRight, 'cbp-spmenu-open');
+                        classie.toggle(body, 'menu-overlay-active');
+                        disableOther('showRightPush');
+                    };
+                    overlay.onclick = function () {
+                        classie.remove(showRightPush, 'active');
+                        classie.remove(body, 'cbp-spmenu-push-toleft');
+                        classie.remove(menuRight, 'cbp-spmenu-open');
+                        classie.remove(body, 'menu-overlay-active');
+
+                        // Reset hamburger icon
+                        var activeBurger = document.querySelector('.hamburger.is-active');
+                        if (activeBurger) activeBurger.classList.remove('is-active');
+                    };
+
+                    if ($(window).width() >= 993) {
+                        classie.remove(body, 'cbp-spmenu-push-toleft');
+                        classie.remove(menuRight, 'cbp-spmenu-open');
+                        $('.hamburger').removeClass('is-active');
+                    };
+                    $(window).resize(function() {
+                        if ($(window).width() >= 993) {
+                            classie.remove(body, 'cbp-spmenu-push-toleft');
+                            classie.remove(menuRight, 'cbp-spmenu-open');
+                            $('.hamburger').removeClass('is-active');
+                        };
+                    });
+                    
+                    $('#news-slider').owlCarousel({
+                        autoplay: true,
+                        loop: true,
+                        margin: 10,
+                        dots: true,
+                        nav: true,
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            600: {
+                                items: 1
+                            },
+                            980: {
+                                items: 2
+                            },
+                            1199: {
+                                items: 3
+                            }
+                        }
+                    });
+                    $(".dropdown-menu").css('margin-top', 0);
+                    $(".dropdown")
+                        .mouseover(function() {
+                            $(this).addClass('show').attr('aria-expanded', "true");
+                            $(this).find('.dropdown-menu').addClass('show');
+                        })
+                        .mouseout(function() {
+                            $(this).removeClass('show').attr('aria-expanded', "false");
+                            $(this).find('.dropdown-menu').removeClass('show');
+                        });
+
+                        
+
+                });
+       
+
+            </script>
+
+            <script type="text/javascript">
+                $(document).on("click", ".download",function() {
+                    let uuid = $(this).data('uuid');
+                   
+                    $.ajax({
+                        type: 'POST',
+                        url: "https://pasigcity.gov.ph/api/download/counter/store",
+                        data: {
+                            uuid: uuid,
+                        },
+                        success: function(data) {
+
+                        }
+                    });
+                });
+
+            </script>
+            </body>
+
+</html>

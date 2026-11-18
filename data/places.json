@@ -1,0 +1,1357 @@
+{
+  "edition_date": "2026-10-28",
+  "places": [
+    {
+      "id": "temporary-city-hall",
+      "name": "Temporary Pasig City Hall",
+      "barangay_id": "rosario",
+      "address": "Eulogio Amang Rodriguez Avenue, Barangay Rosario, Pasig City",
+      "coordinates": null,
+      "regular_hours": null,
+      "evidence": {
+        "name": [
+          "S03:image:1"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "address": [
+          "S03:image:1"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Temporary Pasig City Hall",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "rosario",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Eulogio Amang Rodriguez Avenue, Barangay Rosario, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "robinsons-metro-east",
+      "name": "Robinsons Metro East",
+      "barangay_id": "dela-paz",
+      "address": "Marcos Highway, Barangay Dela Paz, Pasig City",
+      "coordinates": null,
+      "regular_hours": null,
+      "evidence": {
+        "name": [
+          "S11:article"
+        ],
+        "barangay_id": [
+          "S11:article"
+        ],
+        "address": [
+          "S11:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Robinsons Metro East",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "dela-paz",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field barangay_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Marcos Highway, Barangay Dela Paz, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field address",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "mutya-ng-pasig-mega-market",
+      "name": "Mutya ng Pasig Mega Market",
+      "barangay_id": "san-nicolas",
+      "address": null,
+      "coordinates": null,
+      "regular_hours": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "opens": "01:00",
+        "closes": "22:00",
+        "timezone": "Asia/Manila",
+        "excludes_holidays": false
+      },
+      "evidence": {
+        "name": [
+          "S01"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "regular_hours": [
+          "S01:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Mutya ng Pasig Mega Market",
+          "evidence": [
+            {
+              "source_id": "S01",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "san-nicolas",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "regular_hours",
+          "value": {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR",
+              "SA",
+              "SU"
+            ],
+            "opens": "01:00",
+            "closes": "22:00",
+            "timezone": "Asia/Manila",
+            "excludes_holidays": false
+          },
+          "evidence": [
+            {
+              "source_id": "S01",
+              "locator": "article text; field regular_hours",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "bpld-temporary-city-hall",
+      "parent_id": "temporary-city-hall",
+      "name": "BPLD - Temporary Pasig City Hall",
+      "barangay_id": "rosario",
+      "address": "1/F, Eulogio Amang Rodriguez Avenue, Barangay Rosario, Pasig City",
+      "coordinates": null,
+      "business_tax_schedule": [
+        {
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "18:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        }
+      ],
+      "schedule_scope": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays. Do not apply to other offices or services.",
+      "phone": {
+        "number": "0286431111",
+        "extension": "1225",
+        "scope": "BPLD business-tax inquiries",
+        "call_verified": false
+      },
+      "email": "bpld.bridgetowne@pasigcity.gov.ph",
+      "bfp_assistance": true,
+      "evidence": {
+        "address": [
+          "S03:image:1"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "business_tax_schedule": [
+          "S03:image:1"
+        ],
+        "phone": [
+          "S03:image:1"
+        ],
+        "email": [
+          "S03:image:1"
+        ],
+        "bfp_assistance": [
+          "S02:article"
+        ]
+      },
+      "verify": true,
+      "kind": "service_desk",
+      "facts": [
+        {
+          "id": "name",
+          "value": "BPLD - Temporary Pasig City Hall",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "rosario",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "1/F, Eulogio Amang Rodriguez Avenue, Barangay Rosario, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "business_tax_schedule",
+          "value": [
+            {
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "18:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field business_tax_schedule",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays. Do not apply to other offices or services.",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone",
+          "value": {
+            "number": "0286431111",
+            "extension": "1225",
+            "scope": "BPLD business-tax inquiries",
+            "call_verified": false
+          },
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field phone",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "email",
+          "value": "bpld.bridgetowne@pasigcity.gov.ph",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field email",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bfp_assistance",
+          "value": true,
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field bfp_assistance",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "bpld-mega-market",
+      "name": "BPLD - Mutya ng Pasig Mega Market",
+      "parent_id": "mutya-ng-pasig-mega-market",
+      "barangay_id": "san-nicolas",
+      "address": "3/F, Mutya ng Pasig Mega Market, Barangay San Nicolas, Pasig City",
+      "coordinates": null,
+      "business_tax_schedule": [
+        {
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "18:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        }
+      ],
+      "schedule_scope": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+      "phone": {
+        "number": "0286431111",
+        "extension": "1221",
+        "scope": "BPLD business-tax inquiries",
+        "call_verified": false
+      },
+      "email": "bpldmutya@gmail.com",
+      "bfp_assistance": true,
+      "evidence": {
+        "address": [
+          "S03:image:1"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "business_tax_schedule": [
+          "S03:image:1"
+        ],
+        "phone": [
+          "S03:image:1"
+        ],
+        "email": [
+          "S03:image:1"
+        ],
+        "bfp_assistance": [
+          "S02:article"
+        ]
+      },
+      "verify": true,
+      "kind": "service_desk",
+      "facts": [
+        {
+          "id": "name",
+          "value": "BPLD - Mutya ng Pasig Mega Market",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "san-nicolas",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "3/F, Mutya ng Pasig Mega Market, Barangay San Nicolas, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "business_tax_schedule",
+          "value": [
+            {
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "18:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field business_tax_schedule",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone",
+          "value": {
+            "number": "0286431111",
+            "extension": "1221",
+            "scope": "BPLD business-tax inquiries",
+            "call_verified": false
+          },
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field phone",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "email",
+          "value": "bpldmutya@gmail.com",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field email",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bfp_assistance",
+          "value": true,
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field bfp_assistance",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "city-hall-annex-1",
+      "name": "Pasig City Hall Annex 1",
+      "barangay_id": "ugong",
+      "address": "3/F, Ayala Malls The 30th, Barangay Ugong, Pasig City",
+      "coordinates": null,
+      "business_tax_schedule": [
+        {
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "18:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        },
+        {
+          "days": [
+            "SA"
+          ],
+          "opens": "08:00",
+          "closes": "17:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        }
+      ],
+      "schedule_scope": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+      "phone": {
+        "number": "0286431111",
+        "extension": "1158",
+        "scope": "BPLD business-tax inquiries",
+        "call_verified": false
+      },
+      "email": "bpld.annex1@pasigcity.gov.ph",
+      "bfp_assistance": true,
+      "evidence": {
+        "address": [
+          "S03:image:1"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "business_tax_schedule": [
+          "S03:image:1"
+        ],
+        "phone": [
+          "S03:image:1"
+        ],
+        "email": [
+          "S03:image:1"
+        ],
+        "bfp_assistance": [
+          "S02:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Pasig City Hall Annex 1",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "ugong",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "3/F, Ayala Malls The 30th, Barangay Ugong, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "business_tax_schedule",
+          "value": [
+            {
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "18:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            },
+            {
+              "days": [
+                "SA"
+              ],
+              "opens": "08:00",
+              "closes": "17:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field business_tax_schedule",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone",
+          "value": {
+            "number": "0286431111",
+            "extension": "1158",
+            "scope": "BPLD business-tax inquiries",
+            "call_verified": false
+          },
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field phone",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "email",
+          "value": "bpld.annex1@pasigcity.gov.ph",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field email",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bfp_assistance",
+          "value": true,
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field bfp_assistance",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "city-hall-annex-2",
+      "parent_id": "robinsons-metro-east",
+      "name": "Pasig City Hall Annex 2",
+      "barangay_id": "dela-paz",
+      "address": "3/F, Robinsons Metro East, Barangay Dela Paz, Pasig City",
+      "coordinates": null,
+      "business_tax_schedule": [
+        {
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "18:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        },
+        {
+          "days": [
+            "SA"
+          ],
+          "opens": "08:00",
+          "closes": "17:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        }
+      ],
+      "schedule_scope": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+      "phone": {
+        "number": "0286431111",
+        "extension": "2241",
+        "scope": "BPLD business-tax inquiries",
+        "call_verified": false
+      },
+      "email": "bpld.annex2@pasigcity.gov.ph",
+      "bfp_assistance": true,
+      "evidence": {
+        "address": [
+          "S03:image:1"
+        ],
+        "barangay_id": [
+          "S03:image:1"
+        ],
+        "business_tax_schedule": [
+          "S03:image:1"
+        ],
+        "phone": [
+          "S03:image:1"
+        ],
+        "email": [
+          "S03:image:1"
+        ],
+        "bfp_assistance": [
+          "S02:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "facts": [
+        {
+          "id": "name",
+          "value": "Pasig City Hall Annex 2",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "dela-paz",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field barangay_id",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "3/F, Robinsons Metro East, Barangay Dela Paz, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "business_tax_schedule",
+          "value": [
+            {
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "18:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            },
+            {
+              "days": [
+                "SA"
+              ],
+              "opens": "08:00",
+              "closes": "17:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field business_tax_schedule",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "Fourth-quarter 2026 business-tax assessment and payment; from October 5; excludes holidays.",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "phone",
+          "value": {
+            "number": "0286431111",
+            "extension": "2241",
+            "scope": "BPLD business-tax inquiries",
+            "call_verified": false
+          },
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field phone",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "email",
+          "value": "bpld.annex2@pasigcity.gov.ph",
+          "evidence": [
+            {
+              "source_id": "S03",
+              "locator": "image 1; field email",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "bfp_assistance",
+          "value": true,
+          "evidence": [
+            {
+              "source_id": "S02",
+              "locator": "article text; field bfp_assistance",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "pcist-manggahan",
+      "name": "Pasig City Institute of Science and Technology - Manggahan Campus",
+      "barangay_id": "manggahan",
+      "address": "Kaayusan Street, Karangalan Village, Barangay Manggahan, Pasig City",
+      "coordinates": null,
+      "regular_hours": null,
+      "phone": null,
+      "evidence": {
+        "name": [
+          "S06:article"
+        ],
+        "barangay_id": [
+          "S06:article"
+        ],
+        "address": [
+          "S06:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Pasig City Institute of Science and Technology - Manggahan Campus",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "manggahan",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field barangay_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Kaayusan Street, Karangalan Village, Barangay Manggahan, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S06",
+              "locator": "article text; field address",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "camia-de-castro",
+      "name": "Camia Street, De Castro",
+      "barangay_id": "santa-lucia",
+      "address": "Camia Street, De Castro, Barangay Santa Lucia, Pasig City",
+      "coordinates": null,
+      "project": {
+        "reported_inauguration": "2026-10-01",
+        "reported_cost_php": 2700000,
+        "cost_is_approximate": true,
+        "reported_length_m": 320,
+        "scope": "Drainage and sidewalk improvements",
+        "flood_safety_assessment": null
+      },
+      "evidence": {
+        "address": [
+          "S07:article"
+        ],
+        "barangay_id": [
+          "S07:article"
+        ],
+        "project": [
+          "S07:article"
+        ]
+      },
+      "verify": true,
+      "kind": "street",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Camia Street, De Castro",
+          "evidence": [
+            {
+              "source_id": "S07",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "santa-lucia",
+          "evidence": [
+            {
+              "source_id": "S07",
+              "locator": "article text; field barangay_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Camia Street, De Castro, Barangay Santa Lucia, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S07",
+              "locator": "article text; field address",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "project",
+          "value": {
+            "reported_inauguration": "2026-10-01",
+            "reported_cost_php": 2700000,
+            "cost_is_approximate": true,
+            "reported_length_m": 320,
+            "scope": "Drainage and sidewalk improvements",
+            "flood_safety_assessment": null
+          },
+          "evidence": [
+            {
+              "source_id": "S07",
+              "locator": "article text; field project",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "mega-parking-1",
+      "name": "Pasig City Mega Parking I",
+      "barangay_id": "san-nicolas",
+      "address": "Caruncho Avenue, Barangay San Nicolas, Pasig City; near Mutya ng Pasig Mega Market",
+      "coordinates": null,
+      "regular_hours": null,
+      "current_open_status": null,
+      "evidence": {
+        "name": [
+          "S09:article"
+        ],
+        "barangay_id": [
+          "S09:article"
+        ],
+        "address": [
+          "S09:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Pasig City Mega Parking I",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "san-nicolas",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field barangay_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Caruncho Avenue, Barangay San Nicolas, Pasig City; near Mutya ng Pasig Mega Market",
+          "evidence": [
+            {
+              "source_id": "S09",
+              "locator": "article text; field address",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "sm-city-east-ortigas",
+      "name": "SM City East Ortigas",
+      "barangay_id": "santa-lucia",
+      "address": "Ortigas Avenue Extension, Barangay Santa Lucia, Pasig City",
+      "coordinates": null,
+      "regular_hours": null,
+      "evidence": {
+        "name": [
+          "S11:article"
+        ],
+        "barangay_id": [
+          "S11:article"
+        ],
+        "address": [
+          "S11:article"
+        ]
+      },
+      "verify": true,
+      "kind": "building",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "SM City East Ortigas",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field name",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "barangay_id",
+          "value": "santa-lucia",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field barangay_id",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "Ortigas Avenue Extension, Barangay Santa Lucia, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S11",
+              "locator": "article text; field address",
+              "method": "article_text"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    },
+    {
+      "id": "revolving-tower-rpt",
+      "name": "Real property tax transaction site - Revolving Tower",
+      "barangay_id": null,
+      "address": "2/F, Revolving Tower, Pasig City",
+      "coordinates": null,
+      "rpt_schedule": [
+        {
+          "days": [
+            "MO",
+            "TU",
+            "WE",
+            "TH",
+            "FR"
+          ],
+          "opens": "08:00",
+          "closes": "17:00",
+          "timezone": "Asia/Manila",
+          "excludes_holidays": true
+        }
+      ],
+      "schedule_scope": "Real property tax payment, excluding holidays; not viewing-deck hours.",
+      "evidence": {
+        "address": [
+          "S04:image:3"
+        ],
+        "rpt_schedule": [
+          "S04:image:3"
+        ]
+      },
+      "verify": true,
+      "kind": "service_desk",
+      "parent_id": null,
+      "facts": [
+        {
+          "id": "name",
+          "value": "Real property tax transaction site - Revolving Tower",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "image 3; field name",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "address",
+          "value": "2/F, Revolving Tower, Pasig City",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "image 3; field address",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "rpt_schedule",
+          "value": [
+            {
+              "days": [
+                "MO",
+                "TU",
+                "WE",
+                "TH",
+                "FR"
+              ],
+              "opens": "08:00",
+              "closes": "17:00",
+              "timezone": "Asia/Manila",
+              "excludes_holidays": true
+            }
+          ],
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "image 3; field rpt_schedule",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        },
+        {
+          "id": "schedule_scope",
+          "value": "Real property tax payment, excluding holidays; not viewing-deck hours.",
+          "evidence": [
+            {
+              "source_id": "S04",
+              "locator": "image 3; field schedule_scope",
+              "method": "visual_attachment"
+            }
+          ],
+          "effective_from": null,
+          "effective_until": null
+        }
+      ]
+    }
+  ]
+}

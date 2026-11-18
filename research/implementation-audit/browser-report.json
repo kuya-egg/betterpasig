@@ -1,0 +1,19 @@
+{
+  "html_pages": 439,
+  "checked_internal_links": 35665,
+  "browser_checks": [
+    "fil keyboard search -> place",
+    "fil event midnight expiry",
+    "fil stale feed removed, search archived, static archive revealed",
+    "/en keyboard search -> place",
+    "/en event midnight expiry",
+    "/en stale feed removed, search archived, static archive revealed",
+    "No-JS dated source action, no live registration promise"
+  ],
+  "payload": {
+    "local_gzip_bytes": 128793,
+    "decoded_bytes": 387246,
+    "under_300KB": true
+  },
+  "result": "PASS"
+}
