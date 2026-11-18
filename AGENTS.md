@@ -47,7 +47,7 @@ Versions below are the ones declared in `package.json` and `.node-version` on 20
 
 | Layer | Technology | Pinned version | Verified (YYYY-MM-DD) | Source |
 |-------|------------|----------------|-----------------------|--------|
-| Runtime | Node.js | 22.22.0 | 2026-10-22 | `.node-version` |
+| Runtime | Node.js | 22.23.5 | 2026-11-18 | `.node-version` |
 | Runtime | Bun | 1.4.2 | 2026-10-22 | `package.json` `packageManager` |
 | Language | TypeScript | 6 | 2026-10-22 | `package.json` |
 | Framework | Astro | 7.4.1 | 2026-10-22 | `package.json` |
