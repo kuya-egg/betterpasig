@@ -1,6 +1,5 @@
 ---
-// Sources and trust line: where the facts come from, the "being checked" label, and how to report a mistake.
-import Verify from "../Verify.astro";
+// Sources and trust line: where the facts come from and how to report a mistake.
 import { href, langFromUrl, ui } from "../../i18n";
 
 const lang = langFromUrl(Astro.url);
@@ -11,7 +10,7 @@ const t = ui[lang];
   <div class="wrap bp-trust__content">
     <div class="bp-trust__text">
       <h2 id="pinagmulan-h">{t.trustTitle}</h2>
-      <p>{t.trustBefore} <strong>{t.trustStrong}</strong>{t.trustAfter} <Verify /></p>
+      <p>{t.trustBefore} <strong>{t.trustStrong}</strong>{t.trustAfter}</p>
     </div>
     <div class="bp-trust__links">
       <a class="pill pill--secondary" href={href(lang, "/tungkol/")}>{t.aboutTitle}</a>

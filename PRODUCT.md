@@ -16,7 +16,7 @@ BetterPasig puts every City of Pasig service, benefit, official and public figur
 
 ## Positioning
 
-A guide and tracker, not a watchdog. Pasig's records are already open (local FOI ordinance, Ugnayan sa Pasig, livestreamed bidding) but scattered across charter PDFs and Facebook posts; BetterPasig organizes them, shows the source and checked date on every fact, and labels anything unconfirmed "Sinusuri pa". It is not the official website of Pasig City.
+A guide and tracker, not a watchdog. Pasig's records are already open (local FOI ordinance, Ugnayan sa Pasig, livestreamed bidding) but scattered across charter PDFs and Facebook posts; BetterPasig organizes them, shows the source and checked date on published facts, and withholds unconfirmed data. It is not the official website of Pasig City.
 
 ## Operating Context
 
@@ -26,13 +26,13 @@ People use it on phones, often outdoors or in line at an office, sometimes in an
 
 - Astro static site on Cloudflare Pages; Pagefind search; no backend, no accounts, no tracking cookies.
 - Every page under 300 KB on first load; no client JS unless the page needs it.
-- Every fact keeps its source and checked date; `null` is hidden, never guessed; `verify: true` shows "Sinusuri pa".
+- Every fact keeps its source and checked date; `null` and data flagged `verify: true` stay off the public site.
 - Not-official disclaimer on every page.
 
 ## Brand Commitments
 
 - Name: BetterPasig, part of BetterGov.ph.
-- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency, amber only for "Sinusuri pa" (`src/styles/site.css`). The public site uses a single light theme.
+- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency (`src/styles/site.css`). The public site uses a single light theme.
 - The logo mark is the real outline of Pasig from PSA boundaries (`design/logo/`); never the official city seal.
 - The 30-barangay map is a signature element.
 - City motto "Umaagos ang Pag-asa" (Hope Flows), from `data/city.json`; the city is known for transparency.

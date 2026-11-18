@@ -1,7 +1,6 @@
 ---
 // /buhay/<id>/: every service and benefit for one life event, then the events people often need next.
 import Site from "../layouts/Site.astro";
-import Verify from "./Verify.astro";
 import PageHead from "./site/PageHead.astro";
 import LifeIcon from "./home/LifeIcon.astro";
 import { href, langFromUrl, ui } from "../i18n";
@@ -46,7 +45,6 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
                       <span class="bp-life__n" aria-hidden="true">{index + 1}</span>
                       <span class="bp-life__main">
                         <span class="t-card">{en ? service.title_en : service.title_fil}</span>
-                        {service.verify && <Verify />}
                         <span class="t-small muted bp-life__meta">
                           <span>{t.office}: {officeName(service.office)}</span>
                           {service.fee && <span>{t.fee}: {service.fee}</span>}
@@ -70,7 +68,6 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
                       <a class="cd bp-life__step" href={href(lang, `/tulong/#${program.id}`)}>
                         <span class="bp-life__main">
                           <span class="t-card">{en ? program.title_en : program.title_fil}</span>
-                          {program.verify && <Verify />}
                           <span class="t-small muted bp-life__meta"><span>{pick(program.for_fil, program.for_en)}</span></span>
                         </span>
                         <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>

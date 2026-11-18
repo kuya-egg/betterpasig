@@ -2,7 +2,6 @@
 import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
-import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
 import { categories, cityHallHotline, mapsHref, officeById, programs, servicesRetrieved, telHref, type Service } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
@@ -88,7 +87,6 @@ function lines(value: unknown): string[] {
         {title}
         <Fragment slot="actions">
           {summary && <p class="lead bp-svc__summary" lang={detailLanguage}>{summary}</p>}
-          {service.verify && <Verify />}
           {online && (
             <ButtonLink className="bp-svc__online" href={online}>
               {onlineHost === "facebook.com" ? (en ? "Official office page" : "Opisyal na pahina ng tanggapan") : t.doOnline}

@@ -14,10 +14,6 @@ const rows = [...new Set(refs.map((ref) => ref.split(":")[0]))]
 ---
 <div class="bp-source t-small">
   <p>{en ? "Checked against an official announcement." : "Inihambing ang impormasyon sa opisyal na anunsyo."}</p>
-  <p>
-    <span class="bp-source__flag" title={en ? "The announcement was checked; a separate maintainer review is still pending." : "Sinuri na ang anunsyo. Hinihintay pa ang pagsusuri ng isa pang boluntaryo."}>{en ? "Being checked" : "Sinusuri pa"}</span>
-    {en ? "Independent review is still pending." : "Susuriin pa ito ng isa pang boluntaryo."}
-  </p>
   {rows.map((source) => (
     <p data-source-date={source.published_date}>
       {source.publisher}, {formatDate(lang, source.published_date)}. {en ? "Checked" : "Sinuri"} {formatDate(lang, source.checked_at.slice(0, 10))}.{" "}
@@ -36,11 +32,6 @@ const rows = [...new Set(refs.map((ref) => ref.split(":")[0]))]
   }
   .bp-source p {
     margin: 0;
-  }
-  .bp-source__flag {
-    font-weight: 600;
-    color: var(--amber);
-    margin-right: var(--s-1);
   }
   .bp-source a {
     display: inline-flex;

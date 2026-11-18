@@ -1,6 +1,5 @@
 ---
 // Benefits band: featured city programs on a pale panel, each linking to /tulong/#<id>.
-import Verify from "../Verify.astro";
 import { href, langFromUrl, ui } from "../../i18n";
 import { programs } from "../../lib/data";
 import { arrowPath } from "./content";
@@ -9,11 +8,7 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 const en = lang === "en";
 const featuredIds = ["local-senior-pension", "pagasa-scholarship", "solo-parent-subsidy", "pwd-cash-gift"];
-const featured = featuredIds.map((id) => {
-  const item = programs.find((program) => program.id === id);
-  if (!item) throw new Error(`Missing featured program: ${id}`);
-  return item;
-});
+const featured = featuredIds.flatMap((id) => programs.find((program) => program.id === id) ?? []);
 ---
 
 <section class="section--home bp-ben" aria-labelledby="ben-h">
@@ -29,7 +24,7 @@ const featured = featuredIds.map((id) => {
         {featured.map((program) => (
           <li>
             <a class="cd bp-ben__card" href={href(lang, `/tulong/#${program.id}`)}>
-              <span class="bp-ben__title">{en ? program.title_en : program.title_fil}{program.verify && <Verify />}</span>
+              <span class="bp-ben__title">{en ? program.title_en : program.title_fil}</span>
               <span class="bp-ben__foot">
                 <span class="bp-ben__benefit">{en ? program.benefit_en : program.benefit_fil}</span>
                 <svg class="ic ar" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d={arrowPath} /></svg>

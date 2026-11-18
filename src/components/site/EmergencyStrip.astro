@@ -1,5 +1,4 @@
 ---
-import Verify from "../Verify.astro";
 import { href, langFromUrl, ui } from "../../i18n";
 import { emergencyHotlines, telHref } from "../../lib/data";
 
@@ -17,7 +16,6 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
             <span>{line.id === "pasig-emergency-hotline" ? "Pasig DRRMO" : t.guideNational}</span>
             <strong>{line.numbers[0]}</strong>
           </a>
-          {line.verify && <Verify />}
         </li>
       ))}
     </ul>

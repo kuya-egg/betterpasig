@@ -1,7 +1,6 @@
 ---
 import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
-import Verify from "./Verify.astro";
 import PageHead from "./site/PageHead.astro";
 import IbaPaTabs from "./IbaPaTabs.astro";
 import { city, site, sourceLabel } from "../lib/data";
@@ -70,7 +69,6 @@ const asOf = (fact: (typeof city.facts)[number]) =>
               <span class="rows__name">{lang === "en" ? fact.label_en : fact.label_fil}</span>
               <span class="rows__value">
                 {lang === "en" ? fact.value_en : fact.value_fil}
-                {fact.verify && <Verify />}
               </span>
               <div class="bp-about__meta t-small muted">
                 {asOf(fact) && (
@@ -78,7 +76,7 @@ const asOf = (fact: (typeof city.facts)[number]) =>
                     {t.aboutAsOf}: {asOf(fact)}
                   </p>
                 )}
-                {(lang === "en" ? fact.note_en : fact.note_fil) && (fact.verify || fact.id === "land-area") && (
+                {(lang === "en" ? fact.note_en : fact.note_fil) && fact.id === "land-area" && (
                   <p>{lang === "en" ? fact.note_en : fact.note_fil}</p>
                 )}
                 <p>
@@ -189,9 +187,6 @@ const asOf = (fact: (typeof city.facts)[number]) =>
     grid-column: 1 / -1;
     display: grid;
     gap: var(--s-1);
-  }
-  .bp-about__rows :global(.verify) {
-    margin-left: var(--s-2);
   }
   .bp-about__checked,
   .bp-about__note {
