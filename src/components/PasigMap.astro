@@ -8,7 +8,7 @@ import Verify from "./Verify.astro";
 import { isSourceFresh } from "../lib/freshness";
 
 const lang = langFromUrl(Astro.url);
-const t = ui[lang];
+const t = ui.fil;
 const idByName = new Map(barangays.map((barangay) => [barangay.name, barangay.id]));
 const choices = [...barangays].sort((a, b) => a.name.localeCompare(b.name, "fil"));
 const recentPlaceDates = (barangayId: string) =>
@@ -30,7 +30,7 @@ function districtLabel(district: number | null): string | null {
 }
 ---
 
-<section class="section" id="mapa" aria-labelledby="mapa-h">
+<section class="section bp-barangay" lang="fil" id="mapa" aria-labelledby="mapa-h">
   <div class="wrap grid grid--top bp-map">
     <div class="span-5 info">
       <div class="section-head">
@@ -53,7 +53,7 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.district}</dt>
                   <dd>
                     {district}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
@@ -62,7 +62,7 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.captain}</dt>
                   <dd>
                     {barangay.punong_barangay}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
@@ -71,17 +71,17 @@ function districtLabel(district: number | null): string | null {
                   <dt>{t.address}</dt>
                   <dd>
                     {barangay.hall_address}
-                    {barangay.verify && <Verify />}
+                    {barangay.verify && <Verify lang="fil" />}
                   </dd>
                 </div>
               )}
               <div>
-                <dt>{lang === "en" ? "Recent places" : "Mga bagong lugar"}</dt>
+                <dt>Mga bagong lugar</dt>
                 <dd data-place-source-dates={JSON.stringify(dates)}>{dates.filter((date) => isSourceFresh(date, new Date())).length}</dd>
               </div>
               <div class="more">
                 <a class="link" href={href(lang, `/barangay/${barangay.id}/`)}>
-                  {lang === "en" ? "Open barangay details" : "Tingnan ang detalye ng barangay"}
+                  Tingnan ang detalye ng barangay
                 </a>
               </div>
             </dl>
@@ -105,7 +105,7 @@ function districtLabel(district: number | null): string | null {
       </svg>
     </div>
     <div class="bp-map__directory">
-      <h3>{lang === "en" ? "Browse barangays by name" : "Mga barangay ayon sa pangalan"}</h3>
+      <h3>Mga barangay ayon sa pangalan</h3>
       <ul>
         {choices.map((barangay) => (
           <li><a href={href(lang, `/barangay/${barangay.id}/`)}>{barangay.name}</a></li>
@@ -182,7 +182,11 @@ function districtLabel(district: number | null): string | null {
 
 <style>
   /* Hallmark · dropped #mapa, {langFromUrl(Astro.url) === "en" ? `/en/barangay/${barangay.id}/` : `/barangay/${barangay.id}/`} · the same barangay pages are linked through href(lang, `/barangay/<id>/`) and the map anchor through href(lang, "/#mapa") in the nav and footer */
+  .bp-barangay { background: var(--bg); }
   .bp-map__art {
+    background: var(--surface);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
     display: flex;
     justify-content: center;
     align-items: flex-start;

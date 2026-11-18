@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import { programs, programsRetrieved, sourceLabel } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
@@ -8,7 +8,7 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Kit title={t.benefitsTitle} description={t.benefitsIntro}>
+<Site title={t.benefitsTitle} description={t.benefitsIntro}>
   <section class="section section--flow bp-benefits" aria-labelledby="benefits-h">
     <div class="wrap">
       <div class="section-head">
@@ -72,13 +72,16 @@ const t = ui[lang];
       );
     })
   }
-</Kit>
+</Site>
 
 <style>
   .bp-benefits__jump {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
     column-gap: var(--s-5);
+    padding: var(--s-5);
+    border-radius: var(--r-lg);
+    background: var(--paper);
   }
   .bp-benefits__jump a, .bp-benefits__services {
     min-height: 3rem;

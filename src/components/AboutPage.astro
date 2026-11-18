@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import { city, site, sourceLabel } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
@@ -12,7 +12,7 @@ const asOf = (fact: (typeof city.facts)[number]) =>
   (lang === "en" ? ("as_of_en" in fact ? fact.as_of_en : null) : ("as_of_fil" in fact ? fact.as_of_fil : null)) ?? fact.as_of ?? null;
 ---
 
-<Kit title={t.aboutTitle} description={t.aboutMission}>
+<Site title={t.aboutTitle} description={t.aboutMission}>
   <section class="section section--flow" aria-labelledby="tungkol-h">
     <div class="wrap">
       <div class="section-head">
@@ -127,7 +127,7 @@ const asOf = (fact: (typeof city.facts)[number]) =>
       </div>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .bp-about__h {

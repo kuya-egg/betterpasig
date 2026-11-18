@@ -2,11 +2,11 @@
 // The source lines under a recent notice: who published it, when, when it was checked, and a stale warning
 // past 30 days (client-freshness adds the same warning when the page outlives its build).
 import { pasigSources } from "../lib/data";
-import { formatDate, langFromUrl } from "../i18n";
+import { formatDate, langFromUrl, type Lang } from "../i18n";
 import { isSourceFresh } from "../lib/freshness";
-const lang = langFromUrl(Astro.url);
+interface Props { refs: string[]; lang?: Lang }
+const lang = Astro.props.lang ?? langFromUrl(Astro.url);
 const en = lang === "en";
-interface Props { refs: string[] }
 const { refs } = Astro.props;
 const rows = [...new Set(refs.map((ref) => ref.split(":")[0]))]
   .map((id) => pasigSources.find((source) => source.id === id))

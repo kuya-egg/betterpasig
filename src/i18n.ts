@@ -63,7 +63,7 @@ export const ui = {
     useDarkMode: "Gawing madilim ang display",
 
     searchLabel: "Maghanap ng serbisyo",
-    searchPlaceholder: "Halimbawa: amilyar, birth certificate",
+    searchPlaceholder: "Hal. amilyar, ID",
     searchButton: "Hanapin",
     noMatch: "Walang resulta. Subukan ang ibang salita o buksan ang listahan ng mga serbisyo.",
     matchOne: "1 resulta",
@@ -152,9 +152,9 @@ export const ui = {
     barangayOfficialsHeading: "Mga opisyal ng barangay",
     barangayOfficialsNote: "Nakalista rito ang mga opisyal ng 30 barangay. Kinukumpirma pa ang mga pangalan sa opisyal na sanggunian.",
     punongBarangay: "Punong barangay",
-    skChair: "SK Chairperson",
+    skChair: "Tagapangulo ng SK",
     kagawad: "Mga kagawad",
-    hallAddress: "Barangay hall",
+    hallAddress: "Tanggapan ng barangay",
     phones: "Telepono",
 
     // Page /emergency

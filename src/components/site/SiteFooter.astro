@@ -1,5 +1,5 @@
 ---
-import Mark from "../../../design/logo/mark-blue.svg";
+import Mark from "../../../design/logo/mark-white.svg";
 import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
@@ -31,7 +31,7 @@ const columns = [
   {
     title: t.footCity,
     links: [
-      { label: t.mapTitle, url: href(lang, "/#mapa") },
+      { label: t.navBarangay, url: href(lang, "/#mapa") },
       { label: t.guideExplore, url: href(lang, "/#pasyalan") },
       { label: t.officialsPageTitle, url: href(lang, "/opisyal/") },
       { label: t.fundsTitle, url: href(lang, "/pondo/") },

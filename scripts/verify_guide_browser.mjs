@@ -84,6 +84,8 @@ try {
       taskIds.map((id) => `${locale}/serbisyo/${id}/`),
     );
     assert.equal(await layout.locator(".bp-map__directory a").count(), 30);
+    assert.equal(await layout.locator("#mapa").getAttribute("lang"), "fil");
+    assert.equal(await layout.locator("#mapa-h").innerText(), "Ang 30 barangay ng Pasig");
     const hasEnglish = locale === "/en";
     await layout.getByRole("navigation", { name: hasEnglish ? "Main menu" : "Pangunahing menu" })
       .getByRole("link", { name: hasEnglish ? "Explore Pasig" : "Pasyalan" }).click();
@@ -99,13 +101,20 @@ try {
     await summary.press("Escape");
     assert.equal(await details.evaluate((element) => element.open), false);
 
+    await layout.goto(origin + locale + "/barangay/maybunga/");
+    assert.equal(await layout.locator("main").getAttribute("lang"), "fil");
+    assert.match(await layout.locator("main").innerText(), /Punong barangay/);
+    assert.doesNotMatch(await layout.locator("main").innerText(), /Directory source|Published numbers/);
+    await layout.goto(origin + locale + "/opisyal/#opisyal-barangay");
+    assert.equal(await layout.locator("#opisyal-barangay").getAttribute("lang"), "fil");
+
     await layout.goto(origin + locale + "/serbisyo/scholarship-new/");
     assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /Pasig residents/ : /taga-Pasig/);
     assert.ok(await layout.locator("#service-requirements").isVisible());
     await layout.goto(origin + locale + "/serbisyo/business-permit-renewal/");
     assert.match(await layout.locator(".bp-svc__instructions").innerText(), hasEnglish ? /Proof of gross sales/ : /Patunay ng gross sales/);
     await layout.goto(origin + locale + "/serbisyo/aics/");
-    assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /residents in crisis/ : /taga-Pasig na nasa krisis/);
+    assert.match(await layout.locator(".section-head p").innerText(), hasEnglish ? /residents in crisis/ : /taga-Pasig.*krisis/);
 
     const searchPage = await browser.newPage();
     await searchPage.goto(origin + locale + "/serbisyo/");
@@ -150,8 +159,8 @@ try {
   const input = searchStates.getByRole("combobox");
   await input.fill("zzqqxnoresult");
   const status = searchStates.locator(".bp-search__status");
-  await searchStates.waitForFunction(() => document.querySelector(".bp-search__status").textContent.includes("Walang tugma"));
-  assert.ok((await status.innerText()).includes("Walang tugma"));
+  await searchStates.waitForFunction(() => document.querySelector(".bp-search__status").textContent.includes("Walang resulta"));
+  assert.ok((await status.innerText()).includes("Walang resulta"));
   await searchStates.route("**/pagefind/pagefind.js", (route) => route.abort());
   await searchStates.reload();
   await input.fill("amilyar");

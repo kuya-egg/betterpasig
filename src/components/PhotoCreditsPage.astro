@@ -2,7 +2,7 @@
 // /larawan/: every photograph the site shows (data/photos.json), with its author, licence and Commons page.
 // The footer links here in one line instead of listing credits on every page.
 import { Picture } from "astro:assets";
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import { langFromUrl, ui } from "../i18n";
 import { photoAlt, photos } from "../lib/photos";
 
@@ -10,7 +10,7 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Kit title={t.creditsTitle} description={t.creditsLead}>
+<Site title={t.creditsTitle} description={t.creditsLead}>
   <section class="section section--flow bp-credits" aria-labelledby="credits-h">
     <div class="wrap">
       <div class="section-head">
@@ -36,7 +36,7 @@ const t = ui[lang];
       </ul>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .bp-credits__item {

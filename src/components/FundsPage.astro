@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import { sourceLabel, transparencyFigures, transparencyLinks, transparencyRetrieved } from "../lib/data";
 import { formatDate, langFromUrl, ui } from "../i18n";
@@ -9,7 +9,7 @@ const t = ui[lang];
 const checked = formatDate(lang, transparencyRetrieved);
 ---
 
-<Kit title={t.fundsTitle} description={t.fundsPageIntro}>
+<Site title={t.fundsTitle} description={t.fundsPageIntro}>
   <section class="section section--flow bp-funds" aria-labelledby="funds-h">
     <div class="wrap">
       <div class="section-head">
@@ -88,7 +88,7 @@ const checked = formatDate(lang, transparencyRetrieved);
       <p class="t-small muted bp-funds__checked">{t.checked}: {checked}</p>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   section.bp-funds,

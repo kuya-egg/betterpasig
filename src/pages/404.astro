@@ -1,12 +1,12 @@
 ---
 // One 404 for both languages: Cloudflare Pages serves it for any missing path.
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import { ui } from "../i18n";
 
 const { fil, en } = ui;
 ---
 
-<Kit title={`${fil.notFoundTitle} / ${en.notFoundTitle}`} description={`${fil.notFound} ${en.notFound}`}>
+<Site title={`${fil.notFoundTitle} / ${en.notFoundTitle}`} description={`${fil.notFound} ${en.notFound}`}>
   <section class="section section--flow" aria-labelledby="nf-h">
     <div class="wrap">
       <div class="section-head">
@@ -21,7 +21,7 @@ const { fil, en } = ui;
       </div>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .nf-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }

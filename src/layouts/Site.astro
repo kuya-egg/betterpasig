@@ -1,8 +1,8 @@
 ---
-import "../styles/kit-site.css";
+import "../styles/site.css";
 import SiteHead from "../components/SiteHead.astro";
-import KitHeader from "../components/kit/KitHeader.astro";
-import KitFooter from "../components/kit/KitFooter.astro";
+import SiteHeader from "../components/site/SiteHeader.astro";
+import SiteFooter from "../components/site/SiteFooter.astro";
 import Toast from "../components/Toast.astro";
 import { langFromUrl, ui } from "../i18n";
 import { pagefindSection } from "../lib/pagefind";
@@ -11,27 +11,26 @@ interface Props {
   title?: string;
   description?: string;
   photos?: string[];
+  contentLang?: "fil" | "en";
 }
 
 const t = ui[langFromUrl(Astro.url)];
-const { title, description, photos = [] } = Astro.props;
+const { title, description, photos = [], contentLang } = Astro.props;
 const { indexed, section } = pagefindSection(Astro.url);
 ---
 
 <!doctype html>
-<html lang={t.htmlLang} data-type="service" data-radius="soft" data-buttons="tonal">
+<html lang={t.htmlLang}>
   <head>
     <SiteHead title={title} description={description} />
-    <link rel="stylesheet" href="/kit/system.css" />
-    <link rel="stylesheet" href="/kit/ui/cards.css" />
   </head>
   <body class="bp-site">
-    <KitHeader />
-    <main id="top" tabindex="-1" data-pagefind-body={indexed || undefined} data-pagefind-meta={indexed ? `kind:${section}` : undefined}>
+    <SiteHeader />
+    <main lang={contentLang} id="top" tabindex="-1" data-pagefind-body={indexed || undefined} data-pagefind-meta={indexed ? `kind:${section}` : undefined}>
       {indexed && title && <span hidden data-pagefind-meta="title[data-title]" data-title={title} />}
       <slot />
     </main>
-    <KitFooter photoIds={photos} />
+    <SiteFooter photoIds={photos} />
     <Toast />
     <script>import "../lib/client-freshness";</script>
   </body>

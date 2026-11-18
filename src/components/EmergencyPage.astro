@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import CopyButton from "./CopyButton.astro";
 import Verify from "./Verify.astro";
 import {
@@ -60,7 +60,7 @@ const jump = [
 const retrieved = formatDate(lang, facilities.retrieved);
 ---
 
-<Kit title={t.emergencyPageTitle} description={t.emergencyLead}>
+<Site title={t.emergencyPageTitle} description={t.emergencyLead}>
   <section class="section section--flow bp-em" aria-labelledby="emergency-page-h">
     <div class="wrap">
       <div class="section-head">
@@ -249,7 +249,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
       <p class="t-small muted bp-em__checked">{t.checked}: {retrieved}</p>
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .bp-em section,

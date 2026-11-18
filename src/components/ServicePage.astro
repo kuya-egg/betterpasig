@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
 import { categories, officeById, programs, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
@@ -57,7 +57,7 @@ function lines(value: unknown): string[] {
 }
 ---
 
-<Kit title={title} description={lang === "en" ? english?.summary || title : summary || title}>
+<Site title={title} description={lang === "en" ? english?.summary || title : summary || title}>
   <section class="section section--flow" aria-labelledby="service-h">
     <div class="wrap bp-svc">
       <div class="section-head">
@@ -69,6 +69,7 @@ function lines(value: unknown): string[] {
 
       <div class="bp-svc__answers">
         <div class="bp-svc__overview">
+          <div class="bp-svc__sheet">
           <dl class="bp-svc__facts">
             <div><dt>{t.colOffice}</dt><dd>{officeLabel}</dd></div>
             {office?.location && <div><dt>{t.whereLabel}</dt><dd>{office.location}</dd></div>}
@@ -87,6 +88,7 @@ function lines(value: unknown): string[] {
             {service.sources.map((url) => <a href={url}>{sourceLabel(url)}</a>)}
             <span>{t.checked} {formatDate(lang, servicesRetrieved)}</span>
           </p>
+          </div>
         </div>
 
         <div class="bp-svc__instructions">
@@ -123,7 +125,7 @@ function lines(value: unknown): string[] {
       )}
     </div>
   </section>
-</Kit>
+</Site>
 
 <style>
   .bp-svc__back {
@@ -145,10 +147,17 @@ function lines(value: unknown): string[] {
     gap: clamp(1.5rem, 5vw, 4rem);
   }
   .bp-svc__overview {
-    border-top: 3px solid var(--blue);
-    border-radius: var(--r-md);
+    border-radius: calc(var(--r-lg) + .4375rem);
+    padding: .4375rem;
+    background: var(--surface);
+  }
+  .bp-svc__sheet {
+    border-radius: var(--r-lg);
     padding: clamp(1rem, 3vw, 2rem);
-    background: var(--pale);
+    background: var(--paper);
+  }
+  .bp-svc .section-head h1 { max-width: 23ch; text-wrap: wrap; }
+  .bp-svc__instructions h2 { padding-block-end: var(--s-3); border-block-end: 1px solid var(--line);
   }
   .bp-svc__facts { margin: 0; }
   .bp-svc__facts > div {

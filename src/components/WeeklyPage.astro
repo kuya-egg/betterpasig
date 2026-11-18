@@ -1,5 +1,5 @@
 ---
-import Kit from '../layouts/Kit.astro';
+import Site from '../layouts/Site.astro';
 import SourceNote from './SourceNote.astro';
 import {historicalUpdates,opportunities,pasigSources,serviceUpdates} from '../lib/data';
 import {formatDate,href,langFromUrl} from '../i18n';
@@ -10,7 +10,7 @@ const lang=langFromUrl(Astro.url),en=lang==='en';
 const title=archive?(en?'Notice archive':'Arkibo ng mga abiso'):(en?'Recent notices and opportunities':'Mga bagong abiso at oportunidad');
 const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:null,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...opportunities.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:item.event_date,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...historicalUpdates.map(item=>({id:item.id,title:en?(item.id.includes('parking')?'Mega Parking I maintenance':item.id.includes('blood')?'PCIST blood donation announcement':'October 1–2 job fair report'):(item.id.includes('parking')?'Maintenance sa Mega Parking I':item.id.includes('blood')?'Anunsyo ng blood donation sa PCIST':'Ulat sa job fair noong Oktubre 1–2'),date:item.published_date,eventDate:null,refs:item.evidence,service:null,summary:en?item.summary:item.id.includes('parking')?'May anunsyo ng pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.':item.id.includes('blood')?'Nasa anunsyo ang iskedyul na Oktubre 8, 08:00–13:00. Hindi pa kumpirmadong natuloy ang aktibidad.':'Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.',historical:true}))];
 ---
-<Kit title={title} description={en?'Recent official notices and opportunities from Pasig City, each with its source and date.':'Mga bagong opisyal na abiso at oportunidad sa Pasig. May petsa at sanggunian ang bawat abiso.'}>
+<Site title={title} description={en?'Recent official notices and opportunities from Pasig City, each with its source and date.':'Mga bagong opisyal na abiso at oportunidad sa Pasig. May petsa at sanggunian ang bawat abiso.'}>
  <section class="section section--flow" aria-labelledby="weekly-h">
   <div class="wrap" data-current-feed={!archive||undefined} data-pagefind-ignore={archive||undefined}>
    <div class="section-head">
@@ -35,7 +35,7 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
    <p class="weekly__more"><a class="btn btn--secondary" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</a></p>
   </div>
  </section>
-</Kit>
+</Site>
 
 <style>
   .weekly { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }

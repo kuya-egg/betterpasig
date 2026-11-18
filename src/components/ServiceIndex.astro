@@ -1,5 +1,5 @@
 ---
-import Kit from "../layouts/Kit.astro";
+import Site from "../layouts/Site.astro";
 import Search from "./Search.astro";
 import Verify from "./Verify.astro";
 import { categories, officeName, offices, services } from "../lib/data";
@@ -9,8 +9,8 @@ const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 ---
 
-<Kit title={t.allServices} description={t.pageDescription}>
-  <section class="section section--flow" aria-labelledby="services-h">
+<Site title={t.allServices} description={t.pageDescription}>
+  <section class="section section--flow bp-service-index" aria-labelledby="services-h">
     <div class="wrap">
       <div class="section-head">
         <h1 id="services-h">{t.allServices}</h1>
@@ -65,17 +65,30 @@ const t = ui[lang];
       );
     })
   }
-</Kit>
+</Site>
 
 <style>
-  .bp-cat__jump { margin-top: var(--s-5); }
-  .bp-cat__jump ul { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bp-service-index .section-head h1 { max-width: 14ch; text-wrap: wrap; }
+  .bp-cat__jump {
+    margin-block-start: var(--s-6);
+    padding: .4375rem;
+    border-radius: calc(var(--r-lg) + .4375rem);
+    background: var(--surface);
+  }
+  .bp-cat__jump ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: var(--s-2) var(--s-5);
+    padding: var(--s-4);
+    background: var(--bg);
+    border-radius: var(--r-lg);
+  }
   .bp-cat__jump a {
     display: inline-flex;
     min-height: 3rem;
     align-items: center;
-    border: 1px solid var(--line);
-    border-radius: var(--r-sm);
+    width: 100%;
+    border-block-end: 1px solid var(--line);
     color: var(--blue);
     padding-inline: var(--s-3);
     font-size: .9375rem;
@@ -90,7 +103,7 @@ const t = ui[lang];
     max-width: 760px;
   }
   .bp-cat__head h2 {
-    font-size: var(--t-card);
+    font-size: var(--t-h3);
     font-weight: 600;
   }
   .bp-cat__lead {
