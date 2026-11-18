@@ -244,17 +244,21 @@ main > .section--flow:first-of-type { background: var(--bg); }
 .bp-foot-links a { display: inline-flex; align-items: center; min-height: 3rem; font-size: var(--t-small); color: #fff; }
 .bp-foot-about p a, .footer__legal a { color: #fff; text-decoration: underline; text-decoration-color: rgb(255 255 255 / .45); text-underline-offset: 4px; }
 .footer__legal a { display: inline-flex; align-items: center; min-block-size: 2.75rem; }
+/* bottom row (after BetterGov.ph): version and rights on the left, GitHub, sitemap and credits on the right */
 .footer__legal {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--s-2) var(--s-5);
+  gap: var(--s-2) var(--s-6);
   margin-block-start: var(--s-6);
   padding-block-start: var(--s-4);
   border-block-start: 1px solid rgb(255 255 255 / .16);
   font-size: var(--t-small);
   color: #c6cfdb;
 }
+.footer__legal-meta, .footer__legal-links { display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--s-5); }
+.footer__legal-meta a { color: #c6cfdb; text-decoration: none; font-variant-numeric: tabular-nums; }
 @media (hover: hover) {
   .link:hover, .bp-foot-links a:hover { text-underline-offset: .35em; text-decoration: underline; }
 }

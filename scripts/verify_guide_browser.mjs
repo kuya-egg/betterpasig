@@ -104,7 +104,7 @@ try {
     assert.equal(await layout.locator("#mapa").getAttribute("lang"), null);
     assert.equal(await layout.locator(".home-hero__map-title").innerText(), hasEnglish ? "Find your barangay" : "Hanapin ang barangay mo");
     await layout.getByRole("navigation", { name: hasEnglish ? "Main menu" : "Pangunahing menu" })
-      .getByRole("link", { name: hasEnglish ? "Explore Pasig" : "Pasyalan" }).click();
+      .getByRole("link", { name: hasEnglish ? "Places" : "Pasyalan" }).click();
     await layout.waitForURL(`**${locale}/pasyalan/`);
     const park = layout.locator("#pasyalan-maybunga-rainforest-park").locator("..");
     assert.match(await park.innerText(), hasEnglish ? /7:00 AM/ : /7:00 n\.u\./);
