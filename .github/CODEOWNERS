@@ -1,0 +1,3 @@
+# main is the production branch (Cloudflare Pages). Every change to it needs the owner's approval.
+# dev stays open to review by any maintainer (docs/state.md D6).
+* @kuya-egg
