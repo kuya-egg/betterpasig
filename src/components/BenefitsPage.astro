@@ -15,11 +15,12 @@ const t = ui[lang];
 
     {
       programs.map((program) => {
-        const note = "note" in program && typeof program.note === "string" ? program.note : "";
+        const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? en : (fil ?? en)) ?? null;
+        const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null) ?? "";
         const rows = [
-          { label: t.benefitFor, value: program.for, num: false },
-          { label: t.benefitAmount, value: program.benefit, num: true },
-          { label: t.benefitHow, value: program.how, num: false },
+          { label: t.benefitFor, value: pick(program.for_fil, program.for_en), num: false },
+          { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true },
+          { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false },
           { label: t.benefitOffice, value: program.office, num: false },
         ].filter((row) => typeof row.value === "string" && row.value.trim());
         return (

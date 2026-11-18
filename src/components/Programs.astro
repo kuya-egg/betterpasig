@@ -5,6 +5,7 @@ import { href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const pick = (fil?: string | null, en?: string | null) => (lang === "en" ? en : (fil ?? en));
 ---
 
 <div id="benepisyo" class="min-w-0">
@@ -16,9 +17,9 @@ const t = ui[lang];
           <span class="min-w-0">
             <a class="font-medium" href={href(lang, `/tulong/#${program.id}`)}>{lang === "en" ? program.title_en : program.title_fil}</a>
             {program.verify && <Verify />}
-            {program.for && <span class="mt-0.5 block text-[14px] text-muted">{program.for}</span>}
+            {pick(program.for_fil, program.for_en) && <span class="mt-0.5 block text-[14px] text-muted">{pick(program.for_fil, program.for_en)}</span>}
           </span>
-          {program.benefit && <span class="num font-semibold sm:max-w-[24ch] sm:text-right">{program.benefit}</span>}
+          {pick(program.benefit_fil, program.benefit_en) && <span class="num font-semibold sm:max-w-[24ch] sm:text-right">{pick(program.benefit_fil, program.benefit_en)}</span>}
         </li>
       ))
     }
