@@ -32,7 +32,7 @@ Residents use it on phones, often outdoors or in line at an office, sometimes in
 ## Brand Commitments
 
 - Name: BetterPasig, part of BetterGov.ph.
-- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency, amber only for "Sinusuri pa" (`design/tokens/tokens.css`), with dark mode.
+- Colors stay: Pasig Blue `#1A47A8` as the one accent (links, map, focus), ink and muted neutrals, red only for emergency, amber only for "Sinusuri pa" (`src/styles/site.css`). The public site uses a single light theme.
 - The logo mark is the real outline of Pasig from PSA boundaries (`design/logo/`); never the official city seal.
 - The 30-barangay map is a signature element.
 - City motto "Umaagos ang Pag-asa" (Hope Flows), from `data/city.json`; the city is known for transparency.

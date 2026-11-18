@@ -46,6 +46,12 @@ async function assertFits(page, label) {
   assert.equal(overflow, false, label);
 }
 
+async function assertLightMode(page) {
+  const scheme = await page.locator("html").evaluate((root) => getComputedStyle(root).colorScheme);
+  assert.deepEqual(scheme.split(/\s+/).sort(), ["light", "only"]);
+  assert.equal(await page.locator("html[data-theme], .bp-theme").count(), 0);
+}
+
 async function assertHotlines(page) {
   assert.deepEqual(
     await page.locator(".bp-urgent a[href^='tel:']").evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
@@ -57,6 +63,8 @@ async function assertHotlines(page) {
 
 try {
   const layout = await browser.newPage({ viewport: { width: 320, height: 844 } });
+  // Existing visitors may have a dark theme preference stored by previous releases.
+  await layout.addInitScript(() => localStorage.setItem("bp-theme", "dark"));
   const runtimeErrors = [];
   layout.on("pageerror", (error) => runtimeErrors.push(error.message));
 
@@ -72,6 +80,7 @@ try {
           assert.ok(response.ok(), path);
           await assertFits(layout, `${colorScheme} at ${width}px: ${path}`);
           await assertHotlines(layout);
+          await assertLightMode(layout);
         }
       }
     }
@@ -142,9 +151,10 @@ try {
   await touch.waitForURL("**/serbisyo/aics/");
   await touch.close();
 
-  const noScript = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const noScript = await browser.newPage({ javaScriptEnabled: false, colorScheme: "dark", viewport: { width: 390, height: 844 } });
   await noScript.goto(origin + "/en/");
   await assertHotlines(noScript);
+  await assertLightMode(noScript);
   assert.equal(await noScript.locator("[data-ph-clock]").isVisible(), false);
   assert.match(await noScript.locator(".bp-urgent__clock").innerText(), /Philippine time/);
   assert.equal(await noScript.locator(".bp-map__directory a").count(), 30);
@@ -212,7 +222,7 @@ try {
       await layout.screenshot({ path: join(output, `service-${name}.jpg`), quality: 84 });
     }
   }
-  console.log("Guide browser checks passed: 14 page families, both languages and themes, direct links, search states, hotline destinations, Manila clock, touch, zoom, and no JavaScript.");
+  console.log("Guide browser checks passed: 14 page families, both languages and device color preferences, direct links, search states, hotline destinations, Manila clock, touch, zoom, and no JavaScript.");
 } finally {
   await browser.close();
 }

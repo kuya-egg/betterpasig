@@ -83,14 +83,6 @@ const columns = [
       <div class="footer__legal">
         <span>&copy; {year} BetterPasig</span>
         <a href="https://github.com/kuya-egg/betterpasig">{t.aboutGithub}</a>
-        <button
-          type="button"
-          class="bp-theme"
-          hidden
-          aria-pressed="false"
-          data-light-label={t.useLightMode}
-          data-dark-label={t.useDarkMode}
-        >{t.darkMode}</button>
         {
           showsPhotos && <a href={href(lang, "/larawan/")}>{t.photoCredits}</a>
         }
@@ -98,25 +90,3 @@ const columns = [
     </div>
   </div>
 </footer>
-
-<script>
-  const root = document.documentElement;
-  const button = document.querySelector<HTMLButtonElement>(".bp-theme");
-  const system = matchMedia("(prefers-color-scheme: dark)");
-  if (button) {
-    const sync = () => {
-      const dark = root.dataset.theme === "dark" || (!root.dataset.theme && system.matches);
-      button.setAttribute("aria-pressed", String(dark));
-      button.title = (dark ? button.dataset.lightLabel : button.dataset.darkLabel) ?? "";
-    };
-    button.addEventListener("click", () => {
-      const theme = button.getAttribute("aria-pressed") === "true" ? "light" : "dark";
-      root.dataset.theme = theme;
-      try { localStorage.setItem("bp-theme", theme); } catch { /* storage may be blocked */ }
-      sync();
-    });
-    system.addEventListener("change", sync);
-    sync();
-    button.hidden = false;
-  }
-</script>

@@ -58,9 +58,6 @@ export const ui = {
     previousPage: "Nakaraang pahina",
     nextPage: "Susunod na pahina",
     menuPageLabel: "Pahina {current} sa {total}",
-    darkMode: "Madilim na mode",
-    useLightMode: "Gawing maliwanag ang display",
-    useDarkMode: "Gawing madilim ang display",
 
     searchLabel: "Maghanap ng serbisyo",
     searchPlaceholder: "Hal. amilyar, ID",
@@ -336,9 +333,6 @@ export const ui = {
     previousPage: "Previous",
     nextPage: "Next",
     menuPageLabel: "Page {current} of {total}",
-    darkMode: "Dark mode",
-    useLightMode: "Use light mode",
-    useDarkMode: "Use dark mode",
 
     searchLabel: "Search BetterPasig",
     searchPlaceholder: "e.g. permits, parks",
