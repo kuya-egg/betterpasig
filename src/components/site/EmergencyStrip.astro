@@ -8,9 +8,9 @@ const t = ui[lang];
 const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotline" || id === "national-emergency-911");
 ---
 
-<div class="bp-urgent">
+<aside class="bp-urgent" aria-label={t.emergencyPageTitle}>
   <div class="wrap bp-urgent__inner">
-    <ul class="bp-urgent__links" aria-label={t.emergencyPageTitle}>
+    <ul class="bp-urgent__links">
       {lines.map((line) => (
         <li>
           <a href={telHref(line.numbers[0])}>
@@ -26,13 +26,12 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
       <time data-ph-clock hidden>
         <span class="sr-only">{t.guideTime} </span>
         <strong data-clock-time></strong>
-        <span class="bp-urgent__clock-divider" aria-hidden="true">·</span>
         <span data-clock-date></span>
       </time>
       <noscript>UTC+8</noscript>
     </p>
   </div>
-</div>
+</aside>
 
 <script>
   import { manilaTimeZone } from "../../lib/freshness";
@@ -76,7 +75,7 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
 </script>
 
 <style>
-  .bp-urgent { background: #8f2531; color: white; }
+  .bp-urgent { background: var(--red); color: white; }
   .bp-urgent__inner { display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--s-5); }
   .bp-urgent__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-5); }
   .bp-urgent__links li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
@@ -89,13 +88,12 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
     font-size: .875rem;
     text-underline-offset: 4px;
   }
-  .bp-urgent__links strong { font-size: 1rem; font-weight: 750; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bp-urgent__links strong { font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .bp-urgent__all { text-decoration: underline; }
   .bp-urgent :is(a, button):focus-visible { outline-color: white; }
-  .bp-urgent__clock { margin-inline-start: auto; font-size: .8125rem; }
-  .bp-urgent__clock time { white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .bp-urgent__clock strong { font-weight: 750; }
-  .bp-urgent__clock-divider { margin-inline: var(--s-1); }
+  .bp-urgent__clock { margin-inline-start: auto; font-size: var(--t-small); }
+  .bp-urgent__clock time { display: inline-flex; gap: var(--s-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bp-urgent__clock strong { font-weight: 600; }
   @media (hover: hover) { .bp-urgent a:hover { text-decoration: underline; } }
   @media (max-width: 56rem) {
     .bp-urgent__inner { gap: 0 var(--s-3); }

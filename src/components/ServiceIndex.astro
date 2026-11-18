@@ -1,159 +1,150 @@
 ---
 import Site from "../layouts/Site.astro";
+import PageHead from "./site/PageHead.astro";
 import Search from "./Search.astro";
 import Verify from "./Verify.astro";
-import { categories, officeName, offices, services } from "../lib/data";
+import { categories, cityHallHotline, officeName, offices, services, telHref } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
+const en = lang === "en";
 const t = ui[lang];
+const groups = categories.map((category) => ({
+  category,
+  name: en ? category.name_en : category.name_fil,
+  items: services.filter((service) => service.category === category.id),
+}));
+const cityHallNumber = cityHallHotline?.numbers[0];
 ---
 
 <Site title={t.allServices} description={t.pageDescription}>
-  <section class="section section--flow bp-service-index" aria-labelledby="services-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h1 id="services-h">{t.allServices}</h1>
-        <p>{t.serviceCount(services.length, categories.length, offices.length)}</p>
-      </div>
+  <section class="section section--flow ground-white bp-service-index" aria-labelledby="services-h">
+    <div class="wrap bp-sidx__head">
+      <PageHead id="services-h" crumbs={[[t.allServices]]} lead={t.serviceCount(services.length, categories.length, offices.length)}>
+        {en ? <>What do you need <em>done</em>?</> : <>Anong kailangan mong <em>asikasuhin</em>?</>}
+      </PageHead>
       <Search />
-      <nav class="bp-cat__jump" id="service-categories" aria-label={lang === "en" ? "Service categories" : "Mga kategorya ng serbisyo"}>
+    </div>
+  </section>
+
+  <div class="section section--flow">
+    <div class="wrap bp-sidx">
+      <nav class="bp-sidx__topics" id="service-categories" aria-label={en ? "Service categories" : "Mga kategorya ng serbisyo"} data-pagefind-ignore>
+        <p class="kicker bp-sidx__label">{en ? `${categories.length} topics` : `${categories.length} paksa`}</p>
         <ul>
-          {categories.map((category) => (
-            <li><a href={`#${category.id}`}>{lang === "en" ? category.name_en : category.name_fil}</a></li>
+          {groups.map(({ category, name, items }) => (
+            <li>
+              <a class="row" href={`#${category.id}`} data-topic={category.id}>
+                <span class="bp-sidx__name">{name}</span>
+                <span class="num bp-sidx__count">{items.length}</span>
+              </a>
+            </li>
           ))}
         </ul>
       </nav>
-    </div>
-  </section>
-  {
-    categories.map((category, index) => {
-      const items = services.filter((service) => service.category === category.id);
-      const name = lang === "en" ? category.name_en : category.name_fil;
-      return (
-        <section class={`section section--flow${index % 2 === 0 ? " ground-surface" : ""}`} aria-labelledby={category.id}>
-          <div class="wrap">
-            <div class="bp-cat__head">
+
+      <div class="bp-sidx__results">
+        {groups.map(({ category, name, items }) => (
+          <section class="bp-sidx__group" aria-labelledby={category.id}>
+            <div class="bp-sidx__ghead">
               <h2 id={category.id}>{name}</h2>
               <span class="num muted">{items.length}</span>
             </div>
             {category.description_fil && (
-              <p class="muted bp-cat__lead" lang={lang === "en" ? "fil" : undefined}>
+              <p class="muted bp-sidx__lead" lang={en ? "fil" : undefined}>
                 {category.description_fil}
               </p>
             )}
             {items.length === 0 ? (
               <p class="muted">{t.emptyCategory}</p>
             ) : (
-              <ul class="rows bp-cat__rows">
+              <ul class="bp-sidx__list">
                 {items.map((service) => (
                   <li>
-                    <span class="rows__name">
-                      <a class="bp-cat__link" href={href(lang, `/serbisyo/${service.id}`)}>
-                        {lang === "en" ? service.title_en : service.title_fil}
-                      </a>
-                      {service.verify && <Verify />}
-                      <small>{officeName(service.office)}</small>
-                    </span>
-                    {service.processing_time && <span class="rows__value bp-cat__time">{service.processing_time}</span>}
+                    <a class="cd bp-sidx__item" href={href(lang, `/serbisyo/${service.id}`)}>
+                      <span class="bp-sidx__body">
+                        <span class="bp-sidx__title">{en ? service.title_en : service.title_fil}</span>
+                        <span class="bp-sidx__meta">
+                          <span>{officeName(service.office)}</span>
+                          {service.processing_time && <span class="num" lang={en ? "fil" : undefined}>{service.processing_time}</span>}
+                          {service.verify && <Verify />}
+                        </span>
+                      </span>
+                      <svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </a>
                   </li>
                 ))}
               </ul>
             )}
+          </section>
+        ))}
+
+        <div class="bp-sidx__help">
+          <p class="bp-sidx__helpq">{en ? "Can't find what you need?" : "Hindi mo makita ang hinahanap mo?"}</p>
+          <div class="bp-sidx__actions">
+            <a class="pill bp-sidx__alt" href={href(lang, "/tulong/")}>{en ? "Browse by situation" : "Ayon sa sitwasyon"}</a>
+            {cityHallNumber && <a class="pill bp-sidx__call" href={telHref(cityHallNumber)}>{en ? "Call City Hall" : "Tawagan ang City Hall"}</a>}
           </div>
-        </section>
-      );
-    })
-  }
+        </div>
+      </div>
+    </div>
+  </div>
 </Site>
 
+<script>
+  // Highlight the topic whose section is at the top of the viewport; plain anchor links work without this.
+  const links = new Map<string, HTMLAnchorElement>();
+  document.querySelectorAll<HTMLAnchorElement>("#service-categories a[data-topic]").forEach((a) => links.set(a.dataset.topic!, a));
+  const mark = (id: string) => {
+    links.forEach((a, key) => (key === id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current")));
+  };
+  const heads = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+  if (heads.length) {
+    const update = () => {
+      const line = window.innerHeight * 0.3;
+      let current = heads[0].id;
+      for (const head of heads) if (head.getBoundingClientRect().top <= line) current = head.id;
+      mark(current);
+    };
+    let frame = 0;
+    addEventListener("scroll", () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); }, { passive: true });
+    addEventListener("hashchange", update);
+    update();
+  }
+</script>
+
 <style>
-  .bp-service-index .section-head h1 {
-    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.08 var(--font-text);
-    letter-spacing: -.035em;
-    text-wrap: wrap;
+  .bp-sidx__head { display: grid; gap: var(--s-6); }
+  .bp-sidx { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6); align-items: start; }
+  @media (min-width: 1024px) {
+    .bp-sidx { grid-template-columns: 18.75rem minmax(0, 1fr); gap: var(--s-7); }
+    .bp-sidx__topics { position: sticky; top: var(--s-9); max-block-size: calc(100vh - var(--s-9) - var(--s-4)); overflow-y: auto; }
   }
-  .bp-cat__jump {
-    margin-block-start: var(--s-6);
-    border-block-start: 1px solid var(--line);
-  }
-  .bp-cat__jump ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
-    gap: 0 var(--s-5);
-  }
-  .bp-cat__jump a {
-    display: inline-flex;
-    min-height: 3rem;
-    align-items: center;
-    width: 100%;
-    border-block-end: 1px solid var(--line);
-    color: var(--blue);
-    padding-block: var(--s-2);
-    font-size: .9375rem;
-    font-weight: 650;
-  }
-  @media (hover: hover) { .bp-cat__jump a:hover { background: var(--pale); text-decoration: underline; } }
-  .bp-cat__head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--s-4);
-    max-width: 760px;
-  }
-  .bp-cat__head h2 {
-    font-size: var(--t-h3);
-    font-weight: 600;
-  }
-  .bp-cat__lead {
-    max-width: 60ch;
-    margin-top: var(--s-2);
-  }
-  .bp-cat__rows {
-    list-style: none;
-    margin: var(--s-5) 0 0;
-    padding: 0;
-    max-width: 760px;
-  }
-  .bp-cat__rows > li {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 12rem);
-  }
-  .bp-cat__rows .rows__name {
-    display: grid;
-    gap: var(--s-1);
-    justify-items: start;
-  }
-  .bp-cat__rows small {
-    color: var(--muted);
-    font-size: var(--t-small);
-    font-weight: 400;
-  }
-  .bp-cat__link {
-    display: inline-flex;
-    min-height: 48px;
-    align-items: center;
-    font-size: var(--t-body);
-    font-weight: 500;
-    color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: text-underline-offset 150ms var(--ease);
-  }
-  .bp-cat__link:hover {
-    text-underline-offset: .34em;
-  }
-  .bp-cat__time {
-    color: var(--muted);
-    font-size: var(--t-small);
-  }
-  @media (max-width: 1023px) {
-    .bp-cat__rows > li {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .bp-cat__time {
-      grid-column: 1;
-      grid-row: auto;
-      text-align: left;
-    }
+  .bp-sidx__label { color: var(--muted); margin-block-end: var(--s-3); }
+  .bp-sidx__topics ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
+  .bp-sidx__topics a { min-block-size: 3rem; padding: var(--s-2) var(--s-3); border-radius: var(--r-md); font: 600 var(--t-meta)/1.3 var(--font-text); }
+  .bp-sidx__name { flex: 1; min-width: 0; }
+  .bp-sidx__count { font-size: var(--t-small); color: var(--muted); font-weight: 500; }
+  .bp-sidx__topics a[aria-current] { background: var(--pale); color: var(--blue); }
+  .bp-sidx__topics a[aria-current] .bp-sidx__count { color: var(--blue); }
+  .bp-sidx__results { display: grid; gap: var(--s-8); min-width: 0; }
+  .bp-sidx__group { scroll-margin-top: var(--s-9); }
+  .bp-sidx__ghead { display: flex; align-items: baseline; gap: var(--s-4); scroll-margin-top: var(--s-9); }
+  .bp-sidx__ghead h2 { font-size: var(--t-h3); scroll-margin-top: var(--s-9); }
+  .bp-sidx__lead { max-width: 60ch; margin-block-start: var(--s-2); }
+  .bp-sidx__list { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-3); }
+  .bp-sidx__item { display: flex; align-items: center; gap: var(--s-5); padding: var(--s-4) var(--s-5); min-block-size: 3.5rem; }
+  .bp-sidx__body { flex: 1; min-width: 0; display: grid; gap: var(--s-1); }
+  .bp-sidx__title { font: 600 var(--t-card)/1.3 var(--font-text); }
+  .bp-sidx__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-5); font-size: var(--t-small); color: var(--muted); }
+  .bp-sidx__meta :global(.verify) { margin-inline-start: 0; }
+  .bp-sidx__help { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4); padding: var(--s-5); border-radius: var(--r-panel); background: var(--pale); }
+  .bp-sidx__helpq { font: var(--display-weight) var(--t-h3)/1.15 var(--font-display); }
+  .bp-sidx__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+  .bp-sidx__alt { border: 1px solid var(--blue); background: var(--bg); color: var(--blue); }
+  .bp-sidx__call { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
+  @media (hover: hover) {
+    .bp-sidx__alt:hover { background: var(--pale); }
+    .bp-sidx__call:hover { background: color-mix(in srgb, var(--blue) 85%, black); border-color: transparent; }
   }
 </style>

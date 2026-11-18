@@ -212,7 +212,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
           }
         }
         if (kind === "pasyalan") {
-          for (const sub of anchored.filter(({ anchor }) => anchor?.element === "h3" && anchor.id.startsWith("pasyalan-"))) {
+          for (const sub of anchored.filter(({ anchor }) => (anchor?.element === "h2" || anchor?.element === "h3") && anchor.id.startsWith("pasyalan-"))) {
             rows.push({ href: sub.url, title: sub.title, kind: kinds[kind] ?? "", note: "" });
           }
           continue;
@@ -274,7 +274,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
           const title = document.createElement("span");
           title.append(highlight(row.title, words));
           const category = document.createElement("small");
-          category.textContent = row.note ? `${row.kind} · ${row.note}` : row.kind;
+          category.textContent = row.note ? `${row.kind}, ${row.note}` : row.kind;
           link.append(title, category);
           results.append(link);
           links.push(link);
@@ -282,7 +282,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
         results.hidden = false;
         input.setAttribute("aria-expanded", "true");
         shownQuery = query;
-        showStatus(`${countLabel(rows.length)} · ${keys}`, false);
+        showStatus(`${countLabel(rows.length)}. ${keys}`, false);
       } catch {
         if (ticket === latest) showStatus(box.dataset.unavailable ?? "", true);
       }
@@ -427,5 +427,5 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     text-decoration: underline;
     text-underline-offset: 4px;
   }
-  .bp-search__label { display: block; margin-bottom: var(--s-2); font-size: .875rem; font-weight: 750; }
+  .bp-search__label { display: block; margin-bottom: var(--s-2); font-size: var(--t-small); font-weight: 600; }
 </style>

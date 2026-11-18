@@ -2,6 +2,8 @@
 import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
+import PageHead from "./site/PageHead.astro";
+import IbaPaTabs from "./IbaPaTabs.astro";
 import { city, site, sourceLabel } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 
@@ -14,13 +16,17 @@ const asOf = (fact: (typeof city.facts)[number]) =>
 ---
 
 <Site title={t.aboutTitle} description={t.aboutMission}>
-  <section class="section section--flow" aria-labelledby="tungkol-h">
+  <section class="section ground-white bp-about__top" aria-labelledby="tungkol-h">
     <div class="wrap">
-      <div class="section-head">
-        <h1 id="tungkol-h">{t.aboutTitle}</h1>
-        <p>{t.aboutMission}</p>
-      </div>
+      <PageHead id="tungkol-h" crumbs={[[lang === "en" ? "About" : "Tungkol"]]} kicker={lang === "en" ? "About" : "Tungkol"} lead={t.aboutMission}>
+        {lang === "en" ? <>About <em>BetterPasig</em></> : <>Tungkol sa <em>BetterPasig</em></>}
+      </PageHead>
+      <IbaPaTabs current="about" />
+    </div>
+  </section>
 
+  <section class="section section--flow">
+    <div class="wrap">
       <div class="grid bp-about__split" id="misyon-bloke">
         <div class="span-6">
           <h2 id="misyon" class="bp-about__h">{t.aboutMissionTitle}</h2>
@@ -37,11 +43,12 @@ const asOf = (fact: (typeof city.facts)[number]) =>
   <section class="section section--flow ground-surface" aria-labelledby="prinsipyo">
     <div class="wrap">
       <h2 id="prinsipyo" class="bp-about__h">{t.aboutPrinciplesTitle}</h2>
-      <ol class="rows bp-about__rows">
+      <ol class="bp-about__principles">
         {
           t.aboutPrinciples.map(([title, body], i) => (
-            <li>
-              <span class="rows__name"><span class="muted">{i + 1}</span> {title}</span>
+            <li class="bp-about__principle">
+              <span class="bp-about__num" aria-hidden="true">{i + 1}</span>
+              <p class="bp-about__ptitle">{title}</p>
               <p class="muted">{body}</p>
             </li>
           ))
@@ -131,6 +138,28 @@ const asOf = (fact: (typeof city.facts)[number]) =>
 </Site>
 
 <style>
+  .bp-about__top { padding-block-end: var(--s-6); }
+  .bp-about__top :global(.bp-tabs) { margin-block-start: var(--s-6); }
+  .bp-about__principles {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--s-3);
+  }
+  .bp-about__principle {
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+  }
+  .bp-about__principle > p { margin: 0; }
+  .bp-about__num { font: 500 var(--t-h2)/1 var(--font-display); color: var(--blue); }
+  .bp-about__ptitle { font-weight: 600; line-height: 1.35; }
   .bp-about__h {
     font-size: var(--t-card);
     font-weight: 600;

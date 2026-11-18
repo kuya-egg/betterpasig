@@ -1,5 +1,5 @@
 ---
-// A 24px line glyph per life event (data/life-events.json ids), drawn on a pale disc.
+// A line glyph per life event (data/life-events.json ids).
 interface Props {
   id: string;
 }
@@ -32,11 +32,11 @@ if (!d) throw new Error(`LifeIcon: no glyph for "${id}"`);
   .bp-life-icon {
     display: inline-grid;
     place-items: center;
-    color: var(--accent);
+    color: var(--blue);
     flex: none;
   }
   .bp-life-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
   }
 </style>

@@ -1,0 +1,40 @@
+---
+// The top of an inner page (handoff 2026-11): breadcrumb, uppercase kicker, the H1 (its one highlighted word in an
+// <em>, drawn italic in Pasig blue) and a lead. Pass the H1 in the default slot, the actions (if any) in "actions".
+import { href, langFromUrl, ui } from "../../i18n";
+
+interface Props {
+  /** breadcrumb trail after Home: [label, path] pairs; the last one is the current page and has no link */
+  crumbs?: [string, string?][];
+  kicker?: string;
+  lead?: string;
+  id?: string;
+}
+
+const { crumbs = [], kicker, lead, id = "page-h" } = Astro.props;
+const lang = langFromUrl(Astro.url);
+const t = ui[lang];
+---
+
+<div class="bp-pagehead">
+  {crumbs.length > 0 && (
+    <nav aria-label={t.crumbsLabel}>
+      <ol class="crumbs">
+        <li><a href={href(lang, "/")}>{t.crumbHome}</a></li>
+        {crumbs.map(([label, path], index) =>
+          index < crumbs.length - 1 && path ? <li><a href={href(lang, path)}>{label}</a></li> : <li aria-current="page">{label}</li>,
+        )}
+      </ol>
+    </nav>
+  )}
+  {kicker && <p class="kicker">{kicker}</p>}
+  <h1 id={id}><slot /></h1>
+  {lead && <p class="lead">{lead}</p>}
+  <slot name="actions" />
+</div>
+
+<style>
+  .bp-pagehead { display: grid; gap: var(--s-4); justify-items: start; }
+  .bp-pagehead .crumbs { margin-block-end: var(--s-2); }
+  .bp-pagehead .lead { max-width: 52ch; }
+</style>

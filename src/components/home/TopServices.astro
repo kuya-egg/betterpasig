@@ -1,85 +1,39 @@
 ---
-import { Card } from "../ui/card";
+// Popular services: a card per featured service with its category icon, title and arrow.
+import SectionHead from "./SectionHead.astro";
 import { href, langFromUrl, ui } from "../../i18n";
-import { featuredServices } from "../../lib/data";
+import { categories, featuredServices } from "../../lib/data";
+import { arrowPath, categoryIcon, serviceLabels } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const labels: Record<string, { fil: string; en: string }> = {
-  "pay-real-property-tax": { fil: "Magbayad ng amilyar", en: "Pay property tax" },
-  "senior-citizen-id": { fil: "Kumuha ng Senior Citizen ID", en: "Get a senior ID" },
-  aics: { fil: "Humingi ng tulong pinansiyal", en: "Get financial assistance" },
-  "certified-copy-civil-document": { fil: "Kumuha ng rekord ng civil registry", en: "Get civil registry records" },
-  "business-permit-renewal": { fil: "Mag-renew ng business permit", en: "Renew a business permit" },
-  "scholarship-new": { fil: "Mag-apply ng scholarship", en: "Apply for a scholarship" },
-};
+const en = lang === "en";
+const iconFor = (categoryId: string) => categoryIcon(categories.find((category) => category.id === categoryId)?.icon);
 ---
 
-<section class="bp-quick" id="serbisyo" aria-labelledby="serbisyo-h">
-  <Card className="bp-quick__card">
-    <h2 id="serbisyo-h">{t.topTitle}</h2>
-    <ul>
+<section class="section--home bp-quick" id="serbisyo" aria-labelledby="serbisyo-h">
+  <div class="wrap">
+    <SectionHead id="serbisyo-h">
+      {t.topTitle}
+      <a slot="action" class="bp-quick__all" href={href(lang, "/serbisyo/")}>{t.allServices} <svg class="ic" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg></a>
+    </SectionHead>
+    <ul class="bp-quick__grid">
       {featuredServices.map((service) => (
         <li>
-          <a href={href(lang, `/serbisyo/${service.id}/`)}>
-            {labels[service.id]?.[lang] ?? (lang === "en" ? service.title_en : service.title_fil)}
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
+          <a class="cd bp-quick__card" href={href(lang, `/serbisyo/${service.id}/`)}>
+            <span class="icon-well"><svg class="ic" aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path d={iconFor(service.category)} /></svg></span>
+            <span class="bp-quick__title">{serviceLabels[service.id]?.[lang] ?? (en ? service.title_en : service.title_fil)}</span>
+            <svg class="ic ar" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d={arrowPath} /></svg>
           </a>
         </li>
       ))}
     </ul>
-    <a class="bp-quick__all link" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
-  </Card>
+  </div>
 </section>
 
 <style>
-  .bp-quick__card {
-    display: block;
-    box-shadow: none;
-    padding: clamp(.875rem, 2.5vw, 1.75rem);
-    border-color: var(--line);
-    border-radius: var(--r-lg);
-  }
-  .bp-quick h2 {
-    margin-block-end: var(--s-2);
-    font: 800 clamp(1.125rem, 1.04rem + .35vw, 1.375rem)/1.3 var(--font-text);
-    letter-spacing: 0;
-  }
-  .bp-quick ul {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(1rem, 2.6vw, 2rem);
-  }
-  .bp-quick li { border-block-start: 1px solid var(--line); }
-  .bp-quick li a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-2);
-    min-block-size: 3rem;
-    padding-block: var(--s-2);
-    color: var(--blue);
-    font-size: .9375rem;
-    font-weight: 750;
-    line-height: 1.4;
-  }
-  .bp-quick li a svg { flex: none; }
-  .bp-quick__all {
-    display: inline-flex;
-    align-items: center;
-    min-block-size: 3rem;
-    margin-block-start: var(--s-1);
-    font-weight: 750;
-    font-size: .9375rem;
-  }
-  @media (hover: hover) {
-    .bp-quick li a:hover { text-decoration: underline; text-underline-offset: .22em; }
-  }
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .bp-quick li a svg { transition: translate var(--fast) var(--ease); }
-    .bp-quick li a:hover svg { translate: .16rem; }
-  }
-  @media (max-width: 22.5rem) {
-    .bp-quick ul { grid-template-columns: minmax(0, 1fr); }
-  }
+  .bp-quick { padding-block-start: var(--s-6); }
+  .bp-quick__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21.25rem), 1fr)); gap: var(--s-4); }
+  .bp-quick__card { display: flex; align-items: center; gap: var(--s-4); min-block-size: 6.5rem; padding: var(--s-5) var(--s-5); }
+  .bp-quick__title { flex: 1; min-inline-size: 0; font: 600 var(--t-card)/1.3 var(--font-text); }
 </style>

@@ -7,6 +7,8 @@
 // No photos, no party, no praise or criticism.
 import Site from "../layouts/Site.astro";
 import CopyButton from "./CopyButton.astro";
+import PageHead from "./site/PageHead.astro";
+import IbaPaTabs from "./IbaPaTabs.astro";
 import Verify from "./Verify.astro";
 import {
   barangays,
@@ -98,13 +100,17 @@ const districts = [1, 2].map((d) => ({
 ---
 
 <Site title={t.officialsPageTitle} description={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
+  <section class="section ground-white bp-off__top" aria-labelledby="page-h">
+    <div class="wrap">
+      <PageHead crumbs={[[t.officialsPageTitle]]} kicker={lang === "en" ? "Officials" : "Mga opisyal"} lead={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
+        {lang === "en" ? <>Pasig <em>officials</em></> : <>Mga <em>opisyal</em> ng Pasig</>}
+      </PageHead>
+      <IbaPaTabs current="officials" />
+    </div>
+  </section>
+
   <section class="section section--flow" aria-labelledby="opisyal-lungsod-h">
     <div class="wrap">
-      <div class="section-head">
-        <h1>{t.officialsPageTitle}</h1>
-        <p>{lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}</p>
-      </div>
-
       <div class="bp-off__term stack-2">
         <p class="t-small">{lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}</p>
         <p class="t-small muted bp-off__meta">
@@ -114,11 +120,11 @@ const districts = [1, 2].map((d) => ({
       </div>
 
       <h2 id="opisyal-lungsod-h" class="bp-off__h2">{t.cityOfficialsHeading}</h2>
-      <ul class="rows bp-off__rows">
+      <ul class="bp-off__people">
         {top.map((p) => (
-          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name}>
-            <span class="rows__name">{p.name}{p.verify && <Verify />}</span>
-            <span class="rows__value">{role(p.position)}</span>
+          <li id={`opisyal-${p.position.toLowerCase().replaceAll(" ", "-")}`} data-pagefind-title={p.name} class="bp-off__person">
+            <p class="kicker">{role(p.position)}</p>
+            <p class="bp-off__name">{p.name}{p.verify && <Verify />}</p>
             <p class="t-small muted">
               {text(p, "note") && <>{text(p, "note")} </>}{t.sources}: {p.sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}
             </p>
@@ -313,6 +319,28 @@ const districts = [1, 2].map((d) => ({
 </Site>
 
 <style>
+  .bp-off__top { padding-block-end: var(--s-6); }
+  .bp-off__top :global(.bp-tabs) { margin-block-start: var(--s-6); }
+  .bp-off__people {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    gap: var(--s-4);
+  }
+  .bp-off__person {
+    display: grid;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    scroll-margin-top: var(--s-9);
+  }
+  .bp-off__person > p { margin: 0; }
+  .bp-off__name { font: 500 var(--t-h3)/1.15 var(--font-display); letter-spacing: -.01em; }
   .bp-off__term {
     max-width: 70ch;
     margin-bottom: var(--s-8);
@@ -394,6 +422,9 @@ const districts = [1, 2].map((d) => ({
     gap: var(--s-3);
     height: 100%;
     align-content: start;
+    padding: var(--s-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
   }
   .bp-off__dl {
     display: grid;

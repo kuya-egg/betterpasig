@@ -1,4 +1,5 @@
 ---
+// Header (handoff 2026-11): the red emergency strip, then a sticky white nav. The same on every page.
 import Mark from "../../../design/logo/mark-blue.svg";
 import { href, langFromUrl, pathIn, ui } from "../../i18n";
 import EmergencyStrip from "./EmergencyStrip.astro";
@@ -10,8 +11,8 @@ const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/$/, "") 
 const links = [
   { label: t.navServices, path: "/serbisyo/" },
   { label: t.guideHelp, path: "/tulong/" },
-  { label: t.navBarangay, path: "/#mapa" },
-  { label: t.guideExplore, path: "/#pasyalan" },
+  { label: t.navBarangay, path: "/barangay/" },
+  { label: t.guideExplore, path: "/pasyalan/" },
 ];
 const more = [
   { label: t.weeklyTitle, path: "/ngayong-linggo/" },
@@ -20,16 +21,17 @@ const more = [
   { label: t.aboutTitle, path: "/tungkol/" },
 ];
 
+// /buhay/ pages belong to Tulong, /lugar/ pages to Pasyalan
+const section = path.startsWith("/buhay") ? "/tulong" : path.startsWith("/lugar") ? "/pasyalan" : path;
 const navState = (target: string) => {
-  if (target === "/#mapa" && path.startsWith("/barangay/")) return "true";
   const root = target.replace(/\/$/, "");
-  return path === root ? "page" : path.startsWith(root + "/") ? "true" : undefined;
+  return path === root ? "page" : section === root || section.startsWith(root + "/") ? "true" : undefined;
 };
 ---
 
+<a class="skip-link" href="#top">{t.skip}</a>
+<EmergencyStrip />
 <header class="bp-header">
-  <a class="skip-link" href="#top">{t.skip}</a>
-  <EmergencyStrip />
   <div class="wrap bp-header__inner">
     <a class="nav__logo bp-brand" href={href(lang, "/")} aria-label={t.home}>
       <Mark class="bp-mark" aria-hidden="true" />
@@ -55,6 +57,10 @@ const navState = (target: string) => {
         </li>
       </ul>
     </nav>
+    <div class="bp-header__tools">
+    <a class="bp-header__search" href={href(lang, "/serbisyo/#q")} aria-label={t.searchLabel}>
+      <svg class="ic" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M21 21l-4.3-4.3" /></svg>
+    </a>
     <a
       class="bp-header__language"
       href={pathIn(other, Astro.url)}
@@ -68,6 +74,7 @@ const navState = (target: string) => {
       </svg>
       {t.otherLangName}
     </a>
+    </div>
   </div>
 </header>
 
@@ -95,79 +102,76 @@ const navState = (target: string) => {
 
 <style>
   .bp-header {
-    position: relative;
-    z-index: 5;
+    position: sticky;
+    top: 0;
+    z-index: 20;
     background: var(--bg);
     border-block-end: 1px solid var(--line);
   }
-
-  .bp-header .skip-link { z-index: 1; }
 
   .bp-header__inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     min-height: 4.5rem;
-    column-gap: var(--s-4);
+    column-gap: var(--s-6);
   }
 
-  .bp-brand {
-    min-height: 3rem;
-    font-weight: 750;
-    letter-spacing: -.04em;
-  }
+  .bp-brand { min-height: 3rem; color: var(--ink); }
 
   .bp-header__nav > ul { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-1); }
-  .bp-header__nav a, .bp-header__nav summary, .bp-header__language {
+  .bp-header__nav a, .bp-header__nav summary, .bp-header__language, .bp-header__search {
     display: flex;
     align-items: center;
     gap: var(--s-2);
     min-height: 3rem;
-    padding-inline: var(--s-3);
-    border-radius: var(--r-sm);
-    font-size: .9375rem;
-    font-weight: 650;
+    padding-inline: var(--s-4);
+    border-radius: var(--r-md);
+    font-size: var(--t-meta);
+    font-weight: 600;
+    color: var(--ink);
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
   }
-  .bp-header__nav [aria-current] { color: var(--blue); text-decoration: underline; text-underline-offset: .35em; }
-  .bp-header__language { color: var(--blue); }
+  .bp-header__nav [aria-current] { background: var(--pale); color: var(--blue); }
+  .bp-header__tools { display: flex; align-items: center; gap: var(--s-2); margin-inline-start: auto; }
+  .bp-header__search { justify-content: center; inline-size: 3rem; padding-inline: 0; }
   .bp-header__more { position: relative; }
   .bp-header__more summary { cursor: pointer; list-style: none; }
   .bp-header__more summary::-webkit-details-marker { display: none; }
   .bp-header__more[open] summary svg { rotate: 180deg; }
   .bp-header__more > ul {
     position: absolute;
-    inset-inline-end: 0;
-    inset-block-start: calc(100% + 4px);
+    inset-inline-start: 0;
+    inset-block-start: calc(100% + var(--s-1));
     z-index: 2;
-    width: min(14rem, 90vw);
+    width: min(15rem, 90vw);
     padding: var(--s-2);
     background: var(--bg);
     border: 1px solid var(--line);
-    border-radius: var(--r-md);
-    box-shadow: 0 6px 24px var(--shadow);
+    border-radius: var(--r-lg);
+    box-shadow: 0 8px 24px var(--shadow);
   }
 
   @media (hover: hover) {
-    .bp-header__nav :is(a, summary):hover, .bp-header__language:hover { background: var(--pale); color: var(--blue); }
+    .bp-header__nav :is(a, summary):hover, .bp-header__language:hover, .bp-header__search:hover { background: var(--pale); color: var(--blue); }
   }
 
   @media (max-width: 56rem) {
-    .bp-header__inner { padding-block-start: var(--s-1); }
+    .bp-header__inner { padding-block-start: var(--s-1); column-gap: var(--s-2); }
     .bp-header__nav { order: 1; flex-basis: 100%; border-top: 1px solid var(--line); }
     .bp-header__nav > ul { justify-content: space-between; gap: 0; }
-    .bp-header__nav a, .bp-header__nav summary { padding-inline: var(--s-1); font-size: .875rem; }
+    .bp-header__nav a, .bp-header__nav summary { padding-inline: var(--s-2); font-size: var(--t-small); }
     .bp-header__more > ul { position: static; box-shadow: none; width: auto; }
     .bp-header__nav > ul:has(details[open]) { align-items: start; }
     .bp-header__nav li:has(details[open]) { flex: 1 0 100%; }
-    .bp-header__language { padding-inline: var(--s-1); }
+    .bp-header__language { padding-inline: var(--s-2); }
   }
 
   @media (max-width: 31rem) {
     .bp-header__nav > ul { column-gap: var(--s-1); }
     .bp-header__nav > ul > li > a, .bp-header__more summary {
       min-inline-size: 3rem;
-      padding-inline: 0;
+      padding-inline: var(--s-1);
     }
   }
 </style>

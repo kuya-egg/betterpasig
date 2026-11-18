@@ -1,64 +1,88 @@
 ---
+// Hero: kicker, H1, lead, search and popular links beside the 3D barangay map on a pale panel.
 import Search from "../Search.astro";
-import TopServices from "./TopServices.astro";
-import { langFromUrl, ui } from "../../i18n";
+import Map3D from "../map/Map3D.astro";
+import { href, langFromUrl, ui } from "../../i18n";
 import { liveAlerts } from "../../lib/alerts";
+import { featuredServices } from "../../lib/data";
+import { popularLinks } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const en = lang === "en";
 const alert = liveAlerts(lang)[0];
+// the last word of the title is the one blue italic word
+const [, titleHead, titleEm] = t.homeTitle.match(/^(.*?)(\S+)$/) ?? ["", t.homeTitle, ""];
+const popular = popularLinks.filter((link) => featuredServices.some((service) => service.id === link.id));
 ---
 
-<section class="civic-hero" aria-labelledby="hero-h">
-  <div class="wrap civic-hero__layout">
-    <div class="civic-hero__intro">
+<section class="home-hero" aria-labelledby="hero-h">
+  <div class="wrap home-hero__layout">
+    <div class="home-hero__intro">
       {alert && (
-        <p class="civic-hero__alert" data-alert-expires={alert.expires}>
+        <p class="home-hero__alert" data-alert-expires={alert.expires}>
           {alert.text} <a href={alert.source}>{alert.host}</a>
         </p>
       )}
-      <h1 id="hero-h">{t.homeTitle}</h1>
-      <p class="civic-hero__lead">{t.homeLead}</p>
-      <Search includePlaces />
+      <p class="kicker">{en ? "A resident's guide" : "Gabay ng mamamayan"}</p>
+      <h1 id="hero-h">{titleHead}<em>{titleEm}</em></h1>
+      <p class="lead">{t.homeLead}</p>
+      <div class="home-hero__search"><Search includePlaces /></div>
+      <p class="home-hero__popular">
+        <span class="muted">{en ? "Popular searches" : "Madalas hanapin"}:</span>
+        {popular.map((link) => <a href={href(lang, `/serbisyo/${link.id}/`)}>{en ? link.en : link.fil}</a>)}
+      </p>
     </div>
-    <TopServices />
+
+    <div class="home-hero__map" id="mapa">
+      <div class="home-hero__map-head">
+        <div>
+          <h2 class="home-hero__map-title">{t.mapFindTitle}</h2>
+          <p class="muted">{t.mapTapHint}</p>
+        </div>
+        <ul class="home-hero__legend">
+          <li><span class="home-hero__swatch home-hero__swatch--d1" aria-hidden="true"></span>{t.district1}</li>
+          <li><span class="home-hero__swatch home-hero__swatch--d2" aria-hidden="true"></span>{t.district2}</li>
+        </ul>
+      </div>
+      <Map3D size="hero" card remember />
+    </div>
   </div>
 </section>
 
 <style>
-  .civic-hero {
-    background: var(--pale);
-    border-block-end: 1px solid var(--line);
-    padding-block: clamp(1.5rem, 4.5vw, 4.25rem);
+  .home-hero { padding-block: var(--s-9) var(--s-7); }
+  .home-hero__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-8); align-items: center; }
+  .home-hero__intro { display: grid; gap: var(--s-5); min-inline-size: 0; justify-items: start; }
+  .home-hero h1 { font-size: var(--t-h1-home); line-height: 1.04; }
+  .home-hero__alert { padding: var(--s-2) var(--s-3); border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--bg); }
+  .home-hero__alert a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+  .home-hero__search { inline-size: 100%; }
+  .home-hero__search :global(.bp-search) { max-inline-size: 37.5rem; }
+  .home-hero__search :global(.bp-search__label) {
+    position: absolute; inline-size: 1px; block-size: 1px; margin: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
   }
-  .civic-hero__layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    align-items: center;
-    gap: clamp(1.5rem, 5vw, 4.5rem);
-  }
-  .civic-hero__intro h1 {
-    max-inline-size: 18ch;
-    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.05 var(--font-text);
-    letter-spacing: -.04em;
-    text-wrap: balance;
-  }
-  .civic-hero__lead {
-    max-inline-size: 48ch;
-    color: var(--muted);
-    margin-block: var(--s-3) var(--s-5);
-  }
-  .civic-hero__alert {
-    margin-block-end: var(--s-4);
-    padding: var(--s-2) var(--s-3);
-    border: 1px solid var(--line);
-    border-radius: var(--r-sm);
-    background: var(--bg);
-  }
-  .civic-hero__alert a { color: var(--blue); text-decoration: underline; }
+  .home-hero__search :global(form) { border-radius: var(--r-md); padding: var(--s-2) var(--s-2) var(--s-2) var(--s-4); border-color: var(--muted); }
+  .home-hero__search :global(form .bp-search__submit) { min-block-size: 3.25rem; border-radius: var(--r-sm); padding-inline: var(--s-5); font-weight: 600; }
+  .home-hero__popular { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); font-size: var(--t-meta); }
+  .home-hero__popular a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
-  @media (max-width: 54rem) {
-    .civic-hero__layout { grid-template-columns: minmax(0, 1fr); }
-    .civic-hero__intro h1 { max-inline-size: 22ch; text-wrap: wrap; }
+  .home-hero__map { position: relative; display: flex; flex-direction: column; gap: var(--s-4); min-inline-size: 0; min-block-size: 41.25rem; padding: var(--s-6) var(--s-6) var(--s-5); background: var(--pale); border-radius: var(--r-panel); overflow: hidden; }
+  .home-hero__map :global(.bp-map3d) { flex: 1; align-content: center; }
+  .home-hero__map-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-4); position: relative; z-index: 2; }
+  .home-hero__map-title { font-size: 1.875rem; line-height: 1.1; }
+  .home-hero__map-head .muted { margin-block-start: var(--s-1); font-size: var(--t-small); }
+  .home-hero__legend { display: grid; gap: var(--s-2); font-size: var(--t-small); }
+  .home-hero__legend li { display: flex; align-items: center; gap: var(--s-2); }
+  .home-hero__swatch { inline-size: 1rem; block-size: 1rem; border-radius: var(--r-sm); border: 1px solid var(--muted); }
+  .home-hero__swatch--d1 { background: var(--map-d1); }
+  .home-hero__swatch--d2 { background: var(--map-d2); }
+
+  @media (max-width: 64rem) {
+    .home-hero { padding-block: var(--s-7) var(--s-6); }
+    .home-hero__layout { grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+  }
+  @media (max-width: 40rem) {
+    .home-hero__map { min-block-size: 0; padding: var(--s-5) var(--s-4); }
   }
 </style>

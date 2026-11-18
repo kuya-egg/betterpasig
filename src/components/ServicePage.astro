@@ -1,9 +1,10 @@
 ---
 import { ButtonLink } from "@/components/ui/button-link";
 import Site from "../layouts/Site.astro";
+import PageHead from "./site/PageHead.astro";
 import Verify from "./Verify.astro";
 import ServiceNotices from "./ServiceNotices.astro";
-import { categories, officeById, programs, servicesRetrieved, sourceLabel, type Service } from "../lib/data";
+import { categories, cityHallHotline, mapsHref, officeById, programs, servicesRetrieved, telHref, type Service } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 interface Props {
@@ -30,9 +31,24 @@ const fee = typeof service.fee === "string" && service.fee.trim()
 const time = typeof service.processing_time === "string" && service.processing_time.trim()
   ? (english?.processing_time ?? service.processing_time)
   : "";
-const factsTitle = fee
-  ? (lang === "en" ? "Office and fee" : "Opisina at bayad")
-  : (lang === "en" ? "Service details" : "Mga detalye ng serbisyo");
+const en = lang === "en";
+const officeShort = office ? (office.acronym ?? office.name) : service.office;
+const cityHallNumber = cityHallHotline?.numbers[0];
+const contactParts = office?.contact ? office.contact.split(";").map((part) => part.trim()).filter(Boolean) : [];
+function host(url: string): string {
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return url; }
+}
+function fileName(url: string): string {
+  try {
+    const name = decodeURIComponent(new URL(url).pathname.split("/").filter(Boolean).pop() ?? "");
+    return name.length > 36 ? `…${name.slice(-32)}` : name;
+  } catch { return ""; }
+}
+const checklistTemplate = en ? "{n} of {total} ready" : "{n} sa {total} handa";
+const crumbs: [string, string?][] = [[en ? "Services" : "Serbisyo", "/serbisyo/"]];
+if (categoryName) crumbs.push([categoryName, `/serbisyo/#${service.category}`]);
+crumbs.push([title]);
+const stepsNumber = requirements.length > 0 ? 2 : 1;
 const onlineHost = online ? new URL(online).hostname.replace(/^www\./, "") : "";
 /*
  * Related benefits: explicit program id -> office ids (from data/services.json `offices`).
@@ -61,163 +77,242 @@ function lines(value: unknown): string[] {
 }
 ---
 
-<Site title={title} description={lang === "en" ? english?.summary || title : summary || title}>
-  <section class="section section--flow bp-service-page" aria-labelledby="service-h">
-    <div class="wrap bp-svc">
-      <div class="section-head">
-        <a class="bp-svc__back" href={href(lang, `/serbisyo/#${service.category}`)}><span aria-hidden="true">←</span> {categoryName || t.allServices}</a>
-        <h1 id="service-h">{title}</h1>
-        {summary && <p lang={detailLanguage}>{summary}</p>}
-        {service.verify && <Verify />}
-      </div>
-
-      <nav class="bp-svc__jump" aria-label={lang === "en" ? "On this page" : "Sa pahinang ito"} data-pagefind-ignore>
-        <ul>
-          <li><a href="#service-facts">{factsTitle}</a></li>
-          {requirements.length > 0 && <li><a href="#service-requirements">{t.requirements}</a></li>}
-          {steps.length > 0 && <li><a href="#service-steps">{t.stepsLabel}</a></li>}
-        </ul>
-      </nav>
-
-      <div class="bp-svc__answers">
-        <section class="bp-svc__overview" aria-labelledby="service-facts">
-          <h2 id="service-facts" tabindex="-1">{factsTitle}</h2>
-          <dl class="bp-svc__facts">
-            <div><dt>{t.colOffice}</dt><dd>{officeLabel}</dd></div>
-            {office?.location && <div><dt>{t.whereLabel}</dt><dd>{office.location}</dd></div>}
-            {fee && <div><dt>{t.colFee}</dt><dd class="num" lang={detailLanguage}>{fee}</dd></div>}
-            {time && <div><dt>{t.colTime}</dt><dd class="num" lang={detailLanguage}>{time}</dd></div>}
-            {office?.contact && <div><dt>{t.officeContact}</dt><dd>{office.contact}</dd></div>}
-          </dl>
+<Site title={title} description={en ? english?.summary || title : summary || title}>
+  <section class="section section--flow ground-white bp-service-page" aria-labelledby="service-h">
+    <div class="wrap">
+      <PageHead
+        id="service-h"
+        crumbs={crumbs}
+        kicker={categoryName || undefined}
+      >
+        {title}
+        <Fragment slot="actions">
+          {summary && <p class="lead bp-svc__summary" lang={detailLanguage}>{summary}</p>}
+          {service.verify && <Verify />}
           {online && (
             <ButtonLink className="bp-svc__online" href={online}>
-              {onlineHost === "facebook.com" ? (lang === "en" ? "Official office page" : "Opisyal na pahina ng tanggapan") : t.doOnline}
+              {onlineHost === "facebook.com" ? (en ? "Official office page" : "Opisyal na pahina ng tanggapan") : t.doOnline}
               <span aria-hidden="true">↗</span>
             </ButtonLink>
           )}
-          <p class="t-small muted bp-svc__source">
-            {t.sources}
-            {service.sources.map((url) => <a href={url}>{sourceLabel(url)}</a>)}
-            <span>{t.checked} {formatDate(lang, servicesRetrieved)}</span>
-          </p>
-        </section>
+        </Fragment>
+      </PageHead>
+
+      <dl class="bp-svc__facts" id="service-facts">
+        {fee && <div><dt>{t.colFee}</dt><dd lang={detailLanguage}>{fee}</dd></div>}
+        {time && <div><dt>{t.colTime}</dt><dd lang={detailLanguage}>{time}</dd></div>}
+        <div><dt>{t.colOffice}</dt><dd>{officeShort}</dd></div>
+        {steps.length > 0 && <div><dt>{t.stepsLabel}</dt><dd class="num">{steps.length}</dd></div>}
+      </dl>
+    </div>
+  </section>
+
+  <div class="section section--flow">
+    <div class="wrap bp-svc">
+      <div class="bp-svc__main">
+        <nav class="bp-svc__jump" aria-label={en ? "On this page" : "Sa pahinang ito"} data-pagefind-ignore>
+          <ul>
+            {requirements.length > 0 && <li><a class="chip" href="#service-requirements">{t.requirements}</a></li>}
+            {steps.length > 0 && <li><a class="chip" href="#service-steps">{t.stepsLabel}</a></li>}
+            {relatedPrograms.length > 0 && <li><a class="chip" href="#service-benefits">{t.relatedBenefits}</a></li>}
+            <li><a class="chip" href="#service-where">{t.whereLabel}</a></li>
+          </ul>
+        </nav>
 
         <div class="bp-svc__instructions">
           {requirements.length > 0 && (
-            <section aria-labelledby="service-requirements">
-              <h2 id="service-requirements" tabindex="-1">{t.requirements}</h2>
-              <ul class="bp-svc__list" lang={detailLanguage}>
-                {requirements.map((item) => <li>{item}</li>)}
-              </ul>
+            <section aria-labelledby="service-requirements" data-checklist data-template={checklistTemplate} data-total={requirements.length}>
+              <div class="bp-svc__shead">
+                <h2 id="service-requirements" tabindex="-1">1. {en ? "Get these ready" : "Ihanda ang mga ito"}</h2>
+                <p class="bp-svc__progress" data-progress hidden aria-live="polite"></p>
+              </div>
+              <div class="bp-svc__bar" data-bar hidden aria-hidden="true"><span></span></div>
+              <fieldset class="bp-svc__checks">
+                <legend class="bp-svc__legend">{en ? "Requirements checklist" : "Checklist ng mga kailangan"}</legend>
+                <ul lang={detailLanguage}>
+                  {requirements.map((item) => (
+                    <li><label><input type="checkbox" /><span>{item}</span></label></li>
+                  ))}
+                </ul>
+              </fieldset>
+              <p class="t-small muted bp-svc__tip" data-tip hidden>{en ? "Tick items as you gather them. This is not saved; it is only for you." : "I-check habang inihahanda mo. Hindi ito naka-save; para lang sa iyo."}</p>
             </section>
           )}
+
           {steps.length > 0 && (
             <section aria-labelledby="service-steps">
-              <h2 id="service-steps" tabindex="-1">{t.stepsLabel}</h2>
-              <ol class="bp-svc__list" lang={detailLanguage}>
-                {steps.map((item) => <li>{item}</li>)}
+              <h2 id="service-steps" tabindex="-1">{stepsNumber}. {en ? "Follow the steps" : "Sundin ang mga hakbang"}</h2>
+              <ol class="bp-svc__steps" lang={detailLanguage}>
+                {steps.map((item) => <li><span>{item}</span></li>)}
               </ol>
             </section>
           )}
         </div>
+
+        <ServiceNotices serviceId={service.id} />
+
+        {relatedPrograms.length > 0 && (
+          <section class="bp-svc__related" aria-labelledby="service-benefits">
+            <h2 id="service-benefits" tabindex="-1">{t.relatedBenefits}</h2>
+            <ul>
+              {relatedPrograms.map((program) => (
+                <li>
+                  <a class="cd bp-svc__program" href={href(lang, `/tulong/#${program.id}`)}>
+                    <span>{en ? program.title_en : program.title_fil}</span>
+                    <svg class="ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
 
-      <ServiceNotices serviceId={service.id} />
+      <aside class="bp-svc__aside" aria-label={en ? "Where to go and who to ask" : "Saan pupunta at sino ang tatanungin"}>
+        <div class="bp-svc__box" id="service-where">
+          <h2>{t.whereLabel}</h2>
+          <ul class="bp-svc__where">
+            {office?.location && (
+              <li>
+                <strong>{officeLabel}</strong>
+                <span class="muted">{office.location}</span>
+                <a class="link" href={mapsHref(office.location)}>{t.openMaps}</a>
+              </li>
+            )}
+            {cityHallNumber && (
+              <li>
+                <strong>{t.cityHall}</strong>
+                <span class="muted">{t.trunkline}</span>
+                <a class="link num" href={telHref(cityHallNumber)}>{cityHallNumber}</a>
+              </li>
+            )}
+          </ul>
+        </div>
 
-      {relatedPrograms.length > 0 && (
-        <section class="bp-svc__related" aria-labelledby="service-benefits">
-          <h2 id="service-benefits">{t.relatedBenefits}</h2>
+        {contactParts.length > 0 && (
+          <div class="bp-svc__box bp-svc__box--ask">
+            <h2>{en ? "Questions?" : "May tanong?"}</h2>
+            <ul class="bp-svc__contact">
+              {contactParts.map((part) => (
+                <li class="num">{part.includes("@") ? <a class="link" href={`mailto:${part}`}>{part}</a> : part}</li>
+              ))}
+            </ul>
+            <p class="t-small muted">{officeLabel}</p>
+          </div>
+        )}
+
+        <div class="bp-svc__sources t-small muted">
+          <p><strong>{t.sources}</strong></p>
           <ul>
-            {relatedPrograms.map((program) => (
-              <li><a class="link" href={href(lang, `/tulong/#${program.id}`)}>{lang === "en" ? program.title_en : program.title_fil}</a></li>
+            {service.sources.map((url) => (
+              <li><a class="link" href={url}>{host(url)}</a>{fileName(url) && <span>{fileName(url)}</span>}</li>
             ))}
           </ul>
-        </section>
-      )}
+          <p>{t.checked} {formatDate(lang, servicesRetrieved)}</p>
+        </div>
+      </aside>
     </div>
-  </section>
+  </div>
 </Site>
 
+<script>
+  // The requirements checklist: the count and bar live only in this page, nothing is stored.
+  document.querySelectorAll<HTMLElement>("[data-checklist]").forEach((root) => {
+    const boxes = [...root.querySelectorAll<HTMLInputElement>("input[type=checkbox]")];
+    const label = root.querySelector<HTMLElement>("[data-progress]");
+    const bar = root.querySelector<HTMLElement>("[data-bar]");
+    const tip = root.querySelector<HTMLElement>("[data-tip]");
+    const template = root.dataset.template ?? "{n} / {total}";
+    const total = boxes.length;
+    for (const el of [label, bar, tip]) if (el) el.hidden = false;
+    const update = () => {
+      const done = boxes.filter((box) => box.checked).length;
+      if (label) label.textContent = template.replace("{n}", String(done)).replace("{total}", String(total));
+      bar?.style.setProperty("--p", `${(done / total) * 100}%`);
+    };
+    root.addEventListener("change", update);
+    addEventListener("pageshow", update);
+    update();
+  });
+</script>
+
 <style>
-  .bp-service-page { padding-block-start: clamp(1.25rem, 3vw, 2.5rem); }
-  .bp-svc__back {
-    display: inline-flex;
-    gap: var(--s-2);
-    min-height: 3rem;
-    align-items: center;
-    justify-self: start;
-    color: var(--blue);
-    font-size: .9375rem;
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  .bp-svc .section-head h1 {
-    font: 800 clamp(2rem, 1.45rem + 2.6vw, 4.25rem)/1.08 var(--font-text);
-    letter-spacing: -.035em;
-    max-inline-size: 29ch;
-    text-wrap: wrap;
-  }
-  .bp-svc__jump { margin-block: var(--s-5) var(--s-6); border-block: 1px solid var(--line); }
-  .bp-svc__jump ul { display: flex; flex-wrap: wrap; column-gap: var(--s-5); }
-  .bp-svc__jump a {
-    display: inline-flex;
-    align-items: center;
-    min-block-size: 3rem;
-    color: var(--blue);
-    font-weight: 750;
-    font-size: .9375rem;
-    text-decoration: underline;
-    text-underline-offset: .24em;
-  }
-  .bp-svc__answers {
+  .bp-service-page { padding-block-end: var(--s-7); }
+  .bp-svc__summary { max-width: 52ch; }
+  .bp-svc__online { margin-block-start: var(--s-2); }
+  .bp-svc__facts {
+    margin: var(--s-7) 0 0;
     display: grid;
-    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-    align-items: start;
-    gap: clamp(1.5rem, 5vw, 4rem);
-  }
-  .bp-svc__overview {
-    border-radius: var(--r-lg);
-    padding: clamp(1rem, 3vw, 2rem);
-    background: var(--pale);
-  }
-  .bp-svc__overview h2, .bp-svc__instructions h2, .bp-svc__related h2 {
-    font: 800 clamp(1.28rem, 1.1rem + .8vw, 1.85rem)/1.3 var(--font-text);
-    letter-spacing: -.025em;
-  }
-  .bp-svc__overview h2 { margin-block-end: var(--s-3); }
-  .bp-svc__instructions h2 { padding-block-end: var(--s-3); border-block-end: 1px solid var(--line); }
-  .bp-svc__facts { margin: 0; }
-  .bp-svc__facts > div {
-    display: grid;
-    grid-template-columns: minmax(5rem, .6fr) minmax(0, 1.4fr);
+    grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
     gap: var(--s-3);
-    padding-block: var(--s-3);
   }
-  .bp-svc__facts > div + div { border-top: 1px solid var(--line-strong); }
-  .bp-svc__facts dt { font-weight: 750; }
-  .bp-svc__facts dd { margin: 0; overflow-wrap: anywhere; }
-  .bp-svc__online { margin-top: var(--s-3); height: auto; white-space: normal; gap: var(--s-2); }
-  .bp-svc__source {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 var(--s-3);
-    margin-top: var(--s-3);
+  .bp-svc__facts > div { background: var(--surface); border-radius: var(--r-lg); padding: var(--s-4) var(--s-5); min-width: 0; }
+  .bp-svc__facts > div:first-child { background: var(--pale); }
+  .bp-svc__facts dt { font: 600 var(--t-small)/1.5 var(--font-text); color: var(--muted); }
+  .bp-svc__facts dd { margin: var(--s-1) 0 0; font: var(--display-weight) var(--t-h3)/1.15 var(--font-display); overflow-wrap: anywhere; }
+  .bp-svc__facts > div:first-child dd { color: var(--blue); }
+
+  .bp-svc { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); align-items: start; }
+  @media (min-width: 1024px) {
+    .bp-svc { grid-template-columns: minmax(0, 1fr) 21.25rem; gap: var(--s-8); }
+    .bp-svc__aside { position: sticky; top: var(--s-9); }
   }
-  .bp-svc__source a { display: inline-flex; align-items: center; min-height: 3rem; color: var(--blue); text-decoration: underline; }
-  .bp-svc__instructions > section + section { margin-top: var(--s-6); }
-  .bp-svc__list { margin: var(--s-2) 0 0; padding-inline-start: var(--s-5); }
-  .bp-svc__list :global(li::marker) { color: var(--blue); font-weight: 750; }
-  ul.bp-svc__list { list-style: disc; }
-  ol.bp-svc__list { list-style: decimal; }
-  .bp-svc__list > li { padding-block: var(--s-2); padding-inline-start: var(--s-1); }
-  .bp-svc__related { margin-top: var(--s-6); }
-  .bp-svc__related a { display: inline-flex; align-items: center; min-height: 3rem; }
-  @media (max-width: 48rem) {
-    .bp-svc__answers { grid-template-columns: minmax(0, 1fr); }
+  .bp-svc__main { min-width: 0; display: grid; gap: var(--s-8); }
+  .bp-svc__jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bp-svc__jump a { text-decoration: none; }
+  @media (hover: hover) { .bp-svc__jump a:hover { background: var(--pale); border-color: var(--blue); } }
+  .bp-svc__instructions { display: grid; gap: var(--s-8); }
+  .bp-svc__instructions > section, .bp-svc__related { scroll-margin-top: var(--s-9); }
+  .bp-svc h2[id] { scroll-margin-top: var(--s-9); }
+  .bp-svc__main h2 { font-size: var(--t-h3); margin-block-end: var(--s-5); }
+  .bp-svc__shead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-3); }
+  .bp-svc__shead h2 { margin-block-end: var(--s-3); }
+  .bp-svc__progress { font-weight: 600; color: var(--blue); margin-block-end: var(--s-3); }
+  .bp-svc__bar { block-size: var(--s-2); background: var(--surface); border-radius: var(--r-btn); overflow: hidden; margin-block-end: var(--s-4); }
+  .bp-svc__bar span { display: block; block-size: 100%; inline-size: var(--p, 0%); background: var(--blue); border-radius: var(--r-btn); transition: inline-size var(--mid) var(--ease); }
+  .bp-svc__checks { margin: 0; padding: var(--s-2); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg); min-width: 0; }
+  .bp-svc__checks ul { list-style: none; margin: 0; padding: 0; }
+  .bp-svc__checks label { display: flex; gap: var(--s-4); align-items: flex-start; min-block-size: 3.5rem; padding: var(--s-3) var(--s-4); border-radius: var(--r-md); cursor: pointer; transition: background-color var(--fast) var(--ease); }
+  .bp-svc__checks input { inline-size: 1.5rem; block-size: 1.5rem; margin: 0; flex: none; accent-color: var(--blue); cursor: pointer; }
+  .bp-svc__checks span { font-weight: 500; line-height: 1.45; }
+  .bp-svc__checks label:has(input:checked) span { color: var(--muted); text-decoration: line-through; }
+  @media (hover: hover) { .bp-svc__checks label:hover { background: var(--pale); } }
+  .bp-svc__legend { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .bp-svc__tip { margin-block-start: var(--s-3); }
+
+  .bp-svc__steps { list-style: none; counter-reset: step; margin: 0; padding: 0; }
+  .bp-svc__steps li { counter-increment: step; position: relative; display: flex; padding-inline-start: calc(var(--s-8) + var(--s-2)); padding-block-end: var(--s-6); min-block-size: 3.5rem; }
+  .bp-svc__steps li::before {
+    content: counter(step);
+    position: absolute; inset-block-start: 0; inset-inline-start: 0;
+    display: grid; place-items: center;
+    inline-size: 3rem; block-size: 3rem; border-radius: var(--r-btn);
+    background: var(--blue); color: #fff;
+    font: var(--display-weight) var(--t-h3)/1 var(--font-display);
   }
-  @media (max-width: 24rem) {
-    .bp-svc__facts > div { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); }
+  .bp-svc__steps li:not(:last-child)::after {
+    content: ""; position: absolute; inset-inline-start: 1.4375rem; inset-block: 3.5rem 0.5rem;
+    inline-size: 2px; background: var(--line-strong);
   }
+  .bp-svc__steps li span { padding-block-start: var(--s-2); font: 600 var(--t-card)/1.4 var(--font-text); }
+
+  .bp-svc__related ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16.25rem, 1fr)); gap: var(--s-3); }
+  .bp-svc__program { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-block-size: 3.5rem; padding: var(--s-4) var(--s-5); font-weight: 600; line-height: 1.35; }
+
+  .bp-svc__aside { display: grid; gap: var(--s-4); min-width: 0; }
+  .bp-svc__box { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); scroll-margin-top: var(--s-9); }
+  .bp-svc__box h2 { font-size: var(--t-h3); margin-block-end: var(--s-4); }
+  .bp-svc__box--ask { background: var(--pale); border-color: transparent; }
+  .bp-svc__where, .bp-svc__contact, .bp-svc__sources ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }
+  .bp-svc__where li { display: grid; gap: var(--s-1); font-size: var(--t-meta); }
+  .bp-svc__where li > span { line-height: 1.5; overflow-wrap: anywhere; }
+  .bp-svc__where .link { display: inline-flex; align-items: center; min-block-size: 2.75rem; justify-self: start; }
+  .bp-svc__contact { gap: var(--s-2); font-weight: 600; overflow-wrap: anywhere; }
+  .bp-svc__contact .link { display: inline-flex; align-items: center; min-block-size: 2.75rem; }
+  .bp-svc__sources { padding-inline: var(--s-2); display: grid; gap: var(--s-2); }
+  .bp-svc__sources strong { color: var(--ink); }
+  .bp-svc__sources ul { gap: var(--s-1); }
+  .bp-svc__sources li { display: grid; }
+  .bp-svc__sources a { display: inline-flex; align-items: center; min-block-size: 2.75rem; justify-self: start; }
+  .bp-svc__sources li span { overflow-wrap: anywhere; margin-block-start: calc(var(--s-2) * -1); }
 </style>

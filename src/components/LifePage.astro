@@ -2,6 +2,7 @@
 // /buhay/<id>/: every service and benefit for one life event, then the events people often need next.
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
+import PageHead from "./site/PageHead.astro";
 import LifeIcon from "./home/LifeIcon.astro";
 import { href, langFromUrl, ui } from "../i18n";
 import { lifeEvents, officeName, type LifeEvent } from "../lib/data";
@@ -20,63 +21,77 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
 ---
 
 <Site title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
-  <section class="section section--flow bp-life" aria-labelledby="life-h">
+  <section class="section section--flow ground-white bp-life" aria-labelledby="page-h">
     <div class="wrap">
-      <div class="section-head bp-life__head">
-        <LifeIcon id={event.id} />
-        <h1 id="life-h">{title}</h1>
-        <p>{en ? event.line_en : event.line_fil}</p>
+      <div class="bp-life__head">
+        <span class="bp-life__disc"><LifeIcon id={event.id} /></span>
+        <PageHead crumbs={[[t.benefitsTitle, "/tulong/"], [title]]} lead={en ? event.line_en : event.line_fil}>{title}</PageHead>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flow bp-life" aria-labelledby="life-steps-h">
+    <div class="wrap">
+      <div class="bp-life__panel">
+        <div class="bp-life__intro">
+          <h2 id="life-steps-h" class="t-h2">{t.lifeServices}</h2>
+        </div>
+        <div class="bp-life__lists">
+          {
+            event.serviceList.length > 0 && (
+              <ol class="bp-life__steps">
+                {event.serviceList.map((service, index) => (
+                  <li>
+                    <a class="cd bp-life__step" href={href(lang, `/serbisyo/${service.id}/`)}>
+                      <span class="bp-life__n" aria-hidden="true">{index + 1}</span>
+                      <span class="bp-life__main">
+                        <span class="t-card">{en ? service.title_en : service.title_fil}</span>
+                        {service.verify && <Verify />}
+                        <span class="t-small muted bp-life__meta">
+                          <span>{t.office}: {officeName(service.office)}</span>
+                          {service.fee && <span>{t.fee}: {service.fee}</span>}
+                          {service.processing_time && <span>{service.processing_time}</span>}
+                        </span>
+                      </span>
+                      <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )
+          }
+          {
+            event.programList.length > 0 && (
+              <>
+                <h3 class="t-label muted bp-life__h">{t.lifePrograms}</h3>
+                <ul class="bp-life__steps">
+                  {event.programList.map((program) => (
+                    <li>
+                      <a class="cd bp-life__step" href={href(lang, `/tulong/#${program.id}`)}>
+                        <span class="bp-life__main">
+                          <span class="t-card">{en ? program.title_en : program.title_fil}</span>
+                          {program.verify && <Verify />}
+                          <span class="t-small muted bp-life__meta"><span>{pick(program.for_fil, program.for_en)}</span></span>
+                        </span>
+                        <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )
+          }
+        </div>
       </div>
 
-      <h2 class="t-label muted">{t.lifeServices}</h2>
-      <ul class="rows bp-life__rows">
-        {
-          event.serviceList.map((service) => (
-            <li>
-              <span class="rows__name">
-                <a class="bp-life__link" href={href(lang, `/serbisyo/${service.id}/`)}>{en ? service.title_en : service.title_fil}</a>
-                {service.verify && <Verify />}
-                <small>
-                  {t.office}: {officeName(service.office)}
-                  {service.fee && <>. {t.fee}: {service.fee}</>}
-                </small>
-              </span>
-              {service.processing_time && <span class="rows__value bp-life__time">{service.processing_time}</span>}
-            </li>
-          ))
-        }
-      </ul>
-
-      {
-        event.programList.length > 0 && (
-          <>
-            <h2 class="t-label muted bp-life__h">{t.lifePrograms}</h2>
-            <ul class="rows bp-life__rows">
-              {event.programList.map((program) => (
-                <li>
-                  <span class="rows__name">
-                    <a class="bp-life__link" href={href(lang, `/tulong/#${program.id}`)}>{en ? program.title_en : program.title_fil}</a>
-                    {program.verify && <Verify />}
-                    <small>{pick(program.for_fil, program.for_en)}</small>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </>
-        )
-      }
-
-      <h2 class="t-label muted bp-life__h">{t.lifeRelated}</h2>
-      <ul class="grid bp-life__related">
+      <h2 class="t-h3 bp-life__related-h">{t.lifeRelated}</h2>
+      <ul class="bp-life__chips">
         {
           related.map((item) => (
-            <li class="span-6">
-              <a class="card bp-life__card" href={href(lang, `/buhay/${item.id}/`)}>
+            <li>
+              <a class="chip" href={href(lang, `/buhay/${item.id}/`)}>
                 <LifeIcon id={item.id} />
-                <span>
-                  <span class="t-card">{en ? item.title_en : item.title_fil}</span>
-                  <span class="t-small muted bp-life__card-line">{en ? item.line_en : item.line_fil}</span>
-                </span>
+                {en ? item.title_en : item.title_fil}
               </a>
             </li>
           ))
@@ -87,78 +102,21 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
 </Site>
 
 <style>
-  .bp-life__head {
-    margin-bottom: var(--s-8);
-  }
-  .bp-life__head :global(.bp-life-icon) {
-    align-self: flex-start;
-    justify-self: start;
-  }
-  .bp-life__rows :global(.verify) {
-    justify-self: start;
-    margin-left: 0;
-  }
-  .bp-life__h {
-    margin-top: var(--s-8);
-  }
-  .bp-life__rows {
-    list-style: none;
-    margin: var(--s-4) 0 0;
-    padding: 0;
-  }
-  .bp-life__rows > li {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
-  }
-  .bp-life__rows .rows__name {
-    display: grid;
-    gap: var(--s-1);
-  }
-  .bp-life__rows small {
-    color: var(--muted);
-    font-size: var(--t-small);
-    font-weight: 400;
-  }
-  .bp-life__link {
-    font-size: var(--t-card);
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 4px;
-    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
-  }
-  .bp-life__link:hover {
-    text-decoration-color: currentColor;
-  }
-  .bp-life__time {
-    color: var(--muted);
-    font-size: var(--t-small);
-    text-align: right;
-  }
-  .bp-life__related {
-    list-style: none;
-    margin: var(--s-4) 0 0;
-    padding: 0;
-  }
-  .bp-life__card {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: var(--s-4);
-    align-items: center;
-    height: 100%;
-  }
-  .bp-life__card-line {
-    display: block;
-    margin-top: var(--s-1);
-  }
-  @media (max-width: 1023px) {
-    .bp-life__related > li {
-      grid-column: 1 / -1;
-    }
-    .bp-life__rows > li {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .bp-life__time {
-      text-align: left;
-    }
-  }
+  .bp-life__head { display: grid; gap: var(--s-5); justify-items: start; }
+  .bp-life__disc { display: inline-grid; place-items: center; inline-size: 4.5rem; block-size: 4.5rem; border-radius: 50%; background: var(--blue); color: #fff; }
+  .bp-life__disc :global(.bp-life-icon) { color: #fff; }
+  .bp-life__disc :global(.bp-life-icon svg) { inline-size: 2rem; block-size: 2rem; }
+  .bp-life__panel { display: flex; flex-wrap: wrap; gap: var(--s-7); background: var(--pale); border-radius: var(--r-panel); padding: clamp(1.5rem, 4vw, 3rem); }
+  .bp-life__intro { flex: 1 1 18rem; min-inline-size: 0; }
+  .bp-life__lists { flex: 2 1 32rem; min-inline-size: 0; display: grid; gap: var(--s-3); align-content: start; }
+  .bp-life__h { margin-block-start: var(--s-5); }
+  .bp-life__steps { display: grid; gap: var(--s-2); counter-reset: none; }
+  .bp-life__step { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4) var(--s-5); min-block-size: 3.5rem; }
+  .bp-life__n { font: var(--display-weight) var(--t-h3)/1 var(--font-display); color: var(--blue); inline-size: 2rem; flex: none; }
+  .bp-life__main { flex: 1; min-inline-size: 0; display: grid; justify-items: start; gap: var(--s-1); }
+  .bp-life__meta { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); }
+  .bp-life__related-h { margin-block: var(--s-8) var(--s-4); }
+  .bp-life__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bp-life__chips :global(.bp-life-icon) { color: currentColor; }
+  .bp-life__chips :global(.bp-life-icon svg) { inline-size: 1.25rem; block-size: 1.25rem; }
 </style>

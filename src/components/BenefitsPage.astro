@@ -1,146 +1,168 @@
 ---
+// /tulong/: pick a situation (links to /buhay/<id>/), then every program as an accordion grouped by audience.
 import Site from "../layouts/Site.astro";
 import Verify from "./Verify.astro";
-import { programs, programsRetrieved, sourceLabel } from "../lib/data";
+import PageHead from "./site/PageHead.astro";
+import LifeIcon from "./home/LifeIcon.astro";
+import { lifeEvents, programs, programsRetrieved, sourceLabel } from "../lib/data";
 import { formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const en = lang === "en";
+
+// data/programs.json has no audience field, so each program id is assigned to an audience here.
+// Any program not listed lands in the last group, so a new program is never dropped.
+const groups = [
+  { id: "senior", fil: "Senior citizen", en: "Senior citizens", ids: ["local-senior-pension", "senior-year-end-cash-gift", "senior-milestone-incentive", "senior-burial-assistance", "senior-health-perks"] },
+  { id: "pwd", fil: "Taong may kapansanan (PWD)", en: "Persons with disability (PWD)", ids: ["pwd-cash-gift", "pwd-business-assistance"] },
+  { id: "solo-parent", fil: "Solo parent", en: "Solo parents", ids: ["solo-parent-subsidy"] },
+  { id: "estudyante", fil: "Estudyante", en: "Students", ids: ["pagasa-scholarship", "pasig-city-scholars", "plp-admission", "k12-transport-allowance"] },
+  { id: "kalusugan", fil: "Kalusugan", en: "Health", ids: ["mental-health-free-meds"] },
+];
+const placed = new Set(groups.flatMap((group) => group.ids));
+const leftover = programs.filter((program) => !placed.has(program.id)).map((program) => program.id);
+const all = [...groups, { id: "iba-pa", fil: "Iba pa", en: "Other", ids: leftover }]
+  .map((group) => ({ ...group, items: group.ids.map((id) => programs.find((program) => program.id === id)).filter((program) => program !== undefined) }))
+  .filter((group) => group.items.length > 0);
+
+const pick = (fil: string | null | undefined, eng: string | null | undefined) => (en ? eng || fil : fil || eng) ?? null;
+const lead = t.benefitsIntro;
+const countLabel = en ? `${programs.length} programs` : `${programs.length} na programa`;
 ---
 
 <Site title={t.benefitsTitle} description={t.benefitsIntro}>
-  <section class="section section--flow bp-benefits" aria-labelledby="benefits-h">
+  <section class="section section--flow ground-white bp-benefits" aria-labelledby="page-h">
     <div class="wrap">
-      <div class="section-head">
-        <h1 id="benefits-h">{t.benefitsTitle}</h1>
-        <p>{t.benefitsIntro}</p>
-      </div>
-      <ul class="bp-benefits__jump" aria-label={t.benefitsAll} data-pagefind-ignore>
-        {programs.map((program) => (
-          <li><a href={`#${program.id}`}>{lang === "en" ? program.title_en : program.title_fil}</a></li>
-        ))}
+      <PageHead crumbs={[[t.benefitsTitle]]} lead={lead}>
+        {en ? <>Benefits and <em>assistance</em></> : <>Benepisyo at <em>tulong</em></>}
+      </PageHead>
+
+      <h2 class="t-h3 bp-benefits__situation">{en ? "What is your situation?" : "Ano ang sitwasyon mo?"}</h2>
+      <ul class="bp-benefits__chips" data-pagefind-ignore>
+        {
+          lifeEvents.map((event) => (
+            <li>
+              <a class="chip" href={href(lang, `/buhay/${event.id}/`)}>
+                <LifeIcon id={event.id} />
+                {en ? event.title_en : event.title_fil}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+    </div>
+  </section>
+
+  <section class="section section--flow bp-benefits" aria-labelledby="cat-h">
+    <div class="wrap">
+      <div class="bp-benefits__head">
+        <h2 id="cat-h" class="t-h2">{en ? <>All <em>benefits</em></> : <>Lahat ng <em>benepisyo</em></>}</h2>
+        <p class="muted">{countLabel}</p>
+      </div>
+      <div class="bp-benefits__groups">
+        {
+          all.map((group) => (
+            <section aria-labelledby={`group-${group.id}`}>
+              <h3 id={`group-${group.id}`} class="t-h3">{en ? group.en : group.fil}</h3>
+              <div class="bp-benefits__list">
+                {group.items.map((program) => {
+                  const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null);
+                  const title = en ? program.title_en : program.title_fil;
+                  const rows = [
+                    { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), lang: !en && !program.benefit_fil ? "en" : undefined, big: true },
+                    { label: t.benefitFor, value: pick(program.for_fil, program.for_en), lang: !en && !program.for_fil ? "en" : undefined, big: false },
+                    { label: t.benefitHow, value: pick(program.how_fil, program.how_en), lang: !en && !program.how_fil ? "en" : undefined, big: false },
+                    { label: t.benefitOffice, value: program.office, lang: undefined, big: false },
+                  ].filter((row) => typeof row.value === "string" && row.value.trim());
+                  return (
+                    <details id={program.id} class="bp-benefits__item">
+                      <summary>
+                        <span class="bp-benefits__name">{title}</span>
+                        {program.verify && <Verify />}
+                        <span class="bp-benefits__sign" aria-hidden="true" />
+                      </summary>
+                      <div class="bp-benefits__body">
+                        <dl class="bp-benefits__rows">
+                          {rows.map((row) => (
+                            <div class:list={["bp-benefits__cell", row.big && "bp-benefits__cell--big"]}>
+                              <dt class="t-label muted">{row.label}</dt>
+                              <dd lang={row.lang}>{row.value}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                        {note && <p class="t-small muted">{note}</p>}
+                        <p class="t-small muted">
+                          {t.sources}:{" "}
+                          {program.sources.map((url, i) => (
+                            <>
+                              {i > 0 && ", "}
+                              <a class="link" href={url}>{sourceLabel(url)}</a>
+                            </>
+                          ))}
+                        </p>
+                        <p class="t-small muted">{t.checked}: <span>{formatDate(lang, programsRetrieved)}</span></p>
+                      </div>
+                    </details>
+                  );
+                })}
+              </div>
+            </section>
+          ))
+        }
+      </div>
       <a class="link bp-benefits__services" href={href(lang, "/serbisyo/")}>{t.allServices}</a>
     </div>
   </section>
-  {
-    programs.map((program, index) => {
-      const pick = (fil: string | null | undefined, en: string | null | undefined) => (lang === "en" ? (en ?? fil) : (fil ?? en)) ?? null;
-      const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null) ?? "";
-      const rows = [
-        { label: t.benefitFor, value: pick(program.for_fil, program.for_en), num: false },
-        { label: t.benefitOffice, value: program.office, num: false },
-        { label: t.benefitHow, value: pick(program.how_fil, program.how_en), num: false, language: lang === "fil" && !program.how_fil ? "en" : undefined },
-        { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), num: true, language: lang === "fil" && !program.benefit_fil ? "en" : undefined },
-      ].filter((row) => typeof row.value === "string" && row.value.trim());
-      return (
-        <section
-          id={program.id}
-          aria-labelledby={`${program.id}-h`}
-          class:list={["section section--flow bp-benefits", index % 2 === 0 && "ground-surface"]}
-        >
-          <div class="wrap grid">
-            <div class="span-4">
-              <h2 id={`${program.id}-h`} class="bp-benefits__title">
-                {lang === "en" ? program.title_en : program.title_fil}
-                {program.verify && <Verify />}
-              </h2>
-            </div>
-            <div class="span-8">
-              <dl class="bp-benefits__rows">
-                {rows.map((row) => (
-                  <div>
-                    <dt class="t-label muted">{row.label}</dt>
-                    <dd lang={row.language} class:list={[row.num && "bp-benefits__num"]}>{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-              {note && <p class="t-small muted bp-benefits__note">{note}</p>}
-              <p class="t-small muted bp-benefits__src">
-                {t.sources}:{" "}
-                {program.sources.map((url, i) => (
-                  <>
-                    {i > 0 && ", "}
-                    <a href={url}>{sourceLabel(url)}</a>
-                  </>
-                ))}
-              </p>
-              <p class="t-small muted">{t.checked}: <span>{formatDate(lang, programsRetrieved)}</span></p>
-            </div>
-          </div>
-        </section>
-      );
-    })
-  }
 </Site>
 
+<script>
+  // Open the program a link points to (#<program id>). Without JS every item is still reachable by clicking.
+  function openFromHash() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (target instanceof HTMLDetailsElement) {
+      target.open = true;
+      target.scrollIntoView();
+    }
+  }
+  openFromHash();
+  addEventListener("hashchange", openFromHash);
+</script>
+
 <style>
-  .bp-benefits__jump {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
-    column-gap: var(--s-5);
-    padding: var(--s-5);
-    border-radius: var(--r-lg);
-    background: var(--paper);
+  .bp-benefits__situation { margin-block: var(--s-8) var(--s-4); }
+  .bp-benefits__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .bp-benefits__chips :global(.bp-life-icon) { color: currentColor; display: inline-grid; place-items: center; inline-size: 1.25rem; block-size: 1.25rem; }
+  .bp-benefits__chips :global(.bp-life-icon svg) { inline-size: 100%; block-size: 100%; }
+  .bp-benefits__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-3); margin-block-end: var(--s-6); }
+  .bp-benefits__head em { color: var(--blue); }
+  .bp-benefits__groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-8); }
+  .bp-benefits__body :is(dd, p, a) { overflow-wrap: anywhere; }
+  .bp-benefits__groups h3 { margin-block-end: var(--s-3); }
+  .bp-benefits__list { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  .bp-benefits__item + .bp-benefits__item { border-block-start: 1px solid var(--line); }
+  .bp-benefits__item { scroll-margin-block-start: var(--s-9); }
+  .bp-benefits__item summary {
+    display: flex; align-items: center; gap: var(--s-3); min-block-size: 3.5rem; padding: var(--s-4) var(--s-5);
+    cursor: pointer; list-style: none; font: 600 var(--t-card)/1.35 var(--font-text);
+    transition: background-color var(--fast) var(--ease);
   }
-  .bp-benefits__jump a, .bp-benefits__services {
-    min-height: 3rem;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
-    color: var(--blue);
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  .bp-benefits__services { margin-top: var(--s-3); align-self: start; border: 0; }
-  section.bp-benefits {
-    scroll-margin-top: var(--s-8);
-  }
-  .bp-benefits__title {
-    margin: 0;
-  }
-  .bp-benefits__rows {
-    margin: 0;
-  }
-  .bp-benefits__rows > div {
-    display: grid;
-    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
-    gap: var(--s-4);
-    padding-block: var(--s-3);
-    border-top: 1px solid var(--line);
-  }
-  .bp-benefits__rows dd {
-    margin: 0;
-  }
-  .bp-benefits__num {
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-  }
-  .bp-benefits__note,
-  .bp-benefits__src {
-    margin: var(--s-3) 0 0;
-  }
-  .bp-benefits__src + p {
-    margin: var(--s-1) 0 0;
-  }
-  .bp-benefits__src a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    text-decoration: underline;
-    text-decoration-color: var(--line-strong);
-    text-underline-offset: 3px;
-  }
-  @media (max-width: 1023px) {
-    .bp-benefits .wrap > div {
-      grid-column: 1 / -1;
-    }
-  }
-  @media (max-width: 639px) {
-    .bp-benefits__rows > div {
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--s-1);
-    }
-  }
+  .bp-benefits__item summary::-webkit-details-marker { display: none; }
+  .bp-benefits__item summary:hover { background: #f5f8fe; }
+  .bp-benefits__item summary:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+  .bp-benefits__name { flex: 1; min-width: 0; }
+  .bp-benefits__sign { position: relative; flex: none; inline-size: 2.25rem; block-size: 2.25rem; border-radius: 50%; background: var(--pale); color: var(--blue); }
+  .bp-benefits__sign::before, .bp-benefits__sign::after { content: ""; position: absolute; inset: 50% auto auto 50%; background: currentColor; transform: translate(-50%, -50%); }
+  .bp-benefits__sign::before { inline-size: 1rem; block-size: 2px; }
+  .bp-benefits__sign::after { inline-size: 2px; block-size: 1rem; }
+  .bp-benefits__item[open] .bp-benefits__sign::after { display: none; }
+  .bp-benefits__body { display: grid; gap: var(--s-3); padding: 0 var(--s-5) var(--s-5); }
+  .bp-benefits__rows { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--s-3); }
+  .bp-benefits__cell { background: var(--surface); border-radius: var(--r-md); padding: var(--s-4); }
+  .bp-benefits__cell--big { background: var(--pale); }
+  .bp-benefits__cell dd { margin-block-start: var(--s-1); font-size: var(--t-meta); line-height: 1.5; }
+  .bp-benefits__cell--big dd { font: var(--display-weight) var(--t-h3)/1.15 var(--font-display); color: var(--blue); }
+  .bp-benefits__services { display: inline-flex; align-items: center; min-block-size: 2.75rem; margin-block-start: var(--s-8); }
 </style>

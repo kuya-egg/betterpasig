@@ -10,7 +10,9 @@ import {
   places,
   serviceUpdates,
 } from "../lib/data";
-import { formatDate, langFromUrl } from "../i18n";
+import { barangays } from "../lib/data";
+import PageHead from "./site/PageHead.astro";
+import { formatDate, href, langFromUrl, ui } from "../i18n";
 import { eventState } from "../lib/freshness";
 
 interface Props {
@@ -24,8 +26,13 @@ interface ScheduleRow {
 }
 
 const lang = langFromUrl(Astro.url);
+const t = ui[lang];
 const place = places.find((item) => item.id === Astro.props.placeId);
 if (!place) throw new Error(`Unknown place ${Astro.props.placeId}`);
+const barangay = barangays.find((item) => item.id === place.barangay_id);
+const nameWords = place.name.split(" ");
+const nameTail = nameWords.pop() ?? "";
+const nameHead = nameWords.join(" ");
 
 const sourceIds = [...new Set(Object.values(place.evidence).flat().map((ref) => ref.split(":")[0]))];
 const updates = serviceUpdates.filter(
@@ -69,29 +76,28 @@ function historySummary(id: string, english: string): string {
     ? `${place.name}: address, hours and published contact details, with the official sources checked.`
     : `${place.name}: address, oras at mga numerong nakalista sa mga opisyal na sanggunian.`}
 >
-  <section class="section section--flow" aria-labelledby="place-h">
-    <div class="wrap bp-place">
-      <div class="section-head bp-place__head">
-        <h1 id="place-h">{place.name}<Verify /></h1>
-        {place.barangay_id && (
-          <p>
-            <a
-              class="link bp-place__back"
-              href={lang === "en" ? `/en/barangay/${place.barangay_id}/` : `/barangay/${place.barangay_id}/`}
-            >{lang === "en" ? "Barangay information" : "Impormasyon ng barangay"}</a>
-          </p>
-        )}
-      </div>
+  <section class="section" aria-labelledby="page-h">
+    <div class="wrap">
+      <PageHead crumbs={[[t.guideExplore, "/pasyalan/"], [place.name]]}>
+        {nameHead}{" "}<em>{nameTail}</em><Verify />
+        <Fragment slot="actions">
+          {barangay && (
+            <a class="chip" href={href(lang, `/barangay/${barangay.id}/`)}>
+              {lang === "en" ? "Barangay information" : "Impormasyon ng barangay"}
+            </a>
+          )}
+        </Fragment>
+      </PageHead>
 
       <ul class="rows bp-place__facts">
-        {place.barangay_id && (
+        {barangay && (
           <li>
             <span class="rows__name">Barangay</span>
-            <span class="bp-place__val">{place.barangay_id.replaceAll("-", " ")}</span>
+            <span class="bp-place__val">{barangay.name}</span>
           </li>
         )}
         <li>
-          <span class="rows__name">Address</span>
+          <span class="rows__name">{lang === "en" ? "Address" : "Lokasyon"}</span>
           <span class="bp-place__val">
             {place.address ??
               (lang === "en"
@@ -310,26 +316,15 @@ function historySummary(id: string, english: string): string {
   .bp-place {
     max-width: 880px;
   }
-  .bp-place__head {
-    margin-bottom: var(--s-6);
-  }
-  .bp-place__back {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-  }
   .bp-place__facts {
     list-style: none;
-    margin: 0;
+    margin: var(--s-6) 0 0;
     padding: 0;
+    border-top: 1px solid var(--line);
   }
   .bp-place__facts > li {
     grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
     align-items: start;
-  }
-  .bp-place__facts > li:first-child {
-    padding-top: var(--s-4);
-    border-top: 1px solid var(--line);
   }
   .bp-place__facts .rows__name {
     font-weight: 400;
@@ -349,6 +344,7 @@ function historySummary(id: string, english: string): string {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    color: var(--blue);
     text-decoration: underline;
     text-decoration-color: var(--line-strong);
     text-underline-offset: 3px;
@@ -360,20 +356,32 @@ function historySummary(id: string, english: string): string {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: grid;
+    gap: var(--s-3);
   }
   .bp-place__list > li {
     display: grid;
     gap: var(--s-1);
-    padding-block: var(--s-4);
-    border-top: 1px solid var(--line);
+    padding: var(--s-4);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
   }
   .bp-place__list p,
   .bp-place__event p {
     margin: 0;
   }
+  .bp-place__events {
+    display: grid;
+    gap: var(--s-3);
+  }
   .bp-place__event {
     display: grid;
     gap: var(--s-2);
+    padding: var(--s-4);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
   }
   .bp-place__title {
     font-size: var(--t-card);
@@ -383,10 +391,11 @@ function historySummary(id: string, english: string): string {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    color: var(--blue);
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 4px;
-    transition: text-decoration-color var(--m-in, 150ms) var(--ease);
+    transition: text-decoration-color var(--fast) var(--ease);
   }
   a.bp-place__title:hover {
     text-decoration-color: currentColor;

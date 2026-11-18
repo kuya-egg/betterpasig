@@ -1,6 +1,7 @@
 ---
 import { Badge } from "./ui/badge";
 // Amber "being checked" label for any value with verify: true (see docs/design-system.md).
+// Its own fill (#FBF0DC) keeps it readable on white, paper and the navy footer alike.
 import { langFromUrl, type Lang, ui } from "../i18n";
 
 interface Props { lang?: Lang }
@@ -11,11 +12,14 @@ const t = ui[Astro.props.lang ?? langFromUrl(Astro.url)];
 
 <style>
   .verify {
-    margin-inline-start: 6px;
-    padding: .0625rem .3125rem;
+    margin-inline-start: var(--s-2);
+    padding: 0 var(--s-2);
+    border-radius: var(--r-sm);
+    background: #fbf0dc;
     vertical-align: middle;
-    font-size: 13px;
+    font-size: var(--t-small);
     font-weight: 600;
+    line-height: 1.6;
     white-space: nowrap;
     color: var(--amber);
   }

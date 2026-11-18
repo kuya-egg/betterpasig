@@ -2,9 +2,9 @@
 import Site from "../layouts/Site.astro";
 import CopyButton from "./CopyButton.astro";
 import Verify from "./Verify.astro";
+import PageHead from "./site/PageHead.astro";
 import {
-  emergencyHotlines,
-  otherHotlines,
+  hotlines,
   hotlinesRetrieved,
   hotlineConflicts,
   facilities,
@@ -18,15 +18,19 @@ import { formatDate, href, langFromUrl, ui } from "../i18n";
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
 
-const groups: { title: string; items: typeof otherHotlines }[] = [
-  { title: t.emergencyGroupMain, items: emergencyHotlines },
-  { title: t.groupPoliceFire, items: otherHotlines.filter((h) => ["police", "fire"].includes(h.kind)) },
-  { title: t.groupMedical, items: otherHotlines.filter((h) => h.kind === "medical") },
-  {
-    title: t.groupOther,
-    items: otherHotlines.filter((h) => ["emergency", "rescue", "traffic", "city-hall"].includes(h.kind)),
-  },
+const primaryIds = ["pasig-emergency-hotline", "national-emergency-911"];
+const primary = primaryIds.map((id) => hotlines.find((h) => h.id === id)).filter((h) => h !== undefined);
+const rest = hotlines.filter((h) => !primaryIds.includes(h.id));
+const kindsOf = (...kinds: string[]) => rest.filter((h) => kinds.includes(h.kind));
+const groups: { title: string; items: typeof rest }[] = [
+  { title: t.emergencyGroupMain, items: kindsOf("emergency") },
+  { title: t.groupCity, items: kindsOf("city-hall", "traffic") },
+  { title: t.groupPoliceFire, items: kindsOf("police", "fire") },
+  { title: t.groupOther, items: kindsOf("rescue") },
+  { title: t.groupMedical, items: kindsOf("medical") },
 ].filter((g) => g.items.length > 0);
+const smsHref = (number: string) => `sms:${number.replace(/[^\d+]/g, "")}`;
+const reportUrl = "https://github.com/kuya-egg/betterpasig/issues/new";
 
 // "(02) 8643-3333; 8988-1000 / 8988-7000 (ER locals 2222)" -> [{ number, rest }]
 const parseContact = (contact: string) =>
@@ -61,60 +65,92 @@ const retrieved = formatDate(lang, facilities.retrieved);
 ---
 
 <Site title={t.emergencyPageTitle} description={t.emergencyLead}>
-  <section class="section section--flow bp-em" aria-labelledby="emergency-page-h">
+  <section class="section bp-em__hero" aria-labelledby="emergency-page-h">
     <div class="wrap">
-      <div class="section-head">
-        <h1 id="emergency-page-h">{t.emergencyPageTitle}</h1>
-        <p>{t.emergencyLead}</p>
-      </div>
+      <PageHead
+        id="emergency-page-h"
+        crumbs={[[t.emergencyPageTitle]]}
+        kicker={t.emergencyHeroKicker}
+        lead={t.emergencyHeroLead}
+      >
+        {t.emergencyHeroTitle}
+      </PageHead>
+      <ul class="bp-em__primary">
+        {
+          primary.map((h) => (
+            <li>
+              <a class="bp-em__big" href={telHref(h.numbers[0])}>
+                <span class="bp-em__call" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" />
+                  </svg>
+                </span>
+                <span class="bp-em__big-text">
+                  <span class="bp-em__big-label">{lang === "en" ? h.label_en : h.label_fil}</span>
+                  <span class="bp-em__big-num">{h.numbers[0]}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <nav aria-label={t.emergencyJump}>
         <ul class="bp-em__jump">
-          {jump.map(([id, label]) => <li><a class="link" href={`#${id}`}>{label}</a></li>)}
+          {jump.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}
         </ul>
       </nav>
     </div>
   </section>
 
-  <section id="hotlines" class="section section--flow ground-surface bp-em" aria-labelledby="hotlines-h">
+  <section id="hotlines" class="section ground-surface bp-em" aria-labelledby="hotlines-h">
     <div class="wrap">
       <div class="section-head">
         <h2 id="hotlines-h">{t.allHotlines}</h2>
         <p>{t.tapToCall}</p>
       </div>
       {
-        groups.map((g, gi) => (
+        groups.map((g) => (
           <div class="bp-em__group">
-            <h3 class:list={["t-label", gi === 0 ? "bp-em__emergency" : "muted"]}>{g.title}</h3>
-            <ul class:list={["grid", "bp-hotlines", gi === 0 && "bp-hotlines--main"]}>
-              {g.items.map((h) => (
-                <li class="span-6">
-                  <div class="bp-hotline">
-                    <p class="t-small muted">
-                      {lang === "en" ? h.label_en : h.label_fil}
-                      {h.verify && <Verify />}
-                    </p>
-                    <ul class="bp-hotline__nums">
-                      {h.numbers.map((n) => (
-                        <li>
-                          <a class="bp-hotline__number" href={telHref(n)}>{n}</a>
-                          <CopyButton value={n} label={t.copyNumber(n)} />
-                        </li>
-                      ))}
-                    </ul>
-                    <p class="t-small muted">
-                      {t.sources}:{" "}
-                      {h.sources.map((s, i) => (
-                        <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
-                      ))}
-                    </p>
-                  </div>
-                </li>
-              ))}
+            <h3 class="t-label muted">{g.title}</h3>
+            <ul class="bp-hotlines">
+              {g.items.map((h) => {
+                const sms = h.id === "pasig-katxt";
+                return (
+                  <li>
+                    <div class="bp-hotline">
+                      <p class="bp-hotline__label">
+                        {lang === "en" ? h.label_en : h.label_fil}
+                        {h.verify && <Verify />}
+                      </p>
+                      <ul class="bp-hotline__nums">
+                        {h.numbers.map((n) => (
+                          <li>
+                            <a class="bp-hotline__number" href={sms ? smsHref(n) : telHref(n)}>
+                              <span class="bp-hotline__digits">{n}</span>
+                              <span class="bp-hotline__verb">{sms ? t.textVerb : t.callVerb}</span>
+                            </a>
+                            <CopyButton value={n} label={t.copyNumber(n)} />
+                          </li>
+                        ))}
+                      </ul>
+                      <p class="t-small muted">
+                        {t.sources}:{" "}
+                        {h.sources.map((s, i) => (
+                          <>{i > 0 && ", "}<a class="bp-em__src" href={s}>{sourceLabel(s)}</a></>
+                        ))}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))
       }
-      <p class="t-small muted bp-em__checked">{t.checked}: {formatDate(lang, hotlinesRetrieved)}</p>
+      <p class="t-small muted bp-em__checked bp-em__foot">
+        <span>{t.checkedOn(formatDate(lang, hotlinesRetrieved))}</span>
+        <span>{t.reportWrong} <a class="link" href={reportUrl}>{t.reportWrongLink}</a></span>
+      </p>
     </div>
   </section>
 
@@ -252,31 +288,106 @@ const retrieved = formatDate(lang, facilities.retrieved);
 </Site>
 
 <style>
-  .bp-em section,
-  section.bp-em {
+  section.bp-em,
+  .bp-em section {
     scroll-margin-top: var(--s-8);
+  }
+  /* red hero: emergency only */
+  .bp-em__hero {
+    background: var(--red);
+    color: #fff;
+  }
+  .bp-em__hero :global(.kicker),
+  .bp-em__hero :global(.lead),
+  .bp-em__hero :global(.crumbs),
+  .bp-em__hero :global(.crumbs a),
+  .bp-em__hero :global(.crumbs li + li::before) {
+    color: #fff;
+  }
+  .bp-em__hero :global(h1) {
+    color: #fff;
+    font-size: var(--t-h1);
+  }
+  .bp-em__hero :global(a:focus-visible) {
+    outline-color: #fff;
+  }
+  .bp-em__primary {
+    list-style: none;
+    margin: var(--s-6) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--s-4);
+  }
+  .bp-em__big {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-5);
+    border-radius: var(--r-lg);
+    background: #fff;
+    color: var(--ink);
+    text-decoration: none;
+    min-height: 44px;
+  }
+  .bp-em__big:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+  .bp-em__call {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+  }
+  .bp-em__call svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .bp-em__big-text {
+    display: grid;
+    gap: var(--s-1);
+  }
+  .bp-em__big-label {
+    font-size: var(--t-meta);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .bp-em__big-num {
+    font: 500 clamp(32px, 4vw, 44px) / 1.1 var(--font-display);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--red);
   }
   .bp-em__jump {
     list-style: none;
-    margin: 0;
+    margin: var(--s-6) 0 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0 var(--s-5);
   }
-  .bp-em__jump a,
+  .bp-em__jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
   .bp-em__src,
   .bp-em__link {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-  }
-  .bp-em__src {
-    text-decoration: underline;
-    text-decoration-color: var(--line-strong);
-    text-underline-offset: 3px;
-  }
-  .bp-em__link {
     text-decoration: underline;
     text-decoration-color: var(--line-strong);
     text-underline-offset: 4px;
@@ -287,48 +398,90 @@ const retrieved = formatDate(lang, facilities.retrieved);
   .bp-em__group > h3 {
     margin: 0;
   }
-  .bp-em__emergency {
-    color: var(--red);
-  }
   .bp-hotlines {
     list-style: none;
     margin: var(--s-3) 0 0;
     padding: 0;
-    row-gap: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: var(--s-3);
   }
   .bp-hotline {
     display: grid;
-    gap: var(--s-1);
-    padding-block: var(--s-4);
-    border-top: 1px solid var(--line);
+    gap: var(--s-2);
+    height: 100%;
+    padding: var(--s-4) var(--s-5);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
   }
-  .bp-hotlines--main .bp-hotline {
-    border-top-color: var(--red);
+  .bp-hotline:hover {
+    border-color: var(--red);
+    background: #fdf4f5;
   }
   .bp-hotline p,
   .bp-em__list p {
     margin: 0;
+  }
+  .bp-hotline__label {
+    font-weight: 600;
   }
   .bp-hotline__nums,
   .bp-em__contacts {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 var(--s-4);
+    display: grid;
+    gap: var(--s-2);
   }
   .bp-hotline__nums li,
   .bp-em__contacts li {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: var(--s-2);
   }
-  .bp-hotline__number,
+  @media (min-width: 30rem) { .bp-hotline__nums li { flex-wrap: nowrap; } }
+  .bp-em__src { overflow-wrap: anywhere; }
+  .bp-hotline__number {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .bp-hotline__digits {
+    font: 500 var(--t-h3) / 1.1 var(--font-display);
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .bp-hotline__verb {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--s-4);
+    border-radius: var(--r-btn);
+    background: var(--pale);
+    color: var(--blue);
+    font-weight: 600;
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+  }
+  .bp-hotline__number:hover .bp-hotline__verb {
+    background: var(--blue);
+    color: #fff;
+  }
+  .bp-hotline__number:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: var(--r-sm);
+  }
   .bp-em__tel {
-    font: var(--display-weight) var(--t-card) / 1.2 var(--font-display);
+    font: 500 var(--t-card) / 1.2 var(--font-display);
     letter-spacing: -0.01em;
     font-variant-numeric: tabular-nums;
     color: var(--ink);
@@ -336,11 +489,6 @@ const retrieved = formatDate(lang, facilities.retrieved);
     align-items: center;
     min-height: 44px;
     white-space: nowrap;
-  }
-  .bp-hotlines--main .bp-hotline__number {
-    font-size: clamp(26px, 2.2vw, 34px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
   }
   .bp-em__list {
     list-style: none;
@@ -373,9 +521,15 @@ const retrieved = formatDate(lang, facilities.retrieved);
   .bp-em__checked {
     margin-top: var(--s-5);
   }
-  @media (max-width: 1023px) {
-    .bp-hotlines > li {
-      grid-column: 1 / -1;
-    }
+  .bp-em__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-5);
+    align-items: center;
+  }
+  .bp-em__foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 </style>

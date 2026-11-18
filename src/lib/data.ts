@@ -57,7 +57,6 @@ function byId<T extends { id: string }>(items: T[], ids: string[]): T[] {
 
 export const emergencyHotlines = byId(hotlines, site.emergency_featured);
 export const featuredServices = byId(services, site.featured_services);
-export const otherHotlines = hotlines.filter((h) => !site.emergency_featured.includes(h.id));
 export const programs = programsFile.programs;
 export const officials = officialsFile.officials;
 export const officialsTerm = officialsFile.term;
@@ -158,10 +157,12 @@ export function sourceLabel(url: string): string {
   try {
     const parsed = new URL(url);
     const host = parsed.hostname.replace(/^www\./, "");
-    const file = decodeURIComponent(parsed.pathname.split("/").filter(Boolean).pop() ?? "");
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const file = decodeURIComponent(parts.pop() ?? "");
     if (!file) return host;
+    // a shortened URL: host, then the file, eliding any folders between
     const short = file.length > 36 ? `…${file.slice(-32)}` : file;
-    return `${host} · ${short}`;
+    return parts.length ? `${host}/…/${short}` : `${host}/${short}`;
   } catch {
     return url;
   }

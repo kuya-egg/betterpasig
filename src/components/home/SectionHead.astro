@@ -1,0 +1,23 @@
+---
+// Heading block for a home section: optional kicker and lead, an action link at the end.
+interface Props { id: string; kicker?: string; kickerClass?: string }
+const { id, kicker, kickerClass } = Astro.props;
+---
+
+<div class="home-head">
+  <div class="home-head__text">
+    {kicker && <p class:list={["kicker", kickerClass]}>{kicker}</p>}
+    <h2 id={id}><slot /></h2>
+    {Astro.slots.has("lead") && <p class="home-head__lead"><slot name="lead" /></p>}
+  </div>
+  {Astro.slots.has("action") && <div class="home-head__action"><slot name="action" /></div>}
+</div>
+
+<style>
+  .home-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--s-3) var(--s-5); margin-block-end: var(--s-6); }
+  .home-head__text { display: grid; gap: var(--s-3); max-inline-size: 48rem; min-inline-size: 0; }
+  .home-head__lead { font-size: var(--t-body); color: var(--muted); max-inline-size: 56ch; }
+  .home-head__action { font-weight: 600; }
+  .home-head__action :global(a) { display: inline-flex; align-items: center; gap: var(--s-2); min-block-size: 2.75rem; color: var(--blue); }
+  .home-head__action :global(a:hover) { text-decoration: underline; text-underline-offset: .23em; }
+</style>

@@ -1,27 +1,29 @@
 ---
-// Life-event guides link directly to their checklists.
+// Life situations: a ruled grid of rows, each linking to its checklist at /buhay/<id>/.
+import SectionHead from "./SectionHead.astro";
+import LifeIcon from "./LifeIcon.astro";
 import { href, langFromUrl, ui } from "../../i18n";
 import { lifeEvents } from "../../lib/data";
-import LifeIcon from "./LifeIcon.astro";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const en = lang === "en";
 ---
 
-<section class="section ground-surface" id="buhay" aria-labelledby="buhay-h">
+<section class="section--home ground-white" id="buhay" aria-labelledby="buhay-h">
   <div class="wrap">
-    <div class="section-head">
-      <h2 id="buhay-h">{t.doorsTitle}</h2>
-      <p>{t.doorsLead}</p>
-    </div>
+    <SectionHead id="buhay-h" kicker={en ? "By situation" : "Ayon sa sitwasyon"}>
+      {t.doorsTitle}
+      <Fragment slot="lead">{t.doorsLead}</Fragment>
+    </SectionHead>
     <ul class="bp-doors">
       {
         lifeEvents.map((event) => (
           <li>
-            <a class="bp-door" href={href(lang, `/buhay/${event.id}/`)}>
+            <a class="row bp-door" href={href(lang, `/buhay/${event.id}/`)}>
               <LifeIcon id={event.id} />
-              <h3>{lang === "en" ? event.title_en : event.title_fil}</h3>
-              <p class="bp-door__line">{lang === "en" ? event.line_en : event.line_fil}</p>
+              <h3>{en ? event.title_en : event.title_fil}</h3>
+              <p>{en ? event.line_en : event.line_fil}</p>
             </a>
           </li>
         ))
@@ -31,30 +33,10 @@ const t = ui[lang];
 </section>
 
 <style>
-  .bp-doors {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0 clamp(1.25rem, 4vw, 3rem);
-  }
-  .bp-doors > li { border-block-start: 1px solid var(--line); }
-  .bp-door {
-    block-size: 100%;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-content: start;
-    column-gap: var(--s-4);
-    row-gap: var(--s-1);
-    padding-block: var(--s-4);
-  }
-  .bp-door :global(.bp-life-icon) { grid-row: 1 / span 2; }
-  .bp-door h3 {
-    color: var(--blue);
-    font: 800 var(--t-card)/1.3 var(--font-text);
-    letter-spacing: -.02em;
-    text-underline-offset: .23em;
-  }
-  .bp-door__line { font-size: .9375rem; line-height: 1.5; color: var(--muted); }
-  @media (hover: hover) { .bp-door:hover h3 { text-decoration: underline; } }
-  @media (max-width: 57.9375rem) { .bp-doors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 35.9375rem) { .bp-doors { grid-template-columns: minmax(0, 1fr); } }
+  .ground-white { border-block: 1px solid var(--line); }
+  .bp-doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr)); border-block-start: 1px solid var(--line); border-inline-start: 1px solid var(--line); }
+  .bp-doors > li { display: grid; border-inline-end: 1px solid var(--line); border-block-end: 1px solid var(--line); }
+  .bp-door { flex-direction: column; align-items: flex-start; gap: var(--s-3); padding: var(--s-5) var(--s-5); min-block-size: 12.25rem; }
+  .bp-door h3 { font-size: 1.6875rem; line-height: 1.1; }
+  .bp-door p { color: var(--muted); font-size: var(--t-meta); line-height: 1.45; }
 </style>

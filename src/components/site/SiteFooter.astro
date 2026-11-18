@@ -1,5 +1,5 @@
 ---
-import Mark from "../../../design/logo/mark-white.svg";
+// The navy footer (handoff 2026-11), the same on every page.
 import Verify from "../Verify.astro";
 import { formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
@@ -31,8 +31,8 @@ const columns = [
   {
     title: t.footCity,
     links: [
-      { label: t.navBarangay, url: href(lang, "/#mapa") },
-      { label: t.guideExplore, url: href(lang, "/#pasyalan") },
+      { label: t.navBarangay, url: href(lang, "/barangay/") },
+      { label: t.guideExplore, url: href(lang, "/pasyalan/") },
       { label: t.officialsPageTitle, url: href(lang, "/opisyal/") },
       { label: t.fundsTitle, url: href(lang, "/pondo/") },
     ],
@@ -53,7 +53,7 @@ const columns = [
     <div class="closing__links" id="close-h">
       <div class="grid">
         <div class="span-5 stack-4 bp-foot-about">
-          <a class="nav__logo" href={href(lang, "/")}><Mark class="bp-mark" aria-hidden="true" /><span>BetterPasig</span></a>
+          <p class="bp-footer__title">{t.footTitle}</p>
           <p class="t-small muted">{noticeStart}<a href="https://pasigcity.gov.ph">pasigcity.gov.ph</a>{noticeEnd}</p>
           <p class="t-small muted">
             {t.partOf} <a href="https://bettergov.ph">BetterGov.ph</a>. {t.dataUpdated}: {formatDate(lang, site.updated)}.

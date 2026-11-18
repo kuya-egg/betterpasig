@@ -1,78 +1,31 @@
 ---
 import Site from "../layouts/Site.astro";
 import HomeHero from "./home/HomeHero.astro";
-import HomeTopics from "./home/HomeTopics.astro";
+import TopServices from "./home/TopServices.astro";
 import LifeDoors from "./home/LifeDoors.astro";
+import Benefits from "./home/Benefits.astro";
+import HomeTopics from "./home/HomeTopics.astro";
 import Pasyalan from "./home/Pasyalan.astro";
 import NewInPasig from "./home/NewInPasig.astro";
-import Trust from "./home/Trust.astro";
-import PasigMap from "./PasigMap.astro";
 import HomeHotlines from "./home/HomeHotlines.astro";
-import { href, langFromUrl, ui } from "../i18n";
-import { pasyalan, programs } from "../lib/data";
+import Trust from "./home/Trust.astro";
+import { langFromUrl, ui } from "../i18n";
+import { pasyalan } from "../lib/data";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
 const chapters = ["maybunga-rainforest-park", "pasig-city-museum", "kapitolyo-food-district", "bahay-na-tisa"];
-const chapterPhotos = chapters.map((id) => pasyalan.find((place) => place.id === id)?.photo_id).filter((id): id is string => Boolean(id));
-const helpIds = ["local-senior-pension", "pagasa-scholarship", "solo-parent-subsidy", "pwd-cash-gift"];
-const featuredHelp = helpIds.map((id) => {
-  const item = programs.find((program) => program.id === id);
-  if (!item) throw new Error(`Missing featured program: ${id}`);
-  return item;
-});
+const chapterPhotos = [...new Set(chapters.map((id) => pasyalan.find((place) => place.id === id)?.photo_id).filter((id): id is string => Boolean(id)))];
 ---
 
-<Site description={t.pageDescription} photos={["plaza-rizal", ...chapterPhotos]}>
+<Site description={t.pageDescription} photos={chapterPhotos}>
   <HomeHero />
-  <HomeTopics />
-  <section class="section bp-assistance" aria-labelledby="home-help">
-    <div class="wrap bp-assistance__layout">
-      <div class="section-head">
-        <h2 id="home-help">{t.benefitsTitle}</h2>
-        <p>{en ? "Find out who qualifies and how to apply for city assistance." : "Alamin kung sino ang kwalipikado at kung paano mag-apply sa lungsod."}</p>
-      </div>
-      <div class="bp-assistance__programs">
-      <ul class="bp-assistance__list">
-        {featuredHelp.map((program) => (
-          <li><a href={href(lang, `/tulong/#${program.id}`)}>{en ? program.title_en : program.title_fil}<span aria-hidden="true">→</span></a></li>
-        ))}
-      </ul>
-      <p><a class="link" href={href(lang, "/tulong/")}>{t.benefitsAll} <span aria-hidden="true">↗</span></a></p>
-      </div>
-    </div>
-  </section>
+  <TopServices />
   <LifeDoors />
-  <PasigMap />
+  <Benefits />
+  <HomeTopics />
   <Pasyalan ids={chapters} />
-  <NewInPasig skip={chapters} />
-  <Trust />
+  <NewInPasig />
   <HomeHotlines />
+  <Trust />
 </Site>
-
-<style>
-  .bp-assistance__layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-    align-items: start;
-    gap: clamp(1.5rem, 6vw, 6.5rem);
-  }
-  .bp-assistance h2 { max-width: 12ch; text-wrap: wrap; }
-  .bp-assistance .section-head { margin: 0; }
-  .bp-assistance__list { border-block-start: 1px solid var(--line); }
-  .bp-assistance__list li { border-block-end: 1px solid var(--line); }
-  .bp-assistance__list a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-3);
-    min-height: 3.25rem;
-    padding-block: var(--s-3);
-    font-weight: 700;
-  }
-  .bp-assistance__list a span { color: var(--blue); }
-  .bp-assistance p a { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 3rem; }
-  @media (hover: hover) { .bp-assistance__list a:hover { color: var(--blue); text-decoration: underline; } }
-  @media (max-width: 47.9375rem) { .bp-assistance__layout { grid-template-columns: minmax(0, 1fr); } }
-</style>
