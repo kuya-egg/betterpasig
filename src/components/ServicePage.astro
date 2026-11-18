@@ -32,7 +32,7 @@ const time = typeof service.processing_time === "string" && service.processing_t
   ? (english?.processing_time ?? service.processing_time)
   : "";
 const en = lang === "en";
-const officeShort = office ? (office.acronym ?? office.name) : service.office;
+const officeName = office ? (office.acronym ? `${office.name} (${office.acronym})` : office.name) : service.office;
 const cityHallNumber = cityHallHotline?.numbers[0];
 const contactParts = office?.contact ? office.contact.split(";").map((part) => part.trim()).filter(Boolean) : [];
 function host(url: string): string {
@@ -101,8 +101,7 @@ function lines(value: unknown): string[] {
       <dl class="bp-svc__facts" id="service-facts">
         {fee && <div><dt>{t.colFee}</dt><dd lang={detailLanguage}>{fee}</dd></div>}
         {time && <div><dt>{t.colTime}</dt><dd lang={detailLanguage}>{time}</dd></div>}
-        <div><dt>{t.colOffice}</dt><dd>{officeShort}</dd></div>
-        {steps.length > 0 && <div><dt>{t.stepsLabel}</dt><dd class="num">{steps.length}</dd></div>}
+        <div><dt>{t.colOffice}</dt><dd>{officeName}</dd></div>
       </dl>
     </div>
   </section>
@@ -240,17 +239,20 @@ function lines(value: unknown): string[] {
   .bp-service-page { padding-block-end: var(--s-7); }
   .bp-svc__summary { max-width: 52ch; }
   .bp-svc__online { margin-block-start: var(--s-2); }
-  .bp-svc__facts {
-    margin: var(--s-7) 0 0;
+  /* fee, time, office as ruled rows: label left, the value in body text so a long fee reads as a sentence */
+  .bp-svc__facts { margin: var(--s-7) 0 0; max-width: 52rem; border-block-end: 1px solid var(--line); }
+  .bp-svc__facts > div {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
-    gap: var(--s-3);
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: var(--s-1) var(--s-5);
+    padding-block: var(--s-4);
+    border-block-start: 1px solid var(--line);
   }
-  .bp-svc__facts > div { background: var(--surface); border-radius: var(--r-lg); padding: var(--s-4) var(--s-5); min-width: 0; }
-  .bp-svc__facts > div:first-child { background: var(--pale); }
-  .bp-svc__facts dt { font: 600 var(--t-small)/1.5 var(--font-text); color: var(--muted); }
-  .bp-svc__facts dd { margin: var(--s-1) 0 0; font: var(--display-weight) var(--t-h3)/1.15 var(--font-display); overflow-wrap: anywhere; }
-  .bp-svc__facts > div:first-child dd { color: var(--blue); }
+  .bp-svc__facts dt { font: 600 var(--t-small)/1.65 var(--font-text); color: var(--muted); padding-block-start: .125rem; }
+  .bp-svc__facts dd { margin: 0; font: 500 var(--t-body)/1.6 var(--font-text); color: var(--ink); overflow-wrap: anywhere; }
+  @media (max-width: 40rem) {
+    .bp-svc__facts > div { grid-template-columns: minmax(0, 1fr); }
+  }
 
   .bp-svc { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); align-items: start; }
   @media (min-width: 1024px) {
