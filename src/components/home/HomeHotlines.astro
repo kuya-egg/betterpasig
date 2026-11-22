@@ -1,12 +1,12 @@
 ---
 // Emergency hotlines from data/hotlines.json: tap to call (tel:) or text (sms:), with the date they were checked.
-import { formatDate, href, langFromUrl, ui } from "../../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../../i18n";
 import { emergencyHotlines, hotlinesRetrieved, telHref } from "../../lib/data";
 import { arrowPath, messagePath, phonePath } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
+const copy = contentLang(lang);
 const isSms = (label: string) => /\bSMS\b/i.test(label);
 const smsHref = (number: string) => `sms:${number.replace(/[^\d+]/g, "")}`;
 ---
@@ -21,7 +21,7 @@ const smsHref = (number: string) => `sms:${number.replace(/[^\d+]/g, "")}`;
     </div>
     <ul class="bp-hot__grid">
       {emergencyHotlines.map((hotline) => {
-        const label = en ? hotline.label_en : hotline.label_fil;
+        const label = copy === "en" ? hotline.label_en : hotline.label_fil;
         const number = hotline.numbers[0];
         const sms = isSms(label);
         return (

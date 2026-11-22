@@ -3,7 +3,7 @@
 // A card opens the place page at /lugar/<id>/ when one exists, else the place's card on /pasyalan/.
 import { Picture } from "astro:assets";
 import SectionHead from "./SectionHead.astro";
-import { formatDate, href, langFromUrl, ui } from "../../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../../i18n";
 import { barangays, pasyalan, pasyalanRetrieved, places } from "../../lib/data";
 import { photo, photoAlt } from "../../lib/photos";
 import { arrowPath } from "./content";
@@ -12,11 +12,11 @@ interface Props { ids: string[] }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
-const kindLabel: Record<string, { fil: string; en: string }> = {
-  pasyalan: { fil: "Pasyalan", en: "Place to visit" },
-  kainan: { fil: "Kainan", en: "Food" },
-  bago: { fil: "Bago", en: "New" },
+const copy = contentLang(lang);
+const kindLabel: Record<string, string> = {
+  pasyalan: t.searchKinds.pasyalan,
+  kainan: t.kindFood,
+  bago: t.pasyalanNew,
 };
 const cards = Astro.props.ids.flatMap((id) => {
   const place = pasyalan.find((item) => item.id === id);
@@ -34,7 +34,7 @@ const [lead, ...rest] = cards;
   <div class="wrap">
     <SectionHead id="pl-h">
       {t.pasyalanTitle}
-      <a slot="action" href={href(lang, "/pasyalan/")}>{en ? "All places" : "Lahat ng pasyalan"} <svg class="ic" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg></a>
+      <a slot="action" href={href(lang, "/pasyalan/")}>{t.allPlaces} <svg class="ic" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg></a>
     </SectionHead>
     <div class="bp-places__layout">
       {lead && (
@@ -43,10 +43,10 @@ const [lead, ...rest] = cards;
             <Picture src={lead.picture.image} alt={photoAlt(lead.picture, lang)} formats={["avif", "webp"]} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(max-width: 1023px) 92vw, 640px" width={960} quality={55} loading="lazy" decoding="async" />
           </span>
           <span class="bp-places__body">
-            <span class="kicker">{kindLabel[lead.place.kind]?.[lang] ?? ""}{lead.barangay && <span class="bp-places__brgy">{lead.barangay.name}</span>}</span>
+            <span class="kicker">{kindLabel[lead.place.kind] ?? ""}{lead.barangay && <span class="bp-places__brgy">{lead.barangay.name}</span>}</span>
             <h3 id={`pasyalan-${lead.place.id}`}>{lead.place.name}</h3>
-            <span class="bp-places__line">{en ? lead.place.line_en : lead.place.line_fil}</span>
-            {lead.hasTimes && <span class="bp-places__line muted">{en ? "Hours and fee" : "Oras at bayad"}: {en ? "checked" : "sinuri noong"} {formatDate(lang, pasyalanRetrieved)}</span>}
+            <span class="bp-places__line">{copy === "en" ? lead.place.line_en : lead.place.line_fil}</span>
+            {lead.hasTimes && <span class="bp-places__line muted">{t.hoursAndFee}: {t.hoursCheckedWord} {formatDate(lang, pasyalanRetrieved)}</span>}
           </span>
         </a>
       )}
@@ -58,7 +58,7 @@ const [lead, ...rest] = cards;
                 <Picture src={picture.image} alt={photoAlt(picture, lang)} formats={["avif", "webp"]} fallbackFormat="webp" widths={[224, 336]} sizes="112px" width={224} quality={55} loading="lazy" decoding="async" />
               </span>
               <span class="bp-places__small-body">
-                <span class="kicker">{kindLabel[place.kind]?.[lang] ?? ""}</span>
+                <span class="kicker">{kindLabel[place.kind] ?? ""}</span>
                 <h3 id={`pasyalan-${place.id}`}>{place.name}</h3>
                 {barangay && <span class="muted bp-places__where">{barangay.name}</span>}
               </span>

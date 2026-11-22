@@ -2,23 +2,23 @@
 // The source lines under a recent notice: who published it, when, when it was checked, and a stale warning
 // past 30 days (client-freshness adds the same warning when the page outlives its build).
 import { pasigSources } from "../lib/data";
-import { formatDate, langFromUrl, type Lang } from "../i18n";
+import { formatDate, langFromUrl, ui, type Lang } from "../i18n";
 import { isSourceFresh } from "../lib/freshness";
 interface Props { refs: string[]; lang?: Lang }
 const lang = Astro.props.lang ?? langFromUrl(Astro.url);
-const en = lang === "en";
+const t = ui[lang];
 const { refs } = Astro.props;
 const rows = [...new Set(refs.map((ref) => ref.split(":")[0]))]
   .map((id) => pasigSources.find((source) => source.id === id))
   .filter((source) => source !== undefined);
 ---
 <div class="bp-source t-small">
-  <p>{en ? "Checked against an official announcement." : "Inihambing ang impormasyon sa opisyal na anunsyo."}</p>
+  <p>{t.checkedAgainst}</p>
   {rows.map((source) => (
     <p data-source-date={source.published_date}>
-      {source.publisher}, {formatDate(lang, source.published_date)}. {en ? "Checked" : "Sinuri"} {formatDate(lang, source.checked_at.slice(0, 10))}.{" "}
-      <a href={source.url}>{en ? "Open source" : "Basahin ang opisyal na anunsyo"}</a>
-      {!isSourceFresh(source.published_date, new Date()) && <span data-stale>{en ? "This announcement is over 30 days old. Check the official page for a newer notice." : "Mahigit 30 araw na ang lumipas mula nang ilabas ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso."}</span>}
+      {source.publisher}, {formatDate(lang, source.published_date)}. {t.checked} {formatDate(lang, source.checked_at.slice(0, 10))}.{" "}
+      <a href={source.url}>{t.openSource}</a>
+      {!isSourceFresh(source.published_date, new Date()) && <span data-stale>{t.staleSource}</span>}
     </p>
   ))}
 </div>

@@ -2,17 +2,17 @@
 // Life situations: a ruled grid of rows, each linking to its checklist at /buhay/<id>/.
 import SectionHead from "./SectionHead.astro";
 import LifeIcon from "./LifeIcon.astro";
-import { href, langFromUrl, ui } from "../../i18n";
+import { contentLang, href, langFromUrl, ui } from "../../i18n";
 import { lifeEvents } from "../../lib/data";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
+const copy = contentLang(lang);
 ---
 
 <section class="section--home ground-white" id="buhay" aria-labelledby="buhay-h">
   <div class="wrap">
-    <SectionHead id="buhay-h" kicker={en ? "By situation" : "Ayon sa sitwasyon"}>
+    <SectionHead id="buhay-h" kicker={t.bySituation}>
       {t.doorsTitle}
       <Fragment slot="lead">{t.doorsLead}</Fragment>
     </SectionHead>
@@ -22,8 +22,8 @@ const en = lang === "en";
           <li>
             <a class="row bp-door" href={href(lang, `/buhay/${event.id}/`)}>
               <LifeIcon id={event.id} />
-              <h3>{en ? event.title_en : event.title_fil}</h3>
-              <p>{en ? event.line_en : event.line_fil}</p>
+              <h3>{copy === "en" ? event.title_en : event.title_fil}</h3>
+              <p>{copy === "en" ? event.line_en : event.line_fil}</p>
             </a>
           </li>
         ))

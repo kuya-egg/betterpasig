@@ -1,0 +1,9 @@
+---
+import WeeklyPage from "../../../components/WeeklyPage.astro";
+import { langParams } from "../../../i18n";
+
+export function getStaticPaths() {
+  return langParams();
+}
+---
+<WeeklyPage archive={false} />

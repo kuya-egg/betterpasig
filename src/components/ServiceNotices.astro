@@ -1,13 +1,14 @@
 ---
 import SourceNote from "./SourceNote.astro";
 import { opportunities, places, pasigSources, serviceUpdates } from "../lib/data";
-import { formatDate, href, langFromUrl } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 import { currentServiceState } from "../lib/freshness";
 
 interface Props { serviceId: string }
 const { serviceId } = Astro.props;
 const lang = langFromUrl(Astro.url);
-const langText = (fil: string, en: string) => lang === "en" ? en : fil;
+const t = ui[lang];
+const copy = contentLang(lang);
 type RptNotice = { id: string; service_id: string | null; published_date: string; discount_percent: number; ordinary_payment_before_date: string; bulk_payment_before_date: string; online_url: string; contact_email: string; rpt_schedules: { floor: string; place_id: string; days: string[]; opens: string; closes: string }[]; evidence: string[] };
 type BusinessNotice = { id: string; service_id: string | null; published_date: string; online_cutoff_at: string; onsite_deadline_date: string; conditional_deadline_date: string; place_ids: string[]; evidence: string[] };
 const rpt = serviceUpdates.find((item) => item.id === "rpt-2027-advance-payment" && item.service_id === serviceId) as RptNotice | undefined;
@@ -18,37 +19,37 @@ const businessSource = business && pasigSources.find((source) => source.id === b
 const rptSource = rpt && pasigSources.find((source) => source.id === rpt.evidence[0]?.split(":")[0]);
 const onlineStatus = business ? currentServiceState(business.online_cutoff_at, new Date()) : "unknown";
 
-const dayNames: Record<string, string> = lang === "en" ? { MO:"Mon",TU:"Tue",WE:"Wed",TH:"Thu",FR:"Fri",SA:"Sat",SU:"Sun" } : { MO:"Lun",TU:"Mar",WE:"Miy",TH:"Huw",FR:"Biy",SA:"Sab",SU:"Lin" };
+const dayNames = t.dayShort;
 ---
 
 {rpt && <section class="bp-notice">
-  <h2 class="bp-notice__h">{langText("Maagang bayad sa amilyar para sa 2027", "2027 real property tax advance payment")}</h2>
-  <p>{langText(`Kung walang atrasadong bayarin sa account, may ${rpt.discount_percent}% na diskuwento kapag binayaran nang buo ang amilyar bago ang ${formatDate(lang, rpt.ordinary_payment_before_date)}.`, `A ${rpt.discount_percent}% discount is announced for full advance payment before ${formatDate(lang, rpt.ordinary_payment_before_date)} for accounts without delinquencies.`)}</p>
-  <p>{langText(`Kung mahigit 20 account ang babayaran, magbayad bago ang ${formatDate(lang, rpt.bulk_payment_before_date)}. Walang eksaktong oras na nakasaad sa abiso.`, `For more than 20 accounts, pay before ${formatDate(lang, rpt.bulk_payment_before_date)}. No exact cutoff time is stated.`)}</p>
-  <a class="bp-act" href={rpt.online_url}>{langText("Magbayad online", "Online payment portal")}</a><p class="t-small muted">{rpt.contact_email}</p>
-  <h3 class="bp-notice__h3">{langText("Oras ng mga desk na tumatanggap ng bayad sa amilyar", "RPT desk schedules")}</h3>
+  <h2 class="bp-notice__h">{t.rptTitle}</h2>
+  <p>{t.rptDiscount(rpt.discount_percent, formatDate(lang, rpt.ordinary_payment_before_date))}</p>
+  <p>{t.rptBulk(formatDate(lang, rpt.bulk_payment_before_date))}</p>
+  <a class="bp-act" href={rpt.online_url}>{t.payOnline}</a><p class="t-small muted">{rpt.contact_email}</p>
+  <h3 class="bp-notice__h3">{t.rptDesks}</h3>
   <ul class="bp-notice__list">{rpt.rpt_schedules.map((row) => { const place = places.find((item) => item.id === row.place_id); return place && <li>{row.floor}, {place.name}: {row.days.map((day) => dayNames[day]).join(", ")} {row.opens}–{row.closes}</li>; })}</ul>
   {rptSource && <SourceNote refs={rpt.evidence} />}
 </section>}
 
 {business && <section class="bp-notice">
-  <h2 class="bp-notice__h">{langText("Online na pagbabayad ng business tax para sa ikaapat na quarter", "Fourth-quarter online business tax notice")}</h2>
-  <p>{langText(`Hanggang 5:00 PM lang ng ${formatDate(lang, business.online_cutoff_at.slice(0, 10))} puwedeng magbayad online para sa ikaapat na quarter. ${onlineStatus === "past" ? "Lumipas na ang takdang oras ng pagbabayad online." : ""}`, `The notice accepted fourth-quarter online transactions only until ${formatDate(lang, business.online_cutoff_at.slice(0, 10))}, 5:00 PM. ${onlineStatus === "past" ? "That cutoff has passed." : ""}`)}</p>
-  <p>{langText(`Ayon sa abiso, hanggang ${formatDate(lang, business.onsite_deadline_date)} ang pagbabayad sa mga tanggapan. Magiging ${formatDate(lang, business.conditional_deadline_date)} lang ang huling araw kung ideklarang special non-working holiday ang Oktubre 31. Kumpirmahin sa opisyal na anunsyo.`, `The notice lists ${formatDate(lang, business.onsite_deadline_date)} as the onsite deadline. It gives a conditional ${formatDate(lang, business.conditional_deadline_date)} only if October 31 is declared a special non-working holiday; that declaration is not confirmed here.`)}</p>
+  <h2 class="bp-notice__h">{t.bizTaxTitle}</h2>
+  <p>{t.bizOnline(formatDate(lang, business.online_cutoff_at.slice(0, 10)), onlineStatus === "past")}</p>
+  <p>{t.bizOnsite(formatDate(lang, business.onsite_deadline_date), formatDate(lang, business.conditional_deadline_date))}</p>
   {businessPlaces.length > 0 && <>
-    <p>{langText("Mga lugar na puwedeng pagbayaran ng business tax:", "Business tax locations:")}</p>
+    <p>{t.bizLocations}</p>
     <ul class="bp-notice__list">{businessPlaces.map((place) => <li><a class="bp-act" href={href(lang, `/lugar/${place.id}/`)}>{place.name}</a></li>)}</ul>
   </>}
   {businessSource && <SourceNote refs={business.evidence} />}
 </section>}
 
 {event && <section class="bp-notice" data-event-date={event.event_date}>
-  <h2 class="bp-notice__h">{lang === "en" ? event.title_en : event.title_fil}</h2>
-  <p>{formatDate(lang, event.event_date)}<br />{langText("Libre ang kapon sa aktibidad na ito.", "Free for this event only.")}</p>
-  <p>{langText("Para sa lalaking aspin o puspin na 8 buwan hanggang 5 taong gulang, malusog at may bisa pa ang bakuna. Kailangan ng ID na nagpapatunay na taga-Pasig ka.", "For male aspin or puspin, 8 months to 5 years old, healthy and currently vaccinated; Pasig resident ID required.")}</p>
-  <ul class="bp-notice__list bp-notice__list--plain">{(lang === "en" ? event.requirements_en : event.requirements_fil).map((item) => <li>{item}</li>)}</ul>
-  <p class="muted">{langText("Magtanong sa tagapag-ayos kung puwede pang magparehistro.", "Confirm with the organizer whether registration is still being accepted.")}<br />{langText("Walang kumpirmadong bilang ng natitirang slot.", "Live capacity is unknown.")}</p>
-  <p data-event-status>{langText("Kumpirmahin sa tagapag-ayos ang iskedyul.", "Scheduled event; confirm with the organizer.")}</p><p><a href={pasigSources.find(source => source.id === event.evidence[0].split(":")[0])?.url}>{langText("Tingnan ang opisyal na anunsyo at kumpirmahin sa VSD.", "Read the official announcement and confirm with VSD.")}</a></p>
+  <h2 class="bp-notice__h">{copy === "en" ? event.title_en : event.title_fil}</h2>
+  <p>{formatDate(lang, event.event_date)}<br />{t.eventFree}</p>
+  <p>{t.eventWho}</p>
+  <ul class="bp-notice__list bp-notice__list--plain">{(copy === "en" ? event.requirements_en : event.requirements_fil).map((item) => <li>{item}</li>)}</ul>
+  <p class="muted">{t.eventAsk}<br />{t.eventSlots}</p>
+  <p data-event-status>{t.confirmSchedule}</p><p><a href={pasigSources.find(source => source.id === event.evidence[0].split(":")[0])?.url}>{t.eventSourceLink}</a></p>
   <SourceNote refs={event.evidence} />
 </section>}
 

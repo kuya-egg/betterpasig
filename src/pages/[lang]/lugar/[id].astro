@@ -1,6 +1,7 @@
 ---
 import PlacePage from "../../../components/PlacePage.astro";
+import { withLang } from "../../../i18n";
 import { places } from "../../../lib/data";
-export function getStaticPaths() { return places.map(({ id }) => ({ params: { id } })); }
+export function getStaticPaths() { return withLang(places.map(({ id }) => ({ params: { id } }))); }
 ---
 <PlacePage placeId={Astro.params.id!} />

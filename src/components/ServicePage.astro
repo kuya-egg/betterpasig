@@ -4,7 +4,7 @@ import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import ServiceNotices from "./ServiceNotices.astro";
 import { categories, cityHallHotline, mapsHref, officeById, programs, servicesRetrieved, telHref, type Service } from "../lib/data";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 
 interface Props {
   service: Service;
@@ -13,14 +13,15 @@ interface Props {
 const { service } = Astro.props;
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const title = lang === "en" && service.title_en ? service.title_en : service.title_fil;
+const copy = contentLang(lang);
+const title = copy === "en" && service.title_en ? service.title_en : service.title_fil;
 const office = officeById(service.office);
 const officeLabel = office ? (office.acronym ? `${office.name} (${office.acronym})` : office.name) : service.office;
 const category = categories.find((item) => item.id === service.category);
-const categoryName = category ? (lang === "en" ? category.name_en : category.name_fil) : "";
-const english = lang === "en" && "english" in service ? service.english : undefined;
+const categoryName = category ? (copy === "en" ? category.name_en : category.name_fil) : "";
+const english = copy === "en" && "english" in service ? service.english : undefined;
 const summary = english?.summary ?? service.summary_fil;
-const detailLanguage = lang === "en" && !english ? "fil" : undefined;
+const detailLanguage = (copy === "en" ? !english : lang !== "fil") ? "fil" : undefined;
 const requirements = lines(english?.requirements ?? service.requirements);
 const steps = lines(english?.steps ?? service.steps);
 const online = service.id !== "pay-business-tax-online" && service.online?.url && /^https?:\/\//.test(service.online.url) ? service.online.url : "";
@@ -30,7 +31,6 @@ const fee = typeof service.fee === "string" && service.fee.trim()
 const time = typeof service.processing_time === "string" && service.processing_time.trim()
   ? (english?.processing_time ?? service.processing_time)
   : "";
-const en = lang === "en";
 const officeName = office ? (office.acronym ? `${office.name} (${office.acronym})` : office.name) : service.office;
 const cityHallNumber = cityHallHotline?.numbers[0];
 const contactParts = office?.contact ? office.contact.split(";").map((part) => part.trim()).filter(Boolean) : [];
@@ -43,8 +43,8 @@ function fileName(url: string): string {
     return name.length > 36 ? `…${name.slice(-32)}` : name;
   } catch { return ""; }
 }
-const checklistTemplate = en ? "{n} of {total} ready" : "{n} sa {total} handa";
-const crumbs: [string, string?][] = [[en ? "Services" : "Serbisyo", "/serbisyo/"]];
+const checklistTemplate = t.checklistReady;
+const crumbs: [string, string?][] = [[t.navServices, "/serbisyo/"]];
 if (categoryName) crumbs.push([categoryName, `/serbisyo/#${service.category}`]);
 crumbs.push([title]);
 const stepsNumber = requirements.length > 0 ? 2 : 1;
@@ -76,7 +76,7 @@ function lines(value: unknown): string[] {
 }
 ---
 
-<Site title={title} description={en ? english?.summary || title : summary || title}>
+<Site title={title} description={copy === "en" ? english?.summary || title : summary || title}>
   <section class="section section--flow ground-white bp-service-page" aria-labelledby="service-h">
     <div class="wrap">
       <PageHead
@@ -89,7 +89,7 @@ function lines(value: unknown): string[] {
           {summary && <p class="lead bp-svc__summary" lang={detailLanguage}>{summary}</p>}
           {online && (
             <ButtonLink className="bp-svc__online" href={online}>
-              {onlineHost === "facebook.com" ? (en ? "Official office page" : "Opisyal na pahina ng tanggapan") : t.doOnline}
+              {onlineHost === "facebook.com" ? t.officialOfficePage : t.doOnline}
               <span aria-hidden="true">↗</span>
             </ButtonLink>
           )}
@@ -107,7 +107,7 @@ function lines(value: unknown): string[] {
   <div class="section section--flow">
     <div class="wrap bp-svc">
       <div class="bp-svc__main">
-        <nav class="bp-svc__jump" aria-label={en ? "On this page" : "Sa pahinang ito"} data-pagefind-ignore>
+        <nav class="bp-svc__jump" aria-label={t.onThisPage} data-pagefind-ignore>
           <ul>
             {requirements.length > 0 && <li><a class="chip" href="#service-requirements">{t.requirements}</a></li>}
             {steps.length > 0 && <li><a class="chip" href="#service-steps">{t.stepsLabel}</a></li>}
@@ -120,25 +120,25 @@ function lines(value: unknown): string[] {
           {requirements.length > 0 && (
             <section aria-labelledby="service-requirements" data-checklist data-template={checklistTemplate} data-total={requirements.length}>
               <div class="bp-svc__shead">
-                <h2 id="service-requirements" tabindex="-1">1. {en ? "Get these ready" : "Ihanda ang mga ito"}</h2>
+                <h2 id="service-requirements" tabindex="-1">1. {t.getReady}</h2>
                 <p class="bp-svc__progress" data-progress hidden aria-live="polite"></p>
               </div>
               <div class="bp-svc__bar" data-bar hidden aria-hidden="true"><span></span></div>
               <fieldset class="bp-svc__checks">
-                <legend class="bp-svc__legend">{en ? "Requirements checklist" : "Checklist ng mga kailangan"}</legend>
+                <legend class="bp-svc__legend">{t.requirementsChecklist}</legend>
                 <ul lang={detailLanguage}>
                   {requirements.map((item) => (
                     <li><label><input type="checkbox" /><span>{item}</span></label></li>
                   ))}
                 </ul>
               </fieldset>
-              <p class="t-small muted bp-svc__tip" data-tip hidden>{en ? "Tick items as you gather them. This is not saved; it is only for you." : "I-check habang inihahanda mo. Hindi ito naka-save; para lang sa iyo."}</p>
+              <p class="t-small muted bp-svc__tip" data-tip hidden>{t.checklistTip}</p>
             </section>
           )}
 
           {steps.length > 0 && (
             <section aria-labelledby="service-steps">
-              <h2 id="service-steps" tabindex="-1">{stepsNumber}. {en ? "Follow the steps" : "Sundin ang mga hakbang"}</h2>
+              <h2 id="service-steps" tabindex="-1">{stepsNumber}. {t.followSteps}</h2>
               <ol class="bp-svc__steps" lang={detailLanguage}>
                 {steps.map((item) => <li><span>{item}</span></li>)}
               </ol>
@@ -155,7 +155,7 @@ function lines(value: unknown): string[] {
               {relatedPrograms.map((program) => (
                 <li>
                   <a class="cd bp-svc__program" href={href(lang, `/tulong/#${program.id}`)}>
-                    <span>{en ? program.title_en : program.title_fil}</span>
+                    <span>{copy === "en" ? program.title_en : program.title_fil}</span>
                     <svg class="ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
                   </a>
                 </li>
@@ -165,7 +165,7 @@ function lines(value: unknown): string[] {
         )}
       </div>
 
-      <aside class="bp-svc__aside" aria-label={en ? "Where to go and who to ask" : "Saan pupunta at sino ang tatanungin"}>
+      <aside class="bp-svc__aside" aria-label={t.whereAsk}>
         <div class="bp-svc__box" id="service-where">
           <h2>{t.whereLabel}</h2>
           <ul class="bp-svc__where">
@@ -188,7 +188,7 @@ function lines(value: unknown): string[] {
 
         {contactParts.length > 0 && (
           <div class="bp-svc__box bp-svc__box--ask">
-            <h2>{en ? "Questions?" : "May tanong?"}</h2>
+            <h2>{t.questionsHeading}</h2>
             <ul class="bp-svc__contact">
               {contactParts.map((part) => (
                 <li class="num">{part.includes("@") ? <a class="link" href={`mailto:${part}`}>{part}</a> : part}</li>

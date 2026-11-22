@@ -23,20 +23,5 @@ const categoryIcons: Record<string, string> = {
 
 export const categoryIcon = (icon: string | undefined) => categoryIcons[icon ?? ""] ?? categoryIcons.document;
 
-// Action-style card titles for the six featured services (data/site.json featured_services).
-export const serviceLabels: Record<string, { fil: string; en: string }> = {
-  "pay-real-property-tax": { fil: "Magbayad ng amilyar", en: "Pay property tax" },
-  "senior-citizen-id": { fil: "Kumuha ng Senior Citizen ID", en: "Get a senior ID" },
-  aics: { fil: "Humingi ng tulong pinansiyal", en: "Get financial assistance" },
-  "certified-copy-civil-document": { fil: "Kumuha ng rekord ng civil registry", en: "Get civil registry records" },
-  "business-permit-renewal": { fil: "Mag-renew ng business permit", en: "Renew a business permit" },
-  "scholarship-new": { fil: "Mag-apply ng scholarship", en: "Apply for a scholarship" },
-};
-
-// "Madalas hanapin" links under the search box
-export const popularLinks: { id: string; fil: string; en: string }[] = [
-  { id: "senior-citizen-id", fil: "Senior ID", en: "Senior ID" },
-  { id: "business-permit-renewal", fil: "Business permit", en: "Business permit" },
-  { id: "aics", fil: "AICS ayuda", en: "AICS help" },
-  { id: "pay-real-property-tax", fil: "Amilyar", en: "Property tax" },
-];
+// "Madalas hanapin" links under the search box. The words live in ui.popularLink.
+export const popularLinkIds = ["senior-citizen-id", "business-permit-renewal", "aics", "pay-real-property-tax"] as const;

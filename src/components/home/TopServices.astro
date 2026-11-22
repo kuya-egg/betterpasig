@@ -1,13 +1,13 @@
 ---
 // Popular services: a card per featured service with its category icon, title and arrow.
 import SectionHead from "./SectionHead.astro";
-import { href, langFromUrl, ui } from "../../i18n";
+import { contentLang, href, langFromUrl, ui } from "../../i18n";
 import { categories, featuredServices } from "../../lib/data";
-import { arrowPath, categoryIcon, serviceLabels } from "./content";
+import { arrowPath, categoryIcon } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
+const copy = contentLang(lang);
 const iconFor = (categoryId: string) => categoryIcon(categories.find((category) => category.id === categoryId)?.icon);
 ---
 
@@ -22,7 +22,7 @@ const iconFor = (categoryId: string) => categoryIcon(categories.find((category) 
         <li>
           <a class="cd bp-quick__card" href={href(lang, `/serbisyo/${service.id}/`)}>
             <span class="icon-well"><svg class="ic" aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path d={iconFor(service.category)} /></svg></span>
-            <span class="bp-quick__title">{serviceLabels[service.id]?.[lang] ?? (en ? service.title_en : service.title_fil)}</span>
+            <span class="bp-quick__title">{t.serviceShortcut[service.id] ?? (copy === "en" ? service.title_en : service.title_fil)}</span>
             <svg class="ic ar" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d={arrowPath} /></svg>
           </a>
         </li>

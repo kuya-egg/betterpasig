@@ -3,14 +3,14 @@ import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import Search from "./Search.astro";
 import { categories, cityHallHotline, officeName, offices, services, telHref } from "../lib/data";
-import { href, langFromUrl, ui } from "../i18n";
+import { contentLang, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
-const en = lang === "en";
 const t = ui[lang];
+const copy = contentLang(lang);
 const groups = categories.map((category) => ({
   category,
-  name: en ? category.name_en : category.name_fil,
+  name: copy === "en" ? category.name_en : category.name_fil,
   items: services.filter((service) => service.category === category.id),
 }));
 const cityHallNumber = cityHallHotline?.numbers[0];
@@ -20,7 +20,7 @@ const cityHallNumber = cityHallHotline?.numbers[0];
   <section class="section section--flow ground-white bp-service-index" aria-labelledby="services-h">
     <div class="wrap bp-sidx__head">
       <PageHead id="services-h" crumbs={[[t.allServices]]} lead={t.serviceCount(services.length, categories.length, offices.length)}>
-        {en ? <>What do you need <em>done</em>?</> : <>Anong kailangan mong <em>asikasuhin</em>?</>}
+        {t.needBefore}<em>{t.needEm}</em>{t.needAfter}
       </PageHead>
       <Search />
     </div>
@@ -28,8 +28,8 @@ const cityHallNumber = cityHallHotline?.numbers[0];
 
   <div class="section section--flow">
     <div class="wrap bp-sidx">
-      <nav class="bp-sidx__topics" id="service-categories" aria-label={en ? "Service categories" : "Mga kategorya ng serbisyo"} data-pagefind-ignore>
-        <p class="kicker bp-sidx__label">{en ? `${categories.length} topics` : `${categories.length} paksa`}</p>
+      <nav class="bp-sidx__topics" id="service-categories" aria-label={t.serviceCategories} data-pagefind-ignore>
+        <p class="kicker bp-sidx__label">{t.topicCount(categories.length)}</p>
         <ul>
           {groups.map(({ category, name, items }) => (
             <li>
@@ -50,7 +50,7 @@ const cityHallNumber = cityHallHotline?.numbers[0];
               <span class="num muted">{items.length}</span>
             </div>
             {category.description_fil && (
-              <p class="muted bp-sidx__lead" lang={en ? "fil" : undefined}>
+              <p class="muted bp-sidx__lead" lang={lang === "fil" ? undefined : "fil"}>
                 {category.description_fil}
               </p>
             )}
@@ -62,10 +62,10 @@ const cityHallNumber = cityHallHotline?.numbers[0];
                   <li>
                     <a class="cd bp-sidx__item" href={href(lang, `/serbisyo/${service.id}`)}>
                       <span class="bp-sidx__body">
-                        <span class="bp-sidx__title">{en ? service.title_en : service.title_fil}</span>
+                        <span class="bp-sidx__title">{copy === "en" ? service.title_en : service.title_fil}</span>
                         <span class="bp-sidx__meta">
                           <span>{officeName(service.office)}</span>
-                          {service.processing_time && <span class="num" lang={en ? "fil" : undefined}>{service.processing_time}</span>}
+                          {service.processing_time && <span class="num" lang={lang === "fil" ? undefined : "fil"}>{service.processing_time}</span>}
                         </span>
                       </span>
                       <svg class="ar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
@@ -78,10 +78,10 @@ const cityHallNumber = cityHallHotline?.numbers[0];
         ))}
 
         <div class="bp-sidx__help">
-          <p class="bp-sidx__helpq">{en ? "Can't find what you need?" : "Hindi mo makita ang hinahanap mo?"}</p>
+          <p class="bp-sidx__helpq">{t.cantFind}</p>
           <div class="bp-sidx__actions">
-            <a class="pill bp-sidx__alt" href={href(lang, "/tulong/")}>{en ? "Browse by situation" : "Ayon sa sitwasyon"}</a>
-            {cityHallNumber && <a class="pill bp-sidx__call" href={telHref(cityHallNumber)}>{en ? "Call City Hall" : "Tawagan ang City Hall"}</a>}
+            <a class="pill bp-sidx__alt" href={href(lang, "/tulong/")}>{t.browseSituation}</a>
+            {cityHallNumber && <a class="pill bp-sidx__call" href={telHref(cityHallNumber)}>{t.callCityHall}</a>}
           </div>
         </div>
       </div>

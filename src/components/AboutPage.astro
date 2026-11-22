@@ -4,21 +4,22 @@ import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import IbaPaTabs from "./IbaPaTabs.astro";
 import { city, site, sourceLabel } from "../lib/data";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const copy = contentLang(lang);
 const repo = "https://github.com/kuya-egg/betterpasig";
 // Textual as_of values are split into as_of_fil/as_of_en; plain years and dates stay in as_of.
 const asOf = (fact: (typeof city.facts)[number]) =>
-  (lang === "en" ? ("as_of_en" in fact ? fact.as_of_en : null) : ("as_of_fil" in fact ? fact.as_of_fil : null)) ?? fact.as_of ?? null;
+  (copy === "en" ? ("as_of_en" in fact ? fact.as_of_en : null) : ("as_of_fil" in fact ? fact.as_of_fil : null)) ?? fact.as_of ?? null;
 ---
 
 <Site title={t.aboutTitle} description={t.aboutMission}>
   <section class="section ground-white bp-about__top" aria-labelledby="tungkol-h">
     <div class="wrap">
-      <PageHead id="tungkol-h" crumbs={[[lang === "en" ? "About" : "Tungkol"]]} kicker={lang === "en" ? "About" : "Tungkol"} lead={t.aboutMission}>
-        {lang === "en" ? <>About <em>BetterPasig</em></> : <>Tungkol sa <em>BetterPasig</em></>}
+      <PageHead id="tungkol-h" crumbs={[[t.aboutTab]]} kicker={t.aboutTab} lead={t.aboutMission}>
+        {t.aboutBefore}<em>{t.aboutEm}</em>{t.aboutAfter}
       </PageHead>
       <IbaPaTabs current="about" />
     </div>
@@ -66,9 +67,9 @@ const asOf = (fact: (typeof city.facts)[number]) =>
         {
           city.facts.map((fact) => (
             <li>
-              <span class="rows__name">{lang === "en" ? fact.label_en : fact.label_fil}</span>
+              <span class="rows__name">{copy === "en" ? fact.label_en : fact.label_fil}</span>
               <span class="rows__value">
-                {lang === "en" ? fact.value_en : fact.value_fil}
+                {copy === "en" ? fact.value_en : fact.value_fil}
               </span>
               <div class="bp-about__meta t-small muted">
                 {asOf(fact) && (
@@ -76,8 +77,8 @@ const asOf = (fact: (typeof city.facts)[number]) =>
                     {t.aboutAsOf}: {asOf(fact)}
                   </p>
                 )}
-                {(lang === "en" ? fact.note_en : fact.note_fil) && fact.id === "land-area" && (
-                  <p>{lang === "en" ? fact.note_en : fact.note_fil}</p>
+                {(copy === "en" ? fact.note_en : fact.note_fil) && fact.id === "land-area" && (
+                  <p>{copy === "en" ? fact.note_en : fact.note_fil}</p>
                 )}
                 <p>
                   {t.sources}:{" "}
@@ -120,7 +121,7 @@ const asOf = (fact: (typeof city.facts)[number]) =>
       <div class="grid bp-about__split">
         <div class="span-6">
           <h2 id="paunawa" class="bp-about__h">{t.aboutDisclaimerTitle}</h2>
-          <p class="bp-about__p">{lang === "en" ? site.notice_en : site.notice_fil}</p>
+          <p class="bp-about__p">{copy === "en" ? site.notice_en : site.notice_fil}</p>
         </div>
         <div class="span-6" id="ambag-bloke">
           <h2 id="ambag" class="bp-about__h">{t.aboutContribTitle}</h2>

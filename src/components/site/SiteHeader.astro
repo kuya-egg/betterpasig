@@ -1,12 +1,11 @@
 ---
 // Header (handoff 2026-11): the red emergency strip, then a sticky white nav. The same on every page.
 import Mark from "../../../design/logo/mark-blue.svg";
-import { basePath, href, langFromUrl, pathIn, ui } from "../../i18n";
+import { basePath, href, langFromUrl, langs, pathIn, ui } from "../../i18n";
 import EmergencyStrip from "./EmergencyStrip.astro";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const other = lang === "en" ? "fil" : "en";
 const path = basePath(Astro.url.pathname).replace(/\/$/, "") || "/";
 const links = [
   { label: t.navServices, path: "/serbisyo/" },
@@ -61,43 +60,54 @@ const navState = (target: string) => {
     <a class="bp-header__search" href={href(lang, "/serbisyo/#q")} aria-label={t.searchLabel}>
       <svg class="ic" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M21 21l-4.3-4.3" /></svg>
     </a>
-    <a
-      class="bp-header__language"
-      href={pathIn(other, Astro.url)}
-      hreflang={ui[other].htmlLang}
-      lang={ui[other].htmlLang}
-      aria-label={t.switchLabel}
-      data-lang-switch={other}
-    >
-      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-        <circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18" />
-      </svg>
-      {t.otherLangName}
-    </a>
+    <details class="bp-header__lang">
+      <summary aria-label={`${t.langLabel}: ${t.name}`}>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18" />
+        </svg>
+        {t.name}
+      </summary>
+      <ul>
+        {langs.map((code) => (
+          <li>
+            <a
+              href={pathIn(code, Astro.url)}
+              hreflang={ui[code].htmlLang}
+              lang={ui[code].htmlLang}
+              aria-current={code === lang ? "true" : undefined}
+              data-lang-switch={code}
+            >{ui[code].name}</a>
+          </li>
+        ))}
+      </ul>
+    </details>
     </div>
   </div>
 </header>
 
 <script>
-  const language = document.querySelector<HTMLAnchorElement>("[data-lang-switch]");
-  language?.addEventListener("click", () => {
-    const target = new URL(language.href);
-    target.hash = location.hash;
-    language.href = target.href;
-    try { localStorage.setItem("bp-lang", language.dataset.langSwitch ?? "fil"); } catch { /* storage may be blocked */ }
-  });
-
-  const more = document.querySelector<HTMLDetailsElement>(".bp-header__more");
-  if (more) {
-    document.addEventListener("click", (event) => {
-      if (event.target instanceof Node && !more.contains(event.target)) more.open = false;
-    });
-    more.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || !more.open) return;
-      more.open = false;
-      more.querySelector("summary")?.focus();
+  for (const language of document.querySelectorAll<HTMLAnchorElement>("[data-lang-switch]")) {
+    language.addEventListener("click", () => {
+      const target = new URL(language.href);
+      target.hash = location.hash;
+      language.href = target.href;
+      try { localStorage.setItem("bp-lang", language.dataset.langSwitch ?? "en"); } catch { /* storage may be blocked */ }
     });
   }
+
+  const menus = document.querySelectorAll<HTMLDetailsElement>(".bp-header__more, .bp-header__lang");
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Node)) return;
+    for (const menu of menus) if (!menu.contains(event.target)) menu.open = false;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    for (const menu of menus) {
+      if (!menu.open) continue;
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+    }
+  });
 
   // The strip (and the nav on wide screens) stay pinned; sticky panels and anchor jumps read their height.
   const strip = document.querySelector<HTMLElement>(".bp-urgent");
@@ -139,7 +149,7 @@ const navState = (target: string) => {
   .bp-brand { min-height: 3rem; color: var(--ink); }
 
   .bp-header__nav > ul { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-1); }
-  .bp-header__nav a, .bp-header__nav summary, .bp-header__language, .bp-header__search {
+  .bp-header__nav a, .bp-header__nav summary, .bp-header__lang summary, .bp-header__search {
     display: flex;
     align-items: center;
     gap: var(--s-2);
@@ -158,9 +168,8 @@ const navState = (target: string) => {
   .bp-header__more summary { cursor: pointer; list-style: none; }
   .bp-header__more summary::-webkit-details-marker { display: none; }
   .bp-header__more[open] summary svg { rotate: 180deg; }
-  .bp-header__more > ul {
+  .bp-header__more > ul, .bp-header__lang > ul {
     position: absolute;
-    inset-inline-start: 0;
     inset-block-start: calc(100% + var(--s-1));
     z-index: 2;
     width: min(15rem, 90vw);
@@ -170,9 +179,26 @@ const navState = (target: string) => {
     border-radius: var(--r-lg);
     box-shadow: 0 8px 24px var(--shadow);
   }
+  .bp-header__more > ul { inset-inline-start: 0; }
+  .bp-header__lang { position: relative; }
+  .bp-header__lang summary { cursor: pointer; list-style: none; }
+  .bp-header__lang summary::-webkit-details-marker { display: none; }
+  .bp-header__lang > ul { inset-inline-end: 0; }
+  .bp-header__lang a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    padding-inline: var(--s-4);
+    border-radius: var(--r-md);
+    font-size: var(--t-meta);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .bp-header__lang [aria-current="true"] { background: var(--pale); color: var(--blue); }
 
   @media (hover: hover) {
-    .bp-header__nav :is(a, summary):hover, .bp-header__language:hover, .bp-header__search:hover { background: var(--pale); color: var(--blue); }
+    .bp-header__nav :is(a, summary):hover, .bp-header__lang :is(summary, a):hover, .bp-header__search:hover { background: var(--pale); color: var(--blue); }
   }
 
   @media (max-width: 56rem) {
@@ -183,7 +209,7 @@ const navState = (target: string) => {
     .bp-header__more > ul { position: static; box-shadow: none; width: auto; }
     .bp-header__nav > ul:has(details[open]) { align-items: start; }
     .bp-header__nav li:has(details[open]) { flex: 1 0 100%; }
-    .bp-header__language { padding-inline: var(--s-2); }
+    .bp-header__lang summary { padding-inline: var(--s-2); }
   }
 
   @media (max-width: 31rem) {

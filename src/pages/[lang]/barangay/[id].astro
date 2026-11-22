@@ -1,6 +1,7 @@
 ---
 import BarangayPage from "../../../components/BarangayPage.astro";
+import { withLang } from "../../../i18n";
 import { barangays } from "../../../lib/data";
-export function getStaticPaths() { return barangays.map(({ id }) => ({ params: { id } })); }
+export function getStaticPaths() { return withLang(barangays.map(({ id }) => ({ params: { id } }))); }
 ---
 <BarangayPage barangayId={Astro.params.id!} />

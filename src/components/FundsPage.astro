@@ -3,19 +3,19 @@ import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import IbaPaTabs from "./IbaPaTabs.astro";
 import { sourceLabel, transparencyFigures, transparencyLinks, transparencyRetrieved } from "../lib/data";
-import { formatDate, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
-const en = lang === "en";
 const t = ui[lang];
+const copy = contentLang(lang);
 const checked = formatDate(lang, transparencyRetrieved);
 ---
 
 <Site title={t.fundsTitle} description={t.fundsPageIntro}>
   <section class="section ground-white bp-funds-top" aria-labelledby="funds-h">
     <div class="wrap">
-      <PageHead id="funds-h" crumbs={[[t.fundsTitle]]} kicker={en ? "Public funds" : "Pondo ng bayan"} lead={t.fundsPageIntro}>
-        {en ? <>Where the city's <em>money</em> goes</> : <>Saan napupunta ang <em>pondo</em> ng lungsod</>}
+      <PageHead id="funds-h" crumbs={[[t.fundsTitle]]} kicker={t.fundsTitle} lead={t.fundsPageIntro}>
+        {t.moneyBefore}<em>{t.moneyEm}</em>{t.moneyAfter}
       </PageHead>
       <IbaPaTabs current="funds" />
     </div>
@@ -29,8 +29,8 @@ const checked = formatDate(lang, transparencyRetrieved);
       <ul class="bp-funds__grid">
         {
           transparencyFigures.map((figure) => {
-            const label = en ? figure.label_en : figure.label_fil;
-            const value = en ? figure.value_en : figure.value_fil;
+            const label = copy === "en" ? figure.label_en : figure.label_fil;
+            const value = copy === "en" ? figure.value_en : figure.value_fil;
             return (
               <li id={figure.id} data-pagefind-title={label} class="bp-funds__fig">
                 <h3 class="bp-funds__label">{label}</h3>
@@ -62,8 +62,8 @@ const checked = formatDate(lang, transparencyRetrieved);
       <ul class="bp-funds__grid">
         {
           transparencyLinks.map((link) => {
-            const title = en && link.title_en ? link.title_en : link.title_fil;
-            const desc = en && "description_en" in link && link.description_en ? link.description_en : "description_fil" in link ? link.description_fil : "";
+            const title = copy === "en" && link.title_en ? link.title_en : link.title_fil;
+            const desc = copy === "en" && "description_en" in link && link.description_en ? link.description_en : "description_fil" in link ? link.description_fil : "";
             return (
               <li id={link.id} data-pagefind-title={title} class="bp-funds__fig">
                 <a class="bp-funds__link" href={link.url}>{title}</a>
