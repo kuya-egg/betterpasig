@@ -1,24 +1,25 @@
 ---
 import { ButtonLink } from "@/components/ui/button-link";
-// One 404 for both languages: Cloudflare Pages serves it for any missing path. English first (the default language).
+// One 404 for every language: Cloudflare Pages serves it for any missing path. English first (the default).
 import Site from "../layouts/Site.astro";
-import { ui } from "../i18n";
+import { href, langs, ui } from "../i18n";
 
-const { fil, en } = ui;
+const { en } = ui;
 ---
 
-<Site title={`${en.notFoundTitle} / ${fil.notFoundTitle}`} description={`${en.notFound} ${fil.notFound}`}>
+<Site title={en.notFoundTitle} description={en.notFound}>
   <section class="section section--flow" aria-labelledby="nf-h">
     <div class="wrap">
       <div class="section-head">
-        <h1 id="nf-h">{en.notFound}</h1>
-        <p lang="fil">{fil.notFound}</p>
+        <h1 id="nf-h">{en.notFoundTitle}</h1>
+        <p>{en.notFound}</p>
       </div>
       <div class="nf-actions">
         <ButtonLink href="/">Go to the home page</ButtonLink>
         <ButtonLink variant="outline" href="/serbisyo/">Browse services</ButtonLink>
-        <ButtonLink variant="outline" href="/fil/" lang="fil">Bumalik sa home page</ButtonLink>
-        <ButtonLink variant="outline" href="/fil/serbisyo/" lang="fil">Tingnan ang mga serbisyo</ButtonLink>
+        {langs.filter((code) => code !== "en").map((code) => (
+          <ButtonLink variant="outline" href={href(code, "/")} lang={ui[code].htmlLang} hrefLang={ui[code].htmlLang}>{ui[code].name}</ButtonLink>
+        ))}
       </div>
     </div>
   </section>

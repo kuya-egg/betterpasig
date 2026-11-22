@@ -1,0 +1,10 @@
+---
+import OfficialsPage from "../../../components/OfficialsPage.astro";
+import { langParams } from "../../../i18n";
+
+export function getStaticPaths() {
+  return langParams();
+}
+---
+
+<OfficialsPage />

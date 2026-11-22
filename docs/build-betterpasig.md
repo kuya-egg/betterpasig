@@ -87,9 +87,9 @@ if (!service || service.sources.length === 0) {
 
 **Repo layout:** `src/pages` routes, `src/components` UI, `src/lib/data.ts` reads `data/*.json`, `design/tokens` for color and type, `docs/` for the narrative and these operating docs.
 
-**Naming:** English at the root, Filipino under `/fil/`. Stable `id` values. Do not rename an id because a title changed.
+**Naming:** English at the root, Filipino under `/fil/`, and Cebuano, Ilokano, Hiligaynon, Waray, Bikol, and Kapampangan under `/ceb/`, `/ilo/`, `/hil/`, `/war/`, `/bcl/`, and `/pam/`. Those six reuse Filipino content. Stable `id` values. Do not rename an id because a title changed.
 
-**Always:** a trusted source on every fact (official or major news, never Wikipedia, directories or blogs; see D7). `null` when a fee or number is unknown. Both languages on every page, English default. Any other free maintainer reviews a pull request that changes a fact. The author does not wait on a named person.
+**Always:** a trusted source on every fact (official or major news, never Wikipedia, directories or blogs; see D7). `null` when a fee or number is unknown. English is the default. Filipino and the six regional languages are on every page; regional pages reuse Filipino content. Any other free maintainer reviews a pull request that changes a fact. The author does not wait on a named person.
 
 **Never:** commit a secret. Invent a fee, a phone number, or a date. Use party colors or an endorsement. Add an account or a tracking cookie. Cite Wikipedia, a directory, an aggregator or a blog. Make one person the gate for a lane someone else can finish.
 

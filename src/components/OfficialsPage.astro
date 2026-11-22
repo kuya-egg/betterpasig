@@ -18,7 +18,7 @@ import {
   sourceLabel,
   telHref,
 } from "../lib/data";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
@@ -26,7 +26,7 @@ const byName = (a: { name: string }, b: { name: string }) =>
   a.name.localeCompare(b.name, "fil", { sensitivity: "base" });
 // Prose fields are stored as <field>_fil / <field>_en; null when the record has no such field.
 const text = (record: object, field: string): string | null =>
-  ((record as Record<string, string | null | undefined>)[`${field}_${lang === "en" ? "en" : "fil"}`]) ?? null;
+  ((record as Record<string, string | null | undefined>)[`${field}_${contentLang(lang)}`]) ?? null;
 const uniq = (lists: (readonly string[] | undefined)[]) => [...new Set(lists.flatMap((l) => l ?? []))];
 
 const top = ["Mayor", "Vice Mayor", "Representative"].flatMap((position) =>
@@ -95,11 +95,11 @@ const districts = [1, 2].map((d) => ({
 })).filter((g) => g.rows.length > 0);
 ---
 
-<Site title={t.officialsPageTitle} description={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
+<Site title={t.officialsPageTitle} description={contentLang(lang) === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
   <section class="section ground-white bp-off__top" aria-labelledby="page-h">
     <div class="wrap">
-      <PageHead crumbs={[[t.officialsPageTitle]]} kicker={lang === "en" ? "Officials" : "Mga opisyal"} lead={lang === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
-        {lang === "en" ? <>Pasig <em>officials</em></> : <>Mga <em>opisyal</em> ng Pasig</>}
+      <PageHead crumbs={[[t.officialsPageTitle]]} kicker={t.navOfficials} lead={contentLang(lang) === "en" ? officialsDirectory.term_en : officialsDirectory.term_fil}>
+        {t.officialsBefore}<em>{t.officialsEm}</em>{t.officialsAfter}
       </PageHead>
       <IbaPaTabs current="officials" />
     </div>
@@ -108,7 +108,7 @@ const districts = [1, 2].map((d) => ({
   <section class="section section--flow" aria-labelledby="opisyal-lungsod-h">
     <div class="wrap">
       <div class="bp-off__term stack-2">
-        <p class="t-small">{lang === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}</p>
+        <p class="t-small">{contentLang(lang) === "en" ? officialsDirectory.term_note_en : officialsDirectory.term_note_fil}</p>
         <p class="t-small muted bp-off__meta">
           <span>{t.sources}: {officialsDirectory.term_sources.map((u, i) => (<>{i > 0 && ", "}<a href={u}>{sourceLabel(u)}</a></>))}</span>
           <span>{t.checked}: {formatDate(lang, officialsDirectory.retrieved)}</span>

@@ -1,27 +1,28 @@
 ---
 // Topic index: every service category with its service count, linking to /serbisyo/#<id>.
-import { href, langFromUrl } from "../../i18n";
+import { contentLang, href, langFromUrl, ui } from "../../i18n";
 import { categories, services } from "../../lib/data";
 import { arrowPath, categoryIcon } from "./content";
 
 const lang = langFromUrl(Astro.url);
-const en = lang === "en";
+const t = ui[lang];
+const copy = contentLang(lang);
 const count = (id: string) => services.filter((service) => service.category === id).length;
 ---
 
 <section class="section--home home-topics" aria-labelledby="top-h">
   <div class="wrap home-topics__layout">
     <div class="home-topics__intro">
-      <p class="kicker">{en ? "By topic" : "Ayon sa paksa"}</p>
-      <h2 id="top-h">{en ? "Every service, grouped" : "Lahat ng serbisyo, nakapangkat"}</h2>
+      <p class="kicker">{t.byTopic}</p>
+      <h2 id="top-h">{t.servicesGrouped}</h2>
     </div>
     <ul class="home-topics__list">
       {categories.map((category) => (
         <li>
           <a class="row home-topics__row" href={href(lang, `/serbisyo/#${category.id}`)}>
             <svg class="ic home-topics__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d={categoryIcon(category.icon)} /></svg>
-            <span class="home-topics__name">{en ? category.name_en : category.name_fil}</span>
-            <span class="home-topics__count"><span class="num">{count(category.id)}</span> {en ? "services" : "serbisyo"}</span>
+            <span class="home-topics__name">{copy === "en" ? category.name_en : category.name_fil}</span>
+            <span class="home-topics__count"><span class="num">{count(category.id)}</span> {t.servicesUnit}</span>
             <svg class="ic ar" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg>
           </a>
         </li>

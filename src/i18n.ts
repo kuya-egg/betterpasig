@@ -1,13 +1,31 @@
-// Interface text in English (default, served at /) and Filipino (served at /fil/).
-// Content text comes from the _fil / _en fields in data/.
+// Interface text. English is the default at /. Every other language is at /<code>/.
+// Content text comes from the _en / _fil fields in data/. Other languages reuse Filipino.
+import { regional } from "./i18n-regional";
 
-export const langs = ["fil", "en"] as const;
+export const langs = ["en", "fil", "ceb", "ilo", "hil", "war", "bcl", "pam"] as const;
 export type Lang = (typeof langs)[number];
+export type ContentLang = "en" | "fil";
 
-export const ui = {
-  fil: {
+// String literals widen so each language can phrase the same key differently. Functions keep their signatures.
+type Widen<T> = T extends (...args: infer A) => infer R
+  ? (...args: A) => Widen<R>
+  : T extends readonly (infer U)[]
+    ? readonly Widen<U>[]
+    : T extends string
+      ? string
+      : T extends number
+        ? number
+        : T extends boolean
+          ? boolean
+          : T extends object
+            ? { [K in keyof T]: Widen<T[K]> }
+            : T;
+
+const fil = {
     htmlLang: "fil",
     ogLocale: "fil_PH",
+    name: "Filipino",
+    langLabel: "Wika",
     otherLangName: "English",
     switchLabel: "Basahin sa English",
     skip: "Dumiretso sa nilalaman",
@@ -201,7 +219,7 @@ export const ui = {
     aboutTitle: "Tungkol sa BetterPasig",
     aboutMissionTitle: "Misyon",
     aboutMission:
-      "Pinagsasama-sama namin ang impormasyon tungkol sa mga serbisyo, benepisyo at desisyon ng Lungsod ng Pasig. Inilalathala namin ito sa Filipino at English, kasama ang mga sanggunian. Ina-update namin ito para masundan ng mga residente ang nangyayari sa lungsod.",
+      "Pinagsasama-sama namin ang impormasyon tungkol sa mga serbisyo, benepisyo at desisyon ng Lungsod ng Pasig. Inilalathala namin ito sa English, Filipino, at iba pang wika ng Pilipinas, kasama ang mga sanggunian. Ina-update namin ito para masundan ng mga residente ang nangyayari sa lungsod.",
     aboutStance:
       "May sariling ordinansa sa Freedom of Information (Ordinance No. 37, s. 2018) ang Pasig. May tanggapang Ugnayan sa Pasig at ipinapalabas din nang live ang bidding. Tinutulungan ng BetterPasig ang mga residente na hanapin at basahin ang mga pampublikong tala na nasa iba’t ibang lugar.",
     aboutPrinciplesTitle: "Pitong prinsipyo",
@@ -299,11 +317,218 @@ export const ui = {
     newMapLabel: "Mapa ng mga bagong pasyalan na may numero ng bawat barangay",
     sourceWord: "Sanggunian",
 
+    weekdays: ["Lin", "Lun", "Mar", "Miy", "Huw", "Biy", "Sab"],
+    dayShort: { MO: "Lun", TU: "Mar", WE: "Miy", TH: "Huw", FR: "Biy", SA: "Sab", SU: "Lin" } as Record<string, string>,
+
+    needBefore: "Anong kailangan mong ",
+    needEm: "asikasuhin",
+    needAfter: "?",
+    helpBefore: "Baka may ",
+    helpEm: "para sa'yo",
+    helpAfter: "",
+    helpLead: "Mga programa ng lungsod na madalas hindi alam ng mga puwedeng makinabang.",
+    visitBefore: "Mga ",
+    visitEm: "pasyalan",
+    visitAfter: " sa Pasig",
+    moneyBefore: "Saan napupunta ang ",
+    moneyEm: "pondo",
+    moneyAfter: " ng lungsod",
+    benefitsBefore: "Benepisyo at ",
+    benefitsEm: "tulong",
+    benefitsAfter: "",
+    allBenefitsBefore: "Lahat ng ",
+    allBenefitsEm: "benepisyo",
+    allBenefitsAfter: "",
+    barangay30Before: "Ang 30 barangay ng ",
+    barangay30Em: "Pasig",
+    barangay30After: "",
+    archiveBefore: "Arkibo ng mga ",
+    archiveEm: "abiso",
+    archiveAfter: "",
+    recentBefore: "Mga bagong abiso at ",
+    recentEm: "oportunidad",
+    recentAfter: "",
+    officialsBefore: "Mga ",
+    officialsEm: "opisyal",
+    officialsAfter: " ng Pasig",
+    aboutBefore: "Tungkol sa ",
+    aboutEm: "BetterPasig",
+    aboutAfter: "",
+
+    allPlaces: "Lahat ng pasyalan",
+    hoursAndFee: "Oras at bayad",
+    hoursCheckedWord: "sinuri noong",
+    bySituation: "Ayon sa sitwasyon",
+    byTopic: "Ayon sa paksa",
+    servicesGrouped: "Lahat ng serbisyo, nakapangkat",
+    servicesUnit: "serbisyo",
+    residentGuide: "Gabay ng mamamayan",
+    popularSearches: "Madalas hanapin",
+    kindFood: "Kainan",
+    kindParks: "Pasyalan",
+    serviceShortcut: {
+      "pay-real-property-tax": "Magbayad ng amilyar",
+      "senior-citizen-id": "Kumuha ng Senior Citizen ID",
+      aics: "Humingi ng tulong pinansiyal",
+      "certified-copy-civil-document": "Kumuha ng rekord ng civil registry",
+      "business-permit-renewal": "Mag-renew ng business permit",
+      "scholarship-new": "Mag-apply ng scholarship",
+    } as Record<string, string>,
+    popularLink: {
+      "senior-citizen-id": "Senior ID",
+      "business-permit-renewal": "Business permit",
+      aics: "AICS ayuda",
+      "pay-real-property-tax": "Amilyar",
+    } as Record<string, string>,
+
+    serviceCategories: "Mga kategorya ng serbisyo",
+    topicCount: (n: number) => `${n} paksa`,
+    cantFind: "Hindi mo makita ang hinahanap mo?",
+    browseSituation: "Ayon sa sitwasyon",
+    callCityHall: "Tawagan ang City Hall",
+    checklistReady: "{n} sa {total} handa",
+    officialOfficePage: "Opisyal na pahina ng tanggapan",
+    onThisPage: "Sa pahinang ito",
+    getReady: "Ihanda ang mga ito",
+    requirementsChecklist: "Checklist ng mga kailangan",
+    checklistTip: "I-check habang inihahanda mo. Hindi ito naka-save; para lang sa iyo.",
+    followSteps: "Sundin ang mga hakbang",
+    whereAsk: "Saan pupunta at sino ang tatanungin",
+    questionsHeading: "May tanong?",
+
+    placeType: "Uri ng lugar",
+    placesLabel: "Mga lugar",
+    locationLabel: "Lokasyon",
+    hoursShort: "Oras",
+    mapPasig: "Mapa ng Pasig",
+    mapVisitLabel: "Mapa ng Pasig; mas madilim ang barangay na may pasyalan",
+    mapDarkNote: "Mas madilim ang mga barangay na may lugar sa listahang ito.",
+
+    fullBarangay: "Buong pahina ng barangay",
+    pickBarangay: "Pumili ng barangay sa mapa o sa listahan.",
+    noBarangayMatch: "Walang tugmang barangay.",
+    barangaysTitle: "Mga barangay",
+    barangaysDesc: "Hanapin ang alinman sa 30 barangay ng Pasig sa mapa o sa listahang A–Z.",
+    barangayCrumb: "Barangay",
+    barangayIndexLead: "Pindutin ang barangay mo sa mapa, o hanapin sa listahan sa ibaba.",
+    barangayDetails: "Detalye ng barangay",
+    listAz: "Listahan A–Z",
+    findBarangay: "Hanapin ang barangay",
+    barangayBlurb: (name: string) =>
+      `Hanapin ang ${name} sa mapa ng Pasig at tingnan ang mga nakalistang evacuation center at opisyal na abiso.`,
+    barangaySource: "Sanggunian ng barangay",
+    noBarangayContact: "Wala pang nakalistang kumpirmadong address o contact ng barangay.",
+    phoneNumbers: "Mga numero ng telepono",
+    barangayWhere: (name: string) => `Lokasyon ng ${name} sa Pasig`,
+    allBarangays: "Lahat ng barangay",
+    placesNamed30: "Mga lugar na nabanggit sa opisyal na abiso sa nakaraang 30 araw",
+    addressUnstated: "Hindi nakasaad ang address sa nasuring anunsyo.",
+    newServiceNotices: "Mga bagong abiso sa serbisyo",
+    noBarangayNews: "Wala pang nakalistang opisyal na abiso tungkol sa barangay na ito sa nakaraang 30 araw.",
+
+    noticesTab: "Mga abiso",
+    aboutTab: "Tungkol",
+    morePages: "Iba pang pahina",
+    programCount: (n: number) => `${n} na programa`,
+    situationQuestion: "Ano ang sitwasyon mo?",
+    audience: {
+      senior: "Senior citizen",
+      pwd: "Taong may kapansanan (PWD)",
+      "solo-parent": "Solo parent",
+      estudyante: "Estudyante",
+      kalusugan: "Kalusugan",
+      "iba-pa": "Iba pa",
+    } as Record<string, string>,
+
+    checkedAgainst: "Inihambing ang impormasyon sa opisyal na anunsyo.",
+    openSource: "Basahin ang opisyal na anunsyo",
+    staleSource: "Mahigit 30 araw na ang lumipas mula nang ilabas ang anunsyo. Tingnan ang opisyal na pahina para sa mas bagong abiso.",
+    searchPlaces: "Maghanap ng serbisyo o lugar",
+    clearSearch: "Burahin ang hinahanap",
+
+    archiveTitle: "Arkibo ng mga abiso",
+    recentTitle: "Mga bagong abiso at oportunidad",
+    weeklyDesc: "Mga bagong opisyal na abiso at oportunidad sa Pasig. May petsa at sanggunian ang bawat abiso.",
+    archiveLead: "Mga naunang abiso at mga aktibidad na lumipas na ang petsa.",
+    recentLead: "Mga bagong abiso na may link sa opisyal na anunsyo.",
+    publishedLabel: "Inanunsyo",
+    scheduledLabel: "Nakatakda",
+    confirmSchedule: "Kumpirmahin sa tagapag-ayos ang iskedyul.",
+    bfpNote: "Linya para sa mga transaksiyon sa BFP. Para sa emergency, gamitin ang mga hotline sa pahina ng Emergency.",
+    weekdayRange: "Lun–Biy",
+    holidayPhoneNote: "hindi kasama ang mga holiday. Hindi pa nasusubukang tawagan.",
+    sakayNote: "Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Kinukumpirma pa ang mga hintuan at eksaktong ruta.",
+    registrationForm: "Form ng rehistrasyon",
+    noRecentNotices: "Wala pang nakalistang bagong opisyal na abiso.",
+    noArchivedNotices: "Wala pang nakalistang abiso sa arkibo.",
+    seeRecent: "Tingnan ang mga bagong abiso",
+    openArchive: "Buksan ang arkibo ng mga abiso",
+    historyParkingTitle: "Maintenance sa Mega Parking I",
+    historyBloodTitle: "Anunsyo ng blood donation sa PCIST",
+    historyJobTitle: "Ulat sa job fair noong Oktubre 1–2",
+    historyParkingBody: "May anunsyo ng pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.",
+    historyBloodBody: "Nasa anunsyo ang iskedyul na Oktubre 8, 08:00–13:00. Hindi pa kumpirmadong natuloy ang aktibidad.",
+    historyJobBody: "Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.",
+
+    placeBlurb: (name: string) => `${name}: address, oras at mga numerong nakalista sa mga opisyal na sanggunian.`,
+    barangayInfo: "Impormasyon ng barangay",
+    addressMissing: "Hindi nakasaad sa nasuring anunsyo.",
+    marketHours: "Oras ng palengke",
+    bizTaxSchedule: "Oras para sa buwis sa negosyo, ikaapat na quarter ng 2026",
+    holidayExclusions: "Hindi kasama ang mga holiday.",
+    rptSchedule: "Oras ng serbisyo para sa amilyar",
+    rptOnlyNote: "Para lang sa amilyar. Hindi kasama ang mga holiday.",
+    streetProject: "Iniulat na proyekto sa kalsada",
+    cityReportOf: "Ayon sa ulat ng lungsod noong",
+    notFloodAssessment: "Walang pagtatasa sa panganib ng baha sa ulat na ito.",
+    publishedPhone: "Nakalathalang telepono",
+    localWord: "lokal",
+    publishedNumberNote: "Nakalathalang numero; hindi pa nasusubukang tawagan.",
+    desksHeading: "Mga desk at kani-kanilang oras ng serbisyo",
+    bizTaxOnly: "Para lamang sa business tax, ikaapat na quarter ng 2026",
+    rptDesk: "Desk para sa amilyar",
+    holidaysExcluded: "hindi kasama ang mga holiday",
+    relatedNotices: "Mga kaugnay na abiso sa serbisyo",
+    bizPhoneLabel: "Tawagan para sa tulong sa transaksiyon ng negosyo",
+    notEmergency: "Hindi ito emergency hotline.",
+    servicePortal: "Opisyal na portal ng serbisyo",
+    routeNote: (_count: number) =>
+      "Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Walang nakasaad na mga hintuan o eksaktong ruta sa nasuring anunsyo.",
+    datedOpportunity: "May takdang oportunidad",
+    confirmRegistration: "Magtanong sa tagapag-ayos kung puwede pang magparehistro.",
+    openRegistration: "Buksan ang pahina ng pagpaparehistro",
+    pastNotices: "Mga nagdaang abiso",
+    placeHistoryParking: "Ayon sa abiso, nakatakdang isara para sa maintenance ang ikatlong palapag noong Oktubre 7 at buksan muli nang 12:01 PM. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.",
+    placeHistoryBlood: "Nasa anunsyo ang iskedyul ng blood donation sa kampus noong Oktubre 8. Hindi pa kumpirmadong natuloy ito.",
+    placeHistoryJob: "Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon para sa job fair noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.",
+
+    rptTitle: "Maagang bayad sa amilyar para sa 2027",
+    rptDiscount: (percent: number, date: string) =>
+      `Kung walang atrasadong bayarin sa account, may ${percent}% na diskuwento kapag binayaran nang buo ang amilyar bago ang ${date}.`,
+    rptBulk: (date: string) =>
+      `Kung mahigit 20 account ang babayaran, magbayad bago ang ${date}. Walang eksaktong oras na nakasaad sa abiso.`,
+    payOnline: "Magbayad online",
+    rptDesks: "Oras ng mga desk na tumatanggap ng bayad sa amilyar",
+    bizTaxTitle: "Online na pagbabayad ng business tax para sa ikaapat na quarter",
+    bizOnline: (date: string, passed: boolean) =>
+      `Hanggang 5:00 PM lang ng ${date} puwedeng magbayad online para sa ikaapat na quarter. ${passed ? "Lumipas na ang takdang oras ng pagbabayad online." : ""}`,
+    bizOnsite: (onsite: string, conditional: string) =>
+      `Ayon sa abiso, hanggang ${onsite} ang pagbabayad sa mga tanggapan. Magiging ${conditional} lang ang huling araw kung ideklarang special non-working holiday ang Oktubre 31. Kumpirmahin sa opisyal na anunsyo.`,
+    bizLocations: "Mga lugar na puwedeng pagbayaran ng business tax:",
+    eventFree: "Libre ang kapon sa aktibidad na ito.",
+    eventWho: "Para sa lalaking aspin o puspin na 8 buwan hanggang 5 taong gulang, malusog at may bisa pa ang bakuna. Kailangan ng ID na nagpapatunay na taga-Pasig ka.",
+    eventAsk: "Magtanong sa tagapag-ayos kung puwede pang magparehistro.",
+    eventSlots: "Walang kumpirmadong bilang ng natitirang slot.",
+    eventSourceLink: "Tingnan ang opisyal na anunsyo at kumpirmahin sa VSD.",
+
     months: ["Ene", "Peb", "Mar", "Abr", "May", "Hun", "Hul", "Ago", "Set", "Okt", "Nob", "Dis"],
-  },
-  en: {
+};
+
+const en = {
     htmlLang: "en",
     ogLocale: "en_PH",
+    name: "English",
+    langLabel: "Language",
     otherLangName: "Filipino",
     switchLabel: "Basahin sa Filipino",
     skip: "Skip to content",
@@ -496,7 +721,7 @@ export const ui = {
     aboutTitle: "About BetterPasig",
     aboutMissionTitle: "Mission",
     aboutMission:
-      "Gather everything the City of Pasig offers and decides into one clear, sourced, bilingual place, and keep it current so residents can follow what is happening in their city.",
+      "Gather everything the City of Pasig offers and decides into one clear, sourced place, in English, Filipino, and other Philippine languages, and keep it current so residents can follow what is happening in their city.",
     aboutStance:
       "Pasig's records are already open: a local FOI ordinance (Ordinance No. 37, s. 2018), the Ugnayan sa Pasig transparency office, and livestreamed bidding. So BetterPasig is a guide and tracker, not a watchdog. Its job is to make open-but-scattered records easy to find and follow.",
     aboutPrinciplesTitle: "Seven principles",
@@ -593,34 +818,255 @@ export const ui = {
     newMapLabel: "Map of Pasig numbering the barangay of each new place in the list",
     sourceWord: "Source",
 
+    weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    dayShort: { MO: "Mon", TU: "Tue", WE: "Wed", TH: "Thu", FR: "Fri", SA: "Sat", SU: "Sun" } as Record<string, string>,
+
+    needBefore: "What do you need ",
+    needEm: "done",
+    needAfter: "?",
+    helpBefore: "There may be help ",
+    helpEm: "for you",
+    helpAfter: "",
+    helpLead: "City programs that many eligible residents do not know about.",
+    visitBefore: "Places to ",
+    visitEm: "visit",
+    visitAfter: " in Pasig",
+    moneyBefore: "Where the city's ",
+    moneyEm: "money",
+    moneyAfter: " goes",
+    benefitsBefore: "Benefits and ",
+    benefitsEm: "assistance",
+    benefitsAfter: "",
+    allBenefitsBefore: "All ",
+    allBenefitsEm: "benefits",
+    allBenefitsAfter: "",
+    barangay30Before: "The 30 barangays of ",
+    barangay30Em: "Pasig",
+    barangay30After: "",
+    archiveBefore: "Notice ",
+    archiveEm: "archive",
+    archiveAfter: "",
+    recentBefore: "Recent notices and ",
+    recentEm: "opportunities",
+    recentAfter: "",
+    officialsBefore: "Pasig ",
+    officialsEm: "officials",
+    officialsAfter: "",
+    aboutBefore: "About ",
+    aboutEm: "BetterPasig",
+    aboutAfter: "",
+
+    allPlaces: "All places",
+    hoursAndFee: "Hours and fee",
+    hoursCheckedWord: "checked",
+    bySituation: "By situation",
+    byTopic: "By topic",
+    servicesGrouped: "Every service, grouped",
+    servicesUnit: "services",
+    residentGuide: "A resident's guide",
+    popularSearches: "Popular searches",
+    kindFood: "Food",
+    kindParks: "Parks and sights",
+    serviceShortcut: {
+      "pay-real-property-tax": "Pay property tax",
+      "senior-citizen-id": "Get a senior ID",
+      aics: "Get financial assistance",
+      "certified-copy-civil-document": "Get civil registry records",
+      "business-permit-renewal": "Renew a business permit",
+      "scholarship-new": "Apply for a scholarship",
+    } as Record<string, string>,
+    popularLink: {
+      "senior-citizen-id": "Senior ID",
+      "business-permit-renewal": "Business permit",
+      aics: "AICS help",
+      "pay-real-property-tax": "Property tax",
+    } as Record<string, string>,
+
+    serviceCategories: "Service categories",
+    topicCount: (n: number) => `${n} topics`,
+    cantFind: "Can't find what you need?",
+    browseSituation: "Browse by situation",
+    callCityHall: "Call City Hall",
+    checklistReady: "{n} of {total} ready",
+    officialOfficePage: "Official office page",
+    onThisPage: "On this page",
+    getReady: "Get these ready",
+    requirementsChecklist: "Requirements checklist",
+    checklistTip: "Tick items as you gather them. This is not saved; it is only for you.",
+    followSteps: "Follow the steps",
+    whereAsk: "Where to go and who to ask",
+    questionsHeading: "Questions?",
+
+    placeType: "Type of place",
+    placesLabel: "Places",
+    locationLabel: "Address",
+    hoursShort: "Hours",
+    mapPasig: "Map of Pasig",
+    mapVisitLabel: "Map of Pasig; darker barangays have a place to visit",
+    mapDarkNote: "The darker barangays have a place on this list.",
+
+    fullBarangay: "Full barangay page",
+    pickBarangay: "Pick a barangay on the map or in the list.",
+    noBarangayMatch: "No barangay matches.",
+    barangaysTitle: "Barangays",
+    barangaysDesc: "Find any of Pasig's 30 barangays on the map or in the A–Z list.",
+    barangayCrumb: "Barangays",
+    barangayIndexLead: "Tap your barangay on the map, or find it in the list below.",
+    barangayDetails: "Barangay details",
+    listAz: "List A–Z",
+    findBarangay: "Find a barangay",
+    barangayBlurb: (name: string) =>
+      `Find ${name} on the Pasig map and see listed evacuation centers and official notices.`,
+    barangaySource: "Barangay source",
+    noBarangayContact: "No confirmed barangay hall or official contact details are listed yet.",
+    phoneNumbers: "Phone numbers",
+    barangayWhere: (name: string) => `Location of ${name} in Pasig`,
+    allBarangays: "All barangays",
+    placesNamed30: "Places named in official announcements in the past 30 days",
+    addressUnstated: "The announcement checked does not state the address.",
+    newServiceNotices: "New service notices",
+    noBarangayNews: "No official announcement about this barangay has been listed in the past 30 days.",
+
+    noticesTab: "Notices",
+    aboutTab: "About",
+    morePages: "More about the city",
+    programCount: (n: number) => `${n} programs`,
+    situationQuestion: "What is your situation?",
+    audience: {
+      senior: "Senior citizens",
+      pwd: "Persons with disability (PWD)",
+      "solo-parent": "Solo parents",
+      estudyante: "Students",
+      kalusugan: "Health",
+      "iba-pa": "Other",
+    } as Record<string, string>,
+
+    checkedAgainst: "Checked against an official announcement.",
+    openSource: "Open source",
+    staleSource: "This announcement is over 30 days old. Check the official page for a newer notice.",
+    searchPlaces: "Search for a service or place",
+    clearSearch: "Clear search",
+
+    archiveTitle: "Notice archive",
+    recentTitle: "Recent notices and opportunities",
+    weeklyDesc: "Recent official notices and opportunities from Pasig City, each with its source and date.",
+    archiveLead: "Older notices and ones whose date has passed.",
+    recentLead: "Official notices still current, each with its source.",
+    publishedLabel: "Published",
+    scheduledLabel: "Scheduled",
+    confirmSchedule: "Scheduled event; confirm with the organizer.",
+    bfpNote: "BFP transaction assistance; not an emergency hotline.",
+    weekdayRange: "Mon–Fri",
+    holidayPhoneNote: "holidays excluded. Published number; not checked by phone.",
+    sakayNote: "The notice reports six routes. QR is optional; manual registration is available. Stops and route geometry are unverified.",
+    registrationForm: "Registration form",
+    noRecentNotices: "No recent official notices are listed.",
+    noArchivedNotices: "No archived notices are listed.",
+    seeRecent: "See recent notices",
+    openArchive: "Open notice archive",
+    historyParkingTitle: "Mega Parking I maintenance",
+    historyBloodTitle: "PCIST blood donation announcement",
+    historyJobTitle: "October 1–2 job fair report",
+    historyParkingBody: "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+    historyBloodBody: "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+    historyJobBody: "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+
+    placeBlurb: (name: string) =>
+      `${name}: address, hours and published contact details, with the official sources checked.`,
+    barangayInfo: "Barangay information",
+    addressMissing: "Not stated in the announcement checked.",
+    marketHours: "Market hours",
+    bizTaxSchedule: "Q4 2026 business tax schedule",
+    holidayExclusions: "Holiday exclusions apply.",
+    rptSchedule: "RPT transaction schedule",
+    rptOnlyNote: "For RPT transactions only; holidays excluded.",
+    streetProject: "Reported street project",
+    cityReportOf: "According to the city report of",
+    notFloodAssessment: "This is not a flood safety assessment.",
+    publishedPhone: "Published phone",
+    localWord: "local",
+    publishedNumberNote: "Published number; not checked by phone.",
+    desksHeading: "Service desks and separate schedules",
+    bizTaxOnly: "Q4 2026 business tax only",
+    rptDesk: "Real property tax desk",
+    holidaysExcluded: "holidays excluded",
+    relatedNotices: "Related service notices",
+    bizPhoneLabel: "Business transaction assistance phone",
+    notEmergency: "Not an emergency hotline.",
+    servicePortal: "Official service portal",
+    routeNote: (count: number) =>
+      `The notice reports ${count} routes. QR is optional; manual registration is available. Stops and route geometry were not stated in the notice checked.`,
+    datedOpportunity: "Dated opportunity",
+    confirmRegistration: "Confirm with the organizer whether registration is still being accepted.",
+    openRegistration: "Open registration page",
+    pastNotices: "Past notices",
+    placeHistoryParking: "Third-floor maintenance closure; reopening was announced for 12:01 PM. No present-day occupancy or opening status is inferred.",
+    placeHistoryBlood: "Blood donation activity was scheduled at the campus. The source is an announcement, not proof the activity took place.",
+    placeHistoryJob: "City report records 1,067 jobseekers and 1,753 qualified applications across the two-day event; applications and people are different measures. Robinsons venue was Level 3, not necessarily the Annex 2 desk.",
+
+    rptTitle: "2027 real property tax advance payment",
+    rptDiscount: (percent: number, date: string) =>
+      `A ${percent}% discount is announced for full advance payment before ${date} for accounts without delinquencies.`,
+    rptBulk: (date: string) =>
+      `For more than 20 accounts, pay before ${date}. No exact cutoff time is stated.`,
+    payOnline: "Online payment portal",
+    rptDesks: "RPT desk schedules",
+    bizTaxTitle: "Fourth-quarter online business tax notice",
+    bizOnline: (date: string, passed: boolean) =>
+      `The notice accepted fourth-quarter online transactions only until ${date}, 5:00 PM. ${passed ? "That cutoff has passed." : ""}`,
+    bizOnsite: (onsite: string, conditional: string) =>
+      `The notice lists ${onsite} as the onsite deadline. It gives a conditional ${conditional} only if October 31 is declared a special non-working holiday; that declaration is not confirmed here.`,
+    bizLocations: "Business tax locations:",
+    eventFree: "Free for this event only.",
+    eventWho: "For male aspin or puspin, 8 months to 5 years old, healthy and currently vaccinated; Pasig resident ID required.",
+    eventAsk: "Confirm with the organizer whether registration is still being accepted.",
+    eventSlots: "Live capacity is unknown.",
+    eventSourceLink: "Read the official announcement and confirm with VSD.",
+
     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  },
-} satisfies Record<Lang, unknown>;
+};
+
+export const ui = { en, fil, ...regional } satisfies Record<Lang, Widen<typeof fil>>;
 
 export type UI = (typeof ui)[Lang];
 
-// English is the default language, served at /; Filipino is served at /fil/ (SEO: each language has its own
-// crawlable URL, linked by hreflang, with English as x-default).
-const FIL_PREFIX = /^\/fil(?=\/|$)/;
+// English has no prefix. Every other language is /<code>/ (hreflang, English as x-default).
+export const prefixedLangs = langs.filter((lang): lang is Exclude<Lang, "en"> => lang !== "en");
+const PREFIX = new RegExp(`^/(${prefixedLangs.join("|")})(?=/|$)`);
+const NOT_FOUND = new RegExp(`/(?:(?:${prefixedLangs.join("|")})/)?404(?:\\.html)?/?$`);
 
 export function langFromUrl(url: URL): Lang {
-  return FIL_PREFIX.test(url.pathname) ? "fil" : "en";
+  const code = url.pathname.match(PREFIX)?.[1];
+  return code && prefixedLangs.includes(code as Exclude<Lang, "en">) ? (code as Lang) : "en";
 }
 
 /** The path without its language prefix: /fil/serbisyo/ -> /serbisyo/. */
 export function basePath(pathname: string): string {
-  return pathname.replace(FIL_PREFIX, "") || "/";
+  return pathname.replace(PREFIX, "") || "/";
 }
 
-/** The same page in the other language: /foo <-> /fil/foo. */
+/** The same page in `lang`. A missing page links home in that language. */
 export function pathIn(lang: Lang, url: URL): string {
-  if (/\/(?:fil\/)?404(?:\.html)?\/?$/.test(url.pathname)) return href(lang, "/");
+  if (NOT_FOUND.test(url.pathname)) return href(lang, "/");
   return href(lang, basePath(url.pathname));
 }
 
 /** Link to a page in `lang`, e.g. href("fil", "/#hotlines") -> "/fil/#hotlines". */
 export function href(lang: Lang, path: string): string {
-  return lang === "fil" ? `/fil${path}` : path;
+  return lang === "en" ? path : `/${lang}${path}`;
+}
+
+/** English content for English pages. Every other language reuses the Filipino fields. */
+export function contentLang(lang: Lang): ContentLang {
+  return lang === "en" ? "en" : "fil";
+}
+
+export function langParams() {
+  return prefixedLangs.map((lang) => ({ params: { lang } }));
+}
+
+export function withLang<T extends { params: Record<string, string | undefined> }>(entries: readonly T[]) {
+  return prefixedLangs.flatMap((lang) => entries.map((entry) => ({ ...entry, params: { ...entry.params, lang } })));
 }
 
 /** "2026-10-19" -> "Okt 19, 2026" / "Oct 19, 2026". */

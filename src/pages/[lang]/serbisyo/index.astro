@@ -1,0 +1,10 @@
+---
+import ServiceIndex from "../../../components/ServiceIndex.astro";
+import { langParams } from "../../../i18n";
+
+export function getStaticPaths() {
+  return langParams();
+}
+---
+
+<ServiceIndex />

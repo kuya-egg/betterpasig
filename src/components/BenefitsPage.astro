@@ -4,47 +4,47 @@ import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import LifeIcon from "./home/LifeIcon.astro";
 import { lifeEvents, programs, programsRetrieved, sourceLabel } from "../lib/data";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
+const copy = contentLang(lang);
 
 // data/programs.json has no audience field, so each program id is assigned to an audience here.
 // Any program not listed lands in the last group, so a new program is never dropped.
 const groups = [
-  { id: "senior", fil: "Senior citizen", en: "Senior citizens", ids: ["local-senior-pension", "senior-year-end-cash-gift", "senior-milestone-incentive", "senior-burial-assistance", "senior-health-perks"] },
-  { id: "pwd", fil: "Taong may kapansanan (PWD)", en: "Persons with disability (PWD)", ids: ["pwd-cash-gift", "pwd-business-assistance"] },
-  { id: "solo-parent", fil: "Solo parent", en: "Solo parents", ids: ["solo-parent-subsidy"] },
-  { id: "estudyante", fil: "Estudyante", en: "Students", ids: ["pagasa-scholarship", "pasig-city-scholars", "plp-admission", "k12-transport-allowance"] },
-  { id: "kalusugan", fil: "Kalusugan", en: "Health", ids: ["mental-health-free-meds"] },
+  { id: "senior", ids: ["local-senior-pension", "senior-year-end-cash-gift", "senior-milestone-incentive", "senior-burial-assistance", "senior-health-perks"] },
+  { id: "pwd", ids: ["pwd-cash-gift", "pwd-business-assistance"] },
+  { id: "solo-parent", ids: ["solo-parent-subsidy"] },
+  { id: "estudyante", ids: ["pagasa-scholarship", "pasig-city-scholars", "plp-admission", "k12-transport-allowance"] },
+  { id: "kalusugan", ids: ["mental-health-free-meds"] },
 ];
 const placed = new Set(groups.flatMap((group) => group.ids));
 const leftover = programs.filter((program) => !placed.has(program.id)).map((program) => program.id);
-const all = [...groups, { id: "iba-pa", fil: "Iba pa", en: "Other", ids: leftover }]
-  .map((group) => ({ ...group, items: group.ids.map((id) => programs.find((program) => program.id === id)).filter((program) => program !== undefined) }))
+const all = [...groups, { id: "iba-pa", ids: leftover }]
+  .map((group) => ({ ...group, label: t.audience[group.id], items: group.ids.map((id) => programs.find((program) => program.id === id)).filter((program) => program !== undefined) }))
   .filter((group) => group.items.length > 0);
 
-const pick = (fil: string | null | undefined, eng: string | null | undefined) => (en ? eng || fil : fil || eng) ?? null;
+const pick = (fil: string | null | undefined, eng: string | null | undefined) => (copy === "en" ? eng || fil : fil || eng) ?? null;
 const lead = t.benefitsIntro;
-const countLabel = en ? `${programs.length} programs` : `${programs.length} na programa`;
+const countLabel = t.programCount(programs.length);
 ---
 
 <Site title={t.benefitsTitle} description={t.benefitsIntro}>
   <section class="section section--flow ground-white bp-benefits" aria-labelledby="page-h">
     <div class="wrap">
       <PageHead crumbs={[[t.benefitsTitle]]} lead={lead}>
-        {en ? <>Benefits and <em>assistance</em></> : <>Benepisyo at <em>tulong</em></>}
+        {t.benefitsBefore}<em>{t.benefitsEm}</em>{t.benefitsAfter}
       </PageHead>
 
-      <h2 class="t-h3 bp-benefits__situation">{en ? "What is your situation?" : "Ano ang sitwasyon mo?"}</h2>
+      <h2 class="t-h3 bp-benefits__situation">{t.situationQuestion}</h2>
       <ul class="bp-benefits__chips" data-pagefind-ignore>
         {
           lifeEvents.map((event) => (
             <li>
               <a class="chip" href={href(lang, `/buhay/${event.id}/`)}>
                 <LifeIcon id={event.id} />
-                {en ? event.title_en : event.title_fil}
+                {copy === "en" ? event.title_en : event.title_fil}
               </a>
             </li>
           ))
@@ -56,22 +56,22 @@ const countLabel = en ? `${programs.length} programs` : `${programs.length} na p
   <section class="section section--flow bp-benefits" aria-labelledby="cat-h">
     <div class="wrap">
       <div class="bp-benefits__head">
-        <h2 id="cat-h" class="t-h2">{en ? <>All <em>benefits</em></> : <>Lahat ng <em>benepisyo</em></>}</h2>
+        <h2 id="cat-h" class="t-h2">{t.allBenefitsBefore}<em>{t.allBenefitsEm}</em>{t.allBenefitsAfter}</h2>
         <p class="muted">{countLabel}</p>
       </div>
       <div class="bp-benefits__groups">
         {
           all.map((group) => (
             <section aria-labelledby={`group-${group.id}`}>
-              <h3 id={`group-${group.id}`} class="t-h3">{en ? group.en : group.fil}</h3>
+              <h3 id={`group-${group.id}`} class="t-h3">{group.label}</h3>
               <div class="bp-benefits__list">
                 {group.items.map((program) => {
                   const note = pick("note_fil" in program ? program.note_fil : null, "note_en" in program ? program.note_en : null);
-                  const title = en ? program.title_en : program.title_fil;
+                  const title = copy === "en" ? program.title_en : program.title_fil;
                   const rows = [
-                    { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), lang: !en && !program.benefit_fil ? "en" : undefined, big: true },
-                    { label: t.benefitFor, value: pick(program.for_fil, program.for_en), lang: !en && !program.for_fil ? "en" : undefined, big: false },
-                    { label: t.benefitHow, value: pick(program.how_fil, program.how_en), lang: !en && !program.how_fil ? "en" : undefined, big: false },
+                    { label: t.benefitAmount, value: pick(program.benefit_fil, program.benefit_en), lang: copy !== "en" && !program.benefit_fil ? "en" : undefined, big: true },
+                    { label: t.benefitFor, value: pick(program.for_fil, program.for_en), lang: copy !== "en" && !program.for_fil ? "en" : undefined, big: false },
+                    { label: t.benefitHow, value: pick(program.how_fil, program.how_en), lang: copy !== "en" && !program.how_fil ? "en" : undefined, big: false },
                     { label: t.benefitOffice, value: program.office, lang: undefined, big: false },
                   ].filter((row) => typeof row.value === "string" && row.value.trim());
                   return (

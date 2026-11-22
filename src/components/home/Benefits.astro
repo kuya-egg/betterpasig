@@ -1,12 +1,12 @@
 ---
 // Benefits band: featured city programs on a pale panel, each linking to /tulong/#<id>.
-import { href, langFromUrl, ui } from "../../i18n";
+import { contentLang, href, langFromUrl, ui } from "../../i18n";
 import { programs } from "../../lib/data";
 import { arrowPath } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
+const copy = contentLang(lang);
 const featuredIds = ["local-senior-pension", "pagasa-scholarship", "solo-parent-subsidy", "pwd-cash-gift"];
 const featured = featuredIds.flatMap((id) => programs.find((program) => program.id === id) ?? []);
 ---
@@ -16,17 +16,17 @@ const featured = featuredIds.flatMap((id) => programs.find((program) => program.
     <div class="bp-ben__panel">
       <div class="bp-ben__intro">
         <p class="kicker">{t.benefitsTitle}</p>
-        <h2 id="ben-h">{en ? "There may be help " : "Baka may "}<em>{en ? "for you" : "para sa'yo"}</em></h2>
-        <p class="bp-ben__lead">{en ? "City programs that many eligible residents do not know about." : "Mga programa ng lungsod na madalas hindi alam ng mga puwedeng makinabang."}</p>
+        <h2 id="ben-h">{t.helpBefore}<em>{t.helpEm}</em>{t.helpAfter}</h2>
+        <p class="bp-ben__lead">{t.helpLead}</p>
         <a class="pill pill--primary" href={href(lang, "/tulong/")}>{t.benefitsAll} <svg class="ic" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path d={arrowPath} /></svg></a>
       </div>
       <ul class="bp-ben__grid">
         {featured.map((program) => (
           <li>
             <a class="cd bp-ben__card" href={href(lang, `/tulong/#${program.id}`)}>
-              <span class="bp-ben__title">{en ? program.title_en : program.title_fil}</span>
+              <span class="bp-ben__title">{copy === "en" ? program.title_en : program.title_fil}</span>
               <span class="bp-ben__foot">
-                <span class="bp-ben__benefit">{en ? program.preview_en ?? program.benefit_en : program.preview_fil ?? program.benefit_fil}</span>
+                <span class="bp-ben__benefit">{copy === "en" ? program.preview_en ?? program.benefit_en : program.preview_fil ?? program.benefit_fil}</span>
                 <svg class="ic ar" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d={arrowPath} /></svg>
               </span>
             </a>

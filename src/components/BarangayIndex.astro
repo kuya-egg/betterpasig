@@ -6,7 +6,6 @@ import { barangays, telHref } from "../lib/data";
 import { href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
-const en = lang === "en";
 const t = ui[lang];
 const districtName = (d: number | null) => (d === 1 ? t.district1 : d === 2 ? t.district2 : "");
 
@@ -31,26 +30,24 @@ const info = Object.fromEntries(
 const labels = {
   punong: t.punongBarangay,
   hall: t.hallAddress,
-  phone: en ? "Phone" : "Telepono",
-  full: en ? "Full barangay page" : "Buong pahina ng barangay",
-  none: en ? "Pick a barangay on the map or in the list." : "Pumili ng barangay sa mapa o sa listahan.",
-  empty: en ? "No barangay matches." : "Walang tugmang barangay.",
+  phone: t.phones,
+  full: t.fullBarangay,
+  none: t.pickBarangay,
+  empty: t.noBarangayMatch,
 };
 ---
 
 <Site
-  title={en ? "Barangays" : "Mga barangay"}
-  description={en
-    ? "Find any of Pasig's 30 barangays on the map or in the A–Z list."
-    : "Hanapin ang alinman sa 30 barangay ng Pasig sa mapa o sa listahang A–Z."}
+  title={t.barangaysTitle}
+  description={t.barangaysDesc}
 >
   <section class="section section--flow" aria-labelledby="page-h">
     <div class="wrap">
       <PageHead
-        crumbs={[[en ? "Barangays" : "Barangay"]]}
-        lead={en ? "Tap your barangay on the map, or find it in the list below." : "Pindutin ang barangay mo sa mapa, o hanapin sa listahan sa ibaba."}
+        crumbs={[[t.barangayCrumb]]}
+        lead={t.barangayIndexLead}
       >
-        {en ? <>The 30 barangays of <em>Pasig</em></> : <>Ang 30 barangay ng <em>Pasig</em></>}
+        {t.barangay30Before}<em>{t.barangay30Em}</em>{t.barangay30After}
       </PageHead>
 
       <div class="bp-bi__grid" data-bi>
@@ -58,7 +55,7 @@ const labels = {
           <Map3D size="page" controls remember />
         </div>
 
-        <aside class="bp-bi__panel" aria-live="polite" aria-label={en ? "Barangay details" : "Detalye ng barangay"} data-panel>
+        <aside class="bp-bi__panel" aria-live="polite" aria-label={t.barangayDetails} data-panel>
           <p class="bp-bi__none" data-none>{labels.none}</p>
           <div data-detail hidden>
             <p class="kicker" data-f="district"></p>
@@ -78,9 +75,9 @@ const labels = {
   <section class="section section--flow ground-surface" aria-labelledby="az-h" data-az>
     <div class="wrap">
       <div class="bp-bi__azhead">
-        <h2 id="az-h">{en ? "List A–Z" : "Listahan A–Z"}</h2>
+        <h2 id="az-h">{t.listAz}</h2>
         <div class="bp-bi__search">
-          <label for="bq">{en ? "Find a barangay" : "Hanapin ang barangay"}</label>
+          <label for="bq">{t.findBarangay}</label>
           <input id="bq" type="search" autocomplete="off" data-q />
         </div>
       </div>

@@ -3,7 +3,7 @@
 import Site from "../layouts/Site.astro";
 import PageHead from "./site/PageHead.astro";
 import LifeIcon from "./home/LifeIcon.astro";
-import { href, langFromUrl, ui } from "../i18n";
+import { contentLang, href, langFromUrl, ui } from "../i18n";
 import { lifeEvents, officeName, type LifeEvent } from "../lib/data";
 
 interface Props {
@@ -13,18 +13,18 @@ interface Props {
 const { event } = Astro.props;
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
-const title = en ? event.title_en : event.title_fil;
+const copy = contentLang(lang);
+const title = copy === "en" ? event.title_en : event.title_fil;
 const related = event.related.map((id) => lifeEvents.find((item) => item.id === id)!);
-const pick = (fil: string | null | undefined, eng: string | null | undefined) => (en ? eng || fil : fil || eng) ?? null;
+const pick = (fil: string | null | undefined, eng: string | null | undefined) => (copy === "en" ? eng || fil : fil || eng) ?? null;
 ---
 
-<Site title={t.lifeTitle.replace("{title}", title)} description={en ? event.line_en : event.line_fil}>
+<Site title={t.lifeTitle.replace("{title}", title)} description={copy === "en" ? event.line_en : event.line_fil}>
   <section class="section section--flow ground-white bp-life" aria-labelledby="page-h">
     <div class="wrap">
       <div class="bp-life__head">
         <span class="bp-life__disc"><LifeIcon id={event.id} /></span>
-        <PageHead crumbs={[[t.benefitsTitle, "/tulong/"], [title]]} lead={en ? event.line_en : event.line_fil}>{title}</PageHead>
+        <PageHead crumbs={[[t.benefitsTitle, "/tulong/"], [title]]} lead={copy === "en" ? event.line_en : event.line_fil}>{title}</PageHead>
       </div>
     </div>
   </section>
@@ -44,7 +44,7 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
                     <a class="cd bp-life__step" href={href(lang, `/serbisyo/${service.id}/`)}>
                       <span class="bp-life__n" aria-hidden="true">{index + 1}</span>
                       <span class="bp-life__main">
-                        <span class="t-card">{en ? service.title_en : service.title_fil}</span>
+                        <span class="t-card">{copy === "en" ? service.title_en : service.title_fil}</span>
                         <span class="t-small muted bp-life__meta">
                           <span>{t.office}: {officeName(service.office)}</span>
                           {service.fee && <span>{t.fee}: {service.fee}</span>}
@@ -67,7 +67,7 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
                     <li>
                       <a class="cd bp-life__step" href={href(lang, `/tulong/#${program.id}`)}>
                         <span class="bp-life__main">
-                          <span class="t-card">{en ? program.title_en : program.title_fil}</span>
+                          <span class="t-card">{copy === "en" ? program.title_en : program.title_fil}</span>
                           <span class="t-small muted bp-life__meta"><span>{pick(program.for_fil, program.for_en)}</span></span>
                         </span>
                         <svg class="ic ar" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -88,7 +88,7 @@ const pick = (fil: string | null | undefined, eng: string | null | undefined) =>
             <li>
               <a class="chip" href={href(lang, `/buhay/${item.id}/`)}>
                 <LifeIcon id={item.id} />
-                {en ? item.title_en : item.title_fil}
+                {copy === "en" ? item.title_en : item.title_fil}
               </a>
             </li>
           ))

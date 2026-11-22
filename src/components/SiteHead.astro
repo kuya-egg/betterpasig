@@ -1,6 +1,6 @@
 ---
 // Shared metadata, icons, and the saved language redirect.
-import { langFromUrl, langs, pathIn, ui } from "../i18n";
+import { langFromUrl, langs, pathIn, prefixedLangs, ui } from "../i18n";
 
 interface Props {
   title?: string;
@@ -12,7 +12,7 @@ const t = ui[lang];
 const { title, description = t.tagline } = Astro.props;
 const fullTitle = title ? `${title} · BetterPasig` : `${t.homeTitle} · BetterPasig`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const filPath = pathIn("fil", Astro.url);
+const savedPaths = Object.fromEntries(prefixedLangs.map((code) => [code, pathIn(code, Astro.url)]));
 const notFound = /^\/404\/?$/.test(Astro.url.pathname);
 ---
 
@@ -21,10 +21,14 @@ const notFound = /^\/404\/?$/.test(Astro.url.pathname);
 <meta name="color-scheme" content="only light" />
 {
   lang === "en" && (
-    <script is:inline define:vars={{ filPath }}>
-      // Visitors who picked Filipino before (this browser only) go straight to the Filipino page.
-      // Crawlers keep no storage, so they always index the English page at its own URL.
-      try { if (localStorage.getItem("bp-lang") === "fil") location.replace(filPath + location.hash); } catch (e) {}
+    <script is:inline define:vars={{ savedPaths }}>
+      // A saved language choice (this browser only) opens that language's page.
+      // Crawlers keep no storage, so they index the English page at its own URL.
+      try {
+        const saved = localStorage.getItem("bp-lang");
+        const next = saved && savedPaths[saved];
+        if (next) location.replace(next + location.hash);
+      } catch (e) {}
     </script>
   )
 }
@@ -47,7 +51,7 @@ const notFound = /^\/404\/?$/.test(Astro.url.pathname);
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:locale" content={t.ogLocale} />
-<meta property="og:locale:alternate" content={ui[lang === "en" ? "fil" : "en"].ogLocale} />
+{langs.filter((code) => code !== lang).map((code) => <meta property="og:locale:alternate" content={ui[code].ogLocale} />)}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="BetterPasig" />
 <meta property="og:image" content={new URL("/og.png", Astro.site)} />

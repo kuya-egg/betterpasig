@@ -1,7 +1,7 @@
 // Photographs of Pasig (data/photos.json) joined to their files in src/assets/photos for astro:assets.
 import type { ImageMetadata } from "astro";
 import photosFile from "../../data/photos.json";
-import type { Lang } from "../i18n";
+import { contentLang, type Lang } from "../i18n";
 
 const files = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/*.jpg", { eager: true });
 
@@ -20,4 +20,4 @@ export function photo(id: string): Photo {
   return found;
 }
 
-export const photoAlt = (item: Photo, lang: Lang) => (lang === "en" ? item.alt_en : item.alt_fil);
+export const photoAlt = (item: Photo, lang: Lang) => (contentLang(lang) === "en" ? item.alt_en : item.alt_fil);

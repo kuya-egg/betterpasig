@@ -1,9 +1,10 @@
 ---
 import ServicePage from "../../../components/ServicePage.astro";
+import { withLang } from "../../../i18n";
 import { services, serviceStaticPaths } from "../../../lib/data";
 
 export function getStaticPaths() {
-  return serviceStaticPaths();
+  return withLang(serviceStaticPaths());
 }
 
 const { id } = Astro.params;
