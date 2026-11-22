@@ -5,19 +5,23 @@ import SourceNote from './SourceNote.astro';
 import PageHead from './site/PageHead.astro';
 import IbaPaTabs from './IbaPaTabs.astro';
 import {historicalUpdates,opportunities,pasigSources,serviceUpdates,services} from '../lib/data';
-import {formatDate,href,langFromUrl} from '../i18n';
+import {contentLang,formatDate,href,langFromUrl,ui} from '../i18n';
 import {eventState,isSourceFresh} from '../lib/freshness';
 interface Props { archive?: boolean }
 const {archive=false}=Astro.props;
-const lang=langFromUrl(Astro.url),en=lang==='en';
-const title=archive?(en?'Notice archive':'Arkibo ng mga abiso'):(en?'Recent notices and opportunities':'Mga bagong abiso at oportunidad');
-const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:null,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...opportunities.map(item=>({id:item.id,title:en?item.title_en:item.title_fil,date:item.published_date,eventDate:item.event_date,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...historicalUpdates.map(item=>({id:item.id,title:en?(item.id.includes('parking')?'Mega Parking I maintenance':item.id.includes('blood')?'PCIST blood donation announcement':'October 1–2 job fair report'):(item.id.includes('parking')?'Maintenance sa Mega Parking I':item.id.includes('blood')?'Anunsyo ng blood donation sa PCIST':'Ulat sa job fair noong Oktubre 1–2'),date:item.published_date,eventDate:null,refs:item.evidence,service:null,summary:en?item.summary:item.id.includes('parking')?'May anunsyo ng pagsasara sa ikatlong palapag noong Oktubre 7, 08:00–12:01. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.':item.id.includes('blood')?'Nasa anunsyo ang iskedyul na Oktubre 8, 08:00–13:00. Hindi pa kumpirmadong natuloy ang aktibidad.':'Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.',historical:true}))];
+const lang=langFromUrl(Astro.url);
+const t=ui[lang];
+const copy=contentLang(lang);
+const title=archive?t.archiveTitle:t.recentTitle;
+const historyTitle=(id:string)=>id.includes('parking')?t.historyParkingTitle:id.includes('blood')?t.historyBloodTitle:t.historyJobTitle;
+const historyBody=(id:string,english:string)=>copy==='en'?english:id.includes('parking')?t.historyParkingBody:id.includes('blood')?t.historyBloodBody:t.historyJobBody;
+const rows=[...serviceUpdates.map(item=>({id:item.id,title:copy==='en'?item.title_en:item.title_fil,date:item.published_date,eventDate:null,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...opportunities.map(item=>({id:item.id,title:copy==='en'?item.title_en:item.title_fil,date:item.published_date,eventDate:item.event_date,refs:item.evidence,service:item.service_id,summary:null,historical:false})),...historicalUpdates.map(item=>({id:item.id,title:historyTitle(item.id),date:item.published_date,eventDate:null,refs:item.evidence,service:null,summary:historyBody(item.id,item.summary),historical:true}))];
 ---
-<Site title={title} description={en?'Recent official notices and opportunities from Pasig City, each with its source and date.':'Mga bagong opisyal na abiso at oportunidad sa Pasig. May petsa at sanggunian ang bawat abiso.'}>
+<Site title={title} description={t.weeklyDesc}>
  <section class="section bp-weekly-top ground-white" aria-labelledby="weekly-h">
   <div class="wrap">
-   <PageHead id="weekly-h" crumbs={archive?[[en?'Notices':'Mga abiso','/ngayong-linggo/'],[title]]:[[en?'Notices':'Mga abiso']]} kicker={en?'Notices':'Mga abiso'} lead={archive?(en?'Older notices and ones whose date has passed.':'Mga naunang abiso at mga aktibidad na lumipas na ang petsa.'):(en?'Official notices still current, each with its source.':'Mga bagong abiso na may link sa opisyal na anunsyo.')}>
-    {archive?(en?<>Notice <em>archive</em></>:<>Arkibo ng mga <em>abiso</em></>):(en?<>Recent notices and <em>opportunities</em></>:<>Mga bagong abiso at <em>oportunidad</em></>)}
+   <PageHead id="weekly-h" crumbs={archive?[[t.noticesTab,'/ngayong-linggo/'],[title]]:[[t.noticesTab]]} kicker={t.noticesTab} lead={archive?t.archiveLead:t.recentLead}>
+    {archive?<>{t.archiveBefore}<em>{t.archiveEm}</em>{t.archiveAfter}</>:<>{t.recentBefore}<em>{t.recentEm}</em>{t.recentAfter}</>}
    </PageHead>
    <IbaPaTabs current="weekly" />
   </div>
@@ -25,26 +29,26 @@ const rows=[...serviceUpdates.map(item=>({id:item.id,title:en?item.title_en:item
  <section class="section">
   <div class="wrap" data-current-feed={!archive||undefined} data-pagefind-ignore={archive||undefined}>
    <ol class="weekly">
-    {rows.map(row=>{const current=!row.historical&&isSourceFresh(row.date,new Date())&&eventState(row.eventDate,new Date())!=='past';const source=pasigSources.find(s=>s.id===row.refs[0].split(':')[0]);const reg=opportunities.find(o=>o.id===row.id)?.registration_url;const when=new Date(`${row.date}T00:00:00Z`);const month=new Intl.DateTimeFormat(en?'en-PH':'fil-PH',{month:'short',timeZone:'UTC'}).format(when);return <li id={row.id} data-pagefind-title={row.title} data-published-date={row.date} data-event-date={row.eventDate} data-archive-record={archive||undefined} data-historical={String(row.historical)} hidden={archive?current:!current} class="weekly__item">
+    {rows.map(row=>{const current=!row.historical&&isSourceFresh(row.date,new Date())&&eventState(row.eventDate,new Date())!=='past';const source=pasigSources.find(s=>s.id===row.refs[0].split(':')[0]);const reg=opportunities.find(o=>o.id===row.id)?.registration_url;const when=new Date(`${row.date}T00:00:00Z`);const month=t.months[when.getUTCMonth()];return <li id={row.id} data-pagefind-title={row.title} data-published-date={row.date} data-event-date={row.eventDate} data-archive-record={archive||undefined} data-historical={String(row.historical)} hidden={archive?current:!current} class="weekly__item">
      <div class="weekly__date" aria-hidden="true"><span class="weekly__month">{month}</span><span class="weekly__day">{when.getUTCDate()}</span></div>
      <div class="weekly__body">
       <h2 class="weekly__title"><a class="link" href={services.some(service=>service.id===row.service)?href(lang,`/serbisyo/${row.service}/`):source?.url}>{row.title}</a></h2>
       <div class="weekly__dates t-small">
-       <span>{en?'Published':'Inanunsyo'}: {formatDate(lang,row.date)}</span>
-       {row.eventDate&&<span>{en?'Scheduled':'Nakatakda'}: {formatDate(lang,row.eventDate)}</span>}
+       <span>{t.publishedLabel}: {formatDate(lang,row.date)}</span>
+       {row.eventDate&&<span>{t.scheduledLabel}: {formatDate(lang,row.eventDate)}</span>}
       </div>
-      {row.eventDate&&<p class="t-small muted" data-event-status>{en?'Scheduled event; confirm with the organizer.':'Kumpirmahin sa tagapag-ayos ang iskedyul.'}</p>}
+      {row.eventDate&&<p class="t-small muted" data-event-status>{t.confirmSchedule}</p>}
       {row.summary&&<p>{row.summary}</p>}
-      {row.id==='bfp-fsis-assistance-2026-10'&&<p class="t-small">{en?'BFP transaction assistance; not an emergency hotline.':'Linya para sa mga transaksiyon sa BFP. Para sa emergency, gamitin ang mga hotline sa pahina ng Emergency.'} 09603402260, {en?'Mon–Fri':'Lun–Biy'} 08:00–17:00; {en?'holidays excluded. Published number; not checked by phone.':'hindi kasama ang mga holiday. Hindi pa nasusubukang tawagan.'}</p>}
-      {row.id==='libreng-sakay-pasigpass-2026-10'&&<p class="t-small">{en?'The notice reports six routes. QR is optional; manual registration is available. Stops and route geometry are unverified.':'Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Kinukumpirma pa ang mga hintuan at eksaktong ruta.'}</p>}
-      {reg&&row.eventDate&&eventState(row.eventDate,new Date())!=='past'&&<p><a class="link" data-registration href={reg}>{en?'Registration form':'Form ng rehistrasyon'}</a></p>}
+      {row.id==='bfp-fsis-assistance-2026-10'&&<p class="t-small">{t.bfpNote} 09603402260, {t.weekdayRange} 08:00–17:00; {t.holidayPhoneNote}</p>}
+      {row.id==='libreng-sakay-pasigpass-2026-10'&&<p class="t-small">{t.sakayNote}</p>}
+      {reg&&row.eventDate&&eventState(row.eventDate,new Date())!=='past'&&<p><a class="link" data-registration href={reg}>{t.registrationForm}</a></p>}
       <SourceNote refs={row.refs}/>
      </div>
     </li>;})}
    </ol>
-   {!archive && <p class="muted" data-feed-empty hidden={rows.length > 0}>{en ? "No recent official notices are listed." : "Wala pang nakalistang bagong opisyal na abiso."}</p>}
-   {archive && rows.length === 0 && <p class="muted">{en ? "No archived notices are listed." : "Wala pang nakalistang abiso sa arkibo."}</p>}
-   <p class="weekly__more"><ButtonLink variant="outline" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?(en?'See recent notices':'Tingnan ang mga bagong abiso'):(en?'Open notice archive':'Buksan ang arkibo ng mga abiso')}</ButtonLink></p>
+   {!archive && <p class="muted" data-feed-empty hidden={rows.length > 0}>{t.noRecentNotices}</p>}
+   {archive && rows.length === 0 && <p class="muted">{t.noArchivedNotices}</p>}
+   <p class="weekly__more"><ButtonLink variant="outline" href={href(lang,archive?'/ngayong-linggo/':'/ngayong-linggo/arkibo/')}>{archive?t.seeRecent:t.openArchive}</ButtonLink></p>
   </div>
  </section>
 </Site>

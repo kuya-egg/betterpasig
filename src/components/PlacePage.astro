@@ -12,7 +12,7 @@ import {
 } from "../lib/data";
 import { barangays } from "../lib/data";
 import PageHead from "./site/PageHead.astro";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 import { eventState } from "../lib/freshness";
 
 interface Props {
@@ -27,6 +27,7 @@ interface ScheduleRow {
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const copy = contentLang(lang);
 const place = places.find((item) => item.id === Astro.props.placeId);
 if (!place) throw new Error(`Unknown place ${Astro.props.placeId}`);
 const barangay = barangays.find((item) => item.id === place.barangay_id);
@@ -48,10 +49,7 @@ const history = historicalUpdates.filter(
   (item) => item.place_id === place.id || item.place_ids?.includes(place.id),
 );
 
-const dayNames: Record<string, string> =
-  lang === "en"
-    ? { MO: "Mon", TU: "Tue", WE: "Wed", TH: "Thu", FR: "Fri", SA: "Sat", SU: "Sun" }
-    : { MO: "Lun", TU: "Mar", WE: "Miy", TH: "Huw", FR: "Biy", SA: "Sab", SU: "Lin" };
+const dayNames = t.dayShort;
 
 const formatSchedule = (rows: ScheduleRow[]) =>
   rows
@@ -59,22 +57,16 @@ const formatSchedule = (rows: ScheduleRow[]) =>
     .join("; ");
 
 function historySummary(id: string, english: string): string {
-  if (lang === "en") return english;
-  if (id === "mega-parking-1-2026-10-07") {
-    return "Ayon sa abiso, nakatakdang isara para sa maintenance ang ikatlong palapag noong Oktubre 7 at buksan muli nang 12:01 PM. Walang nakasaad dito kung ilang puwesto ang bakante ngayon.";
-  }
-  if (id === "pcist-blood-drive-2026-10-08") {
-    return "Nasa anunsyo ang iskedyul ng blood donation sa kampus noong Oktubre 8. Hindi pa kumpirmadong natuloy ito.";
-  }
-  return "Nag-ulat ang lungsod ng 1,067 naghahanap ng trabaho at 1,753 kwalipikadong aplikasyon para sa job fair noong Oktubre 1–2. Hiwalay ang bilang ng mga tao sa bilang ng mga aplikasyon.";
+  if (copy === "en") return english;
+  if (id === "mega-parking-1-2026-10-07") return t.placeHistoryParking;
+  if (id === "pcist-blood-drive-2026-10-08") return t.placeHistoryBlood;
+  return t.placeHistoryJob;
 }
 ---
 
 <Site
   title={place.name}
-  description={lang === "en"
-    ? `${place.name}: address, hours and published contact details, with the official sources checked.`
-    : `${place.name}: address, oras at mga numerong nakalista sa mga opisyal na sanggunian.`}
+  description={t.placeBlurb(place.name)}
 >
   <section class="section" aria-labelledby="page-h">
     <div class="wrap">
@@ -83,7 +75,7 @@ function historySummary(id: string, english: string): string {
         <Fragment slot="actions">
           {barangay && (
             <a class="chip" href={href(lang, `/barangay/${barangay.id}/`)}>
-              {lang === "en" ? "Barangay information" : "Impormasyon ng barangay"}
+              {t.barangayInfo}
             </a>
           )}
         </Fragment>
@@ -97,70 +89,61 @@ function historySummary(id: string, english: string): string {
           </li>
         )}
         <li>
-          <span class="rows__name">{lang === "en" ? "Address" : "Lokasyon"}</span>
+          <span class="rows__name">{t.locationLabel}</span>
           <span class="bp-place__val">
-            {place.address ??
-              (lang === "en"
-                ? "Not stated in the announcement checked."
-                : "Hindi nakasaad sa nasuring anunsyo.")}
+            {place.address ?? t.addressMissing}
           </span>
         </li>
         {place.regular_hours && (
           <li>
-            <span class="rows__name">{lang === "en" ? "Market hours" : "Oras ng palengke"}</span>
+            <span class="rows__name">{t.marketHours}</span>
             <span class="bp-place__val">{formatSchedule([place.regular_hours])}</span>
           </li>
         )}
         {place.business_tax_schedule && (
           <li>
             <span class="rows__name">
-              {lang === "en" ? "Q4 2026 business tax schedule" : "Oras para sa buwis sa negosyo, ikaapat na quarter ng 2026"}
+              {t.bizTaxSchedule}
             </span>
             <span class="bp-place__val">
               {formatSchedule(place.business_tax_schedule)}
-              <small>{lang === "en" ? "Holiday exclusions apply." : "Hindi kasama ang mga holiday."}</small>
+              <small>{t.holidayExclusions}</small>
             </span>
           </li>
         )}
         {place.rpt_schedule && (
           <li>
             <span class="rows__name">
-              {lang === "en" ? "RPT transaction schedule" : "Oras ng serbisyo para sa amilyar"}
+              {t.rptSchedule}
             </span>
             <span class="bp-place__val">
               {formatSchedule(place.rpt_schedule)}
               <small>
-                {lang === "en"
-                  ? "For RPT transactions only; holidays excluded."
-                  : "Para lang sa amilyar. Hindi kasama ang mga holiday."}
+                {t.rptOnlyNote}
               </small>
             </span>
           </li>
         )}
         {place.project && (
           <li>
-            <span class="rows__name">{lang === "en" ? "Reported street project" : "Iniulat na proyekto sa kalsada"}</span>
+            <span class="rows__name">{t.streetProject}</span>
             <span class="bp-place__val">
               {place.project.scope}; {place.project.reported_length_m} m; approximately PHP{" "}
               {place.project.reported_cost_php.toLocaleString()}.{" "}
-              {lang === "en" ? "According to the city report of" : "Ayon sa ulat ng lungsod noong"}{" "}
-              {formatDate(lang, place.project.reported_inauguration)}. {lang === "en"
-                ? "This is not a flood safety assessment."
-                : "Walang pagtatasa sa panganib ng baha sa ulat na ito."}
+              {t.cityReportOf}{" "}
+              {formatDate(lang, place.project.reported_inauguration)}. {t.notFloodAssessment}
             </span>
           </li>
         )}
         {place.phone && (
           <li>
-            <span class="rows__name">{lang === "en" ? "Published phone" : "Nakalathalang telepono"}</span>
+            <span class="rows__name">{t.publishedPhone}</span>
             <span class="bp-place__val">
               <a class="bp-place__tel" href={`tel:${place.phone.number}`}>
-                (02) 8643-1111, {lang === "en" ? "local" : "lokal"} {place.phone.extension}
+                (02) 8643-1111, {t.localWord} {place.phone.extension}
               </a>
               <small>
-                {lang === "en"
-                  ? "Published number; not checked by phone."
-                  : "Nakalathalang numero; hindi pa nasusubukang tawagan."}
+                {t.publishedNumberNote}
               </small>
             </span>
           </li>
@@ -181,20 +164,20 @@ function historySummary(id: string, english: string): string {
     <section class="section section--flow ground-surface" aria-labelledby="place-desks-h">
       <div class="wrap bp-place">
         <div class="section-head">
-          <h2 id="place-desks-h">{lang === 'en' ? 'Service desks and separate schedules' : 'Mga desk at kani-kanilang oras ng serbisyo'}</h2>
+          <h2 id="place-desks-h">{t.desksHeading}</h2>
         </div>
         <ul class="bp-place__list">
           {childDesks.map(child => (
             <li>
               <a class="bp-place__title" href={href(lang, `/lugar/${child.id}/`)}>{child.name}</a>
-              {child.business_tax_schedule && <p>{lang === 'en' ? 'Q4 2026 business tax only' : 'Para lamang sa business tax, ikaapat na quarter ng 2026'}: {formatSchedule(child.business_tax_schedule)}</p>}
+              {child.business_tax_schedule && <p>{t.bizTaxOnly}: {formatSchedule(child.business_tax_schedule)}</p>}
               <SourceNote refs={child.evidence.business_tax_schedule ?? Object.values(child.evidence).flat()} />
             </li>
           ))}
           {rptDesks.map(row => (
             <li>
-              <p class="bp-place__title">{lang === 'en' ? 'Real property tax desk' : 'Desk para sa amilyar'}</p>
-              <p>{row.floor}<br />{formatSchedule([row])}; {lang === 'en' ? 'holidays excluded' : 'hindi kasama ang mga holiday'}.</p>
+              <p class="bp-place__title">{t.rptDesk}</p>
+              <p>{row.floor}<br />{formatSchedule([row])}; {t.holidaysExcluded}.</p>
               <SourceNote refs={['S04:image:3']} />
             </li>
           ))}
@@ -207,7 +190,7 @@ function historySummary(id: string, english: string): string {
     <section class="section section--flow" aria-labelledby="place-updates-h">
       <div class="wrap bp-place">
         <div class="section-head">
-          <h2 id="place-updates-h">{lang === "en" ? "Related service notices" : "Mga kaugnay na abiso sa serbisyo"}</h2>
+          <h2 id="place-updates-h">{t.relatedNotices}</h2>
         </div>
         <ul class="bp-place__list">
           {updates.map((item) => {
@@ -218,35 +201,33 @@ function historySummary(id: string, english: string): string {
                   class="bp-place__title"
                   href={services.some((service) => service.id === item.service_id) ? href(lang, `/serbisyo/${item.service_id}/`) : source?.url}
                 >
-                  {lang === "en" ? item.title_en : item.title_fil}
+                  {copy === "en" ? item.title_en : item.title_fil}
                 </a>
                 <p class="t-small muted">{formatDate(lang, item.published_date)}</p>
                 {"phone" in item && (
                   <p>
-                    {lang === "en" ? "Business transaction assistance phone" : "Tawagan para sa tulong sa transaksiyon ng negosyo"}: {" "}
+                    {t.bizPhoneLabel}: {" "}
                     <a class="bp-place__tel" href={`tel:${item.phone}`}>{item.phone}</a>
                     <br />
-                    {lang === "en" ? "Not an emergency hotline." : "Hindi ito emergency hotline."}
+                    {t.notEmergency}
                   </p>
                 )}
                 {"phone_hours" in item && item.phone_hours && (
                   <p>
                     {item.phone_hours.days.join(", ")} {item.phone_hours.opens}–{item.phone_hours.closes};{" "}
-                    {lang === "en" ? "holidays excluded" : "hindi kasama ang mga holiday"}.
+                    {t.holidaysExcluded}.
                   </p>
                 )}
                 {"online_url" in item && item.online_url && (
                   <p>
                     <a class="link" href={item.online_url}>
-                      {lang === "en" ? "Official service portal" : "Opisyal na portal ng serbisyo"}
+                      {t.servicePortal}
                     </a>
                   </p>
                 )}
-                {"reported_route_count" in item && (
+                {"reported_route_count" in item && typeof item.reported_route_count === "number" && (
                   <p>
-                    {lang === "en"
-                      ? `The notice reports ${item.reported_route_count} routes. QR is optional; manual registration is available. Stops and route geometry were not stated in the notice checked.`
-                      : `Anim ang rutang inanunsyo. Puwedeng magparehistro nang walang QR code. Walang nakasaad na mga hintuan o eksaktong ruta sa nasuring anunsyo.`}
+                    {t.routeNote(item.reported_route_count)}
                   </p>
                 )}
                 <SourceNote refs={item.evidence} />
@@ -262,23 +243,21 @@ function historySummary(id: string, english: string): string {
     <section class="section section--flow ground-surface" aria-labelledby="place-event-h">
       <div class="wrap bp-place">
         <div class="section-head">
-          <h2 id="place-event-h">{lang === "en" ? "Dated opportunity" : "May takdang oportunidad"}</h2>
+          <h2 id="place-event-h">{t.datedOpportunity}</h2>
         </div>
         <div class="bp-place__events">
           {currentEvents.map((event) => (
             <div class="bp-place__event" data-event-date={event.event_date}>
-              <p class="bp-place__title">{lang === "en" ? event.title_en : event.title_fil}</p>
+              <p class="bp-place__title">{copy === "en" ? event.title_en : event.title_fil}</p>
               <p>
-                {lang === "en" ? "Scheduled" : "Nakatakda"}: {formatDate(lang, event.event_date)}
+                {t.scheduledLabel}: {formatDate(lang, event.event_date)}
               </p>
               <p class="muted">
-                {lang === "en"
-                  ? "Confirm with the organizer whether registration is still being accepted."
-                  : "Magtanong sa tagapag-ayos kung puwede pang magparehistro."}
+                {t.confirmRegistration}
               </p>
               <p>
                 <ButtonLink data-registration href={event.registration_url}>
-                  {lang === "en" ? "Open registration page" : "Buksan ang pahina ng pagpaparehistro"}
+                  {t.openRegistration}
                 </ButtonLink>
               </p>
               <SourceNote refs={event.evidence} />
@@ -293,7 +272,7 @@ function historySummary(id: string, english: string): string {
     <section class="section section--flow" aria-labelledby="place-past-h">
       <div class="wrap bp-place">
         <div class="section-head">
-          <h2 id="place-past-h">{lang === "en" ? "Past notices" : "Mga nagdaang abiso"}</h2>
+          <h2 id="place-past-h">{t.pastNotices}</h2>
         </div>
         <ul class="bp-place__list">
           {history.map((item) => (

@@ -5,15 +5,14 @@ import Map3D from "../map/Map3D.astro";
 import { href, langFromUrl, ui } from "../../i18n";
 import { liveAlerts } from "../../lib/alerts";
 import { featuredServices } from "../../lib/data";
-import { popularLinks } from "./content";
+import { popularLinkIds } from "./content";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const en = lang === "en";
 const alert = liveAlerts(lang)[0];
 // the last word of the title is the one blue italic word
 const [, titleHead, titleEm] = t.homeTitle.match(/^(.*?)(\S+)$/) ?? ["", t.homeTitle, ""];
-const popular = popularLinks.filter((link) => featuredServices.some((service) => service.id === link.id));
+const popular = popularLinkIds.filter((id) => featuredServices.some((service) => service.id === id));
 ---
 
 <section class="home-hero" aria-labelledby="hero-h">
@@ -24,13 +23,13 @@ const popular = popularLinks.filter((link) => featuredServices.some((service) =>
           {alert.text} <a href={alert.source}>{alert.host}</a>
         </p>
       )}
-      <p class="kicker">{en ? "A resident's guide" : "Gabay ng mamamayan"}</p>
+      <p class="kicker">{t.residentGuide}</p>
       <h1 id="hero-h">{titleHead}<em>{titleEm}</em></h1>
       <p class="lead">{t.homeLead}</p>
       <div class="home-hero__search"><Search includePlaces /></div>
       <p class="home-hero__popular">
-        <span class="muted">{en ? "Popular searches" : "Madalas hanapin"}:</span>
-        {popular.map((link) => <a href={href(lang, `/serbisyo/${link.id}/`)}>{en ? link.en : link.fil}</a>)}
+        <span class="muted">{t.popularSearches}:</span>
+        {popular.map((id) => <a href={href(lang, `/serbisyo/${id}/`)}>{t.popularLink[id]}</a>)}
       </p>
     </div>
 

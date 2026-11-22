@@ -21,7 +21,7 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
     </ul>
     <a class="bp-urgent__all" href={href(lang, "/emergency/#hotlines")}>{t.allHotlines} <span aria-hidden="true">→</span></a>
     <p class="bp-urgent__clock">
-      <time data-ph-clock hidden>
+      <time data-ph-clock hidden data-weekdays={JSON.stringify(t.weekdays)} data-months={JSON.stringify(t.months)}>
         <span class="sr-only">{t.guideTime} </span>
         <strong data-clock-time></strong>
         <span data-clock-date></span>
@@ -45,10 +45,13 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
       minute: "2-digit",
       hourCycle: "h12",
     });
-    const dateFormatter = new Intl.DateTimeFormat(document.documentElement.lang === "fil" ? "fil-PH" : "en-PH", {
+    const weekdays = JSON.parse(clock.dataset.weekdays ?? "[]") as string[];
+    const months = JSON.parse(clock.dataset.months ?? "[]") as string[];
+    const weekdayIndex: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    const dateParts = new Intl.DateTimeFormat("en-US", {
       timeZone: manilaTimeZone,
       weekday: "short",
-      month: "short",
+      month: "numeric",
       day: "numeric",
       year: "numeric",
     });
@@ -60,7 +63,10 @@ const lines = emergencyHotlines.filter(({ id }) => id === "pasig-emergency-hotli
       if (document.hidden) return;
       const now = new Date();
       time.textContent = timeFormatter.format(now);
-      date.textContent = dateFormatter.format(now);
+      const parts = Object.fromEntries(dateParts.formatToParts(now).map((part) => [part.type, part.value]));
+      const weekday = weekdays[weekdayIndex[parts.weekday]] ?? parts.weekday;
+      const month = months[Number(parts.month) - 1] ?? parts.month;
+      date.textContent = `${weekday}, ${month} ${Number(parts.day)}, ${parts.year}`;
       clock.dateTime = now.toISOString();
       clock.hidden = false;
       timer = window.setTimeout(update, minute - (now.getTime() % minute));

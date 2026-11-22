@@ -35,7 +35,7 @@ To try search locally, run `bun run build` and then `bun run preview`. Pagefind 
 
 | Folder | What it holds |
 | --- | --- |
-| [`src/`](src/) | Astro pages and components, shared styles, and translations. English is at `/`, Filipino at `/fil/`. |
+| [`src/`](src/) | Astro pages and components, shared styles, and translations. English is at `/`. Filipino is at `/fil/`, and Cebuano, Ilokano, Hiligaynon, Waray, Bikol, and Kapampangan are at `/ceb/`, `/ilo/`, `/hil/`, `/war/`, `/bcl/`, and `/pam/`. Those six reuse Filipino content. |
 | [`data/`](data/) | Sourced JSON for services, benefits, barangays, officials, hotlines, and places. See the [data guide](data/README.md). |
 | [`design/`](design/) | Design tokens, logo assets, map geometry, and screenshots. |
 | [`docs/`](docs/) | [Roadmap](docs/roadmap.md), [backlog](docs/backlog.md), and [design system](docs/design-system.md). |

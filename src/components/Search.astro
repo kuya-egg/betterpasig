@@ -8,9 +8,7 @@ interface Props { includePlaces?: boolean }
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
-const label = Astro.props.includePlaces
-  ? (lang === "en" ? "Search for a service or place" : "Maghanap ng serbisyo o lugar")
-  : t.searchLabel;
+const label = Astro.props.includePlaces ? t.searchPlaces : t.searchLabel;
 const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ? "#service-categories" : href(lang, "/serbisyo/");
 ---
 
@@ -28,6 +26,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
   data-archived={t.searchArchived}
   data-older={t.searchOlderSource}
   data-archive-href={href(lang, "/ngayong-linggo/arkibo/")}
+  data-lang-root={lang === "en" ? "" : `/${lang}`}
   data-barangays={JSON.stringify(barangayNames)}
 >
   <label class="bp-search__label" for="q">{label}</label>
@@ -38,7 +37,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
     <SearchField
       client:load
       placeholder={t.searchPlaceholder}
-      clearLabel={lang === "en" ? "Clear search" : "Burahin ang hinahanap"}
+      clearLabel={t.clearSearch}
     />
     <Button type="submit" size="lg" className="bp-search__submit">{t.searchButton}</Button>
   </form>
@@ -92,7 +91,7 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
       const url = "/pagefind/pagefind.js";
       // pageLength 0.1: hub pages (officials, emergency, funds) are long; the default would rank short pages that merely mention a name above them.
       pagefind ??= import(/* @vite-ignore */ url).then(async (module: Pagefind) => {
-        await module.options({ ranking: { pageLength: 0.1 } });
+        await module.options({ ranking: { pageLength: 0.1 }, language: document.documentElement.lang || "en" });
         return module;
       }).catch((error) => {
         pagefind = undefined;
@@ -193,9 +192,9 @@ const browseHref = Astro.url.pathname.replace(/\/$/, "").endsWith("/serbisyo") ?
       if (!id || !notice) return null;
       const now = new Date();
       const expired = notice.historical || !isSourceFresh(notice.published, now) || eventState(notice.event, now) === "past";
-      const prefix = page.url.startsWith("/fil/") ? "/fil" : "";
+      const langRoot = box.dataset.langRoot ?? "";
       return {
-        href: expired ? `${archiveHref}#${id}` : `${prefix}/ngayong-linggo/#${id}`,
+        href: expired ? `${archiveHref}#${id}` : `${langRoot}/ngayong-linggo/#${id}`,
         title: sub.title || page.meta.title || "",
         kind: kinds["ngayong-linggo"] ?? "",
         note: expired ? archivedLabel : "",

@@ -1,9 +1,10 @@
 ---
 import LifePage from "../../../components/LifePage.astro";
+import { withLang } from "../../../i18n";
 import { lifeEvents } from "../../../lib/data";
 
 export function getStaticPaths() {
-  return lifeEvents.map((event) => ({ params: { id: event.id }, props: { event } }));
+  return withLang(lifeEvents.map((event) => ({ params: { id: event.id }, props: { event } })));
 }
 
 const { event } = Astro.props;

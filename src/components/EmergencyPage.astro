@@ -11,10 +11,11 @@ import {
   sourceLabel,
 } from "../lib/data";
 import { evacuationCenters } from "../lib/evacuation";
-import { formatDate, href, langFromUrl, ui } from "../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../i18n";
 
 const lang = langFromUrl(Astro.url);
 const t = ui[lang];
+const copy = contentLang(lang);
 
 const primaryIds = ["pasig-emergency-hotline", "national-emergency-911"];
 const primary = primaryIds.map((id) => hotlines.find((h) => h.id === id)).filter((h) => h !== undefined);
@@ -83,7 +84,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
                   </svg>
                 </span>
                 <span class="bp-em__big-text">
-                  <span class="bp-em__big-label">{lang === "en" ? h.label_en : h.label_fil}</span>
+                  <span class="bp-em__big-label">{copy === "en" ? h.label_en : h.label_fil}</span>
                   <span class="bp-em__big-num">{h.numbers[0]}</span>
                 </span>
               </a>
@@ -116,7 +117,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
                   <li>
                     <div class="bp-hotline">
                       <p class="bp-hotline__label">
-                        {lang === "en" ? h.label_en : h.label_fil}
+                        {copy === "en" ? h.label_en : h.label_fil}
                       </p>
                       <ul class="bp-hotline__nums">
                         {h.numbers.map((n) => (
@@ -208,7 +209,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
     <div class="wrap">
       <div class="section-head">
         <h2 id="evacuation-h">{t.evacTitle}</h2>
-        <p><strong>{t.evacCaveat}</strong> {lang === "en" ? facilities.notes_en : facilities.notes_fil}</p>
+        <p><strong>{t.evacCaveat}</strong> {copy === "en" ? facilities.notes_en : facilities.notes_fil}</p>
       </div>
       {
         evacGroups.map((g) => (
@@ -248,7 +249,7 @@ const retrieved = formatDate(lang, facilities.retrieved);
         {
           facilities.flood_prone_notes.map((n) => (
             <li class="bp-em__item">
-              <p>{lang === "en" ? n.text_en : n.text_fil}</p>
+              <p>{copy === "en" ? n.text_en : n.text_fil}</p>
               <p class="t-small muted">
                 {t.sources}:{" "}
                 {n.sources.map((s, i) => (

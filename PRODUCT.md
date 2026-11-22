@@ -12,7 +12,7 @@ Anyone who lives, works, studies, runs a business, or visits in Pasig. They may 
 
 ## Product Purpose
 
-BetterPasig puts every City of Pasig service, benefit, official and public figure in one clear, sourced, bilingual place. Success is a resident finding the office, fee and requirements in under 60 seconds (PRD-F3: 8 in 10 of 30 tested residents, 10 of them seniors) and knowing the next step. Payments, applications and complaints go to the city's own channels.
+BetterPasig puts every City of Pasig service, benefit, official and public figure in one clear, sourced place, in English, Filipino, and six other Philippine languages. Success is a resident finding the office, fee and requirements in under 60 seconds (PRD-F3: 8 in 10 of 30 tested residents, 10 of them seniors) and knowing the next step. Payments, applications and complaints go to the city's own channels.
 
 ## Positioning
 

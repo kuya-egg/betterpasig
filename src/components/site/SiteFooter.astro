@@ -1,6 +1,6 @@
 ---
 // The navy footer (handoff 2026-11), the same on every page.
-import { formatDate, href, langFromUrl, ui } from "../../i18n";
+import { contentLang, formatDate, href, langFromUrl, ui } from "../../i18n";
 import { cityHallHotline, mapsHref, site, telHref } from "../../lib/data";
 import { photos } from "../../lib/photos";
 import { buildCommit, buildVersion } from "../../lib/version";
@@ -17,7 +17,7 @@ const showsPhotos = photos.some((item) => photoIds.includes(item.id));
 const hall = site.city_hall;
 const trunk = cityHallHotline?.numbers[0];
 const year = new Date().getFullYear();
-const notice = lang === "en" ? site.notice_en : site.notice_fil;
+const notice = contentLang(lang) === "en" ? site.notice_en : site.notice_fil;
 const [noticeStart, noticeEnd] = notice.split("pasigcity.gov.ph");
 const columns = [
   {
